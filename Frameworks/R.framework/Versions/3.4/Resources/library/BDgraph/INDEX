@@ -1,0 +1,32 @@
+BDgraph-package         Bayesian Structure Learning in Graphical Models
+bdgraph                 Search algorithm in graphical models
+bdgraph.mpl             Search algorithm in graphical models using
+                        marginal pseudo-likehlihood
+bdgraph.npn             Nonparametric transfer
+bdgraph.sim             Graph data simulation
+bdgraph.ts              Search algorithm in time series graphical
+                        models
+compare                 Graph structure comparison
+geneExpression          Human gene expression dataset
+gnorm                   Normalizing constant for G-Wishart
+graph.sim               Graph simulation
+pgraph                  Posterior probabilities of the graphs
+plinks                  Estimated posterior link probabilities
+plot.bdgraph            Plot function for 'S3' class '"bdgraph"'
+plot.graph              Plot function for 'S3' class '"graph"'
+plot.sim                Plot function for 'S3' class '"sim"'
+plotcoda                Convergence plot
+plotroc                 ROC plot
+print.bdgraph           Print function for 'S3' class '"bdgraph"'
+print.sim               Print function for 'S3' class '"sim"'
+reinis                  Risk factors of coronary heart disease
+rgcwish                 Sampling from complex G-Wishart distribution
+rgwish                  Sampling from G-Wishart distribution
+rmvnorm                 Generate data from the multivariate Normal
+                        distribution
+rwish                   Sampling from Wishart distribution
+select                  Graph selection
+summary.bdgraph         Summary function for 'S3' class '"bdgraph"'
+surveyData              Labor force survey data
+traceplot               Trace plot of graph size
+transfer                transfer for discrete data

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Russ Lenth" />
+
+<meta name="date" content="2018-05-20" />
+
+<title>Transformations and link functions in emmeans</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Afont%2Dsize%3A%2011pt%3B%20font%2Dfamily%3A%20%22Palatino%20Linotype%22%2C%20%22Book%20Antiqua%22%2C%20Palatino%2C%20serif%3B%0Amargin%3A%2030px%2050px%2030px%2050px%3B%20%7D%0Ah1%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%20%7B%20font%2Dfamily%3A%20Arial%2CHelvetica%2CSans%2Dserif%3B%20%7D%0Aa%20%7B%20text%2Ddecoration%3A%20none%3B%20%7D%0Aa%3Alink%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Avisited%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Ahover%20%7B%20color%3Adodgerblue%3B%20%7D%0Aa%3Aactive%20%7B%20color%3Adodgerblue%3B%20%7D%20code%20%7B%0Acolor%3A%20%23602000%3B%0Afont%2Dfamily%3A%20%22Lucida%20Console%22%2C%20Monaco%2C%20monospace%3B%20font%2Dsize%3A%2090%25%3B%0A%7D%0A%2Er%20%7B%20%0Acolor%3A%20darkred%3B%20%7D%0A%2Ero%20%7B%20%0Acolor%3A%20darkgreen%3B%20background%2Dcolor%3A%20%23eeeeee%3B%20%7D%0A%2Er%20code%2C%20a%20code%2C%20%2Ero%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20none%3B%20%7D%0A%2Evigindex%20ul%20li%20%7B%20list%2Dstyle%3A%20none%3B%20%7D%0A%2Evigindex%20a%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20li%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Transformations and link functions in emmeans</h1>
+<h4 class="author"><em>Russ Lenth</em></h4>
+<h4 class="date"><em>2018-05-20</em></h4>
+
+
+
+<!-- @index Vignettes!Transformations and link functions -->
+<div id="contents" class="section level2">
+<h2>Contents</h2>
+<p>This vignette covers the intricacies of transformations and link functions in <strong>emmeans</strong>.</p>
+<ol style="list-style-type: decimal">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#regrid">Re-gridding</a></li>
+<li><a href="#links">Link functions</a></li>
+<li><a href="#tranlink">Both a response transformation and a link</a></li>
+<li><a href="#special">Special transformations</a></li>
+<li><a href="#after">Specifying a transformation after the fact</a></li>
+<li><a href="#logs">Faking a log transformation</a></li>
+</ol>
+<p><a href="vignette-topics.html">Index of all vignette topics</a></p>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<!-- @index Transformations!Overview -->
+<p>Consider the same example with the <code>pigs</code> dataset that is used in many of these vignettes:</p>
+<pre class="r"><code>pigs.lm &lt;- lm(log(conc) ~ source + factor(percent), data = pigs)</code></pre>
+<p>This model has two factors, <code>source</code> and <code>percent</code> (coerced to a factor), as predictors; and log-transformed <code>conc</code> as the response. Here we obtain the EMMs for <code>source</code>, examine its structure, and finally produce a summary, including a test against a null value of log(35):</p>
+<pre class="r"><code>pigs.emm.s &lt;- emmeans(pigs.lm, &quot;source&quot;)
+str(pigs.emm.s)</code></pre>
+<pre class="ro"><code>## 'emmGrid' object with variables:
+##     source = fish, soy, skim
+## Transformation: &quot;log&quot;</code></pre>
+<pre class="r"><code>summary(pigs.emm.s, infer = TRUE, null = log(35))</code></pre>
+<pre class="ro"><code>##  source   emmean         SE df lower.CL upper.CL     null t.ratio p.value
+##  fish   3.394492 0.03668122 23 3.318612 3.470373 3.555348  -4.385  0.0002
+##  soy    3.667260 0.03744798 23 3.589793 3.744727 3.555348   2.988  0.0066
+##  skim   3.796770 0.03938283 23 3.715300 3.878240 3.555348   6.130  &lt;.0001
+## 
+## Results are averaged over the levels of: percent 
+## Results are given on the log (not the response) scale. 
+## Confidence level used: 0.95</code></pre>
+<p>Now suppose that we want the EMMs expressed on the same scale as <code>conc</code>. This can be done by adding <code>type = &quot;response&quot;</code> to the <code>summary()</code> call:</p>
+<pre class="r"><code>summary(pigs.emm.s, infer = TRUE, null = log(35), type = &quot;response&quot;)</code></pre>
+<pre class="ro"><code>##  source response       SE df lower.CL upper.CL null t.ratio p.value
+##  fish   29.79952 1.093083 23 27.62197 32.14874   35  -4.385  0.0002
+##  soy    39.14451 1.465883 23 36.22658 42.29747   35   2.988  0.0066
+##  skim   44.55704 1.754782 23 41.07093 48.33905   35   6.130  &lt;.0001
+## 
+## Results are averaged over the levels of: percent 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale 
+## Tests are performed on the log scale</code></pre>
+<div id="timing" class="section level3">
+<h3>Timing is everything</h3>
+<!-- @index Transformations!Timing is everything -->
+<p>Dealing with transformations in <strong>emmeans</strong> is somewhat complex, due to the large number of possibilities. But the key is understanding what happens, when. These results come from a sequence of steps. Here is what happens (and doesn’t happen) at each step:</p>
+<ol style="list-style-type: decimal">
+<li>The reference grid is constructed for the <code>log(conc)</code> model. The fact that a log transformation is used is recorded, but nothing else is done with that information.</li>
+<li>The predictions on the reference grid are averaged over the four <code>percent</code> levels, for each <code>source</code>, to obtain the EMMs for <code>source</code> – <em>still</em> on the <code>log(conc)</code> scale.</li>
+<li>The standard errors and confidence intervals for these EMMs are computed – <em>still</em> on the <code>log(conc)</code> scale.</li>
+<li>Only now do we do back-transformation…
+<ol style="list-style-type: lower-alpha">
+<li>The EMMs are back-transformed to the <code>conc</code> scale.</li>
+<li>The endpoints of the confidence intervals are back-transformed.</li>
+<li>The <em>t</em> tests and <em>P</em> values are left as-is.</li>
+<li>The standard errors are converted to the <code>conc</code> scale using the delta method. These SEs were <em>not</em> used in constructing the tests and confidence intervals.</li>
+</ol></li>
+</ol>
+</div>
+<div id="the-model-is-our-best-guide" class="section level3">
+<h3>The model is our best guide</h3>
+<p>This choice of timing is based on the idea that <em>the model is right</em>. In particular, the fact that the response is transformed suggests that the transformed scale is the best scale to be working with. In addition, the model specifies that the effects of <code>source</code> and <code>percent</code> are <em>linear</em> on the transformed scale; inasmuch as marginal averaging to obtain EMMs is a linear operation, that averaging is best done on the transformed scale. For those two good reasons, back-transforming to the response scale is delayed until the very end by default.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+</div>
+<div id="regrid" class="section level2">
+<h2>Re-gridding</h2>
+<!-- @index `regrid()`; Transformations!Re-gridding; `emmeans()`!With transformations -->
+<p>As well-advised as it is, some users may not want the default timing of things. The tool for changing when back-transformation is performed is the <code>regrid()</code> function – which, with default settings of its arguments, back-transforms an <code>emmGrid</code> object and adjusts everything in it appropriately. For example:</p>
+<pre class="r"><code>str(regrid(pigs.emm.s))</code></pre>
+<pre class="ro"><code>## 'emmGrid' object with variables:
+##     source = fish, soy, skim</code></pre>
+<pre class="r"><code>summary(regrid(pigs.emm.s), infer = TRUE, null = 35)</code></pre>
+<pre class="ro"><code>##  source response       SE df lower.CL upper.CL null t.ratio p.value
+##  fish   29.79952 1.093083 23 27.53831 32.06074   35  -4.758  0.0001
+##  soy    39.14451 1.465883 23 36.11210 42.17692   35   2.827  0.0096
+##  skim   44.55704 1.754782 23 40.92699 48.18708   35   5.446  &lt;.0001
+## 
+## Results are averaged over the levels of: percent 
+## Confidence level used: 0.95</code></pre>
+<p>Notice that the structure no longer includes the transformation. That’s because it is no longer relevant; the reference grid is on the <code>conc</code> scale, and how we got there is now forgotten. Compare this <code>summary()</code> result with the preceding one, and note the following:</p>
+<ul>
+<li>It no longer has annotations concerning transformations.</li>
+<li>The estimates and SEs are identical.</li>
+<li>The confidence intervals, <em>t</em> ratios, and <em>P</em> values are <em>not</em> identical. This is because, this time, the SEs shown in the table are the ones actually used to construct the tests and intervals.</li>
+</ul>
+<p>Understood, right? But think carefully about how these EMMs were obtained. They are back-transformed from <code>pigs.emm.s</code>, in which <em>the marginal averaging was done on the log scale</em>. If we want to back-transform <em>before</em> doing the averaging, we need to call <code>regrid()</code> after the reference grid is constructed but before the averaging takes place:</p>
+<pre class="r"><code>pigs.rg &lt;- ref_grid(pigs.lm)
+pigs.remm.s &lt;- emmeans(regrid(pigs.rg), &quot;source&quot;)
+summary(pigs.remm.s, infer = TRUE, null = 35)</code></pre>
+<pre class="ro"><code>##  source response       SE df lower.CL upper.CL null t.ratio p.value
+##  fish   29.97478 1.096051 23 27.70743 32.24214   35  -4.585  0.0001
+##  soy    39.37473 1.494655 23 36.28280 42.46666   35   2.927  0.0076
+##  skim   44.81909 1.789918 23 41.11636 48.52182   35   5.486  &lt;.0001
+## 
+## Results are averaged over the levels of: percent 
+## Confidence level used: 0.95</code></pre>
+<p>These results all differ from either of the previous two summaries – again, because the averaging is done on the <code>conc</code> scale rather than the <code>log(conc)</code> scale.</p>
+<div id="regrid" class="section level6">
+<h6></h6>
+<!-- @index `regrid()`!`transform` vs. `type` -->
+<p>Note: For those who want to routinely back-transform before averaging, the <code>transform</code> argument in <code>ref_grid()</code> simplifies this. The first two steps above could have been done more easily as follows:</p>
+<pre class="r"><code>pigs.remm.s &lt;- emmeans(pigs.lm, &quot;source&quot;, transform = &quot;response&quot;)</code></pre>
+<p>But don’t get <code>transform</code> and <code>type</code> confused. The <code>transform</code> argument is passed to <code>regrid()</code> after the reference grid is constructed, whereas the <code>type</code> argument is simply remembered and used by <code>summary()</code>. So a similar-looking call:</p>
+<pre class="r"><code>emmeans(pigs.lm, &quot;source&quot;, type = &quot;response&quot;)</code></pre>
+<p>will compute the results we have seen for <code>pigs.emm.s</code> – back-transformed <em>after</em> averaging on the log scale.</p>
+<p>Remember again: When it comes to transformations, timing is everything.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+</div>
+<div id="links" class="section level2">
+<h2>Link functions</h2>
+<!-- @index Link functions; Examples!`neuralgia`; Examples!Logistic regression -->
+<p>Exactly the same ideas we have presented for response transformations apply to generalized linear models having non-identity link functions. As far as <strong>emmeans</strong> is concerned, there is no difference at all.</p>
+<p>To illustrate, consider the <code>neuralgia</code> dataset provided in the package. These data come from an experiment reported in a SAS technical report where different treatments for neuralgia are compared. The patient’s sex is an additional factor, and their age is a covariate. The response is <code>Pain</code>, a binary variable on whether or not the patient reports neuralgia pain after treatment. The model suggested in the SAS report is equivalent to the following. We use it to obtain estimated probabilities of experiencing pain:</p>
+<pre class="r"><code>neuralgia.glm &lt;- glm(Pain ~ Treatment * Sex + Age, family = binomial(), data = neuralgia)
+neuralgia.emm &lt;- emmeans(neuralgia.glm, &quot;Treatment&quot;, type = &quot;response&quot;)</code></pre>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre class="r"><code>neuralgia.emm</code></pre>
+<pre class="ro"><code>##  Treatment      prob         SE  df  asymp.LCL asymp.UCL
+##  A         0.2109015 0.11090460 Inf 0.06750694 0.4966578
+##  B         0.1206362 0.08352179 Inf 0.02848317 0.3909567
+##  P         0.8662555 0.08827173 Inf 0.59265359 0.9664811
+## 
+## Results are averaged over the levels of: Sex 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the logit scale</code></pre>
+<div id="oddsrats" class="section level6">
+<h6></h6>
+<!-- @index Odds ratios; Logistic regression!Odds ratios -->
+<p>(The note about the interaction is discussed shortly.) Note that the averaging over <code>Sex</code> is done on the logit scale, <em>before</em> the results are back-transformed for the summary. We may use <code>pairs()</code> to compare these estimates; note that logits are logs of odds; so this is another instance where log-differences are back-transformed – in this case to odds ratios:</p>
+<pre class="r"><code>pairs(neuralgia.emm, reverse = TRUE)</code></pre>
+<pre class="ro"><code>##  contrast odds.ratio         SE  df z.ratio p.value
+##  B / A     0.5132877  0.5146063 Inf  -0.665  0.7837
+##  P / A    24.2338121 25.1423051 Inf   3.073  0.0060
+##  P / B    47.2129213 57.2422531 Inf   3.179  0.0042
+## 
+## Results are averaged over the levels of: Sex 
+## P value adjustment: tukey method for comparing a family of 3 estimates 
+## Tests are performed on the log odds ratio scale</code></pre>
+<p>So there is evidence of considerably more pain being reported with placebo (treatment <code>P</code>) than with either of the other two treatments. The estimated odds of pain with <code>B</code> are about half that for <code>A</code>, but this finding is not statistically significant. (The odds that this is a made-up dataset seem quite high, but that finding is strictly this author’s impression.)</p>
+<p>Observe that there is a note in the output for <code>neuralgia.emm</code> that the results may be misleading. It is important to take it seriously, because if two factors interact, it may be the case that marginal averages of predictions don’t reflect what is happening at any level of the factors being averaged over. To find out, look at an interaction plot of the fitted model:</p>
+<pre class="r"><code>emmip(neuralgia.glm, Sex ~ Treatment)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAJACAMAAADcl/UUAAABdFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrYAv8QzMzM6AAA6AGY6OgA6Ojo6OmY6OpA6ZmY6ZpA6ZrY6kJA6kLY6kNtNTU1NTW5NTY5Nbm5Nbo5NbqtNjshmAABmADpmOgBmOjpmOpBmZgBmZjpmZmZmZpBmkGZmkJBmkLZmkNtmtttmtv9uTU1ubm5ubo5ujqtujshuq+SOTU2Obk2Obm6Ojk2Oq8iOq+SOyOSOyP+QOgCQOjqQZjqQZmaQkGaQkLaQtmaQtraQttuQ27aQ2/+rbk2rbm6rjm6ryOSr5P+2ZgC2Zjq2Zma2kDq2kGa2kJC2tpC2tra2ttu225C229u22/+2/7a2///Ijk3Ijm7I5P/I///bkDrbkGbbtmbbtpDbtrbbttvb25Db27bb29vb2//b/9vb///kq27kyI7kyKvk///r6+vy8vL4dm3/tmb/yI7/25D/27b/29v/5Kv/5Mj/5OT//7b//8j//9v//+T///8RBBadAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO2di38Vx3XHVzyKrCIHSFi5NoS04JgYJbaxmxhimsY1iS3XpKR2LYyC09oEGVRJvAqS/vnuY87eu697d3fOzDmz+n0/H1vSvbpz9jfsVzN37j6iAwCAMyLpDQBgzEAwABwCwQBwCAQDwCEQDACHQDAAHALBAHAIBAPAIRAMAIdAMAAcAsEAcAgEA8AhEAwAh7gUbEsAmaq8IINFWW1AMH0gg0VZbUAwfSCDRVltQDB9IINFWW1AMH0gg0VZbUAwfSCDRVltQDB9IINFWW1AMH0gg0VZbUAwfSCDRVltQDB9IINFWW2wCPbw/The+fWj6sMyPSxRlRdksCirDQ7BNuOM1+9WHpfpYYmqvCCDRVltMAj2bHXlw4OD5+/H5ypPyPSwRFVekMGirDYYBFuP30u/PFt97W75CZkelqjKCzJYlNUG3yLHy6sQjAdksCirDT7Bnq2+UVnmkOlhiaq8IINFWW2wCfbDanyNvn8lh6tpAIKFSbD1OF75tPgJgh12FhOkt0EHPILt/+GXq/HKbyqPyswRJKryEn6GxQyBwix7Myt878EeTs0RcwQ6eAQ75wgyLC5KGca2N7PBeKjUblxZ5fDfvyPYObfCz7C4KGYY397MBaNgtWVE7927Ff7OmRJ6Bgg2hb1g+zfN1BCCMRF6Bgg2BcuRHOdKXwu8d+9W+DtnSugZINgULMcixu8+Oti/E698Vn7Ce/duhb9zpgSfAYscEzjeg+3mR9OvVBYRIdhAws+AZfoClkWO5x8ker3zTfVhgQ4ewc45hgxSfo1VsBZkeliiKi/BZ0jkwrGIBgimj+AzLOJg3wIIpo/QMyxCsAkQTB+BZ8jefUEwAwTTR+AZstUNCGaAYPoIO8MiBJsGgukj6AxmeR6CGSCYPoLOYD7+gmAGCKaPkDMsQrAyEEwfAWcojt+AYAYIpo+AMxTHR0EwAwTTR7gZFiFYFQimj2AzTB3gC8EMEEwfwWaYOoAeghkgmD5CzbAIwepAMH0EmqF0BhgEM0AwfQSaoXSGJQQzQDB9hJlhEYI1AcH0EWSGyiUCIJgBgukjyAyVS3BAMAME00eIGarXuIFgBgimjwAz1K4hBcEMEEwfAWaoXaMNghkgmD7Cy1C/CCIEM0AwfQSXoeEioxDMAMH0EVyGhov4QjADBNNHaBmarpINwQwuBQOHAtzufBYYwfQRWIbGuzxgBDNAMH2ElaH5NioQzADB9BFUhpbbFEEwAwTTR1AZWm4DBsEMEEwfIWVou88eBDNAMH0ElKH1PpYQzADB9BFQhtb7xEIwAwTTRzgZ2m/EDMEMEEwfwWSYcaNzCGaAYPoIJkO7XxCMgGD6CCXDjAEMghEQTB+BZJjlFwQjIJg+Askwyy8IRkAwfYSRYeYABsEICKaPIDLM9guCERBMH0FkmO0XBCMgmD5CyDBnAINgBATTRwAZ5vkFwQgIpo8AMszzC4IREEwf+jPMHcAgGAHB9KE+w3y/IBgBwfShPsN8vyAYAcH0oT1DhwEMghEQTB/KM3TxC4IREEwfyjN08QuCERBMH7ozdBrAIBgBwfShOkM3vyAYAcH0oTpDN78gGAHB9KE5Q8cBDIIRLII9/CCOV975pvqwTA9LVOVFcYaufkEwgkOwO3HGymeVx2V6WKIqL4ozdPULghEMgu3GKx8eHDy/Gb92t/yETA9LVOVFb4bOAxgEI+wF278ZX0u/vryaf50g08MSVXlRm6G7XxCMsBfs5VUzcq3H75Wfkelhiaq8qM3Q3S8IRjCuIkIwJrRm6DGAQTCCT7CXV4tVjldy2JoGGsC9mIfAJ9hmfI6+hWBjBH4NgU2wXSzTc6EzQ58JIqaIBVyC7a6uXKs+JtPDElV5UZmhn18QjGASbLM+fkGwoajM0M8vCEbwCHanyS8INhCNGXoOYBCM4BBsfz1+/W7D4zI9LFGVF4UZ+voFwQgOwdbjNx41PS7TwxJVedGXobdfEIxgEGyzxS8INhB9GXr7BcEIjkOlYuJc+RmZHpaoyou6DP0HMAhG2Au2G0MwXrRlGOAXBCNwRrM+tGUY4BcEIyCYPpRlGDKAQTACgulDV4ZBfkEwAoLpQ1eGQX5BMAKC6UNVhmEDGAQjIJg+NGUY6BcEIyCYPjRlGOgXBCMgmD4UZRg6gEEwAoLpQ0+GwX5BMAKC6UNPhsF+QTACgulDTYbhAxgEIyCYPrRksPALghEQTB9aMlj4BcEICKYPJRlsBjAIRkAwfejIYOUXBCMgmD50ZLDyC4IREEwfKjLYDWAQjIBg+tCQwdIvCEZAMH1oyGDpFwQjIJg+FGSwHcAgGAHB9CGfwdovCEZAMH3IZ7D2C4IREEwf4hnsBzAIRkAwfUhnYPALghEQTB/SGRj8gmAEBNOHcAaOAQyCERBMH7IZWPyCYIRLwUCI4F7nrGAE04doBp4BDCMYAcH0IZmByS8IRkAwfYgKxtQOBDNAMH0IZuAawCAYAcH0IZeBzS8IRkAwfQgKxtYSBDPMEux74v6wtmV6WKIqL2IZ+AYwCEa0Cfbko2jCka8HtS3TwxJVeZHKwOgXBCNaBHtxPoJgUogJxtgWBDO0CLYRRcfeuk38+cGgtmV6WKIqL0IZOAcwCEY0C7Z3PTph37ZMD0tU5UUmA6tfEIxoFuzF+YVP7NuW6WGJqrwICcbaGgQztAk28G1XCZkelqjKi0gG3gEMghFtU0SMYHJIZGD2C4IRrYscZ+3blulhiaq8iAjG3B4EM7QIlgxhb1u3LdPDElV5EcjAPYBBMKJlinjjYhQtnLpkeBPL9D7xn4HdLwhGtC1yRPigWQwBwdhbhGAGCKYP7xn4BzAIRuBoen34zuDALwhGQDB9eBfMQZsQzADB9OE5g4sBDIIR7YI9vbUcRQvLlweeDHYAwYbiN4MTvyAY0SrYRrHEMfgjZ5kelqjKi2fBnLQKwQxtgqV+HT116eJJC8NkeliiKi9eM7gZwCAY0SLY46Xo+FfZd0+uR0OPS5TpYYmqvPjM4MgvCEa0CLYWHaejN4afGybTwxJVefEqmKN2IZihw9H0j5eO41Apn3jM4GoAg2BEh/PBBp8cJtPDElV58ZfBmV8QjOAS7OXVc7XHZHpYoiovHgVz1jIEM7Rek+NK8cNO1GGKuB5DMC68ZXA3gEEwgmeRY389hmBs+Mrg0C8IRrQv0x/7Mvvuuwvzl+kfvh9DMD68CeawbQhmmPVBc7S8vNzlUI7NOH73BwjGhqcMLgcwCEa0Hip1b8kcKTX/2gGbr396sAvB2PCTwalfEIxoP9h379uLyQh26uNun4GVBHslx3bbgEtwL2YvcJ2uAsECYxGCecGJYAaZOYJEVV58ZHA7QcQUsaAq2N6N9BpSyf+n6XBVKQjGhxfBHLcPwQxVwV6cTy9x0/+iNxCMDw8ZXA9gEIyAYPpwn8G5XxCMwHswfXgQzHUBCEZAMH04z+B+AINgRNuls6fWNR5f/BEWOXziOoMHvyAYwXW6CgTjw7lgbpvPgGCGDoI9XoJgXnGcwccABsGImmCVBcQMXDLAK24zePFrO8FDmRrWPrBTH8F26oJdaXhhB2R6WKIqL44Fc9m4YXtbyDBLGxxQF2zv3y9durg0uTnYpbe+HNi2QAdDsHn4GMC2t6UMs5PBBbgJuj5cZvDpl4Bh9jstNx2W6QfjvXu3INg8/E0QAxHsu4/Si1cffesr+/29EdxdRR8OM3hb4QhEsL3rxULDGYYhpYF5gn1v0bb37t2CYLPx4ldAgk35NXitfA6tgu3devXrbNH+9ODB03v3bkGw2XjxK6BFjo30ihjp/bme3loavFg+mzbBdpayY+jTT8UWhhb2378QbCZ+BrCtYJbpkwHsCA0f6e1OXAxh7Zdty+v99aMl3F3FM64yePNrS8qvnoIlw8fkkp9rXc7K6k/rhUePkdq4u4pvnAnmptk6iVxBHCrVvGs/ScaUaCF/Z7RDb82SyeQwC9o+ByvdXQU3f/CKowweJ4ihHIuYaPOT6rywuLXrmfSntfyt2eOloeMb7q6iDzcZPE4Qt0IRLDvw9tTvp29DnviVDl5PP88Ny8/wT1cbB65EYATThyPBXDTaxHY4ghXr9MuX79POTlPBjXztIZsbDp4gzngPdqLx+17I9LBEVV6cZPA6QQxGsPRIDnMJ63zRYaOYCpo3aOlK4792uixNMy2CJW/uTudOp2Mljqb3iosMfieIAQmWsPfXG+nhUumANb3sYe4w9HjJ4oSS9s/B1tKKy8vLaetDR0eZHpaoyosTwfibbGY7PMFS9r6I6pdTy4etDQsF2gVLC5qbP/xiaNsyPSxRlRcHGTxPEMMTLPPoSqNgj60O8ph784ffDf94W6aHJarywp/Bu19hCFb6bDlx62z5o2fjwXWr4xRxNL0+HAjG3WAbxeEbQQi2MT00JQPV2dSmqkvJL12af4+8ViCYPtgz+B/AwhAs/fi4OJQ9/0h5rTgw0LiWHqP4t+uDDxdku/lDEzI9LFGVF+4MAn6FIVi2lHc6vSLG3rcXosKnfG/fyYe3zDiLI4G5rk3fhEwPS1TlhV0w3ubamTq+NwzBSvt5PkglM8JjH+eLfKlTO/kK4trgSSIE0wdzBokBLBDBps+4PGYmgcWxiKlfuQ7Z14GTRLwH0wdvBhG/QhHs4ODJjeV09Hr148kj2VU68gfWaBlkh/doeh5keliiKi/MgnE2NoPyCWDBCOYaCKYP1gz+BrDSTxDMUBPs6fd17je9EoSAt3udb297KhQYDYscdbDI4RXODDITRIxgBRBMH4wZhCaIEKyg9kHzX29nfBFFC2/+/vbtfzkZLVz+Mz5o9glfBpkVxBQIZmhZ5MiOfMy5N/hkM5kelqjKC6NgXA3NoX4JKQhmaD2jefLB9QbOaPYLWwaxCSIEK2i5+cP10jU5cAM+r3BlkJsgQrACXFVKH2yC8TQzl6ZrjEIwA64qpQ+mDL4GsMZr+EIwA64qpQ+eDIJvwLYCEex/ezBMgVlXlTL3S9rDVaV8wyQYRyMdaL4IPQQzzLqq1KuXLl06SdcQHoBMD0tU5YUlg+gEEYIVtF5V6vPiOI7BlyOQ6WGJqrxwZJCdIEKwgvaj6Z/eym5ee3n4kb4yPSxRlRcWweyb6ETbXYogmAGnq+iDIYPwBBGCFcwUbM/uPBWZHpaoyot9BnG/IBjRLti3P0sPo3/x08uDr7ko08MSVXlhEIxjMzrQfhdLCGaYvciRCHY+Ojb0xhIyPSxRlRfrDPIDGAQjZizTH/v50pGv9347/LrBMj0sUZUX2wwK/IJgRPsHzW+bgxDvLeGDZr9YC8azGXOZdZtzCGaYdbqKOcoXp6t4xjKDhgEMghGzTlcxguFgX8/YZVDhFwQjZp2uYgTD6SqesRSMazPmMNMvCEZAMH1YZdAxgEEwom2KmC5sGLN2hi4jyvSwRFVebDIo8Wu8gj1e6nextZZFjmxhIxds+r7Q/ZDpYYmqvFgJxrcZs5jnFwQjWgRLmjnzIBPsyYXBNx+T6WGJqrxYZPA2gM37hWAF206YLVi/N0xtHzSnN3FZXlo4ddLifBWZHpaoysvwDFomiOEKtr3dYhi9hkuwg78s4XwwISwE49yMdub7Fapg29tthtFr2AQ7eHorvXHS0dNftf7GPGR6WKIqL4MzqJkghirY9narYfQaPsF6sP/H1Th+55vqwzI9LFGVl6EZ9EwQAxJsuwMOBFvrM3C9vBqnvHa38rhMD0tU5WWwYLyb0UYXv8YsGL116ra23vZBc58DfNfjN745eH4zfuNR+XGZHpaoysvADJ4GsE5+hSNY/ykij2A9xsFnq9nY9fLqymflJ2R6WKIqL8MyKHoDthWqYN4WOUrXpp/HZnzOfH2v/IRMD0tU5WWgYNyb0Uy3ASxUwbwt029Exzu/CVuPr2Vfd41oBTI9LFGVl0EZVE0QwxXM1wfNT7+IoqOnLhnenHUs4v5NMzV8tkpvwl7J6bMdwA5f92Ie1Z2Ym0Rqg17DI1jlRrIzm4RgGvDlFwSTFKyyUC8zR5CoysuADMomiAFPEf0I1oeGEcwg08MSVXnpn0GdXxCMgGD66J1B1wp9BgQzzBbs+y5NYBWRmf6COdmMGj0GsPEK1pfZV/aNooX5x0zR51/4HIyJvhn0TRAhWEHrlX2vF0scZ+ZcMABHcjDTM4PCCSIEK2gRLPVr4dTvb//p4tLcg672b8av41hERvoK5mgzKvQawCAY0XokR/QTcwvZL+beQvY5jqZnpV8GjRNECFbQelWpyXnM82+C/vyPiV/vPKo+LNPDElV56ZVB5QQRghW0fdA8dbAvruzrmX6COduMEj0HMAhGdDhdBRce9UyfDDoniBCsoMPpKo+XcOFRr/TIoNUvCEbMuvBow/e9kOlhiaq89BHM4WZM0dsvCEa0L9PTx18b3a5g2oBMD0tU5aV7BrUDGAQjWqaIN9LPv05dvv0f6ddXO5wV1oRMD0tU5aVzBr1+QTCi0+kqPS7FPY1MD0tU5aW7YE43o2CAX2EI5gMIpo+uGRQPYBCMYLnwaAsyPSxRlZeOGTT7FYZggoscLMj0sERVXroK5ngzcob5BcEICKaPbhl8DWDDXgbBDBBMH50yqJ4gQrACCKaPboI534yUoX5BMAKC6aNLBt0TRAhWAMH00SGD8gkiBCuAYProIpiHzbDxC4IREEwf8zNonyBCsAIIpo+5GdRPECFYAccdLtuQ6WGJqrzMF8zLZtj4BcEIjjtctiHTwxJVeZmXwc8AZuUXBCMY7nDZikwPS1TlZU4G/W/AtiBYAcMdLluR6WGJqrzME8zLRtgNYBCMYLjDZSsyPSxRlZfZGUKYIEKwAvs7XLYj08MSVXmZmSGICeKIBds5eup3pMPeny7+/by3UvY34GtHpoclqvIyWzAvm2A7gI1YsGhypeudDmpAMH3MyhDGBDFgwRYTZgt2dImusrZ2dP41efFBsz5mZAjFr2AFW1xsMYxesxMdu2CsenH+x/NX210KBtjxc6/zUd3pfAZtfjUZRq/ZiY5/YeaIOwv/JiuYzJ8wiaq8tGcIZgALdARbXGw1jF6TCPY/Zo64duS/rATb+97w7T/iPZhPWjOE41c4gi12oCLY365nWr04f6LDARltgj35KMhFjrQ7BMry0i6Yl/Icfo1asAcb2Rwx+f9wwcrLiMdDESzvD/91eWnruYAGsHAEGzBFfLCT3q1hLxnHhgu2kd5B9uJS+l+08Ha/zS7w3r3UO94L89LScyH5Fahg3RY5HmRePU7eiQ0WbO960kz6/yvZUVPDDuTw3sWTvz++K/PSJpiP2kx+hSpYl2X6RIe1RIx0njhYMHOHy43sRrJrQ09d8d274xbM0wDG1E6ognX4oDkRLJkjpjNEG8GyF2ZzTfP/Afju3en3pb5rc9LYc0FNEAMWrA16TSZY4sd/pmv19oKls8MX5wO5w2V9+cf3FvDQLJiPymx+jVywvesLF9N5ncV7sGyKmN/+PJx7NE95FbJmTT0X1gRx7IKli4Ad1Wi7Jkf27it/K/Z4/hGNzfjv36pQYQ5nDT0X2ARx9II9XjKTu6GCJQ2c/ipdRjybyhbIFHGr5YPm0DRrEsxHXUa/xi5YboaFYIlV6Ri4E0ULS1HW1gBkerj1qWA0q2cIbYI4YsH60nos4l/SieHeWnYgRyCfg+U9POcXAhjOahmCmyBCsIIZB/v+dzoU3ltevjzQL52C5ajWrC6Yj6qsfkEw4nCfrqJTs2oGL9vG6xcEI2YKtnd/aLMZMj3c/zXahrNKhvDegG1BsIJ2wb79WbrO8eKng2eIwQiWo0ezqmA+ajIPYBCMaBNs7/P8RLAX56NjQy/yK9PDlg0o0KycIcQJIgQrmLFMf+znS0e+3vvtyFYRuyE6nJUyBDlBhGAFLYLtRNHb5mO0e0uhHE2f9zBjY0KalQXzUZF9AINgxKxDpczn1BuhHE2f9zB/m741m84Q5gQRghXMOtjXCBbQsYgu/2H9DWdTGUL1C4IRs05XMYKFczT9lvt/WB+aTQvmqEQJB35BMAKCDcKpZpMMwQ5gYQjmg9ZrclypnHY5AJke9ljM0XBWZAjXLwhGtF5VqjghOpHtkC9yzIFds4lgHK3Nw4lfEIxoPx/sTH51qicXoqF3u5TpYYmqKXyaUYaABzAIRrR90LwRRdHy0sKpk9Hg08EOmWA5HMOZyRCyXxCMmHE+GF3Xt5NfL6+eqz0m08MSVavYaUaCcW9VA678gmBE+8G+T28tJ3YdPd3tXs3rMQSrMVCzPIOfAcxVwxDMwHM+2P56DMHa6D2cZRmCniBCsAIWwR6+H0OwOfTQLBfMwza58wuCEbMEo/uDfT/nvMvNOH73BwjWiQ6aZU+FPUGEYAUc9wfbfP3Tg10I1oNZw5nbw7CmcTiAQTCi0/3BOhwqVRLslRymTRwtJc2qD7ovv31YbsUsSvv9wY69dZv48/xDpSDYYEqa1Y1zBvzyQeuxiD0Pj8IU0ZLFKq4LupwgYopYMPP+YD2AYCz4E8ytXxCMmHn7opnsxhnX6CcIxoEvwRz7BcGImbcvmgkEc4KvAcxx+xDM0LrI0fMIXwjGxRgmiBCsoEWwZAh7u1c7EIyNMfgFwYiWKeKNi1G0cOqS4c2ey/QGmR6WqMqL+wzO/YJgRNsiR2TzQbNBpoclqvLiPIP7AQyCERBMH64zePALghGH+/ZFOnGcwYdfEIyAYPpwLZjT1g0QzADB9OE2g5cBDIIRVcH2bqRrhsn/p+mwitiETA9LVOXFaQY/fkEwoirYi/Ppkkb/RY4mZHpYoiovbgVz2PYUEMwAwfThMoOnAQyCEXgPpg+HGXz5BcEICKYPl4I5a7kCBDN0EOzpvIvetCHTwxJVeXGXwdsABsGI+YLl78qGINPDElV5cZbBn18QjIBg+nCVwaNfEIyAYPpwJpibZhuBYAYIpg9HGXwOYBCMgGD6cJPBq18QjIBg+nAkmItGW4FgBgimDycZ/A5gEIyAYPpwkcGzXxCMgGD6cJDBt18QjIBg+nAhGHuLc4Bghoaj6etAMK/wZ/A+gEEwAoLpgz2Df78gGNFwRnMdnNHsFX7BmNvrAAQz4HQVfXBnEBjAIBgBwfTBnEHCLwhGQDB98GYQ8QuCERBMH8yCcTbWGQhmgGD6YM0gM4BBMMKlYECebdzqXBaMYPrgzCAzfmEEK4Bg+mDMIDRBhGAFEEwffBnE/IJgBATTB6NgXA31BoIZIJg+2DLIDWAQjIBg+uDKIOgXBCMgmD6YMkj6BcEICKYPLsFYWhkIBDNAMH3wZBAdwCAYAcH0wZJB1i8IRkAwffAIxtCGBRDMAMH0wZFBeACDYAQE0wdDBmm/IBgBwfRhn0HcLwhGQDB9MAjGsRlWQDADBNOHdQb5AQyCERBMH7YZFPgFwQgIpg9rwXg2wwoIZoBg+rDMoGEAg2AEBNOHXQYVfkEwAoLpwyqDDr8gGAHB9GEnGNtmWAHBDBBMHzYZlAxgEIyAYPqwyKDFLwhGQDB92AjGuBlWQDADBNPH8AxqBjAIRkAwfQzOoMcvCEZAMH0MF4x1M6yAYAYIpo+hGRQNYBCMYBHs4QdxvPLON9WHZXpYoiovAzNo8guCERyC3YkzVj6rPC7TwxJVeRmWQZVfEIxgEGw3Xvnw4OD5zfi1u+UnZHpYoiovAwXj3gwrIJjBXrD9m/G19OvLq/nXCTI9LFGVl0EZdA1gEIywF+zlVTNyrcfvlZ8R6ODtbWU72hCG9Jy22BDMwLiKqECw7e0xGDZIMP7NsAKCGfgEe3m1WOV4JYet6a5sG7wXFucwZg4DPsE243P0rZBg29uH1bDDlzgY2ATblV+mnwjmuzIvvXtOYWBMEQ1cgu2urlyrPua7dw+vYE42wwoIZhgu2G7+8XKu1WZ9/JIULGzF+vacxrQQzMAj2J0mv/x38fb2KBzr2XMqk0IwA8cUcX89fv1uw+P++7cwK2jH+grmaDOsgGAGDsHW4zceNT0u0MFTVoWrWL+e05kRghkYBNts8Uv+UKlAHevVc0rzQTADx6FSMXGu/IxMD5d+DHKq2E8wZ5thBQQz2Au2GysWbCtEx/r0nNZgEMxwKM5oDsyxHj2nNhQEMxwKwbbCcqx7z+kNBMEMh0WwrYAc6yGYy82wAoIZDpFgW6E41rnnFCeBYIbDJdhWEEv3XXtOcwwIZjh0gm3pd6yzYG43wwoIZjiMgmmfKnbsObXbnwLBDIdTsC3VjnX9I+F6O2yAYIZDK9iWXsc6ZVC43dNAMMNhFmxLqWPdBHO+GVZAMMMhF2xLo2PdFmrcb4cNEMwAwbbUOdYhg56NbQGCGSBYjibHugjmYTOsgGAGCFagRrH5GVRs5kwgmAGCTaPDsQ5Ho3jZDhsgmAGCldEwVZyXIQC/IBgBwWqIOzZXMD+bYQUEM0CwJmQdm5MhhAEMghEQrAVBx+adcuNrO2yAYAYI1o6UY3ME87UZVkAwAwSbiYhjMzOEMYBBMAKCzcO/YrMyBOIXBCMgWAc8OzZTMG9bYQcEM0CwTnidKs68cI+fTbAGghkgWFf8OdaeIRi/IBgBwXrgybHWDOH4BcEICNYPH461C+a0LCsQzOBSsJFiHJMo7L8msAQj2BDcjmMtGQKaIGIEK4BgA3HoWJtgLmq5AoIZINhwXCnWnCGoAQyCERDMCieOtdyCibmKWyCYAYJZ4mCq2JQhML8gGAHB7OF2rFEwttb9AMEMEIwFVscaMoQ2gEEwAoJxwedYPUNwfkEwAoIxwuRYg2C2TXoHghkgGC8cjtUyhDeAQTACgrFjrVg1Q4B+QTACgrnAzrGaYLabIwAEM0AwN9hMFSsZQhzAIBgBwZwx2LFyhiD9gmAEBHPJMMdKGcL0C4IREMwxAxwrC8a8PZ6AYAYI5p6+jk1nCHQAg2AEBER7nK4AAAiESURBVPNCL8emMoTqFwQjIJgvujs2LZi77XELBDNAMI90VGySIdgBDIIREMwvXRwrMoTrFwQjIJhv5k8VKUPAfkEwAoIJMMexQjBf2+MACGaAYDLMcsxkCHkAg2AEBBOj1bE8Q9B+QTACgknS7JgRTGB7+IBgBggmTINjWYawBzAIRkAweSqKZT8E7hcEIyCYCqYcc3ChRQEgmIFFsIfvx/HKrx9VH5bpYYmqDJBX2xDMqqw2OATbjDNev1t5XKaHJarysF1CemvsgGAGBsGera58eHDw/P34XOUJmR6WqMoGBLMtqw0Gwdbj99Ivz1Zfu1t+QqaHJaryAcEsy2qDb5Hj5VUIZg8EsyyrDT7Bnq2+UVnmkOlhiaqMjMMvCEawCfbDanyNvn8lh6vpw0Xul/RWACaYBFuP45VPi58gmA3wa0zwCLb/h1+uxiu/qTwqM0eQqMoLMliU1Qbfe7CHU3PEHJkelqjKCzJYlNXGcMF284+Xr009UFnlkOlhiaq8IINFWW0wClZbRpTpYYmqvCCDRVlt2E8R928aySAYE8hgUVYbLEdynCt9LZDpYYmqvCCDRVltsByLGL/76GD/TrzyWfkJmR6WqMoLMliU1QbHKqJ5N7ZSWUSEYANBBouy2mBZpn/+QaLXO99UH5bpYYmqvCCDRVlt4IxmfSCDRVltQDB9IINFWW1AMH0gg0VZbUAwfSCDRVltQDB9IINFWW1AMH0gg0VZbUAwfSCDRVltQDB9IINFWW24FEyCMZxHjQwjAoLpAxlGBATTBzKMCAimD2QYERBMH8gwIiCYPpBhREAwfSDDiBibYACoAoIB4BAIBoBDIBgADoFgADgEggHgEAgGgEMgGAAOGZdg+zfzG7KHyrNVcw3XX9UuMhkMlCH+h18/mv/bo2dcgiX/uNUbRQdFsXPG1XuthcNUhqD/LZgYl2Drr/1z9QL5QUE3qPm/O/Frd4W3ZSjFTXYeroY9neBhVIK9vPrGD9VbvARFsXMW94QKj8ldrHbD/SvBx6gE243fe3k15H/Uyc65Huxf/0mGsP8tmBiVYOvJ/HA92D/9B2MbwSDYwbgEy/5pa3eKDgnaOffvhJtieooYbAg+xiTYZjqtenk14GWOyQrc68Gu0xd/JH7AIsfBqATbv5nNSMJ99zIt2MqH0tsyFCzTlxiRYM9WswXEkNeupv/6h/sezOj1q0+lN0UDIxJscwwf0ob//mWSARyMSbCXVwvBgv0obAwrcBCsxHgE2yWvnq0Gu8wBwUbHeAQrPgAL+IhfTBFHx2gEm/qTvxn+zhnwEjcEKzEawTYn77yeBbsEN4YlbghWYiyCTR9blHwf6DLH1BJ3sDspBCsxFsEAUAkEA8AhEAwAh0AwABwCwQBwCAQDwCEQDACHQDAAHALBAHAIBAPAIRAMAIdAMAAcAsEAcAgEA8AhEAwAh0AwABwCwZpYi44/8PXivVtLUXTkk+LFZc4O3gygAgjWhE/BMqWOfD3903DB7v1o+HbzNADKQLAmPAr2eCn6u6lftxPMartZGgAVIFgTHgXbiaIrtQf3rkcn3Jd20QCoAMGa8CrYwie1ByHYaIBgTUAwwAQEa6K+nz35aCmKFk5/lT9r1iQSD7Lfm35y8uLs0ejVj6uNT//2Rv5Oq+pYSbDkhyvfXoiio5/USh0cfJcVWb78YNLY2fzl6UsWziSPf/uz5MHiFaUGXpyPzu7dOpm0XW4AsAHBmqgJtkGLDmcOpt42PV7KdsbSk8WL79Gjx75ubGrhFwedBbtEK42VUnufTxeZFuzvzGrJka8/L5UoN5AI9uMLDQ0ANiBYE1XBNvIh4Onn2Y6Z7JYnzMPpblt+kl6cyHc8eXTvi6g820t++9iXychzwVg6f4qY/JD+zpOP66WSn9Mx6skFU8Rsd/qK9InUv6PR6fvZVhx/UAuSJklEf3Dw5LrRClNEbiBYE5X9LJHF7O+5UpP9OPlafdI8u0HzyLXJh1wH2S6dN528OHu8m2DFiFkqVZhOrU4JdtY8bn4j34qGBvKmabILwbiBYE1U9rNCFrPnGymS3fVK/clCsAZxph8288tOgpkKLdsx+ZWJYIXdxdQwH2zLDRS6058BCMYNBGuivJ9N7+7ZM8l+mf7dz3bX2pPm/zvpUsKXDS3TLm6Gn06CFYNepVS12dLQWiqXlWkKUoxoEMwJEKyJ8n6WTqQmpDvimvnzf6L5yezF+eLC0cv3pxue7Pr0bSfBiolgpVTK0+9u3zgZVQU7QUGmBas1kK4i5r8IwRwBwZqYJ9hO+v+d4m1Mo2D58ni6Pje1UF8fhOwEu3ey9CMEUwcEa6ImWOVj3xfnk901/6X6k1Mv/u5GJsDkWCjbEexE9dcSli/97n5titgmWLkBCOYcCNZE7T1Ydbdbi86anbP+ZOXFtEJOTw55D3aieTvMKv1Bw3uwRsFqDUAw50CwJmpLCCQB7aI70fF75sHak9mLpxQprdNvFOPZTtR9FbHQpVRq4ksiShfBatsKwZwDwZqofw5mfqaDOF6cP/JPZieuPVlZpi8PG8M+BzvRuB2Tlje6vQerbSsEcw4Ea2KtspiwkS9VTE331iZvrapPFu/NFt5Oj7K4Xj4fZepIjmzf7iNYtZSZIqZt5a2kVu/dbxes2kBNMNMAYAOCNVEVbHIIH/2B35k6C7nypBkFHi/Rw+Vj+0rHIvYUrFLqhTmOMDr9RW7xTvrDiRmCVRuoCmYaAGxAsCZqgh08+ShdD5wcGj/ZNWtP0jRr79Zy8ujRM9UBIT+enR7uJ1ilVHYkfPp5Nq0P3kuaPvFghmDlBmqCmQa69RLoAAQDwCEQDACHQDAAHALBAHAIBAPAIRAMAIdAMAAcAsEAcAgEA8AhEAwAh0AwABwCwQBwCAQDwCEQDACH/D/giJtmTJ9KQwAAAABJRU5ErkJggg==" width="432" /></p>
+<p>There is no practical difference between females and males in the patterns of response to <code>Treatment</code>; so I think most people would be quite comfortable with the marginal results that are reported earlier.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+</div>
+<div id="tranlink" class="section level2">
+<h2>Models having both a response transformation and a link function</h2>
+<!-- @index Transformations!with link function@link; Examples!`warpbreaks`
+            Examples!Gamma regression; `summary()`!`type = "unlink"` -->
+<p>It is possible to have a generalized linear model with a non-identity link <em>and</em> a response transformation. Here is an example, with the built-in <code>wapbreaks</code> dataset:</p>
+<pre class="r"><code>warp.glm &lt;- glm(sqrt(breaks) ~ wool*tension, family = Gamma, data = warpbreaks)
+ref_grid(warp.glm)</code></pre>
+<pre class="ro"><code>## 'emmGrid' object with variables:
+##     wool = A, B
+##     tension = L, M, H
+## Transformation: &quot;inverse&quot; 
+## Additional response transformation: &quot;sqrt&quot;</code></pre>
+<p>The canonical link for a gamma model is the reciprocal (or inverse); and there is the square-root response transformation besides. If we choose <code>type = &quot;response&quot;</code> in summarizing, we undo <em>both</em> transformations:</p>
+<pre class="r"><code>emmeans(warp.glm, ~ tension | wool, type = &quot;response&quot;)</code></pre>
+<pre class="ro"><code>## wool = A:
+##  tension response       SE  df asymp.LCL asymp.UCL
+##  L       42.87080 5.237067 Inf  33.22074  53.74966
+##  M       23.28978 2.845066 Inf  18.04733  29.19978
+##  H       23.58442 2.881055 Inf  18.27566  29.56919
+## 
+## wool = B:
+##  tension response       SE  df asymp.LCL asymp.UCL
+##  L       27.43817 3.351832 Inf  21.26193  34.40087
+##  M       28.07575 3.429719 Inf  21.75599  35.20024
+##  H       18.50894 2.261044 Inf  14.34264  23.20577
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the sqrt scale</code></pre>
+<p>What happened here is first the linear predictor was back-transformed from the link scale (inverse); then the squares were obtained to back-transform the rest of the way. It is possible to undo the link, and not the response transformation:</p>
+<pre class="r"><code>emmeans(warp.glm, ~ tension | wool, type = &quot;unlink&quot;)</code></pre>
+<pre class="ro"><code>## wool = A:
+##  tension response        SE  df asymp.LCL asymp.UCL
+##  L       6.547580 0.3999238 Inf  5.847547  7.438013
+##  M       4.825948 0.2947676 Inf  4.309983  5.482251
+##  H       4.856380 0.2966258 Inf  4.337161  5.516819
+## 
+## wool = B:
+##  tension response        SE  df asymp.LCL asymp.UCL
+##  L       5.238146 0.3199445 Inf  4.678110  5.950505
+##  M       5.298655 0.3236405 Inf  4.732150  6.019244
+##  H       4.302202 0.2627775 Inf  3.842232  4.887278
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the inverse scale</code></pre>
+<p>It is <em>not</em> possible to undo the response transformation and leave the link in place, because the response was transform first, then the link model was applied; we have to undo those in reverse order to make sense.</p>
+<p>One may also use <code>&quot;unlink&quot;</code> as a <code>transform</code> argument in <code>regrid()</code> or through <code>ref_grid()</code>.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="special" class="section level2">
+<h2>Special transformations</h2>
+<!-- @index Transformations!Custom; `make.tran()` -->
+<p>The <code>make.tran()</code> function provides several special transformations and sets things up so they can be handled in <strong>emmeans</strong> with relative ease. (See [<code>help(&quot;make.tran&quot;, &quot;emmeans&quot;)](../html/make.tran.html) for descriptions of what is available.)</code>make.tran()<code>works much like</code>stats::make.link()<code>in that it returns a list of functions</code>linkfun()<code>,</code>linkinv()<code>, etc. that serve in managing results on a transformed scale. The difference is that most  transformations with</code>make.tran()` require additional arguments.</p>
+<p>To use this capability in <code>emmeans()</code>, it is fortuitous to first obtain the <code>make.tran()</code> result, and then to use it as the enclosing environment for fitting the model, with <code>linkfun</code> as the transformation. For example, suppose we want to use the response transformation <span class="math inline">\(\log(y + \frac12)\)</span>. Then proceed like this:</p>
+<pre class="r"><code>tran &lt;- make.tran(&quot;genlog&quot;, 1/2)
+my.model &lt;- with(tran, 
+    lmer(linkfun(yield) ~ treatment + (1|Block), data = mydata))</code></pre>
+<p>Subsequent calls to <code>ref_grid()</code>, <code>emmeans()</code>, <code>regrid()</code>, etc. will then be able to access the transformation information correctly.</p>
+<p>The help page for <code>make.tran()</code> has an example like this using a Box-Cox transformation.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="after" class="section level2">
+<h2>Specifying a transformation after the fact</h2>
+<!-- @index Transformations!Adding after the fact; `update()`!`tran` -->
+<p>It is not at all uncommon to fit a model using statements like the following:</p>
+<pre class="r"><code>mydata &lt;- transform(mydata, logy.5 = log(yield + .5))
+my.model &lt;- lmer(logy.5 ~ treatment + (1|Block), data = mydata)</code></pre>
+<p>In this case, there is no way for <code>ref_grid()</code> to figure out that a response transformation was used. What can be done is to update the reference grid with the required information:</p>
+<pre class="r"><code>my.rg &lt;- update(ref_grid(my.model), tran = make.tran(&quot;genlog&quot;, .5))</code></pre>
+<p>Subsequently, use <code>my.rg</code> in place of <code>my.mnodel</code> in any <code>emmeans()</code> analyses, and the transformation information will be there.</p>
+<p>For standard transformations (those in <code>stats::make.link()</code>), just give the name of the transformation; e.g.,</p>
+<pre class="r"><code>model.rg &lt;- update(ref_grid(model), tran = &quot;sqrt&quot;)</code></pre>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="logs" class="section level2">
+<h2>Faking a log transformation</h2>
+<!-- @index Transformations!Faking a log transformation; `regrid()`!`transform = "log"` -->
+<p>The <code>regrid()</code> function makes it possible to fake a log transformation of the response. Why would you want to do this? So that you can make comparisons using ratios instead of differences.</p>
+<p>Consider the <code>pigs</code> example once again, but suppose we had fitted a model with a square-root transformation instead of a log:</p>
+<pre class="r"><code>pigroot.lm &lt;- lm(sqrt(conc) ~ source + factor(percent), data = pigs)
+piglog.emm.s &lt;- regrid(emmeans(pigroot.lm, &quot;source&quot;), transform = &quot;log&quot;)
+confint(piglog.emm.s, type = &quot;response&quot;)</code></pre>
+<pre class="ro"><code>##  source response       SE df lower.CL upper.CL
+##  fish   29.84382 1.316416 23 27.24115 32.69514
+##  soy    39.24300 1.541103 23 36.18104 42.56408
+##  skim   44.99895 1.735523 23 41.54824 48.73626
+## 
+## Results are averaged over the levels of: percent 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale</code></pre>
+<pre class="r"><code>pairs(piglog.emm.s, type = &quot;response&quot;)</code></pre>
+<pre class="ro"><code>##  contrast        ratio         SE df t.ratio p.value
+##  fish / soy  0.7604877 0.04535114 23  -4.591  0.0004
+##  fish / skim 0.6632114 0.03910379 23  -6.965  &lt;.0001
+##  soy / skim  0.8720869 0.04685060 23  -2.548  0.0457
+## 
+## Results are averaged over the levels of: percent 
+## P value adjustment: tukey method for comparing a family of 3 estimates 
+## Tests are performed on the log scale</code></pre>
+<p>These results are not identical, but very similar to the back-transformed confidence intervals <a href="#timing">above</a> for the EMMs and the <a href="comparisons.html#logs">pairwise ratios in the “comparisons” vignette</a>, where the fitted model actually used a log response.</p>
+<p><a href="#contents">Back to Contents</a></p>
+<p><a href="vignette-topics.html">Index of all vignette topics</a></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

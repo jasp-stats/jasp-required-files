@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Russ Lenth" />
+
+<meta name="date" content="2018-05-20" />
+
+<title>Comparisons and contrasts in emmeans</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Afont%2Dsize%3A%2011pt%3B%20font%2Dfamily%3A%20%22Palatino%20Linotype%22%2C%20%22Book%20Antiqua%22%2C%20Palatino%2C%20serif%3B%0Amargin%3A%2030px%2050px%2030px%2050px%3B%20%7D%0Ah1%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%20%7B%20font%2Dfamily%3A%20Arial%2CHelvetica%2CSans%2Dserif%3B%20%7D%0Aa%20%7B%20text%2Ddecoration%3A%20none%3B%20%7D%0Aa%3Alink%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Avisited%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Ahover%20%7B%20color%3Adodgerblue%3B%20%7D%0Aa%3Aactive%20%7B%20color%3Adodgerblue%3B%20%7D%20code%20%7B%0Acolor%3A%20%23602000%3B%0Afont%2Dfamily%3A%20%22Lucida%20Console%22%2C%20Monaco%2C%20monospace%3B%20font%2Dsize%3A%2090%25%3B%0A%7D%0A%2Er%20%7B%20%0Acolor%3A%20darkred%3B%20%7D%0A%2Ero%20%7B%20%0Acolor%3A%20darkgreen%3B%20background%2Dcolor%3A%20%23eeeeee%3B%20%7D%0A%2Er%20code%2C%20a%20code%2C%20%2Ero%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20none%3B%20%7D%0A%2Evigindex%20ul%20li%20%7B%20list%2Dstyle%3A%20none%3B%20%7D%0A%2Evigindex%20a%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20li%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Comparisons and contrasts in emmeans</h1>
+<h4 class="author"><em>Russ Lenth</em></h4>
+<h4 class="date"><em>2018-05-20</em></h4>
+
+
+
+<!-- @index Vignettes!Comparisons -->
+<div id="contents" class="section level2">
+<h2>Contents</h2>
+<p>This vignette covers techniques for comparing EMMs at levels of a factor predictor, and other related analyses.</p>
+<ol style="list-style-type: decimal">
+<li><a href="#pairwise">Pairwise comparisons</a></li>
+<li><a href="#contrasts">Other contrasts</a></li>
+<li><a href="#formulas">Formula interface</a></li>
+<li><a href="#linfcns">Custom contrasts and linear functions</a></li>
+<li><a href="#logs">Special behavior with log transformations</a></li>
+<li>Interaction contrasts (see <a href="interactions.html">“interactions” vignette</a>)</li>
+</ol>
+<p><a href="vignette-topics.html">Index of all vignette topics</a></p>
+</div>
+<div id="pairwise" class="section level2">
+<h2>Pairwise comparisons</h2>
+<!-- @index Pairwise comparisons; Contrasts!Pairwise; `pairs()` -->
+<p>The most common follow-up analysis for models having factors as predictors is to compare the EMMs with one another. This may be done simply via the <code>pairs()</code> method for <code>emmGrid</code> objects. In the code below, we obtain the EMMs for <code>source</code> for the <code>pigs</code> data, and then compare the sources pairwise.</p>
+<pre class="r"><code>pigs.lm &lt;- lm(log(conc) ~ source + factor(percent), data = pigs)
+pigs.emm.s &lt;- emmeans(pigs.lm, &quot;source&quot;)
+pairs(pigs.emm.s)</code></pre>
+<pre class="ro"><code>##  contrast      estimate         SE df t.ratio p.value
+##  fish - soy  -0.2727678 0.05293450 23  -5.153  0.0001
+##  fish - skim -0.4022777 0.05415929 23  -7.428  &lt;.0001
+##  soy - skim  -0.1295098 0.05304280 23  -2.442  0.0570
+## 
+## Results are averaged over the levels of: percent 
+## Results are given on the log (not the response) scale. 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<!-- @index `adjust`; `summary()`!`adjust`; `summary()`!`infer` -->
+<p>In its out-of-the-box configuration, <code>pairs()</code> sets two defaults for <a href="confidence-intervals.html#summary"><code>summary()</code></a>: <code>adjust = &quot;tukey&quot;</code> (multiplicity adjustment), and <code>infer = c(FALSE, TRUE)</code> (test statistics, not confidence intervals). You may override these, of course, by calling <code>summary()</code> on the result with different values for these.</p>
+<p>In the example above, EMMs for later factor levels are subtracted from those for earlier levels; if you want the comparisons to go in the other direction, use <code>pairs(pigs.emm.s, reverse = TRUE)</code>. Also, in multi-factor situations, you may specify <code>by</code> factor(s) to perform the comparisons separately at the levels of those factors.</p>
+<!-- @index Comparisons!Graphical -->
+<p>Comparisons may be summarized graphically via the <code>comparisons</code> argument in <code>plot.emm()</code>:</p>
+<pre class="r"><code>plot(pigs.emm.s, comparisons = TRUE)</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAEgCAMAAADli+DTAAABblBMVEUAAAAAADoAAEAAAGYAOjoAOmYAOpAAZpAAZrYzMzM6AAA6OgA6Ojo6OmY6ZmY6ZpA6ZrY6kJA6kNtNTU1NTW5NTY5Nbm5Nbo5NbqtNjshmAABmADpmOgBmOjpmZjpmZmZmZpBmkGZmkLZmkNtmtttmtv9uTU1ubk1ubm5ubo5ujo5ujqtujshuq8huq+SOTU2Obk2Obm6Oq6uOq8iOq+SOyOSOyP+QOgCQOjqQZjqQZmaQZpCQkGaQkLaQtraQttuQ2/+rbk2rbm6rjm6rq8iryOSr5OSr5P+wsPC2ZgC2Zjq2kDq2kGa2tra2ttu229u22/+2//+/v//Ijk3Ijm7Iq27Iq6vIyKvI5OTI5P/I///bkDrbkGbbtmbbtpDbtrbb27bb29vb2//b///kq27kq47kyI7kyKvk5Mjk5P/k///r6+v/AAD/tmb/yI7/25D/27b/29v/5Kv/5Mj/5OT//7b//8j//9v//+T////9OhQeAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAUV0lEQVR4nO2djX8Tx52H1wJyxLiQyxpsU5r00qLkArEhKaZJr5f6SC6YJG1AIRfjC0mDC3eubMCuLe9/35ndlbTaN82+/GYl8Xw/nwTtyqPHOzOPdnZ2ZDkeIUQsTtO/ACGzHAQjRDAIRohgEIwQwSAYIYJBMEIEg2CECAbBCBEMghEiGAQjRDAIRohgEIwQwSAYIYKxLNjfB4k+LpwKZeHCFeUiGFy4glwEgwtXkItgcOEKchEMLlxBLoLBhSvIRTC4cAW5CAYXriAXweDCFeQiGFy4glwEgwtXkItgcOEKchEMLlxBLoLBhSvIRTC4cAW5CAYXriAXweDCFeQiGFy4glwEgwtXkItgcOEKchEMLlxBLoLBhSvIRTC4cAW5CAYXriAXweDCFeQiGNymuHdN88D4J5NFK5Q14I4/XgSD2xS3xo6eXRTBshvAvPUqFIXbGLfGjp5dFMGyG8C89SoUhdsYt8aOnl101gTbcVdTHiIY3OS+7H7b7XaLdfRsR/plu7HXNCo89ifGHy+CwW2Km9lt4zKUE6ylMyJYUcMmXDCD5DeAeetVKAq3MW5Gp+0mXCglWCvIiGAFFUOwfuEKReE2xk3tst0UE8oI1uon9rpFFJsYwQ5vuq773q2hYAftxS+Chx13/eCGu/g7z/tb2730OYLBHSSlw3ZTPSghWKsVM6yb/tK5mRTBDtqun5W+YMqvda8v2If+s6sd/X+lHYLBDZPsrxkWFBes1Yob1i1h2IQIdrLhfrDrec/0Wcu36njNXfcGgrnXd08eKrdueYcbvoM6rwcpQSMzkwexdO0lji6bwsdcRrDjtciJSVmlhFsNH2rBlnf9c5zete9v6CAYQTDDKKGWvu9v7OjB4Gr/oRZMb4QODgULkz+EMB9/VCgKtzFufLw1okCxoVo8+UNE00HihAwRlUkqS5/tDh4jGFwDbrK/WhLM9FUmRTDv6bv+JMf1XV+w99vBkLE/i4hgcJlFrCSYGiZ+dzM4c+24K/5/CAZ3HDe1y9Yk2GzdBwsce6j1Sc4iIhhcVnJUEeygffFR8G8oWCgSgsHN5WZ221oEm521iCcb7vKWF97l8q0KJuoRDG4uN7vf1iJYUHRQtrhfkyLYYCXH0qPhUil1UkMwuLncGjt6dtGZ+DzY4R2l2KWPtDzhYt+OP9eBYHBzuDV29OyiMyFY6eQ3gHnrVSgKtzFujR09uyiCZTeAeetVKAoXriQXweDCFeQiGFy4glwEgwtXkItgcOEKcosI1vsZweDCLcQ1Fuzxrxzn1P2jX77zBMHgwjXlGgrWu+c4vmCXnTP3EQwuXEOuoWCbjnPm3+ZP3e/93nFeq+8cNkEVAReuBNdMsD3H+a13dPmUOnn9MO9cRTC4cM24ZoJtOm96oWDetnMWweDCNeMaCda7PfengWDP50/VdhU2QRUBF64E10iwQK1QsPAfBIMLdzwXweDCFeQaCda7rSc2QrP2apxGnKCKgAtXgmskWDCxEQimZGOSAy5cQ66ZYM/nnTee+IK9uOLoCQ8EgwvXhGsmmDqFOc7C/Nz5c+rfN2vzC8HgzjrXUDDvf+edMDX6hWBwZ51rKpj38qsFZdfpC9/U6BeCwZ11rrFgIpmgioALV4KLYHDhCnILCvZXBIMLtwDXVLDeV7/wF3M4tV6ETVBFwIUrwTUUbG/eCVZLOc5cfZ9WQTC4s841E+z5fPg5yx8/nudGM1y4xlwzwTadM/2RIUul4MI15xoJdnQ5ctbi82Bw4RpzDQWLOMXHVeDCNeYaCsYZDC7cMlwjwdQ12NnUxwgGF24u10ywPce5EPxZ35f3HP6qFFy4plwzwfTfRXTmFhYW9Jr6+k5gCAZ31rmGgvW+7H9aZe439fmFYHBnnWsomFLs8VvqDHb+j3X+aXoEgzvrXGPBRDJBFQEXrgTXTLDNej9niWBwXxWukWBHl2ucOUQwuK8Q11Cw+u4tI5h97t1hHjy4Wz4VypbkljveaFU13b5GggV/mx7BppVbvaOHhSsURbAcwbxt5zWRi7AJqohZ5lbv6GHhCkURLE+wl186zunzb4f5NX86e7q41Tt6WLhCUQTLEUx/kDkSFvtOGTezo3e73UKWlJIkhTuSbs5vUe54o1XVdPsi2CvAzeroeV071ZLkrpaOSdF8wbJ+jXLHG62qptvXSDCxTFBFzDI3vaN383p2uiWJPa2WoWHjBMv4Rcodb7Sqmm5fBHsFuGkdvZvXr7Msie9otUwNGy9Y6q9S7nijVdV0+9Ys2OFN13XfuxVu3FEb17bUo313eVfv2XFXEMw+N9nRu3m9OtuS2HarZWyYiWApv0y5441WVdPtaybYy79G83OmXwdt14+v0X6wsbjuecdrFx+pPScb7jqC2ecmOnpen86zZHSz1TI3zEywxG9T7nijVdV0+xoJZjrJoQT6QJ2pnrUXv/Blu/b/3sm3rt7o+GaFnqm8HiTTVFJnHoymO8kZ/VWbrrnaU02w4zUtU5j+cLCj/933N/YHI0QEsxkEm5hkLJX68esw/3HFmfvPP2fdaFZnsKXvh4+D4aB//RWcuzqxESJDRDvc2FBtpEMXGCFaGCLGf59yxxutqqbb10iwaJ7P53wH+o6+6Fr6TE9oDM5mQ7eGI0QE4xpskDzdyx1vtKqabt/Cgnnbed9x+fRdf2Lj+u7QpuCBHh3ux+YQEcwSN6Wj1yFY7bOIyefKHW+0qppu3+KC5Z7C1NDwOz1Tvxo/gx2vLe8mRogIZoeb2tFrEKze+2Bpz5U73mhVNd2+xQUb/+Gwk4fqsmv0GkyNERf/eyM+QkQwO9yMjl5dsBpXcqQ/V+54o1XVdPsWFyznL/setAOFDtrKqZFZRO3Z++2VeIEJqohZ5mZ29MqC1bEWMe+3KHe80apqun0LC9bbdDKHiOqstbzleYcb2qngPtg/7rjBUPF4TQ8cEawJrmFHH29JhaJ8XCVHsN4n/Y+Cvf3WvJMzydFfybGkT2SRlRyBfJGbZAiGYCYpd7zRqmq6fY0EG73RnDfHcXhHWXXpo91wo78WUWcnXI+IYNa51Tt6WLhCUQQzFOz0OyU/z7yTHCEimB1u9Y4eFq5QFMFyBKsjJxvJESKCwZ11rjXBnibuMiMY3NnnWhKs46ZMcSAY3JnnGgv28qsF/Q1G72R/GCwvD93FWym7J6gi4MKV4JoKtj2Y5chZiVg4E1QRcOFKcA0F036dPv/2W+fqNWyCKgIuXAmumWDP5/t/2vfFbafGP6M9QRUBF64E10ywyPKo3m2+BB0uXFOukWAjX/4w5uMqCAYXbuGVHJEF9HV+l9EEVQRcuBJcBIMLV5BrJJi67hp+w+Ve7mpfBIMLl0kOuHDtcM0Eez7vnPmL/+inK0zTw4VrzDUTLFjIsbCwUPNSjgmqCLhwJbiGgnk/zIcrpeZ+W59fCAZ31rmmgnm9x2+pM9j5T2ub4EAwuK8A11gwkUxQRcCFK8FFMLhwBbnFBOv9+PWfEQwuXGOuqWAv/qAuvo6uOI5zpr5ZegSDO+tcQ8G2/S8F28z/ejAEgws3xjUTbM/XSn8q7MmLyzXeCJugioALV4JrJliwVGrPX8TBWkS4cI25RoKFnwcLNGM1PVy4xlwjwQKnji77y3wRDC5cY24BwdQl2FUEgwu3CNdIsGCIuB2so+caDC5cY66RYOrq66yePtRmMYsIF64510ywvWAl/VWv97HD58HgwjXmmgkWfB7srD/RMXc142cQDC7cONdQMO/FJ7/+VP1z9MsL39TnF4LBnXWuqWAymaCKgAtXgotgcOEKchEMLlxBLoLBhSvIRTC4cAW5Ey6Y4VfYl/oG+6BohbLZ3AINUKr1KhSFa5eLYOXLIhjcsVwEK18WweCO5SJY+bIIBncst27B/tZ23dUdd3V0bye+A8Gabni4drg1C7bvupMrWLfbHW60dCoL1h15zUEKNECp1qtQFK5dbs2C7bgruym7J0Gw7ogMrSB1CJaiWIEGKNV6FYrCtcutXbBUk5oXrDuqQqufWgRLKFagAUq1XoWicO1yaxXMHyC6K6FmhzfVxnu3QsEObrjutfjZbWxFmHb0MenGRGgNU49gMcUKNECp1qtQFK5drpxgB2033NSCve9vLccMG1sRph09N924Bq1oSog15HYTr+2nQAOUar0KReHa5dYqWH+IqP9/suF+oHR61l78QgvmLm95T9vuevhzrwcZ+3oPqqdrLwNmxVokM5v6BDte02aF6QTnruGlGIKRVzK1nsGWvu/v7vgDRT3HOPrjY0/lpkO1nIwoEOySGSJGBokFhhClxh8VisK1yxUTTP1PZemz3UCw1cYE4xoMboNcOcG8p+/6kxzXd5sWLDnXJzCLODKNWKABSrVehaJw7XIFBfO8k+/0TP1q44LdTdyvqvs+WOxGWIEGKNV6FYrCtcsVFUw79lDPbzQu2N34motaV3IklnIUaIBSrVehKFy7XDHBDtoXH+k9B+3JEOxubN1gfWsRUxYjFmiAUq1XoShcu1wxwU429K0v73BDSzURgt1Nc6HqavpUvxAMrvwQsb+SY+nRpAiWWpSPq8CV5MoJ5h3eUYpd+ihyhxnBxh2vYetVKArXLrdmwQpmbEVU7OgGRREMriR3wgWzVxFw4UpwEQwuXEEugsGFK8hFMLhwBbkIBheuIBfB4MIV5CIYXLiCXASDC1eQi2Bw4QpyEQwuXEEugsGFK8hFMLhwBbkIBheuIBfB4MIV5CIYXLiCXASDC1eQi2Bw4QpyEQwuXEEugsGFK8hFMLhwBbkIBheuIBfB4MIV5CIYXLiCXASDC1eQi2Bw4QpymxVsGIPva4YLd+q5CAYXriAXweDCFeQiGFy4glwEgwtXkItgcOEKchEMLlxBbmOCEfIqBMEIEQyCESIYBCNEMAhGiGAQjBDBIBghgkEwQgRjVbBnN1x38aPdMbuscHUO2suy4CT3eM31c/GRXa538m3bdS/dkqQmuScbbj+iB5xyvIc3FfTaliA0mzuyy6ZgO0FdLz3K3WWFq6OaX1awFO5B20J/S+EehmJfF8QmuZYEy67nxS/kqKncp4ldFgU7aC+qd9DDG+5K3i4rXD+qfkQFS+Puix5pJlf19KUt7+ShaI/Lbkz1jF2ufu/c8g5l30FT+7Pmnnwb4VoUrOOuBr/E8N0sZZcVbrAtLFgaN9wnmhTufngG2ZH0O7MxVXeXPOoUbvj4eE1S7NT+HPSojrve32V/kuN4LWFTyi5xrmr1D6WvwRLckw3ZQUsGVx3reu7PCnHD7AgPxZPccKBg5bjT6jkyULEvWMrUgvhsQwqk465YwY5wj9eW/0ddGP/7ljw2yrXyBpbC7dOt6B3lWjmDJbmD98/IPuuCPW0nqjtllzh3X72rWhFshNuf47B8vPpAn76rrr0/F8emNKbouDSdO7gGkydHuRMgWMd1Fz8fu0ue67+3WRAsxt133eu73j/uCE9vxbnqQO8EYktfAaY0ppXTSJx78m0waWq5fTuh0R23IcFO/uu9trv4uzG7LHD9C1R5weLcnUEDyPb0GHc/6Guq1wn39bTG3LdwBZbgHtwIpsu37HLVCCWo5+FtCfvXYM+SA8KUXbLc4LLbzjVY2sHZ6HQR7n7/1NWxMGaKHa+1CZZnI2NiO28ocW7/1tiHDV6DpfYuGx0uAgnvy9gRLO3gZO9LJLiD+1BWjnj0eK0capzbsfiGMnq8z/w5rCYnOSZhGnFnsMBAeM1SjJu3S5I76ORWevvowdm4tR7npk022OAO0sg0/WCsEK2IxC4rXCuC5R2vZK9L5YYdTnKkkNGY4rfW847Xcr8aJHLQVldyrIz8m77LCjeI8Ptb9vHKXpfk1rNgb0+tZwu31lOP18IQMYW701/cMTxoq2sRE1eeVi5GMyHCgmUe7+EN4TVyadxrW43Us4V73CncfRuzpqlcvTzxWTvyPmbzGmw/GJUtrnsDyaO7bHL9SI/QU7jh4PTilmXufruherZxFZRdz7LD0xRucPst+v5pdZLD/7BM8CGdfgNEdlnlBo+FGz/reKXvf6Zx77Tll2ilcK3MD6dw/09/HqyB49ULZkY+dscnmgkRDIIRIhgEI0QwCEaIYBCMEMEgGCGCQTBCBINghAgGwQgRDIIRIhgEI0QwCEaIYBCMEMEgGCGCQTBCBINghAgGwQgRDIIRIhgEI0QwCEaIYBCMEMEgGCGCQbCpyYuP5x1n7sI3/kbvtnPWe3xF7Xjjiec9/pXjOMEzmU/EX0HlJ73tLLzzRG8cXXbe7H11znFOB9ukliDYtGTbCfOG3lIe/ctmsH3q/r3gwdyf8p6Iv4LXu9ffPnPf8wX71yuRbVJLEGxKsh2ciV7eC/xQHqkHT3xLTjsXfvZ6XzrOa09ynoi/gt7WJ7kXyqqzni+YM/ebJ94L9QJvNnqoMxUEm448n/ct8LQX+oTU62ugvQie2VSnrJwn4q+gng+21QMtoP75q3pbvcJrDBLrCoJNR7Z9SXT8iyz9/3DH5nAEGJqX/kT8Ffb6T4clQs+8vpCkliDYVCRwIsimFmF4mhnosNcXLPWJxCsMs9kXbHCGQ7DagmBTET1+G0b1/6EvScFSn0i8gp+XP339yTmnL1h46YVgNQbBpiIigv1wLrqJYCJBsKnIcPwWpoxgiVfQN8He/uPPmwgmFwSbiiRm9goLlniFcJbei1yDIVj9QbDpyGBKMDSlsGDxVxgKp8xCMLEg2HTk+Xzfhz3/dlVxwWKvMBRsm2swwSDYlERpcOZTL7pgo6Bg8VcIh4g/XQnXUiGYSBBsWjJYSeifeEoIFnuFo3DhoXPhS/+ciGAiQbCpyYuP9bT6Lz71N8oINvoKnr90fu7CX8IJRgQTCYIRIhgEI0QwCEaIYBCMEMEgGCGCQTBCBINghAgGwQgRDIIRIhgEI0QwCEaIYBCMEMEgGCGCQTBCBPNPLmh/Duci09YAAAAASUVORK5CYII=" width="432" /></p>
+<p>The blue bars are confidence intervals for the EMMs, and the red arrows are for the comparisons among them. If an arrow from one mean overlaps an arrow from another group, the difference is not significant, based on the <code>adjust</code> setting (which defaults to <code>&quot;tukey&quot;</code>). (Note: Don’t ever use confidence intervals for EMMs to perform comparisons; they can be very misleading.)</p>
+<!-- @index `cld()`; Comparisons!Displaying as groups -->
+<p>Another way to depict comparisons is by compact-letter displays:</p>
+<pre class="r"><code>cld(pigs.emm.s)</code></pre>
+<pre class="ro"><code>##  source   emmean         SE df lower.CL upper.CL .group
+##  fish   3.394492 0.03668122 23 3.318612 3.470373  1    
+##  soy    3.667260 0.03744798 23 3.589793 3.744727   2   
+##  skim   3.796770 0.03938283 23 3.715300 3.878240   2   
+## 
+## Results are averaged over the levels of: percent 
+## Results are given on the log (not the response) scale. 
+## Confidence level used: 0.95 
+## P value adjustment: tukey method for comparing a family of 3 estimates 
+## significance level used: alpha = 0.05</code></pre>
+<p>Two EMMs sharing one or more grouping symbols are not significantly different. I really don’t recommend this method, though, as it imposes a stark difference between <em>P</em> values slightly less and slightly more than <code>alpha</code>.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="contrasts" class="section level2">
+<h2>Other contrasts</h2>
+<!-- @index `contrast()`; `coef()`; Contrasts!Polynomial -->
+<p>Pairwise comparisons are an example of linear functions of EMMs. You may use <code>coef()</code> to see the coefficients of these linear functions:</p>
+<pre class="r"><code>coef(pairs(pigs.emm.s))</code></pre>
+<pre class="ro"><code>##      source c.1 c.2 c.3
+## fish   fish   1   1   0
+## soy     soy  -1   0   1
+## skim   skim   0  -1  -1</code></pre>
+<p>The pairwise comparisons correspond to columns of the above results. For example, the first pairwise comparison, <code>fish - soy</code>, gives coefficients of 1, -1, and 0 to fish, soy, and skim, respectively. In cases, such as this one, where each column of coefficients sums to zero, the linear functions are termed <em>contrasts</em></p>
+<p>The <code>contrast()</code> function provides for general contrasts (and linear functions, as well) of factor levels. Its second argument, <code>method</code>, is used to specify what method is to be used. In this section we describe the built-in ones, where we simply provide the name of the built-in method. Consider, for example, the factor <code>percent</code> in the model <code>pigs.lm</code> . It is treated as a factor in the model, but it corresponds to equally-spaced values of a numeric variable. In such cases, users often want to compute orthogonal polynomial contrasts:</p>
+<pre class="r"><code>pigs.emm.p &lt;- emmeans(pigs.lm, &quot;percent&quot;)
+ply &lt;- contrast(pigs.emm.p, &quot;poly&quot;)
+ply</code></pre>
+<pre class="ro"><code>##  contrast     estimate         SE df t.ratio p.value
+##  linear     0.93739228 0.21055597 23   4.452  0.0002
+##  quadratic -0.09710425 0.08832632 23  -1.099  0.2830
+##  cubic      0.18631573 0.18773559 23   0.992  0.3313
+## 
+## Results are averaged over the levels of: source 
+## Results are given on the log (not the response) scale.</code></pre>
+<pre class="r"><code>coef(ply)</code></pre>
+<pre class="ro"><code>##    percent c.1 c.2 c.3
+## 9        9  -3   1  -1
+## 12      12  -1  -1   3
+## 15      15   1  -1  -3
+## 18      18   3   1   1</code></pre>
+<p>We obtain tests for the linear, quadratic, and cubic trends. The coefficients are those that can be found in tables in many experimental-design texts. It is important to understand that the estimated linear contrast is <em>not</em> the slope of a line fitted to the data. It is simply a contrast having coefficients that increase linearly. It <em>does</em> test the linear trend, however.</p>
+<!-- @index Dunnett method; `pairwise` contrasts; `revpairwise` contrasts; `trt.vs.ctrl` contrasts;
+            `eff` contrasts; `consec` contrasts -->
+<p>There are a number of other named contrast methods, for example <code>&quot;trt.vs.ctrl&quot;</code>, <code>&quot;eff&quot;</code>, and <code>&quot;consec&quot;</code>. The <code>&quot;pairwise&quot;</code> and <code>&quot;revpairwise&quot;</code> methods in <code>contrast()</code> are the same as <code>Pairs()</code> and <code>pairs(..., reverse = TRUE)</code>. See <a href="../html/emmc-functions.html">help(“contrast-methods”)</a> for details.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="formulas" class="section level2">
+<h2>Formula interface</h2>
+<!-- @index `specs`!Formula; Contrasts!Formula; `emm_list` object
+             Examples!`oranges` -->
+<p>If you already know what contrasts you will want before calling <code>emmeans()</code>, a quick way to get them is to specify the method as the left-hand side of the formula in its second argument. For example, with the <code>oranges</code> dataset provided in the package,</p>
+<pre class="r"><code>org.aov &lt;- aov(sales1 ~ day + Error(store), data = oranges,
+               contrasts = list(day = &quot;contr.sum&quot;))
+org.emml &lt;- emmeans(org.aov, consec ~ day)
+org.emml</code></pre>
+<pre class="ro"><code>## $emmeans
+##  day    emmean       SE    df lower.CL upper.CL
+##  1    7.872750 2.772162 29.24 2.205099 13.54040
+##  2    7.100600 2.772162 29.24 1.432949 12.76825
+##  3   13.758600 2.772162 29.24 8.090949 19.42625
+##  4    8.042467 2.772162 29.24 2.374815 13.71012
+##  5   12.924600 2.772162 29.24 7.256949 18.59225
+##  6   11.603650 2.772162 29.24 5.935999 17.27130
+## 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast  estimate       SE df t.ratio p.value
+##  2 - 1    -0.772150 3.776875 25  -0.204  0.9997
+##  3 - 2     6.658000 3.776875 25   1.763  0.3247
+##  4 - 3    -5.716133 3.776875 25  -1.513  0.4680
+##  5 - 4     4.882133 3.776875 25   1.293  0.6125
+##  6 - 5    -1.320950 3.776875 25  -0.350  0.9965
+## 
+## P value adjustment: mvt method for 5 tests</code></pre>
+<p>The contrasts shown are the day-to-day changes.</p>
+<p>This two-sided formula technique is quite convenient, but it can also create confusion. For one thing, the result is not an <code>emmGrid</code> object anymore; it is a <code>list</code> of <code>emmGrid</code> objects, called an <code>emm_list</code>. You may need to be cognizant of that if you are to do further contrasts or other analyzes. For example if you want <code>&quot;eff&quot;</code> contrasts as well, you need to do <code>contrast(org.emml[[1]], &quot;eff&quot;)</code> or <code>contrast(org.emml, &quot;eff&quot;, which = 1)</code>.</p>
+<p>Another issue is that it may be unclear which part of the results is affected by certain options. For example, if you were to add <code>adjust = &quot;bonf&quot;</code> to the <code>org.emm</code> call above, would the Bonferroni adjustment be applied to the EMMs, or to the contrasts? (See the documentation if interested; but the best practice is to avoid such dilemmas.)</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="linfcns" class="section level2">
+<h2>Custom contrasts and linear functions</h2>
+<!-- @index Contrasts!Custom; `.emmc` functions@emmc; `contrast()`!`adjust` -->
+<p>The user may write a custom contrast function for use in <code>contrast()</code>. What’s needed is a function having the desired name with <code>&quot;.emmc&quot;</code> appended, that generates the needed coefficients as a list or data frame. The function should take a vector of levels as its first argument, and any optional parameters as additional arguments. For example, suppose we want to compare every third level of a treatment. The following function provides for this:</p>
+<pre class="r"><code>skip_comp.emmc &lt;- function(levels, skip = 1, reverse = FALSE) {
+    if((k &lt;- length(levels)) &lt; skip + 1)
+        stop(&quot;Need at least &quot;, skip + 1, &quot; levels&quot;)
+    coef &lt;- data.frame()
+    coef &lt;- as.data.frame(lapply(seq_len(k - skip - 1), function(i) {
+        sgn &lt;- ifelse(reverse, -1, 1)
+        sgn * c(rep(0, i - 1), 1, rep(0, skip), -1, rep(0, k - i - skip - 1))
+    }))
+    names(coef) &lt;- sapply(coef, function(x)
+        paste(which(x == 1), &quot;-&quot;, which(x == -1)))
+    attr(coef, &quot;adjust&quot;) = &quot;fdr&quot;   # default adjustment method
+    coef
+}</code></pre>
+<p>To test it, try 5 levels:</p>
+<pre class="r"><code>skip_comp.emmc(1:5)</code></pre>
+<pre class="ro"><code>##   1 - 3 2 - 4 3 - 5
+## 1     1     0     0
+## 2     0     1     0
+## 3    -1     0     1
+## 4     0    -1     0
+## 5     0     0    -1</code></pre>
+<pre class="r"><code>skip_comp.emmc(1:5, skip = 0, reverse = TRUE)</code></pre>
+<pre class="ro"><code>##   2 - 1 3 - 2 4 - 3 5 - 4
+## 1    -1     0     0     0
+## 2     1    -1     0     0
+## 3     0     1    -1     0
+## 4     0     0     1    -1
+## 5     0     0     0     1</code></pre>
+<p>(The latter is the same as <code>&quot;consec&quot;</code> contrasts.) Now try it with the <code>oranges</code> example we had previously:</p>
+<pre class="r"><code>contrast(org.emml[[1]], &quot;skip_comp&quot;, skip = 2, reverse = TRUE)</code></pre>
+<pre class="ro"><code>##  contrast   estimate       SE df t.ratio p.value
+##  4 - 1     0.1697167 3.776875 25   0.045  0.9645
+##  5 - 2     5.8240000 3.776875 25   1.542  0.4069
+##  6 - 3    -2.1549500 3.776875 25  -0.571  0.8601
+## 
+## P value adjustment: fdr method for 3 tests</code></pre>
+<div id="linfct" class="section level7">
+<p></p>
+<!-- @index Linear functions; `contrast()`!Linear functions -->
+<p>The <code>contrast()</code> function may in fact be used to compute arbitrary linear functions of EMMs. Suppose for some reason we want to estimate the quantities <span class="math inline">\(\lambda_1 = \mu_1+2\mu_2-7\)</span> and <span class="math inline">\(\lambda_2 = 3\mu_2-2\mu_3+1\)</span>, where the <span class="math inline">\(\mu_j\)</span> are the population values of the <code>source</code> EMMs in the <code>pigs</code> example. This may be done by providing the coefficients in a list, and the added constants in the <code>offset</code> argument:</p>
+<pre class="r"><code>LF &lt;- contrast(pigs.emm.s, 
+               list(lambda1 = c(1, 2, 0), lambda2 = c(0, 3, -2)),
+               offset = c(-7, 1))
+confint(LF, adjust = &quot;bonferroni&quot;)</code></pre>
+<pre class="ro"><code>##  contrast estimate         SE df lower.CL upper.CL
+##  lambda1  3.729013 0.08274372 23 3.530604 3.927422
+##  lambda2  4.408241 0.13411290 23 4.086655 4.729827
+## 
+## Results are averaged over the levels of: percent 
+## Confidence level used: 0.95 
+## Conf-level adjustment: bonferroni method for 2 estimates</code></pre>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+</div>
+<div id="logs" class="section level2">
+<h2>Special properties of log (and logit) transformations</h2>
+<!-- @index Transformations!Log; Comparisons!with logs@logs;
+            Comparisons!Back-transforming -->
+<p>Suppose we obtain EMMs for a model having a response transformation or link function. In most cases, when we compute contrasts of those EMMs, there is no natural way to express those contrasts on anything other than the transformed scale. For example, in a model fitted using <code>glm()</code> with the <code>gamma()</code> family, the default link function is the inverse. Predictions on such a model are estimates of <span class="math inline">\(1/\mu_j\)</span> for various <span class="math inline">\(j\)</span>. Comparisons of predictions will be estimates of <span class="math inline">\(1/\mu_j - 1/\mu_{k}\)</span> for <span class="math inline">\(j \ne k\)</span>. There is no natural way to back-transform these differences to some other interpretable scale.</p>
+<p>However, logs are an exception, in that <span class="math inline">\(\log\mu_j - \log\mu_k = \log(\mu_j/\mu_k)\)</span>. Accordingly, when <code>contrast()</code> (or <code>pairs()</code>) notices that the response is on the log scale, it back-transforms contrasts to ratios when results are to be of <code>response</code> type. For example:</p>
+<pre class="r"><code>pairs(pigs.emm.s, type = &quot;lp&quot;)</code></pre>
+<pre class="ro"><code>##  contrast      estimate         SE df t.ratio p.value
+##  fish - soy  -0.2727678 0.05293450 23  -5.153  0.0001
+##  fish - skim -0.4022777 0.05415929 23  -7.428  &lt;.0001
+##  soy - skim  -0.1295098 0.05304280 23  -2.442  0.0570
+## 
+## Results are averaged over the levels of: percent 
+## Results are given on the log (not the response) scale. 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<pre class="r"><code>pairs(pigs.emm.s, type = &quot;response&quot;)</code></pre>
+<pre class="ro"><code>##  contrast        ratio         SE df t.ratio p.value
+##  fish / soy  0.7612695 0.04029742 23  -5.153  0.0001
+##  fish / skim 0.6687950 0.03622146 23  -7.428  &lt;.0001
+##  soy / skim  0.8785259 0.04659947 23  -2.442  0.0570
+## 
+## Results are averaged over the levels of: percent 
+## P value adjustment: tukey method for comparing a family of 3 estimates 
+## Tests are performed on the log scale</code></pre>
+<!-- @index Contrasts!Tests of!with transformations@trans -->
+<p>As is true of EMM summaries with <code>type = &quot;response&quot;</code>, the tests and confidence intervals are done before back-transforming. The ratios estimated here are actually ratios of <em>geometric</em> means. In general, a model with a log response is in fact a model for <em>relative</em> effects of any of its linear predictors, and this back-transformation to ratios goes hand-in-hand with that.</p>
+<p>In generalized linear models, this behaviors will occur in two common cases: Poisson or count regression, for which the usual link is the log; and logistic regression, because logits are logs of odds ratios.</p>
+<p><a href="#contents">Back to Contents</a></p>
+<p><a href="vignette-topics.html">Index of all vignette topics</a></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

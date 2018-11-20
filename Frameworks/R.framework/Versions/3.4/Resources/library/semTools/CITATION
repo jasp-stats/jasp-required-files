@@ -1,0 +1,19 @@
+citHeader("We think that the development of the package is a collaborative work. The maintainers cannot take the credits of others' contributions. If it is possible to cite a paper describing the development of a particular function (e.g., permuteMeasEq), please cite that paper.  Otherwise, please use the following citation for the package as a whole:")
+
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
+url <- "https://CRAN.R-project.org/package=semTools"
+
+citEntry(entry = "Manual",
+  title        = "{semTools}: Useful tools for structural equation modeling",
+  author       = as.person("semTools Contributors"),
+  year         = year,
+  note         = vers,
+  url          = url,
+
+  textVersion  =
+  paste("semTools Contributors. (", year, "). ",
+        "semTools: Useful tools for structural equation modeling. ",
+        vers,
+        ". Retrieved from ", url, sep = "")
+)

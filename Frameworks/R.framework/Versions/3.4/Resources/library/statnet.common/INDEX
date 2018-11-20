@@ -1,0 +1,42 @@
+ERRVL                   Return the first argument passed (out of any
+                        number) that is not a 'try-error' (result of
+                        'try' encountering an error.
+NVL                     Convenience functions for handling 'NULL'
+                        objects.
+all_identical           Test if all items in a vector or a list are
+                        identical.
+append.rhs.formula      Functions for Querying, Validating and
+                        Extracting from ERGM Formulas
+check.control.class     Check if the class of the control list is one
+                        of those that can be used by the calling
+                        function
+compress.data.frame     "Compress" a data frame.
+compress_rows           A generic function to compress a row-weighted
+                        table
+control.list.accessor   Named element accessor for ergm control lists
+control.remap           Overwrite control parameters of one
+                        configuration with another.
+logspace.utils          Utilities for performing calculations on
+                        logarithmic scale.
+opttest                 Optionally test code depending on environment
+                        variable.
+order                   Implement the 'sort' and 'order' methods for
+                        'data.frame' and 'matrix', sorting it in
+                        lexicographic order.
+paste.and               Concatenates the elements of a vector
+                        (optionaly enclosing them in quotation marks or
+                        parentheses) adding appropriate punctuation and
+                        unions.
+print.control.list      Pretty print the control list
+rle.utils               RLE utilities
+set.control.class       Set the class of the control list
+statnet.cite            'CITATION' file utilities for Statnet packages
+statnetStartupMessage   Construct a "standard" startup message to be
+                        printed when the package is loaded.
+sweep_cols.matrix       Suptract a elements of a vector from respective
+                        columns of a matrix
+vector.namesmatch       reorder vector v into order determined by
+                        matching the names of its elements to a vector
+                        of names
+wmatrix                 A data matrix with row weights
+wmatrix_weights         Set or extract weighted matrix row weights

@@ -1,0 +1,31 @@
+Package: gnm
+Title: Generalized Nonlinear Models
+Version: 1.0-8
+Date: 2015-04-21
+Authors@R: c(person("Heather", "Turner", role = c("aut", "cre"),
+                    email = "ht@heatherturner.net"),
+             person("David", "Firth", role = "aut"),
+             person("Brian", "Ripley", role = "ctb"),
+	     person("Bill", "Venables", role = "ctb"),
+	     person(c("Douglas", "M."), "Bates", role = "ctb"),
+	     person("Martin", "Maechler", role = "ctb"))
+Description: Functions to specify and fit generalized nonlinear models, including models with multiplicative interaction terms such as the UNIDIFF model from sociology and the AMMI model from crop science, and many others.  Over-parameterized representations of models are used throughout; functions are provided for inference on estimable parameter combinations, as well as standard methods for diagnostics etc.
+URL: http://go.warwick.ac.uk/gnm
+License: GPL-2 | GPL-3
+Depends: R (>= 2.3.0)
+Imports: MASS, stats, graphics, Matrix, nnet, qvcalc (>= 0.8-3), relimp
+Suggests: vcdExtra
+LazyData: yes
+NeedsCompilation: yes
+Packaged: 2015-04-22 09:28:24 UTC; hturner
+Author: Heather Turner [aut, cre],
+  David Firth [aut],
+  Brian Ripley [ctb],
+  Bill Venables [ctb],
+  Douglas M. Bates [ctb],
+  Martin Maechler [ctb]
+Maintainer: Heather Turner <ht@heatherturner.net>
+Repository: CRAN
+Date/Publication: 2015-04-22 12:08:50
+Built: R 3.4.0; x86_64-apple-darwin15.6.0; 2017-04-20 18:06:29 UTC; unix
+Archs: gnm.so.dSYM

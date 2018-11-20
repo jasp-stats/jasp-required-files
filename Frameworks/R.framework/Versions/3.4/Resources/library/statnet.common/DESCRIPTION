@@ -1,0 +1,23 @@
+Package: statnet.common
+Version: 4.0.0
+Date: 2017-08-15
+Title: Common R Scripts and Utilities Used by the Statnet Project
+        Software
+Authors@R: c(
+	person("Pavel N.", "Krivitsky", role=c("aut","cre"), email="pavel@uow.edu.au"),
+	person("Skye", "Bender-deMoll", role=c("ctb"), email="skyebend@uw.edu"))
+Description: Non-statistical utilities used by the software developed by the Statnet Project. They may also be of use to others.
+Imports: utils, methods
+BugReports: https://github.com/statnet/statnet.common/issues
+License: GPL-3 + file LICENSE
+URL: http://www.statnet.org
+RoxygenNote: 6.0.1
+NeedsCompilation: yes
+Packaged: 2017-08-15 07:37:15 UTC; pavel
+Author: Pavel N. Krivitsky [aut, cre],
+  Skye Bender-deMoll [ctb]
+Maintainer: Pavel N. Krivitsky <pavel@uow.edu.au>
+Repository: CRAN
+Date/Publication: 2017-08-16 09:59:03 UTC
+Built: R 3.4.1; x86_64-apple-darwin15.6.0; 2017-08-17 04:30:37 UTC; unix
+Archs: statnet.common.so.dSYM

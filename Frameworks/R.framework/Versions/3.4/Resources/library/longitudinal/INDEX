@@ -1,0 +1,8 @@
+dyn.cor                 Dynamical Correlation and Covariance
+dyn.scale               Dynamical Scale, Moments, and Weights
+longitudinal            Data Structure for Longitudinal Data
+longitudinal-package    The longitudinal package
+longitudinal.util       Utility Functions for the "Longitudinal" Data
+                        Structure
+tcell                   Microarray Time Series Data for T-Cell
+                        Activation
