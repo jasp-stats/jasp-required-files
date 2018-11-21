@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Correlation stability coefficient</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for corStability {bootnet}"><tr><td>corStability {bootnet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Correlation stability coefficient
+</h2>
+
+<h3>Description</h3>
+
+<p>This coefficient denotes the estimated maximum number of cases that can be dropped from the data to retain, with 95% probability, a correlation of at least 0.7 (default) between statistics based on the original network and statistics computed with less cases. This coefficient should not be below 0.25 and is preferably above 0.5. See also Epskamp, Borsboom and Fried (2016) for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+corStability(x, cor = 0.7, statistics = c("strength", "closeness", "betweenness"), 
+verbose = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>Output of <code><a href="bootnet.html">bootnet</a></code>. Must be case-drop bootstrap.
+</p>
+</td></tr>
+<tr valign="top"><td><code>cor</code></td>
+<td>
+
+<p>The correlation level tot est at.
+</p>
+</td></tr>
+<tr valign="top"><td><code>statistics</code></td>
+<td>
+
+<p>The statistic(s) to test for.
+</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Logical, should information on the progress be printed to the console?</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Sacha Epskamp &lt;mail@sachaepskamp.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Epskamp, S., Borsboom, D., &amp; Fried, E. I. (2016). Estimating psychological networks and their accuracy: a tutorial paper. arXiv preprint, arXiv:1604.08462.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="bootnet.html">bootnet</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# BFI Extraversion data from psych package:
+library("psych")
+data(bfi)
+bfiSub &lt;- bfi[,1:25]
+
+# Estimate network:
+Network &lt;- estimateNetwork(bfiSub, default = "EBICglasso")
+
+# Bootstrap 1000 values, using 8 cores:
+# Bootstrap 1000 values, using 8 cores:
+Results2 &lt;- bootnet(Network, nBoots = 1000, nCores = 8, 
+              type = "case")
+
+# Compute CS-coefficients:
+corStability(Results2)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bootnet</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

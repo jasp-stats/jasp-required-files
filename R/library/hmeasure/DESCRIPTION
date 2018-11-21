@@ -1,0 +1,23 @@
+Package: hmeasure
+Type: Package
+Title: The H-measure and other scalar classification performance
+        metrics
+Version: 1.0
+Date: 2012-04-30
+Author: Christoforos Anagnostopoulos
+        <christoforos.anagnostopoulos06@imperial.ac.uk> and David J.
+        Hand <d.j.hand@imperial.ac.uk>
+Depends: R (>= 2.10)
+Suggests: MASS, class
+Maintainer: Christoforos Anagnostopoulos
+ <christoforos.anagnostopoulos06@imperial.ac.uk>
+Description: Scalar performance metrics, including the H-measure, based
+        on classification scores for several classifiers applied to the
+        same dataset.
+License: GPL (>= 2)
+URL: http://www.canagnos.com/~canagnos/hmeasure.html
+Namespace: hmeasure
+Packaged: 2012-09-07 19:52:58 UTC; canagnos
+Repository: CRAN
+Date/Publication: 2012-09-07 20:05:20
+Built: R 3.4.4; ; 2018-06-02 07:52:19 UTC; windows

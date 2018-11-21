@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate a network structure</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for estimateNetwork {bootnet}"><tr><td>estimateNetwork {bootnet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Estimate a network structure
+</h2>
+
+<h3>Description</h3>
+
+<p>This function allows for flexible estimation of a network structure using various R packages and model frameworks. This is typically done by using one of the default sets. See details for manual specification. See also Epskamp, Borsboom and Fried (2016) for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+estimateNetwork(data, default = c("none", "EBICglasso", "pcor", "IsingFit", 
+      "IsingSampler", "huge", "adalasso", "mgm", "relimp", "cor", "TMFG"), fun, prepFun, 
+      prepArgs, estFun, estArgs, graphFun, graphArgs, intFun, intArgs, labels, 
+      verbose = TRUE, construct = c("default","function","arguments"), .dots = list(), 
+      weighted = TRUE,  signed = TRUE, directed, ..., .input, memorysaver = FALSE)
+                
+bootnet_EBICglasso(data, tuning = 0.5, corMethod = c("cor_auto","cov","cor","npn"), 
+  missing = c("pairwise","listwise","fiml","stop"), sampleSize = c("maximum","minimim"),
+  verbose = TRUE, corArgs = list(), refit = FALSE, principalDirection = FALSE)
+  
+bootnet_pcor(data, corMethod = c("cor_auto", "cov", "cor", "npn"), missing = c("pairwise",
+  "listwise","fiml","stop"), sampleSize = c("maximum", "minimim"), verbose = TRUE, 
+  corArgs = list(), threshold = 0, principalDirection = FALSE)
+  
+bootnet_cor(data, corMethod = c("cor_auto", "cov", "cor", "npn"), missing = c("pairwise",
+  "listwise","fiml","stop"), sampleSize = c("maximum", "minimim"), verbose = TRUE, 
+  corArgs = list(), threshold = 0, principalDirection = FALSE)
+  
+bootnet_IsingFit(data, tuning = 0.25, missing = c("listwise","stop"), verbose = TRUE,
+  rule = c("AND","OR"), split = "median", principalDirection = FALSE)
+  
+bootnet_IsingSampler(data, missing = c("listwise","stop"), verbose = TRUE,
+  split = "median", method = c("default","ll","pl","uni","bi"), principalDirection = FALSE)
+  
+bootnet_adalasso(data,missing = c("listwise","stop"), verbose = TRUE, nFolds = 10, 
+              principalDirection = FALSE)
+  
+bootnet_huge(data, tuning = 0.5, missing = c("listwise","stop"), verbose = TRUE,
+  npn = TRUE, criterion = c("ebic","ric","stars"), principalDirection = FALSE)
+  
+bootnet_mgm(data, type, level, tuning = 0.5, missing = c("listwise","stop"), 
+  verbose = TRUE, criterion = c("EBIC","CV"), nFolds = 10, order = 2,
+  rule = c("AND","OR"), binarySign)
+  
+bootnet_relimp(data, normalized = TRUE, type = "lmg",
+  structureDefault = c("none", "custom", "EBICglasso", "pcor", "IsingFit", 
+  "IsingSampler", "huge", "adalasso", "mgm"),  missing = c("listwise","stop"),
+  ..., verbose = TRUE, threshold = 0)
+  
+bootnet_TMFG(data, corMethod = c("cor_auto","cov","cor","npn"), missing = c("pairwise",
+  "listwise","fiml","stop"), verbose = TRUE, corArgs = list(), principalDirection = FALSE,
+    ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>A data frame or matrix containing the raw data. Must be numeric, integer or ordered factors.
+</p>
+</td></tr>
+<tr valign="top"><td><code>default</code></td>
+<td>
+
+<p>A string indicating the method to use. Specifying a <code>default</code> sets default values to <code>prepFun</code>, <code>prepArgs</code>, <code>estFun</code>, <code>estArgs</code>, <code>graphFun</code>, <code>graphArgs</code>, <code>intFun</code> and <code>intArgs</code>. Setting a <code>default</code> can be omitted but that does require specifying all above mentioned arguments. Current options are:
+</p>
+
+<dl>
+<dt><code>"EBICglasso"</code></dt><dd><p>Gaussian Markov random field estimation using graphical LASSO and extended Bayesian information criterion to select optimal regularization parameter. Using <code><a href="../../qgraph/html/EBICglasso.html">EBICglasso</a></code> from the qgraph package. Calls <code>bootnet_EBICglasso</code>.</p>
+</dd>
+<dt><code>"IsingFit"</code></dt><dd><p>Ising model estimation using LASSO regularized nodewise logistic regression and extended Bayesian information criterion to select optimal regularization parameter. Using <code><a href="../../IsingFit/html/IsingFit.html">IsingFit</a></code> from the IsingFit package.  Calls <code>bootnet_IsingFit</code>.</p>
+</dd>
+<dt><code>IsingSampler</code></dt><dd><p>Calls the <code><a href="../../IsingSampler/html/EstimateIsing.html">EstimateIsing</a></code> function from the IsingSampler package. </p>
+</dd>
+<dt><code>"pcor"</code></dt><dd><p>Partial correlation network (non-regularized Gaussian Markov random field), using <code><a href="../../corpcor/html/cor2pcor.html">cor2pcor</a></code> from the corpcor package.  Calls <code>bootnet_pcor</code>.</p>
+</dd>
+<dt><code>"cor"</code></dt><dd><p>Correlation network.</p>
+</dd>
+<dt><code>adalasso</code></dt><dd><p>Uses the <code><a href="../../parcor/html/adalasso.net.html">adalasso.net</a></code> from the parcor package. Calls <code>bootnet_adalasso</code>.</p>
+</dd>
+<dt><code>huge</code></dt><dd><p>Uses EBIC model selection of GGM networks estimated via the glasso algorithm as implemented in the huge package (as opposed to glasso and qgraph packages used in <code>default = "EBICglasso"</code>). Uses nonparanormal transformation in preparing the data and does not use polychoric correlations. Calls <code>bootnet_huge</code>.</p>
+</dd>
+<dt><code>mgm</code></dt><dd><p>Estimates a Mixed graphical model by using the the mgm (or mgmfit in older versions) function of the mgm package. Calls <code>bootnet_mgm</code>.</p>
+</dd>
+<dt><code>TMFG</code></dt><dd><p>Estimates a Triangulated Maximally Filtered Graph, using the function <code>TMFG</code> of the NetworkToolbox package</p>
+</dd>
+</dl>
+
+<p>See details section for a more detailed description.
+</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+
+<p>A custom estimation function, when no default set is used. This must be a function that takes the data as input (first argument) and returns either a weights matrix or a list containing the elements <code>"graph"</code> for the weights matrix, <code>"intercepts"</code> for the intercepts (optional) and <code>"results"</code> for the full estimation results (optional).
+</p>
+</td></tr>
+<tr valign="top"><td><code>tuning</code></td>
+<td>
+<p>EBIC tuning parameter, used in 'EBICglasso', 'IsingFit', 'huge' and 'mgm' default sets.</p>
+</td></tr>
+<tr valign="top"><td><code>corMethod</code></td>
+<td>
+<p>Correlation method, used in 'EBICglasso' and 'pcor' default sets. <code>"cor_auto"</code> uses <code><a href="../../qgraph/html/cor_auto.html">cor_auto</a></code> for polychoric and polyserial correlations, <code>"cov"</code> uses the <code><a href="../../stats/html/cor.html">cov</a></code> function for covariances, <code>"cor"</code> will use the <code><a href="../../stats/html/cor.html">cor</a></code> function for correlations and <code>"npn"</code> will apply the nonparanormal transformation (via <code><a href="../../huge/html/huge.npn.html">huge.npn</a></code>) and then compute correlations.</p>
+</td></tr>
+<tr valign="top"><td><code>missing</code></td>
+<td>
+<p>How to handle missing data? <code>"pairwise"</code> for pairwise deletion, <code>"listwise"</code> for listwise deletion, <code>"fiml"</code> for full-information maximum likelihood and <code>"stop"</code> to stop with an error.</p>
+</td></tr>
+<tr valign="top"><td><code>sampleSize</code></td>
+<td>
+<p>How will sample size be computed in EBICglasso default set? <code>"maximum"</code> takes total number of rows including rows with NA, and <code>"minimum"</code> takes total number of rows that contain no NA.</p>
+</td></tr>
+<tr valign="top"><td><code>corArgs</code></td>
+<td>
+<p>A list with arguments for the function used defined by <code>corMethod</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>threshold</code></td>
+<td>
+
+<p>Thresholding to use in partial correlation networks. Can be a fixed number to threshold all absolute edges below this value, <code>'locfdr'</code> for local FDR, or any option corresponding to adjustments in <code><a href="../../psych/html/corr.p.html">corr.p</a></code> (<code>'none'</code>, <code>'sig'</code>, <code>'holm'</code>, <code>'hochberg'</code>, <code>'hommel'</code>, <code>'bonferroni'</code>, <code>'BH'</code>, <code>'BY'</code> or <code>'fdr'</code>)). 
+</p>
+</td></tr>
+<tr valign="top"><td><code>refit</code></td>
+<td>
+<p>Logical used in EBICglasso default set: should the estimated model structure be refitted without LASSO regularization?</p>
+</td></tr>
+<tr valign="top"><td><code>rule</code></td>
+<td>
+<p>The rule to use to select an edge in nodewise estimation. <code>"AND"</code> to only select in edge if both regression coefficients are nonzero and <code>"OR"</code> if only one is nonzero. Used in 'IsingFit' and 'mgm' default sets.</p>
+</td></tr>
+<tr valign="top"><td><code>split</code></td>
+<td>
+<p>A function or character string (<code>"median"</code> or <code>"mean"</code>) indicating how to binarize values when estimating an Ising model.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>The estimation method used in the IsingSampler default set (see <code><a href="../../IsingSampler/html/EstimateIsing.html">EstimateIsing</a></code>).</p>
+</td></tr>
+<tr valign="top"><td><code>npn</code></td>
+<td>
+<p>Logical, should nonparanormal be used in huge default set?</p>
+</td></tr>
+<tr valign="top"><td><code>criterion</code></td>
+<td>
+<p>The criterion used in model selection. <code>"ebic"</code>, <code>"ric"</code> or <code>"stars"</code> in the huge default set or <code>"EBIC"</code> or <code>"CV"</code> in the mgm default set.</p>
+</td></tr>
+<tr valign="top"><td><code>nFolds</code></td>
+<td>
+<p>Number of folds used in k-fold cross-validation.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>For mgm, see mgm or mgmfit; for relative importance networks, see <code><a href="../../relaimpo/html/calc.relimp.html">calc.relimp</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>level</code></td>
+<td>
+<p>See  <code><a href="../../mgm/html/mgm.html">mgm</a></code>. Automatically set if not assigned.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>Order up until including which interactions are included in the model. See  <code><a href="../../mgm/html/mgm.html">mgm</a></code>. Automatically set if not assigned.</p>
+</td></tr>
+<tr valign="top"><td><code>binarySign</code></td>
+<td>
+<p>See  <code><a href="../../mgm/html/mgm.html">mgm</a></code>. Automatically set if not assigned.</p>
+</td></tr>
+<tr valign="top"><td><code>normalized</code></td>
+<td>
+<p>Should normalized relative importance be used in relative importance networks?</p>
+</td></tr>
+<tr valign="top"><td><code>structureDefault</code></td>
+<td>
+<p>In relative importance networks, default set used to compute the graph structure. Any other arguments used (using ...) are sent to the graph estimator function as well.</p>
+</td></tr>
+<tr valign="top"><td><code>prepFun</code></td>
+<td>
+
+<p>A function that takes as input the raw data and returns whatever the estimation function needs (as first argument). Typically this function is used to correlate or binarize the data. Defaults to <code><a href="../../base/html/identity.html">identity</a></code> if omitted and <code>default</code> is not set. ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>prepArgs</code></td>
+<td>
+
+<p>A list with arguments for <code>prepFun</code>. Defaults to <code>list()</code> if omitted and <code>default</code> is not set. ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>estFun</code></td>
+<td>
+
+<p>A function that takes as input the prepared raw data and estimates a network. ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>estArgs</code></td>
+<td>
+
+<p>A list with arguments for <code>estArgs</code>.  ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>graphFun</code></td>
+<td>
+
+<p>A function that takes the result of <code>estFun</code> and extracts the estimated weights matrix. Defaults to <code><a href="../../base/html/identity.html">identity</a></code> if omitted and <code>default</code> is not set. ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>graphArgs</code></td>
+<td>
+
+<p>A list with arguments for <code>graphFun</code>. Defaults to <code>list()</code> if omitted and <code>default</code> is not set. ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>intFun</code></td>
+<td>
+
+<p>A function that takes the result of <code>estFun</code> and extracts the estimated intercepts. Defaults to <code><a href="null.html">null</a></code> if omitted and <code>default</code> is not set. ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>intArgs</code></td>
+<td>
+
+<p>A list with arguments for <code>intFun</code>. Defaults to <code>list()</code> if omitted and <code>default</code> is not set. ARGUMENT IS DEPRECATED AND WILL BE REMOVED.
+</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+
+<p>A character vector containing the node labels. If omitted the column names of the data are used.
+</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+
+<p>Logical, currently only used when <code>default = "EBICglasso"</code> in the <code>cor_auto</code> function.
+</p>
+</td></tr>
+<tr valign="top"><td><code>weighted</code></td>
+<td>
+<p>Logical, should the analyzed network be weighted?</p>
+</td></tr>
+<tr valign="top"><td><code>signed</code></td>
+<td>
+<p>Logical, should the analyzed network be signed?</p>
+</td></tr>
+<tr valign="top"><td><code>directed</code></td>
+<td>
+<p>Logical, is the analyzed network directed? Usually does not have to be set and is detected automatically.</p>
+</td></tr>
+<tr valign="top"><td><code>construct</code></td>
+<td>
+
+<p>Should the estimator function be constructed using new bootnet functionality (<code>function</code>) or old bootnet functionality (<code>arguments</code>)? Will default to <code>function</code> unless arguments such as <code>estFun</code> are used.
+</p>
+</td></tr>
+<tr valign="top"><td><code>.dots</code></td>
+<td>
+
+<p>A list of arguments used in the estimation function set by a default set or by the <code>fun</code> argument.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>A list of arguments used in the estimation function set by a default set or by the <code>fun</code> argument.
+</p>
+</td></tr>
+<tr valign="top"><td><code>.input</code></td>
+<td>
+<p>Used internally in the bootnet function. Do not use.</p>
+</td></tr>
+<tr valign="top"><td><code>memorysaver</code></td>
+<td>
+
+<p>Logical. If TRUE attempts to save memory (RAM) by removing some objects from the output. Used by bootnet by default for bootstraps.</p>
+</td></tr>
+<tr valign="top"><td><code>principalDirection</code></td>
+<td>
+
+<p>Rescales variables according to the sign of the first eigen-vector. This will lead to most correlations to be positive (positive manifold), leading to negative edges to be substantively interpretable.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>NEW FUNCTIONALTIY:
+</p>
+<p>The user can manually specify an estimation method by assigning a custom function to the <code>'fun'</code> argument. This function must take data as input and output an estimated network. Fhe functions <code>bootnet_</code> correspond to the functions used when using default sets. E.g, <code>default = "pcor"</code> sets <code>fun = bootnet_pcor</code>. As such, the arguments described above can be used depending on the default set used.
+</p>
+<p>DEPRECATED OLD FUNCTIONALITY:
+</p>
+<p>The user can manually set the estimation method of the PMRF in bootnet using a set of arguments to the bootnet function. First, the method of preprocessing the data must be defined via the <code>prepFun</code> argument, which must be assigned a function that takes a dataset as input and returns the viable input for the network estimator. The argument <code>prepArgs</code> can be specified a list of arguments to the <code>prepFun</code> function. Data preprocessing typically means correlating the data for the GGM or binarizing it for the Ising model (to this end bootnet provides a <code>binarize</code> function). Next, we estimate the network. To do so, we assign the <code>estFun</code> argument, a function that takes whatever the output of <code>prepFun</code> was and estimates a network. The <code>estArgs</code> argument can be used to assign a list of additional arguments to the function used in <code>estFun</code>. Finally, we need to extract the weights matrix and intercepts. Assigning functions to the <code>graphFun</code> and <code>intFun</code> arguments respectively can do this. An example of how these commands work together to estimate a network using <code>default = "EBICglasso"</code> is shown below:
+</p>
+<p><code>estimateNetwork(Data, 
+	prepFun = cor_auto, 
+	prepArgs =  list(verbose = FALSE), 
+	estFun = qgraph::EBICglasso, 
+	estArgs = list(n = nrow(bfi)), 
+	graphFun = identity, 
+	intFun= null)</code>
+</p>
+<p>The following defaults can be used:
+</p>
+
+<dl>
+<dt><code>default = "EBICglasso"</code></dt><dd>
+
+<dl>
+<dt>prepFun</dt><dd><p><code><a href="../../qgraph/html/cor_auto.html">cor_auto</a></code> from the qgraph package</p>
+</dd>
+<dt>prepArgs</dt><dd><p><code>list(verbose=TRUE)</code> for estimating a network and <code>list(verbose=FALSE)</code> for bootstrap samples.</p>
+</dd>
+<dt>estFun</dt><dd><p><code><a href="../../qgraph/html/EBICglasso.html">EBICglasso</a></code> from the qgraph package</p>
+</dd>
+<dt>estArgs</dt><dd><p><code>list(n = nrow(data), returnAllResults = TRUE)</code></p>
+</dd>
+<dt>graphFun</dt><dd><p><code>function(x)x[['optnet']]</code></p>
+</dd>
+<dt>graphArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>intFun</dt><dd><p><code><a href="null.html">null</a></code></p>
+</dd>
+<dt>intArgs</dt><dd><p><code>list()</code></p>
+</dd>
+</dl>
+
+</dd>
+<dt><code>default = "IsingFit"</code></dt><dd>
+
+<dl>
+<dt>prepFun</dt><dd><p><code><a href="binarize.html">binarize</a></code></p>
+</dd>
+<dt>prepArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>estFun</dt><dd><p><code><a href="../../IsingFit/html/IsingFit.html">IsingFit</a></code> from the IsingFit package</p>
+</dd>
+<dt>estArgs</dt><dd><p><code>list(plot = FALSE, progress = FALSE)</code></p>
+</dd>
+<dt>graphFun</dt><dd><p><code>function(x)x[['weiadj']]</code></p>
+</dd>
+<dt>graphArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>intFun</dt><dd><p><code>function(x)x[['thresholds']]</code></p>
+</dd>
+<dt>intArgs</dt><dd><p><code>list()</code></p>
+</dd>
+</dl>
+
+</dd>
+<dt><code>default = "pcor"</code></dt><dd>
+
+<dl>
+<dt>prepFun</dt><dd><p><code><a href="../../qgraph/html/cor_auto.html">cor_auto</a></code> from the qgraph package</p>
+</dd>
+<dt>prepArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>estFun</dt><dd><p><code><a href="../../corpcor/html/cor2pcor.html">cor2pcor</a></code> from the corpcor package</p>
+</dd>
+<dt>estArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>graphFun</dt><dd><p><code><a href="../../base/html/identity.html">identity</a></code></p>
+</dd>
+<dt>graphArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>intFun</dt><dd><p>null</p>
+</dd>
+<dt>intArgs</dt><dd><p><code>list()</code></p>
+</dd>
+</dl>
+
+</dd>
+<dt><code>default = "adalasso"</code></dt><dd>
+
+<dl>
+<dt>prepFun</dt><dd><p><code>identity</code></p>
+</dd>
+<dt>prepArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>estFun</dt><dd><p><code><a href="../../parcor/html/adalasso.net.html">adalasso.net</a></code> from the parcor package</p>
+</dd>
+<dt>estArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>graphFun</dt><dd><p><code>function(x)as.matrix(Matrix::forceSymmetric(x$pcor.adalasso)</code></p>
+</dd>
+<dt>graphArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>intFun</dt><dd><p>null</p>
+</dd>
+<dt>intArgs</dt><dd><p><code>list()</code></p>
+</dd>
+</dl>
+
+</dd>
+<dt><code>default = "huge"</code></dt><dd>
+
+<dl>
+<dt>prepFun</dt><dd><p><code>function(x)huge.npn(na.omit(as.matrix(x)),verbose = FALSE)</code>, using <code><a href="../../huge/html/huge.npn.html">huge.npn</a></code> from the huge package</p>
+</dd>
+<dt>prepArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>estFun</dt><dd><p><code>function(x)huge::huge.select(huge::huge(x,method = "glasso",verbose=FALSE), criterion = "ebic",verbose = FALSE)</code>, using the huge package</p>
+</dd>
+<dt>estArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>graphFun</dt><dd><p><code>as.matrix(qgraph::wi2net(as.matrix(x$opt.icov)))</code>, using the huge package</p>
+</dd>
+<dt>graphArgs</dt><dd><p><code>list()</code></p>
+</dd>
+<dt>intFun</dt><dd><p>null</p>
+</dd>
+<dt>intArgs</dt><dd><p><code>list()</code></p>
+</dd>
+</dl>
+
+</dd>
+</dl>
+
+
+
+<h3>Value</h3>
+
+<p>A <code>bootnetResult</code> object with the following elements:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>The weights matrix of the network</p>
+</td></tr>
+<tr valign="top"><td><code>intercepts</code></td>
+<td>
+<p>The intercepts</p>
+</td></tr>
+<tr valign="top"><td><code>results</code></td>
+<td>
+<p>The results of the estimation procedure</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>A vector with node labels</p>
+</td></tr>
+<tr valign="top"><td><code>nNodes</code></td>
+<td>
+<p>Number of nodes in the network</p>
+</td></tr>
+<tr valign="top"><td><code>nPerson</code></td>
+<td>
+<p>Number of persons in the network</p>
+</td></tr>
+<tr valign="top"><td><code>input</code></td>
+<td>
+<p>Input used, including the result of the default set used</p>
+</td></tr>
+</table>
+
+
+
+
+
+
+
+<h3>Author(s)</h3>
+
+<p>Sacha Epskamp &lt;mail@sachaepskamp.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Epskamp, S., Borsboom, D., &amp; Fried, E. I. (2016). Estimating psychological networks and their accuracy: a tutorial paper. arXiv preprint, arXiv:1604.08462.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="bootnet.html">bootnet</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# BFI Extraversion data from psych package:
+library("psych")
+data(bfi)
+bfiSub &lt;- bfi[,1:25]
+
+# Estimate network:
+Network &lt;- estimateNetwork(bfiSub, default = "EBICglasso")
+
+## Not run: 
+# Some pointers:
+print(Network)
+
+# Estimated network:
+plot(Network, layout = 'spring') 
+
+# Centrality indices:
+library("qgraph")
+centralityPlot(Network)
+
+# BIC model selection:
+Network_BIC &lt;- estimateNetwork(bfiSub, default = "EBICglasso", tuning = 0)
+
+# Ising model:
+Network_BIC &lt;- estimateNetwork(bfiSub, default = "IsingFit")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bootnet</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

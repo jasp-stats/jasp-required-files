@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Bootstrapped network estimation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bootnet {bootnet}"><tr><td>bootnet {bootnet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Bootstrapped network estimation
+</h2>
+
+<h3>Description</h3>
+
+<p>This function can be used to bootstrap network estimation methods so that the spread of parameter and centrality estimates can be assessed. Most important methods are <code>type = 'nonparametric'</code> for the non-parametric bootstrap and <code>type = 'case'</code> for the case-dropping bootstrap. See also Epskamp, Borsboom and Fried (2016) for more details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bootnet(data, nBoots = 1000, default = c("none", "EBICglasso", "pcor","IsingFit",
+                  "IsingSampler", "huge","adalasso","mgm","relimp","cor","TMFG"), type =
+                 c("nonparametric", "parametric", "node", "person",
+                 "jackknife", "case"), nCores = 1, statistics = c("edge"
+                 ,"strength","closeness","betweenness"), model = c("detect",
+                 "GGM", "Ising"), fun, prepFun, prepArgs, estFun, estArgs,
+                 graphFun, graphArgs, intFun, intArgs, verbose = TRUE,
+                 construct = c("default", "function", "arguments"), labels, 
+                 alpha = 1, caseMin = 0.05, caseMax = 0.75, caseN = 10,
+                 subNodes = 2:(ncol(data) - 1), subCases = round((1 -
+                 seq(caseMin, caseMax, length = caseN)) * nrow(data)),
+                 computeCentrality = TRUE, propBoot = 1, replacement =
+                 TRUE, graph, sampleSize, intercepts, weighted, signed,
+                 directed, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>A data frame or matrix containing the raw data. Must be numeric, integer or ordered factors.
+</p>
+</td></tr>
+<tr valign="top"><td><code>nBoots</code></td>
+<td>
+
+<p>Number of bootstraps
+</p>
+</td></tr>
+<tr valign="top"><td><code>default</code></td>
+<td>
+
+<p>A string indicating the method to use. See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+
+<p>The kind of bootstrap method to use.
+</p>
+</td></tr>
+<tr valign="top"><td><code>nCores</code></td>
+<td>
+
+<p>Number of cores to use in computing results. Set to 1 to not use parallel computing.
+</p>
+</td></tr>
+<tr valign="top"><td><code>statistics</code></td>
+<td>
+
+<p>Vector indicating which statistics to store. Can contain <code>"edge"</code>, <code>"strength"</code>, <code>"closeness"</code>, <code>"betweenness"</code>, <code>"length"</code> and <code>"distance"</code>. By default, length and distance are not stored.
+</p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+
+<p>The modeling framework to use. Automatically detects if data is binary or not.
+</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+
+<p>A custom estimation function, when no default set is used. This must be a function that takes the data as input (first argument) and returns either a weights matrix or a list containing the elements <code>"graph"</code> for the weights matrix, <code>"intercepts"</code> for the intercepts (optional) and <code>"results"</code> for the full estimation results (optional).
+</p>
+</td></tr>
+<tr valign="top"><td><code>prepFun</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>prepArgs</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>estFun</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>estArgs</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>graphFun</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>graphArgs</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>intFun</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>intArgs</code></td>
+<td>
+
+<p>See documentation at <code><a href="estimateNetwork.html">estimateNetwork</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+
+<p>Logical. Should progress of the function be printed to the console?
+</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+
+<p>A character vector containing the node labels. If omitted the column names of the data are used.
+</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+
+<p>The centrality tuning parameter as used in <code><a href="../../qgraph/html/centrality.html">centrality</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>subNodes</code></td>
+<td>
+
+<p>Range of nodes to sample in node-drop bootstrap
+</p>
+</td></tr>
+<tr valign="top"><td><code>caseMin</code></td>
+<td>
+<p>Minimum proportion of cases to drop when <code>type = "case"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>caseMax</code></td>
+<td>
+<p>Maximum proportion of cases to drop when <code>type = "case"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>caseN</code></td>
+<td>
+<p>Number of sampling levels to test when <code>type = "case"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>subCases</code></td>
+<td>
+
+<p>Range of persons to sample in person-drop bootstrap
+</p>
+</td></tr>
+<tr valign="top"><td><code>computeCentrality</code></td>
+<td>
+
+<p>Logical, should centrality be computed?  
+</p>
+</td></tr>
+<tr valign="top"><td><code>propBoot</code></td>
+<td>
+
+<p>Proportion of persons to sample in bootstraps. Set to lower than 1 for m out of n bootstrap
+</p>
+</td></tr>
+<tr valign="top"><td><code>replacement</code></td>
+<td>
+
+<p>Logical, should replacement be used in bootstrap sampling?
+</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>A given network structure to use in parametric bootstrap.</p>
+</td></tr>
+<tr valign="top"><td><code>sampleSize</code></td>
+<td>
+<p>The samplesize to use in parametric bootstrap.</p>
+</td></tr>
+<tr valign="top"><td><code>intercepts</code></td>
+<td>
+<p>Intercepts to use in parametric bootstrap.</p>
+</td></tr>
+<tr valign="top"><td><code>construct</code></td>
+<td>
+<p>How to construct the estimator? Set to <code>"arguments"</code> to use old functionality (not recommended).</p>
+</td></tr>
+<tr valign="top"><td><code>weighted</code></td>
+<td>
+<p>Logical, should the analyzed network be weighted?</p>
+</td></tr>
+<tr valign="top"><td><code>signed</code></td>
+<td>
+<p>Logical, should the analyzed network be signed?</p>
+</td></tr>
+<tr valign="top"><td><code>directed</code></td>
+<td>
+<p>Logical, is the analyzed network directed? Usually does not have to be set and is detected automatically.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>Additional arguments used in the estimator function.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code>bootnet</code> object with the following elements:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>sampleTable</code></td>
+<td>
+<p> A data frame containing all estimated values on the real sample. </p>
+</td></tr>
+<tr valign="top"><td><code>bootTable</code></td>
+<td>
+<p> A data frame containing all estimated values on all bootstrapped samples. </p>
+</td></tr>
+<tr valign="top"><td><code>sample</code></td>
+<td>
+<p> A <code>bootnetResult</code> object with plot and print method containing the estimated network of the real sample.  </p>
+</td></tr>
+<tr valign="top"><td><code>boots</code></td>
+<td>
+<p>A list of <code>bootnetResult</code> objects containing the raw bootstrap results.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Sacha Epskamp &lt;mail@sachaepskamp.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Epskamp, S., Borsboom, D., &amp; Fried, E. I. (2016). Estimating psychological networks and their accuracy: a tutorial paper. arXiv preprint, arXiv:1604.08462.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="estimateNetwork.html">estimateNetwork</a></code>, <code><a href="differenceTest.html">differenceTest</a></code>, <code><a href="corStability.html">corStability</a></code>, <code><a href="plot.bootnet.html">plot.bootnet</a></code>, <code><a href="summary.bootnet.html">summary.bootnet</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# BFI Extraversion data from psych package:
+library("psych")
+data(bfi)
+bfiSub &lt;- bfi[,1:25]
+
+# Estimate network:
+Network &lt;- estimateNetwork(bfiSub, default = "EBICglasso")
+
+# Centrality indices:
+library("qgraph")
+centralityPlot(Network)
+
+## Not run: 
+# Estimated network:
+plot(Network, layout = 'spring') 
+
+### Non-parametric bootstrap ###
+# Bootstrap 1000 values, using 8 cores:
+Results1 &lt;- bootnet(Network, nBoots = 1000, nCores = 8)
+
+# Plot bootstrapped edge CIs:
+plot(Results1, labels = FALSE, order = "sample")
+
+# Plot significant differences (alpha = 0.05) of edges:
+plot(Results1, "edge", plot = "difference",onlyNonZero = TRUE,
+     order = "sample") 
+
+# Plot significant differences (alpha = 0.05) of node strength:
+plot(Results1, "strength", plot = "difference")
+
+# Test for difference in strength between node "A1" and "C2":
+differenceTest(Results,  "A1", "C2", "strength")
+
+### Case-drop bootstrap ###
+# Bootstrap 1000 values, using 8 cores:
+Results2 &lt;- bootnet(Network, nBoots = 1000, nCores = 8, 
+              type = "case")
+
+# Plot centrality stability:
+plot(Results2)
+
+# Compute CS-coefficients:
+corStability(Results2)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bootnet</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

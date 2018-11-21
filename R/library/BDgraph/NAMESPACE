@@ -1,0 +1,57 @@
+useDynLib( BDgraph, .registration = TRUE )
+
+importFrom( "Matrix", "Matrix", "printSpMatrix" )
+
+importFrom( "igraph", "graph.adjacency", "plot.igraph", "layout.circle", 
+            "make_undirected_graph", "max_cliques" )
+
+importFrom( "grDevices", "dev.new" )
+
+importFrom( "graphics", "abline", "matplot", "par", "plot", "points", "text", "title", "legend" )
+		    
+importFrom( "stats", "toeplitz", "cor", "sd", 
+			"rnorm", "pnorm", "qnorm", 
+			"rbinom", "qbinom", 
+			"qexp", "qpois",
+		    "rchisq", "runif", "smooth.spline" )
+		    
+importFrom( "utils", "flush.console", "read.table", "object.size" )
+
+export( bdgraph,
+		bdgraph.mpl,
+		bdgraph.ts,
+
+		transfer,
+		plinks,
+		select,
+		pgraph,
+		graph.sim,
+		bdgraph.sim,
+		bdgraph.npn,
+		compare,
+
+		plotcoda,
+		traceplot,
+		plotroc,
+		
+		rgwish,
+		rgcwish,
+		rwish,
+		gnorm,
+		rmvnorm,
+		
+		print.bdgraph, 
+		plot.bdgraph, 
+		summary.bdgraph,
+		print.sim, 
+		plot.sim,
+		
+		detect_cores
+	   )
+
+S3method( "summary", "bdgraph" )
+S3method( "plot"   , "bdgraph" )
+S3method( "print"  , "bdgraph" )
+S3method( "plot"   , "sim" )
+S3method( "print"  , "sim" )
+S3method( "plot"   , "graph" )

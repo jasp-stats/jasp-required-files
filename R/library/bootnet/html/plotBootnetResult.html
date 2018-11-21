@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot method for bootnetResult objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.bootnetResult {bootnet}"><tr><td>plot.bootnetResult {bootnet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Plot method for bootnetResult objects
+</h2>
+
+<h3>Description</h3>
+
+<p>Plots the graph using the qgraph package and the <code><a href="../../qgraph/html/qgraph.html">qgraph</a></code> function. Defined as <code>qgraph::qgraph(x[['graph']],labels=x[['labels']],...)</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'bootnetResult'
+plot(x, weighted, signed, directed, labels, 
+          layout = "spring", parallelEdge = TRUE, cut = 0, 
+          theme = "colorblind", ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>A <code>bootnetResult</code> object
+</p>
+</td></tr>
+<tr valign="top"><td><code>weighted</code></td>
+<td>
+<p>Logical, should the analyzed network be weighted?</p>
+</td></tr>
+<tr valign="top"><td><code>signed</code></td>
+<td>
+<p>Logical, should the analyzed network be signed?</p>
+</td></tr>
+<tr valign="top"><td><code>directed</code></td>
+<td>
+<p>Logical, is the analyzed network directed? Usually does not have to be set and is detected automatically.</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>Labels of the nodes. Defaults to the column names of the data if missing.</p>
+</td></tr>
+<tr valign="top"><td><code>layout</code></td>
+<td>
+<p>Placement of the nodes. See  <code><a href="../../qgraph/html/qgraph.html">qgraph</a></code>. Always defaults to <code>"spring"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>parallelEdge</code></td>
+<td>
+<p>Should edges in directed networks be plotted parallel? See  <code><a href="../../qgraph/html/qgraph.html">qgraph</a></code>. Defaults to <code>TRUE</code> instead of <code>FALSE</code> (as in qgraph).</p>
+</td></tr>
+<tr valign="top"><td><code>cut</code></td>
+<td>
+<p>Should scaling in width and saturation of edges be split? See  <code><a href="../../qgraph/html/qgraph.html">qgraph</a></code>. Defaults to <code>0</code> to disable cut (qgraph chooses a cutoff with at least 20 nodes).</p>
+</td></tr>
+<tr valign="top"><td><code>theme</code></td>
+<td>
+<p>Theme of the edge and node colors. See  <code><a href="../../qgraph/html/qgraph.html">qgraph</a></code>. Defaults to <code>"colorblind"</code> rather than the default used in qgraph (<code>"classic"</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>Arguments sent to <code><a href="../../qgraph/html/qgraph.html">qgraph</a></code>.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Sacha Epskamp &lt;mail@sachaepskamp.com&gt;
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>bootnet</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

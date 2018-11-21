@@ -1,0 +1,14 @@
+Package: glasso
+Title: Graphical lasso- estimation of Gaussian graphical models
+Version: 1.8
+Author: Jerome Friedman, Trevor Hastie and Rob Tibshirani
+Description: Graphical lasso
+Maintainer: Rob Tibshirani <tibs@stat.stanford.edu>
+License: GPL-2
+URL: http://www-stat.stanford.edu/~tibs/glasso
+Packaged: 2014-07-22 07:02:50 UTC; tibs
+Repository: CRAN
+Date/Publication: 2014-07-22 10:29:36
+NeedsCompilation: yes
+Built: R 3.4.1; x86_64-w64-mingw32; 2017-08-16 00:51:21 UTC; windows
+Archs: i386, x64

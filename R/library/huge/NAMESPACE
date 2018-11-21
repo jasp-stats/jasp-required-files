@@ -1,0 +1,29 @@
+useDynLib("huge")
+import("Matrix","MASS","igraph","lattice")
+importFrom("grDevices", "dev.off", "gray.colors", "postscript")
+importFrom("graphics", "lines", "par", "plot")
+importFrom("methods", "new")
+importFrom("stats", "cor", "qnorm", "runif", "sd")
+importFrom("utils", "flush.console")
+export(huge,
+	huge.select,
+	huge.roc,
+	huge.generator,
+	huge.npn,
+	huge.plot,
+
+	huge.mb, huge.glasso, huge.ct,
+
+	print.huge,plot.huge,
+	print.sim,plot.sim,
+	print.roc,plot.roc,
+	print.select,plot.select
+)
+S3method("print","huge")
+S3method("plot","huge")
+S3method("print","sim")
+S3method("plot","sim")
+S3method("print","roc")
+S3method("plot","roc")
+S3method("print","select")
+S3method("plot","select")

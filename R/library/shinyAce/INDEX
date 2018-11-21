@@ -1,0 +1,6 @@
+aceAutocomplete         Enable Code Completion for an Ace Code Input
+aceEditor               Render Ace
+getAceModes             Get available modes
+getAceThemes            Get available themes
+jsQuote                 Escape a JS String
+updateAceEditor         Update Ace Editor

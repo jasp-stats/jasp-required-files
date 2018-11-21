@@ -1,0 +1,19 @@
+huge                    High-dimensional undirected graph estimation
+huge-package            High-Dimensional Undirected Graph Estimation
+huge.generator          Data generator
+huge.mb                 Internal huge functions
+huge.npn                Nonparanormal(npn) transformation
+huge.plot               Graph visualization
+huge.roc                Draw ROC Curve for a graph path
+huge.select             Model selection for high-dimensional undirected
+                        graph estimation
+plot.huge               Plot function for S3 class "huge"
+plot.roc                Plot function for S3 class "roc"
+plot.select             Plot function for S3 class "select"
+plot.sim                Plot function for S3 class "sim"
+print.huge              Print function for S3 class "huge"
+print.roc               Print function for S3 class "roc"
+print.select            Print function for S3 class "select"
+print.sim               Print function for S3 class "sim"
+stockdata               Stock price of S&P 500 companies from 2003 to
+                        2008

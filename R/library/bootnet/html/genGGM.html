@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generates a GGM small-world network.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for genGGM {bootnet}"><tr><td>genGGM {bootnet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Generates a GGM small-world network.
+</h2>
+
+<h3>Description</h3>
+
+<p>Simulates a GGM as described by Yin and Li (2011), using the Watts and Strogatz (1998) algorithm for generating the graph structure (see <code><a href="../../igraph/html/watts.strogatz.game.html">watts.strogatz.game</a></code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+genGGM(Nvar, p = 0, nei = 1, parRange = c(0.5, 1), constant = 1.5, propPositive = 0.5)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>Nvar</code></td>
+<td>
+
+<p>Number of nodes
+</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+
+<p>Rewiring probability (see <code><a href="../../igraph/html/watts.strogatz.game.html">watts.strogatz.game</a></code>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>nei</code></td>
+<td>
+
+<p>Neighborhood (see <code><a href="../../igraph/html/watts.strogatz.game.html">watts.strogatz.game</a></code>).
+</p>
+</td></tr>
+<tr valign="top"><td><code>parRange</code></td>
+<td>
+
+<p>Range of partial correlation coefficients to be originally sampled.
+</p>
+</td></tr>
+<tr valign="top"><td><code>constant</code></td>
+<td>
+
+<p>A constant as described by  Yin and Li (2011).
+</p>
+</td></tr>
+<tr valign="top"><td><code>propPositive</code></td>
+<td>
+
+<p>Proportion of edges to be set positive.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Sacha Epskamp &lt;mail@sachaepskamp.com&gt;
+</p>
+
+
+<h3>References</h3>
+
+<p>Yin, J., and Li, H. (2011). A sparse conditional gaussian graphical model for analysis of genetical genomics data. The annals of applied statistics, 5(4), 2630.
+</p>
+<p>Watts, D. J., &amp; Strogatz, S. H. (1998). Collective dynamics of &lsquo;small-world&rsquo; networks. nature, 393(6684), 440-442.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>bootnet</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

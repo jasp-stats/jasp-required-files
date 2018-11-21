@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Import, Export, and Convert Data Files</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Import, Export, and Convert Data Files</h1>
+
+<p>The idea behind <strong>rio</strong> is to simplify the process of importing data into R and exporting data from R. This process is, probably unnecessarily, extremely complex for beginning R users. Indeed, R supplies <a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">an entire manual</a> describing the process of data import/export. And, despite all of that text, most of the packages described are (to varying degrees) out-of-date. Faster, simpler, packages with fewer dependencies have been created for many of the file types described in that document. <strong>rio</strong> aims to unify data I/O (importing and exporting) into two simple functions: <code>import()</code> and <code>export()</code> so that beginners (and experienced R users) never have to think twice (or even once) about the best way to read and write R data.</p>
+
+<p>The core advantage of <strong>rio</strong> is that it makes assumptions that the user is probably willing to make. Specifically, <strong>rio</strong> uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By taking away the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, <strong>rio</strong> allows almost all common data formats to be read with the same function.</p>
+
+<p>By making import and export easy, it&#39;s an obvious next step to also use R as a simple data conversion utility. Transferring data files between various proprietary formats is always a pain and often expensive. The <code>convert</code> function therefore combines <code>import</code> and <code>export</code> to easily convert between file formats (thus providing a FOSS replacement for programs like <a href="https://www.stattransfer.com/">Stat/Transfer</a> or <a href="https://www.mtna.us/#/products/sledgehammer">Sledgehammer</a>).</p>
+
+<h2>Supported file formats</h2>
+
+<p><strong>rio</strong> supports a variety of different file formats for import and export. To keep the package slim, all non-essential formats are supported via &ldquo;Suggests&rdquo; packages, which are not installed (or loaded) by default. To ensure rio is fully functional, install these packages the first time you use <strong>rio</strong> via:</p>
+
+<pre><code class="R">install_formats()
+</code></pre>
+
+<p>The full list of supported formats is below:</p>
+
+<table><thead>
+<tr>
+<th>Format</th>
+<th>Typical Extension</th>
+<th>Import Package</th>
+<th>Export Package</th>
+<th>Installed by Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Comma-separated data</td>
+<td>.csv</td>
+<td><a href="https://cran.r-project.org/package=data.table"><strong>data.table</strong></a></td>
+<td><a href="https://cran.r-project.org/package=data.table"><strong>data.table</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Pipe-separated data</td>
+<td>.psv</td>
+<td><a href="https://cran.r-project.org/package=data.table"><strong>data.table</strong></a></td>
+<td><a href="https://cran.r-project.org/package=data.table"><strong>data.table</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Tab-separated data</td>
+<td>.tsv</td>
+<td><a href="https://cran.r-project.org/package=data.table"><strong>data.table</strong></a></td>
+<td><a href="https://cran.r-project.org/package=data.table"><strong>data.table</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>SAS</td>
+<td>.sas7bdat</td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>SPSS</td>
+<td>.sav</td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Stata</td>
+<td>.dta</td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>SAS XPORT</td>
+<td>.xpt</td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>SPSS Portable</td>
+<td>.por</td>
+<td><a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a></td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Excel</td>
+<td>.xls</td>
+<td><a href="https://cran.r-project.org/package=readxl"><strong>readxl</strong></a></td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Excel</td>
+<td>.xlsx</td>
+<td><a href="https://cran.r-project.org/package=readxl"><strong>readxl</strong></a></td>
+<td><a href="https://cran.r-project.org/package=openxlsx"><strong>openxlsx</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>R syntax</td>
+<td>.R</td>
+<td><strong>base</strong></td>
+<td><strong>base</strong></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Saved R objects</td>
+<td>.RData, .rda</td>
+<td><strong>base</strong></td>
+<td><strong>base</strong></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Serialized R objects</td>
+<td>.rds</td>
+<td><strong>base</strong></td>
+<td><strong>base</strong></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Epiinfo</td>
+<td>.rec</td>
+<td><a href="https://cran.r-project.org/package=foreign"><strong>foreign</strong></a></td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Minitab</td>
+<td>.mtp</td>
+<td><a href="https://cran.r-project.org/package=foreign"><strong>foreign</strong></a></td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Systat</td>
+<td>.syd</td>
+<td><a href="https://cran.r-project.org/package=foreign"><strong>foreign</strong></a></td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>&ldquo;XBASE&rdquo; database files</td>
+<td>.dbf</td>
+<td><a href="https://cran.r-project.org/package=foreign"><strong>foreign</strong></a></td>
+<td><a href="https://cran.r-project.org/package=foreign"><strong>foreign</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Weka Attribute-Relation File Format</td>
+<td>.arff</td>
+<td><a href="https://cran.r-project.org/package=foreign"><strong>foreign</strong></a></td>
+<td><a href="https://cran.r-project.org/package=foreign"><strong>foreign</strong></a></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Data Interchange Format</td>
+<td>.dif</td>
+<td><strong>utils</strong></td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Fortran data</td>
+<td>no recognized extension</td>
+<td><strong>utils</strong></td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Fixed-width format data</td>
+<td>.fwf</td>
+<td><strong>utils</strong></td>
+<td><strong>utils</strong></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>gzip comma-separated data</td>
+<td>.csv.gz</td>
+<td><strong>utils</strong></td>
+<td><strong>utils</strong></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>CSVY (CSV + YAML metadata header)</td>
+<td>.csvy</td>
+<td><a href="https://cran.r-project.org/package=csvy"><strong>csvy</strong></a></td>
+<td><a href="https://cran.r-project.org/package=csvy"><strong>csvy</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Feather R/Python interchange format</td>
+<td>.feather</td>
+<td><a href="https://cran.r-project.org/package=feather"><strong>feather</strong></a></td>
+<td><a href="https://cran.r-project.org/package=feather"><strong>feather</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Fast Storage</td>
+<td>.fst</td>
+<td><a href="https://cran.r-project.org/package=fst"><strong>fst</strong></a></td>
+<td><a href="https://cran.r-project.org/package=fst"><strong>fst</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>JSON</td>
+<td>.json</td>
+<td><a href="https://cran.r-project.org/package=jsonlite"><strong>jsonlite</strong></a></td>
+<td><a href="https://cran.r-project.org/package=jsonlite"><strong>jsonlite</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Matlab</td>
+<td>.mat</td>
+<td><a href="https://cran.r-project.org/package=rmatio"><strong>rmatio</strong></a></td>
+<td><a href="https://cran.r-project.org/package=rmatio"><strong>rmatio</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>OpenDocument Spreadsheet</td>
+<td>.ods</td>
+<td><a href="https://cran.r-project.org/package=readODS"><strong>readODS</strong></a></td>
+<td><a href="https://cran.r-project.org/package=readODS"><strong>readODS</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>HTML Tables</td>
+<td>.html</td>
+<td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
+<td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Shallow XML documents</td>
+<td>.xml</td>
+<td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
+<td><a href="https://cran.r-project.org/package=xml2"><strong>xml2</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>YAML</td>
+<td>.yml</td>
+<td><a href="https://cran.r-project.org/package=yaml"><strong>yaml</strong></a></td>
+<td><a href="https://cran.r-project.org/package=yaml"><strong>yaml</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Clipboard</td>
+<td>default is tsv</td>
+<td><a href="https://cran.r-project.org/package=clipr"><strong>clipr</strong></a></td>
+<td><a href="https://cran.r-project.org/package=clipr"><strong>clipr</strong></a></td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://www.google.com/sheets/about/">Google Sheets</a></td>
+<td>as Comma-separated data</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>Additionally, any format that is not supported by <strong>rio</strong> but that has a known R implementation will produce an informative error message pointing to a package and import or export function. Unrecognized formats will yield a simple &ldquo;Unrecognized file format&rdquo; error.</p>
+
+<h2>Data Import</h2>
+
+<p><strong>rio</strong> allows you to import files in almost any format using one, typically single-argument, function. <code>import()</code> infers the file format from the file&#39;s extension and calls the appropriate data import function for you, returning a simple data.frame. This works for any for the formats listed above.</p>
+
+<pre><code class="r">library(&quot;rio&quot;)
+
+x &lt;- import(&quot;mtcars.csv&quot;)
+y &lt;- import(&quot;mtcars.rds&quot;)
+z &lt;- import(&quot;mtcars.dta&quot;)
+
+# confirm identical
+all.equal(x, y, check.attributes = FALSE)
+</code></pre>
+
+<pre><code>## [1] &quot;Component \&quot;vs\&quot;: target is logical, current is numeric&quot;
+## [2] &quot;Component \&quot;am\&quot;: target is logical, current is numeric&quot;
+</code></pre>
+
+<pre><code class="r">all.equal(x, z, check.attributes = FALSE)
+</code></pre>
+
+<pre><code>## [1] &quot;Component \&quot;vs\&quot;: target is logical, current is numeric&quot;
+## [2] &quot;Component \&quot;am\&quot;: target is logical, current is numeric&quot;
+</code></pre>
+
+<p>If for some reason a file does not have an extension, or has a file extension that does not match its actual type, you can manually specify a file format to override the format inference step. For example, we can read in a CSV file that does not have a file extension by specifying <code>csv</code>:</p>
+
+<pre><code class="r">head(import(&quot;mtcars_noext&quot;, format = &quot;csv&quot;))
+</code></pre>
+
+<pre><code>##    mpg cyl disp  hp drat    wt  qsec    vs    am gear carb
+## 1 21.0   6  160 110 3.90 2.620 16.46 FALSE  TRUE    4    4
+## 2 21.0   6  160 110 3.90 2.875 17.02 FALSE  TRUE    4    4
+## 3 22.8   4  108  93 3.85 2.320 18.61  TRUE  TRUE    4    1
+## 4 21.4   6  258 110 3.08 3.215 19.44  TRUE FALSE    3    1
+## 5 18.7   8  360 175 3.15 3.440 17.02 FALSE FALSE    3    2
+## 6 18.1   6  225 105 2.76 3.460 20.22  TRUE FALSE    3    1
+</code></pre>
+
+<h3>Importing Data Lists</h3>
+
+<p>Sometimes you may have multiple data files that you want to import. <code>import()</code> only ever returns a single data frame, but <code>import_list()</code> can be used to import a vector of file names into R. This works even if the files are different formats:</p>
+
+<pre><code class="r">str(import_list(dir()), 1)
+</code></pre>
+
+<p>Similarly, some single-file formats (e.g. Excel Workbooks, Zip directories, HTML files, etc.) can contain multiple data sets. Because <code>import()</code> is type safe, always returning a data frame, importing from these formats requires specifying a <code>which</code> argument to <code>import()</code> to dictate which data set (worksheet, file, table, etc.) to import (the default being <code>which = 1</code>). But <code>import_list()</code> can be used to import all (or only a specified subset, again via <code>which</code>) of data objects from these types of files.</p>
+
+<h2>Data Export</h2>
+
+<p>The export capabilities of <strong>rio</strong> are somewhat more limited than the import capabilities, given the availability of different functions in various R packages and because import functions are often written to make use of data from other applications and it never seems to be a development priority to have functions to export to the formats used by other applications. That said, <strong>rio</strong> currently supports the following formats:</p>
+
+<pre><code class="r">library(&quot;rio&quot;)
+
+export(mtcars, &quot;mtcars.csv&quot;)
+export(mtcars, &quot;mtcars.rds&quot;)
+export(mtcars, &quot;mtcars.dta&quot;)
+</code></pre>
+
+<p>It is also easy to use <code>export()</code> as part of an R pipeline (from magrittr or dplyr). For example, the following code uses <code>export()</code> to save the results of a simple data transformation:</p>
+
+<pre><code class="r">library(&quot;magrittr&quot;)
+mtcars %&gt;% subset(hp &gt; 100) %&gt;%  aggregate(. ~ cyl + am, data = ., FUN = mean) %&gt;% export(file = &quot;mtcars2.dta&quot;)
+</code></pre>
+
+<p>Some file formats (e.g., Excel workbooks, Rdata files) can support multiple data objects in a single file. <code>export()</code> natively supports output of multiple objects to these types of files:</p>
+
+<pre><code class="r"># export to sheets of an Excel workbook
+export(list(mtcars = mtcars, iris = iris), &quot;multi.xlsx&quot;)
+</code></pre>
+
+<pre><code class="r"># export to an .Rdata file
+## as a named list
+export(list(mtcars = mtcars, iris = iris), &quot;multi.rdata&quot;)
+
+## as a character vector
+export(c(&quot;mtcars&quot;, &quot;iris&quot;), &quot;multi.rdata&quot;)
+</code></pre>
+
+<h2>File Conversion</h2>
+
+<p>The <code>convert()</code> function links <code>import()</code> and <code>export()</code> by constructing a dataframe from the imported file and immediately writing it back to disk. <code>convert()</code> invisibly returns the file name of the exported file, so that it can be used to programmatically access the new file.</p>
+
+<p>Because <code>convert()</code> is just a thin wrapper for <code>import()</code> and <code>export()</code>, it is very easy to use. For example, we can convert </p>
+
+<pre><code class="r"># create file to convert
+export(mtcars, &quot;mtcars.dta&quot;)
+
+# convert Stata to SPSS
+convert(&quot;mtcars.dta&quot;, &quot;mtcars.sav&quot;)
+</code></pre>
+
+<p><code>convert()</code> also accepts lists of arguments for controlling import (<code>in_opts</code>) and export (<code>out_opts</code>). This can be useful for passing additional arguments to import or export methods. This could be useful, for example, for reading in a fixed-width format file and converting it to a comma-separated values file:</p>
+
+<pre><code class="r"># create an ambiguous file
+fwf &lt;- tempfile(fileext = &quot;.fwf&quot;)
+cat(file = fwf, &quot;123456&quot;, &quot;987654&quot;, sep = &quot;\n&quot;)
+
+# see two ways to read in the file
+identical(import(fwf, widths = c(1,2,3)), import(fwf, widths = c(1,-2,3)))
+</code></pre>
+
+<pre><code>## [1] FALSE
+</code></pre>
+
+<pre><code class="r"># convert to CSV
+convert(fwf, &quot;fwf.csv&quot;, in_opts = list(widths = c(1,2,3)))
+import(&quot;fwf.csv&quot;) # check conversion
+</code></pre>
+
+<pre><code>##   V1 V2  V3
+## 1  1 23 456
+## 2  9 87 654
+</code></pre>
+
+<p>With metadata-rich file formats (e.g., Stata, SPSS, SAS), it can also be useful to pass imported data through <code>characterize()</code> or <code>factorize()</code> when converting to an open, text-delimited format: <code>characterize()</code> converts a single variable or all variables in a data frame that have &ldquo;labels&rdquo; attributes into character vectors based on the mapping of values to value labels (e.g., <code>export(characterize(import(&quot;file.dta&quot;)), &quot;file.csv&quot;)</code>). An alternative approach is exporting to CSVY format, which records metadata in a YAML-formatted header at the beginning of a CSV file.</p>
+
+<p>It is also possible to use <strong>rio</strong> on the command-line by calling <code>Rscript</code> with the <code>-e</code> (expression) argument. For example, to convert a file from Stata (.dta) to comma-separated values (.csv), simply do the following:</p>
+
+<pre><code>Rscript -e &quot;rio::convert(&#39;mtcars.dta&#39;, &#39;mtcars.csv&#39;)&quot;
+</code></pre>
+
+<h2>Package Philosophy</h2>
+
+<p>The core advantage of <strong>rio</strong> is that it makes assumptions that the user is probably willing to make. Eight of these are important:</p>
+
+<ol>
+<li><strong>rio</strong> uses the file extension of a file name to determine what kind of file it is. This is the same logic used by Windows OS, for example, in determining what application is associated with a given file type. By removing the need to manually match a file type (which a beginner may not recognize) to a particular import or export function, <strong>rio</strong> allows almost all common data formats to be read with the same function. And if a file extension is incorrect, users can force a particular import method by specifying the <code>format</code> argument. Other packages do this as well, but <strong>rio</strong> aims to be more complete and more consistent than each:</li>
+</ol>
+
+<ul>
+<li><a href="https://cran.r-project.org/package=reader"><strong>reader</strong></a> handles certain text formats and R binary files</li>
+<li><a href="https://cran.r-project.org/package=io"><strong>io</strong></a> offers a set of custom formats</li>
+<li><a href="https://cran.r-project.org/package=ImportExport"><strong>ImportExport</strong></a> focuses on select binary formats (Excel, SPSS, and Access files) and provides a Shiny interface.</li>
+<li><a href="https://cran.r-project.org/package=SchemaOnRead"><strong>SchemaOnRead</strong></a> iterates through a large number of possible import methods until one works successfully</li>
+</ul>
+
+<ol>
+<li><p><strong>rio</strong> uses <code>data.table::fread()</code> for text-delimited files to automatically determine the file format regardless of the extension. So, a CSV that is actually tab-separated will still be correctly imported. It&#39;s also crazy fast.</p></li>
+<li><p><strong>rio</strong>, wherever possible, does not import character strings as factors.</p></li>
+<li><p><strong>rio</strong> supports web-based imports natively, including from SSL (HTTPS) URLs, from shortened URLs, from URLs that lack proper extensions, and from (public) Google Documents Spreadsheets.</p></li>
+<li><p><strong>rio</strong> imports from from single-file .zip and .tar archives automatically, without the need to explicitly decompress them. Export to compressed directories is also supported.</p></li>
+<li><p><strong>rio</strong> wraps a variety of faster, more stream-lined I/O packages than those provided by base R or the <strong>foreign</strong> package. It uses <a href="https://cran.r-project.org/package=data.table"><strong>data.table</strong></a> for delimited formats, <a href="https://cran.r-project.org/package=haven"><strong>haven</strong></a> for SAS, Stata, and SPSS files, smarter and faster fixed-width file import and export routines, and <a href="https://cran.r-project.org/package=readxl"><strong>readxl</strong></a> and <a href="https://cran.r-project.org/package=openxlsx"><strong>openxlsx</strong></a> for reading and writing Excel workbooks.</p></li>
+<li><p><strong>rio</strong> stores metadata from rich file formats (SPSS, Stata, etc.) in variable-level attributes in a consistent form regardless of file type or underlying import function. These attributes are identified as:</p></li>
+</ol>
+
+<pre><code> - `label`: a description of variable
+ - `labels`: a vector mapping numeric values to character strings those values represent
+ - `format`: a character string describing the variable storage type in the original file
+
+  The `gather_attrs()` function makes it easy to move variable-level attributes to the data frame level (and `spread_attrs()` reverses that gathering process). These can be useful, especially, during file conversion to more easily modify attributes that are handled differently across file formats. As an example, the following idiom can be used to trim SPSS value labels to the 32-character maximum allowed by Stata:
+
+  ```R
+  dat &lt;- gather_attrs(rio::import(&quot;data.sav&quot;))
+  attr(dat, &quot;labels&quot;) &lt;- lapply(attributes(dat)$labels, function(x) {
+      if (!is.null(x)) {
+          names(x) &lt;- substring(names(x), 1, 32)
+      }
+      x
+  })
+  export(spread_attrs(dat), &quot;data.dta&quot;)
+  ```
+
+  In addition, two functions (added in v0.5.5) provide easy ways to create character and factor variables from these &quot;labels&quot; attributes. `characterize()` converts a single variable or all variables in a data frame that have &quot;labels&quot; attributes into character vectors based on the mapping of values to value labels. `factorize()` does the same but returns factor variables. This can be especially helpful for converting these rich file formats into open formats (e.g., `export(characterize(import(&quot;file.dta&quot;)), &quot;file.csv&quot;)`.
+</code></pre>
+
+<ol>
+<li><strong>rio</strong> imports and exports files based on an internal S3 class infrastructure. This means that other packages can contain extensions to <strong>rio</strong> by registering S3 methods. These methods should take the form <code>.import.rio_X()</code> and <code>.export.rio_X()</code>, where <code>X</code> is the file extension of a file type. An example is provided in the <a href="https://github.com/leeper/rio.db">rio.db package</a>.</li>
+</ol>
+
+</body>
+
+</html>

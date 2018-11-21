@@ -1,0 +1,9 @@
+indentPrint	indentPrint
+plot.qv	plot.qv
+print.qv	qvcalc
+qvcalc	qvcalc
+qvcalc.default	qvcalc
+qvcalc.itempar	qvcalc
+qvcalc.lm	qvcalc
+summary.qv	qvcalc
+worstErrors	worstErrors

@@ -1,0 +1,3 @@
+IsingFit                Network estimation using the eLasso method
+IsingFit-package        Network estimation using the eLasso method
+print.IsingFit          Methods for IsingFit objects

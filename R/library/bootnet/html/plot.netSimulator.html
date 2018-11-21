@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: netSimulator S3 methods</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.netSimulator {bootnet}"><tr><td>plot.netSimulator {bootnet}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+netSimulator S3 methods
+</h2>
+
+<h3>NA</h3>
+
+plot.replicationSimulator
+
+<h3>Description</h3>
+
+<p>Plot, print and summary methods for <code><a href="netSimulator.html">netSimulator</a></code> output.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'netSimulator'
+plot(x, xvar = "factor(nCases)",
+                              yvar = c("sensitivity", "specificity", "correlation"),
+                              xfacet = "measure", yfacet = ".", color = NULL,
+                             ylim = c(0,1), print = TRUE,  xlab = "Number of cases", 
+                              ylab, ...)
+## S3 method for class 'netSimulator'
+print(x, digits = 2, ...)
+## S3 method for class 'netSimulator'
+summary(object, digits = 2, ...)
+
+## S3 method for class 'replicationSimulator'
+plot(x, xvar = "factor(nCases)",
+                              yvar = c("correlation","jaccard","replicatedEdges",
+                              "replicatedZeroes"),
+                              xfacet = "measure", yfacet = ".", color = NULL,
+                             ylim = c(0,1), print = TRUE,  xlab = "Number of cases", 
+                              ylab, ...)
+## S3 method for class 'replicationSimulator'
+print(x, digits = 2, ...)
+## S3 method for class 'replicationSimulator'
+summary(object, digits = 2, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>Output of <code><a href="netSimulator.html">netSimulator</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+
+<p>Output of <code><a href="netSimulator.html">netSimulator</a></code>.
+</p>
+</td></tr>
+<tr valign="top"><td><code>xvar</code></td>
+<td>
+
+<p>String indicating the variable to be used on the x-axis.
+</p>
+</td></tr>
+<tr valign="top"><td><code>yvar</code></td>
+<td>
+
+<p>String vector indicating the variable(s) to be used on the y-axis.
+</p>
+</td></tr>
+<tr valign="top"><td><code>xfacet</code></td>
+<td>
+
+<p>String indicating the variable to be used on the horizontal facets (or <code>"."</code> to omit).
+</p>
+</td></tr>
+<tr valign="top"><td><code>yfacet</code></td>
+<td>
+
+<p>String indicating the variable to be used on the vertical facets (or <code>"."</code> to omit).
+</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+
+<p>String indicating the variable to be used in coloring boxplots.
+</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+
+<p>Y-axis limits.
+</p>
+</td></tr>
+<tr valign="top"><td><code>print</code></td>
+<td>
+
+<p>Logical, should the plot be printed? This helps printing the plots to PDF files.
+</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+
+<p>Number of digits to be used in print and summary method.
+</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+
+<p>X-axis label
+</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+
+<p>Y-axis label. Defaults to combining the values in <code>yvar</code>. Is hidden when <code>xfacet = "measure"</code>, as then it is clear what the y-axis represent from the facet labels.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>Not used.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Sacha Epskamp &lt;mail@sachaepskamp.com&gt;
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>bootnet</em> version 1.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
