@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="date" content="2018-07-15" />
+
+<title>Modules in R</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Modules in R</h1>
+<h4 class="date"><em>2018-07-15</em></h4>
+
+
+
+<p>Provides modules as an organizational unit for source code. Modules enforce to be more rigorous when defining dependencies and have a local search path. They can be used as a sub unit within packages or in scripts.</p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>From CRAN:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;modules&quot;</span>)</code></pre></div>
+<p>From GitHub:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="kw">require</span>(<span class="st">&quot;devtools&quot;</span>)) <span class="kw">install_github</span>(<span class="st">&quot;wahani/modules&quot;</span>)</code></pre></div>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The key idea of this package is to provide a unit of source code which has it’s own scope. The main and most reliable infrastructure for such organizational units in the R ecosystem is a package. Modules can be used as stand alone, ad-hoc substitutes for a package or as a sub-unit within a package.</p>
+<p>When modules are defined inside of packages they act as bags of functions (like objects as in object-oriented-programming). Outside of packages modules define entities which only know of the base environment, i.e. within a module the base environment is the only <em>package</em> on the <em>search path</em>. Also they are always represented as a list inside R.</p>
+<p>Some core features:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;modules&quot;</span>)
+m &lt;-<span class="st"> </span><span class="kw">module</span>({
+  boringFunction &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="st">&quot;boring output&quot;</span>
+})
+m<span class="op">$</span><span class="kw">boringFunction</span>()</code></pre></div>
+<pre><code>## [1] &quot;boring output&quot;</code></pre>
+<p>Since they are isolated from the <code>.GlobalEnv</code> the following object <code>x</code> can not be found:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;hey&quot;</span>
+m &lt;-<span class="st"> </span><span class="kw">module</span>({
+  someFunction &lt;-<span class="st"> </span><span class="cf">function</span>() x
+})
+m<span class="op">$</span><span class="kw">someFunction</span>()</code></pre></div>
+<pre><code>## Error in m$someFunction(): Objekt 'x' nicht gefunden</code></pre>
+<div id="imports" class="section level2">
+<h2>Imports</h2>
+<p>If you rely on exported objects of a package you can refer to them explicitly using <code>::</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">module</span>({
+  functionWithDep &lt;-<span class="st"> </span><span class="cf">function</span>(x) stats<span class="op">::</span><span class="kw">median</span>(x)
+})
+m<span class="op">$</span><span class="kw">functionWithDep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+<p>Or you can use <code>import</code> for <em>attaching</em> single objects or packages and <code>use</code> for <em>attaching</em> or loading a module:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">module</span>({
+
+  <span class="kw">import</span>(<span class="st">&quot;stats&quot;</span>, <span class="st">&quot;median&quot;</span>) <span class="co"># make median from package stats available</span>
+
+  functionWithDep &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">median</span>(x)
+
+})
+m<span class="op">$</span><span class="kw">functionWithDep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">module</span>({
+
+  <span class="kw">import</span>(<span class="st">&quot;stats&quot;</span>)
+
+  functionWithDep &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">median</span>(x)
+
+})
+m<span class="op">$</span><span class="kw">functionWithDep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+</div>
+<div id="exports" class="section level2">
+<h2>Exports</h2>
+<p>It may also be of interest to control which objects are visible for the client. You can do that with the <code>export</code> function. Note that export accepts regular expressions which are indicated by a leading ‘^’.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">module</span>({
+
+  <span class="kw">export</span>(<span class="st">&quot;fun&quot;</span>)
+
+  fun &lt;-<span class="st"> </span>identity <span class="co"># public</span>
+  privateFunction &lt;-<span class="st"> </span>identity
+
+  <span class="co"># .named are always private</span>
+  .privateFunction &lt;-<span class="st"> </span>identity
+
+})
+
+<span class="kw">names</span>(m)</code></pre></div>
+<pre><code>## [1] &quot;fun&quot;</code></pre>
+</div>
+<div id="example-modules-as-parallel-process" class="section level2">
+<h2>Example: Modules as Parallel Process</h2>
+<p>One example where you may want to have more control of the enclosing environment of a function is when you parallelize your code. First consider the case when a <em>naive</em> implementation fails.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;parallel&quot;</span>)
+dependency &lt;-<span class="st"> </span>identity
+fun &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dependency</span>(x) 
+
+cl &lt;-<span class="st"> </span><span class="kw">makeCluster</span>(<span class="dv">2</span>)
+<span class="kw">clusterMap</span>(cl, fun, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## Error in checkForRemoteErrors(val): 2 nodes produced errors; first error: konnte Funktion &quot;dependency&quot; nicht finden</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stopCluster</span>(cl)</code></pre></div>
+<p>To make the function <code>fun</code> self contained we can define it in a module.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">module</span>({
+  dependency &lt;-<span class="st"> </span>identity
+  fun &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">dependency</span>(x) 
+})
+
+cl &lt;-<span class="st"> </span><span class="kw">makeCluster</span>(<span class="dv">2</span>)
+<span class="kw">clusterMap</span>(cl, m<span class="op">$</span>fun, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stopCluster</span>(cl)</code></pre></div>
+<p>Note that the parallel computing facilities in <code>R</code> always provide a way to handle such situations. Here it is just a matter of organization if you believe the function itself should handle its dependencies or the parallel interface.</p>
+</div>
+</div>
+<div id="related-projects" class="section level1">
+<h1>Related Projects</h1>
+<p>There exist several projects with similar goals. First of all, the package <a href="https://github.com/klmr/modules">klmr/modules</a> aims at providing a unit similar to what <a href="https://www.python.org/">Python</a>-modules are. This project is obviously interesting for you when you have prior knowledge in Python. In contrast to <code>klmr/modules</code> modules defined here do not aim for a full replacement of R-packages – rather they provide a sub-unit within R’s package ecosystem. Otherwise there is considerable overlap of features between the two packages.</p>
+<p>Second you may be interested in <a href="https://cran.r-project.org/package=import">import</a> which provides convenient syntax for stating dependencies in script files. This is something which is also covered here, although, when you are only interested in a replacement for <code>library</code> the package <code>import</code> is more focused.</p>
+<p><code>modules</code> in this package can act as objects as in object-orientation. In contrast to <a href="https://cran.r-project.org/package=R6">R6</a> and reference classes implemented in the methods package here these objects are immutable by default. Furthermore it is not being made easy to change state of a module; but it is not difficult to do that if you really want to: see the section on coupling below. Furthermore inheritance is not a feature, instead you have various possibilities for object composition.</p>
+<p>The development of the <code>modules</code> package has been inspired by other languages: <a href="https://fsharpforfunandprofit.com/posts/organizing-functions/">F#</a>, <a href="http://learnyousomeerlang.com/modules">Erlang</a> and <a href="http://docs.julialang.org/en/release-0.4/manual/modules/">julia</a>.</p>
+</div>
+<div id="scripts-as-modules" class="section level1">
+<h1>Scripts as modules</h1>
+<p>You can load scripts as modules when you refer to a file (or directory) in a call to <code>use</code>. Inside such a script you can use <code>import</code> and <code>use</code> in the same way you typically use <code>library</code>. A major difference is, that library will not only attach the stated package but also all packages in the depends field of that package. This is something you have to do manually (explicitly) with <code>import</code>. Consider the following example where we create a module in a temporary file with its dependencies.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code &lt;-<span class="st"> &quot;</span>
+<span class="st">import('stats', 'median')</span>
+<span class="st">functionWithDep &lt;- function(x) median(x)</span>
+<span class="st">&quot;</span>
+
+fileName &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.R&quot;</span>)
+<span class="kw">writeLines</span>(code, fileName)</code></pre></div>
+<p>Then we can load such a module into this session by the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">use</span>(fileName)
+m<span class="op">$</span><span class="kw">functionWithDep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 1.5</code></pre>
+</div>
+<div id="nested-modules" class="section level1">
+<h1>Nested Modules</h1>
+<p>You can also write nested modules, which means you define modules inside modules. In this case dependencies of the top level module are accessible to its children:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">module</span>({
+
+  <span class="kw">import</span>(<span class="st">&quot;stats&quot;</span>, <span class="st">&quot;median&quot;</span>)
+  <span class="kw">import</span>(<span class="st">&quot;modules&quot;</span>, <span class="st">&quot;module&quot;</span>)
+
+  anotherModule &lt;-<span class="st"> </span><span class="kw">module</span>({
+    fun &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">median</span>(x)
+  })
+
+})
+
+m<span class="op">$</span>anotherModule<span class="op">$</span><span class="kw">fun</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 1.5</code></pre>
+</div>
+<div id="parameterized-modules" class="section level1">
+<h1>Parameterized Modules</h1>
+<p>Sometimes it can be useful to pass arguments to a module. If you have a background in object oriented programming you may find this natural. From a functional perspective we define parameters shared by a list of closures. This is achieved by making the enclosing environment of the module available to the module itself. Note that inside a package this would be the default behaviour.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="cf">function</span>(param) {
+  <span class="kw">module</span>(<span class="dt">topEncl =</span> <span class="kw">environment</span>(), {
+    fun &lt;-<span class="st"> </span><span class="cf">function</span>() param
+  })
+}
+
+<span class="kw">m</span>(<span class="dv">1</span>)<span class="op">$</span><span class="kw">fun</span>()</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="documentation" class="section level1">
+<h1>Documentation</h1>
+<p>If you want proper documentation for your functions or modules you really want a package. However, there are some simple things you can do for ad-hoc documentation of modules which is to use comments:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">module</span>({
+  fun &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+    ## A function for illustrating documentation
+    ## x (numeric)
+    x
+  }
+})</code></pre></div>
+<pre><code>## fun:
+## function(x)
+## ## A function for illustrating documentation
+## ## x (numeric)</code></pre>
+</div>
+<div id="modules-in-packages" class="section level1">
+<h1>Modules in Packages</h1>
+<p>You can use modules inside packages in the same way as illustrated above. When a module is defined inside a R-package its search path connects to the packages namespace. So it sees all objects within the package and has access to all its dependencies. You can always change this by specifying the argument <code>topEncl</code> when calling <code>module</code>. Do not use <code>import</code> inside this setting but instead rely on the package to handle your dependencies. Attaching other modules using <code>use</code> and <code>expose</code> can make sense but is a matter of preference. You should definitely not rely on modules in files and load them with <code>use</code>!</p>
+</div>
+<div id="modules-with-object-orientation" class="section level1">
+<h1>Modules with Object Orientation</h1>
+<div id="s3" class="section level2">
+<h2>S3</h2>
+<p>S3 method dispatch can be problematic because of the special search mechanism of <code>UseMethod</code>. What will work, however, is wrapping the generic function in a wrapper function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">module</span>({
+  .generic &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">UseMethod</span>(<span class="st">&quot;generic&quot;</span>)
+  generic.numeric &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">cat</span>(<span class="st">&quot;method for x ~ numeric&quot;</span>)
+  generic &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">.generic</span>(x)
+})
+m<span class="op">$</span><span class="kw">generic</span>(<span class="dv">1</span>)</code></pre></div>
+<pre><code>## method for x ~ numeric</code></pre>
+</div>
+<div id="s4" class="section level2">
+<h2>S4</h2>
+<p>By default the <em>set</em> functions of the methods package have side effects in the top level environment. So you would have to set the appropriate environment for the argument ‘where’. However if you really have the need for S4 generics, classes and methods you should consider writing a package instead; or if you are already in a package define them in the scope of the package.</p>
+</div>
+</div>
+<div id="modules-and-coupling" class="section level1">
+<h1>Modules and Coupling</h1>
+<p>Best is to only use <code>::</code> and <code>use</code> with <code>attach = FALSE</code> to be explicit with your dependencies. However, there are some other options you have, which will result in stronger forms of coupling between modules.</p>
+<div id="modules-to-model-mutable-state" class="section level2">
+<h2>Modules to Model Mutable State</h2>
+<p>This is in itself abstract but in principle you can not only put functions in your bag (module) but any R-object. This transforms into something which is probably associated with object-orientation. You can like this or not, here I simply use it to illustrate the strongest form of coupling between two modules I can come up with.</p>
+<p>In the following I define a module to encapsulate some value and have a <em>get</em> and <em>set</em> method for it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mutableModule &lt;-<span class="st"> </span><span class="kw">module</span>({
+  .num &lt;-<span class="st"> </span><span class="ot">NULL</span>
+  get &lt;-<span class="st"> </span><span class="cf">function</span>() .num
+  set &lt;-<span class="st"> </span><span class="cf">function</span>(val) .num &lt;&lt;-<span class="st"> </span>val
+})
+mutableModule<span class="op">$</span><span class="kw">get</span>()</code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mutableModule<span class="op">$</span><span class="kw">set</span>(<span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="coupling-between-modules" class="section level2">
+<h2>Coupling Between Modules</h2>
+<p>In the next module we can use <code>mutableModule</code> and rebuild the interface to <code>.num</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule &lt;-<span class="st"> </span><span class="kw">module</span>({
+  <span class="kw">use</span>(.GlobalEnv<span class="op">$</span>mutableModule, <span class="dt">attach =</span> <span class="ot">TRUE</span>)
+  getNum &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">get</span>()
+  <span class="kw">set</span>(<span class="dv">3</span>)
+})
+mutableModule<span class="op">$</span><span class="kw">get</span>()</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule<span class="op">$</span><span class="kw">getNum</span>()</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>Depending on your expectations with respect to the above code it comes at a surprise that we can get and set that value from an attached module; Furthermore it is not changed in <code>mutableModule</code>. This is because <code>use</code> will trigger a re-initialization of any module you plug in. You can override this behaviour:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule &lt;-<span class="st"> </span><span class="kw">module</span>({
+  <span class="kw">use</span>(.GlobalEnv<span class="op">$</span>mutableModule, <span class="dt">attach =</span> <span class="ot">TRUE</span>, <span class="dt">reInit =</span> <span class="ot">FALSE</span>)
+  getNum &lt;-<span class="st"> </span><span class="cf">function</span>() <span class="kw">get</span>()
+  <span class="kw">set</span>(<span class="dv">3</span>)
+})
+mutableModule<span class="op">$</span><span class="kw">get</span>()</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule<span class="op">$</span><span class="kw">getNum</span>()</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>This is not all we can do. Also we can use <code>expose</code>. This function will take everything in a module and expose it to the environment from which it is called.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule &lt;-<span class="st"> </span><span class="kw">module</span>({
+  <span class="kw">expose</span>(.GlobalEnv<span class="op">$</span>mutableModule, <span class="dt">reInit =</span> <span class="ot">TRUE</span>)
+  <span class="kw">set</span>(<span class="dv">4</span>)
+})
+mutableModule<span class="op">$</span><span class="kw">get</span>()</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule<span class="op">$</span><span class="kw">get</span>()</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>And of course we can do this with <code>reInit = FALSE</code> should this be desirable. In this case both modules are essentially a copy of a reference.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule &lt;-<span class="st"> </span><span class="kw">module</span>({
+  <span class="kw">expose</span>(.GlobalEnv<span class="op">$</span>mutableModule, <span class="dt">reInit =</span> <span class="ot">FALSE</span>)
+  <span class="kw">set</span>(<span class="dv">1</span>)
+})
+mutableModule<span class="op">$</span><span class="kw">get</span>()</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">complectModule<span class="op">$</span><span class="kw">get</span>()</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
