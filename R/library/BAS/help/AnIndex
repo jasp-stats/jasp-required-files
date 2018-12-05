@@ -78,4 +78,6 @@ Uniform	uniform
 uniform	uniform
 update	update
 update.bas	update
+variable.names	variable.names.pred.bas
+variable.names.pred.bas	variable.names.pred.bas
 which.matrix	which.matrix

@@ -68,8 +68,8 @@ plot.coef.bas           Plots the posterior distributions of
                         coefficients derived from Bayesian model
                         averaging
 plot.confint.bas        Plot Bayesian Confidence Intervals
-predict.bas             Prediction Method for an object of class BMA
-predict.basglm          Prediction Method for an object of class basglm
+predict.bas             Prediction Method for an object of class BAS
+predict.basglm          Prediction Method for an Object of Class basglm
 print.bas               Print a Summary of Bayesian Model Averaging
                         objects from BAS
 protein                 Protein Activity Data
@@ -86,5 +86,8 @@ tr.poisson              Truncated Poisson Prior Distribution for Models
 tr.power.prior          Truncated Power Prior Distribution for Models
 uniform                 Uniform Prior Distribution for Models
 update.bas              Update BAS object using a new prior
+variable.names.pred.bas
+                        Extract the variable names for a model from a
+                        BAS prediction object
 which.matrix            Coerce a BAS list object of models into a
                         matrix.
