@@ -181,19 +181,33 @@ for lib in libs:
 
 	change_dep_paths(lib, changes)
 	
+def removeFunc(path):
+	try:
+		os.remove(path)
+	except:
+		return #we do not care
 
-os.remove(os.path.join(wd, "R.framework/Headers"))
-os.remove(os.path.join(wd, "R.framework/Libraries"))
-os.remove(os.path.join(wd, "R.framework/PrivateHeaders"))
-os.remove(os.path.join(wd, "R.framework/R"))
-os.remove(os.path.join(wd, "R.framework/Resources"))
-os.remove(os.path.join(wd, "R.framework/Versions/Current"))
-os.remove(os.path.join(wd, "R.framework/Versions/" + current + "/Headers"))
-os.remove(os.path.join(wd, "R.framework/Versions/" + current + "/R"))
-os.remove(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/R"))
-shutil.rmtree(os.path.join(wd, "R.framework/Versions/" + current + "/PrivateHeaders"))
-shutil.rmtree(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/man1"))
-shutil.rmtree(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/doc"))
+def removeTreeFunc(path):
+	try:
+		shutil.rmtree(path)
+	except:
+		return #we do not care
+
+removeFunc(os.path.join(wd, "R.framework/Headers"))
+removeFunc(os.path.join(wd, "R.framework/Libraries"))
+removeFunc(os.path.join(wd, "R.framework/PrivateHeaders"))
+removeFunc(os.path.join(wd, "R.framework/R"))
+removeFunc(os.path.join(wd, "R.framework/Resources"))
+removeFunc(os.path.join(wd, "R.framework/Versions/Current"))
+removeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Headers"))
+removeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/R"))
+removeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/R"))
+removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/PrivateHeaders"))
+removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/man1"))
+removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/doc"))
+
+
+#call(["install_name_tool", "-id", linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/libR.dylib", "./R.framework/Versions/3.4/Resources/lib/libR.dylib"])
 
 
 call(["install_name_tool", "-id", linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/libR.dylib", "libR.dylib"])
