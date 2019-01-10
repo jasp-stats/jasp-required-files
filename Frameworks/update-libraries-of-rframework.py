@@ -26,8 +26,8 @@ def locate_libs(path):
 		if path.endswith(".so") or path.endswith(".dylib"):
 
 			locations.add(path)
-			print("location: "  + path)
-'''
+			#print("location: "  + path)
+			'''
 			output = check_output(["otool", "-L", path])
 
 			lines = output.split("\n")
@@ -46,7 +46,7 @@ def locate_libs(path):
 					if (file != path):
 						#print("recursing into " + file)
 						locations.update(locate_libs(file))
-	'''
+			'''
 	elif os.path.isdir(path):
 
 
@@ -177,7 +177,7 @@ for lib in libs:
 
 	#print(new_path)
 
-	print "change link to " + new_path + " of " + lib
+	#print "change link to " + new_path + " of " + lib
 	call(["install_name_tool", "-id", new_path, lib])
 
 	change_dep_paths(lib, changes)
@@ -210,5 +210,4 @@ removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/
 
 #call(["install_name_tool", "-id", linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/libR.dylib", "./R.framework/Versions/3.4/Resources/lib/libR.dylib"])
 
-
-call(["install_name_tool", "-id", linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/libR.dylib", "libR.dylib"])
+#call(["install_name_tool", "-id", linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/libR.dylib", "libR.dylib"])
