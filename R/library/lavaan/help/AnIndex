@@ -53,6 +53,8 @@ lavPartable	model.syntax
 lavpartable	model.syntax
 lavPredict	lavPredict
 lavpredict	lavPredict
+lavResidual	lavResiduals
+lavResiduals	lavResiduals
 lavScores	estfun
 lavScoreTest	lavTestScore
 lavTables	lavTables

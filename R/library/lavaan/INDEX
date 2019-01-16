@@ -30,6 +30,7 @@ lavNames                lavaan Names
 lavOptions              lavaan Options
 lavPredict              Predict the values of latent variables (and
                         their indicators).
+lavResiduals            Residuals
 lavTables               lavaan frequency tables
 lavTablesFitCp          Pairwise maximum likelihood fit statistics
 lavTestLRT              LRT test
