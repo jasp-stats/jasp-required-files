@@ -1,0 +1,18 @@
+citHeader("To cite NetworkToolbox in publications use:")
+
+citEntry(
+	entry = "Manual",
+	title = "{NetworkToolbox}: Methods and Measures for Brain, Cognitive, and Psychometric Network Analysis in R",
+	author = personList(as.person("Alexander P. Christensen")),
+	journal = "PsyArXiv",
+	year = "2018",
+	doi = "10.31234/osf.io/6kmav",
+
+  textVersion  =
+  paste(
+	"Christensen, A. P. (2018).",
+        "NetworkToolbox: Methods and measures for brain, cognitive, and psychometric network analysis in R.",
+	"PsyArXiv.",
+	"doi: 10.31234/osf.io/6kmav"
+	)
+)

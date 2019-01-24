@@ -1,0 +1,85 @@
+useDynLib(gnm, .registration = TRUE, .fixes = "C_")
+export(asGnm, checkEstimable, Const, Diag,
+       Dref, DrefWeights, exitInfo, Exp, expandCategorical, getContrasts,
+       getModelFrame, gnm, instances, Inv, #Log, Logit,
+       meanResiduals, MPinv, Mult, MultHomog,
+       ofInterest, "ofInterest<-", parameters,
+       pickCoef, qrSolve, #Raise,
+       residSVD, se,
+       Symm, termPredictors, Topo, wedderburn)
+
+importFrom(grDevices, as.graphicsAnnot, dev.interactive,
+           devAskNewPage, extendrange) # in plot.gnm
+importFrom(graphics, abline, axis, frame, legend, lines, mtext, panel.smooth, 
+           par, plot, points, strheight, text, 
+           title)  # in plot.gnm; plot.profile.gnm
+importFrom(methods, as) # in hatvalues.gnm
+importFrom(nnet, class.ind) # in gnmTools, expandCategorical
+importFrom(qvcalc, qvcalc) # in getContrasts
+importFrom(relimp, pickFrom) # in getContrasts
+importFrom(MASS, addterm, boxcox, dropterm, logtrans)
+importFrom(Matrix, rankMatrix, rowSums)
+importFrom(stats, .getXlevels, add.scope, add1, alias, anova, approx, 
+           as.formula, C, coef, confint, cooks.distance, delete.response,
+           deriv, deviance, df.residual, dfbeta, dfbetas, drop.scope, drop1, 
+           dummy.coef, effects, extractAIC, family, fitted.values, fitted, 
+           formula, gaussian, glm.control, glm.fit, hatvalues, influence,
+           is.empty.model, lm.wfit, make.link, model.extract, model.frame, 
+           model.matrix, model.offset, model.response, model.weights, na.action,
+           na.exclude, na.omit, na.pass, napredict, naresid, optim, pchisq, pf,
+           pnorm, poisson, predict, printCoefmat, profile, proj, pt, qnorm,
+           qqnorm, quantile, reformulate, residuals, rstandard, rstudent, runif, 
+           sd, spline, stat.anova, symnum, terms, terms.formula, update.formula,
+           update, variable.names, vcov, weights)
+importFrom(utils, flush.console) # in prattle, confint.gnm
+
+export(se)
+S3method(add1, gnm)
+S3method(addterm, gnm)
+S3method(alias, gnm)
+S3method(anova, gnm)
+S3method(asGnm, glm)
+S3method(asGnm, lm)
+S3method(asGnm, default)
+S3method(boxcox, gnm)
+S3method(coef, gnm)
+S3method(confint, gnm)
+S3method(confint, profile.gnm)
+S3method(cooks.distance, gnm)
+S3method(dfbeta, gnm)
+S3method(dfbetas, gnm)
+S3method(drop1, gnm)
+S3method(dropterm, gnm)
+S3method(dummy.coef, gnm)
+S3method(effects, gnm)
+S3method(fitted, gnm)
+S3method(hatvalues, gnm)
+S3method(influence, gnm)
+S3method(kappa, gnm)
+S3method(labels, gnm)
+S3method(logtrans, gnm)
+S3method(model.frame, gnm)
+S3method(model.matrix, gnm)
+S3method(plot, gnm)
+S3method(plot, profile.gnm)
+S3method(predict, gnm)
+S3method(print, gnm)
+S3method(print, coef.gnm)
+S3method(print, profile.gnm)
+S3method(print, summary.gnm)
+S3method(print, vcov.gnm)
+S3method(print, meanResiduals)
+S3method(profile, gnm)
+S3method(proj, gnm)
+S3method(residuals, gnm)
+S3method(rstandard, gnm)
+S3method(rstudent, gnm)
+S3method(se, gnm)
+S3method(summary, gnm)
+S3method(summary, meanResiduals)
+S3method(termPredictors, default)
+S3method(termPredictors, gnm)
+S3method(update, gnm)
+S3method(variable.names, gnm)
+S3method(vcov, gnm)
+S3method(weights, gnm)

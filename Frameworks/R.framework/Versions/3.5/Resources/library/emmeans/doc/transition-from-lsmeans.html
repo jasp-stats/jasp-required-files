@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="emmeans package, Version 1.3.2" />
+
+
+<title>Transitioning to emmeans from lsmeans</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Afont%2Dsize%3A%2011pt%3B%20font%2Dfamily%3A%20%22Palatino%20Linotype%22%2C%20%22Book%20Antiqua%22%2C%20Palatino%2C%20serif%3B%0Amargin%3A%2030px%2050px%2030px%2050px%3B%20%7D%0Ah1%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%20%7B%20font%2Dfamily%3A%20Arial%2CHelvetica%2CSans%2Dserif%3B%20%7D%0Aa%20%7B%20text%2Ddecoration%3A%20none%3B%20%7D%0Aa%3Alink%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Avisited%20%7B%20color%3Adarkblue%3B%20%7D%20a%3Ahover%20%7B%20color%3Adodgerblue%3B%20%7D%0Aa%3Aactive%20%7B%20color%3Adodgerblue%3B%20%7D%20code%20%7B%0Acolor%3A%20%23602000%3B%0Afont%2Dfamily%3A%20%22Lucida%20Console%22%2C%20Monaco%2C%20monospace%3B%20font%2Dsize%3A%2090%25%3B%0A%7D%0A%2Er%20%7B%20%0Acolor%3A%20darkred%3B%20%7D%0A%2Ero%20%7B%20%0Acolor%3A%20darkgreen%3B%20background%2Dcolor%3A%20%23eeeeee%3B%20%7D%0A%2Er%20code%2C%20a%20code%2C%20%2Ero%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20none%3B%20%7D%0A%2Evigindex%20ul%20li%20%7B%20list%2Dstyle%3A%20none%3B%20%7D%0A%2Evigindex%20a%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A%2Evigindex%20li%20code%20%7B%20color%3A%20inherit%3B%20%7D%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Transitioning to emmeans from lsmeans</h1>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
+
+
+
+<!-- @index Vignettes!Transitioning from **lsmeans**; **lsmeans** package!Transitioning from -->
+<div id="contents" class="section level2">
+<h2>Contents</h2>
+<p>This vignette is here to help past users of the <strong>lsmeans</strong> package.</p>
+<ol style="list-style-type: decimal">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#impact">User impact</a></li>
+<li><a href="#scripts">Converting old scripts</a></li>
+<li><a href="#workspaces">Converting old workspaces</a></li>
+<li><a href="#devel">Notes for package developers</a></li>
+</ol>
+<p><a href="vignette-topics.html">Index of all vignette topics</a></p>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><strong>emmeans</strong> is a continuation of the <strong>lsmeans</strong> package. The name is changed for two reasons:</p>
+<ol style="list-style-type: decimal">
+<li>The term “least-squares means” is misleading in terms of describing the analyses it provides. The term “estimated marginal means” (EMMs) is well-accepted, and it better describes the basic idea that we use marginal means of predictions over a reference grid. When we do that with, say, an ordinal model, the concept “estimated marginal mean” makes sense while “least-squares mean” does not, because no least-squares methods are used to fit the model or obtain the EMMs.</li>
+<li>A number of changes are made to the internal architecture of the package. The <strong>lsmeans</strong> package had two classes, <code>ref.grid</code> and <code>lsmobj</code>, and it was confusing to some users that they needed to use primarily <code>ref.grid</code> methods to summarize <code>lsmobj</code> objects. The <strong>emmeans</strong> package has only an <code>emmGrid</code> class that covers both of the old classes. Changing the name of the package at the same time as the object classes are changed makes for a cleaner transition.</li>
+</ol>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="impact" class="section level2">
+<h2>User impact</h2>
+<p>For the most part, all that most users need to do to transition from using the <strong>lsmeans</strong> package is to use <code>require(emmeans)</code> or <code>library(emmeans)</code> to load the package. With that one change, almost all of the code in the <em>using-lsmeans</em> vignette runs without alteration, and almost all examples from the help system for <strong>lsmeans</strong> also work as-is. Even though we now emphasize using the <code>emmeans()</code> function and related “em” functions, <code>lsmeans()</code> and its relatives are still available as wrappers for the new functions.</p>
+<p>That said, here are a few changes that former <strong>lsmeans</strong> users may need to be aware of:</p>
+<ul>
+<li>The package provides a utility <code>emmeans:::convert_scripts()</code> that may be used to convert old scripts that used <strong>lsmeans</strong> to use <strong>emmeans</strong> instead. <a href="#scripts">See more below</a></li>
+<li>Some functions are deprecated, e.g. <code>ref.grid()</code>, <code>lsm.options()</code>, etc. As of version 2.3.0, these functions are no longer available at all.</li>
+<li>While the functions <code>lsmeans()</code>, <code>lsmip()</code>, etc. will continue to be provided, all the help-page and vignette descriptions refer to their new counterparts <code>emmeans()</code>, <code>emmip()</code>, etc. So you will need to get accustomed to new terminology like “EMMs”, even if you don’t choose to use it in your own work.</li>
+<li>If you have any scripts that include calls prefixed by <code>lsmeans::</code>, or calls to <code>require(lsmeans)</code> or <code>library(lsmeans)</code>, obviously you need to change these to use <code>emmeans</code> instead.</li>
+<li>If you have any custom contrast functions, you need to rename them with an extension of <code>.emmc</code> instead of <code>lsmc</code>. See the example under <code>help(&quot;contrast-methods&quot;)</code>.</li>
+<li>If you have saved results from previous runs in <strong>lsmeans</strong> (i.e., <code>ref.grid</code> or <code>lsmobj</code> objects), convert the objects to class <code>emmGrid</code> – e.g., <code>my_new_ref_grid &lt;- as.emmGrid(my.old.ref.grid)</code>. Running the non-exported function <code>emmeans:::convert_workspace()</code> may be used to convert all the objects in an environment (the global one by default) and clean out any dependencies on <strong>lsmeans</strong>. <a href="#workspaces">See more below</a></li>
+<li>The <code>emmip()</code> and <code>plot()</code> functions use graphics from the <strong>ggplot2</strong> package by default. If you prefer the <strong>lattice</strong> graphics produced by the <strong>lsmeans</strong> package, they are still available: Use <code>emm_options(graphics.engine = &quot;lattice&quot;)</code> to change the default, or add <code>engine = &quot;lattice&quot;</code> to the call to for a particular plot.</li>
+<li>To get complete information about models supported by <strong>emmeans</strong>, use <a href="models.html"><code>vignette(&quot;models&quot;)</code></a> rather than the help page of the same name. It includes a quick reference chart at the beginning that should prove helpful.</li>
+<li>The “using-lsmeans” vignette has been replaced by a number of smaller vignettes that cover specific topics. Start with <a href="basics.html"><code>vignette(&quot;basics&quot;)</code></a> to obtain an overview. The <a href="index.html">vignette index</a> has links to all the vignettes.</li>
+<li>The degrees-of-freedom saga, continued… Initially, <strong>lsmeans</strong> used the <strong>pbkrtest</strong> package to compute degrees of freedom (via the Kenward-Roger method) for <code>lme4::lmerMod</code> models. Later, the default was changed to the Satterthwaite method, implemented in the <strong>lmerTest</strong> package. Both methods are problematic; but I have decided to revert to the Kenward-Roger method as the system default. The default may be changed via <code>emm_options(lmer.df = ...)</code>. See <a href="models.html#L"><code>vignette(&quot;models&quot;)</code></a> for details.</li>
+</ul>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="scripts" class="section level2">
+<h2>Converting scripts</h2>
+<!-- @index `convert_scripts()`; **lsmeans** package!Converting scripts -->
+<p>The user may run</p>
+<pre><code>emmeans:::convert_scripts()</code></pre>
+<p>to convert R scripts or R Markdown files to use <strong>emmeans</strong> functions. (This is a non-exported function – you need three <code>:</code>s in there.)</p>
+<ul>
+<li>You will get a file-open dialog where you can browse for the files – multiple files may be selected.</li>
+<li>You will also be prompted for whether or not you want calls to <code>lsmeans()</code> or <code>pmmeans()</code>to be replaced by calls to <code>emmeans()</code> (it’s your choice; the former still work).</li>
+<li>Each converted file is saved in the same directory with <code>-emm</code> added to the root name; for example, <code>myfile.R</code> is converted and saved as <code>myfile-emm.R</code>.</li>
+</ul>
+<p>The conversion routines will convert the following to their <code>emmeans</code> counterparts:</p>
+<ul>
+<li><code>require(lsmeans)</code> and <code>library(lsmeans)</code> to <code>require(emmeans)</code> and <code>library(emmeans)</code></li>
+<li><code>lsmeans::</code> to <code>emmeans::</code></li>
+<li><code>ref.grid(</code> to <code>ref_grid(</code></li>
+<li><code>lsm.options(</code> and <code>get.lsm.option(</code> to <code>emm_options(</code> and <code>get_emm_option(</code> (arguments thereof are also converted).</li>
+<li><code>.lsmc</code> to <code>.emmc</code> (contrast-method names)</li>
+<li><code>lsmeans(</code> and relatives to <code>emmeans(</code> and relatives, if opted for</li>
+<li><code>pmmeans(</code> and relatives to <code>emmeans(</code> and relatives, if opted for</li>
+</ul>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="workspaces" class="section level2">
+<h2>Converting workspaces</h2>
+<!-- @index `convert_workspace()`; **lsmeans** package!Converting workspaces -->
+<p>If you have any objects from the <strong>lsmeans</strong> package laying around, it is all too likely that the <strong>lsmeans</strong> package will be loaded, and perhaps even get added to the search path. This can create annoying messages, if not conflicts. When this happens, type</p>
+<pre><code>emmeans:::convert_workspace()</code></pre>
+<p>on the console. This will convert any <code>ref.grid</code> or <code>lsmobj</code> objects laying around to the new <code>emmGrid</code> class, and unload all vestiges of <strong>lsmeans</strong>.</p>
+<p>Once you are comfortable using <strong>emmeans</strong> in place of <strong>lsmeans</strong>, you may effect a permanent solution (the “nuclear option?”) by uninstalling the <strong>lsmeans</strong> package. Doing so will <em>not</em> prevent you from converting old workspaces or scripts. Watch your package updates carefully, though, as it may get re-installed if it is still imported by another package.</p>
+<p><a href="#contents">Back to Contents</a></p>
+<p><a href="vignette-topics.html">Index of all vignette topics</a></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
