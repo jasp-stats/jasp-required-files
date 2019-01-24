@@ -52,7 +52,7 @@ to character if possible.</p>
 </td></tr>
 <tr valign="top"><td><code>keep.source</code></td>
 <td>
-<p>a logical value; if <code>TRUE</code>, keep 
+<p>a logical value; if <code>TRUE</code>, keep
 source reference information.</p>
 </td></tr>
 <tr valign="top"><td><code>srcfile</code></td>
@@ -101,7 +101,7 @@ referring to that file will be used.
 <p>When <code>srcfile</code> is a character string, error messages will
 include the name, but source reference information will not be added
 to the result.  When <code>srcfile</code> is a <code><a href="srcfile.html">srcfile</a></code>
-object, source reference information will be retained. 
+object, source reference information will be retained.
 </p>
 
 
@@ -131,7 +131,7 @@ Latin-1 or UTF-8 locale.
 
 <h3>Partial parsing</h3>
 
-<p>When a syntax error occurs during parsing, <code>parse</code> 
+<p>When a syntax error occurs during parsing, <code>parse</code>
 signals an error.  The partial parse data will be stored in the
 <code>srcfile</code> argument if it is a <code><a href="srcfile.html">srcfile</a></code> object
 and the <code>text</code> argument was used to supply the text.  In other
@@ -140,7 +140,7 @@ cases it will be lost when the error is triggered.
 <p>The partial parse data can be retrieved using
 <code><a href="../../utils/html/getParseData.html">getParseData</a></code> applied to the <code>srcfile</code> object.
 Because parsing was incomplete, it will typically include references
-to <code>"parent"</code> entries that are not present.  
+to <code>"parent"</code> entries that are not present.
 </p>
 
 
@@ -150,8 +150,8 @@ to <code>"parent"</code> entries that are not present.
 <em>The New S Language</em>.
 Wadsworth &amp; Brooks/Cole.
 </p>
-<p>Murdoch, D. (2010).  
-<a href="https://journal.r-project.org/archive/2010-2/RJournal_2010-2_Murdoch.pdf">Source 
+<p>Murdoch, D. (2010).
+<a href="https://journal.r-project.org/archive/2010-2/RJournal_2010-2_Murdoch.pdf">Source
 References</a>.  <em>The R Journal</em> 2/2, 16-19.
 </p>
 
@@ -172,10 +172,11 @@ and related functions.  More detailed information is available through
 <h3>Examples</h3>
 
 <pre>
-cat("x &lt;- c(1, 4)\n  x ^ 3 -10 ; outer(1:7, 5:9)\n", file = "xyz.Rdmped")
-# parse 3 statements from the file "xyz.Rdmped"
-parse(file = "xyz.Rdmped", n = 3)
-unlink("xyz.Rdmped")
+fil &lt;- tempfile(fileext = ".Rdmped")
+cat("x &lt;- c(1, 4)\n  x ^ 3 -10 ; outer(1:7, 5:9)\n", file = fil)
+# parse 3 statements from our temp file
+parse(file = fil, n = 3)
+unlink(fil)
 
 # A partial parse with a syntax error
 txt &lt;- "
@@ -187,5 +188,5 @@ try(parse(text = txt, srcfile = sf))
 getParseData(sf)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

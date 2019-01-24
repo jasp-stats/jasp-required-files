@@ -21,8 +21,17 @@ as.POSIXct(x, tz = "", ...)
 as.POSIXlt(x, tz = "", ...)
 
 ## S3 method for class 'character'
-as.POSIXlt(x, tz = "", format, ...)
-
+as.POSIXlt(x, tz = "", format,
+           tryFormats = c("%Y-%m-%d %H:%M:%OS",
+                          "%Y/%m/%d %H:%M:%OS",
+                          "%Y-%m-%d %H:%M",
+                          "%Y/%m/%d %H:%M",
+                          "%Y-%m-%d",
+                          "%Y/%m/%d"),
+           optional = FALSE, ...)
+## Default S3 method:
+as.POSIXlt(x, tz = "",
+           optional = FALSE, ...)
 ## S3 method for class 'numeric'
 as.POSIXlt(x, tz = "", origin, ...)
 
@@ -36,14 +45,14 @@ as.double(x, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>An object to be converted.</p>
+<p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>  object to be converted.</p>
 </td></tr>
 <tr valign="top"><td><code>tz</code></td>
 <td>
-<p>A time zone specification to be used for the conversion,
+<p>time zone specification to be used for the conversion,
 <em>if one is required</em>.  System-specific (see <a href="timezones.html">time zones</a>),
 but <code>""</code> is the current time zone, and <code>"GMT"</code> is UTC
-(Universal Time, Coordinated). Invalid values are most commonly
+(Universal Time, Coordinated).  Invalid values are most commonly
 treated as UTC, on some platforms with a warning.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
@@ -54,6 +63,16 @@ treated as UTC, on some platforms with a warning.</p>
 <td>
 <p>character string giving a date-time format as used
 by <code><a href="strptime.html">strptime</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>tryFormats</code></td>
+<td>
+<p><code><a href="character.html">character</a></code> vector of <code>format</code>
+strings to try if <code>format</code> is not specified.</p>
+</td></tr>
+<tr valign="top"><td><code>optional</code></td>
+<td>
+<p><code><a href="logical.html">logical</a></code> indicating to return <code>NA</code>
+(instead of signalling an error) if the format guessing does not succeed.</p>
 </td></tr>
 <tr valign="top"><td><code>origin</code></td>
 <td>
@@ -138,6 +157,12 @@ re-interpretations assumed by ISO 8601:2004 is that there was a year
 zero, even though current year numbering (and zero) is a much later
 concept (525 AD for year numbers from 1 AD).
 </p>
+<p>Conversions between <code>"POSIXlt"</code> and <code>"POSIXct"</code> of future
+times are speculative except in UTC.  The main uncertainty is in the
+use of and transitions to/from DST (most systems will assume the
+continuation of current rules but these can be changed at short
+notice).
+</p>
 <p>If you want to extract specific aspects of a time (such as the day of
 the week) just convert it to class <code>"POSIXlt"</code> and extract the
 relevant component(s) of the list, or if you want a character
@@ -218,5 +243,5 @@ tmp &lt;- read.delim(file.path(R.home("share"), "zoneinfo", "zone.tab"),
 if(interactive()) View(tmp)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

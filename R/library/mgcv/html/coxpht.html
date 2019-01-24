@@ -48,7 +48,8 @@ tdpois &lt;- function(dat,event="z",et="futime",t="day",status="status1",
   require(utils) ## for progress bar
   te &lt;- sort(unique(dat[[et]][dat[[status]]==1])) ## event times
   sid &lt;- unique(dat[[id]])
-  prg &lt;- txtProgressBar(min = 0, max = length(sid), initial = 0,
+  inter &lt;- interactive()
+  if (inter) prg &lt;- txtProgressBar(min = 0, max = length(sid), initial = 0,
          char = "=",width = NA, title="Progress", style = 3)
   ## create dataframe for poisson model data
   dat[[event]] &lt;- 0; start &lt;- 1
@@ -63,14 +64,14 @@ tdpois &lt;- function(dat,event="z",et="futime",t="day",status="status1",
     um[[et]] &lt;- tr ## reset time to relevant event times
     dap[start:(start-1+nrow(um)),] &lt;- um ## copy to dap
     start &lt;- start + nrow(um)
-    setTxtProgressBar(prg, i)
+    if (inter) setTxtProgressBar(prg, i)
   }
   close(prg)
   dap[1:(start-1),]
 } ## tdpois
 
-## The following takes too long for CRAN checking
-## (but typically takes a minute or less).
+## The following typically takes a minute or less...
+
 
 ## Convert pbcseq to equivalent Poisson form...
 pbcseq$status1 &lt;- as.numeric(pbcseq$status==2) ## death indicator
@@ -107,5 +108,5 @@ rug(pbcseq$day[pbcseq$id==25]) ## measurement times
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

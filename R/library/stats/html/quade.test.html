@@ -162,8 +162,18 @@ y &lt;- matrix(c( 5,  4,  7, 10, 12,
             list(Store = as.character(1:7),
                  Brand = LETTERS[1:5]))
 y
-quade.test(y)
+(qTst &lt;- quade.test(y))
+
+## Show equivalence of different versions of test :
+utils::str(dy &lt;- as.data.frame(as.table(y)))
+qT. &lt;- quade.test(Freq ~ Brand|Store, data = dy)
+qT.$data.name &lt;- qTst$data.name
+stopifnot(all.equal(qTst, qT., tolerance = 1e-15))
+dys &lt;- dy[order(dy[,"Freq"]),]
+qTs &lt;- quade.test(Freq ~ Brand|Store, data = dys)
+qTs$data.name &lt;- qTst$data.name
+stopifnot(all.equal(qTst, qTs, tolerance = 1e-15))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

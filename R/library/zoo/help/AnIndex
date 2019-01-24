@@ -172,6 +172,7 @@ na.fill	na.fill
 na.fill.default	na.fill
 na.fill.ts	na.fill
 na.fill.zoo	na.fill
+na.fill0	na.fill
 na.locf	na.locf
 na.locf.data.frame	na.locf
 na.locf.default	na.locf

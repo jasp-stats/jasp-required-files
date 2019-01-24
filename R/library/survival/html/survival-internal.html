@@ -23,8 +23,6 @@ survdiff.fit(y, x, strat, rho = 0)
 match.ratetable(R, ratetable)
 ## S3 method for class 'ratetable'
 as.matrix(x, ...)
-## S3 method for class 'ratetable2'
-is.na(x)
 ## S3 method for class 'coxph.penalty'
 is.na(x)
 coxpenal.df(hmat, hinv, fdiag, assign.list, ptype, nvar, pen1,
@@ -33,26 +31,29 @@ coxpenal.fit(x, y, strata, offset, init, control, weights, method,
     rownames, pcols, pattr, assign)
 coxph.wtest(var, b, toler.chol = 1e-09)
 agexact.fit(x, y, strata, offset, init, control, weights, method,
-    rownames) 
+    rownames, resid=TRUE) 
 survfitCI(X, Y, weights,  id, istate,
                        type=c('kaplan-meier', 'fleming-harrington', 'fh2'),
                        se.fit=TRUE,
                        conf.int= .95,
-                       conf.type=c('log',  'log-log',  'plain', 'none'),
+                       conf.type=c('log',  'log-log',  'plain', 'none',
+                                   'logit', 'arcsin'),
                        conf.lower=c('usual', 'peto', 'modified'),
-                       influence=FALSE, start.time)
+                       influence=FALSE, start.time, p0)
 survfitKM(x, y, casewt=rep(1,length(x)),
                        type=c('kaplan-meier', 'fleming-harrington', 'fh2'),
                        error=c('greenwood', "tsiatis"), se.fit=TRUE,
                        conf.int= .95,
-                       conf.type=c('log',  'log-log',  'plain', 'none'),
+                       conf.type=c('log',  'log-log',  'plain', 'none',
+                                   'logit', 'arcsin'),
                        conf.lower=c('usual', 'peto', 'modified'),
                        start.time, new.time) 
 survfitTurnbull(x, y, casewt,
                        type=c('kaplan-meier', 'fleming-harrington', 'fh2'),
                        error=c('greenwood', "tsiatis"), se.fit=TRUE,
                        conf.int= .95,
-                       conf.type=c('log',  'log-log',  'plain', 'none'),
+                       conf.type=c('log',  'log-log',  'plain', 'none',
+                                   'logit', 'arcsin'),
                        conf.lower=c('usual', 'peto', 'modified'),
                        start.time)
 </pre>
@@ -63,5 +64,5 @@ survfitTurnbull(x, y, casewt,
 <p>The arguments to these routines are not guaranteed to stay the
 same from release to release &ndash; call them at your own risk!</p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

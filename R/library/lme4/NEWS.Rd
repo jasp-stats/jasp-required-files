@@ -4,9 +4,72 @@
 \title{lme4 News}
 \encoding{UTF-8}
 
+\section{CHANGES IN VERSION 1.1-19}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item influence measure code from \code{car} rolled in (see
+      \code{?influence.merMod})
+      \item \code{mkReTrm} gets new arguments \code{reorder.terms},
+      \code{reorder.vars} to control arrangement of RE terms and
+      individual effects with RE terms within model structures
+      \item adding material from the \pkg{RePsychLing} package
+      (on GitHub; see Bates et al 2015 arXiv:1506.04967) to
+      show orthogonal variance components.
+    }
+  }
+  \subsection{USER-VISIBLE CHANGES}{
+    \itemize{
+      \item \code{as.data.frame.merMod} finds conditional variance
+      information stored either as \code{attr(.,"postVar")} or
+      \code{attr(.,"condVar")} (for \code{glmmTMB} compatibility)
+      \item change to defaults of \code{[g]lmerControl} to print a
+      message when fits are singular
+      \item new utility \code{isSingular()} function for
+      detecting singular fits; by default a message is printed
+      for singular fits
+      \item \code{allFit} function/methods have been moved to the main
+      package, rather than being included in an auxiliary source file
+      \item post-fitting convergence checks based on estimated gradient
+      and Hessian (see \code{\link{troubleshooting}}) are no longer
+      performed for (nearly-)singular fits (see \code{\link{isSingular}})
+    }
+  }
+}
+
+\section{CHANGES IN VERSION 1.1-18-1 (2018-08-17)}{
+ \itemize{  
+ \item This is a minor release; the only change is to roll back (unexport) the \code{influence.merMod} method, pending resolution of conflicts with the car package
+ }
+}     
+
+\section{CHANGES IN VERSION 1.1-18 ((2018-08-16)}{
+  \subsection{USER-VISIBLE CHANGES}{
+    \itemize{
+      \item \code{ranef(.,condVar=TRUE)} now works when there
+      are multiple random effects terms per factor
+    }
+  }
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item \code{rstudent} and \code{influence} methods are available
+      for \code{merMod} objects
+    \item \code{devfun2} function (for generating a deviance
+      function that works on the standard deviation/correlation scale)
+      is now exported
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{lmList} now obeys its \code{pool} argument (instead of
+      always using what currently is the default, GH #476)
+    }
+  }
+}
+
+
 \section{CHANGES IN VERSION 1.1-17 (2018-04-03)}{
   \itemize{
-    This is a maintenance release only (fixes CRAN problems with
+    \item This is a maintenance release only (fixes CRAN problems with
     cross-platform tests and examples)
   }
 }
@@ -35,7 +98,7 @@
     }
   }
 }
-    
+
 \section{CHANGES IN VERSION 1.1-15 (2017-12-21)}{
   \subsection{BUG FIXES}{
      \itemize{
@@ -55,7 +118,9 @@
 }
 
 \section{CHANGES IN VERSION 1.1-14 (2017-09-27)}{
-  Primarily an R-devel/CRAN-compatibility release.
+  \itemize{
+     \item Primarily an R-devel/CRAN-compatibility release.
+  }
 
   \subsection{NEW FEATURES}{
     \itemize{

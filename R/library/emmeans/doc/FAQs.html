@@ -10,9 +10,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Russ Lenth" />
+<meta name="author" content="emmeans package, Version 1.3.2" />
 
-<meta name="date" content="2018-05-20" />
 
 <title>FAQs for emmeans</title>
 
@@ -31,8 +30,7 @@
 
 
 <h1 class="title toc-ignore">FAQs for emmeans</h1>
-<h4 class="author"><em>Russ Lenth</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
 
 
 
@@ -44,13 +42,15 @@
 <li><a href="#what">What are EMMs/lsmeans?</a></li>
 <li><a href="#interactions">I have three (or two or four) factors that interact</a></li>
 <li><a href="#trends">I have covariate(s) that interact(s) with factor(s)</a></li>
-<li><a href="#numeric">lsmeans/emmeans doesn’t work unless you have factors</a></li>
+<li><a href="#polys">I have covariate(s) and am fitting a polynomial model</a></li>
+<li><a href="#notfactor">All my pairwise comparisons have the same <em>P</em> value</a></li>
+<li><a href="#numeric">emmeans() doesn’t work as expected</a></li>
+<li><a href="#NAs">All or some of the results are NA</a></li>
 <li><a href="#model">If I analyze subsets of the data separately, I get different results</a></li>
 <li><a href="#transformations">My lsmeans/EMMs are way off from what I expected</a></li>
 <li><a href="#asymp">Why do I get <code>Inf</code> for the degrees of freedom?</a></li>
-<li><a href="#NAs">Some or all of the results shown say NA or NonEst</a></li>
 <li><a href="#additive">I get exactly the same comparisons for each “by” group</a></li>
-<li><a href="#anova">My ANOVA <em>F</em> is significant, but nopairwise comparisons are</a></li>
+<li><a href="#anova">My ANOVA <em>F</em> is significant, but no pairwise comparisons are</a></li>
 <li><a href="#namespace">I get annoying messages about namespaces</a></li>
 </ol>
 <p><a href="vignette-topics.html">Index of all vignette topics</a></p>
@@ -77,8 +77,16 @@
 <!-- @index Covariates!Interacting with factors -->
 <p>This is a situation where it may well be appropriate to compare the slopes of trend lines, rather than the EMMs. See the <a href="../doc/emtrends.html">help page for <code>emtrends()</code></a> and the discussion of this topic in <a href="interactions.html#covariates">the “interactions” vignette</a></p>
 </div>
+<div id="polys" class="section level2">
+<h2>I have covariate(s) and am fitting a polynomial model</h2>
+<p>You need to be careful to define the reference grid consistently. For example, if you use covariates <code>x</code> and <code>xsq</code> (equal to <code>x^2</code>) to fit a quadratic curve, the default reference grid uses the mean of each covariate – and <code>mean(xsq)</code> is usually not the same as <code>mean(x)^2</code>. So you need to use <code>at</code> to ensure that the covariates are set consistently with respect to the model. See <a href="basics.html#depcovs">this subsection of the “basics” vignette</a> for an example.</p>
+</div>
+<div id="notfactor" class="section level2">
+<h2>All my pairwise comparisons have the same <em>P</em> value</h2>
+<p>This will happen if you fitted a model where the treatments you want to compare were put in as a numeric predictor; for example <code>dose</code>, with values of 1, 2, and 3. If <code>dose</code> is modeled as numeric, you will be fitting a linear trend in those dose values, rather than a model that allows those doses to differ in arbitrary ways. Go back and fit a different model using <code>factor(dose)</code> instead; it will make all the difference. This is closely related to the next topic.</p>
+</div>
 <div id="numeric" class="section level2">
-<h2>lsmeans/emmeans doesn’t work unless you have factors</h2>
+<h2>emmeans() doesn’t work as expected</h2>
 <!-- @index Covariates!`emmeans()` doesn't work -->
 <p>Equivalently, users ask how to get <em>post hoc</em> comparisons when we have covariates rather than factors. Yes, it does work, but you have to tell it the appropriate reference grid.</p>
 <p>But before saying more, I have a question for you: <em>Are you sure your model is meaningful?</em></p>
@@ -89,6 +97,44 @@
 <p>Assuming that issue is settled, you can do something like <code>emmeans(model, &quot;sex&quot;, at = list(sex = 1:2))</code>, to get get separate EMMs for each sex rather than one EMM for the average numeric value of <code>sex</code>.</p>
 <p>An alternative to the <code>at</code> list is to use <code>cov.reduce = FALSE</code>, which specifies that the unique values of covariates are to be used rather than reducing them to their means. However, the specification applies to <em>all</em> covariates, so if you have another one, say <code>age</code>, that has 43 different values in your data, you will have a mess on your hands.</p>
 <p>See “altering the reference grid” in the <a href="basics.html#altering">“basics” vignette</a> for more discussion.</p>
+<p><a href="#contents">Back to Contents</a></p>
+</div>
+<div id="NAs" class="section level2">
+<h2>All or some of the results are NA</h2>
+<!-- @index `NA`s in the output; `NonEst` values; Estimability issues -->
+<p>The <strong>emmeans</strong> package uses tookls in the <strong>estimability</strong> package to determine whether its results are uniquely estimable. For example, in a two-way model with interactions included, if there are no observations in a particular cell (factor combination), then we cannot estimate the mean of that cell.</p>
+<p>When <em>some</em> of the EMMs are estimable and others are not, that is information about missing information in the data. If it’s possible to remove some terms from the model (particularly interactions), that may make more things estimable if you re-fit with those terms excluded; but don’t delete terms that are really needed for the model to fit well.</p>
+<p>When <em>all</em> of the estimates are non-estimable, it could be symptomatic of something else. Some possibilities include:</p>
+<ul>
+<li>An overly ambitious model; for example, in a Latin square design, interaction effects are confounded with main effects; so if any interactions are included in the model, you will render main effects inestimable.</li>
+<li>Possibly you have a nested structure that needs to be included in the model or specified via the <code>nesting</code> argument. Perhaps the levels that B can have depend on which level of A is in force. Then B is nested in A and the model should specify <code>A + A:B</code>, with no main effect for <code>B</code>.</li>
+<li>Modeling factors as numeric predictors (see also the <a href="#numeric">related section on covariates</a>). To illustrate, suppose you have data on particular state legislatures, and the model includes the predictors <code>state_name</code> as well as <code>dem_gov</code> which is coded 1 if the governor is a Democrat and 0 otherwise. If the model was fitted with <code>state_name</code> as a factor or character variable, but <code>dem_gov</code> as a numeric predictor, then, chances are, <code>emmeans()</code> will return non-estimable results. If instead, you use <code>factor(dem_gov)</code> in the model, then the fact that <code>state_name</code> is nested in <code>dem_gov</code> will be detected, causing EMMs to be computed separately for each party’s states, thus making things estimable.</li>
+<li>Some other things may in fact be estimable. For illustration, it’s easy to construct an example where all the EMMs are non-estimable, but pairwise comparisons are estimable:</li>
+</ul>
+<pre class="r"><code>pg &lt;- transform(pigs, x = rep(1:3, c(10, 10, 9)))
+pg.lm &lt;- lm(log(conc) ~ x + source + factor(percent), data = pg)
+emmeans(pg.lm, consec ~ percent)</code></pre>
+<pre class="ro"><code>## $emmeans
+##  percent emmean SE df asymp.LCL asymp.UCL
+##        9 nonEst NA NA        NA        NA
+##       12 nonEst NA NA        NA        NA
+##       15 nonEst NA NA        NA        NA
+##       18 nonEst NA NA        NA        NA
+## 
+## Results are averaged over the levels of: source 
+## Results are given on the log (not the response) scale. 
+## Confidence level used: 0.95 
+## 
+## $contrasts
+##  contrast estimate     SE df t.ratio p.value
+##  12 - 9     0.1796 0.0561 23 3.202   0.0109 
+##  15 - 12    0.0378 0.0582 23 0.650   0.8613 
+##  18 - 15    0.0825 0.0691 23 1.194   0.5201 
+## 
+## Results are averaged over the levels of: source 
+## Results are given on the log (not the response) scale. 
+## P value adjustment: mvt method for 3 tests</code></pre>
+<p>The <a href="messy-data.html">“messy-data” vignette</a> has more examples and discussion.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
 <div id="model" class="section level2">
@@ -112,18 +158,6 @@
 <pre class="r"><code>qnorm(c(.9, .95, .975))</code></pre>
 <pre class="ro"><code>## [1] 1.281552 1.644854 1.959964</code></pre>
 <p>so when you see infinite d.f., that just means its a <em>z</em> test or a <em>z</em> confidence interval.</p>
-<p><a href="#contents">Back to Contents</a></p>
-</div>
-<div id="NAs" class="section level2">
-<h2>Some or all of the results shown say NA or NonEst</h2>
-<!-- @index `NA` results; `NonEst` results; Estimability -->
-<p>Such a situation typically arises in observational data. What this means is that the model is not capable of producing estimates for all points in the reference grid. For example, you have data on combinations of factors A and B, but there are no data at certain combinations of these two factors. If the model includes the <code>A:B</code> interaction, then it can’t estimate those missing combinations. Here are a couple of possibilities:</p>
-<ul>
-<li>Try fitting a simpler model. In the example above, a model with <code>A + B</code>, without <code>A:B</code>, may be able to estimate the needed combinations.</li>
-<li>Use <code>at</code> to focus (at least mostly) on factor settings where estimates are possible</li>
-<li>Possibly you have a nested structure that needs to be included in the model or specified via the <code>nesting</code> argument. Perhaps the levels that B can have depend on which level of A is in force. Then B is nested in A and the model should specify <code>A + A:B</code>, with no main effect for <code>B</code>.</li>
-</ul>
-<p>The <a href="messy-data.html">“messy-data” vignette</a> has more examples and discussion.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
 <div id="additive" class="section level2">

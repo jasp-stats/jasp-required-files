@@ -112,18 +112,21 @@ qxrLA &lt;- qr(m(Xr), LAPACK=TRUE) # =&gt; qr.fitted(), qr.resid() not supported
 qcfXy &lt;- qr.coef (qXr, y) # vector
 qcfXY &lt;- qr.coef (qXr, Y) # 4x1 dgeMatrix
 cf &lt;- c(int=6, b1=-3, c1=-2, c2=-1)
+doExtras &lt;- interactive() || nzchar(Sys.getenv("R_MATRIX_CHECK_EXTRA")) ||
+    identical("true", unname(Sys.getenv("R_PKG_CHECKING_doExtras")))
+tolE &lt;- if(doExtras) 1e-15 else 1e-13
 stopifnot(
-    all.equal(qr.coef(qxr,  y),   cf, tol=1e-15)
+    all.equal(qr.coef(qxr,  y),   cf, tol=tolE)
   , getRversion() &lt;= "3.4.1" ||
-    all.equal(qr.coef(qxrLA,y),   cf, tol=1e-15)
-  , all.equal(qr.coef(qxr,  Y), m(cf), tol=1e-15)
-  , all.equal(  qcfXy,    cf, tol=1e-15)
-  , all.equal(m(qcfXY), m(cf), tol=1e-15)
-  , all.equal(y, qr.fitted(qxr, y), tol=2e-15)
-  , all.equal(y, qr.fitted(qXr, y), tol=2e-15)
-  , all.equal(m(qr.fitted(qXr, Y)), qr.fitted(qxr, Y), tol=1e-15)
-  , all.equal(  qr.resid (qXr, y),  qr.resid (qxr, y), tol=1e-15)
-  , all.equal(m(qr.resid (qXr, Y)), qr.resid (qxr, Y), tol=1e-15)
+    all.equal(qr.coef(qxrLA,y),   cf, tol=tolE)
+  , all.equal(qr.coef(qxr,  Y), m(cf), tol=tolE)
+  , all.equal(  qcfXy,    cf, tol=tolE)
+  , all.equal(m(qcfXY), m(cf), tol=tolE)
+  , all.equal(y, qr.fitted(qxr, y), tol=2*tolE)
+  , all.equal(y, qr.fitted(qXr, y), tol=2*tolE)
+  , all.equal(m(qr.fitted(qXr, Y)), qr.fitted(qxr, Y), tol=tolE)
+  , all.equal(  qr.resid (qXr, y),  qr.resid (qxr, y), tol=tolE)
+  , all.equal(m(qr.resid (qXr, Y)), qr.resid (qxr, Y), tol=tolE)
 )
 
 ##----- rank-deficient ("singular") case ------------------------------------
@@ -131,10 +134,10 @@ stopifnot(
 (qX &lt;- qr(  X))           # both @p and @q are non-trivial permutations
  qx &lt;- qr(m(X)) ; str(qx) # $pivot is non-trivial, too
 
-drop0(R. &lt;- qr.R(qX), tol=1e-15) # columns *permuted*: c3 b1 ..
+drop0(R. &lt;- qr.R(qX), tol=tolE) # columns *permuted*: c3 b1 ..
 Q. &lt;- qr.Q(qX)
 qI &lt;- sort.list(qX@q) # the inverse 'q' permutation
-(X. &lt;- drop0(Q. %*% R.[, qI], tol=1e-15))## just = X, incl. correct colnames
+(X. &lt;- drop0(Q. %*% R.[, qI], tol=tolE))## just = X, incl. correct colnames
 stopifnot(all(X - X.) &lt; 8*.Machine$double.eps,
           ## qrR(.) returns R already "back permuted" (as with qI):
           identical(R.[, qI], qrR(qX)) )
@@ -150,5 +153,5 @@ qr.coef(qX, Y)
 rm(m)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
 </body></html>

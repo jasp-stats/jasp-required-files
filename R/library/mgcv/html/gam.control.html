@@ -23,10 +23,11 @@ choise of fitting method, see <code><a href="gam.html">gam</a></code> arguments 
 <pre>
 gam.control(nthreads=1,irls.reg=0.0,epsilon = 1e-07, maxit = 200,
             mgcv.tol=1e-7,mgcv.half=15, trace = FALSE,
-            rank.tol=.Machine$double.eps^0.5,
-            nlm=list(),optim=list(),newton=list(),
-            outerPIsteps=0,idLinksBases=TRUE,scalePenalty=TRUE,
-            keepData=FALSE,scale.est="fletcher",edge.correct=FALSE) 
+            rank.tol=.Machine$double.eps^0.5,nlm=list(),
+	    optim=list(),newton=list(),outerPIsteps=0,
+	    idLinksBases=TRUE,scalePenalty=TRUE,efs.lspmax=15,
+	    efs.tol=.1,keepData=FALSE,scale.est="fletcher",
+	    edge.correct=FALSE) 
 </pre>
 
 
@@ -115,6 +116,16 @@ of the penalty matrices of a smooth relative to its model matrix. This option re
 the penalty matrices to accomodate this problem. Probably should be set to <code>FALSE</code> 
 if you are linking smoothing parameters but have set <code>idLinkBases</code> to <code>FALSE</code>.</p>
 </td></tr>
+<tr valign="top"><td><code>efs.lspmax</code></td>
+<td>
+<p>maximum log smoothing parameters to allow under extended Fellner Schall
+smoothing parameter optimization.</p>
+</td></tr>
+<tr valign="top"><td><code>efs.tol</code></td>
+<td>
+<p>change in REML to count as negligible when testing for EFS convergence. If the
+step is small and the last 3 steps led to a REML change smaller than this, then stop.</p>
+</td></tr>
 <tr valign="top"><td><code>keepData</code></td>
 <td>
 <p>Should a copy of the original <code>data</code> argument be kept in the <code>gam</code> 
@@ -189,5 +200,5 @@ generalized additive models. J. Amer. Statist. Ass.99:673-686.
 
 <p><code><a href="gam.html">gam</a></code>, <code><a href="gam.fit.html">gam.fit</a></code>, <code><a href="../../stats/html/glm.control.html">glm.control</a></code> </p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

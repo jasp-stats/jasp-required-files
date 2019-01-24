@@ -16,10 +16,10 @@
 <h3>Usage</h3>
 
 <pre>
-noquote(obj)
+noquote(obj, right = FALSE)
 
 ## S3 method for class 'noquote'
-print(x, ...)
+print(x, quote = FALSE, right = FALSE, ...)
 
 ## S3 method for class 'noquote'
 c(..., recursive = FALSE)
@@ -34,11 +34,17 @@ c(..., recursive = FALSE)
 <p>any <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object, typically a vector of
 <code><a href="character.html">character</a></code> strings.</p>
 </td></tr>
+<tr valign="top"><td><code>right</code></td>
+<td>
+<p>optional <code><a href="logical.html">logical</a></code> eventually to be passed to
+<code>print()</code>, used by <code><a href="print.default.html">print.default</a>()</code>, indicating
+whether or not strings should be right aligned.</p>
+</td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>an object of class <code>"noquote"</code>.</p>
 </td></tr>
-<tr valign="top"><td><code>...</code></td>
+<tr valign="top"><td><code>quote, ...</code></td>
 <td>
 <p>further options passed to next methods, such as <code><a href="print.html">print</a></code>.</p>
 </td></tr>
@@ -56,6 +62,10 @@ c(..., recursive = FALSE)
 method (<code>"[.noquote"</code>) which ensures that the class is not lost
 by subsetting.  The print method (<code>print.noquote</code>) prints
 character strings <em>without</em> quotes (<code>"\dots"</code>).
+</p>
+<p>If <code>right</code> is specified in a call <code>print(x, right=*)</code>, it
+takes precedence over a possible <code>right</code> setting of <code>x</code>,
+e.g., created by <code>x &lt;- noquote(*, right=TRUE)</code>.
 </p>
 <p>These functions exist both as utilities and as an example of using (S3)
 <code><a href="class.html">class</a></code> and object orientation.
@@ -89,7 +99,13 @@ cmp.logical &lt;- function(log.v)
   noquote(if(length(log.v) == 0)"()" else c(".","|")[1 + log.v])
 }
 cmp.logical(stats::runif(20) &gt; 0.8)
+
+chmat &lt;- as.matrix(format(stackloss)) # a "typical" character matrix
+## noquote(*, right=TRUE)  so it prints exactly like a data frame
+chmat &lt;- noquote(chmat, right = TRUE)
+chmat
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

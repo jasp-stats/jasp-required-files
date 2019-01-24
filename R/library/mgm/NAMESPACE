@@ -6,6 +6,7 @@ import(stringr)
 import(glmnet)
 import(matrixcalc)
 import(Hmisc)
+import(qgraph) # for FactorGraph()
 
 importFrom("stats", "as.formula", "coef", "dnorm", "dpois",
              "model.matrix", "var", "quantile")
@@ -14,6 +15,8 @@ importFrom("stats", "rnorm", "rpois")
 
 importFrom("graphics", "abline", "axis", "layout", "par", "plot.new",
              "plot.window", "points", "segments", "text")
+
+importFrom("gtools", "permutations")
 
 # Exported functions
 export(mgm)
@@ -33,6 +36,9 @@ export(resample)
 export(showInteraction)
 export(plotRes)
 
+export(FactorGraph)
+
+
 # Export old functions with defunct msg
 export(mgmfit)
 export(var.mgm)
@@ -44,4 +50,4 @@ export(tv_var.mgm)
 S3method(predict, mgm)
 S3method(print, mgm)
 S3method(print, resample)
-
+S3method(print, int)

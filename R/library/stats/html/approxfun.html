@@ -74,7 +74,7 @@ extrapolation should differ.</p>
 <tr valign="top"><td><code>f</code></td>
 <td>
 <p>for <code>method = "constant"</code> a number between 0 and 1
-inclusive, indicating a compromise between left- and 
+inclusive, indicating a compromise between left- and
 right-continuous step functions. If <code>y0</code> and <code>y1</code> are
 the values to the left and right of the point then the value is
 <code>y0</code> if <code>f == 0</code>, <code>y1</code> if <code>f == 1</code>, and
@@ -84,9 +84,10 @@ right-continuous for <code>f == 0</code> and left-continuous for <code>f
 </td></tr>
 <tr valign="top"><td><code>ties</code></td>
 <td>
-<p>Handling of tied <code>x</code> values.  Either a function
+<p>handling of tied <code>x</code> values.  Either a function
 with a single vector argument returning a single number result or
-the string <code>"ordered"</code>.</p>
+the string <code>"ordered"</code>; note that the latter is the fastest for
+large <code>length(x)</code>.</p>
 </td></tr>
 </table>
 
@@ -177,5 +178,5 @@ approx(x, y, xout = x, ties = max)$y
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

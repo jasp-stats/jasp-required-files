@@ -183,7 +183,13 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 
 <pre>
 data.class(model.frame(dist ~ speed, data = cars))
+
+## get_all_vars(): new var.s are recycled (iff length matches: 50 = 2*25)
+ncars &lt;- get_all_vars(sqrt(dist) ~ I(speed/2), data = cars, newVar = 2:3)
+stopifnot(is.data.frame(ncars),
+          identical(cars, ncars[,names(cars)]),
+          ncol(ncars) == ncol(cars) + 1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

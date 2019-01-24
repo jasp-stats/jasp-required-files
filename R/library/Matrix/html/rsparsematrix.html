@@ -9,7 +9,9 @@
 
 <h3>Description</h3>
 
-<p>Generate a Random Sparse Matrix Efficiently.
+<p>Generate a random sparse matrix efficiently.  The default has rounded
+gaussian non-zero entries, and <code>rand.x = NULL</code> generates random
+patter<b>n</b> matrices, i.e. inheriting from <code><a href="nsparseMatrix-classes.html">nsparseMatrix</a></code>.
 </p>
 
 
@@ -18,7 +20,7 @@
 <pre>
 rsparsematrix(nrow, ncol, density, nnz = round(density * maxE),
               symmetric = FALSE,
-              rand.x = function(n) signif(rnorm(nnz), 2), ...)
+              rand.x = function(n) signif(rnorm(n), 2), ...)
 </pre>
 
 
@@ -114,5 +116,5 @@ T2 &lt;- rsparsematrix(40, 12, nnz = 99, giveCsparse=FALSE)
 head(T2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
 </body></html>

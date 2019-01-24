@@ -19,7 +19,7 @@ libraries.
 <pre>
 installed.packages(lib.loc = NULL, priority = NULL,
                    noCache = FALSE, fields = NULL,
-                   subarch = .Platform$r_arch)
+                   subarch = .Platform$r_arch, ...)
 </pre>
 
 
@@ -58,8 +58,11 @@ ones, or <code>NULL</code> (default).  Unavailable fields result in
 <td>
 <p>character string or <code>NULL</code>.  If non-null and
 non-empty, used to select packages which are installed for that
-sub-architecture.
-</p>
+sub-architecture.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>allows unused arguments to be passed down from other functions.</p>
 </td></tr>
 </table>
 
@@ -74,7 +77,7 @@ names, library paths and version numbers.
 specified <code>fields</code> argument, and updated only if the top-level
 library directory has been altered, for example by installing or
 removing a package.  If the cached information becomes confused, it
-can be avoided by running <code>installed.packages(noCache = TRUE)</code>.
+can be avoided by specifying <code>noCache = TRUE</code>.
 </p>
 
 
@@ -95,14 +98,15 @@ argument.
 
 <h3>Note</h3>
 
-<p>This can be slow when thousands of packages are installed, so do not
-use this to find out if a named package is installed (use
-<code><a href="../../base/html/system.file.html">system.file</a></code> or <code><a href="../../base/html/find.package.html">find.package</a></code>) nor to find
-out if a package is usable (call <code><a href="../../base/html/library.html">require</a></code> and check the
-return value) nor to find details of a small number of packages (use
-<code><a href="packageDescription.html">packageDescription</a></code>).  It needs to read several files per
-installed package, which will be slow on Windows and on some
-network-mounted file systems.
+<p>This needs to read several files per installed package, which will be
+slow on Windows and on some network-mounted file systems.
+</p>
+<p>It will be slow when thousands of packages are installed, so do not
+use it to find out if a named package is installed (use
+<code><a href="../../base/html/find.package.html">find.package</a></code> or <code><a href="../../base/html/system.file.html">system.file</a></code>) nor to find
+out if a package is usable (call <code><a href="../../base/html/ns-load.html">requireNamespace</a></code> or
+<code><a href="../../base/html/library.html">require</a></code> and check the return value) nor to find details
+of a small number of packages (use <code><a href="packageDescription.html">packageDescription</a></code>).
 </p>
 
 
@@ -125,5 +129,5 @@ plic &lt;- installed.packages(.Library, priority = "high", fields = "License")
 table( plic[, "License"] )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

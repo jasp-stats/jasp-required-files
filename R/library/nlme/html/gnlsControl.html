@@ -18,11 +18,12 @@ used as the <code>control</code> argument to the <code>gnls</code> function.
 <h3>Usage</h3>
 
 <pre>
-gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
-            nlsTol, msTol, returnObject, msVerbose,
-            apVar, .relStep,
-            opt = c("nlminb", "optim"), optimMethod,
-            minAbsParApVar, sigma = NULL)
+gnlsControl(maxIter = 50, nlsMaxIter = 7, msMaxIter = 50, minScale = 0.001,
+            tolerance = 1e-6, nlsTol = 0.001, msTol = 1e-7,
+            returnObject = FALSE, msVerbose = FALSE,
+            apVar = TRUE, .relStep =,
+            opt = c("nlminb", "optim"), optimMethod = "BFGS",
+            minAbsParApVar = 0.05, sigma = NULL)
 </pre>
 
 
@@ -32,19 +33,19 @@ gnlsControl(maxIter, nlsMaxIter, msMaxIter, minScale, tolerance,
 <tr valign="top"><td><code>maxIter</code></td>
 <td>
 <p>maximum number of iterations for the <code>gnls</code>
-optimization algorithm. Default is 50.</p>
+optimization algorithm.  Default is 50.</p>
 </td></tr>
 <tr valign="top"><td><code>nlsMaxIter</code></td>
 <td>
 <p>maximum number of iterations
-for the <code>nls</code> optimization step inside the <code>gnls</code>
-optimization. Default is 7.</p>
+for the <code>nls</code> optimization step <em>inside</em> the <code>gnls</code>
+optimization.  Default is 7.</p>
 </td></tr>
 <tr valign="top"><td><code>msMaxIter</code></td>
 <td>
 <p>maximum number of iterations
 for the <code>ms</code> optimization step inside the <code>gnls</code>
-optimization. Default is 50.</p>
+optimization.  Default is 50.</p>
 </td></tr>
 <tr valign="top"><td><code>minScale</code></td>
 <td>
@@ -70,13 +71,15 @@ iteration when <code>optim</code> is used.  Default is 1e-7.</p>
 <tr valign="top"><td><code>returnObject</code></td>
 <td>
 <p>a logical value indicating whether the fitted
-object should be returned when the maximum number of iterations is
-reached without convergence of the algorithm.  Default is <code>FALSE</code>.</p>
+object should be returned with a <code><a href="../../base/html/warning.html">warning</a></code> (instead of an
+error via <code><a href="../../base/html/stop.html">stop</a>()</code>) when the maximum number of
+iterations is reached without convergence of the algorithm.</p>
 </td></tr>
 <tr valign="top"><td><code>msVerbose</code></td>
 <td>
 <p>a logical value passed as the <code>trace</code> argument to
-<code>ms</code> (see documentation on that function).  Default is <code>FALSE</code>.</p>
+the optimizer chosen by <code>opt</code>; see documentation on that.
+Default is <code>FALSE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>apVar</code></td>
 <td>
@@ -87,7 +90,7 @@ calculated.  Default is <code>TRUE</code>.</p>
 <tr valign="top"><td><code>.relStep</code></td>
 <td>
 <p>relative step for numerical derivatives
-calculations.  Default is <code>.Machine$double.eps^(1/3)</code>.</p>
+calculations.  Default is <code>.Machine$double.eps^(1/3)</code> (about 6e-6).</p>
 </td></tr>
 <tr valign="top"><td><code>opt</code></td>
 <td>
@@ -138,5 +141,5 @@ If <code>NULL</code>, as by default, or <code>0</code>, sigma is estimated.</p>
 gnlsControl(msMaxIter = 20, msVerbose = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-131.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
 </body></html>

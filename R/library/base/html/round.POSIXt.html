@@ -17,9 +17,12 @@
 
 <pre>
 ## S3 method for class 'POSIXt'
-round(x, units = c("secs", "mins", "hours", "days"))
+round(x,
+      units = c("secs", "mins", "hours", "days", "months", "years"))
 ## S3 method for class 'POSIXt'
-trunc(x, units = c("secs", "mins", "hours", "days"), ...)
+trunc(x,
+      units = c("secs", "mins", "hours", "days", "months", "years"),
+      ...)
 
 ## S3 method for class 'Date'
 round(x, ...)
@@ -49,9 +52,9 @@ trunc(x, ...)
 
 <h3>Details</h3>
 
-<p>The time is rounded or truncated to the second, minute, hour or day.
-Time zones are only relevant to days, when midnight in the current
-<a href="timezones.html">time zone</a> is used.
+<p>The time is rounded or truncated to the second, minute, hour, day,
+month or year.  Time zones are only relevant to days or more, when
+midnight in the current <a href="timezones.html">time zone</a> is used.
 </p>
 <p>The methods for class <code>"Date"</code> are of little use except to remove
 fractional days.
@@ -79,5 +82,5 @@ round(.leap.seconds + 1000, "hour")
 trunc(Sys.time(), "day")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

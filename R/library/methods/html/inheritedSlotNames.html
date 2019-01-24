@@ -59,16 +59,14 @@ inheritedSlotNames(Class, where = topenv(parent.frame()))
 library(stats4)
 inheritedSlotNames("mle")
 
-if(require("Matrix")) {
-  print( inheritedSlotNames("Matrix") ) # NULL
+if(require("Matrix")) withAutoprint({
+  inheritedSlotNames("Matrix")       # NULL
   ## whereas
-  print( inheritedSlotNames("sparseMatrix") ) # --&gt; Dim &amp; Dimnames
+  inheritedSlotNames("sparseMatrix") # --&gt; Dim &amp; Dimnames
   ##  i.e. inherited from "Matrix" class
-
-  print( cl &lt;- getClass("dgCMatrix") ) # six slots, etc
-
-  print( inheritedSlotNames(cl) ) # *all* six slots are inherited
-}
+  cl &lt;- getClass("dgCMatrix")        # six slots, etc
+  inheritedSlotNames(cl) # *all* six slots are inherited
+})
 ## Not run: 
 
 
@@ -79,5 +77,5 @@ for(n in rev(which(is.na(match(search(), .srch)))))
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>methods</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>methods</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

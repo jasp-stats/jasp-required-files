@@ -55,7 +55,10 @@ indicates &lsquo;<span class="file">stdin</span>&rsquo;.</p>
 front-end is convenient for writing <span class="samp">#!</span> scripts since it is an
 executable and takes <code>file</code> directly as an argument.  Options
 <span class="option">--slave --no-restore</span> are always supplied: these imply
-<span class="option">--no-save</span>.  (The standard Windows command line has no concept
+<span class="option">--no-save</span>. Arguments that contain spaces cannot be specified
+directly on the <span class="samp">#!</span> line, because spaces and tabs are interpreted as
+delimiters and there is no way to protect them from this interpretation on
+the <span class="samp">#!</span> line. (The standard Windows command line has no concept
 of <span class="samp">#!</span> scripts, but Cygwin shells do.)
 </p>
 <p><em>Either</em> one or more <span class="option">-e</span> options or <code>file</code> should
@@ -72,8 +75,7 @@ doing.  Also passed on to <span style="font-family: Courier New, Courier; color:
 <dt><span class="option">--default-packages=list</span></dt><dd><p>where <code>list</code> is a
 comma-separated list of package names or <code>NULL</code>.  Sets the
 environment variable <span class="env">R_DEFAULT_PACKAGES</span> which determines the
-packages loaded on startup.  The default for <code>Rscript</code>
-omits <span class="pkg">methods</span> as it takes about 60% of the startup time.
+packages loaded on startup.
 </p>
 </dd>
 </dl>
@@ -81,6 +83,10 @@ omits <span class="pkg">methods</span> as it takes about 60% of the startup time
 <p>Spaces are allowed in <code>expression</code> and <code>file</code> (but will need
 to be protected from the shell in use, if any, for example by
 enclosing the argument in quotes).
+</p>
+<p>If <span class="option">--default-packages</span> is not used, then <code>Rscript</code>
+checks the environment variable <span class="env">R_SCRIPT_DEFAULT_PACKAGES</span>. If
+this is set, then it takes precedence over <span class="env">R_DEFAULT_PACKAGES</span>.
 </p>
 <p>The <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> files are found from the location of the &lsquo;<span class="file">Rscript.exe</span>&rsquo;
 executable.   If this is copied elsewhere, the environment variable
@@ -119,5 +125,5 @@ if(inherits(res, "try-error")) q(status=1) else q()
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

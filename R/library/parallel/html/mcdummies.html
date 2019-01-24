@@ -19,11 +19,11 @@
 <pre>
 mclapply(X, FUN, ..., mc.preschedule = TRUE, mc.set.seed = TRUE,
          mc.silent = FALSE, mc.cores = 1L,
-         mc.cleanup = TRUE, mc.allow.recursive = TRUE)
+         mc.cleanup = TRUE, mc.allow.recursive = TRUE, affinity.list = NULL)
 
 mcmapply(FUN, ..., MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE,
         mc.preschedule = TRUE, mc.set.seed = TRUE,
-        mc.silent = FALSE, mc.cores = 1L, mc.cleanup = TRUE)
+        mc.silent = FALSE, mc.cores = 1L, mc.cleanup = TRUE, affinity.list = NULL)
 
 mcMap(f, ...)
 
@@ -64,7 +64,7 @@ inputs: see <code><a href="../../base/html/mapply.html">mapply</a></code>.</p>
 <td>
 <p>see <code><a href="../../base/html/mapply.html">mapply</a></code>.</p>
 </td></tr>
-<tr valign="top"><td><code>mc.preschedule, mc.set.seed, mc.silent, mc.cleanup, mc.allow.recursive</code></td>
+<tr valign="top"><td><code>mc.preschedule, mc.set.seed, mc.silent, mc.cleanup, mc.allow.recursive, affinity.list</code></td>
 <td>
 
 <p>Ignored on Windows.</p>
@@ -105,5 +105,5 @@ by <code>X</code>.
 <p><code><a href="clusterApply.html">parLapply</a></code>, <code><a href="clusterApply.html">clusterMap</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

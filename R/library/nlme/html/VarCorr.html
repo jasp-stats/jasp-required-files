@@ -22,8 +22,12 @@ variance and standard deviation are also calculated.
 <pre>
 VarCorr(x, sigma = 1, ...)
 ## S3 method for class 'lme'
+VarCorr(x, sigma = x$sigma, rdig = 3, ...)
+
+## S3 method for class 'pdMat'
 VarCorr(x, sigma = 1, rdig = 3, ...)
-## and identical signature for classes 'pdMat' and 'pdBlocked'
+## S3 method for class 'pdBlocked'
+VarCorr(x, sigma = 1, rdig = 3, ...)
 </pre>
 
 
@@ -38,7 +42,8 @@ class <code>"<a href="lme.html">lme</a>"</code>.</p>
 <tr valign="top"><td><code>sigma</code></td>
 <td>
 <p>an optional numeric value used as a multiplier for the
-standard deviations.  Default is <code>1</code>.</p>
+standard deviations.  The default is <code>x$sigma</code> or <code>1</code>
+depending on <code><a href="../../base/html/class.html">class</a>(x)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>rdig</code></td>
 <td>
@@ -91,5 +96,5 @@ fm1 &lt;- lme(distance ~ age, data = Orthodont, random = ~age)
 VarCorr(fm1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-131.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
 </body></html>

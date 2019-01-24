@@ -17,7 +17,6 @@
 
 <pre>
 chooseCRANmirror(graphics = getOption("menu.graphics"), ind = NULL,
-                 useHTTPS = getOption("useHTTPS", TRUE),
                  local.only = FALSE)
 
 getCRANmirrors(all = FALSE, local.only = FALSE)
@@ -37,10 +36,6 @@ text <code><a href="menu.html">menu</a></code>.</p>
 <tr valign="top"><td><code>ind</code></td>
 <td>
 <p>Optional numeric value giving which entry to select.</p>
-</td></tr>
-<tr valign="top"><td><code>useHTTPS</code></td>
-<td>
-<p>Whether to prefer secure mirrors.</p>
 </td></tr>
 <tr valign="top"><td><code>all</code></td>
 <td>
@@ -65,13 +60,8 @@ the on-line list is inaccessible.
 <code><a href="contrib.url.html">contrib.url</a></code> if it finds the initial dummy value of
 <code><a href="../../base/html/options.html">options</a>("repos")</code>.
 </p>
-<p>The <code>useHTTPS</code> argument defaults to <code>TRUE</code>.  With
-<code>useHTTPS = TRUE</code>, HTTPS mirrors with mirroring over
-<code>ssh</code> will be offered in preference to other mirrors (which
-are listed in a sub-menu).  If it is set to <code>FALSE</code>, no secure
-mirrors will be offered.  Choosing a secure mirror provides some
-guarantees on the identity of the site chosen and so is
-recommended. (All <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> builds support downloading from HTTPS sites.)
+<p>HTTPS mirrors with mirroring over <code>ssh</code> will be offered in
+preference to other mirrors (which are listed in a sub-menu).
 </p>
 <p><code>ind</code> chooses a row in the list of current mirrors, by number. It
 is best used with <code>local.only = TRUE</code> and row numbers in
@@ -94,5 +84,5 @@ side effect of updating <code>options("repos")</code>.
 <code><a href="contrib.url.html">contrib.url</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

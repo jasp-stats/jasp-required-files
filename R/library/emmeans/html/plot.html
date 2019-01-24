@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot an 'emmGrid' or 'summary_emm' object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot.emmGrid {emmeans}"><tr><td>plot.emmGrid {emmeans}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot an <code>emmGrid</code> or <code>summary_emm</code> object</h2>
+
+<h3>Description</h3>
+
+<p>Methods are provided to plot EMMs as side-by-side intervals, and optionally to display 
+&ldquo;comparison arrows&rdquo; for displaying pairwise comparisons.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'emmGrid'
+plot(x, y, type, intervals = TRUE,
+  comparisons = FALSE, alpha = 0.05, adjust = "tukey",
+  int.adjust = "none", frequentist, ...)
+
+## S3 method for class 'summary_emm'
+plot(x, y, horizontal = TRUE, xlab, ylab, layout,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Object of class <code>emmGrid</code> or <code>summary_emm</code></p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>(Required but ignored)</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Character value specifying the type of prediction desired
+(matching <code>"linear.predictor"</code>, <code>"link"</code>, or <code>"response"</code>).
+See details under <code><a href="summary.emmGrid.html">summary.emmGrid</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>intervals</code></td>
+<td>
+<p>Logical value. If <code>TRUE</code>, confidence intervals are
+plotted for each estimate.</p>
+</td></tr>
+<tr valign="top"><td><code>comparisons</code></td>
+<td>
+<p>Logical value. If <code>TRUE</code>, &ldquo;comparison arrows&rdquo;
+are added to the plot, in such a way that the degree to which arrows
+overlap reflects as much as possible the significance of the comparison of
+the two estimates. (A warning is issued if this can't be done.)</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>The significance level to use in constructing comparison arrows</p>
+</td></tr>
+<tr valign="top"><td><code>adjust</code></td>
+<td>
+<p>Character value: Multiplicity adjustment method for comparison arrows <em>only</em>.</p>
+</td></tr>
+<tr valign="top"><td><code>int.adjust</code></td>
+<td>
+<p>Character value: Multiplicity adjustment method for the plotted confidence intervals <em>only</em>.</p>
+</td></tr>
+<tr valign="top"><td><code>frequentist</code></td>
+<td>
+<p>Logical value. If there is a posterior MCMC sample and 
+<code>frequentist</code> is non-missing and TRUE, a frequentist summary is used for
+obtaining the plot data, rather than the posterior point estimate and HPD
+intervals. This argument is ignored when it is not a Bayesian model.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to <code><a href="update.emmGrid.html">update.emmGrid</a></code> or
+<code><a href="../../lattice/html/xyplot.html">dotplot</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>horizontal</code></td>
+<td>
+<p>Logical value specifying whether the intervals should be
+plotted horizontally or vertically</p>
+</td></tr>
+<tr valign="top"><td><code>xlab</code></td>
+<td>
+<p>Character label for horizontal axis</p>
+</td></tr>
+<tr valign="top"><td><code>ylab</code></td>
+<td>
+<p>Character label for vertical axis</p>
+</td></tr>
+<tr valign="top"><td><code>layout</code></td>
+<td>
+<p>Numeric value passed to <code><a href="../../lattice/html/xyplot.html">dotplot</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>If any <code>by</code> variables are in force, the plot is divided into separate
+panels. These functions use the <code><a href="../../lattice/html/xyplot.html">dotplot</a></code> function, and
+thus require that the <span class="pkg">lattice</span> package be installed. For
+<code>"summary_emm"</code> objects, the <code>...</code> arguments in <code>plot</code>
+are passed <em>only</em> to <code>dotplot</code>, whereas for <code>"emmGrid"</code>
+objects, the object is updated using <code>...</code> before summarizing and
+plotting.
+</p>
+<p>In plots with <code>comparisons = TRUE</code>, the resulting arrows are only
+approximate, and in some cases may fail to accurately reflect the pairwise
+comparisons of the estimates &ndash; especially when estimates having large and
+small standard errors are intermingled in just the wrong way. Note that the
+maximum and minimum estimates have arrows only in one direction, since there
+is no need to compare them with anything higher or lower, respectively.
+</p>
+<p>If <code>adjust</code> or <code>int.adjust</code> are not supplied, they default to the 
+internal <code>adjust</code> setting saved in <code>pairs(x)</code> and <code>x</code> 
+respectively (see <code><a href="update.emmGrid.html">update.emmGrid</a></code>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+warp.lm &lt;- lm(breaks ~ wool * tension, data = warpbreaks)
+warp.emm &lt;- emmeans(warp.lm, ~ tension | wool)
+plot(warp.emm)
+plot(warp.emm, by = NULL, comparisons = TRUE, adjust = "mvt", 
+     horizontal = FALSE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>emmeans</em> version 1.3.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

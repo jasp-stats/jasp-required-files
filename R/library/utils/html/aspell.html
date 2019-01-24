@@ -79,7 +79,7 @@ dictionaries.
 <p>The currently available built-in filters are <code>"Rd"</code>
 (corresponding to <code><a href="../../tools/html/RdTextFilter.html">RdTextFilter</a></code>), <code>"Sweave"</code>
 (corresponding to <code><a href="../../tools/html/SweaveTeXFilter.html">SweaveTeXFilter</a></code>), <code>"R"</code>,
-<code>"pot"</code> and <code>"dcf"</code>.
+<code>"pot"</code>, <code>"dcf"</code> and <code>"md"</code>.
 </p>
 <p>Filter <code>"R"</code> is for R code and extracts the message string
 constants in calls to <code><a href="../../base/html/message.html">message</a></code>, <code><a href="../../base/html/warning.html">warning</a></code>,
@@ -88,7 +88,8 @@ constants in calls to <code><a href="../../base/html/message.html">message</a></
 <code><a href="../../base/html/gettext.html">ngettext</a></code> (the unnamed string constants for the first
 five, and <code>fmt</code> and <code>msg1</code>/<code>msg2</code> string constants,
 respectively, for the latter two).
-Filter <code>"pot"</code> is for message string catalog &lsquo;<span class="file">.pot</span>&rsquo; files.
+</p>
+<p>Filter <code>"pot"</code> is for message string catalog &lsquo;<span class="file">.pot</span>&rsquo; files.
 Both have an argument <code>ignore</code> allowing to give regular
 expressions for parts of message strings to be ignored for spell
 checking: e.g., using <code>"[ \t]'[^']*'[ \t[:punct:]]"</code> ignores all
@@ -98,6 +99,11 @@ text inside single quotes.
 The fields to keep can be controlled by argument <code>keep</code> (a
 character vector with the respective field names).  By default,
 <span class="samp">Title</span> and <span class="samp">Description</span> fields are kept.
+</p>
+<p>Filter <code>"md"</code> is for files in
+<a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> format
+(&lsquo;<span class="file">.md</span>&rsquo; and &lsquo;<span class="file">.Rmd</span>&rsquo; files), and needs packages
+<a href="https://CRAN.R-project.org/package=commonmark"><span class="pkg">commonmark</span></a> and <a href="https://CRAN.R-project.org/package=xml2"><span class="pkg">xml2</span></a> to be available.
 </p>
 <p>The print method for the objects returned by <code>aspell</code> has an
 <code>indent</code> argument controlling the indentation of the positions of
@@ -165,5 +171,5 @@ aspell(files, control = "--mode=texinfo")
 Sys.glob(file.path(R.home("share"), "dictionaries", "*.rds"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

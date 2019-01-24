@@ -73,9 +73,10 @@ iteration when <code>optim</code> is used.  Default is <code>1e-7</code>.</p>
 <tr valign="top"><td><code>returnObject</code></td>
 <td>
 <p>a logical value indicating whether the fitted
-object should be returned when the maximum number of iterations is
-reached without convergence of the algorithm.  Default is
-<code>FALSE</code>.</p>
+object should be returned with a <code><a href="../../base/html/warning.html">warning</a></code> (instead of an
+error via <code><a href="../../base/html/stop.html">stop</a>()</code>) when the maximum number of
+iterations is reached without convergence of the algorithm.  Default
+is <code>FALSE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>gradHess</code></td>
 <td>
@@ -165,5 +166,5 @@ str(lCtr &lt;- lmeControl(msMaxIter = 20, msVerbose = TRUE))
 do.call(lmeControl, lCtr)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-131.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
 </body></html>

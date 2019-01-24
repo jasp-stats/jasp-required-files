@@ -189,21 +189,27 @@ Wadsworth &amp; Brooks/Cole.
 <pre>
 ## A function to use identify to select points, and overplot the
 ## points with another symbol as they are selected
-identifyPch &lt;- function(x, y = NULL, n = length(x), pch = 19, ...)
+identifyPch &lt;- function(x, y = NULL, n = length(x), plot = FALSE, pch = 19, ...)
 {
     xy &lt;- xy.coords(x, y); x &lt;- xy$x; y &lt;- xy$y
-    sel &lt;- rep(FALSE, length(x)); res &lt;- integer(0)
+    sel &lt;- rep(FALSE, length(x))
     while(sum(sel) &lt; n) {
-        ans &lt;- identify(x[!sel], y[!sel], n = 1, plot = FALSE, ...)
+        ans &lt;- identify(x[!sel], y[!sel], labels = which(!sel), n = 1, plot = plot, ...)
         if(!length(ans)) break
         ans &lt;- which(!sel)[ans]
         points(x[ans], y[ans], pch = pch)
         sel[ans] &lt;- TRUE
-        res &lt;- c(res, ans)
     }
-    res
+    ## return indices of selected points
+    which(sel)
 }
+
+if(dev.interactive()) { ## use it
+  x &lt;- rnorm(50); y &lt;- rnorm(50)
+  plot(x,y); identifyPch(x,y) # how fast to get all?
+}
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

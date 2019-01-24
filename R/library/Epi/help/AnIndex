@@ -38,6 +38,7 @@ contr.diff	contr.cum
 contr.orth	contr.cum
 count	stattable.funs
 countLexis	cutLexis
+coxph.Lexis	mod.Lexis
 cp.lines	pc.lines
 cp.matlines	pc.lines
 cp.matpoints	pc.lines
@@ -74,10 +75,16 @@ fit.baseline	fit.baseline
 fit.mult	fit.mult
 float	float
 ftrend	ftrend
+gam.Lexis	mod.Lexis
 gen.exp	gen.exp
+glm.Lexis	mod.Lexis
 gmortDK	gmortDK
 hivDK	hivDK
 Icens	Icens
+id.span	in.span
+idSpan	in.span
+in.span	in.span
+inSpan	in.span
 LCa.fit	LCa.fit
 lep	lep
 levels.Lexis	transform.Lexis
@@ -129,6 +136,7 @@ plotEst	plotEst
 plotevent	plotevent
 points.Lexis	plot.Lexis
 pointsEst	plotEst
+poisreg	poisreg
 Pplot	rateplot
 predict.LCa	LCa.fit
 print.floated	float
@@ -166,6 +174,7 @@ surv2	erl
 tbox	boxes.MS
 Termplot	Termplot
 testisDK	testisDK
+thinCol	in.span
 thoro	thoro
 timeBand	time.band
 timeScales	time.scales

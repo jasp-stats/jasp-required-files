@@ -4,6 +4,14 @@ test.merge_empty_xts_with_2_scalars <- function() {
   checkIdentical(m1, m2)
 }
 
+test.merge_more_than_2_zero_width_objects <- function() {
+  zw1 <- xts()
+  zw2 <- xts()
+  zw3 <- xts()
+  m1 <- merge(zw1, zw2, zw3)
+  checkIdentical(m1, zw1)
+}
+
 # Tests for NA in index. Construct xts object using structure() because
 # xts constructors should not allow users to create objects with NA in
 # the index
@@ -82,5 +90,33 @@ test.merge_with_zero_width_returns_original_type <- function() {
     e1 <- .xts(,1:3)
     m2 <- merge(m1, e1)
     checkIdentical(m1, m2)
+  }
+}
+
+test.n_way_merge_on_all_types <- function() {
+  D1 <- as.Date("2018-01-03")-2:0
+  M1 <- xts(1:3, D1, dimnames = list(NULL, "m"))
+  M3 <- xts(cbind(1:3, 1:3, 1:3), D1,
+            dimnames = list(NULL, c("m", "m.1", "m.2")))
+
+  types <- c("double", "integer", "logical", "character", "complex")
+  for (type in types) {
+    m1 <- M1
+    m3 <- M3
+    storage.mode(m1) <- storage.mode(m3) <- type
+    m <- merge(m1, m1, m1)
+    checkIdentical(m, m3)
+  }
+}
+
+test.shorter_colnames_for_unnamed_args <- function() {
+  X <- .xts(rnorm(10, 10), 1:10)
+
+  types <- c("double", "integer", "logical", "character", "complex")
+  for (type in types) {
+    x <- X
+    storage.mode(x) <- type
+    mx <- do.call(merge, list(x, x))
+    checkTrue(all(nchar(colnames(mx)) < 200), type)
   }
 }

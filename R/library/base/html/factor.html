@@ -48,7 +48,7 @@ values.</p>
 </td></tr>
 <tr valign="top"><td><code>levels</code></td>
 <td>
-<p>an optional vector of the values (as character strings)
+<p>an optional vector of the unique values (as character strings)
 that <code>x</code> might have taken.  The default is the unique set of
 values taken by <code><a href="character.html">as.character</a>(x)</code>, sorted into
 increasing order <em>of <code>x</code></em>.  Note that this set can be
@@ -56,10 +56,11 @@ specified as smaller than <code>sort(unique(x))</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>labels</code></td>
 <td>
-<p><em>either</em> an optional character vector of (unique)
+<p><em>either</em> an optional character vector of
 labels for the levels (in the same order as <code>levels</code> after
 removing those in <code>exclude</code>), <em>or</em> a character string of
-length 1.</p>
+length 1.  Duplicated values in <code>labels</code> can be used to map
+different values of <code>x</code> to the same factor level.</p>
 </td></tr>
 <tr valign="top"><td><code>exclude</code></td>
 <td>
@@ -93,7 +94,7 @@ if <code>any(is.na(x))</code>.</p>
 
 <p>The type of the vector <code>x</code> is not restricted; it only must have
 an <code><a href="character.html">as.character</a></code> method and be sortable (by
-<code><a href="order.html">sort.list</a></code>).
+<code><a href="order.html">order</a></code>).
 </p>
 <p>Ordered factors differ from factors only in their class, but methods
 and the model-fitting functions treat the two classes quite differently.
@@ -285,11 +286,20 @@ z # ordered levels 'A &lt; B &lt; C'
 factor(z, exclude = "C") # does exclude
 factor(z, exclude = "B") # ditto
 
+## Now, labels maybe duplicated:
+## factor() with duplicated labels allowing to "merge levels"
+x &lt;- c("Man", "Male", "Man", "Lady", "Female")
+## Map from 4 different values to only two levels:
+(xf &lt;- factor(x, levels = c("Male", "Man" , "Lady",   "Female"),
+                 labels = c("Male", "Male", "Female", "Female")))
+#&gt; [1] Male   Male   Male   Female Female
+#&gt; Levels: Male Female
+
 ## Using addNA()
 Month &lt;- airquality$Month
 table(addNA(Month))
 table(addNA(Month, ifany = TRUE))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -54,6 +54,9 @@ isRestart(x)
 restartDescription(r)
 restartFormals(r)
 
+suspendInterrupts(expr)
+allowInterrupts(expr)
+
 .signalSimpleWarning(msg, call)
 .handleSimpleError(h, msg, call)
 .tryResumeInterrupt()
@@ -215,6 +218,11 @@ obtain the arguments to use when invoking the restart.  The default
 <code>interactive</code> method queries the user for values for the
 formal arguments of the handler function.
 </p>
+<p>Interrupts can be suspended while evaluating an expression using
+<code>suspendInterrupts</code>.  Subexpression can be evaluated with
+interrupts enabled using <code>allowInterrupts</code>.  These functions
+can be used to make sure cleanup handlers cannot be interrupted.
+</p>
 <p><code>.signalSimpleWarning</code>, <code>.handleSimpleError</code>, and
 <code>.tryResumeInterrupt</code> are used internally and should not be
 called directly.
@@ -263,5 +271,5 @@ withRestarts(invokeRestart("foo", 1, 2), foo = function(x, y) {x + y})
 ##--&gt;   demo(error.catching)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

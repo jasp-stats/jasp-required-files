@@ -81,14 +81,15 @@ attached as an attribute named <code>gradient</code>.
 
 <pre>
 Theoph.1 &lt;- Theoph[ Theoph$Subject == 1, ]
-SSfol(Theoph.1$Dose, Theoph.1$Time, -2.5, 0.5, -3) # response only
-lKe &lt;- -2.5; lKa &lt;- 0.5; lCl &lt;- -3
-SSfol(Theoph.1$Dose, Theoph.1$Time, lKe, lKa, lCl) # response and gradient
+with(Theoph.1, SSfol(Dose, Time, -2.5, 0.5, -3)) # response only
+with(Theoph.1, local({  lKe &lt;- -2.5; lKa &lt;- 0.5; lCl &lt;- -3
+  SSfol(Dose, Time, lKe, lKa, lCl) # response _and_ gradient
+}))
 getInitial(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph.1)
 ## Initial values are in fact the converged values
 fm1 &lt;- nls(conc ~ SSfol(Dose, Time, lKe, lKa, lCl), data = Theoph.1)
 summary(fm1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

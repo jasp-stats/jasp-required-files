@@ -26,7 +26,7 @@ for quantities derived from the model (e.g. derivatives of smooths), and for loo
 ## S3 method for class 'gam'
 predict(object,newdata,type="link",se.fit=FALSE,terms=NULL,
         exclude=NULL,block.size=NULL,newdata.guaranteed=FALSE,
-        na.action=na.pass,unconditional=FALSE,...)
+        na.action=na.pass,unconditional=FALSE,iterms.type=NULL,...)
 </pre>
 
 
@@ -109,6 +109,10 @@ determined from <code>object$na.action</code>.</p>
 <p>if <code>TRUE</code> then the smoothing parameter uncertainty corrected covariance
 matrix is used, when available, otherwise the covariance matrix conditional on the estimated 
 smoothing parameters is used. </p>
+</td></tr>
+<tr valign="top"><td><code>iterms.type</code></td>
+<td>
+<p>if <code>type="iterms"</code> then standard errors can either include the uncertainty in the overall mean (default, withfixed and random effects included) or the uncertainty in the mean of the non-smooth fixed effects only (<code>iterms.type=2</code>).</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -251,19 +255,6 @@ mean(res);var(res)
 
 res &lt;- colSums(log(abs(Xp %*% t(br))))
 
-##################################################################
-# illustration of unsafe scale dependent transforms in smooths....
-##################################################################
-
-b0 &lt;- gam(y~s(x0)+s(x1)+s(x2)+x3,data=dat) ## safe
-b1 &lt;- gam(y~s(x0)+s(I(x1/2))+s(x2)+scale(x3),data=dat) ## safe
-b2 &lt;- gam(y~s(x0)+s(scale(x1))+s(x2)+scale(x3),data=dat) ## unsafe
-pd &lt;- dat; pd$x1 &lt;- pd$x1/2; pd$x3 &lt;- pd$x3/2
-par(mfrow=c(1,2))
-plot(predict(b0,pd),predict(b1,pd),main="b0 and b1 predictions match")
-abline(0,1,col=2)
-plot(predict(b0,pd),predict(b2,pd),main="b2 unsafe, doesn't match")
-abline(0,1,col=2)
 
 
 ##################################################################
@@ -295,6 +286,21 @@ se &lt;- sqrt(x0%*%b$Vp%*%t(x0));se ## get standard error
 ## compare to normal prediction
 predict(b,newdata=data.frame(x0=xn[1],x1=xn[2],
         x2=xn[3],x3=xn[4]),se=TRUE)
+
+##################################################################
+# illustration of unsafe scale dependent transforms in smooths....
+##################################################################
+
+b0 &lt;- gam(y~s(x0)+s(x1)+s(x2)+x3,data=dat) ## safe
+b1 &lt;- gam(y~s(x0)+s(I(x1/2))+s(x2)+scale(x3),data=dat) ## safe
+b2 &lt;- gam(y~s(x0)+s(scale(x1))+s(x2)+scale(x3),data=dat) ## unsafe
+pd &lt;- dat; pd$x1 &lt;- pd$x1/2; pd$x3 &lt;- pd$x3/2
+par(mfrow=c(1,2))
+plot(predict(b0,pd),predict(b1,pd),main="b0 and b1 predictions match")
+abline(0,1,col=2)
+plot(predict(b0,pd),predict(b2,pd),main="b2 unsafe, doesn't match")
+abline(0,1,col=2)
+
 
 ####################################################################
 ## Differentiating the smooths in a model (with CIs for derivatives)
@@ -333,5 +339,5 @@ for (i in 1:4) {  ## plot derivatives and corresponding CIs
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

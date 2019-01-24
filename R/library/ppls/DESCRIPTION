@@ -1,20 +1,24 @@
 Package: ppls
 Type: Package
 Title: Penalized Partial Least Squares
-Depends: splines, MASS
-Version: 1.6-1
+Depends: R (>= 2.10), splines, MASS
+Version: 1.6-1.1
 Date: 2014-09-04
 Author: Nicole Kraemer <kraemer_r_packages@yahoo.de> Anne-Laure Boulesteix
         <boulesteix@ibe.med.uni-muenchen.de>
-Maintainer: Nicole Kraemer <kraemer_r_packages@yahoo.de>
-Description: This package contains linear and nonlinear regression
+Maintainer: ORPHANED
+Description: Contains linear and nonlinear regression
         methods based on Partial Least Squares and Penalization
         Techniques. Model parameters are selected via cross-validation,
         and confidence intervals ans tests for the regression
         coefficients can be conducted via jackknifing.
 License: GPL (>= 2)
-Packaged: 2014-09-04 08:44:25 UTC; ga29xul
+Packaged: 2018-07-20 14:33:03 UTC; hornik
 Repository: CRAN
 NeedsCompilation: no
-Date/Publication: 2014-09-04 11:55:57
-Built: R 3.4.4; ; 2018-06-02 07:45:24 UTC; windows
+Date/Publication: 2018-07-20 14:38:39 UTC
+X-CRAN-Original-Maintainer: Nicole Kraemer
+        <kraemer_r_packages@yahoo.de>
+X-CRAN-Comment: Orphaned and corrected on 2018-07-20 as check problems
+        were not corrected despite reminders.
+Built: R 3.5.2; ; 2019-01-21 15:28:56 UTC; windows

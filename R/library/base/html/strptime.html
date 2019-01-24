@@ -99,9 +99,9 @@ the <code><a href="locales.html">LC_TIME</a></code> locale category.  The &lsquo
 locale&rsquo; of the descriptions might mean the locale in use at the start
 of the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session or when these functions are first used.  (For input,
 the locale-specific conversions can be changed by calling
-<code><a href="locales.html">Sys.setlocale</a></code> with category <code>LC_TIME</code> since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
-3.1.0 or <code>LC_ALL</code> since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.4.1.  For output, what happens
-depends on the OS.)
+<code><a href="locales.html">Sys.setlocale</a></code> with category <code>LC_TIME</code> (or
+<code>LC_ALL</code>).  For output, what happens depends on the OS but
+usually works.)
 </p>
 
 <p>The details of the formats are platform-specific, but the following are
@@ -238,7 +238,8 @@ with agreement of the parties involved.
 </dd>
 <dt><code>%z</code></dt><dd><p>Signed offset in hours and minutes
 from UTC, so <code>-0800</code> is 8 hours behind UTC. Values up to
-<code>+1400</code> are accepted.  (Standard only for output.)</p>
+<code>+1400</code> are accepted.  (Standard only for output.  For input
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> currently supports it on all platforms.)</p>
 </dd> 
 <dt><code>%Z</code></dt><dd><p>(Output only.)  Time zone abbreviation as a
 character string (empty if not available).  This may not be reliable
@@ -359,14 +360,32 @@ specifications (see <code><a href="timezones.html">Sys.timezone</a></code>): pos
 East of the meridian.  Although there have been time zones with
 offsets like 00:09:21 (Paris in 1900), and 00:44:30 (Liberia until
 1972), offsets are usually treated as whole numbers of minutes, and
-are most often seen in RFC 822 email headers in forms like
-<code>-0800</code> (e.g., used on the Pacific coast of the US in winter).
+are most often seen in RFC 5322 email headers in forms like
+<code>-0800</code> (e.g., used on the Pacific coast of the USA in winter).
 </p>
 <p>Format <code>%z</code> can be used for input or output: it is a character
 string, conventionally plus or minus followed by two digits for
 hours and two for minutes: the standards say that an empty string
 should be output if the offset is unknown, but some systems use the
 offsets for the time zone in use for the current year.
+</p>
+
+
+<h3>Sources</h3>
+
+<p>Input uses the POSIX function <code>strptime</code> and output the C99
+function <code>strftime</code>.
+</p>
+<p>However, not all OSes (notably Windows) provided <code>strptime</code> and
+many issues were found for those which did, so since 2000 <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> has used
+a fork of code from <span class="samp">glibc</span>.  The forked code uses the
+system's <code>strftime</code> to find the locale-specific day and month
+names and any AM/PM indicator.
+</p>
+<p>On some platforms (including Windows and by default on macOS) the
+system's <code>strftime</code> is replaced (along with most of the rest of
+the C-level datetime code) by code modified from IANA's <span class="samp">tzcode</span>
+distribution (<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>).
 </p>
 
 
@@ -439,7 +458,7 @@ format(Sys.time(), "%a %b %d %X %Y %Z")
 format(Sys.time(), "%H:%M:%OS3")
 
 ## read in date info in format 'ddmmmyyyy'
-## This will give NA(s) in some locales; setting the C locale
+## This will give NA(s) in some non-English locales; setting the C locale
 ## as in the commented lines will overcome this on most systems.
 ## lct &lt;- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
 x &lt;- c("1jan1960", "2jan1960", "31mar1960", "30jul1960")
@@ -460,13 +479,16 @@ op &lt;- options(digits.secs = 3)
 z
 options(op)
 
-## time zones name are not portable, but 'EST5EDT' comes pretty close.
+## time zone names are not portable, but 'EST5EDT' comes pretty close.
 (x &lt;- strptime(c("2006-01-08 10:07:52", "2006-08-07 19:33:02"),
                "%Y-%m-%d %H:%M:%S", tz = "EST5EDT"))
 attr(x, "tzone")
 
-## An RFC 822 header (Eastern Canada, during DST)
-strptime("Tue, 23 Mar 2010 14:36:38 -0400",  "%a, %d %b %Y %H:%M:%S %z")
+## An RFC 5322 header (Eastern Canada, during DST)
+## In a non-English locale the commented lines may be needed.
+## prev &lt;- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
+strptime("Tue, 23 Mar 2010 14:36:38 -0400", "%a, %d %b %Y %H:%M:%S %z")
+## Sys.setlocale("LC_TIME", prev)
 
 ## Make sure you know what the abbreviated names are for you if you wish
 ## to use them for input (they are matched case-insensitively):
@@ -474,5 +496,5 @@ format(seq.Date(as.Date('1978-01-01'), by = 'day', len = 7), "%a")
 format(seq.Date(as.Date('2000-01-01'), by = 'month', len = 12), "%b")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

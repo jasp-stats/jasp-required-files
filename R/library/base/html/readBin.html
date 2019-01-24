@@ -168,7 +168,8 @@ and <code>long double</code>.
 <h3>Examples</h3>
 
 <pre>
-zz &lt;- file("testbin", "wb")
+zzfil &lt;- tempfile("testbin")
+zz &lt;- file(zzfil, "wb")
 writeBin(1:10, zz)
 writeBin(pi, zz, endian = "swap")
 writeBin(pi, zz, size = 4)
@@ -183,7 +184,7 @@ if((s &lt;- .Machine$sizeof.longdouble) &gt; 8)
     writeBin((pi/3)^(1:10), zz, size = s)
 close(zz)
 
-zz &lt;- file("testbin", "rb")
+zz &lt;- file(zzfil, "rb")
 readBin(zz, integer(), 4)
 readBin(zz, integer(), 6)
 readBin(zz, numeric(), 1, endian = "swap")
@@ -197,11 +198,12 @@ if(.Machine$sizeof.long == 8 || .Machine$sizeof.longlong == 8)
 if((s &lt;- .Machine$sizeof.longdouble) &gt; 8)
     readBin(zz, numeric(), 10, size = s)
 close(zz)
-unlink("testbin")
+unlink(zzfil)
 stopifnot(z2 == z)
 
 ## signed vs unsigned ints
-zz &lt;- file("testbin", "wb")
+zzfil &lt;- tempfile("testbin")
+zz &lt;- file(zzfil, "wb")
 x &lt;- as.integer(seq(0, 255, 32))
 writeBin(x, zz, size = 1)
 writeBin(x, zz, size = 1)
@@ -209,13 +211,13 @@ x &lt;- as.integer(seq(0, 60000, 10000))
 writeBin(x, zz, size = 2)
 writeBin(x, zz, size = 2)
 close(zz)
-zz &lt;- file("testbin", "rb")
+zz &lt;- file(zzfil, "rb")
 readBin(zz, integer(), 8, size = 1)
 readBin(zz, integer(), 8, size = 1, signed = FALSE)
 readBin(zz, integer(), 7, size = 2)
 readBin(zz, integer(), 7, size = 2, signed = FALSE)
 close(zz)
-unlink("testbin")
+unlink(zzfil)
 
 ## use of raw
 z &lt;- writeBin(pi^{1:5}, raw(), size = 4)
@@ -224,5 +226,5 @@ z &lt;- writeBin(c("a", "test", "of", "character"), raw())
 readBin(z, character(), 4)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

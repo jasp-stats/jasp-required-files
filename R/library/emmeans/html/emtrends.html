@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimated marginal means of linear trends</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for emtrends {emmeans}"><tr><td>emtrends {emmeans}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimated marginal means of linear trends</h2>
+
+<h3>Description</h3>
+
+<p>The <code>emtrends</code> function is useful when a fitted model involves a
+numerical predictor <i>x</i>  interacting with another predictor <code>a</code>
+(typically a factor). Such models specify that <i>x</i> has a different trend
+depending on <i>a</i>; thus, it may be of interest to estimate and compare
+those trends. Analogous to the <code><a href="emmeans.html">emmeans</a></code> setting, we construct a
+reference grid of these predicted trends, and then possibly average them over
+some of the predictors in the grid.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+emtrends(model, specs, var, delta.var = 0.01 * rng, data,
+  transform = c("none", "response"), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>A supported model object (<em>not</em> a reference grid)</p>
+</td></tr>
+<tr valign="top"><td><code>specs</code></td>
+<td>
+<p>Specifications for what marginal trends are desired &ndash; as in
+<code><a href="emmeans.html">emmeans</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>var</code></td>
+<td>
+<p>Character value giving the name of a variable with respect to 
+which a difference quotient of the linear predictors is computed. In order
+for this to be useful, <code>var</code> should be a numeric predictor that
+interacts with at least one factor in <code>specs</code>. Then instead of
+computing EMMs, we compute and compare the slopes of the <code>var</code> trend
+over levels of the specified other predictor(s). As in EMMs, marginal
+averages are computed for the predictors in <code>specs</code> and <code>by</code>.
+See also the &ldquo;Generalizations&rdquo; section below.</p>
+</td></tr>
+<tr valign="top"><td><code>delta.var</code></td>
+<td>
+<p>The value of <em>h</em> to use in forming the difference
+quotient <i>(f(x+h) - f(x))/h</i>. Changing it (especially changing its
+sign) may be necessary to avoid numerical problems such as logs of negative
+numbers. The default value is 1/100 of the range of <code>var</code> over the
+dataset.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>As in <code><a href="ref_grid.html">ref_grid</a></code>, you may use this argument to supply
+the dataset used in fitting the model, for situations where it is not
+possible to reconstruct the data. Otherwise, leave it missing.</p>
+</td></tr>
+<tr valign="top"><td><code>transform</code></td>
+<td>
+<p>If <code>object</code> has a response
+transformation or link function, then specifying 
+<code>transform = "response"</code> will cause
+<code>emtrends</code> to calculate the trends after back-transforming to the
+response scale. This is done using the chain rule, and standard errors are
+estimated via the delta method. With <code>transform = "none"</code> (the
+default), the trends are calculated on the scale of the linear predictor,
+without back-transforming it. This argument works similarly to the
+<code>transform</code> argument in <code><a href="ref_grid.html">ref_grid</a></code>, in that the returned
+object is re-gridded to the new scale (see also <code><a href="regrid.html">regrid</a></code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed to other methods or to 
+<code><a href="ref_grid.html">ref_grid</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An <code>emmGrid</code> or <code>emm_list</code> object, according to <code>specs</code>.
+See <code><a href="emmeans.html">emmeans</a></code> for more details on when a list is returned.
+</p>
+
+
+<h3>Generalizations</h3>
+
+<p>Instead of a single predictor, the user may specify some monotone function of
+one variable, e.g., <code>var = "log(dose)"</code>. If so, the chain rule is
+applied. Note that, in this example, if <code>model</code> contains
+<code>log(dose)</code> as a predictor, we will be comparing the slopes estimated by
+that model, whereas specifying <code>var = "dose"</code> would perform a
+transformation of those slopes, making the predicted trends vary depending on
+<code>dose</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>link{emmeans}</code>, <code><a href="ref_grid.html">ref_grid</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+fiber.lm &lt;- lm(strength ~ diameter*machine, data=fiber)
+# Obtain slopes for each machine ...
+( fiber.emt &lt;- emtrends(fiber.lm, "machine", var = "diameter") )
+# ... and pairwise comparisons thereof
+pairs(fiber.emt)
+
+# Suppose we want trends relative to sqrt(diameter)...
+emtrends(fiber.lm, ~ machine | diameter, var = "sqrt(diameter)", 
+         at = list(diameter = c(20, 30)))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>emmeans</em> version 1.3.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

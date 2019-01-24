@@ -10,9 +10,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package" />
+<meta name="author" content="emmeans package, Version 1.3.2" />
 
-<meta name="date" content="2018-05-20" />
 
 <title>Index of vignette topics</title>
 
@@ -31,8 +30,7 @@
 
 
 <h1 class="title toc-ignore">Index of vignette topics</h1>
-<h4 class="author"><em>emmeans package</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
 
 
 
@@ -41,7 +39,7 @@
 
 
 <div id="topnav" class="section level3">
-<h3>Jump to: <a href="#a">A</a> <a href="#b">B</a> <a href="#c">C</a> <a href="#d">D</a> <a href="#e">E</a> <a href="#f">F</a> <a href="#g">G</a> <a href="#h">H</a> <a href="#i">I</a> <a href="#j">J</a> <a href="#k">K</a> <a href="#l">L</a> <a href="#m">M</a> <a href="#n">N</a> <a href="#o">O</a> <a href="#p">P</a> <a href="#r">R</a> <a href="#s">S</a> <a href="#t">T</a> <a href="#u">U</a> <a href="#v">V</a> <a href="#w">W</a> <a href="#z">Z</a></h3>
+<h3>Jump to: <a href="#a">A</a> <a href="#b">B</a> <a href="#c">C</a> <a href="#d">D</a> <a href="#e">E</a> <a href="#f">F</a> <a href="#g">G</a> <a href="#h">H</a> <a href="#i">I</a> <a href="#j">J</a> <a href="#k">K</a> <a href="#l">L</a> <a href="#m">M</a> <a href="#n">N</a> <a href="#o">O</a> <a href="#p">P</a> <a href="#q">Q</a> <a href="#r">R</a> <a href="#s">S</a> <a href="#t">T</a> <a href="#u">U</a> <a href="#v">V</a> <a href="#w">W</a> <a href="#z">Z</a></h3>
 </div>
 <div id="a" class="section level3">
 <h3>A</h3>
@@ -95,7 +93,10 @@
 <div id="c" class="section level3">
 <h3>C</h3>
 <ul>
-<li><a href="comparisons.html#pairwise"><code>cld()</code></a></li>
+<li><a href="comparisons.html#pairwise"><code>CLD()</code></a>
+<ul>
+<li><a href="comparisons.html#pairwise">versus <code>multcomp::cld()</code></a></li>
+</ul></li>
 <li><a href="models.html#O"><code>clm</code> models</a></li>
 <li><a href="sophisticated.html#bayesxtra"><strong>coda</strong> package</a></li>
 <li><a href="comparisons.html#contrasts"><code>coef()</code></a></li>
@@ -145,6 +146,7 @@
 <li>Covariates
 <ul>
 <li><a href="messy-data.html#adjcov">Adjusted</a></li>
+<li><a href="basics.html#depcovs">Derived</a></li>
 <li><a href="FAQs.html#numeric"><code>emmeans()</code> doesn’t work</a></li>
 <li><a href="FAQs.html#trends">Interacting with factors</a></li>
 <li><a href="messy-data.html#mediators">Mediating</a></li>
@@ -159,6 +161,7 @@
 <ul>
 <li><a href="FAQs.html#asymp">Infinite</a></li>
 </ul></li>
+<li><a href="utilities.html#digits">Digits, optimizing</a></li>
 <li><a href="comparisons.html#contrasts">Dunnett method</a></li>
 </ul>
 <p><a href="#topnav">Back to top</a></p>
@@ -180,7 +183,7 @@
 <li><strong>emmeans</strong> package
 <ul>
 <li><a href="xtending.html#exporting">Exporting extensions to</a></li>
-<li><a href="xtending.html#exported">Exports for developers</a></li>
+<li><a href="xtending.html#exported">Exports useful to developers</a></li>
 </ul></li>
 <li><a href="basics.html#emmeans"><code>emmeans()</code></a>
 <ul>
@@ -210,13 +213,14 @@
 <li><a href="basics.html#eqwts">Appropriateness of</a></li>
 <li><a href="FAQs.html#what">What are they?</a></li>
 </ul></li>
-<li><a href="interactions.html#covariates"><code>emtrends()</code></a></li>
-<li><a href="xtending.html#hooks"><code>estHook</code></a></li>
-<li>Estimability
+<li><code>emtrends()</code>
 <ul>
-<li><a href="FAQs.html#NAs">in <em>FAQs: NAs</em></a></li>
-<li><a href="messy-data.html#nonestex">in <em>messy-data: nonestex</em></a></li>
+<li><a href="interactions.html#covariates">in <em>interactions: covariates</em></a></li>
+<li><a href="interactions.html#oranges">in <em>interactions: oranges</em></a></li>
 </ul></li>
+<li><a href="xtending.html#hooks"><code>estHook</code></a></li>
+<li><a href="messy-data.html#nonestex">Estimability</a></li>
+<li><a href="FAQs.html#NAs">Estimability issues</a></li>
 <li><a href="basics.html#EMMdef">Estimated marginal means</a>
 <ul>
 <li><a href="basics.html#emmeans">Defined</a></li>
@@ -227,6 +231,7 @@
 <li><a href="sophisticated.html#mcmc">Bayesian model</a></li>
 <li><a href="sophisticated.html#mcmc"><code>cbpp</code></a></li>
 <li><a href="messy-data.html#cows"><code>cows</code></a></li>
+<li><a href="interactions.html#covariates"><code>fiber</code></a></li>
 <li><a href="messy-data.html#mediators"><code>framing</code></a></li>
 <li><a href="transformations.html#tranlink">Gamma regression</a></li>
 <li><a href="sophisticated.html#offsets">Insurance claims (SAS)</a></li>
@@ -242,7 +247,7 @@
 <li><code>oranges</code>
 <ul>
 <li><a href="comparisons.html#formulas">in <em>comparisons: formulas</em></a></li>
-<li><a href="interactions.html#covariates">in <em>interactions: covariates</em></a></li>
+<li><a href="interactions.html#oranges">in <em>interactions: oranges</em></a></li>
 </ul></li>
 <li><a href="sophisticated.html#ordinal">Ordinal model</a></li>
 <li><a href="basics.html#motivation"><code>pigs</code></a></li>
@@ -274,8 +279,10 @@
 <div id="g" class="section level3">
 <h3>G</h3>
 <ul>
+<li><a href="models.html#G"><code>gam</code> models</a></li>
 <li><a href="models.html#H"><code>gamlss</code> models</a></li>
 <li><a href="models.html#E">GEE models</a></li>
+<li><a href="models.html#G">Generalized additive models</a></li>
 <li><a href="models.html#G">Generalized linear models</a></li>
 <li><a href="utilities.html#options"><code>get_emm_option()</code></a></li>
 <li><a href="basics.html#ggplot"><strong>ggplot2</strong> package</a></li>
@@ -305,6 +312,7 @@
 <li><a href="interactions.html">Analysis</a></li>
 <li><a href="interactions.html#contrasts">Contrasts</a></li>
 <li><a href="interactions.html#covariates">Covariate with factors</a></li>
+<li><a href="interactions.html#oranges">Implied</a></li>
 <li><a href="interactions.html#factors">Plotting</a></li>
 <li><a href="interactions.html#factors">Possible inappropriateness of marginal means</a></li>
 </ul></li>
@@ -353,7 +361,6 @@
 <ul>
 <li><a href="transition-from-lsmeans.html#scripts">Converting scripts</a></li>
 <li><a href="transition-from-lsmeans.html#workspaces">Converting workspaces</a></li>
-<li><a href="transition-from-lsmeans.html#devel">Information for package developers</a></li>
 <li><a href="transition-from-lsmeans.html">Transitioning from</a></li>
 </ul></li>
 </ul>
@@ -390,6 +397,7 @@
 <li>Multivariate models
 <ul>
 <li><a href="basics.html#multiv">in <em>basics: multiv</em></a></li>
+<li><a href="interactions.html#oranges">in <em>interactions: oranges</em></a></li>
 <li><a href="models.html#M">in <em>models: M</em></a></li>
 </ul></li>
 <li><a href="confidence-intervals.html#adjmore">Multivariate <em>t</em> (<code>&quot;mvt&quot;</code>) adjustment</a></li>
@@ -400,7 +408,7 @@
 <div id="n" class="section level3">
 <h3>N</h3>
 <ul>
-<li><a href="FAQs.html#NAs"><code>NA</code> results</a></li>
+<li><a href="FAQs.html#NAs"><code>NA</code>s in the output</a></li>
 <li><a href="messy-data.html#nesting">Nesting</a>
 <ul>
 <li><a href="messy-data.html#nest-trap">Auto-detection</a></li>
@@ -410,7 +418,7 @@
 <li><a href="utilities.html#groups">Creating</a></li>
 </ul></li>
 <li><a href="messy-data.html#nonestex">Non-estimability</a></li>
-<li><a href="FAQs.html#NAs"><code>NonEst</code> results</a></li>
+<li><a href="FAQs.html#NAs"><code>NonEst</code> values</a></li>
 </ul>
 <p><a href="#topnav">Back to top</a></p>
 </div>
@@ -420,7 +428,11 @@
 <li><a href="messy-data.html#issues">Observational data</a></li>
 <li><a href="transformations.html#oddsrats">Odds ratios</a></li>
 <li><a href="sophisticated.html#offsets">Offsets</a></li>
-<li><a href="utilities.html#options">Options</a></li>
+<li><a href="utilities.html#digits"><code>opt.digits</code> option</a></li>
+<li><a href="utilities.html#options">Options</a>
+<ul>
+<li><a href="utilities.html#startup">Startup</a></li>
+</ul></li>
 <li>Ordinal models
 <ul>
 <li><a href="sophisticated.html#ordinal">Latent scale</a></li>
@@ -451,8 +463,16 @@
 <li><a href="FAQs.html#transformations">Surprising results</a></li>
 </ul></li>
 <li><a href="models.html#O"><code>polreg</code> models</a></li>
+<li><a href="basics.html#depcovs">Polynomial regression</a></li>
 <li><a href="xtending.html#hooks"><code>postGridHook</code></a></li>
 <li><a href="confidence-intervals.html#emmobj"><code>print.summary_emm()</code></a></li>
+</ul>
+<p><a href="#topnav">Back to top</a></p>
+</div>
+<div id="q" class="section level3">
+<h3>Q</h3>
+<ul>
+<li><a href="basics.html#depcovs">Quadratic terms</a></li>
 </ul>
 <p><a href="#topnav">Back to top</a></p>
 </div>
@@ -479,6 +499,7 @@
 <ul>
 <li><a href="basics.html#altering">Altering</a></li>
 </ul></li>
+<li><a href="xtending.html#exporting">Registering <code>recover_data</code> and <code>emm_basis</code> methods</a></li>
 <li><a href="transformations.html#regrid"><code>regrid()</code></a>
 <ul>
 <li><a href="transformations.html#logs"><code>transform = &quot;log&quot;</code></a></li>
@@ -514,6 +535,7 @@
 </ul></li>
 <li><a href="models.html#S"><code>stanreg</code> objects</a></li>
 <li><a href="interactions.html#factors">* gazing</a></li>
+<li><a href="utilities.html#startup">Startup options</a></li>
 <li><a href="confidence-intervals.html#emmobj"><code>str()</code></a></li>
 <li><a href="FAQs.html#model">Subsets of data</a></li>
 <li><a href="confidence-intervals.html#summary"><code>summary()</code></a>
@@ -565,7 +587,7 @@
 </ul></li>
 <li>Trends
 <ul>
-<li><a href="interactions.html#covariates">Estimating and comparing</a></li>
+<li><a href="interactions.html#oranges">Estimating and comparing</a></li>
 </ul></li>
 <li><a href="comparisons.html#contrasts"><code>trt.vs.ctrl</code> contrasts</a></li>
 <li><a href="confidence-intervals.html#adjust">Tukey adjustment</a></li>

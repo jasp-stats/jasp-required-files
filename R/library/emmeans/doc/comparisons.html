@@ -10,9 +10,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Russ Lenth" />
+<meta name="author" content="emmeans package, Version 1.3.2" />
 
-<meta name="date" content="2018-05-20" />
 
 <title>Comparisons and contrasts in emmeans</title>
 
@@ -31,8 +30,7 @@
 
 
 <h1 class="title toc-ignore">Comparisons and contrasts in emmeans</h1>
-<h4 class="author"><em>Russ Lenth</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
 
 
 
@@ -57,10 +55,10 @@
 <pre class="r"><code>pigs.lm &lt;- lm(log(conc) ~ source + factor(percent), data = pigs)
 pigs.emm.s &lt;- emmeans(pigs.lm, &quot;source&quot;)
 pairs(pigs.emm.s)</code></pre>
-<pre class="ro"><code>##  contrast      estimate         SE df t.ratio p.value
-##  fish - soy  -0.2727678 0.05293450 23  -5.153  0.0001
-##  fish - skim -0.4022777 0.05415929 23  -7.428  &lt;.0001
-##  soy - skim  -0.1295098 0.05304280 23  -2.442  0.0570
+<pre class="ro"><code>##  contrast    estimate     SE df t.ratio p.value
+##  fish - soy    -0.273 0.0529 23 -5.153  0.0001 
+##  fish - skim   -0.402 0.0542 23 -7.428  &lt;.0001 
+##  soy - skim    -0.130 0.0530 23 -2.442  0.0570 
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
@@ -71,15 +69,15 @@ pairs(pigs.emm.s)</code></pre>
 <!-- @index Comparisons!Graphical -->
 <p>Comparisons may be summarized graphically via the <code>comparisons</code> argument in <code>plot.emm()</code>:</p>
 <pre class="r"><code>plot(pigs.emm.s, comparisons = TRUE)</code></pre>
-<p><img src="data:image/png;base64,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" width="432" /></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAEgCAMAAADli+DTAAABblBMVEUAAAAAADoAAEAAAGYAOjoAOmYAOpAAZpAAZrYzMzM6AAA6OgA6Ojo6OmY6ZmY6ZpA6ZrY6kJA6kNtNTU1NTW5NTY5Nbm5Nbo5NbqtNjshmAABmADpmOgBmOjpmZjpmZmZmZpBmkGZmkLZmkNtmtttmtv9uTU1ubk1ubm5ubo5ujo5ujqtujshuq8huq+SOTU2Obk2Obm6Oq6uOq8iOq+SOyOSOyP+QOgCQOjqQZjqQZmaQZpCQkGaQkLaQtraQttuQ2/+rbk2rbm6rjm6rq8iryOSr5OSr5P+wsPC2ZgC2Zjq2kDq2kGa2tra2ttu229u22/+2//+/v//Ijk3Ijm7Iq27Iq6vIyKvI5OTI5P/I///bkDrbkGbbtmbbtpDbtrbb27bb29vb2//b///kq27kq47kyI7kyKvk5Mjk5P/k///r6+v/AAD/tmb/yI7/25D/27b/29v/5Kv/5Mj/5OT//7b//8j//9v//+T////9OhQeAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAV9UlEQVR4nO2dgX/bRJqGFbflSpptOZQ2SbcLe+zWcLQkLWzTg7s9Nlc4mgK7FFOONEdhaba9yzlpmmzj6L+/GUm2ZWnkjKSZ+Ub+3vf3g9pyxo+/0TzRaCzHQYQgiLUE1C8AQWY5EAxBLAaCIYjFQDAEsRgIhiAWA8EQxGIgGIJYDARDEIuBYAhiMRAMQSwGgiGIxUAwBLEYCIYgFuNWsP8bJXu7chq05cZlVzA5F4Kx4rIrmJwLwVhx2RVMzoVgrLjsCibnQjBWXHYFk3MhGCsuu4LJuRCMFZddweRcCMaKy65gci4EY8VlVzA5F4Kx4rIrmJwLwVhx2RVMzoVgrLjsCibnQjBWXHYFk3MhGCsuu4LJuRCMFZddweRcCMaKy65gci4EY8VlVzA5F4Kx4rIrmJwLwVhx2RVMzoVgrLjsCibnQjBWXHYFk3MhGCsuu4LJuRCMFZddweRcCMaKy65gci4EY8X1qeD72vlW/0cLTRu01eCeXi8EY8X1qWCTA728KQQr6/8KO69BU2Zcnwo2OdDLm0Kwsv6vsPMaNGXG9algkwO9vOlsCbYTripuQjBvuD4VXD5s+/1+xYFe7siwbT//pDqNT/2J0+uFYKy4PhVcOmoLLtQTrCMzIVhVw7wWTCdT+7/CzmvQlBnXp4JLxmy/qEItwTpJJgSrqBgESxs3aMqM61PB6iGrEqGOYJ1hJp+3kmGeCHZ0OwzD9+6MBTvsLn6R3OyF64e3wsU/RNHfuuGVzyEYNdenglUDtq/0oIZgnU7OsL76qafGD8EOu2GclaFgwq/1aCjYh/Gjqz35f6EdBKPl+lSwYryWWFBdsE4nb1i/hmFeCHayEX6wG0XP5VErtup4LVyPRoKFN3dPHgm37kRHG7GDMq+nqQxDZijf5tN3lgK6bioXXV2w47XMgUlYJYRbTW9KwZZ342Oc3LQf35GBYAgE04wQaumH4Z0dORlcHd6Ugsk7qYNjwYaZOoOoMP1o0JQZ16eCC/OtrAIVp2r5TJ0iak8SvZgiCpNElj7bHd2GYP5yfSpYMV7dCKb9LH4IFj17N17kuLkbC/Z+N5kyDlcRIZhPXJ8KVg1YU4LN0iqiyMn3t5Mj1064Ev8HwTzl+lSwesgaEmyW3gdLHHsk9SmuIkIwr7g+FVwyZg0JNjNXchx2Lz9O/k0FS0WCYD5yfSq4dNSaEWxWrkU82QiXt6L0Xa7YqmShHoL5yPWp4PJha0awpOmobXW//BBsdCXH0uPxpVLioAbBfOT6VLDJgV7edAY+D3Z0Tyh25SMpT3qxby9e64Bg/nF9KtjkQC9vOgOC1c/U/q+w8xo0Zcb1qWCTA728KQQr6/8KO69BU2ZcdgWTcyEYKy67gsm5EIwVl13B5Nwqgg1+gWAt57IrmJyrLdiT3wTBmYevfv3OUwjWXi67gsm5moINHgRBLNjV4NxDCNZaLruCybmagm0Gwbl/mj/zcPAvQfCasWOYR/3AhMuuYHKunmB7QfD76NXVM+Lg9eN8cB2CtZXLrmByrp5gm8GbUSpYtB2ch2Bt5bIrmJyrJdjg7tyfRoK9mD9j6izMo35gwmVXMDlXS7BErVSw9B8I1kYuu4LJuRCMFZddweRcLcEGd+XCRmrWnrllRI/6gQmXXcHkXC3BkoWNRDAhGxY5WstlVzA5V0+wF/PBG09jwQ6uBXLBA4K1k8uuYHKunmDiEBYEC/NzFy+If9805RcEc85lVzA5V1Ow6L/ngzTm/IJgzrnsCibn6goWvfxqQdh19tI35vyCYM657Aom52oLZiMe9QMTLruCybkQjBWXXcHk3IqC/RWCtZrLrmByrq5gg69+FV/MEZg8CfOoH5hw2RVMztUUbG8+SK6WCoI5Y59WgWDOuewKJufqCfZiPv2c5U8fz+ON5hZz2RVMztUTbDM4N5wZ4lKpNnPZFUzO1RLs1dXMUQufB2sxl13B5FxNwTJO4eMqLeayK5icqykYjmCzwWVXMDlXSzBxDnZeeRuCtYzLrmByrp5ge0FwKfmzvi8fBPirUu3lsiuYnKsnmPy7iMHcwsKCvKbe2AEMgjnnsiuYnKsp2ODL4adV5n5nzC8I5pzLrmByrqZgQrEnb4kj2MU/GvzT9BDMOZddweRcbcFsxKN+YMJlVzA5V0+wTaOfs4RgEIwNV0uwV1fNrRxCMEouu4LJuZqCGXtvGYK55zr8UvDypvXa1is421fUO1hLsORv00OwlnINDPS0cYOmEGyKYNF28JqNkzCP+mGWuQYGetq4QVMINk2wl18GwdmLb6f5Lf50dqu4BgZ62rhBUwg2RTD5QeZMcLFvu7gGBnrauEFTCAbBZpVbOtD7/X41S4qbOjI6TcsF6095GfUKzvYV9Q7WEsxWPOqHWeaWDPT+tJGttqSwpdPRNOwUwcpeSL2Cs31FvYMh2OxzlQO9P21cl1mS39Dp6Bp2qmDql1Kv4GxfUe9go4Id3Q7D8L076Z174s6NLXFrP1zelVt2whUIRsBVDPT+tFFdbknufqejbZiGYKoXU6/gbF9R72A9wV7+NZtfSvw67IZxYo32kzuL61F0vHb5sdhyshGuQzACbmGg96eN6WmWTN7tdPQN0xKs+HLqFZztK+odrCWY3iKHEOgDcaR63l38Ipbtxv9GJ9+F8k4vNiv1TOT1NCWiImbz7WT6XmfytVJ3nfE0Eex4TcqUZjgd7Ml/9+M7+6MZIgRzGgjmT0oulfrp6zT/di2Y+/c/q99oFkewpR/Gt5PpYHz+lRy7evkZIqaIbri5qdrEeNafH953MUXMv6B6BWf7inoHawmWzYv50u9A35EnXUufyQWN0dFs7NZ4hgjBcA6WyTTf6xWc7SvqHVxZsGi7/Dsun70bL2zc3B3blNyQs8P9/BoiBHPELQ50M4IZX0Usvpp6BWf7inoHVxdsyiFMTA2/lyv1q/kj2PHa8m5xhgjB3HBVA92IYGbfB1O9lnoFZ/uKegdXF+y0D4edPBKnXZPnYGKOuPifG4UZIgRzw1UPdBOCGbySQ/1K6hWc7SvqHVxdsNK/7HvYTRQ67AqnJlYRpWfvd1cKLTzqh1nmlg10A4KZuhax7HXUKzjbV9Q7uLJgg82gZIoojlrLW1F0tCGdSt4H+/u9MJkqHq/JiSMEI+GWDnQDgmk3ndJ2ysuoV3C2r6h3sJZgg0+GHwV7+635oHSRY3glx5I8kGWu5Ejky7xJBsH8EKyyJQ2a4uMqUwSbfKO5fI3j6J6w6spHu+md4bWIMjvp9YgQzD3XwEBPGzdoCsE0BTv7Tq3PM+8oZogQzA3XwEBPGzdoCsGmCNY8JxuKGSIEc85lVzA515Fgz4rvMkMwAi67gsm5TgTrhaolDgjmnsuuYHKutmAvv1qQ32D0TtmHwablUbh4R7Xdo35gwmVXMDlXV7Dt0SpH6ZWI1eNRPzDhsiuYnKspmPTr7MW337pg1DCP+oEJl13B5Fw9wV7MD/+078HdwNyf0faoH5hw2RVMztUTLHN51OAuvgS9vVx2BZNztQSb+PKHqR9XgWB+c9kVTM7VEmziEyoGv8vIo35gwmVXMDkXgrHisiuYnKslmDjvGn/D5d6Uq30hmOdcdgWTc7UEwyLHrHDZFUzO1RPsxXxw7i/xrZ+vYZm+xVx2BZNz9QRLLuRYWFgweymHR/3AhMuuYHKupmDRj/PplVJzvzfmFwRzzmVXMDlXV7Bo8OQtcQS7+KmpBQ4IRsFlVzA5V1swG/GoH5hw2RVMzoVgrLjsCibnVhNs8NPXf4ZgLeayK5icqyvYwb+Kk69X14IgOGdslR6COeeyK5icqynYdvylYJvTvh4MgrWAy65gcq6eYHuxVvJTYU8Prpp7I8yjfmDCZVcwOVdPsORSqb34Ig5ci9hiLruCyblagqWfB0s0w9X0LeayK5icqyVY4tSrq/FlvhCsxVx2BZNzKwgmTsGuQ7B2c9kVTM7VEiyZIm4n19HjHKzFXHYFk3O1BBNnX+fl8qE0C6uIbeayK5icqyfYXnIl/fVo8HGAz4O1mMuuYHKunmDJ58HOxwsdc9dLfgaC+c9lVzA5V1Ow6OCT334q/nn160vfGPMLgjnnsiuYnKsrmJV41A9MuOwKJudCMFZcdgWTcyEYKy67gsm5EIwVl13B5Fy/BdP8gu1a36+dNLXyneAV+r/WzmvSlnrAceNCsAaNyx6o0P+1dl6TttQDjhsXgjVoXPZAhf6vtfOatKUecNy4EKxB47IHKvR/rZ3XpC31gOPGNSvY37phuLoTrk5u7eU3QDAIxoVrVLD9MPRYsH6/P7rdkbnfWLB+9jnHqdD/tXZek7bUA44b16hgO+HKrmKzF4L1szJ0OqlhBgRTKFah/2vtvCZtqQccN65hwZQmeSBYf0KFzjBmBCsoVqH/a+28Jm2pBxw3rkHB4gliuJJqdnRb3HnvTirY4a0wvFE4up3aD7oD/ZT0J0XojGNIsJxiFfq/1s5r0pZ6wHHj2hLssBumd6Vg78f3lvOGndoPugN9avo5DTrZmBJsQrEK/V9r5zVpSz3guHENCjacIsr/n2yEHwidnncXv5CChctb0bNuuJ7+3OtpTn3Cb5un7y4jZqNORGY5pgQ7XpNmpeklx67xqRgEQ5jG4BFs6Yfh5l48UZRrjLmfP/VIrjtVm5IJBeItlqaImUlihRlErelHk7bUUyZuXEuCif+JLH22mwi2SicYzsG8ALPl2hIsevZuvMhxc5dcsMJan41VxIllxAr9X2vnNWlLPeC4ca0JFkUn38uV+lV6we7n368y/j5Y7o2wCv1fa+c1aUs94LhxLQomHXsk1zfoBbufu+bC7JUchUs5KvR/rZ3XpC31gOPGtSTYYffyY7nlsOuJYPcnrxs0eC2i4mLECv1fa+c1aUs94LhxLQl2siHf+oqONqRUfgh2X+VC06vplX5BMHCtTxGHV3IsPfZGMGVTfFzFDZgt15Zg0dE9odiVjzLvMEOwU+vV3HlN2lIPOG5co4JVzan90HCgazSFYG7AbLl+C+auH5hw2RVMzoVgrLjsCibnQjBWXHYFk3MhGCsuu4LJuRCMFZddweRcCMaKy65gci4EY8VlVzA5F4Kx4rIrmJwLwVhx2RVMzoVgrLjsCibnQjBWXHYFk3MhGCsuu4LJuRCMFZddweRcCMaKy65gci4EY8VlVzA5F4Kx4rIrmJwLwVhx2RVMzoVgrLjsCibnQjBWXHYFk3MhGCsuu4LJuRCMFZddweRcCMaKy65gci4EY8VlVzA5F4Kx4rIrmJxLKtg4Gl8nC26bweAmgWCzzWVXsG9cCDbbXHYF+8aFYLPNZVewb1wINttcdgX7xoVgs81lV7BvXAg221x2BfvGhWCzzWVXsG9cKsEQhEUgGIJYDARDEIuBYAhiMRAMQSwGgiGIxUAwBLEYCIYgFuNSsOe3wnDxo91TNjnhyhx2l+2Ci9zjtTDO5ceOwdHJd90wvHLHKrbAPdkIh7FasaLeo9sCemPLIrScO7HJoWA7SVcvPZ66yQlXRux9u4IpuIddF4IpwEep2Tedch0JVt7Ri1/Yoyq5zwqb3Al22F0Uv0CPboUr0zY54cYR3WNVMBV332ql5WAx0pe2opNHVkdc+d4Uj7jlyl+eW9GR3V+hygEtuSffZbjuBOuFq8lrGP8yU2xywk3uWxZMxU232Y0CvJ8eQXZsCl66N8Vwt1m2gpvePl6zKbZyQCdDqheuDzc5X+Q4XivYpNhknSt2+oe2z8EK3JMNu3OWMrAodn3qz1riptmxPBcvctOZgpO6Vf2cmak4F0yxtGB9tUEB6YUrTrAT3OO15f8S58X/vGUfOwF28htMwR3Sneid5To5ghW5o1+gmW2uBXvWLfS2YpN17r74pepEsAnucI3DxYDLgmWlz94V596fu+UmsTovVXNH52D2yVkuvWC9MFz8/NRN9rnxrzYHguW4+2F4czf6+z3Lq1sFsKj0XmK27VNAxd50chjJc0++SxZNHe/gXmp0L6QR7OQ/3uuGi384ZZMDbnx+al+wPHdn1P+WB3oOvJ+MNTHqLI911d7cd3AGVuAe3kqWy7fccsUUJenn8dsSzs/BnhcnhIpNdrnJWbebczBVcS7GXBa8Pzx09RzMmXIFO1tgeT4xJ3bzCyXPHb419iHdOZhydDkZcGNI+raMG8FUxdl9X6IIHr0P5aTkyYLd1Jrj9hz+Qpms93m8iEW4yOHDMuLO6PoC29csTXKnbbIKHg1yJ6N9sjon763nuKrFBhfcUSiW6UdThWw/FDY54ToRbFq9VgedEpwOOJtThZK9af98c0q9jgfWKJmiXV7JsTLxr3qTE24Sy7/eyuu1fFoytaMtjnZlRzt4b11Zr4MpooK7M7y4Y1y0y2sRCyeeTs5FSyGWBSut9+iW7YsgVeAbWyQd7eA9bgV338WqqZIrL0983s38HnN4DrafzMoW16OR49lNLrlxbE/QFdx0cnp5yyZX2dFdoo52cRZU3tF2p6cKbvL2W/YXqMtFjvizMslndIb9n9nklJvctrzvy+q1/vanCnyva/8aLQXXyQKxgvs/8vNgBPXKC2YmPnaHTzQjiMVAMASxGAiGIBYDwRDEYiAYglgMBEMQi4FgCGIxEAxBLAaCIYjFQDAEsRgIhiAWA8EQxGIgGIJYDARDEIuBYAhiMRAMQSwGgiGIxUAwBLEYCIYgFgPBEMRiIFhrcvDxfBDMXfomvjO4G5yPnlwTG954GkVPfhMEQfJI6QP5ZxD5Wd4PFt55Ku+8uhq8OfjqQhCcTe4jRgLB2pLtIM0b8p7w6B82k/tnHj5Ibsz9adoD+WeIBg+G9889jGLB/vFa5j5iJBCsJdlOjkQvHyR+CI/EjaexJWeDS79Egy+D4LWnUx7IP4O8Lw9yB8Kq81EsWDD3u6fRgXiCN0lLnalAsHbkxXxsQSS9kAekwVAD6UXyyKY4ZE15IP8M4vHkvrghBZQ/f13eF8/wGiaJpgLB2pHtWBKZ+CRL/j/dsDmeAabmqR/IP8Pe8OG0RepZNBQSMRII1ookTiTZlCKMDzMjHfaGgikfKDzDOJtDwUZHOAhmLBCsFZHzt3HE+B/7UhRM+UDhGeK8/PnrTy4EQ8HSUy8IZjAQrBWxItiPF7J3IZiVQLBWZDx/S1NHsMIzyDfB3v7jL5sQzF4gWCtSWNmrLFjhGdJV+ihzDgbBzAeCtSOjJcHUlMqC5Z9hLJwwC4JZCwRrR17MD33Yi9+uqi5Y7hnGgm3jHMxiIFhLIjQ492mUvWCjomD5Z0iniD9fS6+lgmBWAsHaktGVhPGBp4ZguWd4lV54GFz6Mj4mQjArgWCtycHHcln9V5/Gd+oINvkMUXzp/Nylv6QLjBDMSiAYglgMBEMQi4FgCGIxEAxBLAaCIYjFQDAEsRgIhiAWA8EQxGIgGIJYDARDEIuBYAhiMRAMQSwGgiGIxUAwBLEYCIYgFgPBEMRiIBiCWAwEQxCLgWAIYjEQDEEs5v8BxvgpRQ7agxAAAAAASUVORK5CYII=" width="432" /></p>
 <p>The blue bars are confidence intervals for the EMMs, and the red arrows are for the comparisons among them. If an arrow from one mean overlaps an arrow from another group, the difference is not significant, based on the <code>adjust</code> setting (which defaults to <code>&quot;tukey&quot;</code>). (Note: Don’t ever use confidence intervals for EMMs to perform comparisons; they can be very misleading.)</p>
-<!-- @index `cld()`; Comparisons!Displaying as groups -->
+<!-- @index `CLD()`; `CLD()`!versus `multcomp::cld()`; Comparisons!Displaying as groups -->
 <p>Another way to depict comparisons is by compact-letter displays:</p>
-<pre class="r"><code>cld(pigs.emm.s)</code></pre>
-<pre class="ro"><code>##  source   emmean         SE df lower.CL upper.CL .group
-##  fish   3.394492 0.03668122 23 3.318612 3.470373  1    
-##  soy    3.667260 0.03744798 23 3.589793 3.744727   2   
-##  skim   3.796770 0.03938283 23 3.715300 3.878240   2   
+<pre class="r"><code>CLD(pigs.emm.s)</code></pre>
+<pre class="ro"><code>##  source emmean     SE df lower.CL upper.CL .group
+##  fish     3.39 0.0367 23     3.32     3.47  1    
+##  soy      3.67 0.0374 23     3.59     3.74   2   
+##  skim     3.80 0.0394 23     3.72     3.88   2   
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
@@ -87,6 +85,7 @@ pairs(pigs.emm.s)</code></pre>
 ## P value adjustment: tukey method for comparing a family of 3 estimates 
 ## significance level used: alpha = 0.05</code></pre>
 <p>Two EMMs sharing one or more grouping symbols are not significantly different. I really don’t recommend this method, though, as it imposes a stark difference between <em>P</em> values slightly less and slightly more than <code>alpha</code>.</p>
+<p><em>Note:</em> The <strong>multcomp</strong> package provides a very similar function named <code>cld()</code>. A corresponding method is provided for <code>emmGrid</code> objects; thus, if <code>package:multcomp</code> is attached, you may call <code>cld()</code> and obtain the same results as with <code>CLD()</code>.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
 <div id="contrasts" class="section level2">
@@ -103,10 +102,10 @@ pairs(pigs.emm.s)</code></pre>
 <pre class="r"><code>pigs.emm.p &lt;- emmeans(pigs.lm, &quot;percent&quot;)
 ply &lt;- contrast(pigs.emm.p, &quot;poly&quot;)
 ply</code></pre>
-<pre class="ro"><code>##  contrast     estimate         SE df t.ratio p.value
-##  linear     0.93739228 0.21055597 23   4.452  0.0002
-##  quadratic -0.09710425 0.08832632 23  -1.099  0.2830
-##  cubic      0.18631573 0.18773559 23   0.992  0.3313
+<pre class="ro"><code>##  contrast  estimate     SE df t.ratio p.value
+##  linear      0.9374 0.2106 23  4.452  0.0002 
+##  quadratic  -0.0971 0.0883 23 -1.099  0.2830 
+##  cubic       0.1863 0.1877 23  0.992  0.3313 
 ## 
 ## Results are averaged over the levels of: source 
 ## Results are given on the log (not the response) scale.</code></pre>
@@ -132,23 +131,23 @@ ply</code></pre>
 org.emml &lt;- emmeans(org.aov, consec ~ day)
 org.emml</code></pre>
 <pre class="ro"><code>## $emmeans
-##  day    emmean       SE    df lower.CL upper.CL
-##  1    7.872750 2.772162 29.24 2.205099 13.54040
-##  2    7.100600 2.772162 29.24 1.432949 12.76825
-##  3   13.758600 2.772162 29.24 8.090949 19.42625
-##  4    8.042467 2.772162 29.24 2.374815 13.71012
-##  5   12.924600 2.772162 29.24 7.256949 18.59225
-##  6   11.603650 2.772162 29.24 5.935999 17.27130
+##  day emmean   SE   df lower.CL upper.CL
+##  1     7.87 2.77 29.2     2.21     13.5
+##  2     7.10 2.77 29.2     1.43     12.8
+##  3    13.76 2.77 29.2     8.09     19.4
+##  4     8.04 2.77 29.2     2.37     13.7
+##  5    12.92 2.77 29.2     7.26     18.6
+##  6    11.60 2.77 29.2     5.94     17.3
 ## 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
-##  contrast  estimate       SE df t.ratio p.value
-##  2 - 1    -0.772150 3.776875 25  -0.204  0.9997
-##  3 - 2     6.658000 3.776875 25   1.763  0.3247
-##  4 - 3    -5.716133 3.776875 25  -1.513  0.4680
-##  5 - 4     4.882133 3.776875 25   1.293  0.6125
-##  6 - 5    -1.320950 3.776875 25  -0.350  0.9965
+##  contrast estimate   SE df t.ratio p.value
+##  2 - 1      -0.772 3.78 25 -0.204  0.9997 
+##  3 - 2       6.658 3.78 25  1.763  0.3249 
+##  4 - 3      -5.716 3.78 25 -1.513  0.4678 
+##  5 - 4       4.882 3.78 25  1.293  0.6126 
+##  6 - 5      -1.321 3.78 25 -0.350  0.9965 
 ## 
 ## P value adjustment: mvt method for 5 tests</code></pre>
 <p>The contrasts shown are the day-to-day changes.</p>
@@ -190,10 +189,10 @@ org.emml</code></pre>
 ## 5     0     0     0     1</code></pre>
 <p>(The latter is the same as <code>&quot;consec&quot;</code> contrasts.) Now try it with the <code>oranges</code> example we had previously:</p>
 <pre class="r"><code>contrast(org.emml[[1]], &quot;skip_comp&quot;, skip = 2, reverse = TRUE)</code></pre>
-<pre class="ro"><code>##  contrast   estimate       SE df t.ratio p.value
-##  4 - 1     0.1697167 3.776875 25   0.045  0.9645
-##  5 - 2     5.8240000 3.776875 25   1.542  0.4069
-##  6 - 3    -2.1549500 3.776875 25  -0.571  0.8601
+<pre class="ro"><code>##  contrast estimate   SE df t.ratio p.value
+##  4 - 1        0.17 3.78 25  0.045  0.9645 
+##  5 - 2        5.82 3.78 25  1.542  0.4069 
+##  6 - 3       -2.15 3.78 25 -0.571  0.8601 
 ## 
 ## P value adjustment: fdr method for 3 tests</code></pre>
 <div id="linfct" class="section level7">
@@ -204,9 +203,9 @@ org.emml</code></pre>
                list(lambda1 = c(1, 2, 0), lambda2 = c(0, 3, -2)),
                offset = c(-7, 1))
 confint(LF, adjust = &quot;bonferroni&quot;)</code></pre>
-<pre class="ro"><code>##  contrast estimate         SE df lower.CL upper.CL
-##  lambda1  3.729013 0.08274372 23 3.530604 3.927422
-##  lambda2  4.408241 0.13411290 23 4.086655 4.729827
+<pre class="ro"><code>##  contrast estimate     SE df lower.CL upper.CL
+##  lambda1      3.73 0.0827 23     3.53     3.93
+##  lambda2      4.41 0.1341 23     4.09     4.73
 ## 
 ## Results are averaged over the levels of: percent 
 ## Confidence level used: 0.95 
@@ -221,19 +220,19 @@ confint(LF, adjust = &quot;bonferroni&quot;)</code></pre>
 <p>Suppose we obtain EMMs for a model having a response transformation or link function. In most cases, when we compute contrasts of those EMMs, there is no natural way to express those contrasts on anything other than the transformed scale. For example, in a model fitted using <code>glm()</code> with the <code>gamma()</code> family, the default link function is the inverse. Predictions on such a model are estimates of <span class="math inline">\(1/\mu_j\)</span> for various <span class="math inline">\(j\)</span>. Comparisons of predictions will be estimates of <span class="math inline">\(1/\mu_j - 1/\mu_{k}\)</span> for <span class="math inline">\(j \ne k\)</span>. There is no natural way to back-transform these differences to some other interpretable scale.</p>
 <p>However, logs are an exception, in that <span class="math inline">\(\log\mu_j - \log\mu_k = \log(\mu_j/\mu_k)\)</span>. Accordingly, when <code>contrast()</code> (or <code>pairs()</code>) notices that the response is on the log scale, it back-transforms contrasts to ratios when results are to be of <code>response</code> type. For example:</p>
 <pre class="r"><code>pairs(pigs.emm.s, type = &quot;lp&quot;)</code></pre>
-<pre class="ro"><code>##  contrast      estimate         SE df t.ratio p.value
-##  fish - soy  -0.2727678 0.05293450 23  -5.153  0.0001
-##  fish - skim -0.4022777 0.05415929 23  -7.428  &lt;.0001
-##  soy - skim  -0.1295098 0.05304280 23  -2.442  0.0570
+<pre class="ro"><code>##  contrast    estimate     SE df t.ratio p.value
+##  fish - soy    -0.273 0.0529 23 -5.153  0.0001 
+##  fish - skim   -0.402 0.0542 23 -7.428  &lt;.0001 
+##  soy - skim    -0.130 0.0530 23 -2.442  0.0570 
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 <pre class="r"><code>pairs(pigs.emm.s, type = &quot;response&quot;)</code></pre>
-<pre class="ro"><code>##  contrast        ratio         SE df t.ratio p.value
-##  fish / soy  0.7612695 0.04029742 23  -5.153  0.0001
-##  fish / skim 0.6687950 0.03622146 23  -7.428  &lt;.0001
-##  soy / skim  0.8785259 0.04659947 23  -2.442  0.0570
+<pre class="ro"><code>##  contrast    ratio     SE df t.ratio p.value
+##  fish / soy  0.761 0.0403 23 -5.153  0.0001 
+##  fish / skim 0.669 0.0362 23 -7.428  &lt;.0001 
+##  soy / skim  0.879 0.0466 23 -2.442  0.0570 
 ## 
 ## Results are averaged over the levels of: percent 
 ## P value adjustment: tukey method for comparing a family of 3 estimates 

@@ -427,6 +427,29 @@ encoding names are recognized on your platform.  Additionally,
 encoding, that is the internal encoding of the current locale and
 hence no translation is done.
 </p>
+<p>When writing to a text connection, the connections code always assumes its
+input is in native encoding, so e.g.  <code><a href="writeLines.html">writeLines</a></code> has to
+convert text to native encoding.  <code><a href="writeLines.html">writeLines</a></code> does not do the
+conversion when <code>useBytes=TRUE</code> (for expert use only), but the
+connections code still behaves as if the text was in native encoding, so
+any attempt to convert encoding (<code>encoding</code> argument other than
+<code>""</code> and <code>"native.enc"</code>) in connections will produce incorrect
+results.
+</p>
+<p>When reading from a text connection, the connections code, after
+re-encoding based on the <code>encoding</code> argument, returns text that is
+assumed to be in native encoding; an encoding mark is only added by
+functions that read from the connection, so e.g.  <code><a href="readLines.html">readLines</a></code>
+can be instructed to mark the text as <code>"UTF-8"</code> or <code>"latin1"</code>,
+but <code><a href="readLines.html">readLines</a></code> does no further conversion.  To allow reading
+text in <code>"UTF-8"</code> on a system that cannot represent all such
+characters in native encoding (currently only Windows), a connection can
+be internally configured to return the read text in UTF-8 even though it
+is not the native encoding; currently <code><a href="readLines.html">readLines</a></code> and
+<code><a href="scan.html">scan</a></code> use this feature when given a connection that is not
+yet open and, when using the feature, they unconditionally mark the text
+as <code>"UTF-8"</code>.
+</p>
 <p>Re-encoding only works for connections in text mode: reading from a
 connection with re-encoding specified in binary mode will read the
 stream of bytes, but mixing text and binary mode reads (e.g., mixing
@@ -446,10 +469,6 @@ choose the appropriate byte order, some (including earlier versions of
 the &lsquo;Supplementary Planes&rsquo; which need surrogate pairs is very
 rare so <code>"UCS-2LE"</code> is an appropriate first choice (as it is more
 widely implemented).
-</p>
-<p>One caveat:  <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s implementation of <code>"UCS-2LE"</code> and similar for
-output does not currently work on Windows, and on Unix it will default
-to Unix-style line endings.  We recommend use of <code>UTF-8</code> instead.
 </p>
 <p>As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.0.0 the encoding <code>"UTF-8-BOM"</code> is accepted for
 reading and will remove a Byte Order Mark if present (which it often
@@ -590,7 +609,7 @@ on data compression.
 <p><code><a href="extSoftVersion.html">extSoftVersion</a></code> for the versions of the <code>zlib</code> (for
 <code>gzfile</code>), <code>bzip2</code> and <code>xz</code> libraries in use.
 </p>
-<p>To flush output to the Windows and maOS consoles, see
+<p>To flush output to the Windows and macOS consoles, see
 <code><a href="../../utils/html/flush.console.html">flush.console</a></code>.
 </p>
 
@@ -598,31 +617,35 @@ on data compression.
 <h3>Examples</h3>
 
 <pre>
-zz &lt;- file("ex.data", "w")  # open an output file connection
+zzfil &lt;- tempfile(fileext=".data")
+zz &lt;- file(zzfil, "w")  # open an output file connection
 cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = zz, sep = "\n")
 cat("One more line\n", file = zz)
 close(zz)
-readLines("ex.data")
-unlink("ex.data")
+readLines(zzfil)
+unlink(zzfil)
 
-zz &lt;- gzfile("ex.gz", "w")  # compressed file
+zzfil &lt;- tempfile(fileext=".gz")
+zz &lt;- gzfile(zzfil, "w")  # compressed file
 cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = zz, sep = "\n")
 close(zz)
-readLines(zz &lt;- gzfile("ex.gz"))
+readLines(zz &lt;- gzfile(zzfil))
 close(zz)
-unlink("ex.gz")
+unlink(zzfil)
 zz # an invalid connection
 
-zz &lt;- bzfile("ex.bz2", "w")  # bzip2-ed file
+zzfil &lt;- tempfile(fileext=".bz2")
+zz &lt;- bzfile(zzfil, "w")  # bzip2-ed file
 cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = zz, sep = "\n")
 close(zz)
 zz # print() method: invalid connection
-print(readLines(zz &lt;- bzfile("ex.bz2")))
+print(readLines(zz &lt;- bzfile(zzfil)))
 close(zz)
-unlink("ex.bz2")
+unlink(zzfil)
 
 ## An example of a file open for reading and writing
-Tfile &lt;- file("test1", "w+")
+Tpath &lt;- tempfile("test")
+Tfile &lt;- file(Tpath, "w+")
 c(isOpen(Tfile, "r"), isOpen(Tfile, "w")) # both TRUE
 cat("abc\ndef\n", file = Tfile)
 readLines(Tfile)
@@ -633,7 +656,7 @@ readLines(Tfile)
 Tfile # -&gt; print() :  "valid" connection
 close(Tfile)
 Tfile # -&gt; print() :  "invalid" connection
-unlink("test1")
+unlink(Tpath)
 
 ## We can do the same thing with an anonymous file.
 Tfile &lt;- file()
@@ -643,11 +666,12 @@ close(Tfile)
 
 ## Not run: ## fifo example -- may hang even with OS support for fifos
 if(capabilities("fifo")) {
-  zz &lt;- fifo("foo-fifo", "w+")
+  zzfil &lt;- tempfile(fileext="-fifo")
+  zz &lt;- fifo(zzfil, "w+")
   writeLines("abc", zz)
   print(readLines(zz))
   close(zz)
-  unlink("foo-fifo")
+  unlink(zzfil)
 }
 ## End(Not run)
 
@@ -677,5 +701,5 @@ A &lt;- read.table(con &lt;- file("students", encoding = "UCS-2LE")); close(con)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

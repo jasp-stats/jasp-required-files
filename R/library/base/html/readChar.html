@@ -51,7 +51,7 @@ least as long as <code>nchars</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>eos</code></td>
 <td>
-<p>&lsquo;end of string&rsquo;: character string .  The terminator
+<p>&lsquo;end of string&rsquo;: character string.  The terminator
 to be written after each string, followed by an ASCII <code>nul</code>;
 use <code>NULL</code> for no terminator at all.</p>
 </td></tr>
@@ -137,19 +137,20 @@ the connection was opened with an <code>encoding</code> argument.
 
 <pre>
 ## test fixed-length strings
-zz &lt;- file("testchar", "wb")
+zzfil &lt;- tempfile("testchar")
+zz &lt;- file(zzfil, "wb")
 x &lt;- c("a", "this will be truncated", "abc")
 nc &lt;- c(3, 10, 3)
 writeChar(x, zz, nc, eos = NULL)
 writeChar(x, zz, eos = "\r\n")
 close(zz)
 
-zz &lt;- file("testchar", "rb")
+zz &lt;- file(zzfil, "rb")
 readChar(zz, nc)
 readChar(zz, nchar(x)+3) # need to read the terminator explicitly
 close(zz)
-unlink("testchar")
+unlink(zzfil)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

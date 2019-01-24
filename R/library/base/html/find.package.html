@@ -45,7 +45,7 @@ if the package is not found?</p>
 <tr valign="top"><td><code>verbose</code></td>
 <td>
 <p>a logical.  If <code>TRUE</code>, additional diagnostics are
-printed.</p>
+printed, notably when a package is found more than once.</p>
 </td></tr>
 </table>
 
@@ -90,5 +90,22 @@ are not attached, and given an error if none are.
 standardization.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+
+<h3>Examples</h3>
+
+<pre>
+try(find.package("knitr"))
+## will not give an error, maybe a warning about *all* locations it is found:
+find.package("kitty", quiet=TRUE, verbose=TRUE)
+
+## Find all .libPaths() entries a package is found:
+findPkgAll &lt;- function(pkg)
+  unlist(lapply(.libPaths(), function(lib)
+           find.package(pkg, lib, quiet=TRUE, verbose=FALSE)))
+
+findPkgAll("MASS")
+findPkgAll("knitr")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

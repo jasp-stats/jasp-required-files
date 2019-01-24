@@ -108,14 +108,6 @@ emm_basis.rsm = function(object, trms, xlev, grid,
          dffun = dffun, dfargs = dfargs, misc = list())
 }
 
-## ----eval = FALSE--------------------------------------------------------
-#  if (requireNamespace("emmeans", quietly = TRUE)) {
-#      importFrom("emmeans", "recover_data", "emm_basis")
-#      importFrom("estimability", "all.estble", "nonest.basis")
-#      S3method(recover_data, rsm)
-#      S3method(emm_basis, rsm)
-#  }
-
 ## ----results = "hide", warning = FALSE, message = FALSE------------------
 library("rsm")
 example("rsm")   ### (output is not shown) ###

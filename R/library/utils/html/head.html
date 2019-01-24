@@ -59,9 +59,9 @@ tail(x, n = 6L, ...)
 </td></tr>
 <tr valign="top"><td><code>n</code></td>
 <td>
-<p>a single integer. If positive, size for the resulting
+<p>a single integer.  If positive or zero, size for the resulting
 object: number of elements for a vector (including lists), rows for
-a matrix or data frame or lines for a function. If negative, all but
+a matrix or data frame or lines for a function.  If negative, all but
 the <code>n</code> last/first number of elements of <code>x</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>addrownums</code></td>
@@ -79,7 +79,7 @@ numbers.</p>
 <h3>Details</h3>
 
 <p>For matrices, 2-dim tables and data frames, <code>head()</code> (<code>tail()</code>) returns
-the first (last) <code>n</code> rows when <code>n &gt; 0</code> or all but the
+the first (last) <code>n</code> rows when <code>n &gt;= 0</code> or all but the
 last (first) <code>n</code> rows when <code>n &lt; 0</code>.  <code>head.matrix()</code> and
 <code>tail.matrix()</code> are exported.  For functions, the
 lines of the deparsed function are returned as character strings.
@@ -125,5 +125,5 @@ tail(library)
 head(stats::ftable(Titanic))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

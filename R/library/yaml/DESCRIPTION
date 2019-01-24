@@ -1,9 +1,9 @@
 Package: yaml
 Type: Package
 Title: Methods to Convert R Data to YAML and Back
-Version: 2.1.19
-Date: 2018-04-30
-Suggests: testthat
+Date: 2018-07-20
+Version: 2.2.0
+Suggests: RUnit
 Author: Jeremy Stephens [aut, cre], Kirill Simonov [aut], Yihui Xie [ctb],
   Zhuoer Dong [ctb], Hadley Wickham [ctb], Jeffrey Horner [ctb], reikoch [ctb],
   Will Beasley [ctb], Brendan O'Connor [ctb], Gregory R. Warnes [ctb]
@@ -14,8 +14,8 @@ Description: Implements the 'libyaml' 'YAML' 1.1 parser and emitter
 URL: https://github.com/viking/r-yaml/
 BugReports: https://github.com/viking/r-yaml/issues
 NeedsCompilation: yes
-Packaged: 2018-04-30 20:56:56 UTC; stephej1
+Packaged: 2018-07-24 19:09:41 UTC; stephej1
 Repository: CRAN
-Date/Publication: 2018-05-01 10:38:53 UTC
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-06-02 07:40:27 UTC; windows
+Date/Publication: 2018-07-25 15:40:03 UTC
+Built: R 3.5.2; x86_64-w64-mingw32; 2018-12-26 00:47:22 UTC; windows
 Archs: i386, x64

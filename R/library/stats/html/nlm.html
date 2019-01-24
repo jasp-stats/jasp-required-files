@@ -123,6 +123,9 @@ or length, it will be ignored if <code>check.analyticals = TRUE</code> (the
 default) with a warning.  The hessian is not even checked unless the
 gradient is present and passes the sanity checks.
 </p>
+<p>The C code for the &ldquo;perturbed&rdquo; cholesky, <code>choldc()</code> has
+had a bug in all <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions before 3.4.1.
+</p>
 <p>From the three methods available in the original source, we always use
 method &ldquo;1&rdquo; which is line search.
 </p>
@@ -197,13 +200,15 @@ translation of Fortran code by Richard H. Jones.
 
 <h3>References</h3>
 
-<p>Dennis, J. E. and Schnabel, R. B. (1983) <em>Numerical Methods for
-Unconstrained Optimization and Nonlinear Equations.</em> Prentice-Hall,
-Englewood Cliffs, NJ.
+<p>Dennis, J. E. and Schnabel, R. B. (1983).
+<em>Numerical Methods for Unconstrained Optimization and Nonlinear
+Equations</em>.
+Prentice-Hall, Englewood Cliffs, NJ.
 </p>
-<p>Schnabel, R. B., Koontz, J. E. and Weiss, B. E. (1985) A modular
-system of algorithms for unconstrained minimization.
-<em>ACM Trans. Math. Software</em>, <b>11</b>, 419&ndash;440.
+<p>Schnabel, R. B., Koontz, J. E. and Weiss, B. E. (1985).
+A modular system of algorithms for unconstrained minimization.
+<em>ACM Transactions on Mathematical Software</em>, <b>11</b>, 419&ndash;440.
+doi: <a href="http://doi.org/10.1145/6187.6192">10.1145/6187.6192</a>.
 </p>
 
 
@@ -242,5 +247,5 @@ nlm(f, c(10,10), a = c(3,5))
 ## Not run: demo(nlm)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

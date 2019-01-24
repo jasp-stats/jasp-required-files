@@ -290,14 +290,16 @@ logexp &lt;- function(days = 1)
 {
     linkfun &lt;- function(mu) qlogis(mu^(1/days))
     linkinv &lt;- function(eta) plogis(eta)^days
-    mu.eta &lt;- function(eta) days * plogis(eta)^(days-1) * binomial()$mu_eta
+    mu.eta  &lt;- function(eta) days * plogis(eta)^(days-1) *
+                  binomial()$mu.eta(eta)
     valideta &lt;- function(eta) TRUE
     link &lt;- paste0("logexp(", days, ")")
     structure(list(linkfun = linkfun, linkinv = linkinv,
                    mu.eta = mu.eta, valideta = valideta, name = link),
               class = "link-glm")
 }
-binomial(logexp(3))
+(bil3 &lt;- binomial(logexp(3)))
+
 ## in practice this would be used with a vector of 'days', in
 ## which case use an offset of 0 in the corresponding formula
 ## to get the null deviance right.
@@ -318,5 +320,5 @@ y &lt;- rbinom(100, 1, plogis(x))
 glm(y ~ x, family = quasi(variance = "mu(1-mu)", link = "logit"), start = c(0,1))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

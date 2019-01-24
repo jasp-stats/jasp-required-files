@@ -154,6 +154,9 @@ were a numeric vector printed by <code><a href="../../base/html/print.default.ht
 </p>
 <p>The code tries hard not to draw overlapping tick labels, and so will
 omit labels where they would abut or overlap previously drawn labels.
+Currently, this applies only for labels written <em>parallel</em> to the
+axis direction, hence not for e.g., <code>las = 2</code>.  It is planned to
+extend this, so perpendicular labels would also not overlap.
 This can result in, for example, every other tick being labelled.
 (The ticks are drawn left to right or bottom to top, and space at
 least the size of an &lsquo;m&rsquo; is left between labels.)
@@ -228,5 +231,5 @@ plot(1:10, xaxt = "n")
 axis(1, xaxp = c(2, 9, 7))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

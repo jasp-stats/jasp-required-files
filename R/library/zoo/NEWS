@@ -1,3 +1,47 @@
+Changes in Version 1.8-4
+
+  o Conditional registration of S3 methods simplified in R-devel (aka
+    3.6.0-to-be) which is leveraged in "zoo" for the autoplot() and
+    fortify() methods if "ggplot2" is loaded.
+
+
+Changes in Version 1.8-3
+
+  o The 'width' argument in rollapply() is now trunc()-ated to an integer
+    rather than implicitly coercing it (which lead to inconsistent and/or
+    unintended behavior for non-integer widths in previous versions).
+    Analogously for argument "k" in the other roll*() functions.
+
+  o Consistently use read.zoo(text = ...) and read.table(text = ...)
+    instead of read.zoo(textConnection(...)) and read.table(textConnection(...))
+    in order to cleanly open/close the text connection.
+
+
+Changes in Version 1.8-2
+
+  o Properly register autoplot() and fortify() methods for "zoo" objects
+    provided that "ggplot2" is loaded.
+
+  o If rollapply(), rollmean(), etc. are applied to zero-length objects,
+    these objects are returned unmodified.
+
+  o The rollmean(x, k, ...) method now calls rollapply(x, k, (mean), ...) in
+    case x contains any NAs (as the fast cumsum-based solution in rollmean is
+    not applicable in this case). Analogously for rollsum() and rollmedian().
+    (Reported by Jan Gorecki.)
+
+  o Added new na.fill0() function for simpler filling of NAs in sufficiently
+    plain vectors, Date objects, etc.
+
+  o Applying na.fill() to all-NA vectors/columns now consistently treats
+    all NAs as leading NAs. Also filling character vectors/columns has been
+    improved.
+
+  o In write.zoo() the time index column is now coerced to as.character()
+    prior to calling write.table() so that quote=TRUE is applied when writing
+    time indexes with spaces (e.g., "Jan 2000" for "yearmon").
+
+
 Changes in Version 1.8-1
 
   o New .DollarNames method (contributed by Josh Ulrich) to enable tab

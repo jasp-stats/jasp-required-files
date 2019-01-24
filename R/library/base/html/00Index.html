@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;base&rsquo; version 3.4.4</h2>
+</div><h2>Documentation for package &lsquo;base&rsquo; version 3.5.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../demo">Code demos</a>.  Use <a href="../../utils/help/demo">demo()</a> to run them.</li>
@@ -84,6 +84,8 @@
 <td>Find All Names in an Expression</td></tr>
 <tr><td style="width: 25%;"><a href="allnames.html">all.vars</a></td>
 <td>Find All Names in an Expression</td></tr>
+<tr><td style="width: 25%;"><a href="conditions.html">allowInterrupts</a></td>
+<td>Condition Handling and Recovery</td></tr>
 <tr><td style="width: 25%;"><a href="any.html">any</a></td>
 <td>Are Some Values True?</td></tr>
 <tr><td style="width: 25%;"><a href="duplicated.html">anyDuplicated</a></td>
@@ -548,7 +550,7 @@
 <tr><td style="width: 25%;"><a href="list.files.html">dir</a></td>
 <td>List the Files in a Directory/Folder</td></tr>
 <tr><td style="width: 25%;"><a href="files2.html">dir.create</a></td>
-<td>Manipulaton of Directories and File Permissions</td></tr>
+<td>Manipulation of Directories and File Permissions</td></tr>
 <tr><td style="width: 25%;"><a href="basename.html">dirname</a></td>
 <td>Manipulate File Paths</td></tr>
 <tr><td style="width: 25%;"><a href="getLoadedDLLs.html">DLLInfo</a></td>
@@ -561,6 +563,8 @@
 <td>Execute a Function Call</td></tr>
 <tr><td style="width: 25%;"><a href="dontCheck.html">dontCheck</a></td>
 <td>Identity Function to Suppress Checking</td></tr>
+<tr><td style="width: 25%;"><a href="dots.html">dots</a></td>
+<td>..., '..1', etc used in Functions</td></tr>
 <tr><td style="width: 25%;"><a href="double.html">double</a></td>
 <td>Double-Precision Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="dput.html">dput</a></td>
@@ -994,6 +998,8 @@
 <td>Display Connections</td></tr>
 <tr><td style="width: 25%;"><a href="debug.html">isdebugged</a></td>
 <td>Debug a Function</td></tr>
+<tr><td style="width: 25%;"><a href="Logic.html">isFALSE</a></td>
+<td>Logical Operators</td></tr>
 <tr><td style="width: 25%;"><a href="connections.html">isIncomplete</a></td>
 <td>Functions to Manipulate Connections (Files, URLs, ...)</td></tr>
 <tr><td style="width: 25%;"><a href="ns-load.html">isNamespaceLoaded</a></td>
@@ -1469,6 +1475,8 @@
 <td>References to Source Files and Code</td></tr>
 <tr><td style="width: 25%;"><a href="table.html">print.summary.table</a></td>
 <td>Cross Tabulation and Table Creation</td></tr>
+<tr><td style="width: 25%;"><a href="warnings.html">print.summary.warnings</a></td>
+<td>Print Warning Messages</td></tr>
 <tr><td style="width: 25%;"><a href="summary.html">print.summaryDefault</a></td>
 <td>Object Summaries</td></tr>
 <tr><td style="width: 25%;"><a href="warnings.html">print.warnings</a></td>
@@ -1974,12 +1982,16 @@
 <td>References to Source Files and Code</td></tr>
 <tr><td style="width: 25%;"><a href="table.html">summary.table</a></td>
 <td>Cross Tabulation and Table Creation</td></tr>
+<tr><td style="width: 25%;"><a href="warnings.html">summary.warnings</a></td>
+<td>Print Warning Messages</td></tr>
 <tr><td style="width: 25%;"><a href="message.html">suppressMessages</a></td>
 <td>Diagnostic Messages</td></tr>
 <tr><td style="width: 25%;"><a href="message.html">suppressPackageStartupMessages</a></td>
 <td>Diagnostic Messages</td></tr>
 <tr><td style="width: 25%;"><a href="warning.html">suppressWarnings</a></td>
 <td>Warning Messages</td></tr>
+<tr><td style="width: 25%;"><a href="conditions.html">suspendInterrupts</a></td>
+<td>Condition Handling and Recovery</td></tr>
 <tr><td style="width: 25%;"><a href="svd.html">svd</a></td>
 <td>Singular Value Decomposition of a Matrix</td></tr>
 <tr><td style="width: 25%;"><a href="sweep.html">sweep</a></td>
@@ -1989,7 +2001,7 @@
 <tr><td style="width: 25%;"><a href="Syntax.html">Syntax</a></td>
 <td>Operator Syntax and Precedence</td></tr>
 <tr><td style="width: 25%;"><a href="files2.html">Sys.chmod</a></td>
-<td>Manipulaton of Directories and File Permissions</td></tr>
+<td>Manipulation of Directories and File Permissions</td></tr>
 <tr><td style="width: 25%;"><a href="Sys.time.html">Sys.Date</a></td>
 <td>Get Current Date and Time</td></tr>
 <tr><td style="width: 25%;"><a href="Sys.getenv.html">Sys.getenv</a></td>
@@ -2029,7 +2041,7 @@
 <tr><td style="width: 25%;"><a href="timezones.html">Sys.timezone</a></td>
 <td>Time Zones</td></tr>
 <tr><td style="width: 25%;"><a href="files2.html">Sys.umask</a></td>
-<td>Manipulaton of Directories and File Permissions</td></tr>
+<td>Manipulation of Directories and File Permissions</td></tr>
 <tr><td style="width: 25%;"><a href="Sys.setenv.html">Sys.unsetenv</a></td>
 <td>Set or Unset Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="Sys.which.html">Sys.which</a></td>
@@ -2143,7 +2155,7 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="files2.html">umask</a></td>
-<td>Manipulaton of Directories and File Permissions</td></tr>
+<td>Manipulation of Directories and File Permissions</td></tr>
 <tr><td style="width: 25%;"><a href="class.html">unclass</a></td>
 <td>Object Classes</td></tr>
 <tr><td style="width: 25%;"><a href="debug.html">undebug</a></td>
@@ -2259,10 +2271,6 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="Logic.html">xor</a></td>
 <td>Logical Operators</td></tr>
-<tr><td style="width: 25%;"><a href="hexmode.html">xor.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
-<tr><td style="width: 25%;"><a href="octmode.html">xor.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="xtfrm.html">xtfrm</a></td>
 <td>Auxiliary Function for Sorting and Ranking</td></tr>
 <tr><td style="width: 25%;"><a href="numeric_version.html">xtfrm.numeric_version</a></td>
@@ -2275,7 +2283,7 @@
 
 <table width="100%">
 <tr><td style="width: 25%;"><a href="zapsmall.html">zapsmall</a></td>
-<td>Rounding of Numbers</td></tr>
+<td>Rounding of Numbers: Zapping Small Ones to Zero</td></tr>
 </table>
 
 <h2><a name="misc">-- misc --</a></h2>
@@ -2349,10 +2357,18 @@
 <td>Assignment Operators</td></tr>
 <tr><td style="width: 25%;"><a href="assignOps.html">-&gt;&gt;</a></td>
 <td>Assignment Operators</td></tr>
-<tr><td style="width: 25%;"><a href="Reserved.html">...</a></td>
-<td>Reserved Words in R</td></tr>
-<tr><td style="width: 25%;"><a href="Reserved.html">..1</a></td>
-<td>Reserved Words in R</td></tr>
+<tr><td style="width: 25%;"><a href="dots.html">...</a></td>
+<td>..., '..1', etc used in Functions</td></tr>
+<tr><td style="width: 25%;"><a href="dots.html">...elt</a></td>
+<td>..., '..1', etc used in Functions</td></tr>
+<tr><td style="width: 25%;"><a href="dots.html">...length</a></td>
+<td>..., '..1', etc used in Functions</td></tr>
+<tr><td style="width: 25%;"><a href="dots.html">..1</a></td>
+<td>..., '..1', etc used in Functions</td></tr>
+<tr><td style="width: 25%;"><a href="dots.html">..2</a></td>
+<td>..., '..1', etc used in Functions</td></tr>
+<tr><td style="width: 25%;"><a href="deparseOpts.html">..deparseOpts</a></td>
+<td>Options for Expression Deparsing</td></tr>
 <tr><td style="width: 25%;"><a href="agrep.html">.amatch_bounds</a></td>
 <td>Approximate String Matching (Fuzzy Matching)</td></tr>
 <tr><td style="width: 25%;"><a href="agrep.html">.amatch_costs</a></td>
@@ -2371,6 +2387,8 @@
 <td>Modern Interfaces to C/C++ code</td></tr>
 <tr><td style="width: 25%;"><a href="UseMethod.html">.Class</a></td>
 <td>Class Methods</td></tr>
+<tr><td style="width: 25%;"><a href="col.html">.col</a></td>
+<td>Column Indexes</td></tr>
 <tr><td style="width: 25%;"><a href="colSums.html">.colMeans</a></td>
 <td>Form Row and Column Sums and Means</td></tr>
 <tr><td style="width: 25%;"><a href="colSums.html">.colSums</a></td>
@@ -2479,6 +2497,8 @@
 <td>Initialization at Start of an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="search.html">.rmpkg</a></td>
 <td>Give Search Path for R Objects</td></tr>
+<tr><td style="width: 25%;"><a href="row.html">.row</a></td>
+<td>Row Indexes</td></tr>
 <tr><td style="width: 25%;"><a href="colSums.html">.rowMeans</a></td>
 <td>Form Row and Column Sums and Means</td></tr>
 <tr><td style="width: 25%;"><a href="colSums.html">.rowSums</a></td>
@@ -2491,6 +2511,8 @@
 <td>Condition Handling and Recovery</td></tr>
 <tr><td style="width: 25%;"><a href="zutils.html">.standard_regexps</a></td>
 <td>Miscellaneous Internal/Programming Utilities</td></tr>
+<tr><td style="width: 25%;"><a href="timezones.html">.sys.timezone</a></td>
+<td>Time Zones</td></tr>
 <tr><td style="width: 25%;"><a href="traceback.html">.Traceback</a></td>
 <td>Get and Print Call Stacks</td></tr>
 <tr><td style="width: 25%;"><a href="traceback.html">.traceback</a></td>
@@ -2553,6 +2575,8 @@
 <td>Time Intervals / Differences</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.html">[.Dlist</a></td>
 <td>Extract or Replace Parts of an Object</td></tr>
+<tr><td style="width: 25%;"><a href="getLoadedDLLs.html">[.DLLInfoList</a></td>
+<td>Get DLLs Loaded in Current Session</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.factor.html">[.factor</a></td>
 <td>Extract or Replace Parts of a Factor</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">[.hexmode</a></td>
@@ -2600,6 +2624,8 @@
 <tr><td style="width: 25%;"><a href="numeric_version.html">[[.numeric_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="DateTimeClasses.html">[[.POSIXct</a></td>
+<td>Date-Time Classes</td></tr>
+<tr><td style="width: 25%;"><a href="DateTimeClasses.html">[[.POSIXlt</a></td>
 <td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="Arithmetic.html">^</a></td>
 <td>Arithmetic Operators</td></tr>

@@ -6,7 +6,7 @@ bdgraph.npn	bdgraph.npn
 bdgraph.sim	bdgraph.sim
 bdgraph.ts	bdgraph.ts
 calc_joint_dist	BDgraph-package
-check.os	BDgraph-package
+churn	churn
 compare	compare
 compute_measures	BDgraph-package
 compute_tp_fp	BDgraph-package

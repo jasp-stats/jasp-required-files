@@ -12,6 +12,7 @@ importFrom(stats,
   na.pass,
   start,
   end,
+  window,
   ts,
   as.ts,
   frequency,
@@ -185,6 +186,7 @@ S3method(print,periodicity)
 S3method(align.time, xts)
 S3method(align.time, POSIXct)
 S3method(align.time, POSIXlt)
+S3method(shift.time, xts)
 S3method(make.index.unique, xts)
 S3method(make.index.unique, numeric)
 S3method(make.index.unique, POSIXct)
@@ -222,6 +224,7 @@ S3method(na.locf,xts)
 S3method(print,xts)
 S3method(print,CLASS)
 S3method('CLASS<-',xts)
+S3method(window,xts)
 
 S3method(dimnames, xts)
 S3method('dimnames<-', xts)
@@ -288,16 +291,19 @@ S3method(as.matrix,xts)
 S3method(as.environment,xts)
 
 # timeSeries (package:timeSeries) specific methods
-#export(xts.as.timeSeries)
-export(as.timeSeries.xts)
+if (getRversion() >= "3.6.0") {
+  S3method(timeSeries::as.timeSeries, xts)
+}
 S3method(as.xts,timeSeries)
 
 # irts (package:tseries) specific methods
 S3method(as.xts,irts)
 
 # fts (package:fts) specific methods
+if (getRversion() >= "3.6.0") {
+  S3method(fts::as.fts, xts)
+}
 S3method(as.xts,fts)
-export(as.fts.xts)
 
 # Date specific methods
 S3method(as.xts,Date)

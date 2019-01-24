@@ -19,6 +19,7 @@ combination (<code>formula</code> method).
 
 <pre>
 interpSpline(obj1, obj2, bSpline = FALSE, period = NULL,
+             ord = 4L,
              na.action = na.fail, sparse = FALSE)
 </pre>
 
@@ -46,6 +47,13 @@ Defaults to <code>FALSE</code>.</p>
 <td>
 <p>an optional positive numeric value giving a period for a
 periodic interpolation spline.</p>
+</td></tr>
+<tr valign="top"><td><code>ord</code></td>
+<td>
+<p>an integer specifying the spline <em>order</em>, the number of
+coefficients per interval.  <i>ord = d+1</i> where <i>d</i> is the
+<em>degree</em> polynomial degree.  Currently, only cubic splines
+(<code>ord = 4</code>) are implemented.</p>
 </td></tr>
 <tr valign="top"><td><code>na.action</code></td>
 <td>
@@ -101,5 +109,5 @@ points( women$height, women$weight )
 splineKnots( ispl )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>splines</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>splines</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

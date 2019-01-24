@@ -16,7 +16,7 @@
 <h3>Usage</h3>
 
 <pre>
-grid.remove(gPath, warn = TRUE, strict  =  FALSE, grep = FALSE,
+grid.remove(gPath, warn = TRUE, strict = FALSE, grep = FALSE,
             global = FALSE, allDevices = FALSE, redraw = TRUE)
 
 grid.gremove(..., grep = TRUE, global = TRUE)
@@ -35,18 +35,18 @@ removeGrob(gTree, gPath, strict = FALSE, grep = FALSE,
 </td></tr>
 <tr valign="top"><td><code>gPath</code></td>
 <td>
-<p> A gPath object. For <code>grid.remove</code> this
+<p>a gPath object. For <code>grid.remove</code> this
 specifies a gTree on the display list.  For <code>removeGrob</code> this
-specifies a descendant of the specified gTree. </p>
+specifies a descendant of the specified <code>gTree</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>strict</code></td>
 <td>
-<p> A boolean indicating whether the gPath must be
-matched exactly. </p>
+<p>a <code><a href="../../base/html/logical.html">logical</a></code> indicating whether the <code>gPath</code> must be
+matched exactly.</p>
 </td></tr>
 <tr valign="top"><td><code>grep</code></td>
 <td>
-<p>A boolean indicating whether the <code>gPath</code> should
+<p>a <code><a href="../../base/html/logical.html">logical</a></code> indicating whether the <code>gPath</code> should
 be treated as a regular expression.  Values are recycled across
 elements of the <code>gPath</code> (e.g., <code>c(TRUE, FALSE)</code> means
 that every odd element of the <code>gPath</code> will be treated as
@@ -55,16 +55,15 @@ a regular expression).
 </td></tr>
 <tr valign="top"><td><code>global</code></td>
 <td>
-<p> A boolean indicating whether the function should affect
+<p>a <code><a href="../../base/html/logical.html">logical</a></code> indicating whether the function should affect
 just the first match of the <code>gPath</code>, or whether all matches
 should be affected.
 </p>
 </td></tr>
 <tr valign="top"><td><code>allDevices</code></td>
 <td>
-<p> A boolean indicating whether all open devices
-should
-be searched for matches, or just the current device.
+<p>a <code><a href="../../base/html/logical.html">logical</a></code> indicating whether all open
+devices should be searched for matches, or just the current device.
 NOT YET IMPLEMENTED.
 </p>
 </td></tr>
@@ -79,7 +78,7 @@ specified grob should trigger an error.  </p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p> Arguments that are passed to <code>grid.get</code>. </p>
+<p>arguments passed to <code><a href="grid.get.html">grid.get</a></code>.</p>
 </td></tr>
 </table>
 
@@ -112,9 +111,8 @@ is <code>TRUE</code> it then redraws everything to reflect the change.
 
 <h3>See Also</h3>
 
-<p><code><a href="grid.grob.html">grob</a></code>, <code><a href="grid.get.html">getGrob</a></code>,
-<code><a href="grid.remove.html">removeGrob</a></code>, <code><a href="grid.remove.html">removeGrob</a></code>.
+<p><code><a href="grid.grob.html">grob</a></code>, <code><a href="grid.get.html">getGrob</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>grid</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grid</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

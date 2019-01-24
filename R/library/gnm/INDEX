@@ -48,7 +48,7 @@ model.matrix.gnm        Local Design Matrix for a Generalized Nonlinear
                         Model
 nonlin.function         Functions to Specify Nonlinear Terms in gnm
                         Models
-ofInterest              Coefficents of Interest in a Generalized
+ofInterest              Coefficients of Interest in a Generalized
                         Nonlinear Model
 parameters              Extract Constrained and Estimated Parameters
                         from a gnm Object
@@ -59,7 +59,7 @@ predict.gnm             Predict Method for Generalized Nonlinear Models
 profile.gnm             Profile Deviance for Parameters in a
                         Generalized Nonlinear Model
 residSVD                Multiplicative Approximation of Model Residuals
-se                      Standard Errors of Linear Parameter
+se.gnm                  Standard Errors of Linear Parameter
                         Combinations in gnm Models
 summary.gnm             Summarize Generalized Nonlinear Model Fits
 termPredictors          Extract Term Contributions to Predictor

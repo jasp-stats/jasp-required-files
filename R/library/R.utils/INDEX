@@ -44,7 +44,7 @@ dataFrame               Allocates a data frame with given column
                         classes
 detachPackage           Detaches packages by name
 dimNA< -                Sets the dimension of an object with the option
-                        to infer one dimension autmatically
+                        to infer one dimension automatically
 displayCode             Displays the contents of a text file with line
                         numbers and more
 doCall                  Executes a function call with option to ignore
@@ -112,8 +112,8 @@ mout                    Miscellaneous functions for outputting via
                         message()
 mpager                  A \"pager\" function that outputs to standard
                         error
-nullfile                Gets the pathname of the NULL device on the
-                        current platform
+nullfile                Gets the pathname or a connection to the NULL
+                        device on the current platform
 onGarbageCollect        Registers a function to be called when the R
                         garbage collector is (detected to be) running
 onSessionExit           Registers a function to be called when the R
@@ -139,7 +139,7 @@ resample                Sample values from a set of elements
 saveObject              Saves an object to a file or a connection
 seqToHumanReadable      Gets a short human readable string
                         representation of an vector of indices
-seqToIntervals          Gets all contigous intervals of a vector of
+seqToIntervals          Gets all contiguous intervals of a vector of
                         indices
 setOption               Sets a option in R
 shell.exec2             Open a file or URL using Windows File

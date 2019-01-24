@@ -91,13 +91,16 @@ anonymous calling functions (e.g., <code>get("print.ts")(AirPassengers)</code>).
 </p>
 <p>Namespaces can register methods for generic functions.  To support
 this, <code>UseMethod</code> and <code>NextMethod</code> search for methods in
-two places: first in the environment in which the generic function
-is called, and then in the registration data base for the
+two places: in the environment in which the generic function
+is called, and in the registration data base for the
 environment in which the generic is defined (typically a namespace).
 So methods for a generic function need to be available in the
 environment of the call to the generic, or they must be registered.
 (It does not matter whether they are visible in the environment in
-which the generic is defined.)
+which the generic is defined.)  As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0, the registration
+data base is searched after the top level environment (see
+<code><a href="ns-topenv.html">topenv</a></code>) of the calling environment (but before the
+parents of the top level environment).
 </p>
 
 
@@ -217,5 +220,5 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 <code><a href="../../utils/html/getS3method.html">getS3method</a></code>, <code><a href="is.object.html">is.object</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

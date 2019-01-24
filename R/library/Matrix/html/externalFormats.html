@@ -75,9 +75,9 @@ columns <code>i</code>, <code>j</code>, and possibly <code>x</code>, see <code>s
 
 <h3>References</h3>
 
-<p><a href="http://math.nist.gov/MatrixMarket">http://math.nist.gov/MatrixMarket</a>
+<p><a href="https://math.nist.gov/MatrixMarket">https://math.nist.gov/MatrixMarket</a>
 </p>
-<p><a href="http://www.cise.ufl.edu/research/sparse/matrices">http://www.cise.ufl.edu/research/sparse/matrices</a>
+<p><a href="https://www.cise.ufl.edu/research/sparse/matrices">https://www.cise.ufl.edu/research/sparse/matrices</a>
 </p>
 
 
@@ -104,7 +104,10 @@ str(jgl009 &lt;-
 
 ## End(Not run)
 data(KNex)
-writeMM(KNex$mm, "mmMM.mtx")
+## Store as MatrixMarket (".mtx") file, here inside temporary dir./folder:
+(MMfile &lt;- file.path(tempdir(), "mmMM.mtx"))
+writeMM(KNex$mm, file=MMfile) 
+file.info(MMfile)[,c("size", "ctime")] # (some confirmation of the file's)
 
 ## very simple export - in triplet format - to text file:
 data(CAex)
@@ -119,5 +122,5 @@ mm &lt;- do.call(sparseMatrix, dd)
 stopifnot(all.equal(mm, CAex, tolerance=1e-15))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
 </body></html>

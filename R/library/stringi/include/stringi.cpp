@@ -150,11 +150,11 @@ SEXP stri_unescape_unicode(SEXP e1) {
       return fun(e1);
    }
 
-SEXP stri_flatten(SEXP e1, SEXP e2) {
-      static SEXP(*fun)(SEXP,SEXP) = NULL;
+SEXP stri_flatten(SEXP e1, SEXP e2, SEXP e3, SEXP e4) {
+      static SEXP(*fun)(SEXP,SEXP,SEXP,SEXP) = NULL;
       if (!fun)
-         fun = (SEXP(*)(SEXP,SEXP)) R_GetCCallable("stringi", "C_stri_flatten");
-      return fun(e1, e2);
+         fun = (SEXP(*)(SEXP,SEXP,SEXP,SEXP)) R_GetCCallable("stringi", "C_stri_flatten");
+      return fun(e1, e2, e3, e4);
    }
 
 SEXP stri_join(SEXP e1, SEXP e2, SEXP e3, SEXP e4) {

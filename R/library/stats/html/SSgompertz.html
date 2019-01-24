@@ -71,16 +71,23 @@ an attribute named <code>gradient</code>.
 
 <pre>
 DNase.1 &lt;- subset(DNase, Run == 1)
-SSgompertz(log(DNase.1$conc), 4.5, 2.3, 0.7)   # response only
-Asym &lt;- 4.5; b2 &lt;- 2.3; b3 &lt;- 0.7
-SSgompertz(log(DNase.1$conc), Asym, b2, b3) # response and gradient
+SSgompertz(log(DNase.1$conc), 4.5, 2.3, 0.7)  # response only
+local({  Asym &lt;- 4.5; b2 &lt;- 2.3; b3 &lt;- 0.7
+  SSgompertz(log(DNase.1$conc), Asym, b2, b3) # response _and_ gradient
+})
 print(getInitial(density ~ SSgompertz(log(conc), Asym, b2, b3),
                  data = DNase.1), digits = 5)
 ## Initial values are in fact the converged values
 fm1 &lt;- nls(density ~ SSgompertz(log(conc), Asym, b2, b3),
            data = DNase.1)
 summary(fm1)
+plot(density ~ log(conc), DNase.1, # xlim = c(0, 21),
+     main = "SSgompertz() fit to DNase.1")
+ux &lt;- par("usr")[1:2]; x &lt;- seq(ux[1], ux[2], length.out=250)
+lines(x, do.call(SSgompertz, c(list(x=x), coef(fm1))), col = "red", lwd=2)
+As &lt;- coef(fm1)[["Asym"]]; abline(v = 0, h = 0, lty = 3)
+axis(2, at= exp(-coef(fm1)[["b2"]]), quote(e^{-b[2]}), las=1, pos=0)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -53,33 +53,36 @@ predict(object, newdata, n.ahead = 1, se.fit = TRUE, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>A univariate or multivariate time series.</p>
+<p>a univariate or multivariate time series.</p>
 </td></tr>
 <tr valign="top"><td><code>aic</code></td>
 <td>
-<p>Logical flag.  If <code>TRUE</code> then the Akaike Information
+<p><code><a href="../../base/html/logical.html">logical</a></code>.  If <code>TRUE</code> then the Akaike Information
 Criterion is used to choose the order of the autoregressive
-model. If <code>FALSE</code>, the model of order <code>order.max</code> is
+model.  If <code>FALSE</code>, the model of order <code>order.max</code> is
 fitted.</p>
 </td></tr>
 <tr valign="top"><td><code>order.max</code></td>
 <td>
-<p>Maximum order (or order) of model to fit. Defaults
+<p>maximum order (or order) of model to fit.  Defaults
 to the smaller of <i>N-1</i> and <i>10*log10(N)</i>
-where <i>N</i> is the number of observations
+where <i>N</i> is the number of non-missing observations
 except for <code>method = "mle"</code> where it is the minimum of this
 quantity and 12.</p>
 </td></tr>
 <tr valign="top"><td><code>method</code></td>
 <td>
-<p>Character string giving the method used to fit the
+<p>character string specifying the method to fit the
 model.  Must be one of the strings in the default argument
 (the first few characters are sufficient).  Defaults to
 <code>"yule-walker"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>na.action</code></td>
 <td>
-<p>function to be called to handle missing values.</p>
+<p>function to be called to handle missing
+values.  Currently, via <code>na.action = na.pass</code>, only Yule-Walker
+method can handle missing values which must be consistent within a
+time point: either all variables must be missing or none.</p>
 </td></tr>
 <tr valign="top"><td><code>demean</code></td>
 <td>
@@ -101,7 +104,7 @@ model.  Must be one of the strings in the default argument
 </td></tr>
 <tr valign="top"><td><code>object</code></td>
 <td>
-<p>a fit from <code>ar</code>.</p>
+<p>a fit from <code>ar()</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>newdata</code></td>
 <td>
@@ -133,7 +136,7 @@ problematic, as of the methods here only <code>ar.mle</code> performs
 true maximum likelihood estimation. The AIC is computed as if the variance
 estimate were the MLE, omitting the determinant term from the
 likelihood. Note that this is not the same as the Gaussian likelihood
-evaluated at the estimated parameter values. In <code>ar.yw</code> the
+evaluated at the estimated parameter values.  In <code>ar.yw</code> the
 variance matrix of the innovations is computed from the fitted
 coefficients and the autocovariance of <code>x</code>.
 </p>
@@ -190,7 +193,12 @@ best-fitting model.  Note that the latter can have an AIC of <code>-Inf</code>.<
 </td></tr>
 <tr valign="top"><td><code>n.used</code></td>
 <td>
-<p>The number of observations in the time series.</p>
+<p>The number of observations in the time series, including
+missing.</p>
+</td></tr>
+<tr valign="top"><td><code>n.obs</code></td>
+<td>
+<p>The number of non-missing observations in the time series.</p>
 </td></tr>
 <tr valign="top"><td><code>order.max</code></td>
 <td>
@@ -231,7 +239,7 @@ The asymptotic-theory variance matrix of the coefficient estimates.</p>
 </table>
 <p>For <code>predict.ar</code>, a time series of predictions, or if
 <code>se.fit = TRUE</code>, a list with components <code>pred</code>, the
-predictions, and <code>se</code>, the estimated standard errors. Both
+predictions, and <code>se</code>, the estimated standard errors.  Both
 components are time series.
 </p>
 
@@ -241,6 +249,9 @@ components are time series.
 <p>Only the univariate case of <code>ar.mle</code> is implemented.
 </p>
 <p>Fitting by <code>method="mle"</code> to long series can be very slow.
+</p>
+<p>If <code>x</code> contains missing values, see <code><a href="../../base/html/NA.html">NA</a></code>, also consider
+using <code><a href="arima.html">arima</a>()</code>, possibly with <code>method = "ML"</code>.
 </p>
 
 
@@ -253,19 +264,25 @@ and C code for univariate case of <code>ar.burg</code> by B. D. Ripley.
 
 <h3>References</h3>
 
-<p>Brockwell, P. J. and Davis, R. A. (1991) <em>Time
-Series and Forecasting Methods.</em>  Second edition. Springer, New
-York. Section 11.4.
+<p>Brockwell, P. J. and Davis, R. A. (1991).
+<em>Time Series and Forecasting Methods</em>, second edition.
+Springer, New York.
+Section 11.4.
 </p>
-<p>Brockwell, P. J. and Davis, R. A. (1996) <em>Introduction to Time
-Series and Forecasting.</em> Springer, New York. Sections 5.1 and 7.6.
+<p>Brockwell, P. J. and Davis, R. A. (1996).
+<em>Introduction to Time Series and Forecasting</em>.
+Springer, New York.
+Sections 5.1 and 7.6.
 </p>
-<p>Percival, D. P. and Walden, A. T. (1998) <em>Spectral Analysis
-for Physical Applications.</em> Cambridge University Press.
+<p>Percival, D. P. and Walden, A. T. (1998).
+<em>Spectral Analysis for Physical Applications</em>.
+Cambridge University Press.
 </p>
-<p>Whittle, P. (1963) On the fitting of multivariate autoregressions
-and the approximate canonical factorization of a spectral density
-matrix. <em>Biometrika</em> <b>40</b>, 129&ndash;134.
+<p>Whittle, P. (1963).
+On the fitting of multivariate autoregressions and the approximate
+canonical factorization of a spectral density matrix.
+<em>Biometrika</em>, <b>40</b>, 129&ndash;134.
+doi: <a href="http://doi.org/10.2307/2333753">10.2307/2333753</a>.
 </p>
 
 
@@ -295,5 +312,5 @@ ar(ts.union(BJsales, BJsales.lead))
 ar(ts.union(BJsales, BJsales.lead), method = "burg")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

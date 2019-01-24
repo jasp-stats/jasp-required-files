@@ -89,11 +89,11 @@ cut intervals. Which interval for each row of the output is shown by the
 between the first and the second, etc.
 For the example above the values would be 2, 3, and 4.
 </p>
-<p>The routine will normally be called with a formula as the first
+<p>The routine is called with a formula as the first
 argument. 
 The right hand side of the formula can be used to delimit variables
 that should be retained; normally one will use <code> ~ .</code> as a
-shorthand to retain them all.  When called in this way the routine
+shorthand to retain them all.  The routine
 will try to retain variable names, e.g. <code>Surv(adam, joe, fred)~.</code>
 will result in a data set with those same variable names for
 <code>tstart</code>, <code>end</code>, and <code>event</code> options rather than
@@ -101,10 +101,7 @@ the defaults.  Any user specified values for these options will be
 used if they are present, of course.
 However, the routine is not sophisticated; it only does this
 substitution for simple names.  A call of <code>Surv(time, stat==2)</code>
-for instance will result in use of the 'event' argument for that
-variable name.
-The <code>end</code> and <code>event</code> arguments are required if there is
-no formula.
+for instance will not retain &quot;stat&quot; as the name of the event variable.
 </p>
 <p>Rows of data with a missing time or status are copied across
 unchanged, unless the na.action argument is changed from its default
@@ -144,5 +141,5 @@ c(overall= coef(fit1)[1],
   t120   = sum(coef(fit2)[c(1,5)]))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

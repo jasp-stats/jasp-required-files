@@ -25,7 +25,7 @@ merge(x, y, ...)
 ## S3 method for class 'data.frame'
 merge(x, y, by = intersect(names(x), names(y)),
       by.x = by, by.y = by, all = FALSE, all.x = all, all.y = all,
-      sort = TRUE, suffixes = c(".x",".y"),
+      sort = TRUE, suffixes = c(".x",".y"), no.dups = TRUE,
       incomparables = NULL, ...)
 </pre>
 
@@ -72,6 +72,12 @@ columns?</p>
 to be used for making unique the names of columns in the result
 which are not used for merging (appearing in <code>by</code> etc).</p>
 </td></tr>
+<tr valign="top"><td><code>no.dups</code></td>
+<td>
+<p>logical indicating that <code>suffixes</code> are appended in
+more cases to avoid duplicated column names in the result.  This
+was implicitly false before <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.5.0.</p>
+</td></tr>
 <tr valign="top"><td><code>incomparables</code></td>
 <td>
 <p>values which cannot be matched.  See
@@ -117,6 +123,10 @@ corresponding columns of <code>y</code>;  analogously for <code>all.y</code>.
 names, these have <code>suffixes</code> (<code>".x"</code> and <code>".y"</code> by
 default) appended to try to make the names of the result unique.  If
 this is not possible, an error is thrown.
+</p>
+<p>If a <code>by.x</code> column name matches one of <code>y</code>, and if
+<code>no.dups</code> is true (as by default), the y version gets suffixed as
+well, avoiding duplicate column names in the result.
 </p>
 <p>The complexity of the algorithm used is proportional to the length of
 the answer.
@@ -167,11 +177,12 @@ the result for 32-bit platforms.
 <h3>Examples</h3>
 
 <pre>
-## use character columns of names to get sensible sort order
 authors &lt;- data.frame(
+    ## I(*) : use character columns of names to get sensible sort order
     surname = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
     nationality = c("US", "Australia", "US", "UK", "Australia"),
     deceased = c("yes", rep("no", 4)))
+authorN &lt;- within(authors, { name &lt;- surname; rm(surname) })
 books &lt;- data.frame(
     name = I(c("Tukey", "Venables", "Tierney",
              "Ripley", "Ripley", "McNeil", "R Core")),
@@ -184,14 +195,20 @@ books &lt;- data.frame(
     other.author = c(NA, "Ripley", NA, NA, NA, NA,
                      "Venables &amp; Smith"))
 
+(m0 &lt;- merge(authorN, books))
 (m1 &lt;- merge(authors, books, by.x = "surname", by.y = "name"))
-(m2 &lt;- merge(books, authors, by.x = "name", by.y = "surname"))
-stopifnot(as.character(m1[, 1]) == as.character(m2[, 1]),
-          all.equal(m1[, -1], m2[, -1][ names(m1)[-1] ]),
-          dim(merge(m1, m2, by = integer(0))) == c(36, 10))
+ m2 &lt;- merge(books, authors, by.x = "name", by.y = "surname")
+stopifnot(exprs = {
+   identical(m0, m2[, names(m0)])
+   as.character(m1[, 1]) == as.character(m2[, 1])
+   all.equal(m1[, -1], m2[, -1][ names(m1)[-1] ])
+   identical(dim(merge(m1, m2, by = NULL)),
+             c(nrow(m1)*nrow(m2), ncol(m1)+ncol(m2)))
+})
 
 ## "R core" is missing from authors and appears only here :
 merge(authors, books, by.x = "surname", by.y = "name", all = TRUE)
+
 
 ## example of using 'incomparables'
 x &lt;- data.frame(k1 = c(NA,NA,3,4,5), k2 = c(1,NA,NA,4,5), data = 1:5)
@@ -201,5 +218,5 @@ merge(x, y, by = "k1") # NA's match, so 6 rows
 merge(x, y, by = "k2", incomparables = NA) # 2 rows
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

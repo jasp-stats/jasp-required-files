@@ -1,7 +1,6 @@
 ---
 title: "For developers: Extending **emmeans**"
-author: "Russ Lenth"
-date: "`r Sys.Date()`"
+author: "emmeans package, Version `r packageVersion('emmeans')`"
 output: emmeans::.emm_vignette
 vignette: >
   %\VignetteIndexEntry{For developers: Extending emmeans}
@@ -26,7 +25,8 @@ This vignette explains how developers may incorporate **emmeans** support in the
   5. [Hook functions](#hooks)
   6. [Exported methods from **emmeans**](#exported)
   7. [Existing support for `rsm` objects](#rsm)
-  8. [Conclusions](#concl)
+  8. [Exporting and registering your methods](#exporting)
+  9. [Conclusions](#concl)
   
 [Index of all vignette topics](vignette-topics.html)
 
@@ -40,6 +40,10 @@ The first thing to do is to look at the help page for extending the package:
 help("extending-emmeans", package="emmeans")
 ```
 It gives details about the fact that you need to write two S3 methods, `recover_data` and `emm_basis`, for the class of object that your model-fitting function returns. The `recover_data`  method is needed to recreate the dataset so that the reference grid can be identified. The `emm_basis` method then determines the linear functions needed to evaluate each point in the reference grid and to obtain associated information---such as the variance-covariance matrix---needed to do estimation and testing.
+
+These methods must also be exported from your package so that they are available
+to users. See the section on [exporting the methods](#exporting) for details and
+suggestions.
 
 This vignette presents an example where suitable methods are developed, and discusses a few issues that arise.
 
@@ -202,12 +206,19 @@ In addition, you may want to apply some form of special post-processing after th
 [Back to Contents](#contents)
 
 ## Exported methods from **emmeans** {#exported}
-<!-- @index **emmeans** package!Exports for developers -->
-For package developers' convenience, **emmeans** exports some of its S3 methods for `recover_data` and/or `emm_basis`---use `methods("recover_data")` and `methods("emm_basis")` to discover which ones. It may be that all you need is to invoke one of those methods and perhaps make some small changes---especially if your model-fitting algorithm makes heavy use of an existing model type supported by **emmeans**. Contact me if you need **emmeans** to export some additional methods for your use.
+<!-- @index **emmeans** package!Exports useful to developers -->
+For package developers' convenience, **emmeans** exports some of its S3 methods
+for `recover_data` and/or `emm_basis`---use `methods("recover_data")` and
+`methods("emm_basis")` to discover which ones. It may be that all you need is to
+invoke one of those methods and perhaps make some small changes---especially if
+your model-fitting algorithm makes heavy use of an existing model type supported
+by **emmeans**. For those methods that are not exported, use `recover_data()`
+and `.emm_basis()`, which run in **emmeans**'s namespace, thus providing access
+to all available methods..
 
 A few additional functions are exported because they may be useful to developers. They are as follows:
 
-  * `.all.vars(expr, retain)` Some users of your package may include `$` or
+  * `emmeans::.all.vars(expr, retain)` Some users of your package may include `$` or
     `[[]]` operators in their model formulas. If you need to get the variable
     names, `base::all.vars` will probably not give you what you need. For
     example, if `form = ~ data$x + data[[5]]`, then `base::all.vars(form)`
@@ -216,23 +227,39 @@ A few additional functions are exported because they may be useful to developers
     used to specify regular expressions for patterns to retain as parts of
     variable names.
 
-  * `.diag(x, nrow, ncol)` The base `diag` function has a booby trap whereby,
+  * `emmeans::.diag(x, nrow, ncol)` The base `diag` function has a booby trap whereby,
     for example, `diag(57.6)` returns a 57 x 57 identity matrix rather than
     a 1 x 1 matrix with 57.6 as its only element. But
     `emmeans::.diag(57.6)` will return the latter. The function works identically
     to `diag` except for its tail run around the identity-matrix trap.
-  * `.aovlist.dffun(k, dfargs)` This function is exported because it is needed
+  * `emmeans::.aovlist.dffun(k, dfargs)` This function is exported because it is needed
     for computing degrees of freedom for models fitted using `aov`, but it may be
     useful for other cases where Satterthwaite degrees-of-freedom calculations are
     needed. It requires the `dfargs` slot to contain analogous contents.
-  * `.get.offset(terms, grid)` If `terms` is a model formula containing an
+  * `emmeans::.get.offset(terms, grid)` If `terms` is a model formula containing an
     `offset` call, this is will compute that offset in the context of `grid` (a
     `data.frame`).
-  * `.my.vcov(object, ...)` In a call to `ref_grid`, `emmeans`, etc., the user may
+  * `emmeans::.my.vcov(object, ...)` In a call to `ref_grid`, `emmeans`, etc., the user may
     use `vcov.` to specify an alternative function or matrix to use as the
     covariance matrix of the fixed-effects coefficients. This function supports
     that feature. Calling `.my.vcov` in place of the `vcov` method will
     substitute the user's `vcov.` when it is specified.
+  * `emmeans::.std.link.labels(fam, misc)` This is useful in `emm_basis` methods for
+    generalized linear models. Call it with `fam` equal to the `family` object for
+    your model, and `misc` either an existing list, or just `list()` if none. It
+    returns a new `misc` list containing the link function and, in some cases,
+    extra features that are used for certain types of link functions (e.g., for a
+    log link, the setups for returning ratio comparisons with `type = "response"`).
+  * `emmeans::.num.key(levs, key)` Returns integer indices of elements of 
+    `key` in `levs` when `key` is a character vector; or just returns integer values
+    if already integer. Also throws an error if levels are mismatched or indices exceed 
+    legal range. This is useful in custom contrast functions (`.emmc` functions).
+  * `emmeans::.get.excl(levs, exclude, include)` This is support for the `exclude` and 
+    `include` arguments of contrast functions. It checks legality and returns an integer 
+    vector of `exclude` indices in `levs`, given specified integer or character
+    arguments `exclude` and `include`. In your `.emmc` function, 
+    `exclude` should default to `integer(0)` and `include` should have no default.
+    
 
 [Back to Contents](#contents)
 
@@ -316,25 +343,6 @@ emm_basis.rsm = function(object, trms, xlev, grid,
 This is much simpler. All we have to do is determine if decoding was done (line 5); and, if so, convert the grid back to the coded scale (line 6) and recover the original `terms` attribute (line 7). The rest is borrowed directly from the `emm_basis.lm` method in **emmeans**. Note that line 13 uses one of the exported functions we described in the preceding section. Lines 15--18 use functions from the **estimability** package to handle the possibility that the model is rank-deficient.
 
 
-### Exporting the methods {#exporting}
-<!-- @index **emmeans** package!Exporting extensions to -->
-To make the methods available to users of the **rsm** package, the following code appears in the `NAMESPACE` file:
-```{r eval = FALSE}
-if (requireNamespace("emmeans", quietly = TRUE)) {
-    importFrom("emmeans", "recover_data", "emm_basis")
-    importFrom("estimability", "all.estble", "nonest.basis")
-    S3method(recover_data, rsm)
-    S3method(emm_basis, rsm)
-}
-```
-This only has an effect if the user has the **emmeans** package installed (in which case **estimability** is also imported by **emmeans**); otherwise the code is skipped. We need to import the prototypes for `recover_data` and `emm_basis`, and register our new methods.
-Also, packages `emmeans` and `estimability` are included in the `Imports` section of the `DESCRIPTION` file.
-
-Alternatively, we could simply export the functions `recover_data.rsm` and `emm_basis.rsm` without any need to import anything or register methods. It's simpler to do, but makes those functions user-visible and thus they require documentation.
-
-[Back to Contents](#contents)
-
-
 ### A demonstration {#demo}
 Here's a demonstration of this **rsm** support. The standard example for `rsm` fits a second-order model `CR.rs2` to a dataset organized in two blocks and with two coded predictors.
 ```{r results = "hide", warning = FALSE, message = FALSE}
@@ -357,6 +365,64 @@ emmeans(CR.rs2, ~ Time * Temp, mode = "decoded",
         at = list(Time = c(80, 85, 90), Temp = c(165, 185)))
 ```
 Since the supplied settings are the same on the decoded scale as were used on the coded scale, the EMMs are identical to those in the previous output.
+
+
+## Exporting and registering your methods {#exporting}
+<!-- @index **emmeans** package!Exporting extensions to 
+     Registering `recover_data` and `emm_basis` methods -->
+To make the methods available to users of your package, the methods must be exported.
+R and CRAN are evolving in a way that having S3 methods in the registry is
+increasingly important; so it is a good idea to provide for that.
+The problem is not all of your package users will have **emmeans** installed.
+Thus, registering the methods must be done conditionally.
+
+One solution is to list `emmeans` and `estimability` in the `Imports` field of your `DESCRIPTION` file.
+Then, in the package `NAMESPACE` file, insert something like the following,
+replacing "foo" with your object class name:
+```r
+if (requireNamespace("emmeans", quietly = TRUE)) {
+    importFrom("emmeans", "recover_data", "emm_basis")
+    importFrom("estimability", "all.estble", "nonest.basis")
+    S3method(recover_data, foo)
+    S3method(emm_basis, foo)
+}
+```
+(You can get by without testing **estimability** since it is already required by **emmeans**.)
+
+The disadvantage of the above solution is that it adds several other packages as
+dependencies. An alternative method that avoids those extra dependencies is as follows:
+Put `emmeans` and
+`estimability` in `Suggests` rather than `Imports`, and add code to
+*dynamically* register the methods to one of your R source files (typically one
+named `zzz.R`, the last source file to be read). Put code like this there:
+```r
+register_s3_method <- function(pkg, generic, class) {
+    fun <- get(paste0(generic, ".", class), envir = parent.frame())
+    if (isNamespaceLoaded(pkg))
+        registerS3method(generic, class, fun, envir = asNamespace(pkg))
+    # Also ensure registration is done if pkg is loaded later:
+    setHook(
+        packageEvent(pkg, "onLoad"),
+        function(...)
+            registerS3method(generic, class, fun, envir = asNamespace(pkg))
+    )
+}
+
+.onLoad <- function(libname, pkgname) {
+    if (requireNamespace("emmeans", quietly = TRUE)) {
+        register_s3_method("emmeans", "recover_data", "foo")
+        register_s3_method("emmeans", "emm_basis", "foo")
+    }
+}
+
+```
+This code is adapted and simplified from the **hms** package. The original
+`register_s3_method` function is more general and includes type-checking
+of its arguments; but since this is just used internally, that checking
+seems unnecessary.
+
+
+[Back to Contents](#contents)
 
 
 ## Conclusions {#concl}

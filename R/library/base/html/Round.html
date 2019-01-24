@@ -22,7 +22,8 @@ numeric vector containing the integers formed by truncating the values in
 <code>x</code> toward <code>0</code>.
 </p>
 <p><code>round</code> rounds the values in its first argument to the specified
-number of decimal places (default 0).
+number of decimal places (default 0).  See &lsquo;Details&rsquo; about
+&ldquo;round to even&rdquo; when rounding off a 5.
 </p>
 <p><code>signif</code> rounds the values in its first argument to the specified
 number of significant digits.
@@ -68,8 +69,8 @@ Negative values are allowed (see &lsquo;Details&rsquo;).</p>
 individually or via the <code><a href="groupGeneric.html">Math</a></code> group
 generic.
 </p>
-<p>Note that for rounding off a 5, the IEC 60559 standard is expected to
-be used, &lsquo;<em>go to the even digit</em>&rsquo;.
+<p>Note that for rounding off a 5, the IEC 60559 standard (see also
+&lsquo;IEEE 754&rsquo;) is expected to be used, &lsquo;<em>go to the even digit</em>&rsquo;.
 Therefore <code>round(0.5)</code> is <code>0</code> and <code>round(-1.5)</code> is
 <code>-2</code>.  However, this is dependent on OS services and on
 representation error (since e.g. <code>0.15</code> is not represented
@@ -119,6 +120,12 @@ normally necessary to use a tolerance.
 <p>Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
 <em>The New S Language</em>.  Wadsworth &amp; Brooks/Cole.
 </p>
+<p>The ISO/IEC/IEEE 60559:2011 standard is available for money from
+<a href="https://www.iso.org">https://www.iso.org</a>.
+</p>
+<p>The IEEE 745:2008 standard is more openly documented, e.g, at
+<a href="https://en.wikipedia.org/wiki/IEEE_754">https://en.wikipedia.org/wiki/IEEE_754</a>.
+</p>
 
 
 <h3>See Also</h3>
@@ -130,9 +137,11 @@ normally necessary to use a tolerance.
 <h3>Examples</h3>
 
 <pre>
-round(.5 + -2:4) # IEEE rounding: -2  0  0  2  2  4  4
+round(.5 + -2:4) # IEEE / IEC rounding: -2  0  0  2  2  4  4
+## (this is *good* behaviour -- do *NOT* report it as bug !)
+
 ( x1 &lt;- seq(-2, 4, by = .5) )
-round(x1) #-- IEEE rounding !
+round(x1) #-- IEEE / IEC rounding !
 x1[trunc(x1) != floor(x1)]
 x1[round(x1) != floor(x1 + .5)]
 (non.int &lt;- ceiling(x1) != floor(x1))
@@ -142,5 +151,5 @@ round(x2, 3)
 signif(x2, 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

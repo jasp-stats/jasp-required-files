@@ -7,12 +7,11 @@ Net-class               Class For the Result of Nesting and Equivalence
                         Testing
 PAVranking              Parcel-Allocation Variability in Model Ranking
 SSpower                 Power for model parameters
-auxiliary               Analyzing data with full-information maximum
-                        likelihood with auxiliary variables
+auxiliary               Implement Saturated Correlates with FIML
 bsBootMiss              Bollen-Stine Bootstrap with the Existence of
                         Missing Data
-chisqSmallN             _k_-factor correction for chi-squared test
-                        statistic
+calculate.D2            Calculate the "D2" statistic
+chisqSmallN             _k_-factor correction for chi^2 test statistic
 clipboard               Copy or save the result of 'lavaan' or
                         'FitDiff' objects into a clipboard or a file
 combinequark            Combine the results from the quark function
@@ -24,6 +23,7 @@ dat3way                 Simulated Dataset to Demonstrate Three-way
                         Latent Interaction
 datCat                  Simulated Data set to Demonstrate Categorical
                         Measurement Invariance
+efa.ekc                 Empirical Kaiser criterion
 efaUnrotate             Analyze Unrotated Exploratory Factor Analysis
                         Model
 exLong                  Simulated Data set to Demonstrate Longitudinal
@@ -37,7 +37,6 @@ findRMSEAsamplesize     Find the minimum sample size for a given
 findRMSEAsamplesizenested
                         Find sample size given a power in nested model
                         comparison
-fitMeasuresMx           Find fit measures from an MxModel result
 fmi                     Fraction of Missing Information.
 htmt                    Assessing Discriminant Validity using
                         Heterotrait-Monotrait Ratio
@@ -48,29 +47,28 @@ indProd                 Make products of indicators using no centering,
 kd                      Generate data via the Kaiser-Dickman (1962)
                         algorithm.
 kurtosis                Finding excessive kurtosis
-lavaanStar-class        Class For Representing A (Fitted) Latent
-                        Variable Model with Additional Elements
-lisrel2lavaan           Latent variable modeling in 'lavaan' using
-                        LISREL syntax
+lavTestLRT.mi           Likelihood Ratio Test for Multiple Imputations
+lavTestScore.mi         Score Test for Multiple Imputations
+lavTestWald.mi          Wald Test for Multiple Imputations
+lavaan.mi-class         Class for a lavaan Model Fitted to Multiple
+                        Imputations
 loadingFromAlpha        Find standardized factor loading from
                         coefficient alpha
-longInvariance          Measurement Invariance Tests Within Person
 mardiaKurtosis          Finding Mardia's multivariate kurtosis
 mardiaSkew              Finding Mardia's multivariate skewness
 maximalRelia            Calculate maximal reliability
-measurementInvariance   Measurement Invariance Tests
-measurementInvarianceCat
-                        Measurement Invariance Tests for Categorical
-                        Items
+measEq.syntax           Syntax for measurement equivalence
+measEq.syntax-class     Class for Representing a
+                        Measurement-Equivalence Model
 miPowerFit              Modification indices and their power approach
                         for model fit evaluation
+modindices.mi           Modification Indices for Multiple Imputations
 monteCarloMed           Monte Carlo Confidence Intervals to Test
                         Complex Indirect Effects
 moreFitIndices          Calculate more fit indices
 mvrnonnorm              Generate Non-normal Data using Vale and
                         Maurelli (1983) method
 net                     Nesting and Equivalence Testing
-nullMx                  Analyzing data using a null model
 nullRMSEA               Calculate the RMSEA of the null model
 orthRotate              Implement orthogonal or oblique rotation
 parcelAllocation        Random Allocation of Items to Parcels in a
@@ -102,21 +100,21 @@ quark                   Quark
 reliability             Calculate reliability values of factors
 reliabilityL2           Calculate the reliability values of a
                         second-order factor
-residualCovariate       Residual centered all target indicators by
+residualCovariate       Residual-center all target indicators by
                         covariates
-runMI                   Multiply impute and analyze data using lavaan
-saturateMx              Analyzing data using a saturate model
+runMI                   Fit a lavaan Model to Multiple Imputed Data
+                        Sets
+semTools                semTools: Useful Tools for Structural Equation
+                        Modeling
 simParcel               Simulated Data set to Demonstrate Random
                         Allocations of Parcels
 singleParamTest         Single Parameter Test Divided from Nested Model
                         Comparison
 skew                    Finding skewness
 splitSample             Randomly Split a Data Set into Halves
-standardizeMx           Find standardized estimates for OpenMx output
 tukeySEM                Tukey's WSD post-hoc test of means for unequal
                         variance and sample size
 twostage                Fit a lavaan model using 2-Stage Maximum
                         Likelihood (TSML) estimation for missing data.
 twostage-class          Class for the Results of 2-Stage Maximum
                         Likelihood (TSML) Estimation for Missing Data
-wald                    Calculate multivariate Wald statistics

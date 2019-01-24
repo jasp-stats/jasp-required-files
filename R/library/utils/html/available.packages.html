@@ -21,7 +21,9 @@ from a local mirror).
 <pre>
 available.packages(contriburl = contrib.url(repos, type), method,
                    fields = NULL, type = getOption("pkgType"),
-                   filters = NULL, repos = getOption("repos"))
+                   filters = NULL, repos = getOption("repos"),
+                   ignore_repo_cache =  FALSE, max_repo_cache_age,
+                   ...)
 </pre>
 
 
@@ -72,17 +74,43 @@ values.
 <p>character vector, the base URL(s) of the repositories to use.
 </p>
 </td></tr>
+<tr valign="top"><td><code>ignore_repo_cache</code></td>
+<td>
+<p>logical.  If true, the repository cache is
+never used (see &lsquo;Details&rsquo;).
+</p>
+</td></tr>
+<tr valign="top"><td><code>max_repo_cache_age</code></td>
+<td>
+<p>any cached values older than this in seconds
+will be ignored. See &lsquo;Details&rsquo;.
+</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
+<p>allow additional arguments to be passed from callers (which might be
+arguments to future versions of this function).
+</p>
+</td></tr>
 </table>
 
 
 <h3>Details</h3>
 
 <p>The list of packages is either copied from a local mirror (specified by a
-<span class="samp">file://</span> URI) or downloaded.  If downloaded, the list is cached
+<span class="samp">file://</span> URI) or downloaded.  If downloaded and
+<code>ignore_repo_cache</code> is false (the default), the list is cached
 for the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session in a per-repository file in <code><a href="../../base/html/tempfile.html">tempdir</a>()</code>
 with a name like
 </p>
 <pre>repos_http%3a%2f%2fcran.r-project.org%2fsrc%2fcontrib.rds</pre>
+<p>The cached values are renewed when found to be too old, with the age
+limit controlled <em>via</em> argument <code>max_repo_cache_age</code>.
+This defaults to the current value of the environment variable
+<span class="env">R_AVAILABLE_PACKAGES_CACHE_CONTROL_MAX_AGE</span>, or if unset, to
+<code>3600</code> (one hour).
+</p>
 <p>By default, the return value includes only packages whose version and
 OS requirements are met by the running version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>, and only gives
 information on the latest versions of packages.
@@ -198,5 +226,5 @@ options(available_packages_filters =
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

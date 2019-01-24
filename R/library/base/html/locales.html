@@ -45,15 +45,15 @@ locale for the system.</p>
 <h3>Details</h3>
 
 <p>The locale describes aspects of the internationalization of a program.
-Initially most aspects of the locale of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> are set to <code>"C"</code> (which
-is the default for the C language and reflects North-American usage).
-<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> sets <code>"LC_CTYPE"</code> and <code>"LC_COLLATE"</code>, which allow the
-use of a different character set and alphabetic
-comparisons in that character set (including the use of
+Initially most aspects of the locale of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> are set to <code>"C"</code>
+(which is the default for the C language and reflects North-American
+usage &ndash; also known as <code>"POSIX"</code>).  <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> sets <code>"LC_CTYPE"</code> and
+<code>"LC_COLLATE"</code>, which allow the use of a different character set
+and alphabetic comparisons in that character set (including the use of
 <code><a href="sort.html">sort</a></code>), <code>"LC_MONETARY"</code> (for use by
-<code><a href="Sys.localeconv.html">Sys.localeconv</a></code>) and <code>"LC_TIME"</code> may affect
-the behaviour of <code><a href="as.POSIXlt.html">as.POSIXlt</a></code> and <code><a href="strptime.html">strptime</a></code>
-and functions which use them (but not <code><a href="date.html">date</a></code>).
+<code><a href="Sys.localeconv.html">Sys.localeconv</a></code>) and <code>"LC_TIME"</code> may affect the
+behaviour of <code><a href="as.POSIXlt.html">as.POSIXlt</a></code> and <code><a href="strptime.html">strptime</a></code> and
+functions which use them (but not <code><a href="date.html">date</a></code>).
 </p>
 <p>The first seven categories described here are those specified by
 POSIX.  <code>"LC_MESSAGES"</code> will be <code>"C"</code> on systems that do not
@@ -98,6 +98,21 @@ names separated by <code>"/"</code> (Solaris, macOS) or <code>";"</code>
 individually: it is not necessarily the case that the result of
 <code>foo &lt;- Sys.getlocale()</code> can be used in
 <code>Sys.setlocale("LC_ALL", locale = foo)</code>.
+</p>
+
+
+<h3>Available locales</h3>
+
+<p>On most Unix-alkes the POSIX shell command <code>locale -a</code> will
+list the &lsquo;available public&rsquo; locales.  What that means is
+platform-dependent.  On recent Linuxen this may mean &lsquo;available
+to be installed&rsquo; as on some RPM-based systems the locale data is in
+separate RPMS.  On Debian/Ubuntu the set of available locales is
+managed by OS-specific facilities such as <code>locale-gen</code> and
+<code>locale -a</code> lists those currently enabled.
+</p>
+<p>For Windows, MicroSoft moves its documentation frequently so a Web
+search is the best way to find current information.
 </p>
 
 
@@ -162,5 +177,5 @@ Sys.setlocale("LC_COLLATE", "C")   # turn off locale-specific sorting,
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -18,6 +18,8 @@
 <pre>
 ## S3 method for class 'Date'
 summary(object, digits = 12, ...)
+
+
 </pre>
 
 
@@ -26,7 +28,7 @@ summary(object, digits = 12, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>object</code></td>
 <td>
-<p>An object summarized.</p>
+<p>a <code>Date</code> object to be summarized.</p>
 </td></tr>
 <tr valign="top"><td><code>digits</code></td>
 <td>
@@ -37,6 +39,8 @@ summary(object, digits = 12, ...)
 <p>Further arguments to be passed from or to other methods.</p>
 </td></tr>
 </table>
+
+
 
 
 <h3>Details</h3>
@@ -85,8 +89,19 @@ format(today, "%d %b %Y")  # with month as a word
 (tenweeks &lt;- seq(today, length.out=10, by="1 week")) # next ten weeks
 weekdays(today)
 months(tenweeks)
-as.Date(.leap.seconds)
+(Dls &lt;- as.Date(.leap.seconds))
+
+##  length(&lt;Date&gt;) &lt;- n   now works
+ls &lt;- Dls; length(ls) &lt;- 12
+l2 &lt;- Dls; length(l2) &lt;- 5 + length(Dls)
+stopifnot(exprs = {
+  ## length(.) &lt;- * is compatible to subsetting/indexing:
+  identical(ls, Dls[seq_along(ls)])
+  identical(l2, Dls[seq_along(l2)])
+  ## has filled with NA's
+  is.na(l2[(length(Dls)+1):length(l2)])
+})
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

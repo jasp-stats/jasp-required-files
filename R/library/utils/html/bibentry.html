@@ -28,7 +28,7 @@ print(x, style = "text", .bibstyle, ...)
 format(x, style = "text", .bibstyle = NULL,
        citation.bibtex.max = getOption("citation.bibtex.max", 1),
        bibtex = length(x) &lt;= citation.bibtex.max,
-       sort = FALSE, ...)
+       sort = FALSE, macros = NULL, ...)
 
 ## S3 method for class 'bibentry'
 sort(x, decreasing = FALSE, .bibstyle = NULL, drop = FALSE, ...)
@@ -52,7 +52,13 @@ See <b>Entry Types</b> for details.
 <tr valign="top"><td><code>textVersion</code></td>
 <td>
 <p>a character string with a text representation of
-the reference to optionally be employed for printing.</p>
+the reference to optionally be employed for printing.  It is
+recommended to leave this unspecified if
+<code>format(x, style = "text")</code>
+works correctly.  Only if special LaTeX macros (e.g., math
+formatting) or special characters (e.g., with accents) are
+necessary, a <code>textVersion</code> should be provided.
+</p>
 </td></tr>
 <tr valign="top"><td><code>header</code></td>
 <td>
@@ -138,6 +144,11 @@ The default depends on on the number of (bib) entries and
 <p>logical indicating if bibentries should be sorted, using
 <code><a href="../../tools/html/bibstyle.html">bibstyle</a>(.bibstyle)$sortKeys(x)</code>.</p>
 </td></tr>
+<tr valign="top"><td><code>macros</code></td>
+<td>
+<p>a character string or an object with already loaded Rd
+macros, see <b>Details</b>.</p>
+</td></tr>
 <tr valign="top"><td><code>drop</code></td>
 <td>
 <p>logical used as <code>x[ ..., drop=drop]</code> inside the
@@ -169,7 +180,13 @@ and a simple copy of the <code>textVersion</code> elements (style
 <code>"textVersion"</code>).
 The <code>"text"</code>, <code>"html"</code> and <code>"latex"</code> styles make use
 of the <code>.bibstyle</code> argument using the <code><a href="../../tools/html/bibstyle.html">bibstyle</a></code>
-function.  When printing bibentry objects in citation style, a
+function.  In addition, one can use the <code>macros</code> argument to
+provide additional (otherwise unknown, presumably LaTeX-style) Rd
+macros, either by giving the path to a file with Rd macros to be
+loaded via <code><a href="../../tools/html/loadRdMacros.html">loadRdMacros</a></code>, or an object with macros
+already loaded.
+</p>
+<p>When printing bibentry objects in citation style, a
 <code>header</code>/<code>footer</code> for each item can be displayed as well as
 a <code>mheader</code>/<code>mfooter</code> for the whole vector of references.
 </p>
@@ -251,9 +268,9 @@ BibTeX fields, including
 <dt>address:</dt><dd><p>The address of the publisher or other type of
 institution.</p>
 </dd>
-<dt>author:</dt><dd><p>The name(s) of the author(s), either
-as a character string in the format described in the LaTeX book,
-or a <code><a href="person.html">person</a></code> object.</p>
+<dt>author:</dt><dd><p>The name(s) of the author(s), either as a
+<code><a href="person.html">person</a></code> object, or as a character string which
+<code><a href="person.html">as.person</a></code> correctly coerces to such.</p>
 </dd>
 <dt>booktitle:</dt><dd><p>Title of a book, part of which is being cited.</p>
 </dd>
@@ -375,5 +392,5 @@ writeLines(paste(format(bref, "R"), collapse = "\n\n"))
 writeLines(format(bref, "R", collapse = TRUE))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

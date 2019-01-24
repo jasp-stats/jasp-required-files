@@ -15,5 +15,5 @@ Packaged: 2015-03-02 12:27:36 UTC; sacha
 NeedsCompilation: yes
 Repository: CRAN
 Date/Publication: 2015-03-02 15:51:07
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-06-02 08:37:31 UTC; windows
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-01-21 16:26:44 UTC; windows
 Archs: i386, x64

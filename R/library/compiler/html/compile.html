@@ -144,15 +144,20 @@ during installation.
 this by using <code>cat</code> to print messages.  Eventually this should
 use the condition handling mechanism.
 </p>
-<p>The <code>options</code> argument can be used to control compiler operation.
-There are currently three options: <code>optimize</code>,
-<code>suppressAll</code>, and <code>suppressUndefined</code>. <code>optimize</code>
-specifies the optimization level, an integer from <code>0</code> to <code>3</code>
-(the current out-of-the-box default is <code>2</code>).  <code>suppressAll</code>
-should be a scalar logical; if <code>TRUE</code> no messages will be
-shown. <code>suppressUndefined</code> can be <code>TRUE</code> to suppress all
-messages about undefined variables, or it can be a character vector of
-the names of variables for which messages should not be shown.
+<p>The <code>options</code> argument can be used to control compiler operation. 
+There are currently four options: <code>optimize</code>, <code>suppressAll</code>,
+<code>suppressUndefined</code>, and <code>suppressNoSuperAssignVar</code>. 
+<code>optimize</code> specifies the optimization level, an integer from <code>0</code>
+to <code>3</code> (the current out-of-the-box default is <code>2</code>). 
+<code>suppressAll</code> should be a scalar logical; if <code>TRUE</code> no messages
+will be shown (this is the default). <code>suppressUndefined</code> can be
+<code>TRUE</code> to suppress all messages about undefined variables, or it can
+be a character vector of the names of variables for which messages should
+not be shown.  <code>suppressNoSuperAssignVar</code> can be <code>TRUE</code> to
+suppress messages about super assignments to a variable for which no
+binding is visible at compile time.  During compilation of packages,
+<code>suppressAll</code> is currently <code>FALSE</code>, <code>suppressUndefined</code> is
+<code>TRUE</code> and <code>suppressNoSuperAssignVar</code> is <code>TRUE</code>.
 </p>
 <p><code>getCompilerOption</code> returns the value of the specified option.
 The default value is returned unless a value is supplied in the
@@ -230,5 +235,5 @@ system.time(for (i in 1:1000) la2c(y, is.null))
 
 enableJIT(oldJIT)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>compiler</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>compiler</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

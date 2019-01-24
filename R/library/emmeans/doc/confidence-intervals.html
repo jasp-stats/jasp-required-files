@@ -10,9 +10,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Russ Lenth" />
+<meta name="author" content="emmeans package, Version 1.3.2" />
 
-<meta name="date" content="2018-05-20" />
 
 <title>Confidence intervals and tests in emmeans</title>
 
@@ -31,8 +30,7 @@
 
 
 <h1 class="title toc-ignore">Confidence intervals and tests in emmeans</h1>
-<h4 class="author"><em>Russ Lenth</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
 
 
 
@@ -74,10 +72,10 @@ class(pigs.emm.s)</code></pre>
 ##     percent =  9, 12, 15, 18
 ## Transformation: &quot;log&quot;</code></pre>
 <pre class="r"><code>pigs.emm.s</code></pre>
-<pre class="ro"><code>##  source   emmean         SE df lower.CL upper.CL
-##  fish   3.394492 0.03668122 23 3.318612 3.470373
-##  soy    3.667260 0.03744798 23 3.589793 3.744727
-##  skim   3.796770 0.03938283 23 3.715300 3.878240
+<pre class="ro"><code>##  source emmean     SE df lower.CL upper.CL
+##  fish     3.39 0.0367 23     3.32     3.47
+##  soy      3.67 0.0374 23     3.59     3.74
+##  skim     3.80 0.0394 23     3.72     3.88
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
@@ -101,19 +99,19 @@ class(pigs.emm.s)</code></pre>
 <p>As you may have gathered, the most important method for <code>emmGrid</code> objects is <code>summary()</code>. It has a lot of options, and the detailed documentation via <a href="../html/summary.emm.html"><code>help(&quot;summary.emm&quot;)</code></a> is worth a look.</p>
 <p>Just <code>summary(&lt;object&gt;)</code> by itself will produce a summary that varies somewhat according to context. It does this by setting different defaults for the <code>infer</code> argument, which consists of two logical values, specifying confidence intervals and tests, respectively. The summary of a newly made reference grid will show just estimates and standard errors, but not confidence intervals or tests (that is, <code>infer = c(FALSE, FALSE)</code>). The summary of an <code>emmeans()</code> result, as we see above, will have intervals, but no tests (i.e., <code>infer = c(TRUE, FALSE)</code>); and the result of a <code>contrast()</code> call (see <a href="comparisons.html">comparisons and contrasts</a>) will show test statistics and <em>P</em> values, but not intervals (i.e., <code>infer = c(FALSE, TRUE)</code>). There are courtesy methods <code>confint()</code> and <code>test()</code> that just call <code>summary()</code> with the appropriate <code>infer</code> setting; for example,</p>
 <pre class="r"><code>test(pigs.emm.s)</code></pre>
-<pre class="ro"><code>##  source   emmean         SE df t.ratio p.value
-##  fish   3.394492 0.03668122 23  92.540  &lt;.0001
-##  soy    3.667260 0.03744798 23  97.929  &lt;.0001
-##  skim   3.796770 0.03938283 23  96.407  &lt;.0001
+<pre class="ro"><code>##  source emmean     SE df t.ratio p.value
+##  fish     3.39 0.0367 23 92.540  &lt;.0001 
+##  soy      3.67 0.0374 23 97.929  &lt;.0001 
+##  skim     3.80 0.0394 23 96.407  &lt;.0001 
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale.</code></pre>
 <p>It is not particularly useful, though, to test these EMMs against the default of zero – which is why tests are not usually shown. It makes a lot more sense to test them against some target concentration, say 40. And suppose we want to do a one-sided test to see if the concentration is greater than 40. Remembering that the response is log-transformed in this model,</p>
 <pre class="r"><code>test(pigs.emm.s, null = log(40), side = &quot;&gt;&quot;)</code></pre>
-<pre class="ro"><code>##  source   emmean         SE df     null t.ratio p.value
-##  fish   3.394492 0.03668122 23 3.688879  -8.026  1.0000
-##  soy    3.667260 0.03744798 23 3.688879  -0.577  0.7153
-##  skim   3.796770 0.03938283 23 3.688879   2.740  0.0058
+<pre class="ro"><code>##  source emmean     SE df null t.ratio p.value
+##  fish     3.39 0.0367 23 3.69 -8.026  1.0000 
+##  soy      3.67 0.0374 23 3.69 -0.577  0.7153 
+##  skim     3.80 0.0394 23 3.69  2.740  0.0058 
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
@@ -125,10 +123,10 @@ class(pigs.emm.s)</code></pre>
 <!-- @index Transformations!Back-transforming; `type`; Response scale -->
 <p>Transformations and link functions are supported an several ways in <strong>emmeans</strong>, making this a complex topic worthy of <a href="transformations.html">its own vignette</a>. Here, we show just the most basic approach. Namely, specifying the argument <code>type = &quot;response&quot;</code> will cause the displayed results to be back-transformed to the response scale, when a transformation or link function is incorporated in the model. For example, let’s try the preceding <code>test()</code> call again:</p>
 <pre class="r"><code>test(pigs.emm.s, null = log(40), side = &quot;&gt;&quot;, type = &quot;response&quot;)</code></pre>
-<pre class="ro"><code>##  source response       SE df null t.ratio p.value
-##  fish   29.79952 1.093083 23   40  -8.026  1.0000
-##  soy    39.14451 1.465883 23   40  -0.577  0.7153
-##  skim   44.55704 1.754782 23   40   2.740  0.0058
+<pre class="ro"><code>##  source response   SE df null t.ratio p.value
+##  fish       29.8 1.09 23   40 -8.026  1.0000 
+##  soy        39.1 1.47 23   40 -0.577  0.7153 
+##  skim       44.6 1.75 23   40  2.740  0.0058 
 ## 
 ## Results are averaged over the levels of: percent 
 ## P values are right-tailed 
@@ -136,10 +134,10 @@ class(pigs.emm.s)</code></pre>
 <p>Note what changes and what doesn’t change. In the <code>test()</code> call, we <em>still</em> use the log of 40 as the null value; <code>null</code> must always be specified on the linear-prediction scale, in this case the log. In the output, the displayed estimates, as well as the <code>null</code> value, are shown back-transformed. As well, the standard errors are altered (using the delta method). However, the <em>t</em> ratios and <em>P</em> values are identical to the preceding results. That is, the tests themselves are still conducted on the linear-predictor scale (as is noted in the output).</p>
 <p>Similar statements apply to confidence intervals on the response scale:</p>
 <pre class="r"><code>confint(pigs.emm.s, side = &quot;&gt;&quot;, level = .90, type = &quot;response&quot;)</code></pre>
-<pre class="ro"><code>##  source response       SE df lower.CL upper.CL
-##  fish   29.79952 1.093083 23 28.39159      Inf
-##  soy    39.14451 1.465883 23 37.25735      Inf
-##  skim   44.55704 1.754782 23 42.30080      Inf
+<pre class="ro"><code>##  source response   SE df lower.CL upper.CL
+##  fish       29.8 1.09 23     28.4      Inf
+##  soy        39.1 1.47 23     37.3      Inf
+##  skim       44.6 1.75 23     42.3      Inf
 ## 
 ## Results are averaged over the levels of: percent 
 ## Confidence level used: 0.9 
@@ -153,10 +151,10 @@ class(pigs.emm.s)</code></pre>
      Tukey adjustment; Sidak adjustment -->
 <p>Both tests and confidence intervals may be adjusted for simultaneous inference. Such adjustments ensure that the confidence coefficient for a whole set of intervals is at least the specified level, or to control the overall significance level for a whole family of tests. This is done via the <code>adjust</code> argument. For <code>ref_grid()</code> and <code>emmeans()</code> results, the default is <code>adjust = &quot;none&quot;</code>. For most <code>contrast()</code> results, <code>adjust</code> is often something else, depending on what type of contrasts are created. For example, pairwise comparisons default to <code>adjust = &quot;tukey&quot;</code>, i.e., the Tukey HSD method. The <code>summary()</code> function sometimes <em>changes</em> <code>adjust</code> if it is inappropriate. For example, with</p>
 <pre class="r"><code>confint(pigs.emm.s, adjust = &quot;tukey&quot;)</code></pre>
-<pre class="ro"><code>##  source   emmean         SE df lower.CL upper.CL
-##  fish   3.394492 0.03668122 23 3.300060 3.488925
-##  soy    3.667260 0.03744798 23 3.570854 3.763666
-##  skim   3.796770 0.03938283 23 3.695383 3.898157
+<pre class="ro"><code>##  source emmean     SE df lower.CL upper.CL
+##  fish     3.39 0.0367 23     3.30     3.49
+##  soy      3.67 0.0374 23     3.57     3.76
+##  skim     3.80 0.0394 23     3.70     3.90
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
@@ -170,10 +168,10 @@ class(pigs.emm.s)</code></pre>
 <p>An adjustment method that is usually appropriate is Bonferroni; however, it can be quite conservative. Using <code>adjust = &quot;mvt&quot;</code> is the closest to being the “exact” all-around method “single-step” method, as it uses the multivariate <em>t</em> distribution (and the <strong>mvtnorm</strong> package) with the same covariance structure as the estimates to determine the adjustment. However, this comes at high computational expense as the computations are done using simulation techniques. For a large set of tests (and especially confidence intervals), the computational lag becomes noticeable if not intolerable.</p>
 <p>For tests, <code>adjust</code> increases the <em>P</em> values over those otherwise obtained with <code>adjust = &quot;none&quot;</code>, making it harder to declare an individual test as “significant.” Compare the following adjusted tests with the unadjusted ones previously computed.</p>
 <pre class="r"><code>test(pigs.emm.s, null = log(40), side = &quot;&gt;&quot;, adjust = &quot;bonferroni&quot;)</code></pre>
-<pre class="ro"><code>##  source   emmean         SE df     null t.ratio p.value
-##  fish   3.394492 0.03668122 23 3.688879  -8.026  1.0000
-##  soy    3.667260 0.03744798 23 3.688879  -0.577  1.0000
-##  skim   3.796770 0.03938283 23 3.688879   2.740  0.0175
+<pre class="ro"><code>##  source emmean     SE df null t.ratio p.value
+##  fish     3.39 0.0367 23 3.69 -8.026  1.0000 
+##  soy      3.67 0.0374 23 3.69 -0.577  1.0000 
+##  skim     3.80 0.0394 23 3.69  2.740  0.0175 
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
@@ -188,25 +186,25 @@ class(pigs.emm.s)</code></pre>
 <p>Sometimes you want to break a summary down into smaller pieces; for this purpose, the <code>by</code> argument in <code>summary()</code> is useful. For example,</p>
 <pre class="r"><code>confint(pigs.rg, by = &quot;source&quot;)</code></pre>
 <pre class="ro"><code>## source = fish:
-##  percent prediction         SE df lower.CL upper.CL
-##        9   3.220292 0.05361160 23 3.109388 3.331196
-##       12   3.399846 0.04934177 23 3.297775 3.501917
-##       15   3.437691 0.05482126 23 3.324284 3.551097
-##       18   3.520141 0.05474644 23 3.406889 3.633393
+##  percent prediction     SE df lower.CL upper.CL
+##        9       3.22 0.0536 23     3.11     3.33
+##       12       3.40 0.0493 23     3.30     3.50
+##       15       3.44 0.0548 23     3.32     3.55
+##       18       3.52 0.0547 23     3.41     3.63
 ## 
 ## source = soy:
-##  percent prediction         SE df lower.CL upper.CL
-##        9   3.493060 0.04979018 23 3.390061 3.596058
-##       12   3.672614 0.04893581 23 3.571383 3.773846
-##       15   3.710459 0.05070383 23 3.605570 3.815347
-##       18   3.792909 0.06398483 23 3.660546 3.925272
+##  percent prediction     SE df lower.CL upper.CL
+##        9       3.49 0.0498 23     3.39     3.60
+##       12       3.67 0.0489 23     3.57     3.77
+##       15       3.71 0.0507 23     3.61     3.82
+##       18       3.79 0.0640 23     3.66     3.93
 ## 
 ## source = skim:
-##  percent prediction         SE df lower.CL upper.CL
-##        9   3.622569 0.05011840 23 3.518892 3.726247
-##       12   3.802124 0.04938053 23 3.699972 3.904275
-##       15   3.839968 0.05486610 23 3.726469 3.953468
-##       18   3.922419 0.06459690 23 3.788790 4.056048
+##  percent prediction     SE df lower.CL upper.CL
+##        9       3.62 0.0501 23     3.52     3.73
+##       12       3.80 0.0494 23     3.70     3.90
+##       15       3.84 0.0549 23     3.73     3.95
+##       18       3.92 0.0646 23     3.79     4.06
 ## 
 ## Results are given on the log (not the response) scale. 
 ## Confidence level used: 0.95</code></pre>
@@ -223,22 +221,22 @@ summary(.Last.value, by = percent)       ### grouped the other way</code></pre>
 pigsint.rg &lt;- ref_grid(pigsint.lm)
 contrast(pigsint.rg, &quot;consec&quot;, simple = &quot;percent&quot;)</code></pre>
 <pre class="ro"><code>## source = fish:
-##  contrast     estimate         SE df t.ratio p.value
-##  12 - 9    0.184851182 0.10612784 17   1.742  0.5274
-##  15 - 12   0.004504448 0.10612784 17   0.042  1.0000
-##  18 - 15   0.040679810 0.10612784 17   0.383  0.9999
+##  contrast estimate     SE df t.ratio p.value
+##  12 - 9     0.1849 0.1061 17  1.742  0.2361 
+##  15 - 12    0.0045 0.1061 17  0.042  0.9999 
+##  18 - 15    0.0407 0.1061 17  0.383  0.9626 
 ## 
 ## source = soy:
-##  contrast     estimate         SE df t.ratio p.value
-##  12 - 9    0.141172845 0.09492363 17   1.487  0.6970
-##  15 - 12  -0.010218130 0.09492363 17  -0.108  1.0000
-##  18 - 15   0.089467012 0.13424228 17   0.666  0.9951
+##  contrast estimate     SE df t.ratio p.value
+##  12 - 9     0.1412 0.0949 17  1.487  0.3593 
+##  15 - 12   -0.0102 0.0949 17 -0.108  0.9992 
+##  18 - 15    0.0895 0.1342 17  0.666  0.8572 
 ## 
 ## source = skim:
-##  contrast     estimate         SE df t.ratio p.value
-##  12 - 9    0.204318195 0.09492363 17   2.152  0.2922
-##  15 - 12   0.139774084 0.10612784 17   1.317  0.8028
-##  18 - 15   0.186377064 0.14238544 17   1.309  0.8074
+##  contrast estimate     SE df t.ratio p.value
+##  12 - 9     0.2043 0.0949 17  2.152  0.1184 
+##  15 - 12    0.1398 0.1061 17  1.317  0.4521 
+##  18 - 15    0.1864 0.1424 17  1.309  0.4568 
 ## 
 ## Results are given on the log (not the response) scale. 
 ## P value adjustment: mvt method for 3 tests</code></pre>
@@ -252,10 +250,10 @@ contrast(pigsint.rg, &quot;consec&quot;, simple = &quot;percent&quot;)</code></p
 <p>From the above, we already know how to test individual results. For pairwise comparisons (details in <a href="comparisons.html">the “comparisons” vignette</a>), we might do</p>
 <pre class="r"><code>pigs.prs.s &lt;- pairs(pigs.emm.s)
 pigs.prs.s</code></pre>
-<pre class="ro"><code>##  contrast      estimate         SE df t.ratio p.value
-##  fish - soy  -0.2727678 0.05293450 23  -5.153  0.0001
-##  fish - skim -0.4022777 0.05415929 23  -7.428  &lt;.0001
-##  soy - skim  -0.1295098 0.05304280 23  -2.442  0.0570
+<pre class="ro"><code>##  contrast    estimate     SE df t.ratio p.value
+##  fish - soy    -0.273 0.0529 23 -5.153  0.0001 
+##  fish - skim   -0.402 0.0542 23 -7.428  &lt;.0001 
+##  soy - skim    -0.130 0.0530 23 -2.442  0.0570 
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 
@@ -263,7 +261,7 @@ pigs.prs.s</code></pre>
 <p>But suppose we want an <em>omnibus</em> test that all these comparisons are zero. Easy enough, using the <code>joint</code> argument in <code>test</code> (note: the <code>joint</code> argument is <em>not</em> available in <code>summary()</code>; only in <code>test()</code>):</p>
 <pre class="r"><code>test(pigs.prs.s, joint = TRUE)</code></pre>
 <pre class="ro"><code>##  df1 df2 F.ratio p.value note
-##    2  23  28.849  &lt;.0001  d  
+##    2  23  28.849 &lt;.0001   d  
 ## 
 ## d: df1 reduced due to linear dependence</code></pre>
 <p>Notice that there are three comparisons, but only 2 d.f. for the test, as cautioned in the message.</p>
@@ -274,9 +272,9 @@ pigs.prs.s</code></pre>
 <p>For convenience, there is also a <code>joint_tests()</code> function that performs joint tests of contrasts among each term in a model or <code>emmGrid</code> object.</p>
 <pre class="r"><code>joint_tests(pigsint.rg)</code></pre>
 <pre class="ro"><code>##  model term     df1 df2 F.ratio p.value
-##  source           2  17  30.256  &lt;.0001
-##  percent          3  17   8.214  0.0013
-##  source:percent   6  17   0.926  0.5011</code></pre>
+##  source           2  17  30.256 &lt;.0001 
+##  percent          3  17   8.214 0.0013 
+##  source:percent   6  17   0.926 0.5011</code></pre>
 <p>The tests of main effects are of families of contrasts; those for interaction effects are for interaction contrasts. These results are essentially the same as a “Type-III ANOVA”, but may differ in situations where there are empty cells or other non-estimability issues, or if generalizations are present such as unequal weighting. (Another distinction is that sums of squares and mean squares are not shown; that is because these really are tests of contrasts among predictions, and they may or may not corresopond to model sums of squares.) One may use <code>by</code> variables to obtain separate tables of joint tests.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
@@ -286,10 +284,10 @@ pigs.prs.s</code></pre>
 <!-- @index Tests!Equivalence; Tests!Noninferiority; `test()`!`delta` -->
 <p>The <code>delta</code> argument in <code>summary()</code> or <code>test()</code> allows the user to specify a threshold value to use in a test of equivalence, noninferiority, or nonsuperiority. An equivalence test is kind of a backwards significance test, where differences enough smaller than <code>delta</code> are the ones that can be significant. The help page for <code>summary.emmGrid</code> gives the details of these tests. Suppose in the present example, we consider two sources to be equivalent if they are within 25% of each other. We can test this as follows:</p>
 <pre class="r"><code>test(pigs.prs.s, delta = log(1.25), adjust = &quot;none&quot;)</code></pre>
-<pre class="ro"><code>##  contrast      estimate         SE df t.ratio p.value
-##  fish - soy  -0.2727678 0.05293450 23   0.937  0.8209
-##  fish - skim -0.4022777 0.05415929 23   3.308  0.9985
-##  soy - skim  -0.1295098 0.05304280 23  -1.765  0.0454
+<pre class="ro"><code>##  contrast    estimate     SE df t.ratio p.value
+##  fish - soy    -0.273 0.0529 23  0.937  0.8209 
+##  fish - skim   -0.402 0.0542 23  3.308  0.9985 
+##  soy - skim    -0.130 0.0530 23 -1.765  0.0454 
 ## 
 ## Results are averaged over the levels of: percent 
 ## Results are given on the log (not the response) scale. 

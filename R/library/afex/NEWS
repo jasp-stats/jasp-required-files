@@ -1,8 +1,66 @@
                     *************************
+                    ** afex VERSION 0.22-x **
+                    *************************
+                    
+                    Changes in afex Version 0.22-x
+                    Released September 2018
+                    
+    Significant User Visible Changes and New Features
+    
+    o   New functions for plotting results (means, error bars, and raw data) 
+        using ggplot2, afex_plot(), generic function for afex and lme4::merMod 
+        objects. Furthermore added two more functions:
+        - interaction_plot(): workhorse producing interaction plot
+        - oneway_plot(): workhorse producing oneway plot
+        Error bars can bedisplay confidence intervals (the default) or standard
+        errors and can be calculated using a variety of different standard 
+        errors (e.g., model-based, within-subjects).
+
+    o   Added vignette introducing afex_plot().
+        
+    o   Updated ANOVA vignette to use afex_plot() and the multivariate for 
+        follow-up test.
+    
+    o   Package emmeans was moved to suggests and needs to be either attached 
+        explicitly or called with ::
+        Option 1: emmeans::emmeans() 
+        Option 2: library("emmeans") and then just emmeans()
+        
+    o   Added call slot to mixed objects holding the matched call.
+    
+    Bugfixes
+
+    o   Error in ANOVA examples using emmeans corrected, see:
+        https://stats.stackexchange.com/q/360900/442
+
+
+                    *************************
+                    ** afex VERSION 0.21-x **
+                    *************************
+                    
+                    Changes in afex Version 0.21-x
+                    Released June 2018
+                    
+    Significant User Visible Changes and New Features
+    
+    o   Smaller package footprint: 
+        The stringr package is not imported any more, all calls to stringr 
+        functions were replaced with calls to base R functions.
+        The coin package (used in compare.2.vectors) was moved from Imports to 
+        Suggests.
+    
+    Bugfixes
+
+    o   ANOVA functions produce accurate emmeans even for ANCOVAs, see: 
+        https://afex.singmann.science/forums/topic/precise-estimates-from-emmeans-across-lm-and-aov_ez
+
+    
+    
+                    *************************
                     ** afex VERSION 0.20-x **
                     *************************
                     
-                    Changes in afex Version 0.20-0
+                    Changes in afex Version 0.20-x
                     Released April 2018
                     
     Significant User Visible Changes and New Features

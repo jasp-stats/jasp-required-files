@@ -11,14 +11,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2018-05-26" />
+<meta name="date" content="2019-01-11" />
 
 <title>Benchmarking data.table</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -54,7 +54,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -68,66 +90,111 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Benchmarking data.table</h1>
-<h4 class="date"><em>2018-05-26</em></h4>
+<h4 class="date"><em>2019-01-11</em></h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#fread-clear-caches"><span class="toc-section-number">0.1</span> fread: clear caches</a></li>
-<li><a href="#subset-index-optimization-switch-off"><span class="toc-section-number">0.2</span> subset: index optimization switch off</a></li>
-<li><a href="#subset-index-aware-benchmarking"><span class="toc-section-number">0.3</span> subset: index aware benchmarking</a></li>
-<li><a href="#by-reference-operations"><span class="toc-section-number">0.4</span> <em>by reference</em> operations</a></li>
-<li><a href="#avoid-microbenchmark-times100"><span class="toc-section-number">0.5</span> avoid <code>microbenchmark(, times=100)</code></a></li>
-<li><a href="#multithreaded-processing"><span class="toc-section-number">0.6</span> multithreaded processing</a></li>
-<li><a href="#avoid-data.table-inside-a-loop"><span class="toc-section-number">0.7</span> avoid <code>data.table()</code> inside a loop</a></li>
+<li><a href="#fread-clear-caches"><span class="toc-section-number">1</span> fread: clear caches</a></li>
+<li><a href="#subset-threshold-for-index-optimization-on-compound-queries"><span class="toc-section-number">2</span> subset: threshold for index optimization on compound queries</a></li>
+<li><a href="#subset-index-aware-benchmarking"><span class="toc-section-number">3</span> subset: index aware benchmarking</a></li>
+<li><a href="#by-reference-operations"><span class="toc-section-number">4</span> <em>by reference</em> operations</a></li>
+<li><a href="#try-to-benchmark-atomic-processes"><span class="toc-section-number">5</span> try to benchmark atomic processes</a></li>
+<li><a href="#avoid-class-coercion"><span class="toc-section-number">6</span> avoid class coercion</a></li>
+<li><a href="#avoid-microbenchmark...-times100"><span class="toc-section-number">7</span> avoid <code>microbenchmark(..., times=100)</code></a></li>
+<li><a href="#multithreaded-processing"><span class="toc-section-number">8</span> multithreaded processing</a></li>
+<li><a href="#inside-a-loop-prefer-set-instead-of"><span class="toc-section-number">9</span> inside a loop prefer <code>set</code> instead of <code>:=</code></a></li>
+<li><a href="#inside-a-loop-prefer-setdt-instead-of-data.table"><span class="toc-section-number">10</span> inside a loop prefer <code>setDT</code> instead of <code>data.table()</code></a></li>
 </ul>
 </div>
 
-<style>
-h2 {
-    font-size: 20px;
-}
-</style>
-<p>This document is meant to guide on measuring performance of data.table. Single place to documents best practices or traps to avoid.</p>
-<div id="fread-clear-caches" class="section level2">
-<h2><span class="header-section-number">0.1</span> fread: clear caches</h2>
+<p>This document is meant to guide on measuring performance of <code>data.table</code>. Single place to document best practices and traps to avoid.</p>
+<div id="fread-clear-caches" class="section level1">
+<h1><span class="header-section-number">1</span> fread: clear caches</h1>
 <p>Ideally each <code>fread</code> call should be run in fresh session with the following commands preceding R execution. This clears OS cache file in RAM and HD cache.</p>
 <div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="fu">free</span> -g
 <span class="fu">sudo</span> sh -c <span class="st">'echo 3 &gt;/proc/sys/vm/drop_caches'</span>
 <span class="fu">sudo</span> lshw -class disk
 <span class="fu">sudo</span> hdparm -t /dev/sda</code></pre></div>
+<p>When comparing <code>fread</code> to non-R solutions be aware that R requires values of character columns to be added to <em>R’s global string cache</em>. This takes time when reading data but later operations benefit since the character strings have already been cached. Consequently as well timing isolated tasks (such as <code>fread</code> alone), it’s a good idea to benchmark a pipeline of tasks such as reading data, computing operators and producing final output and report the total time of the pipeline.</p>
 </div>
-<div id="subset-index-optimization-switch-off" class="section level2">
-<h2><span class="header-section-number">0.2</span> subset: index optimization switch off</h2>
-<p>Index optimization will currently be turned off when doing subset using index and when cross product of elements provided to filter on exceeds &gt; 1e4.</p>
+<div id="subset-threshold-for-index-optimization-on-compound-queries" class="section level1">
+<h1><span class="header-section-number">2</span> subset: threshold for index optimization on compound queries</h1>
+<p>Index optimization for compound filter queries will be not be used when cross product of elements provided to filter on exceeds 1e4 elements.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT =<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">V1=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">V2=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">V3=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">V4=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+<span class="kw">setindex</span>(DT)
+v =<span class="st"> </span><span class="kw">c</span>(1L, <span class="kw">rep</span>(11L, <span class="dv">9</span>))
+<span class="kw">length</span>(v)<span class="op">^</span><span class="dv">4</span>               <span class="co"># cross product of elements in filter</span>
+<span class="co">#[1] 10000                # &lt;= 10000</span>
+DT[V1 <span class="op">%in%</span><span class="st"> </span>v <span class="op">&amp;</span><span class="st"> </span>V2 <span class="op">%in%</span><span class="st"> </span>v <span class="op">&amp;</span><span class="st"> </span>V3 <span class="op">%in%</span><span class="st"> </span>v <span class="op">&amp;</span><span class="st"> </span>V4 <span class="op">%in%</span><span class="st"> </span>v, verbose=<span class="ot">TRUE</span>]
+<span class="co">#Optimized subsetting with index 'V1__V2__V3__V4'</span>
+<span class="co">#on= matches existing index, using index</span>
+<span class="co">#Starting bmerge ...done in 0.000sec</span>
+<span class="co">#...</span>
+v =<span class="st"> </span><span class="kw">c</span>(1L, <span class="kw">rep</span>(11L, <span class="dv">10</span>))
+<span class="kw">length</span>(v)<span class="op">^</span><span class="dv">4</span>               <span class="co"># cross product of elements in filter</span>
+<span class="co">#[1] 14641                # &gt; 10000</span>
+DT[V1 <span class="op">%in%</span><span class="st"> </span>v <span class="op">&amp;</span><span class="st"> </span>V2 <span class="op">%in%</span><span class="st"> </span>v <span class="op">&amp;</span><span class="st"> </span>V3 <span class="op">%in%</span><span class="st"> </span>v <span class="op">&amp;</span><span class="st"> </span>V4 <span class="op">%in%</span><span class="st"> </span>v, verbose=<span class="ot">TRUE</span>]
+<span class="co">#Subsetting optimization disabled because the cross-product of RHS values exceeds 1e4, causing memory problems.</span>
+<span class="co">#...</span></code></pre></div>
 </div>
-<div id="subset-index-aware-benchmarking" class="section level2">
-<h2><span class="header-section-number">0.3</span> subset: index aware benchmarking</h2>
-<p>For convinience data.table automatically builds index on fields you are doing subset data. It will add some overhead to first subset on particular fields but greatly reduce time to query those columns in subsequent runs. When measuring speed best way is to measure index creation and query using index separately. Having such timings it is easy to decide what is the optimal strategy for your use case. To control usage of index use following options (see <code>?datatable.optimize</code> for more details):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">datatable.optimize=</span>2L)
-<span class="kw">options</span>(<span class="dt">datatable.optimize=</span>3L)
-<span class="kw">options</span>(<span class="dt">datatable.auto.index=</span><span class="ot">TRUE</span>)
+<div id="subset-index-aware-benchmarking" class="section level1">
+<h1><span class="header-section-number">3</span> subset: index aware benchmarking</h1>
+<p>For convenience <code>data.table</code> automatically builds an index on fields you use to subset data. It will add some overhead to first subset on particular fields but greatly reduces time to query those columns in subsequent runs. When measuring speed, the best way is to measure index creation and query using an index separately. Having such timings it is easy to decide what is the optimal strategy for your use case. To control usage of index use following options:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">datatable.auto.index=</span><span class="ot">TRUE</span>)
 <span class="kw">options</span>(<span class="dt">datatable.use.index=</span><span class="ot">TRUE</span>)</code></pre></div>
-<p><code>options(datatable.optimize=2L)</code> will turn off optimization of subsets completely, while <code>options(datatable.optimize=3L)</code> will switch it back on. <code>use.index=FALSE</code> will force query not to use index even if it exists, but existing keys are used for optimization. <code>auto.index=FALSE</code> only disables building index automatically when doing subset on non-indexed data.</p>
+<ul>
+<li><code>use.index=FALSE</code> will force query not to use indices even if they exists, but existing keys are still used for optimization.</li>
+<li><code>auto.index=FALSE</code> disables building index automatically when doing subset on non-indexed data, but if indices were created before this option was set, or explicitly by calling <code>setindex</code> they still will be used for optimization.</li>
+</ul>
+<p>Two other options control optimization globally, including use of indices:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">datatable.optimize=</span>2L)
+<span class="kw">options</span>(<span class="dt">datatable.optimize=</span>3L)</code></pre></div>
+<p><code>options(datatable.optimize=2L)</code> will turn off optimization of subsets completely, while <code>options(datatable.optimize=3L)</code> will switch it back on. Those options affects much more optimizations thus should not be used when only control of index is needed. Read more in <code>?datatable.optimize</code>.</p>
 </div>
-<div id="by-reference-operations" class="section level2">
-<h2><span class="header-section-number">0.4</span> <em>by reference</em> operations</h2>
-<p>When benchmarking <code>set*</code> functions it make sense to measure only first run. Those functions updates data.table by reference thus in subsequent runs they get already processed data.table on input.</p>
-<p>Protecting your data.table from being updated by reference operations can be achieved using <code>copy</code> or <code>data.table:::shallow</code> functions. Be aware <code>copy</code> might be very expensive as it needs to duplicate whole object, but this is what other packages usually do. It is unlikely we want to include duplication time in time of the actual task we are benchmarking.</p>
+<div id="by-reference-operations" class="section level1">
+<h1><span class="header-section-number">4</span> <em>by reference</em> operations</h1>
+<p>When benchmarking <code>set*</code> functions it make sense to measure only first run. Those functions updates data.table by reference thus in subsequent runs they get already processed <code>data.table</code> on input.</p>
+<p>Protecting your <code>data.table</code> from being updated by reference operations can be achieved using <code>copy</code> or <code>data.table:::shallow</code> functions. Be aware <code>copy</code> might be very expensive as it needs to duplicate whole object. It is unlikely we want to include duplication time in time of the actual task we are benchmarking.</p>
 </div>
-<div id="avoid-microbenchmark-times100" class="section level2">
-<h2><span class="header-section-number">0.5</span> avoid <code>microbenchmark(, times=100)</code></h2>
+<div id="try-to-benchmark-atomic-processes" class="section level1">
+<h1><span class="header-section-number">5</span> try to benchmark atomic processes</h1>
+<p>If your benchmark is meant to be published it will be much more insightful if you will split it to measure time of atomic processes. This way your readers can see how much time was spent on reading data from source, cleaning, actual transformation, exporting results. Of course if your benchmark is meant to present <em>full workflow</em> then it perfectly make sense to present total timing, still spliting timings might give good insight into bottlenecks in such workflow. There are another cases when it might not be desired, for example when benchmarking <em>reading csv</em>, followed by <em>grouping</em>. R requires to populate <em>R’s global string cache</em> which adds extra overhead when importing character data to R session. On the other hand <em>global string cache</em> might speed up processes like <em>grouping</em>. In such cases when comparing R to other languages it might be useful to include total timing.</p>
+</div>
+<div id="avoid-class-coercion" class="section level1">
+<h1><span class="header-section-number">6</span> avoid class coercion</h1>
+<p>Unless this is what you truly want to measure you should prepare input objects for every tools you are benchmarking in expected class.</p>
+</div>
+<div id="avoid-microbenchmark...-times100" class="section level1">
+<h1><span class="header-section-number">7</span> avoid <code>microbenchmark(..., times=100)</code></h1>
 <p>Repeating benchmarking many times usually does not fit well for data processing tools. Of course it perfectly make sense for more atomic calculations. It does not well represent use case for common data processing tasks, which rather consists of batches sequentially provided transformations, each run once. Matt once said:</p>
 <blockquote>
 <p>I’m very wary of benchmarks measured in anything under 1 second. Much prefer 10 seconds or more for a single run, achieved by increasing data size. A repetition count of 500 is setting off alarm bells. 3-5 runs should be enough to convince on larger data. Call overhead and time to GC affect inferences at this very small scale.</p>
 </blockquote>
+<p>This is very valid. The smaller time measurement is the relatively bigger noise is. Noise generated by method dispatch, package/class initialization, etc. Main focus of benchmark should be on real use case scenarios.</p>
 </div>
-<div id="multithreaded-processing" class="section level2">
-<h2><span class="header-section-number">0.6</span> multithreaded processing</h2>
-<p>One of the main factor that is likely to impact timings is number of threads in your machine. In recent versions of data.table some of the functions has been parallelized. You can control how much threads you want to use with <code>setDTthreads</code>.</p>
+<div id="multithreaded-processing" class="section level1">
+<h1><span class="header-section-number">8</span> multithreaded processing</h1>
+<p>One of the main factor that is likely to impact timings is number of threads in your machine. In recent versions of <code>data.table</code> some of the functions has been parallelized. You can control how much threads you want to use with <code>setDTthreads</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setDTthreads</span>(<span class="dv">0</span>)    <span class="co"># use all available cores (default)</span>
+<span class="kw">getDTthreads</span>()     <span class="co"># check how many cores are currently used</span></code></pre></div>
 </div>
-<div id="avoid-data.table-inside-a-loop" class="section level2">
-<h2><span class="header-section-number">0.7</span> avoid <code>data.table()</code> inside a loop</h2>
+<div id="inside-a-loop-prefer-set-instead-of" class="section level1">
+<h1><span class="header-section-number">9</span> inside a loop prefer <code>set</code> instead of <code>:=</code></h1>
+<p>Unless you are utilizing index when doing <em>sub-assign by reference</em> you should prefer <code>set</code> function which does not impose overhead of <code>[.data.table</code> method call.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT =<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">a=</span><span class="dv">3</span><span class="op">:</span><span class="dv">1</span>, <span class="dt">b=</span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])
+<span class="kw">setindex</span>(DT, a)
+
+<span class="co"># for (...) {                 # imagine loop here</span>
+
+  DT[a<span class="op">==</span>2L, b <span class="op">:</span><span class="er">=</span><span class="st"> &quot;z&quot;</span>]         <span class="co"># sub-assign by reference, uses index</span>
+  DT[, d <span class="op">:</span><span class="er">=</span><span class="st"> &quot;z&quot;</span>]              <span class="co"># not sub-assign by reference, not uses index and adds overhead of `[.data.table`</span>
+  <span class="kw">set</span>(DT, <span class="dt">j=</span><span class="st">&quot;d&quot;</span>, <span class="dt">value=</span><span class="st">&quot;z&quot;</span>)   <span class="co"># no `[.data.table` overhead, but no index yet, till #1196</span>
+
+<span class="co"># }</span></code></pre></div>
+</div>
+<div id="inside-a-loop-prefer-setdt-instead-of-data.table" class="section level1">
+<h1><span class="header-section-number">10</span> inside a loop prefer <code>setDT</code> instead of <code>data.table()</code></h1>
 <p>As of now <code>data.table()</code> has an overhead, thus inside loops it is preferred to use <code>as.data.table()</code> or <code>setDT()</code> on a valid list.</p>
 </div>
 

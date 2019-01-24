@@ -96,11 +96,6 @@ different when at least one of <code>duplicated</code> and
 <p><code>duplicated(x, fromLast = TRUE)</code> is equivalent to but faster than
 <code>rev(duplicated(rev(x)))</code>.
 </p>
-<p>The data frame method works by pasting together a character
-representation of the rows separated by <code>\r</code>, so may be imperfect
-if the data frame has characters with embedded carriage returns or
-columns which do not reliably map to characters.
-</p>
 <p>The array method calculates for each element of the sub-array
 specified by <code>MARGIN</code> if the remaining dimensions are identical
 to those for an earlier (or later, when <code>fromLast = TRUE</code>) element
@@ -117,12 +112,6 @@ complex ones differing from <code>NaN</code>; character strings will be compared
 <p>Values in <code>incomparables</code> will never be marked as duplicated.
 This is intended to be used for a fairly small set of values and will
 not be efficient for a very large set.
-</p>
-<p>When used on a data frame with more than one column, or an array or
-matrix when comparing dimensions of length greater than one, this
-tests for identity of character representations.  This will
-catch people who unwisely rely on exact equality of floating-point
-numbers!
 </p>
 <p>Except for factors, logical and raw vectors the default <code>nmax = NA</code> is
 equivalent to <code>nmax = length(x)</code>.  Since a hash table of size
@@ -194,5 +183,5 @@ anyDuplicated(x)
 anyDuplicated(x, fromLast = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

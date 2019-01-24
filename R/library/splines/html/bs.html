@@ -34,7 +34,8 @@ bs(x, df = NULL, knots = NULL, degree = 3, intercept = FALSE,
 <code>knots</code>; <code>bs()</code> then chooses <code>df-degree</code> (minus one
 if there is an intercept) knots at suitable quantiles of <code>x</code>
 (which will ignore missing values).  The default, <code>NULL</code>,
-corresponds to <em>no</em> inner knots, i.e., <code>degree - intercept</code>.</p>
+takes the number of inner knots as <code>length(knots)</code>.  If that is
+zero as per default, that corresponds to <code>df = degree - intercept</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>knots</code></td>
 <td>
@@ -67,7 +68,7 @@ parameters do not depend on <code>x</code>.  Data can extend beyond
 
 <h3>Details</h3>
 
-<p><code>bs</code> is based on the function <code><a href="splineDesign.html">spline.des</a></code>.
+<p><code>bs</code> is based on the function <code><a href="splineDesign.html">splineDesign</a></code>.
 It generates a basis matrix for
 representing the family of piecewise polynomials with the specified
 interior knots and degree, evaluated at the values of <code>x</code>.  A
@@ -130,5 +131,5 @@ ht &lt;- seq(57, 73, length.out = 200)
 lines(ht, predict(fm1, data.frame(height = ht)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>splines</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>splines</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

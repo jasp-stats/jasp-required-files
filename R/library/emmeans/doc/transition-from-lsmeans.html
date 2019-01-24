@@ -10,9 +10,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Russ Lenth" />
+<meta name="author" content="emmeans package, Version 1.3.2" />
 
-<meta name="date" content="2018-05-20" />
 
 <title>Transitioning to emmeans from lsmeans</title>
 
@@ -31,8 +30,7 @@
 
 
 <h1 class="title toc-ignore">Transitioning to emmeans from lsmeans</h1>
-<h4 class="author"><em>Russ Lenth</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
 
 
 
@@ -64,16 +62,15 @@
 <p>That said, here are a few changes that former <strong>lsmeans</strong> users may need to be aware of:</p>
 <ul>
 <li>The package provides a utility <code>emmeans:::convert_scripts()</code> that may be used to convert old scripts that used <strong>lsmeans</strong> to use <strong>emmeans</strong> instead. <a href="#scripts">See more below</a></li>
-<li><p>Some functions are deprecated, e.g. <code>ref.grid()</code>, <code>lsm.options()</code>, etc. They will work, but you will get a deprecated message advising you to use <code>ref_grid()</code> and <code>emm_options()</code>, etc.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p></li>
-<li><p>While the functions <code>lsmeans()</code>, <code>lsmip()</code>, etc. will continue to be provided, all the help-page and vignette descriptions refer to their new counterparts <code>emmeans()</code>, <code>emmip()</code>, etc. So you will need to get accustomed to new terminology like “EMMs”, even if you don’t choose to use it in your own work.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p></li>
+<li>Some functions are deprecated, e.g. <code>ref.grid()</code>, <code>lsm.options()</code>, etc. As of version 2.3.0, these functions are no longer available at all.</li>
+<li>While the functions <code>lsmeans()</code>, <code>lsmip()</code>, etc. will continue to be provided, all the help-page and vignette descriptions refer to their new counterparts <code>emmeans()</code>, <code>emmip()</code>, etc. So you will need to get accustomed to new terminology like “EMMs”, even if you don’t choose to use it in your own work.</li>
 <li>If you have any scripts that include calls prefixed by <code>lsmeans::</code>, or calls to <code>require(lsmeans)</code> or <code>library(lsmeans)</code>, obviously you need to change these to use <code>emmeans</code> instead.</li>
 <li>If you have any custom contrast functions, you need to rename them with an extension of <code>.emmc</code> instead of <code>lsmc</code>. See the example under <code>help(&quot;contrast-methods&quot;)</code>.</li>
-<li>If you have saved results from previous runs in <strong>lsmeans</strong> (i.e., <code>ref.grid</code> or <code>lsmobj</code> objects), they should still work in <strong>emmeans</strong>. The issue you may face, though, is that the <strong>lsmeans</strong> package could get loaded simply because these objects are present, and put in the <code>search()</code> path. To make sure you’re using the new package, convert the objects to class <code>emmGrid</code> – e.g., <code>my_new_ref_grid &lt;- as.emmGrid(my.old.ref.grid)</code>. Running the non-exported function <code>emmeans:::convert_workspace()</code> may be used to convert all the objects in an environment (the global one by default) and clean out any dependencies on <strong>lsmeans</strong>. <a href="#workspaces">See more below</a></li>
+<li>If you have saved results from previous runs in <strong>lsmeans</strong> (i.e., <code>ref.grid</code> or <code>lsmobj</code> objects), convert the objects to class <code>emmGrid</code> – e.g., <code>my_new_ref_grid &lt;- as.emmGrid(my.old.ref.grid)</code>. Running the non-exported function <code>emmeans:::convert_workspace()</code> may be used to convert all the objects in an environment (the global one by default) and clean out any dependencies on <strong>lsmeans</strong>. <a href="#workspaces">See more below</a></li>
 <li>The <code>emmip()</code> and <code>plot()</code> functions use graphics from the <strong>ggplot2</strong> package by default. If you prefer the <strong>lattice</strong> graphics produced by the <strong>lsmeans</strong> package, they are still available: Use <code>emm_options(graphics.engine = &quot;lattice&quot;)</code> to change the default, or add <code>engine = &quot;lattice&quot;</code> to the call to for a particular plot.</li>
 <li>To get complete information about models supported by <strong>emmeans</strong>, use <a href="models.html"><code>vignette(&quot;models&quot;)</code></a> rather than the help page of the same name. It includes a quick reference chart at the beginning that should prove helpful.</li>
 <li>The “using-lsmeans” vignette has been replaced by a number of smaller vignettes that cover specific topics. Start with <a href="basics.html"><code>vignette(&quot;basics&quot;)</code></a> to obtain an overview. The <a href="index.html">vignette index</a> has links to all the vignettes.</li>
-<li>The options <code>lsmeans</code> and <code>ref.grid</code> have been remapped to <code>emmeans</code> and <code>ref_grid</code> respectively. For example, calling <code>lsm.options(lsmeans = ...)</code> remaps as <code>emm_options(emmeans = ...)</code>. See <code>help(&quot;emm_options&quot;, package = &quot;emmeans&quot;)</code> and <code>help(&quot;lsm.options&quot;, package = &quot;lsmeans&quot;)</code> for explanations of these options.</li>
-<li><p>The degrees-of-freedom saga, continued… Initially, <strong>lsmeans</strong> used the <strong>pbkrtest</strong> package to compute degrees of freedom (via the Kenward-Roger method) for <code>lme4::lmerMod</code> models. Later, the default was changed to the Satterthwaite method, implemented in the <strong>lmerTest</strong> package. Both methods are problematic; but I have decided to revert to the Kenward-Roger method as the system default. The default may be changed via <code>emm_options(lmer.df = ...)</code>. See <a href="models.html#L"><code>vignette(&quot;models&quot;)</code></a> for details.</p></li>
+<li>The degrees-of-freedom saga, continued… Initially, <strong>lsmeans</strong> used the <strong>pbkrtest</strong> package to compute degrees of freedom (via the Kenward-Roger method) for <code>lme4::lmerMod</code> models. Later, the default was changed to the Satterthwaite method, implemented in the <strong>lmerTest</strong> package. Both methods are problematic; but I have decided to revert to the Kenward-Roger method as the system default. The default may be changed via <code>emm_options(lmer.df = ...)</code>. See <a href="models.html#L"><code>vignette(&quot;models&quot;)</code></a> for details.</li>
 </ul>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
@@ -108,34 +105,7 @@
 <p>on the console. This will convert any <code>ref.grid</code> or <code>lsmobj</code> objects laying around to the new <code>emmGrid</code> class, and unload all vestiges of <strong>lsmeans</strong>.</p>
 <p>Once you are comfortable using <strong>emmeans</strong> in place of <strong>lsmeans</strong>, you may effect a permanent solution (the “nuclear option?”) by uninstalling the <strong>lsmeans</strong> package. Doing so will <em>not</em> prevent you from converting old workspaces or scripts. Watch your package updates carefully, though, as it may get re-installed if it is still imported by another package.</p>
 <p><a href="#contents">Back to Contents</a></p>
-</div>
-<div id="devel" class="section level2">
-<h2>Notes for package developers to transition to emmeans support</h2>
-<!-- @index **lsmeans** package!Information for package developers -->
-<p>if you are the developer of a package that supports <strong>lsmeans</strong>, and you want to transition to supporting <strong>emmeans</strong>, I make the following suggestions:</p>
-<ol style="list-style-type: decimal">
-<li>Currently, your package provides methods <code>recover.data.xyz()</code> and <code>lsm.basis.xyz()</code>, where <code>xyz</code> stands in for the class of your object. Rename these functions <code>recover_data.xyz()</code> and <code>emm_basis.xyz()</code>.</li>
-<li>Any calls to <code>lsmeans::</code> functions in the above methods should be changed to the corresponding <code>emmeans::</code> functions.</li>
-<li>For a period of time, you may want to continue support for <strong>lsmeans</strong> as well. So write new functions <code>recover.data.xyz()</code> and <code>lsm.basis.xyz()</code> that just call their counterparts.</li>
-<li>In your <code>DESCRIPTION</code> file, add <code>emmeans</code> to <code>Imports</code>, and make sure that <code>lsmeans</code> is <em>not</em> in <code>Imports</code>.</li>
-<li>In your <code>NAMESPACE</code> file,
-<ol style="list-style-type: lower-alpha">
-<li>add <code>importFrom(emmeans, recover_data, emm_basis)</code></li>
-<li>add <code>S3method(recover_data, xyz)</code></li>
-<li>add <code>S3method(emm_basis, xyz)</code></li>
-<li>add <code>export(recover.data.xyz, lsm.basis.xyz)</code>. That is, export them as <em>functions</em>, and <em>not</em> as S3 methods</li>
-<li>In lieu of (a)-(c) above, you could just export the functions <code>recover_data.xyz</code> and <code>emm_basis.xyz</code>.</li>
-</ol></li>
-</ol>
-<p><a href="#contents">Back to Contents</a></p>
 <p><a href="vignette-topics.html">Index of all vignette topics</a></p>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Many of the deprecated functions, like <code>ref.grid()</code>, are renamed to avoid possible confusion in S3 method dispatch: how do we know that <code>summary.ref.grid()</code> wasn’t a <code>summary.ref()</code> method for class <code>grid</code>, rather than a <code>summary()</code> method for class <code>ref.grid</code>?<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>By the way, the <code>pmmeans()</code>, <code>pmmip()</code>, etc. wrappers already provided in <strong>lsmeans</strong> are also still available.<a href="#fnref2">↩</a></p></li>
-</ol>
 </div>
 
 

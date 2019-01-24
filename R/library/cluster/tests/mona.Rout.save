@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2017-03-08 r72321) -- "Unsuffered Consequences"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.5.0 alpha (2018-03-28 r74481)
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -2621,7 +2621,7 @@ Error in mona(ani.non2) :
 Error in mona(ani.idNA) : 
   All variables must be binary (e.g., a factor with 2 levels, both present).
 > 
-> if(require(MASS)) withAutoprint({
+> if(require(MASS, lib.loc=.Library)) withAutoprint({
 +     if(R.version$major != "1" || as.numeric(R.version$minor) >= 7)
 +         RNGversion("1.6")
 +     set.seed(253)
@@ -2638,15 +2638,6 @@ Error in mona(ani.idNA) :
 +     mx # (too much, but still)
 + })
 Loading required package: MASS
-List of 7
- $ data     : int [1:512, 1:4] 0 0 0 0 1 1 1 0 1 0 ...
- $ hasNA    : logi FALSE
- $ order    : int [1:512] 1 137 154 204 353 398 30 52 69 85 ...
- $ variable : int [1:511] 0 0 0 0 0 3 0 0 0 0 ...
- $ step     : int [1:511] 0 0 0 0 0 4 0 0 0 0 ...
- $ order.lab: NULL
- $ call     : language mona(x = x)
- - attr(*, "class")= chr "mona"
 > if (R.version$major != "1" || as.numeric(R.version$minor) >= 7) RNGversion("1.6")
 > set.seed(253)
 > n <- 512
@@ -2802,10 +2793,8 @@ Separation step:
 Available components:
 [1] "data"      "hasNA"     "order"     "variable"  "step"      "order.lab"
 [7] "call"     
-Warning messages:
-1: In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
-  buggy version of Kinderman-Ramage generator used
-2: In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
+Warning message:
+In RNGkind("Marsaglia-Multicarry", "Buggy Kinderman-Ramage") :
   buggy version of Kinderman-Ramage generator used
 > 
 > 
@@ -2821,4 +2810,4 @@ Error in mona(cbind(1:0), trace = 2) :
 > 
 > proc.time()
    user  system elapsed 
-  0.263   0.061   0.418 
+  0.260   0.067   0.437 

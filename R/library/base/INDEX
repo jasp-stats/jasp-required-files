@@ -162,9 +162,11 @@ diff                    Lagged Differences
 difftime                Time Intervals / Differences
 dim                     Dimensions of an Object
 dimnames                Dimnames of an Object
-dir.create              Manipulaton of Directories and File Permissions
+dir.create              Manipulation of Directories and File
+                        Permissions
 do.call                 Execute a Function Call
 dontCheck               Identity Function to Suppress Checking
+dots                    ..., '..1', etc used in Functions
 double                  Double-Precision Vectors
 dput                    Write an Object to a File or Recreate it
 drop                    Drop Redundant Extent Information
@@ -452,4 +454,4 @@ withVisible             Return both a Value and its Visibility
 write                   Write Data to a File
 writeLines              Write Lines to a Connection
 xtfrm                   Auxiliary Function for Sorting and Ranking
-zapsmall                Rounding of Numbers
+zapsmall                Rounding of Numbers: Zapping Small Ones to Zero

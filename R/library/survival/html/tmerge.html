@@ -33,7 +33,7 @@ observation will be added</p>
 </td></tr>
 <tr valign="top"><td><code>data2</code></td>
 <td>
-<p>second data set in which the other arguments
+<p>second data set in which all the other arguments
 will be found</p>
 </td></tr>
 <tr valign="top"><td><code>id</code></td>
@@ -70,7 +70,7 @@ defines the basic structure, and subsequent ones that add new
 variables to that structure.  For a more complete explanation of how this
 routine works refer to the vignette on time-dependent variables.
 </p>
-<p>There are 4 types of optional arguments: a time dependent covariate
+<p>There are 4 types of operational arguments: a time dependent covariate
 (tdc), cumulative count (cumtdc), event (event) or cumulative event
 (cumevent).
 Time dependent covariates change their values before an event,
@@ -82,7 +82,7 @@ events are outcomes.
 variable will created. 
 The argument <code>y</code> is assumed to be on the
 scale of the start and end time, and each instance describes the
-occurrent of a &quot;condition&quot; at that time.
+occurrence of a &quot;condition&quot; at that time.
 The second argument <code>x</code> is optional. In the  case where
 <code>x</code> is missing the count variable starts at 0 for each subject
 and becomes 1 at the time of the event.
@@ -90,7 +90,7 @@ If <code>x</code> is present the value of the time dependent covariate
 is initialized to the <code>tdcstart</code> option and is reset to the
 value of <code>x</code> at each observation.
 If the option <code>na.rm=TRUE</code> missing values of <code>x</code> are
-first removed.  
+first removed, i.e., the update will not create missing values.  
 </p>
 <p>newname = cumtdc(y,x) Similar to tdc, except that the event
 count is accumulated over time for each subject.
@@ -108,7 +108,13 @@ will be similar to the 0/1 status variable of a survival time.
 <p>The function adds three new variables to the output data set: 
 <code>tstart</code>, <code>tstop</code>, and <code>id</code>.  The <code>options</code> argument
 can be used to change these names.
-The <code>na.rm</code> option affects creation of time-dependent covariates.
+If <code>data1</code> contains the <code>tstart</code> variable then that is used as
+the starting point for the created time intervals, otherwise the initial
+interval for each id will begin at 0 by default.
+This will lead to an invalid interval and subsequent error if say a
+death time were &lt;= 0.
+</p>
+<p>The <code>na.rm</code> option affects creation of time-dependent covariates.
 Should a data row in <code>data2</code> that has a missing value for the
 variable be ignored (na.rm=FALSE, default) or should it generate an
 observation with a value of NA?  The default value leads to
@@ -147,11 +153,15 @@ occurrence at 15 would count in the (0,15] interval.
 The last case is where the main data set has touching
 intervals for a subject, e.g. (17, 28] and (28,35] and a new occurrence
 lands at the join.  Events will go to the earlier interval and counts
-to the latter one.  A last column shows the number of additions where
+to the latter one.  A last column shows the number of additions
 where the id and time point were identical.
+When this occurs, the <code>tdc</code> and <code>event</code> operators will use
+the final value in the data (last edit wins), but ignoring missing,
+while <code>cumtdc</code> and <code>cumevent</code> operators add up the values.
 </p>
 <p>These extra attributes are ephemeral and will be discarded
-if the dataframe is modified in any way.  This is intentional.
+if the dataframe is modified.  This is intentional, since they will
+become invalid if for instance a subset were selected. 
 </p>
 
 
@@ -184,5 +194,5 @@ pbc2 &lt;- tmerge(pbc2, pbcseq, id=id, ascites = tdc(day, ascites),
 fit &lt;- coxph(Surv(tstart, tstop, endpt==2) ~ protime + log(bili), data=pbc2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

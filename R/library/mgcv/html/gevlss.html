@@ -41,7 +41,9 @@ gevlss(link=list("identity","identity","logit"))
 </p>
 <p>This family does not produce a null deviance. Note that the distribution for <i>xi=0</i> is approximated by setting <i>xi</i> to a small number. 
 </p>
-<p>The derivative system code for this family is mostly auto-generated, and the family is still somewhat experimental.  
+<p>The derivative system code for this family is mostly auto-generated, and the family is still somewhat experimental.
+</p>
+<p>The GEV distribution is rather challenging numerically, and for small datasets or poorly fitting models imporoved numerical robustness may be obtained by using the extended Fellner-Schall method of Wood and Fasiolo (2017) for smoothing parameter estimation. See examples.
 </p>
 
 
@@ -60,6 +62,9 @@ nonregular cases. Biometrika 72(1):67-90
 model selection for general smooth models.
 Journal of the American Statistical Association 111, 1548-1575
 <a href="http://dx.doi.org/10.1080/01621459.2016.1180986">http://dx.doi.org/10.1080/01621459.2016.1180986</a>
+</p>
+<p>Wood, S.N. and M. Fasiolo (2017) A generalized Fellner-Schall method for smoothing parameter optimization with application to Tweedie location, scale and shape models. Biometrics 73(4): 1071-1081.
+<a href="http://dx.doi.org/10.1111/biom.12666">http://dx.doi.org/10.1111/biom.12666</a>
 </p>
 
 
@@ -90,6 +95,11 @@ dat &lt;- data.frame(y,x0,x1,x2);pairs(dat)
 ## fit model....
 b &lt;- gam(list(y~s(x2),~s(x0),~s(x1)),family=gevlss,data=dat)
 
+## same fit using the extended Fellner-Schall method which
+## can provide improved numerical robustness... 
+b &lt;- gam(list(y~s(x2),~s(x0),~s(x1)),family=gevlss,data=dat,
+         optimizer="efs")
+
 ## plot and look at residuals...
 plot(b,pages=1,scale=0)
 summary(b)
@@ -106,5 +116,5 @@ plot(fv,residuals(b,"response"))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

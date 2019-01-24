@@ -47,8 +47,8 @@ single value.</p>
 </td></tr>
 <tr valign="top"><td><code>shrink.sml</code></td>
 <td>
-<p>positive numeric
-by a which a default scale is shrunk in the case when
+<p>positive number, a factor (smaller than one)
+by which a default scale is shrunk in the case when
 <code>range(x)</code> is very small (usually 0).</p>
 </td></tr>
 <tr valign="top"><td><code>high.u.bias</code></td>
@@ -91,7 +91,7 @@ that <i>b &le; c &lt; 10b</i>.
 </p>
 <p>Now determine the basic <em>unit</em> <i>u</i> as one of
 <i>{1,2,5,10} b</i>, depending on
-<i>c/b in [1,10</i>
+<i>c/b in [1,10)</i>
 and the two &lsquo;<em>bias</em>&rsquo; coefficients, <i>h
   =</i><code>high.u.bias</code> and <i>f =</i><code>u5.bias</code>.
 </p>
@@ -144,5 +144,5 @@ for(k in -7:3)
       formatC(pretty(1001.1001, shrink.sml = 2^k), width = 6),"\n")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

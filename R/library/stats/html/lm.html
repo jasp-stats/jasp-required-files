@@ -136,14 +136,18 @@ on: to avoid this pass a <code>terms</code> object as the formula (see
 <code>y ~ x - 1</code> or <code>y ~ 0 + x</code>.  See <code><a href="formula.html">formula</a></code> for
 more details of allowed formulae.
 </p>
-<p>Non-<code>NULL</code> <code>weights</code> can be used to indicate that different
-observations have different variances (with the values in
+<p>Non-<code>NULL</code> <code>weights</code> can be used to indicate that
+different observations have different variances (with the values in
 <code>weights</code> being inversely proportional to the variances); or
 equivalently, when the elements of <code>weights</code> are positive
 integers <i>w_i</i>, that each response <i>y_i</i> is the mean of
-<i>w_i</i> unit-weight observations (including the case that there are
-<i>w_i</i> observations equal to <i>y_i</i> and the data have been
-summarized).
+<i>w_i</i> unit-weight observations (including the case that there
+are <i>w_i</i> observations equal to <i>y_i</i> and the data have been
+summarized). However, in the latter case, notice that within-group
+variation is not used.  Therefore, the sigma estimate and residual
+degrees of freedom may be suboptimal; in the case of replication
+weights, even wrong. Hence, standard errors and analysis of variance
+tables should be treated with care.
 </p>
 <p><code>lm</code> calls the lower level functions <code><a href="lmfit.html">lm.fit</a></code>, etc,
 see below, for the actual numerical computations.  For programming
@@ -283,9 +287,10 @@ was based on Wilkinson &amp; Rogers (1973).
 Chapter 4 of <em>Statistical Models in S</em>
 eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 </p>
-<p>Wilkinson, G. N. and Rogers, C. E. (1973)
+<p>Wilkinson, G. N. and Rogers, C. E. (1973).
 Symbolic descriptions of factorial models for analysis of variance.
-<em>Applied Statistics</em>, <b>22</b>, 392&ndash;9.
+<em>Applied Statistics</em>, <b>22</b>, 392&ndash;399.
+doi: <a href="http://doi.org/10.2307/2346786">10.2307/2346786</a>.
 </p>
 
 
@@ -343,5 +348,5 @@ par(opar)
 ### less simple examples in "See Also" above
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

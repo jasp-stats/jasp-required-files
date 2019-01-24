@@ -1,23 +1,29 @@
 Package: hmeasure
 Type: Package
-Title: The H-measure and other scalar classification performance
-        metrics
-Version: 1.0
-Date: 2012-04-30
+Title: The H-Measure and Other Scalar Classification Performance
+        Metrics
+Version: 1.0-1
+Date: 2018-12-30
 Author: Christoforos Anagnostopoulos
-        <christoforos.anagnostopoulos06@imperial.ac.uk> and David J.
-        Hand <d.j.hand@imperial.ac.uk>
+    <christoforos.anagnostopoulos06@imperial.ac.uk> and David J.
+    Hand <d.j.hand@imperial.ac.uk>
 Depends: R (>= 2.10)
-Suggests: MASS, class
+Suggests: MASS, class, testthat
 Maintainer: Christoforos Anagnostopoulos
  <christoforos.anagnostopoulos06@imperial.ac.uk>
-Description: Scalar performance metrics, including the H-measure, based
-        on classification scores for several classifiers applied to the
-        same dataset.
-License: GPL (>= 2)
-URL: http://www.canagnos.com/~canagnos/hmeasure.html
-Namespace: hmeasure
-Packaged: 2012-09-07 19:52:58 UTC; canagnos
+Description: Classification performance metrics that are derived from the ROC
+    curve of a classifier. The package includes the H-measure performance metric
+    as described in <http://link.springer.com/article/10.1007/s10994-009-5119-5>,
+    which computes the minimum total misclassification cost, integrating over any
+    uncertainty about the relative misclassification costs, as per a user-defined
+    prior. It also offers a one-stop-shop for other scalar metrics of performance,
+    including sensitivity, specificity and many others, and also offers plotting
+    tools for ROC curves and related statistics.
+License: MIT + file LICENSE
+URL: http://www.hmeasure.net
+Packaged: 2019-01-02 08:13:51 UTC; canagnos
 Repository: CRAN
-Date/Publication: 2012-09-07 20:05:20
-Built: R 3.4.4; ; 2018-06-02 07:52:19 UTC; windows
+Date/Publication: 2019-01-02 08:40:03 UTC
+RoxygenNote: 5.0.1
+NeedsCompilation: no
+Built: R 3.5.2; ; 2019-01-21 15:30:13 UTC; windows

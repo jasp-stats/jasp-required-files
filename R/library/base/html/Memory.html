@@ -40,7 +40,9 @@ garbage collection.  These values can be set by the command line
 options <span class="option">--min-nsize</span> and <span class="option">--min-vsize</span> (or if they are
 not used, the environment variables <span class="env">R_NSIZE</span> and <span class="env">R_VSIZE</span>)
 when <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> is started.  Thereafter <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> will grow or shrink the areas
-depending on usage, never decreasing below the initial values.
+depending on usage, never decreasing below the initial values.  The
+maximal vector heap size can be set with the environment variable
+<span class="env">R_MAX_VSIZE</span>.
 </p>
 <p>How much time <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> spends in the garbage collector will depend on these
 initial settings and on the trade-off the memory manager makes, when
@@ -81,5 +83,5 @@ profiling the usage of cons cells.
 <code><a href="../../utils/html/memory.size.html">memory.limit</a></code> for the current limit.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

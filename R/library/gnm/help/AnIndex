@@ -44,6 +44,7 @@ profile.gnm	profile.gnm
 qrSolve	gnm-defunct
 residSVD	residSVD
 se	se
+se.gnm	se.gnm
 summary.gnm	summary.gnm
 Symm	Symm
 termPredictors	termPredictors

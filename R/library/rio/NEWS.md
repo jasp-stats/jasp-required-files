@@ -1,3 +1,36 @@
+# rio 0.5.16
+
+ * Fix `the condition has length > 1 and only the first element will be used` warning in `standardize_attributes()`.
+
+# rio 0.5.15
+
+ * Modified some further code to produce compatibility with haven 2.0.0 release. (#188)
+ * Add some additional function suggestions for the ledger package. (#190, h/t Trevor Davis)
+
+# rio 0.5.14
+
+ * Changes to `gather_attrs()` for haven 2.0.0 release. (#188)
+ * Fixed a bug that generated a superfluous warning in `import()`.
+ * Some style guide changes to code.
+
+# rio 0.5.13
+
+ * Allow `import()` of objects other than data frames from R-serialized (.rds and .rdata) files. Also, export of such objects to .rds files is supported, as previously intended. (#183, h/t Nicholas Jhirad)
+ * Added (suggests) support for import of EViews files using `hexView::readEViews()`. (#163, h/t Boris Demeshev)
+
+ # rio 0.5.12
+
+ * Add better package specification to `install_formats()` so that it reads from the `Suggests` field of the `DESCRIPTION` file.
+ * Edit header of `README.Rmd` (and thusly `README.md`) to stop complaining about a lack of title field.
+ * Fix typo in `CONTRIBUTING.md` (line said "three arguments", but only listed two).
+
+# rio 0.5.11
+
+ * Fixed a bug in `import()` wherein matlab files were ignored unless `format` was specified, as well as a related bug that made importing appear to fail for matlab files. (#171)
+ * Fixed a bug in `export()` wherein `format` was ignored. (#99, h/t Sebastian Sauer)
+ * Fixed a bug in the importing of European-style semicolon-separated CSV files. Added a test to ensure correct behavior. (#159, h/t Kenneth Rose)
+ * Updated documentation to reflect recent changes to the xlsx `export()` method. (#156)
+
 # rio 0.5.10
 
  * Removed some csvy-related tests, which were failing on CRAN.

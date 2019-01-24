@@ -70,6 +70,24 @@ mtcars.rg <- ref_grid(mtcars.lm,
     at = list(disp = c(100, 200, 300), cyl = c(4, 6, 8)))
 
 ## ------------------------------------------------------------------------
+mtcars.1 <- lm(mpg ~ factor(cyl) + disp + I(disp^2), data = mtcars)
+emmeans(mtcars.1, "cyl")
+
+## ------------------------------------------------------------------------
+mtcars <- transform(mtcars, 
+                    Cyl = factor(cyl),
+                    dispsq = disp^2)
+mtcars.2 <- lm(mpg ~ Cyl + disp + dispsq, data = mtcars)
+emmeans(mtcars.2, "Cyl")
+
+## ------------------------------------------------------------------------
+ref_grid(mtcars.1)
+ref_grid(mtcars.2)
+
+## ------------------------------------------------------------------------
+emmeans(mtcars.2, "Cyl", at = list(dispsq = 230.72^2))
+
+## ------------------------------------------------------------------------
 emmip(pigs.lm1, source ~ percent)
 emmip(ref_grid(pigs.lm2, cov.reduce = FALSE), source ~ percent)
 

@@ -19,7 +19,7 @@
 system(command, intern = FALSE,
        ignore.stdout = FALSE, ignore.stderr = FALSE,
        wait = TRUE, input = NULL, show.output.on.console = TRUE,
-       minimized = FALSE, invisible = TRUE)
+       minimized = FALSE, invisible = TRUE, timeout = 0)
 </pre>
 
 
@@ -53,6 +53,12 @@ always wait) if <code>intern = TRUE</code>.</p>
 <p>if a character vector is supplied, this is copied one
 string per line to a temporary file, and the standard input of
 <code>command</code> is redirected to the file.</p>
+</td></tr>
+<tr valign="top"><td><code>timeout</code></td>
+<td>
+<p>timeout in seconds, ignored if 0.  This is a limit for the
+elapsed time running <code>command</code> in a separate process.  Fractions
+of seconds are ignored.</p>
 </td></tr>
 </table>
 <table summary="R argblock">
@@ -100,6 +106,11 @@ see <code><a href="shell.html">shell</a></code> if you want to pass a shell comm
 include the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> &lsquo;<span class="file">bin</span>&rsquo; directory, the working directory and the
 Windows system directories before <span class="env">PATH</span>.
 </p>
+<p>When <code>timeout</code> is non-zero, the command is terminated after the given
+number of seconds.  The termination works for typical commands, but is not
+guaranteed: it is possible to write a program that would keep running
+after the time is out.  Timeouts can only be set with <code>wait = TRUE</code>.
+</p>
 <p>The ordering of arguments after the first two has changed from time to
 time: it is recommended to name all arguments after the first.
 </p>
@@ -118,14 +129,18 @@ Under the <code>Rgui</code> console <code>intern = TRUE</code> also captures
 <code>stderr</code> unless <code>ignore.stderr = TRUE</code>.
 If <code>command</code> runs but gives a non-zero exit status this will be
 reported with a warning and in the attribute <code>"status"</code> of the
-result: an attribute <code>"errmsg"</code> may also be available
+result: an attribute <code>"errmsg"</code> may also be available.
 </p>
 <p>If <code>intern = FALSE</code>, the return value is an error code (<code>0</code>
 for success), given the invisible attribute (so needs to be printed
 explicitly).  If the command could not be run for any reason, the
-value is <code>127</code>.  Otherwise if <code>wait = TRUE</code> the value is the
-exit status returned by the command, and if <code>wait = FALSE</code> it is
-<code>0</code> (the conventional success value).
+value is <code>127</code> and a warning is issued (as from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0).
+Otherwise if <code>wait = TRUE</code> the value is the exit status returned
+by the command, and if <code>wait = FALSE</code> it is <code>0</code> (the
+conventional success value).
+</p>
+<p>If the command times out, a warning is reported and the exit status is
+<code>124</code>.
 Some Windows commands return out-of-range status values
 (e.g., <code>-1</code>) and so only the bottom 16 bits of the value are used.
 </p>
@@ -246,5 +261,5 @@ system(paste('"c:/Program Files/Mozilla Firefox/firefox.exe"',
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

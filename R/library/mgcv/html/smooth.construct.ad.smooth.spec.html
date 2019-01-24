@@ -122,7 +122,7 @@ lines(x,mu-mean(mu),col=2)
 
 ## A 2D example (marked, 'Not run' purely to reduce
 ## checking load on CRAN).
-## Not run: 
+
 par(mfrow=c(2,2),mar=c(1,1,1,1))
 x &lt;- seq(-.5, 1.5, length= 60)
 z &lt;- x
@@ -152,10 +152,9 @@ b &lt;- gam(y~s(x,z,bs="ad",k=15,m=3),gamma=1.4)
 vis.gam(b,theta=30,phi=30,ticktype="detailed")
 cor(fitted(b0),f);cor(fitted(b),f)
 
-## End(Not run)
 
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

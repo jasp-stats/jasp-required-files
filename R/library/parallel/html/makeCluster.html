@@ -26,6 +26,7 @@ makeForkCluster(nnodes = getOption("mc.cores", 2L), ...)
 stopCluster(cl = NULL)
 
 setDefaultCluster(cl = NULL)
+getDefaultCluster()
 </pre>
 
 
@@ -95,9 +96,15 @@ machine as <span class="samp">somename.local</span>, a name known only to itself
 default taken from the environment variable <span class="env">R_PARALLEL_PORT</span>,
 then a randomly chosen port in the range <code>11000:11999</code>.</p>
 </dd>
-<dt><code>timeout</code></dt><dd><p>The timeout in seconds for that port.  Default
-30 days (and the POSIX standard only requires values up to 31 days
-to be supported).</p>
+<dt><code>setup_timeout</code></dt><dd><p>The maximum number of seconds a worker
+attempts to connect to master before failing.  Default is 2
+minutes.  The waiting time before the next attempt starts at
+0.1 seconds and is incremented 50% after each retry.</p>
+</dd>
+<dt><code>timeout</code></dt><dd><p>The timeout in seconds for that port.  This is
+the maximum time of zero communication between master and worker
+before failing. Default is 30 days (and the POSIX standard only
+requires values up to 31 days to be supported).</p>
 </dd>
 <dt><code>outfile</code></dt><dd><p>Where to direct the <code><a href="../../base/html/showConnections.html">stdout</a></code> and
 <code><a href="../../base/html/showConnections.html">stderr</a></code> connection output from the workers.
@@ -163,7 +170,11 @@ the registered cluster, as does stopping that cluster.
 
 <h3>Value</h3>
 
-<p>An object of class <code>c("SOCKcluster", "cluster")</code>.
+<p>For the cluster creators, an object of class
+<code>c("SOCKcluster", "cluster")</code>.
+</p>
+<p>For the default cluster setter and getter, the registered default
+cluster or <code>NULL</code> if there is no such cluster.
 </p>
 
 
@@ -174,5 +185,5 @@ the registered cluster, as does stopping that cluster.
 <p>Derived from the <a href="https://CRAN.R-project.org/package=snow"><span class="pkg">snow</span></a> package.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

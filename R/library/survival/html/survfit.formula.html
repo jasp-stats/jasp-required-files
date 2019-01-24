@@ -121,14 +121,15 @@ is assumed if non-integer case weights are provided.
 </dd>
 <dt>conf.type</dt><dd>
 <p>One of <code>"none"</code>, <code>"plain"</code>, <code>"log"</code> (the default),
-or <code>"log-log"</code>.  Only
+<code>"log-log"</code> or <code>"logit"</code>.  Only
 enough of the string to uniquely identify it is necessary.
 The first option causes confidence intervals not to be
 generated.  The second causes the standard intervals
 <code>curve +- k *se(curve)</code>, where k is determined from
 <code>conf.int</code>.  The log option calculates intervals based on the
-cumulative hazard or log(survival). The last option bases
-intervals on the log hazard or log(-log(survival)). 
+cumulative hazard or log(survival). The log-log option bases the
+intervals on the log hazard or log(-log(survival)), and the
+logit option on log(survival/(1-survival)). 
 </p>
 </dd>
 <dt>conf.lower</dt><dd>
@@ -136,8 +137,7 @@ intervals on the log hazard or log(-log(survival)).
 upper limit remains unchanged.  
 Possible values are <code>"usual"</code> (unmodified), 
 <code>"peto"</code>, 
-and <code>"modified"</code>.  T
-he modified lower limit 
+and <code>"modified"</code>.  The modified lower limit 
 is based on an &quot;effective n&quot; argument.  The confidence 
 bands will agree with the usual calculation at each death time, but unlike 
 the usual bands the confidence interval becomes wider at each censored 
@@ -180,6 +180,19 @@ unique times, number of states); be forewarned that this can be huge.
 If the total number of elements is larger then the maximum
 integer the underlying C program can not create it.
 </p>
+</dd>
+<dt>istate</dt><dd><p>this applies only to multi-state curves.  An
+optional variable that gives the starting state for each
+subject.  If missing then all subjects are assumed to start in
+an single un-named state.  When a subject has multiple rows only
+the value from their first (minimal time) row is used.</p>
+</dd>
+<dt>p0</dt><dd><p>this applies only to multi-state curves. 
+An optional vector giving the initial probability across
+the states. If this is missing, then p0 is estimated using the
+frequency of the starting states of all observations at risk
+at <code>start.time</code>, or if that is not specified, at
+the time of the first event.</p>
 </dd>
 </dl>
 
@@ -324,7 +337,7 @@ fit  &lt;- survfit(Surv(time, time, status, type='interval') ~1,
 #
 # Time to progression/death for patients with monoclonal gammopathy
 #  Competing risk curves (cumulative incidence)
-fitKM &lt;- survfit(Surv(stop, event=='progression') ~1, data=mgus1,
+fitKM &lt;- survfit(Surv(stop, event=='pcm') ~1, data=mgus1,
                     subset=(start==0))
 
 fitCI &lt;- survfit(Surv(stop, status*as.numeric(event), type="mstate") ~1,
@@ -340,5 +353,5 @@ text(16, .15,"Competing risk: progression", col=2)
 text(15, .30,"KM:prog")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

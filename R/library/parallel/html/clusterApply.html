@@ -27,16 +27,16 @@ clusterMap(cl = NULL, fun, ..., MoreArgs = NULL, RECYCLE = TRUE,
            .scheduling = c("static", "dynamic"))
 clusterSplit(cl = NULL, seq)
 
-parLapply(cl = NULL, X, fun, ...)
+parLapply(cl = NULL, X, fun, ..., chunk.size = NULL)
 parSapply(cl = NULL, X, FUN, ..., simplify = TRUE,
-          USE.NAMES = TRUE)
-parApply(cl = NULL, X, MARGIN, FUN, ...)
-parRapply(cl = NULL, x, FUN, ...)
-parCapply(cl = NULL, x, FUN, ...)
+          USE.NAMES = TRUE, chunk.size = NULL)
+parApply(cl = NULL, X, MARGIN, FUN, ..., chunk.size = NULL)
+parRapply(cl = NULL, x, FUN, ..., chunk.size = NULL)
+parCapply(cl = NULL, x, FUN, ..., chunk.size = NULL)
 
-parLapplyLB(cl = NULL, X, fun, ...)
+parLapplyLB(cl = NULL, X, fun, ..., chunk.size = NULL)
 parSapplyLB(cl = NULL, X, FUN, ..., simplify = TRUE,
-            USE.NAMES = TRUE)
+            USE.NAMES = TRUE, chunk.size = NULL)
 </pre>
 
 
@@ -91,6 +91,11 @@ beware of partial matching to earlier arguments.</p>
 <p>A vector (atomic or list) for <code>parLapply</code> and
 <code>parSapply</code>, an array for <code>parApply</code>.</p>
 </td></tr>
+<tr valign="top"><td><code>chunk.size</code></td>
+<td>
+<p>scalar number; number of invocations of <code>fun</code> or
+<code>FUN</code> in one chunk; a chunk is a unit for scheduling.</p>
+</td></tr>
 <tr valign="top"><td><code>MARGIN</code></td>
 <td>
 <p>vector specifying the dimensions to use.</p>
@@ -121,19 +126,20 @@ node.  It is a parallel version of <code><a href="../../base/html/eval.html">eva
 convenience function invoking <code>clusterCall</code>.
 </p>
 <p><code>clusterApply</code> calls <code>fun</code> on the first node with
-arguments <code>seq[[1]]</code> and <code>...</code>, on the second node with
-<code>seq[[2]]</code> and <code>...</code>, and so on, recycling nodes as needed.
+arguments <code>x[[1]]</code> and <code>...</code>, on the second node with
+<code>x[[2]]</code> and <code>...</code>, and so on, recycling nodes as needed.
 </p>
 <p><code>clusterApplyLB</code> is a load balancing version of
-<code>clusterApply</code>.  If the length <code>p</code> of <code>seq</code> is not
-greater than the number of nodes <code>n</code>, then a job is sent to
-<code>p</code> nodes.  Otherwise the first <code>n</code> jobs are placed in order
-on the <code>n</code> nodes.  When the first job completes, the next job is
+<code>clusterApply</code>.  If the length <code>n</code> of <code>x</code> is not
+greater than the number of nodes <code>p</code>, then a job is sent to
+<code>n</code> nodes.  Otherwise the first <code>p</code> jobs are placed in order
+on the <code>p</code> nodes.  When the first job completes, the next job is
 placed on the node that has become free; this continues until all jobs
 are complete.  Using <code>clusterApplyLB</code> can result in better
 cluster utilization than using <code>clusterApply</code>, but increased
 communication can reduce performance.  Furthermore, the node that
-executes a particular job is non-deterministic.
+executes a particular job is non-deterministic. This means that
+simulations that assign RNG streams to nodes will not be reproducible.
 </p>
 <p><code>clusterMap</code> is a multi-argument version of <code>clusterApply</code>,
 analogous to <code><a href="../../base/html/mapply.html">mapply</a></code> and <code><a href="../../base/html/funprog.html">Map</a></code>.  If
@@ -156,16 +162,30 @@ number of nodes.  Currently the pieces are chosen to be close
 to equal in length: the computation is done on the master.
 </p>
 <p><code>parLapply</code>, <code>parSapply</code>, and <code>parApply</code> are parallel
-versions of <code>lapply</code>, <code>sapply</code> and <code>apply</code>.
+versions of <code>lapply</code>, <code>sapply</code> and <code>apply</code>.  Chunks of
+computation are statically allocated to nodes using <code>clusterApply</code>.
+By default, the number of chunks is the same as the number of nodes.
 <code>parLapplyLB</code>, <code>parSapplyLB</code> are load-balancing versions,
 intended for use when applying <code>FUN</code> to different elements of
-<code>X</code> takes quite variable amounts of time, and either the function
-is deterministic or reproducible results are not required.
+<code>X</code> takes quite variable amounts of time, and either the function is
+deterministic or reproducible results are not required.  Chunks of
+computation are allocated dynamically to nodes using
+<code>clusterApplyLB</code>.  From <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0, the default number of chunks is
+twice the number of nodes. Before <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0, the (fixed) number of chunks
+was the same as the number of nodes.  As for <code>clusterApplyLB</code>,
+with load balancing the node that executes a particular job is
+non-deterministic and simulations that assign RNG streams to nodes
+will not be reproducible.
 </p>
 <p><code>parRapply</code> and <code>parCapply</code> are parallel row and column
 <code>apply</code> functions for a matrix <code>x</code>; they may be slightly
 more efficient than <code>parApply</code> but do less post-processing of the
 result.
+</p>
+<p>A chunk size of <code>0</code> with static scheduling uses the default (one
+chunk per node).  With dynamic scheduling, chunk size of <code>0</code> has the
+same effect as <code>1</code> (one invocation of <code>FUN</code>/<code>fun</code> per
+chunk).
 </p>
 
 
@@ -175,7 +195,7 @@ result.
 list with one element per node.
 </p>
 <p>For <code>clusterApply</code> and <code>clusterApplyLB</code>, a list the same
-length as <code>seq</code>.
+length as <code>x</code>.
 </p>
 <p><code>clusterMap</code> follows <code><a href="../../base/html/mapply.html">mapply</a></code>.
 </p>
@@ -266,5 +286,5 @@ boot.ci(cd4.boot,  type = c("norm", "basic", "perc"),
 stopCluster(cl)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

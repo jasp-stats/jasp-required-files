@@ -69,7 +69,8 @@ the duration of the function call.  This can be a compressed file.
 </p>
 <p>If the connection is open it is read from its current position.  If it
 is not open, it is opened in <code>"rt"</code> mode for the duration of
-the call and then closed again.
+the call and then closed (but not destroyed; one must call
+<code><a href="connections.html">close</a></code> to do that).
 </p>
 <p>If the final line is incomplete (no final EOL marker) the behaviour
 depends on whether the connection is blocking or not.  For a
@@ -116,22 +117,24 @@ See the examples.
 <h3>Examples</h3>
 
 <pre>
-cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = "ex.data",
+fil &lt;- tempfile(fileext = ".data")
+cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = fil,
     sep = "\n")
-readLines("ex.data", n = -1)
-unlink("ex.data") # tidy up
+readLines(fil, n = -1)
+unlink(fil) # tidy up
 
 ## difference in blocking
-cat("123\nabc", file = "test1")
-readLines("test1") # line with a warning
+fil &lt;- tempfile("test")
+cat("123\nabc", file = fil)
+readLines(fil) # line with a warning
 
-con &lt;- file("test1", "r", blocking = FALSE)
+con &lt;- file(fil, "r", blocking = FALSE)
 readLines(con) # empty
-cat(" def\n", file = "test1", append = TRUE)
+cat(" def\n", file = fil, append = TRUE)
 readLines(con) # gets both
 close(con)
 
-unlink("test1") # tidy up
+unlink(fil) # tidy up
 
 ## Not run: 
 # read a 'Windows Unicode' file
@@ -141,5 +144,5 @@ unique(Encoding(A)) # will most likely be UTF-8
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

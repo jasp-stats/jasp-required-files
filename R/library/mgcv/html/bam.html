@@ -18,7 +18,7 @@ are designed for datasets containing upwards of several tens of thousands of dat
 of <code>bam</code> is much lower memory footprint than <code><a href="gam.html">gam</a></code>, but it can also be much faster, 
 for large datasets. <code>bam</code> can also compute on a cluster set up by the <a href="../../parallel/html/parallel.html">parallel</a> package.
 </p>
-<p>An alternative fitting approach (Wood et al. 2016) is provided by the <code>discrete==TRUE</code> method. In this case a method based on discretization of covariate values and C code level parallelization (controlled by the <code>nthreads</code> argument instead of the <code>cluster</code> argument) is used. This extends both the data set and model size that are practical.
+<p>An alternative fitting approach (Wood et al. 2017) is provided by the <code>discrete==TRUE</code> method. In this case a method based on discretization of covariate values and C code level parallelization (controlled by the <code>nthreads</code> argument instead of the <code>cluster</code> argument) is used. This extends both the data set and model size that are practical.
 </p>
 
 
@@ -182,7 +182,7 @@ single machine). See details and example code.
 <tr valign="top"><td><code>nthreads</code></td>
 <td>
 <p>Number of threads to use for non-cluster computation (e.g. combining results from cluster nodes).
-If <code>NA</code> set to <code>max(1,length(cluster))</code>.</p>
+If <code>NA</code> set to <code>max(1,length(cluster))</code>. See details.</p>
 </td></tr>
 <tr valign="top"><td><code>gc.level</code></td>
 <td>
@@ -252,7 +252,9 @@ can be used in the 1D case, and tensor product smooths (<code>te</code>) are typ
 </p>
 <p>If <code>cluster</code> is provided as a cluster set up using <code><a href="../../parallel/html/makeCluster.html">makeCluster</a></code> (or <code><a href="../../parallel/html/makeForkCluster.html">makeForkCluster</a></code>) from the <code>parallel</code> package, then the rate limiting QR decomposition of the model matrix is performed in parallel using this cluster. Note that the speed ups are often not that great. On a multi-core machine it is usually best to set the cluster size to the number of physical cores, which is often less than what is reported by <code><a href="../../parallel/html/detectCores.html">detectCores</a></code>. Using more than the number of physical cores can result in no speed up at all (or even a slow down). Note that a highly parallel BLAS may negate all advantage from using a cluster of cores. Computing in parallel of course requires more memory than computing in series. See examples.
 </p>
-<p>When <code>discrete=TRUE</code> the covariate data are first discretized. Discretization takes place on a smooth by smooth basis, or in the case of tensor product smooths (or any smooth that can be represented as such, such as random effects), separately for each marginal smooth. The required spline bases are then evaluated at the discrete values, and stored, along with index vectors indicating which original observation they relate to. Fitting is by a version of performance oriented iteration/PQL using REML smoothing parameter selection on each iterative working model (as for the default method). The iteration is based on the derivatives of the REML score, without computing the score itself, allowing the expensive computations to be reduced to one parallel block Cholesky decomposition per iteration (plus two basic operations of equal cost, but easily parallelized). Unlike standard POI/PQL, only one step of the smoothing parameter update for the working model is taken at each step (rather than iterating to the optimal set of smoothing parameters for each working model). At each step a weighted model matrix crossproduct of the model matrix is required - this is efficiently computed from the pre-computed basis functions evaluated at the discretized covariate values. Efficient computation with tensor product terms means that some terms within a tensor product may be re-ordered for maximum efficiency. Parallel computation is controlled using the <code>nthreads</code> argument. For this method no cluster computation is used, and the <code>parallel</code> package is not required.
+<p>When <code>discrete=TRUE</code> the covariate data are first discretized. Discretization takes place on a smooth by smooth basis, or in the case of tensor product smooths (or any smooth that can be represented as such, such as random effects), separately for each marginal smooth. The required spline bases are then evaluated at the discrete values, and stored, along with index vectors indicating which original observation they relate to. Fitting is by a version of performance oriented iteration/PQL using REML smoothing parameter selection on each iterative working model (as for the default method). The iteration is based on the derivatives of the REML score, without computing the score itself, allowing the expensive computations to be reduced to one parallel block Cholesky decomposition per iteration (plus two basic operations of equal cost, but easily parallelized). Unlike standard POI/PQL, only one step of the smoothing parameter update for the working model is taken at each step (rather than iterating to the optimal set of smoothing parameters for each working model). At each step a weighted model matrix crossproduct of the model matrix is required - this is efficiently computed from the pre-computed basis functions evaluated at the discretized covariate values. Efficient computation with tensor product terms means that some terms within a tensor product may be re-ordered for maximum efficiency.
+</p>
+<p>When <code>discrete=TRUE</code> parallel computation is controlled using the <code>nthreads</code> argument. For this method no cluster computation is used, and the <code>parallel</code> package is not required. Note that actual speed up from parallelization depends on the BLAS installed and your hardware. With the (R default) reference BLAS using several threads can make a substantial difference, but with a single threaded tuned BLAS, such as openblas, the effect is less marked (since cache use is typically optimized for one thread, and is then sub optimal for several). However the tuned BLAS is usually much faster than using the reference BLAS, however many threads you use. If you have a multi-threaded BLAS installed then you should leave <code>nthreads</code> at 1, since calling a multi-threaded BLAS from multiple threads usually slows things down: the only exception to this is that you might choose to form discrete matrix cross products (the main cost in the fitting routine) in a multi-threaded way, but use single threaded code for other computations: this can be achieved by e.g. <code>nthreads=c(2,1)</code>, which would use 2 threads for discrete inner products, and 1 for most code calling BLAS. Not that the basic reason that multi-threaded performance is often disappointing is that most computers are heavily memory bandwidth limited, not flop rate limited. It is hard to get data to one core fast enough, let alone trying to get data simultaneously to several cores.   
 </p>
 <p><code>discrete=TRUE</code> will often produce identical results to the methods without discretization, since covariates often only take a modest number of discrete values anyway, so no approximation at all is involved in the discretization process. Even when some approximation is involved, the differences are often very small as the algorithms discretize marginally whenever possible. For example each margin of a tensor product smooth is discretized separately, rather than discretizing onto a grid of covariate values (for an equivalent isotropic smooth we would have to discretize onto a grid). The marginal approach allows quite fine scale discretization and hence very low approximation error. Note that when using the smooth <code>id</code> mechanism to link smoothing parameters, the discrete method cannot force the linked bases to be identical, so some differences to the none discrete methods will be noticable.   
 </p>
@@ -277,6 +279,8 @@ terms less the number of spline terms).
 </p>
 <p>This routine is less stable than &lsquo;gam&rsquo; for the same dataset.
 </p>
+<p>With <code>discrete=TRUE</code>, <code>te</code> terms are efficiently computed, but <code>t2</code> are not.
+</p>
 <p>The negbin family is only supported for the *known theta* case.
 </p>
 
@@ -290,8 +294,10 @@ terms less the number of spline terms).
 <h3>References</h3>
 
 <p>Wood, S.N., Goude, Y. &amp; Shaw S. (2015) Generalized additive models for large datasets. Journal of the Royal Statistical Society, Series C 64(1): 139-155.
+<a href="http://dx.doi.org/10.1111/rssc.12068">http://dx.doi.org/10.1111/rssc.12068</a>
 </p>
-<p>Wood, S.N., Li, Z., Shaddick, G. &amp; Augustin N.H. (2017) Generalized additive models for gigadata: modelling the UK black smoke network daily data. Journal of the American Statistical Association.
+<p>Wood, S.N., Li, Z., Shaddick, G. &amp; Augustin N.H. (2017) Generalized additive models for gigadata: modelling the UK black smoke network daily data. Journal of the American Statistical Association. 112(519):1199-1210
+<a href="http://dx.doi.org/10.1080/01621459.2016.1195744">http://dx.doi.org/10.1080/01621459.2016.1195744</a>
 </p>
 
 
@@ -313,9 +319,7 @@ terms less the number of spline terms).
 library(mgcv)
 ## See help("mgcv-parallel") for using bam in parallel
 
-## Some examples are marked 'Not run' purely to keep 
-## checking load on CRAN down. Sample sizes are small for 
-## the same reason.
+## Sample sizes are small for fast run times.
 
 set.seed(3)
 dat &lt;- gamSim(1,n=25000,dist="normal",scale=20)
@@ -340,8 +344,16 @@ system.time(b1 &lt;- bam(y ~ s(x0,bs=bs)+s(x1,bs=bs)+s(x2,bs=bs,k=k),
             data=dat,family=poisson()))
 b1
 
+## Similar using faster discrete method...
+
+ 
+system.time(b2 &lt;- bam(y ~ s(x0,bs=bs,k=k)+s(x1,bs=bs,k=k)+s(x2,bs=bs,k=k)+
+            s(x3,bs=bs,k=k),data=dat,family=poisson(),discrete=TRUE))
+b2
+
+
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

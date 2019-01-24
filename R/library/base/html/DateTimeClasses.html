@@ -18,7 +18,7 @@ representing calendar dates and times.
 
 <pre>
 ## S3 method for class 'POSIXct'
-print(x, tz = "", usetz = TRUE, ...)
+print(x, tz = "", usetz = TRUE, max = NULL, ...)
 
 ## S3 method for class 'POSIXct'
 summary(object, digits = 15, ...)
@@ -41,6 +41,12 @@ date-time classes.</p>
 <tr valign="top"><td><code>tz, usetz</code></td>
 <td>
 <p>for timezone formatting, passed to <code><a href="strptime.html">format.POSIXct</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>max</code></td>
+<td>
+<p>numeric or <code>NULL</code>, specifying the maximal number of
+entries to be printed.  By default, when <code>NULL</code>,
+<code><a href="options.html">getOption</a>("max.print")</code> used.</p>
 </td></tr>
 <tr valign="top"><td><code>digits</code></td>
 <td>
@@ -118,7 +124,9 @@ platform-dependent: they are supported on platforms based on BSD or
 they are not necessarily set.).  Note that the internal list structure
 is somewhat hidden, as many methods (including
 <code><a href="length.html">length</a>(x)</code>, <code><a href="print.html">print</a>()</code> and <code><a href="../../utils/html/str.html">str</a></code>)
-apply to the abstract date-time vector, as for <code>"POSIXct"</code>.  The
+apply to the abstract date-time vector, as for <code>"POSIXct"</code>.  As
+from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0, one can extract and replace <em>single</em> components
+via <code>[</code> indexing with two indices (see the examples).  The
 classes correspond to the POSIX/C99 constructs of &lsquo;calendar
 time&rsquo; (the <code>time_t</code> data type) and &lsquo;local time&rsquo; (or
 broken-down time, the <code>struct tm</code> data type), from which they
@@ -312,12 +320,28 @@ as.POSIXlt(Sys.time(), "GMT") # the current time in GMT
 format(.leap.seconds)         # the leap seconds in your time zone
 print(.leap.seconds, tz = "PST8PDT")  # and in Seattle's
 
+
 ## look at *internal* representation of "POSIXlt" :
 leapS &lt;- as.POSIXlt(.leap.seconds)
 names(leapS) ; is.list(leapS)
 ## str() "too smart" --&gt;  need unclass(.):
 utils::str(unclass(leapS), vec.len = 7)
+## Extracting *single* components of POSIXlt objects:
+leapS[1 : 5, "year"]
+
+##  length(.) &lt;- n   now works for "POSIXct" and "POSIXlt" :
+for(lpS in list(.leap.seconds, leapS)) {
+    ls &lt;- lpS; length(ls) &lt;- 12
+    l2 &lt;- lpS; length(l2) &lt;- 5 + length(lpS)
+    stopifnot(exprs = {
+      ## length(.) &lt;- * is compatible to subsetting/indexing:
+      identical(ls, lpS[seq_along(ls)])
+      identical(l2, lpS[seq_along(l2)])
+      ## has filled with NA's
+      is.na(l2[(length(lpS)+1):length(l2)])
+    })
+}
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

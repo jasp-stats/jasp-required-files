@@ -11,14 +11,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2018-05-26" />
+<meta name="date" content="2019-01-11" />
 
 <title>Keys and fast binary search based subset</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -54,7 +54,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -68,7 +90,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Keys and fast binary search based subset</h1>
-<h4 class="date"><em>2018-05-26</em></h4>
+<h4 class="date"><em>2019-01-11</em></h4>
 
 
 
@@ -137,7 +159,7 @@ DF
 <li><p>And row names should be <em>unique</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(DF) =<span class="st"> </span><span class="kw">sample</span>(LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dv">10</span>, <span class="ot">TRUE</span>)
 <span class="co"># Warning: non-unique values when setting 'row.names': 'C', 'D'</span>
-<span class="co"># Error in `row.names&lt;-.data.frame`(`*tmp*`, value = value): duplicate 'row.names' are not allowed</span></code></pre></div></li>
+<span class="co"># Error in `.rowNamesDF&lt;-`(x, value = value): duplicate 'row.names' are not allowed</span></code></pre></div></li>
 </ol>
 <p>Now let’s convert it to a <em>data.table</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DT =<span class="st"> </span><span class="kw">as.data.table</span>(DF)
@@ -521,7 +543,7 @@ flights[.(<span class="dv">24</span>), hour <span class="op">:</span><span class
 <p>We can choose if queries that do not match should return <code>NA</code> or be skipped altogether using the <code>nomatch</code> argument.</p>
 <div id="from-the-previous-example-subset-all-rows-only-if-theres-a-match" class="section level4">
 <h4>– From the previous example, Subset all rows only if there’s a match</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights[.(<span class="kw">c</span>(<span class="st">&quot;LGA&quot;</span>, <span class="st">&quot;JFK&quot;</span>, <span class="st">&quot;EWR&quot;</span>), <span class="st">&quot;XNA&quot;</span>), mult =<span class="st"> &quot;last&quot;</span>, nomatch =<span class="st"> </span>0L]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights[.(<span class="kw">c</span>(<span class="st">&quot;LGA&quot;</span>, <span class="st">&quot;JFK&quot;</span>, <span class="st">&quot;EWR&quot;</span>), <span class="st">&quot;XNA&quot;</span>), mult =<span class="st"> &quot;last&quot;</span>, nomatch =<span class="st"> </span><span class="ot">NULL</span>]
 <span class="co">#    year month day dep_delay arr_delay carrier origin dest air_time distance hour</span>
 <span class="co"># 1: 2014     5  23       163       148      MQ    LGA  XNA      158     1147   18</span>
 <span class="co"># 2: 2014     2   3       231       268      EV    EWR  XNA      184     1131   12</span></code></pre></div>
@@ -529,7 +551,7 @@ flights[.(<span class="dv">24</span>), hour <span class="op">:</span><span class
 <div id="section-14" class="section level4 bs-callout bs-callout-info">
 <h4></h4>
 <ul>
-<li><p>Default value for <code>nomatch</code> is <code>NA</code>. Setting <code>nomatch = 0L</code> skips queries with no matches.</p></li>
+<li><p>Default value for <code>nomatch</code> is <code>NA</code>. Setting <code>nomatch = NULL</code> skips queries with no matches.</p></li>
 <li><p>The query “JFK”, “XNA” doesn’t match any rows in flights and therefore is skipped.</p></li>
 </ul>
 </div>
@@ -543,6 +565,10 @@ flights[.(<span class="st">&quot;JFK&quot;</span>, <span class="st">&quot;MIA&qu
 <p>we could have done:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights[origin <span class="op">==</span><span class="st"> &quot;JFK&quot;</span> <span class="op">&amp;</span><span class="st"> </span>dest <span class="op">==</span><span class="st"> &quot;MIA&quot;</span>]</code></pre></div>
 <p>One advantage very likely is shorter syntax. But even more than that, <em>binary search based subsets</em> are <strong>incredibly fast</strong>.</p>
+<p>As the time goes <code>data.table</code> gets new optimization and currently the latter call is automatically optimized to use <em>binary search</em>.<br />
+To use slow <em>vector scan</em> key needs to be removed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setkey</span>(flights, <span class="ot">NULL</span>)
+flights[origin <span class="op">==</span><span class="st"> &quot;JFK&quot;</span> <span class="op">&amp;</span><span class="st"> </span>dest <span class="op">==</span><span class="st"> &quot;MIA&quot;</span>]</code></pre></div>
 <div id="a-performance-of-binary-search-approach" class="section level3">
 <h3>a) Performance of binary search approach</h3>
 <p>To illustrate, let’s create a sample <em>data.table</em> with 20 million rows and three columns and key it by columns <code>x</code> and <code>y</code>.</p>
@@ -550,19 +576,18 @@ flights[.(<span class="st">&quot;JFK&quot;</span>, <span class="st">&quot;MIA&qu
 N =<span class="st"> </span><span class="fl">2e7</span>L
 DT =<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">x =</span> <span class="kw">sample</span>(letters, N, <span class="ot">TRUE</span>),
                 <span class="dt">y =</span> <span class="kw">sample</span>(1000L, N, <span class="ot">TRUE</span>),
-              <span class="dt">val =</span> <span class="kw">runif</span>(N), <span class="dt">key =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))
+                <span class="dt">val =</span> <span class="kw">runif</span>(N))
 <span class="kw">print</span>(<span class="kw">object.size</span>(DT), <span class="dt">units =</span> <span class="st">&quot;Mb&quot;</span>)
-<span class="co"># 381.5 Mb</span>
-
-<span class="kw">key</span>(DT)
-<span class="co"># [1] &quot;x&quot; &quot;y&quot;</span></code></pre></div>
+<span class="co"># 381.5 Mb</span></code></pre></div>
 <p><code>DT</code> is ~380MB. It is not really huge, but this will do to illustrate the point.</p>
 <p>From what we have seen in the Introduction to data.table section, we can subset those rows where columns <code>x = &quot;g&quot;</code> and <code>y = 877</code> as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## (1) Usual way of subsetting - vector scan approach
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">key</span>(DT)
+<span class="co"># NULL</span>
+## (1) Usual way of subsetting - vector scan approach
 t1 &lt;-<span class="st"> </span><span class="kw">system.time</span>(ans1 &lt;-<span class="st"> </span>DT[x <span class="op">==</span><span class="st"> &quot;g&quot;</span> <span class="op">&amp;</span><span class="st"> </span>y <span class="op">==</span><span class="st"> </span>877L])
 t1
 <span class="co">#    user  system elapsed </span>
-<span class="co">#   0.001   0.000   0.001</span>
+<span class="co">#   0.891   0.090   0.170</span>
 <span class="kw">head</span>(ans1)
 <span class="co">#    x   y       val</span>
 <span class="co"># 1: g 877 0.3946652</span>
@@ -574,7 +599,10 @@ t1
 <span class="kw">dim</span>(ans1)
 <span class="co"># [1] 761   3</span></code></pre></div>
 <p>Now let’s try to subset by using keys.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## (2) Subsetting using keys
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setkeyv</span>(DT, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))
+<span class="kw">key</span>(DT)
+<span class="co"># [1] &quot;x&quot; &quot;y&quot;</span>
+## (2) Subsetting using keys
 t2 &lt;-<span class="st"> </span><span class="kw">system.time</span>(ans2 &lt;-<span class="st"> </span>DT[.(<span class="st">&quot;g&quot;</span>, 877L)])
 t2
 <span class="co">#    user  system elapsed </span>
@@ -593,7 +621,7 @@ t2
 <span class="kw">identical</span>(ans1<span class="op">$</span>val, ans2<span class="op">$</span>val)
 <span class="co"># [1] TRUE</span></code></pre></div>
 <ul>
-<li>The speed-up is <strong>~1x</strong>!</li>
+<li>The speed-up is <strong>~170x</strong>!</li>
 </ul>
 </div>
 <div id="b-why-does-keying-a-data.table-result-in-blazing-fast-susbets" class="section level3">

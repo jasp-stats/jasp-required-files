@@ -9,6 +9,8 @@ Bfox                    Canadian Women's Labour-Force Participation
 Blackmore               Exercise Histories of Eating-Disordered and
                         Control Subjects
 Burt                    Fraudulent Data on IQs of Twins Raised Apart
+CES11                   2011 Canadian National Election Study, With
+                        Attitude Toward Abortion
 CanPop                  Canadian Population Data
 Chile                   Voting Intentions in the 1988 Chilean
                         Plebiscite
@@ -48,6 +50,7 @@ Pottery                 Chemical Composition of Pottery
 Prestige                Prestige of Canadian Occupations
 Quartet                 Four Regression Datasets
 Robey                   Fertility and Contraception
+Rossi                   Rossi et al.'s Criminal Recidivism Data
 SLID                    Survey of Labour and Income Dynamics
 Sahlins                 Agricultural Production in Mazulu Village
 Salaries                Salaries for Professors
@@ -59,6 +62,7 @@ TitanicSurvival         Survival of Passengers on the Titanic
 Transact                Transaction data
 UN                      National Statistics from the United Nations,
                         Mostly From 2009-2011
+UN98                    United Nations Social Indicators Data 1998]
 USPop                   Population of the United States
 Vocab                   Vocabulary and Education
 WVS                     World Values Surveys

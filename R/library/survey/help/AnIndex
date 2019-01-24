@@ -225,6 +225,7 @@ svycoxph.survey.design	svycoxph
 svycoxph.survey.design2	svycoxph
 svycoxph.svyrep.design	svycoxph
 svyCprod	svyCprod
+svycralpha	svycralpha
 svydesign	svydesign
 svydesign.character	svydesign
 svydesign.default	svydesign

@@ -45,8 +45,8 @@ is.na(x) &lt;- value
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object to be tested: the default method for
-<code>is.na</code> handles atomic vectors, lists and pairlists: that for
-<code>anyNA</code> also handles <code>NULL</code>.</p>
+<code>is.na</code> and <code>anyNA</code> handle atomic vectors, lists,
+pairlists, and <code>NULL</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>recursive</code></td>
 <td>
@@ -111,8 +111,8 @@ dispatch) to each element.
 with the same dimensions as the data frame, and with dimnames taken
 from the row and column names of the data frame.
 </p>
-<p><code>anyNA(NULL)</code> is false: <code>is.na(NULL)</code> is <code>logical(0)</code>
-with a warning.
+<p><code>anyNA(NULL)</code> is false; <code>is.na(NULL)</code> is <code>logical(0)</code>
+(no longer warning since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.5.0).
 </p>
 
 
@@ -178,5 +178,5 @@ anyNA(dd) # FALSE
 anyNA(dN) # TRUE
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

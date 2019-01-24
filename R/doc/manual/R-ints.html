@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is for R, version 3.4.4 (2018-03-15).
+<!-- This manual is for R, version 3.5.2 (2018-12-20).
 
 Copyright (C) 1999-2018 R Core Team
 
@@ -288,7 +288,7 @@ Next: <a href="#R-Internal-Structures" accesskey="n" rel="next">R Internal Struc
 <p>This is a guide to the internal structures of R and coding standards for
 the core team working on R itself.
 </p>
-<p>This manual is for R, version 3.4.4 (2018-03-15).
+<p>This manual is for R, version 3.5.2 (2018-12-20).
 </p>
 <p>Copyright &copy; 1999&ndash;2018 R Core Team
 </p>
@@ -420,10 +420,10 @@ available to R Extensions: rather <code>SEXP</code> is an opaque pointer,
 and the internals can only be accessed by the functions provided.
 </p>
 <a name="index-node"></a>
-<p>Both types of node structure have as their first three fields a 32-bit
+<p>Both types of node structure have as their first three fields a 64-bit
 <code>sxpinfo</code> header and then three pointers (to the attributes and the
 previous and next node in a doubly-linked list), and then some further
-fields.  On a 32-bit platform a node<a name="DOCF1" href="#FOOT1"><sup>1</sup></a> occupies 28 bytes: on a 64-bit platform typically 56
+fields.  On a 32-bit platform a node<a name="DOCF1" href="#FOOT1"><sup>1</sup></a> occupies 32 bytes: on a 64-bit platform typically 56
 bytes (depending on alignment constraints).
 </p>
 <p>The first five bits of the <code>sxpinfo</code> header specify one of up to 32
@@ -532,23 +532,28 @@ Next: <a href="#The-_0027data_0027" accesskey="n" rel="next">The 'data'</a>, Pre
 <a name="Rest-of-header-1"></a>
 <h4 class="subsection">1.1.2 Rest of header</h4>
 
-<p>Note that the size and structure of the header will change in R 3.5.0.
+<p>Note that the size and structure of the header changed in R 3.5.0:
+see earlier editions of this manual for the previous layout.
 </p>
-<p>The <code>sxpinfo</code> header is currently defined as a 32-bit C structure by
+<p>The <code>sxpinfo</code> header is defined as a 64-bit C structure by
 </p>
 <div class="example">
-<pre class="example">struct sxpinfo_struct {
+<pre class="example">#define NAMED_BITS 16
+struct sxpinfo_struct {
     SEXPTYPE type      :  5;  /* <span class="roman">discussed above</span> */
+    unsigned int scalar:  1;  /* <span class="roman">is this a numeric vector of length 1?</span>
     unsigned int obj   :  1;  /* <span class="roman">is this an object with a class attribute?</span> */
-    unsigned int named :  2;  /* <span class="roman">used to control copying</span> */
+    unsigned int alt   :  1;  /* <span class="roman">is this an <code>ALTREP</code> object?</span> */
     unsigned int gp    : 16;  /* <span class="roman">general purpose, see below</span> */
     unsigned int mark  :  1;  /* <span class="roman">mark object as &lsquo;in use&rsquo; in GC</span> */
     unsigned int debug :  1;
     unsigned int trace :  1;
-    unsigned int spare :  1;  /* <span class="roman">debug once</span> */
+    unsigned int spare :  1;  /* <span class="roman">debug once and with reference counting</span> */
     unsigned int gcgen :  1;  /* <span class="roman">generation for GC</span> */
     unsigned int gccls :  3;  /* <span class="roman">class of node for GC</span> */
-};  /*              Tot: 32 */
+    unsigned int named : NAMED_BITS; /* <span class="roman">used to control copying</span> */
+    unsigned int extra : 32 - NAMED_BITS;
+}; /*		    Tot: 64 */
 </pre></div>
 
 <a name="index-debug-bit"></a>
@@ -566,12 +571,13 @@ other objects when tracing duplications (see <code>tracemem</code>).
 <p>The <code>spare</code> bit is used for closures to mark them for one-time
 debugging.
 </p>
-<a name="index-named-bit"></a>
+<a name="index-named-bits"></a>
 <a name="index-NAMED"></a>
 <a name="index-SET_005fNAMED"></a>
 <a name="index-copying-semantics"></a>
 <p>The <code>named</code> field is set and accessed by the <code>SET_NAMED</code> and
-<code>NAMED</code> macros, and take values <code>0</code>, <code>1</code> and <code>2</code>.
+<code>NAMED</code> macros, and take values <code>0</code>, <code>1</code> and <code>2</code>, or
+possibly higher if <code>NAMEDMAX</code> is set to a higher value.
 R has a &lsquo;call by value&rsquo; illusion, so an assignment like
 </p><div class="example">
 <pre class="example">b &lt;- a
@@ -583,7 +589,7 @@ is no need to copy.  What really happens is that a new symbol <code>b</code>
 is bound to the same value as <code>a</code> and the <code>named</code> field on the
 value object is set (in this case to <code>2</code>).  When an object is about
 to be altered, the <code>named</code> field is consulted.  A value of <code>2</code>
-means that the object must be duplicated before being changed.  (Note
+or more means that the object must be duplicated before being changed.  (Note
 that this does not say that it is necessary to duplicate, only that it
 should be duplicated whether necessary or not.)  A value of <code>0</code>
 means that it is known that no other <code>SEXP</code> shares data with this
@@ -1258,7 +1264,7 @@ used for the evaluation of the body of the function, and promises will
 be forced (and hence actual or default arguments evaluated) when they
 are encountered.
 <a name="index-NAMED-1"></a>
-(Evaluating a promise sets <code>NAMED = 2</code> on its value, so if the
+(Evaluating a promise sets <code>NAMED = NAMEDMAX</code> on its value, so if the
 argument was a symbol its binding is regarded as having multiple
 references during the evaluation of the closure call.)
 </p>
@@ -1547,9 +1553,10 @@ from a connection.
 <p>R has used the same serialization format since R 1.4.0 in December
 2001.  Earlier formats are still supported via <code>load</code> and
 <code>save</code> but such formats are not described here. The current
-serialization format is called &lsquo;version 2&rsquo;, and has been expanded in
+default serialization format is called &lsquo;version 2&rsquo;, and has been expanded in
 back-compatible ways since its inception, for example to support
-additional <code>SEXPTYPE</code>s.
+additional <code>SEXPTYPE</code>s. Version 3 format has been introduced in R
+3.5.0.
 </p>
 <p><code>save</code> works by writing a single-line header (typically
 <code>RDX2\n</code> for a binary save: the only other current value is
@@ -1626,6 +1633,11 @@ doubles formatted with <code>%.16g</code> (plus <code>NA</code>, <code>Inf</code
 <code>-Inf</code>) and bytes with <code>%02x</code>.  Strings are written using
 standard escapes (e.g. <code>\t</code> and <code>\013</code>) for non-printing and
 non-<acronym>ASCII</acronym> bytes.
+</p>
+<p>Version-3 serialization extends version-2 by support for custom
+serialization of <code>ALTREP</code> framework objects.  It also stores the
+current native encoding at serialization time, so that unflagged strings can
+be converted if unserialized in R running under different native encoding.
 </p>
 <hr>
 <a name="Encodings-for-CHARSXPs"></a>
@@ -2583,7 +2595,7 @@ unclass        invisible      seq_along      seq_len
 <div class="example">
 <pre class="example">length      length&lt;-
 class       class&lt;-
-oldClass    oldCLass&lt;-
+oldClass    oldClass&lt;-
 attr        attr&lt;-
 attributes  attributes&lt;-
 names       names&lt;-
@@ -2597,27 +2609,27 @@ dimnames    dimnames&lt;-
 <a name="index-NAMED-2"></a>
 <p>Note that optimizing <code>NAMED = 1</code> is only effective within a
 primitive (as the closure wrapper of a <code>.Internal</code> will set
-<code>NAMED = 2</code> when the promise to the argument is evaluated) and
+<code>NAMED = NAMEDMAX</code> when the promise to the argument is evaluated) and
 hence replacement functions should where possible be primitive to avoid
 copying (at least in their default methods).
 </p>
 </li><li> The following functions are primitive for efficiency reasons:
 
 <div class="example">
-<pre class="example">:          ~          c           list
-call       expression substitute
-UseMethod  standardGeneric
-.C         .Fortran   .Call       .External
-round      signif      rep        seq.int
+<pre class="example">:           ~           c           list
+call        expression  substitute
+UseMethod   standardGeneric
+.C          .Fortran   .Call        .External
+round       signif      rep         seq.int
 </pre></div>
 
 <p>as well as the following internal-use-only functions
 </p>
 <div class="example">
-<pre class="example">.Primitive     .Internal
-.Call.graphics .External.graphics
-.subset        .subset2
-.primTrace     .primUntrace
+<pre class="example">.Primitive      .Internal
+.Call.graphics  .External.graphics
+.subset         .subset2
+.primTrace      .primUntrace
 lazyLoadDBfetch
 </pre></div>
 
@@ -4664,6 +4676,43 @@ is always required.
 Default: <code>&quot;&quot;</code>. (<code>10</code> for CRAN checks.)
 </p>
 </dd>
+<dt><code>_R_CHECK_EXAMPLE_TIMING_THRESHOLD_</code>
+<a name="index-_005fR_005fCHECK_005fEXAMPLE_005fTIMING_005fTHRESHOLD_005f"></a>
+</dt>
+<dd><p>If timings are being recorded, set the threshold in seconds for
+reporting long-running examples (either user+system CPU time or elapsed
+time).  Default: <code>&quot;5&quot;</code>.
+</p>
+</dd>
+<dt><code>_R_CHECK_EXAMPLE_TIMING_CPU_TO_ELAPSED_THRESHOLD_</code>
+<a name="index-_005fR_005fCHECK_005fEXAMPLE_005fTIMING_005fCPU_005fTO_005fELAPSED_005fTHRESHOLD_005f"></a>
+</dt>
+<dd><p>For checks with timings enabled, report examples where the ratio of CPU
+time to elapsed time exceeds this threshold (and the CPU time is at
+least one second).  This can help detect the simultaneous use of
+multiple CPU cores.
+Default: <code>NA</code>.
+</p>
+</dd>
+<dt><code>_R_CHECK_TEST_TIMING_CPU_TO_ELAPSED_THRESHOLD_</code>
+<a name="index-_005fR_005fCHECK_005fTEST_005fTIMING_005fCPU_005fTO_005fELAPSED_005fTHRESHOLD_005f"></a>
+</dt>
+<dd><p>Report for running an individual test if the ratio of CPU time to
+elapsed time exceeds this threshold (and the CPU time is at least one
+second).  Not supported on Windows.
+Default: <code>NA</code>.
+</p>
+</dd>
+<dt><code>_R_CHECK_VIGNETTE_TIMING_CPU_TO_ELAPSED_THRESHOLD_</code>
+<a name="index-_005fR_005fCHECK_005fVIGNETTE_005fTIMING_005fCPU_005fTO_005fELAPSED_005fTHRESHOLD_005f"></a>
+</dt>
+<dd><p>Report if when running/re-building vignettes (individually or in
+aggregate) the ratio of CPU time to elapsed time exceeds this threshold
+(and the CPU time is at least one second).  Not supported on
+Windows.
+Default: <code>NA</code>.
+</p>
+</dd>
 <dt><code>_R_CHECK_INSTALL_DEPENDS_</code>
 <a name="index-_005fR_005fCHECK_005fINSTALL_005fDEPENDS_005f"></a>
 </dt>
@@ -4686,15 +4735,15 @@ is available to those who first install recording to a log, then call
 <dt><code>_R_CHECK_SUGGESTS_ONLY_</code>
 <a name="index-_005fR_005fCHECK_005fSUGGESTS_005fONLY_005f"></a>
 </dt>
-<dd><p>If set to a true value, running examples, tests and
-vignettes<a name="DOCF23" href="#FOOT23"><sup>23</sup></a> is done with
-<code>.libPaths()</code> containing just a temporary library directory and
-<code>.Library</code>.  The temporary library is populated by symbolic
-links<a name="DOCF24" href="#FOOT24"><sup>24</sup></a> to the installed copies of
+<dd><p>If set to a true value, running examples, tests and vignettes is done
+with <code>.libPaths()</code> containing just a temporary library directory
+and <code>.Library</code>.  The temporary library is populated by symbolic
+links<a name="DOCF23" href="#FOOT23"><sup>23</sup></a> to the installed copies of
 all the Depends/Imports and (for the second only) Suggests packages
-which are not in <code>.Library</code>.  (As an exception, packages in a
-&lsquo;<samp>VignetteBuilder</samp>&rsquo; field are always made available.)
-Default: false (but <code>_R_CHECK_SUGGESTS_ONLY_</code> is true for CRAN checks).
+which are not in <code>.Library</code>.  (As exceptions, packages in a
+&lsquo;<samp>VignetteBuilder</samp>&rsquo; field and test-suite managers in &lsquo;<samp>Suggests</samp>&rsquo;
+are always made available.)  Default: false (but
+<code>_R_CHECK_SUGGESTS_ONLY_</code> is true for CRAN checks).
 </p>
 </dd>
 <dt><code>_R_CHECK_NO_RECOMMENDED_</code>
@@ -4898,7 +4947,73 @@ Windows, <code>objdump.exe</code> to be on the <code>PATH</code>.  This would be
 normal when using a package with compiled code (which are the only ones
 this checks), but Windows&rsquo; users should check.)
 Default: false (but true for CRAN submission checks).
-</p></dd>
+</p>
+</dd>
+<dt><code>_R_CHECK_NO_STOP_ON_TEST_ERROR_</code>
+<a name="index-_005fR_005fCHECK_005fNO_005fSTOP_005fON_005fTEST_005fERROR_005f"></a>
+</dt>
+<dd><p>If set to a true value, do not stop running tests after first error (as
+if command line option <samp>--no-stop-on-test-error</samp> had been given).
+Default: false (but true for CRAN submission checks).
+</p>
+</dd>
+<dt><code>_R_CHECK_PRAGMAS_</code>
+<a name="index-_005fR_005fCHECK_005fPRAGMAS_005f"></a>
+</dt>
+<dd><p>Run additional checks on the pragmas in C/C++ source code and headers.
+Default: false (but true for CRAN submission checks).
+</p>
+</dd>
+<dt><code>_R_CHECK_COMPILATION_FLAGS_</code>
+<a name="index-_005fR_005fCHECK_005fCOMPILATION_005fFLAGS_005f"></a>
+</dt>
+<dd><p>If the package is installed and has C/C++/Fortran code, check the
+install log for non-portable flags (for example those added to
+<samp>src/Makevars</samp> during configuration).  Currently <samp>-W</samp> flags
+are reported, except <samp>-Wall</samp>, <samp>-Wextra</samp> and
+<samp>-Weverything</samp>, and flags which appear to be attempts to suppress
+warnings are highlighted.
+See
+<a href="R-exts.html#Writing-portable-packages">Writing portable packages</a> in <cite>Writing R Extensions</cite>
+for the rationale of this check (and why even <samp>-Werror</samp> is
+unsafe).  Environment variable <code>_R_CHECK_COMPILATION_FLAGS_KNOWN_</code>
+can be set to a space-separated set of flags which come from the R
+build used for testing (flags such as <samp>-Wall</samp> and
+<samp>-Wextra</samp> are already known).
+Default: false (but true for CRAN submission checks).
+</p>
+</dd>
+<dt><code>_R_CHECK_R_DEPENDS_</code>
+<a name="index-_005fR_005fCHECK_005fR_005fDEPENDS_005f"></a>
+</dt>
+<dd><p>Check that any dependence on R is not on a recent patch-level version
+such as <code>R (&gt;= 3.3.3)</code> since blocking installation of a package
+will also block its reverse dependencies.  Possible values
+&lsquo;<samp>&quot;note&quot;</samp>&rsquo;, &lsquo;<samp>&quot;warn&quot;</samp>&rsquo; and logical values (where currently true
+values are equivalent to &lsquo;<samp>&quot;note&quot;</samp>&rsquo;).
+Default: false (but &lsquo;<samp>&quot;warn&quot;</samp>&rsquo; for <samp>--as-cran</samp>).
+</p>
+</dd>
+<dt><code>_R_CHECK_SERIALIZATION_</code>
+<a name="index-_005fR_005fCHECK_005fSERIALIZATION_005f"></a>
+</dt>
+<dd><p>Check that serialized R objects in the package sources were
+serialized with version 2 and there is no dependence on &lsquo;<samp>R &gt;=
+3.5.0</samp>&rsquo;.  (Version 3 is in use as from R 3.5.0 but should only be used
+when necessary.)
+Default: false (but true for CRAN submission checks).
+</p>
+</dd>
+<dt><code>_R_CHECK_R_ON_PATH_</code>
+<a name="index-_005fR_005fCHECK_005fR_005fON_005fPATH_005f"></a>
+</dt>
+<dd><p>This checks if the package attempts to use <code>R</code> or
+<code>Rscript</code> from the path rather than that under test.
+It does so by putting scripts at the head of the path which print a
+message and fail.
+Default: false (but true for CRAN submission checks).
+</p>
+</dd>
 </dl>
 
 <p>CRAN&rsquo;s submission checks use something like
@@ -4924,6 +5039,11 @@ _R_CHECK_SCREEN_DEVICE_=stop
 _R_CHECK_TOPLEVEL_FILES_=TRUE
 _R_CHECK_S3_METHODS_NOT_REGISTERED_=TRUE
 _R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_=TRUE
+_R_CHECK_PRAGMAS_=TRUE
+_R_CHECK_COMPILATION_FLAGS_=TRUE
+_R_CHECK_R_DEPENDS_=warn
+_R_CHECK_SERIALIZATION_=TRUE
+_R_CHECK_R_ON_PATH_=TRUE
 </pre></div>
 
 <p>These are turned on by <code>R CMD check --as-cran</code>: the incoming
@@ -4935,9 +5055,70 @@ checks also use
 <p>since some packages do suggest other packages not available on CRAN or
 other commonly-used repositories.
 </p>
+<p>Several environment variables can be used to set &lsquo;timeouts&rsquo;: limits for
+the elapsed time taken by the sub-processes used for parts of the
+checks.  A value of <code>0</code> indicates no limit, and is the default.
+Character strings ending in &lsquo;<samp>s</samp>&rsquo;, &lsquo;<samp>m</samp>&rsquo; or &lsquo;<samp>h</samp>&rsquo; indicate a
+number of seconds, minutes or hours respectively: other values are
+interpreted as a whole number of seconds (with invalid inputs being
+treated as no limit).
+</p><dl compact="compact">
+<dt><code>_R_CHECK_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>The default timeout for sub-processes not otherwise mentioned, and the
+default value for all except <code>_R_CHECK_ONE_TEST_ELAPSED_TIMEOUT_</code>.
+(This is also used by <code>tools::check_packages_in_dir</code>.)
+</p>
+</dd>
+<dt><code>_R_CHECK_INSTALL_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fINSTALL_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>Limit for when <code>R CMD INSTALL</code> is run by <code>check</code>.
+</p>
+</dd>
+<dt><code>_R_CHECK_EXAMPLES_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fEXAMPLES_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>Limit for running all the examples for one sub-architecture.
+</p>
+</dd>
+<dt><code>_R_CHECK_ONE_TEST_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fONE_005fTEST_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>Limit for running one test for one sub-architecture.  Default
+<code>_R_CHECK_TESTS_ELAPSED_TIMEOUT_</code>.
+</p>
+</dd>
+<dt><code>_R_CHECK_TESTS_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fTESTS_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>Limit for running all the tests for one sub-architecture (and the
+default limit for running one test).
+</p>
+</dd>
+<dt><code>_R_CHECK_ONE_VIGNETTE_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fONE_005fVIGNETTE_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>Limit for running the R code in one vignette.
+</p>
+</dd>
+<dt><code>_R_CHECK_BUILD_VIGNETTES_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fBUILD_005fVIGNETTES_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>Limit for re-building (all) vignettes.
+</p>
+</dd>
+<dt><code>_R_CHECK_PKGMAN_ELAPSED_TIMEOUT_</code>
+<a name="index-_005fR_005fCHECK_005fPKGMAN_005fELAPSED_005fTIMEOUT_005f"></a>
+</dt>
+<dd><p>Limit for each attempt at building the PDF package manual.
+</p></dd>
+</dl>
+
 <p>Another variable which enables stricter checks is to set
 <code>R_CHECK_CONSTANTS</code> to <code>5</code>.  This checks that
-nothing<a name="DOCF25" href="#FOOT25"><sup>25</sup></a> changes the values of &lsquo;constants&rsquo;<a name="DOCF26" href="#FOOT26"><sup>26</sup></a> in R
+nothing<a name="DOCF24" href="#FOOT24"><sup>24</sup></a> changes the values of &lsquo;constants&rsquo;<a name="DOCF25" href="#FOOT25"><sup>25</sup></a> in R
 code.  This is best used in conjunction with setting
 <code>R_JIT_STRATEGY</code> to <code>3</code>, which checks code on first use (by
 default most code is only checked after byte-compilation on second use).
@@ -5127,7 +5308,7 @@ a sequence of <code>(pdf)latex</code>, <code>bibtex</code> and
 </p>
 <p>This process has been rather vulnerable to the versions of the external
 software used: particular issues have been <code>texi2dvi</code> and
-<samp>texinfo.tex</samp> updates, mismatches between the two<a name="DOCF27" href="#FOOT27"><sup>27</sup></a>,
+<samp>texinfo.tex</samp> updates, mismatches between the two<a name="DOCF26" href="#FOOT26"><sup>26</sup></a>,
 versions of the LaTeX package &lsquo;<samp>hyperref</samp>&rsquo; and quirks in index
 production.  The licenses used for LaTeX and latterly &lsquo;<samp>texinfo</samp>&rsquo;
 prohibit us from including &lsquo;known good&rsquo; versions in the R
@@ -5222,17 +5403,10 @@ used to work with positive integer indices (and negative, logical and
 matrix indices were all converted to positive integers): it now works
 with either <code>INTSXP</code> or <code>REALSXP</code> indices.
 
-</li><li> R function <code>length</code> was documented to currently return an
-integer, possibly <code>NA</code>.  A lot of code has been written that
-assumes that, and even code which calls <code>as.integer(length(x))</code>
-before passing to <code>.C</code>/<code>.Fortran</code> rarely checks for an
-<code>NA</code> result.
+</li><li> The R function <code>length</code> returns a double value if the length
+exceeds 2^31-1. Code calling <code>as.integer(length(x))</code> before passing
+to <code>.C</code>/<code>.Fortran</code> should checks for an <code>NA</code> result.
 
-<p>There is a new function <code>xlength</code> which works for long vectors and
-returns a double value if the length exceeds 2^31-1. At present
-<code>length</code> returns <code>NA</code> for long vectors, but it may be safer to
-make that an error.
-</p>
 </li></ul>
 
 <hr>
@@ -5281,7 +5455,7 @@ vectors.
 <p>The remaining interfaces will need to cope with the changed
 <code>VECTOR_SEXPREC</code> types.  It seems likely that in most cases lengths
 are accessed by the <code>length</code> and <code>LENGTH</code>
-functions<a name="DOCF28" href="#FOOT28"><sup>28</sup></a>  The current approach is to keep these returning 32-bit lengths and
+functions<a name="DOCF27" href="#FOOT27"><sup>27</sup></a>  The current approach is to keep these returning 32-bit lengths and
 introduce &lsquo;long&rsquo; versions <code>xlength</code> and <code>XLENGTH</code> which return
 <code>R_xlen_t</code> values.
 </p>
@@ -5391,6 +5565,7 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fALWAYS_005fLOG_005fVIGNETTE_005fOUTPUT_005f"><code>_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fASCII_005fCODE_005f"><code>_R_CHECK_ASCII_CODE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fASCII_005fDATA_005f"><code>_R_CHECK_ASCII_DATA_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fBUILD_005fVIGNETTES_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_BUILD_VIGNETTES_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCLEAN_005fVIGN_005fTEST_005f"><code>_R_CHECK_CLEAN_VIGN_TEST_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCODETOOLS_005fPROFILE_005f"><code>_R_CHECK_CODETOOLS_PROFILE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCODE_005fASSIGN_005fTO_005fGLOBALENV_005f"><code>_R_CHECK_CODE_ASSIGN_TO_GLOBALENV_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5400,6 +5575,7 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCODE_005fUSAGE_005fWITH_005fONLY_005fBASE_005fATTACHED_005f"><code>_R_CHECK_CODE_USAGE_WITH_ONLY_BASE_ATTACHED_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCODOC_005fS4_005fMETHODS_005f"><code>_R_CHECK_CODOC_S4_METHODS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCOMPACT_005fDATA_005f"><code>_R_CHECK_COMPACT_DATA_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCOMPILATION_005fFLAGS_005f"><code>_R_CHECK_COMPILATION_FLAGS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCRAN_005fINCOMING_005f"><code>_R_CHECK_CRAN_INCOMING_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCRAN_005fINCOMING_005fREMOTE_005f"><code>_R_CHECK_CRAN_INCOMING_REMOTE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fDEPENDS_005fONLY_005f"><code>_R_CHECK_DEPENDS_ONLY_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5408,6 +5584,10 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fDOC_005fSIZES_005f"><code>_R_CHECK_DOC_SIZES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fDOT_005fFIRSTLIB_005f"><code>_R_CHECK_DOT_FIRSTLIB_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fDOT_005fINTERNAL_005f"><code>_R_CHECK_DOT_INTERNAL_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fEXAMPLES_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_EXAMPLES_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fEXAMPLE_005fTIMING_005fCPU_005fTO_005fELAPSED_005fTHRESHOLD_005f"><code>_R_CHECK_EXAMPLE_TIMING_CPU_TO_ELAPSED_THRESHOLD_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fEXAMPLE_005fTIMING_005fTHRESHOLD_005f"><code>_R_CHECK_EXAMPLE_TIMING_THRESHOLD_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fEXECUTABLES_005f"><code>_R_CHECK_EXECUTABLES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fEXECUTABLES_005fEXCLUSIONS_005f"><code>_R_CHECK_EXECUTABLES_EXCLUSIONS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fEXIT_005fON_005fFIRST_005fERROR_005f"><code>_R_CHECK_EXIT_ON_FIRST_ERROR_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5416,13 +5596,19 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fFORCE_005fSUGGESTS_005f"><code>_R_CHECK_FORCE_SUGGESTS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fGCT_005fN_005f"><code>_R_CHECK_GCT_N_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fINSTALL_005fDEPENDS_005f"><code>_R_CHECK_INSTALL_DEPENDS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fINSTALL_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_INSTALL_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fLICENSE_005f"><code>_R_CHECK_LICENSE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fLIMIT_005fCORES_005f"><code>_R_CHECK_LIMIT_CORES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fNATIVE_005fROUTINE_005fREGISTRATION_005f"><code>_R_CHECK_NATIVE_ROUTINE_REGISTRATION_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fNO_005fRECOMMENDED_005f"><code>_R_CHECK_NO_RECOMMENDED_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fNO_005fSTOP_005fON_005fTEST_005fERROR_005f"><code>_R_CHECK_NO_STOP_ON_TEST_ERROR_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fONE_005fTEST_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_ONE_TEST_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fONE_005fVIGNETTE_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_ONE_VIGNETTE_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fOVERWRITE_005fREGISTERED_005fS3_005fMETHODS_005f"><code>_R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPERMISSIONS_005f"><code>_R_CHECK_PERMISSIONS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPKGMAN_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_PKGMAN_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPKG_005fSIZES_005f"><code>_R_CHECK_PKG_SIZES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPRAGMAS_005f"><code>_R_CHECK_PRAGMAS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fRD_005fCHECKRD_005fMINLEVEL_005f"><code>_R_CHECK_RD_CHECKRD_MINLEVEL_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fRD_005fCONTENTS_005f"><code>_R_CHECK_RD_CONTENTS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fRD_005fEXAMPLES_005fT_005fAND_005fF_005f"><code>_R_CHECK_RD_EXAMPLES_T_AND_F_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5430,8 +5616,11 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fRD_005fSTYLE_005f"><code>_R_CHECK_RD_STYLE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fRD_005fXREFS_005f"><code>_R_CHECK_RD_XREFS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fREPLACING_005fIMPORTS_005f"><code>_R_CHECK_REPLACING_IMPORTS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fR_005fDEPENDS_005f"><code>_R_CHECK_R_DEPENDS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fR_005fON_005fPATH_005f"><code>_R_CHECK_R_ON_PATH_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fS3_005fMETHODS_005fNOT_005fREGISTERED_005f"><code>_R_CHECK_S3_METHODS_NOT_REGISTERED_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSCREEN_005fDEVICE_005f"><code>_R_CHECK_SCREEN_DEVICE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSERIALIZATION_005f"><code>_R_CHECK_SERIALIZATION_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSKIP_005fARCH_005f"><code>_R_CHECK_SKIP_ARCH_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSKIP_005fEXAMPLES_005fARCH_005f"><code>_R_CHECK_SKIP_EXAMPLES_ARCH_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSKIP_005fTESTS_005fARCH_005f"><code>_R_CHECK_SKIP_TESTS_ARCH_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5440,7 +5629,9 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSUBDIRS_005fNOCASE_005f"><code>_R_CHECK_SUBDIRS_NOCASE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSUBDIRS_005fSTRICT_005f"><code>_R_CHECK_SUBDIRS_STRICT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSUGGESTS_005fONLY_005f"><code>_R_CHECK_SUGGESTS_ONLY_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTESTS_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_TESTS_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTESTS_005fNLINES_005f"><code>_R_CHECK_TESTS_NLINES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTEST_005fTIMING_005fCPU_005fTO_005fELAPSED_005fTHRESHOLD_005f"><code>_R_CHECK_TEST_TIMING_CPU_TO_ELAPSED_THRESHOLD_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTIMINGS_005f"><code>_R_CHECK_TIMINGS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTOPLEVEL_005fFILES_005f"><code>_R_CHECK_TOPLEVEL_FILES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fUNSAFE_005fCALLS_005f"><code>_R_CHECK_UNSAFE_CALLS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5448,6 +5639,7 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fUSE_005fINSTALL_005fLOG_005f"><code>_R_CHECK_USE_INSTALL_LOG_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fVC_005fDIRS_005f"><code>_R_CHECK_VC_DIRS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fVIGNETTES_005fNLINES_005f"><code>_R_CHECK_VIGNETTES_NLINES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fVIGNETTE_005fTIMING_005fCPU_005fTO_005fELAPSED_005fTHRESHOLD_005f"><code>_R_CHECK_VIGNETTE_TIMING_CPU_TO_ELAPSED_THRESHOLD_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fWALL_005fFORTRAN_005f"><code>_R_CHECK_WALL_FORTRAN_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fWINDOWS_005fDEVICE_005f"><code>_R_CHECK_WINDOWS_DEVICE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fXREFS_005fREPOSITORIES_005f"><code>_R_CHECK_XREFS_REPOSITORIES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5502,7 +5694,7 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-NAMED"><code>NAMED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Rest-of-header">Rest of header</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-NAMED-1"><code>NAMED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Argument-evaluation">Argument evaluation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-NAMED-2"><code>NAMED</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#g_t_002eInternal-vs-_002ePrimitive">.Internal vs .Primitive</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-named-bit"><code>named bit</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Rest-of-header">Rest of header</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-named-bits"><code>named bits</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Rest-of-header">Rest of header</a></td></tr>
 <tr><td colspan="4"> <hr></td></tr>
 <tr><th><a name="Function-and-variable-index_vr_letter-P">P</a></th><td></td><td></td></tr>
 <tr><td></td><td valign="top"><a href="#index-Perl"><code>Perl</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#R-coding-standards">R coding standards</a></td></tr>
@@ -5828,20 +6020,18 @@ for this.</p>
 <p>under Windows, junction points, or copies if
 environment variable <code>R_WIN_NO_JUNCTIONS</code> has a non-empty value.</p>
 <h3><a name="FOOT23" href="#DOCF23">(23)</a></h3>
-<p>but not re-building vignettes.</p>
-<h3><a name="FOOT24" href="#DOCF24">(24)</a></h3>
 <p>see the previous footnote.</p>
-<h3><a name="FOOT25" href="#DOCF25">(25)</a></h3>
+<h3><a name="FOOT24" href="#DOCF24">(24)</a></h3>
 <p>The usual culprits are calls to compiled code
 <em>via</em> <code>.Call</code> or <code>.External</code> which alter their
 arguments.</p>
-<h3><a name="FOOT26" href="#DOCF26">(26)</a></h3>
+<h3><a name="FOOT25" href="#DOCF25">(25)</a></h3>
 <p>things which the
 byte compiler assumes do not change, e.g. function bodies.</p>
-<h3><a name="FOOT27" href="#DOCF27">(27)</a></h3>
+<h3><a name="FOOT26" href="#DOCF26">(26)</a></h3>
 <p>Linux
 distributions tend to unbundle <samp>texinfo.tex</samp> from &lsquo;<samp>texinfo</samp>&rsquo;.</p>
-<h3><a name="FOOT28" href="#DOCF28">(28)</a></h3>
+<h3><a name="FOOT27" href="#DOCF27">(27)</a></h3>
 <p>but <code>LENGTH</code> is a macro under some internal
 uses.</p>
 </div>

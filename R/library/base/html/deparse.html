@@ -17,9 +17,8 @@
 
 <pre>
 deparse(expr, width.cutoff = 60L,
-        backtick = mode(expr) %in%
-            c("call", "expression", "(", "function"),
-        control = c("keepInteger", "showAttributes", "keepNA"),
+        backtick = mode(expr) %in% c("call", "expression", "(", "function"),
+        control = c("keepNA", "keepInteger", "niceNames", "showAttributes"),
         nlines = -1L)
 </pre>
 
@@ -43,8 +42,8 @@ enclosed in backticks if they do not follow the standard syntax.</p>
 </td></tr>
 <tr valign="top"><td><code>control</code></td>
 <td>
-<p>character vector of deparsing options.  See
-<code><a href="deparseOpts.html">.deparseOpts</a></code>.</p>
+<p>character vector (or <code>NULL</code>) of deparsing options.
+See <code><a href="deparseOpts.html">.deparseOpts</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>nlines</code></td>
 <td>
@@ -134,8 +133,8 @@ deparse(e)
 deparse(e, backtick = TRUE)
 e &lt;- quote(`foo bar`+1)
 deparse(e)
-deparse(e, control = "all")
+deparse(e, control = "all") # wraps it w/ quote( . )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

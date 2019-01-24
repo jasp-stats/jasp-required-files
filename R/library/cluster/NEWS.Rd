@@ -6,6 +6,27 @@
 \newcommand{\CRANpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 %% NB: The date (yyyy-mm-dd) is the "Packaged:" date in ../DESCRIPTION
 
+\section{Changes in version 2.0.7 (2018-03-29, svn r7509)}{
+  \subsection{New Features}{
+    \itemize{
+      \item \code{clara()} gets new option \code{metric = "jaccard"},
+      contributed  by Kamil Kozlowski and Kamil Jadszko.
+      %% FIXME:  Also add for  pam() !!
+
+      \item \code{pam()} and \code{clara()} use \code{match.arg(metric)}
+      and hence \code{metric} can be abbreviated (and invalid strings
+      give an error instead of being interpreted as \code{"euclidean"}).
+    }
+  }
+  \subsection{Bug Fixes}{
+    \itemize{
+      \item The bug fix of \code{clara(*, correct.d = TRUE)} (from
+      version 2.0.4) for the NA-data case now also applies to the
+      internal C function \code{selec()}.
+    }
+  }
+}
+
 \section{Changes in version 2.0.6 (2017-03-10, svn r7332)}{
   \subsection{New Features}{
     \itemize{

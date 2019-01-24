@@ -24,8 +24,8 @@ survfit(formula, newdata,
         se.fit=TRUE, conf.int=.95,
         individual=FALSE, 
         type,vartype,
-        conf.type=c("log","log-log","plain","none"), censor=TRUE, id,
-        start.time,
+        conf.type=c("log","log-log","plain","none", "logit", "arcsin"),
+        censor=TRUE, id, start.time,
         na.action=na.pass, ...)
 </pre>
 
@@ -100,14 +100,15 @@ estimate for <code>ties='efron'</code> and the Aalen estimate otherwise.
 <td>
 
 <p>One of <code>"none"</code>, <code>"plain"</code>, <code>"log"</code> (the default),
-or <code>"log-log"</code>.  Only
+<code>"log-log"</code> or <code>"logit"</code>.  Only
 enough of the string to uniquely identify it is necessary.
 The first option causes confidence intervals not to be
 generated.  The second causes the standard intervals
 <code>curve +- k *se(curve)</code>, where k is determined from
 <code>conf.int</code>.  The log option calculates intervals based on the
-cumulative hazard or log(survival). The last option bases
-intervals on the log hazard or log(-log(survival)). 
+cumulative hazard or log(survival). The log-log option uses
+the log hazard or log(-log(survival)), and the logit
+log(survival/(1-survival)).
 </p>
 </td></tr>
 <tr valign="top"><td><code>censor</code></td>
@@ -304,7 +305,7 @@ fit  &lt;- survfit(Surv(time, time, status, type='interval') ~1,
 #
 # Time to progression/death for patients with monoclonal gammopathy
 #  Competing risk curves (cumulative incidence)
-fit1 &lt;- survfit(Surv(stop, event=='progression') ~1, data=mgus1,
+fit1 &lt;- survfit(Surv(stop, event=='pcm') ~1, data=mgus1,
                     subset=(start==0))
 fit2 &lt;- survfit(Surv(stop, status) ~1, data=mgus1,
                     subset=(start==0), etype=event) #competing risks
@@ -318,5 +319,5 @@ text(16, .15,"Competing Risk: progression", col=2)
 text(15, .30,"KM:prog")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

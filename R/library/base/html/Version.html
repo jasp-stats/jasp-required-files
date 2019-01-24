@@ -142,7 +142,18 @@ mtext(R.version.string, side = 1, line = 4, adj = 1) # a useful bottom-right not
 
 ## a good way to detect macOS:
 if(grepl("^darwin", R.version$os)) message("running on macOS")
+
+## Short R version string, ("space free", useful in file/directory names;
+##                          also fine for unreleased versions of R):
+shortRversion &lt;- function() {
+   rvs &lt;- R.version.string
+   if(grepl("devel", (st &lt;- R.version$status)))
+       rvs &lt;- sub(paste0(" ",st," "), "-devel_", rvs, fixed=TRUE)
+   gsub("[()]", "", gsub(" ", "_", sub(" version ", "-", rvs)))
+}
+shortRversion()
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

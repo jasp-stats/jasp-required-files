@@ -1,8 +1,7 @@
 
-R version 2.14.0 alpha (2011-10-06 r57181)
-Copyright (C) 2011 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-unknown-linux-gnu (64-bit)
+R version 3.5.0 alpha (2018-03-28 r74481)
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -39,9 +38,9 @@ dissimilarity(0)
 
 Metric :  euclidean 
 Number of objects : 1
-Classes 'dissimilarity', 'dist'  atomic (0) 
-  ..- attr(*, "Size")= int 1
-  ..- attr(*, "Metric")= chr "euclidean"
+ 'dissimilarity' num(0) 
+ - attr(*, "Size")= int 1
+ - attr(*, "Metric")= chr "euclidean"
 > d01 <- daisy(matrix(0., 0,1))
 > if(paste(R.version$major, R.version$minor, sep=".") >= "2.1.0")
 +     print(d01)
@@ -51,9 +50,9 @@ dissimilarity(0)
 Metric :  euclidean 
 Number of objects : 0
 > str(d01)
-Classes 'dissimilarity', 'dist'  atomic (0) 
-  ..- attr(*, "Size")= int 0
-  ..- attr(*, "Metric")= chr "euclidean"
+ 'dissimilarity' num(0) 
+ - attr(*, "Size")= int 0
+ - attr(*, "Metric")= chr "euclidean"
 > d32 <- data.frame(eins=c("A"=1,"B"=1,"C"=1), zwei=c(2,2,2))
 > daisy(d32)
 Dissimilarities :
@@ -925,3 +924,6 @@ Number of objects : 20
 > pairs(cbind(d0,d2,d4),
 +       main = "Animals -- symmetric and asymm. dissimilarities")
 > 
+> proc.time()
+   user  system elapsed 
+  0.265   0.043   0.361 

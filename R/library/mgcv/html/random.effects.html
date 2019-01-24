@@ -19,15 +19,15 @@ regression terms. This method can be used with <code><a href="gam.html">gam</a><
 <code><a href="smooth.construct.re.smooth.spec.html">smooth.construct.re.smooth.spec</a></code>, for full details. The basic idea is that, e.g., <code>s(x,z,g,bs="re")</code> generates an i.i.d. Gaussian 
 random effect with model matrix given by <code>model.matrix(~x:z:g-1)</code> &mdash; in principle such terms can take any number of arguments. This simple 
 approach is sufficient for implementing a wide range of commonly used random effect structures. For example if <code>g</code> is a factor then 
-<code>s(g,bs="re")</code> produces a random coefficient for each level of <code>g</code>, with the random coefficients all modelled as i.i.d. normal. If <code>g</code> is a factor and <code>x</code> is numeric, then <code>s(x,g,bs="re")</code> produces an i.i.d. normal random slope relating the response to <code>x</code> for each level of <code>g</code>. If <code>h</code> is another factor then <code>s(h,g,bs="re")</code> produces the usual i.i.d. normal <code>g</code> - <code>h</code> interaction. Note that a rather useful approximate test for zero random effect is also implemented for tsuch terms based on Wood (2013). If the precision
+<code>s(g,bs="re")</code> produces a random coefficient for each level of <code>g</code>, with the random coefficients all modelled as i.i.d. normal. If <code>g</code> is a factor and <code>x</code> is numeric, then <code>s(x,g,bs="re")</code> produces an i.i.d. normal random slope relating the response to <code>x</code> for each level of <code>g</code>. If <code>h</code> is another factor then <code>s(h,g,bs="re")</code> produces the usual i.i.d. normal <code>g</code> - <code>h</code> interaction. Note that a rather useful approximate test for zero random effect is also implemented for such terms based on Wood (2013). If the precision
 matrix is known to within a multiplicative constant, then this can be supplied via the <code>xt</code> argument of <code>s</code>. See <a href="smooth.construct.re.smooth.spec.html">smooth.construct.re.smooth.spec</a> for details and example. 
 </p>
 <p>Alternatively, but less straightforwardly, the <code>paraPen</code> argument to <code><a href="gam.html">gam</a></code> can be used: 
 see <code><a href="gam.models.html">gam.models</a></code>. If smoothing parameter estimation is by ML or REML (e.g. <code>gam(...,method="REML")</code>) then this approach is 
 a completely conventional likelihood based treatment of random effects.
 </p>
-<p><code>gam</code> can be slow for fitting models with large numbers of random effects, because it does not exploit the sparcity that is often a feature
-of parametric random effects. It can not be used for models with more coefficients than data. However <code>gam</code> is often faster and more relaiable 
+<p><code>gam</code> can be slow for fitting models with large numbers of random effects, because it does not exploit the sparsity that is often a feature
+of parametric random effects. It can not be used for models with more coefficients than data. However <code>gam</code> is often faster and more reliable 
 than <code>gamm</code> or <code>gamm4</code>, when the number of random effects is modest.
 </p>
 <p>To facilitate the use of random effects with <code>gam</code>, <code><a href="gam.vcomp.html">gam.vcomp</a></code> is a utility routine for converting 
@@ -101,5 +101,5 @@ fv1 &lt;- predict(rm1) ## predictions setting r.e. to predicted values
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

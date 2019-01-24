@@ -47,6 +47,15 @@ joint_tests(noise.lm)
 joint_tests(noise.lm, by = "side")
 
 ## ------------------------------------------------------------------------
+fiber.lm <- lm(strength ~ diameter*machine, data = fiber)
+
+## ------------------------------------------------------------------------
+emtrends(fiber.lm, pairwise ~ machine, var = "diameter")
+
+## ----fig.height = 2------------------------------------------------------
+emmip(fiber.lm, machine ~ diameter, cov.reduce = range)
+
+## ------------------------------------------------------------------------
 org.quad <- lm(cbind(sales1, sales2) ~ poly(price1, price2, degree = 2)
                                        + day + store, data = oranges)
 org.int <- lm(cbind(sales1, sales2) ~ price1 * price2 + day + store, data = oranges)

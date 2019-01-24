@@ -174,13 +174,13 @@ package citation.</p>
 (potentially in other languages) but did not make further
 substantial contributions to the package.</p>
 </dd>
-<dt><code>"ctb"</code></dt><dd><p>(Contributor) Use for authors who have made
-smaller contributions (such as code patches etc.) but should not
-show up in the package citation.</p>
-</dd>
 <dt><code>"cph"</code></dt><dd><p>(Copyright holder) Use for all copyright holders.</p>
 </dd>
 <dt><code>"cre"</code></dt><dd><p>(Creator) Use for the package maintainer.</p>
+</dd>
+<dt><code>"ctb"</code></dt><dd><p>(Contributor) Use for authors who have made
+smaller contributions (such as code patches etc.) but should not
+show up in the package citation.</p>
 </dd>
 <dt><code>"ctr"</code></dt><dd><p>(Contractor) Use for authors who have been
 contracted to write (parts of) the package and hence do not own
@@ -191,6 +191,9 @@ contributed data sets for the package.</p>
 </dd>
 <dt><code>"fnd"</code></dt><dd><p>(Funder) Use for persons or organizations that
 furnished financial support for the development of the package.</p>
+</dd>
+<dt><code>"rev"</code></dt><dd><p>(Reviewer) Use for persons or organizations
+responsible for reviewing (parts of) the package.</p>
 </dd>
 <dt><code>"ths"</code></dt><dd><p>(Thesis advisor) If the package is part of a
 thesis, use for the thesis advisor.</p>
@@ -205,6 +208,13 @@ separate <code>"personList"</code> class with corresponding creator
 <code>personList()</code> for collections of these.  The new scheme employs
 a single class for information about an arbitrary positive number of
 persons, eliminating the need for the <code>personList</code> mechanism.
+</p>
+<p>The <code>comment</code> field can be used for &ldquo;arbitrary&rdquo; additional
+information about persons.  Elements named <code>"ORCID"</code> will be
+taken to give ORCID identifiers (see <a href="https://orcid.org/">https://orcid.org/</a> for more
+information), and be displayed as the corresponding URIs by the
+<code>print()</code> and <code>format()</code> methods (see <b>Examples</b>
+below).
 </p>
 
 
@@ -245,7 +255,7 @@ p[1]$email
 ## BR is the second author [aut], who translated the code to R [trl],
 ## and maintains the package [cre].
 b &lt;- c(person("Angelo", "Canty", role = "aut", comment =
-         "S original, http://statwww.epfl.ch/davison/BMA/library.html"),
+         "S original, &lt;http://statwww.epfl.ch/davison/BMA/library.html&gt;"),
        person(c("Brian", "D."), "Ripley", role = c("aut", "trl", "cre"),
               comment = "R port", email = "ripley@stats.ox.ac.uk")
      )
@@ -259,7 +269,11 @@ format(b, include = c("family", "given", "role"),
 ## Conversion to BibTeX author field.
 paste(format(b, include = c("given", "family")), collapse = " and ")
 toBibtex(b)
+
+## ORCID identifiers.
+(p3 &lt;- person("Achim", "Zeileis",
+              comment = c(ORCID = "0000-0003-0918-3766")))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

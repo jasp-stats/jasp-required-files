@@ -10,9 +10,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Russ Lenth" />
+<meta name="author" content="emmeans package, Version 1.3.2" />
 
-<meta name="date" content="2018-05-20" />
 
 <title>Sophisticated models in emmeans</title>
 
@@ -31,8 +30,7 @@
 
 
 <h1 class="title toc-ignore">Sophisticated models in emmeans</h1>
-<h4 class="author"><em>Russ Lenth</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
 
 
 
@@ -62,22 +60,22 @@
 <p>Let’s look at the EMMs for <code>nitro</code>:</p>
 <pre class="r"><code>Oats.emm.n &lt;- emmeans(Oats.lmer, &quot;nitro&quot;)
 Oats.emm.n</code></pre>
-<pre class="ro"><code>##  nitro    emmean       SE   df  lower.CL  upper.CL
-##    0.0  78.89207 7.294379 7.78  61.98930  95.79484
-##    0.2  97.03425 7.136271 7.19  80.25029 113.81822
-##    0.4 114.19816 7.136186 7.19  97.41454 130.98179
-##    0.6 124.06857 7.070235 6.95 107.32795 140.80919
+<pre class="ro"><code>##  nitro emmean   SE   df lower.CL upper.CL
+##    0.0   78.9 7.29 7.78     62.0     95.8
+##    0.2   97.0 7.14 7.19     80.3    113.8
+##    0.4  114.2 7.14 7.19     97.4    131.0
+##    0.6  124.1 7.07 6.95    107.3    140.8
 ## 
 ## Results are averaged over the levels of: Variety 
 ## Degrees-of-freedom method: kenward-roger 
 ## Confidence level used: 0.95</code></pre>
 <p>You will notice that the degrees of freedom are fractional: that is due to the fact that whole-plot and subplot variations are combined when standard errors are estimated. Different degrees-of-freedom methods are available. By default, the Kenward-Roger method is used, and that’s why you see a message about the <strong>pbkrtest</strong> package being loaded, as it implements that method. We may specify a different degrees-of-freedom method via the optional argument <code>lmer.df</code>:</p>
 <pre class="r"><code>emmeans(Oats.lmer, &quot;nitro&quot;, lmer.df = &quot;satterthwaite&quot;)</code></pre>
-<pre class="ro"><code>##  nitro    emmean       SE   df  lower.CL  upper.CL
-##    0.0  78.89207 7.280608 7.28  61.81122  95.97292
-##    0.2  97.03425 7.128706 6.72  80.03161 114.03690
-##    0.4 114.19816 7.128885 6.72  97.19535 131.20098
-##    0.6 124.06857 7.067304 6.49 107.08857 141.04857
+<pre class="ro"><code>##  nitro emmean   SE   df lower.CL upper.CL
+##    0.0   78.9 7.28 7.28     61.8       96
+##    0.2   97.0 7.13 6.72     80.0      114
+##    0.4  114.2 7.13 6.72     97.2      131
+##    0.6  124.1 7.07 6.49    107.1      141
 ## 
 ## Results are averaged over the levels of: Variety 
 ## Degrees-of-freedom method: satterthwaite 
@@ -87,11 +85,11 @@ Oats.emm.n</code></pre>
 <!-- @index Degrees of freedom; *z* tests; Asymptotic tests -->
 <p>This latest result uses the Satterthwaite method, which is implemented in the <strong>lmerTest</strong> package. Note that, with this method, not only are the degrees of freedom slightly different, but so are the standard errors. That is because the Kenward-Roger method also entails making a bias adjustment to the covariance matrix of the fixed effects; that is the principal difference between the methods. A third possibility is <code>&quot;asymptotic&quot;</code>:</p>
 <pre class="r"><code>emmeans(Oats.lmer, &quot;nitro&quot;, lmer.df = &quot;asymptotic&quot;)</code></pre>
-<pre class="ro"><code>##  nitro    emmean       SE  df asymp.LCL asymp.UCL
-##    0.0  78.89207 7.280608 Inf  64.62234   93.1618
-##    0.2  97.03425 7.128706 Inf  83.06225  111.0063
-##    0.4 114.19816 7.128885 Inf 100.22580  128.1705
-##    0.6 124.06857 7.067304 Inf 110.21691  137.9202
+<pre class="ro"><code>##  nitro emmean   SE  df asymp.LCL asymp.UCL
+##    0.0   78.9 7.28 Inf      64.6      93.2
+##    0.2   97.0 7.13 Inf      83.1     111.0
+##    0.4  114.2 7.13 Inf     100.2     128.2
+##    0.6  124.1 7.07 Inf     110.2     137.9
 ## 
 ## Results are averaged over the levels of: Variety 
 ## Degrees-of-freedom method: asymptotic 
@@ -99,29 +97,29 @@ Oats.emm.n</code></pre>
 <p>This just sets all the degrees of freedom to <code>Inf</code> – that’s <strong>emmeans</strong>’s way of using <em>z</em> statistics rather than <em>t</em> statistics. The asymptotic methods tend to make confidence intervals a bit too narrow and P values a bit too low; but they involve much, much less computation. Note that the SEs are the same as obtained using the Satterthwaite method.</p>
 <p>Comparisons and contrasts are pretty much the same as with other models. As <code>nitro</code> has quantitative levels, we might want to test polynomial contrasts:</p>
 <pre class="r"><code>contrast(Oats.emm.n, &quot;poly&quot;)</code></pre>
-<pre class="ro"><code>##  contrast    estimate        SE    df t.ratio p.value
-##  linear    152.693407 15.577738 43.23   9.802  &lt;.0001
-##  quadratic  -8.271775  6.948552 44.19  -1.190  0.2402
-##  cubic      -6.315230 15.205089 42.75  -0.415  0.6800
+<pre class="ro"><code>##  contrast  estimate    SE   df t.ratio p.value
+##  linear      152.69 15.58 43.2  9.802  &lt;.0001 
+##  quadratic    -8.27  6.95 44.2 -1.190  0.2402 
+##  cubic        -6.32 15.21 42.8 -0.415  0.6800 
 ## 
 ## Results are averaged over the levels of: Variety</code></pre>
 <p>The interesting thing here is that the degrees of freedom are much larger than they are for the EMMs. The reason is because <code>nitro</code> within-plot factor, so inter-plot variations have little role in estimating contrasts among <code>nitro</code> levels. On the other hand, <code>Variety</code> is a whole-plot factor, and there is not much of a bump in degrees of freedom for comparisons:</p>
 <pre class="r"><code>emmeans(Oats.lmer, pairwise ~ Variety)</code></pre>
 <pre class="ro"><code>## $emmeans
-##  Variety        emmean       SE   df lower.CL upper.CL
-##  Golden Rain 105.24081 7.531718 8.46 88.03704 122.4446
-##  Marvellous  108.46951 7.482632 8.28 91.31571 125.6233
-##  Victory      96.93446 7.641645 8.81 79.59011 114.2788
+##  Variety     emmean   SE   df lower.CL upper.CL
+##  Golden Rain  105.2 7.53 8.46     88.0      122
+##  Marvellous   108.5 7.48 8.28     91.3      126
+##  Victory       96.9 7.64 8.81     79.6      114
 ## 
 ## Results are averaged over the levels of: nitro 
 ## Degrees-of-freedom method: kenward-roger 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
-##  contrast                  estimate       SE   df t.ratio p.value
-##  Golden Rain - Marvellous -3.228698 6.553848 9.56  -0.493  0.8764
-##  Golden Rain - Victory     8.306351 6.707935 9.80   1.238  0.4595
-##  Marvellous - Victory     11.535049 6.670488 9.80   1.729  0.2431
+##  contrast                 estimate   SE   df t.ratio p.value
+##  Golden Rain - Marvellous    -3.23 6.55 9.56 -0.493  0.8764 
+##  Golden Rain - Victory        8.31 6.71 9.80  1.238  0.4595 
+##  Marvellous - Victory        11.54 6.67 9.80  1.729  0.2431 
 ## 
 ## Results are averaged over the levels of: nitro 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
@@ -154,20 +152,20 @@ ins.glm &lt;- glm(claims ~ size + age + offset(log(n)),
 ## Transformation: &quot;log&quot;</code></pre>
 <p>Note that <code>n</code> is included in the reference grid and that its average value of 500 is used for all predictions. Thus, if we obtain EMMs for, say, <code>age</code>, these are results are based on a pool of 500 cars:</p>
 <pre class="r"><code>emmeans(ins.glm, &quot;size&quot;, type = &quot;response&quot;)</code></pre>
-<pre class="ro"><code>##  size     rate       SE  df asymp.LCL asymp.UCL
-##  S    69.26111 6.250440 Inf 58.032750  82.66198
-##  M    34.64335 3.342971 Inf 28.673568  41.85604
-##  L    11.86512 3.136904 Inf  7.066934  19.92108
+<pre class="ro"><code>##  size rate   SE  df asymp.LCL asymp.UCL
+##  S    69.3 6.25 Inf     58.03      82.7
+##  M    34.6 3.34 Inf     28.67      41.9
+##  L    11.9 3.14 Inf      7.07      19.9
 ## 
 ## Results are averaged over the levels of: age 
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the log scale</code></pre>
 <p>However, many users would like to ignore the offset for this kind of model, because then the estimates we obtain are rates per unit value of the (logged) offset. This may be accomplished by specifying an <code>offset</code> parameter in the call:</p>
 <pre class="r"><code>emmeans(ins.glm, &quot;size&quot;, type = &quot;response&quot;, offset = 0)</code></pre>
-<pre class="ro"><code>##  size       rate          SE  df  asymp.LCL  asymp.UCL
-##  S    0.13852223 0.012500880 Inf 0.11606550 0.16532396
-##  M    0.06928671 0.006685942 Inf 0.05734714 0.08371208
-##  L    0.02373023 0.006273808 Inf 0.01413387 0.03984217
+<pre class="ro"><code>##  size   rate      SE  df asymp.LCL asymp.UCL
+##  S    0.1385 0.01250 Inf    0.1161    0.1653
+##  M    0.0693 0.00669 Inf    0.0573    0.0837
+##  L    0.0237 0.00627 Inf    0.0141    0.0398
 ## 
 ## Results are averaged over the levels of: age 
 ## Confidence level used: 0.95 
@@ -191,30 +189,30 @@ ins.glm &lt;- glm(claims ~ size + age + offset(log(n)),
 <p>(in earlier modeling, we found little interaction between the factors.) Here are the EMMs for each factor using default options:</p>
 <pre class="r"><code>emmeans(wine.clm, list(pairwise ~ temp, pairwise ~ contact))</code></pre>
 <pre class="ro"><code>## $`emmeans of temp`
-##  temp     emmean        SE  df  asymp.LCL  asymp.UCL
-##  cold -0.8838870 0.2898157 Inf -1.4519155 -0.3158586
-##  warm  0.6011128 0.2246028 Inf  0.1608993  1.0413263
+##  temp emmean    SE  df asymp.LCL asymp.UCL
+##  cold -0.884 0.290 Inf    -1.452    -0.316
+##  warm  0.601 0.225 Inf     0.161     1.041
 ## 
 ## Results are averaged over the levels of: contact, judge 
 ## Confidence level used: 0.95 
 ## 
 ## $`pairwise differences of temp`
-##  contrast     estimate        SE  df z.ratio p.value
-##  cold - warm -1.073545 0.4215306 Inf  -2.547  0.0109
+##  contrast    estimate    SE  df z.ratio p.value
+##  cold - warm    -1.07 0.422 Inf -2.547  0.0109 
 ## 
 ## Results are averaged over the levels of: contact, judge 
 ## 
 ## $`emmeans of contact`
-##  contact     emmean        SE  df   asymp.LCL   asymp.UCL
-##  no      -0.6143569 0.2983133 Inf -1.19904027 -0.02967357
-##  yes      0.3315827 0.2014363 Inf -0.06322522  0.72639062
+##  contact emmean    SE  df asymp.LCL asymp.UCL
+##  no      -0.614 0.298 Inf   -1.1990   -0.0297
+##  yes      0.332 0.201 Inf   -0.0632    0.7264
 ## 
 ## Results are averaged over the levels of: temp, judge 
 ## Confidence level used: 0.95 
 ## 
 ## $`pairwise differences of contact`
-##  contrast   estimate        SE  df z.ratio p.value
-##  no - yes -0.6838446 0.3038508 Inf  -2.251  0.0244
+##  contrast estimate    SE  df z.ratio p.value
+##  no - yes   -0.684 0.304 Inf -2.251  0.0244 
 ## 
 ## Results are averaged over the levels of: temp, judge</code></pre>
 <p>These results are on the “latent” scale; the idea is that there is a continuous random variable (in this case normal, due to the probit link) having a mean that depends on the predictors; and that the ratings are a discretization of the latent variable based on a fixed set of cut points (which are estimated). In this particular example, we also have a scale model that says that the variance of the latent variable depends on the judges. The latent results are quite a bit like those for measurement data, making them easy to interpret. The only catch is that they are not uniquely defined: we could apply a linear transformation to them, and the same linear transformation to the cut points, and the results would be the same.</p>
@@ -232,18 +230,18 @@ tmp</code></pre>
 ## Transformation: &quot;probit&quot;</code></pre>
 <p>Note that this reference grid involves an additional constructed predictor named <code>cut</code> that accounts for the different intercepts in the model. Let’s obtain EMMs for <code>temp</code> on the linear-predictor scale:</p>
 <pre class="r"><code>emmeans(tmp, &quot;temp&quot;)</code></pre>
-<pre class="ro"><code>##  temp     emmean        SE  df  asymp.LCL  asymp.UCL
-##  cold  0.8838870 0.2898157 Inf  0.3158586  1.4519155
-##  warm -0.6011128 0.2246028 Inf -1.0413263 -0.1608993
+<pre class="ro"><code>##  temp emmean    SE  df asymp.LCL asymp.UCL
+##  cold  0.884 0.290 Inf     0.316     1.452
+##  warm -0.601 0.225 Inf    -1.041    -0.161
 ## 
 ## Results are averaged over the levels of: contact, judge, cut 
 ## Results are given on the probit (not the response) scale. 
 ## Confidence level used: 0.95</code></pre>
 <p>These are just the negatives of the latent results obtained earlier (the sign is changed to make the comparisons go the right direction). Closely related to this is <code>mode = &quot;cum.prob&quot;</code> and <code>mode = &quot;exc.prob&quot;</code>, which simply transform the linear predictor to cumulative probabilities and exceedance (1 - cumulative) probabilities. These modes give us access to the details of the fitted model but are cumbersome to use for describing results. When they can become useful is when you want to work in terms of a particular cut point. Let’s look at <code>temp</code> again in terms of the probability that the rating will be at least 4:</p>
 <pre class="r"><code>emmeans(wine.clm, ~ temp, mode = &quot;exc.prob&quot;, at = list(cut = &quot;3|4&quot;))</code></pre>
-<pre class="ro"><code>##  temp   exc.prob         SE  df  asymp.LCL asymp.UCL
-##  cold 0.07477754 0.03183196 Inf 0.01238804 0.1371670
-##  warm 0.40688371 0.07056873 Inf 0.26857154 0.5451959
+<pre class="ro"><code>##  temp exc.prob     SE  df asymp.LCL asymp.UCL
+##  cold   0.0748 0.0318 Inf    0.0124     0.137
+##  warm   0.4069 0.0706 Inf    0.2686     0.545
 ## 
 ## Results are averaged over the levels of: contact, judge 
 ## Confidence level used: 0.95</code></pre>
@@ -254,43 +252,43 @@ tmp</code></pre>
 <p>There are yet more modes! With <code>mode = &quot;prob&quot;</code>, we obtain estimates of the probability distribution of each rating. Its reference grid includes a factor with the same name as the model response – in this case <code>rating</code>. We usually want to use that as the primary factor, and the factors of interest as <code>by</code> variables:</p>
 <pre class="r"><code>emmeans(wine.clm, ~ rating | temp, mode = &quot;prob&quot;)</code></pre>
 <pre class="ro"><code>## temp = cold:
-##  rating       prob         SE  df    asymp.LCL  asymp.UCL
-##  1      0.12922075 0.06252864 Inf  0.006666872 0.25177462
-##  2      0.48768408 0.07051118 Inf  0.349484709 0.62588345
-##  3      0.30831763 0.05942035 Inf  0.191855896 0.42477937
-##  4      0.05766120 0.02378461 Inf  0.011044211 0.10427818
-##  5      0.01711634 0.01265193 Inf -0.007680992 0.04191368
+##  rating   prob     SE  df asymp.LCL asymp.UCL
+##  1      0.1292 0.0625 Inf   0.00667    0.2518
+##  2      0.4877 0.0705 Inf   0.34948    0.6259
+##  3      0.3083 0.0594 Inf   0.19186    0.4248
+##  4      0.0577 0.0238 Inf   0.01104    0.1043
+##  5      0.0171 0.0127 Inf  -0.00768    0.0419
 ## 
 ## temp = warm:
-##  rating       prob         SE  df    asymp.LCL  asymp.UCL
-##  1      0.01561393 0.01287141 Inf -0.009613574 0.04084144
-##  2      0.14730458 0.04475283 Inf  0.059590654 0.23501851
-##  3      0.43019777 0.06274049 Inf  0.307228674 0.55316687
-##  4      0.26845558 0.06251632 Inf  0.145925842 0.39098532
-##  5      0.13842813 0.05061119 Inf  0.039232030 0.23762424
+##  rating   prob     SE  df asymp.LCL asymp.UCL
+##  1      0.0156 0.0129 Inf  -0.00961    0.0408
+##  2      0.1473 0.0448 Inf   0.05959    0.2350
+##  3      0.4302 0.0627 Inf   0.30723    0.5532
+##  4      0.2685 0.0625 Inf   0.14593    0.3910
+##  5      0.1384 0.0506 Inf   0.03923    0.2376
 ## 
 ## Results are averaged over the levels of: contact, judge 
 ## Confidence level used: 0.95</code></pre>
 <p>Using <code>mode = &quot;mean.class&quot;</code> obtains the average of these probability distributions as probabilities of the integers 1–5:</p>
 <pre class="r"><code>emmeans(wine.clm, &quot;temp&quot;, mode = &quot;mean.class&quot;)</code></pre>
-<pre class="ro"><code>##  temp mean.class        SE  df asymp.LCL asymp.UCL
-##  cold   2.345768 0.1438341 Inf  2.063859  2.627678
-##  warm   3.366779 0.1462579 Inf  3.080119  3.653440
+<pre class="ro"><code>##  temp mean.class    SE  df asymp.LCL asymp.UCL
+##  cold       2.35 0.144 Inf      2.06      2.63
+##  warm       3.37 0.146 Inf      3.08      3.65
 ## 
 ## Results are averaged over the levels of: contact, judge 
 ## Confidence level used: 0.95</code></pre>
 <p>And there is a mode for the scale model too. In this example, the scale model involves only judges, and that is the only factor in the grid:</p>
 <pre class="r"><code>summary(ref_grid(wine.clm, mode = &quot;scale&quot;), type = &quot;response&quot;)</code></pre>
-<pre class="ro"><code>##  judge  response        SE  df
-##  1     1.0000000 0.0000000 Inf
-##  2     1.0429804 0.5696650 Inf
-##  3     1.0526798 0.4811605 Inf
-##  4     0.7103256 0.3356562 Inf
-##  5     0.6632397 0.3009780 Inf
-##  6     0.7582403 0.3411929 Inf
-##  7     1.0707070 0.5861427 Inf
-##  8     0.2409019 0.1791135 Inf
-##  9     0.5331235 0.3110024 Inf</code></pre>
+<pre class="ro"><code>##  judge response    SE  df
+##  1        1.000 0.000 Inf
+##  2        1.043 0.570 Inf
+##  3        1.053 0.481 Inf
+##  4        0.710 0.336 Inf
+##  5        0.663 0.301 Inf
+##  6        0.758 0.341 Inf
+##  7        1.071 0.586 Inf
+##  8        0.241 0.179 Inf
+##  9        0.533 0.311 Inf</code></pre>
 <p>Judge 8’s ratings don’t vary much, relative to the others. The scale model is in terms of log(SD). Again, these are not uniquely identifiable, and the first level’s estimate is set to log(1) = 0. so, actually, each estimate shown is a comparison with judge 1.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
@@ -315,11 +313,11 @@ cbpp.rg &lt;- ref_grid(example_model)</code></pre>
 <p>And, again in the usual way, we can obtain EMMs:</p>
 <pre class="r"><code>period.emm &lt;- emmeans(cbpp.rg, &quot;period&quot;)
 period.emm</code></pre>
-<pre class="ro"><code>##  period    emmean lower.HPD  upper.HPD
-##  1      -1.430450 -1.959630 -0.8940016
-##  2      -2.394991 -3.132075 -1.8225853
-##  3      -2.515846 -3.190710 -1.8616529
-##  4      -2.967635 -3.884121 -1.9977081
+<pre class="ro"><code>##  period emmean lower.HPD upper.HPD
+##  1       -1.43     -1.96    -0.894
+##  2       -2.39     -3.13    -1.823
+##  3       -2.52     -3.19    -1.862
+##  4       -2.97     -3.88    -1.998
 ## 
 ## Results are given on the logit (not the response) scale. 
 ## HPD interval probability: 0.95</code></pre>
@@ -355,13 +353,13 @@ period.emm</code></pre>
 ## period 4 -3.890 -3.254 -2.968 -2.698 -2.003</code></pre>
 <p>Note that <code>as.mcmc</code> will actually produce an <code>mcmc.list</code> when there is more than one chain present, as in this example. The 2.5th and 97.5th quantiles are similar, but not identical, to the 95% confidence intervals in the frequentist summary. Here is a plot of the posterior EMMs, back-transformed:</p>
 <pre class="r"><code>bayesplot::mcmc_areas(as.mcmc(regrid(period.emm)))</code></pre>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA2AAAAJACAMAAADcl/UUAAAAn1BMVEUAW5YDOWwzMzNNTU1NTW5NTY5Nbm5Nbo5NbqtNjo5NjshuTU1ubk1ubm5ubo5ujqtujshuq8huq+SOTU2Obk2Obm6Oq6uOq8iOq+SOyOSOyP+rbk2rbm6rjm6ryOSr5P/Ijk3Ijm7Iq27Iq47I5OTI5P/I///R4ezkq27kyI7kyKvk/8jk///l5eXr6+v/yI7/5Kv/5Mj//8j//+T///9vBEz3AAAACXBIWXMAAB2HAAAdhwGP5fFlAAAgAElEQVR4nO3da2Ob1roE4FCcJrVzaW6n28lu67THie3jyEms///bDjchLgtYAwsY8c760FiSPZri9wkIYefJXktLa7b1ZO0CWlpbXgKmpTXjEjAtrRmXgGlpzbgETEtrxiVgWlozLgHT0ppxCZiW1oxLwLS0ZlwCpqU14xIwLa0Zl4Bpac24BExLa8a1DrAdvL59w7+mc414/s6ogFkBe5HWYu0VspaAaWLQsIBRnL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMDAJM5arL0ETMD6VtRaFLVcUZy9BEzAOlbb1nGtWKszSsAEDItacWJKSV+z9SRd2UeBkW1kc/UlCZiA1VfdVgNYQ9mCtQajBEzAsKjlJyZy4HIAqyFboJZflIAJGBa17MR04eoAVkE2ay3/KAETMCxqsYmJ+nD1AJtu7CQ3F5YkYLaBDdkaADaR2MltLjxJwAwD88E1BGySsdPaXKOSBMwoME9bPsDGEzudzTU6ScBMAitAePHyAFYam1hrwhIwAQOj5puY0kJAYKOIncbmmpQkYNaAVRkEBTaC2AlsrqlJAmYMWI1AYGAFsTG1pv8fCpiAYVFzTExj/oMDA4mxb64ASQJmCFhr9mcA9nUHEOPeXEGSBMwMMMfczwJs50+MeXMFShIwK8BcQz8TsJ3v2Q7izRUqScBsAHMP/FzAfInRbq5wSQJmAljHsM8HzO84kXVzCZiAIatz1OcE5kOMc3MJmIBBKxnzjqx5gQ0To9xcOwETMGSlM74SsCFijJsrCwuXJGBbB5YN+GrA+okRbq48LFySgG0bWDHdKwLreQnIt7kOYeGSBGzTwA6jvSqw7p0Y2+Yqw8IlCdiGgR3nel1gncS4NlclLFySgG0XWGWm1wbWQYxqc1XDwiUJ2FaB1QZ6fWDOazuINlc9LFySgG0TWGOYCYC5iNFsrmZYuCQB2yQwz0leFlibGMvmaoWFSxKwDQLzPhZbGljzpRjH5nKEhUsSsM0BA84mLA+sToxhcznDwiUJ2MaAQefD1wBWJbb+5uoIC5ckYJsC1vWWLhWw42uxtTdXZ1i4JAHbELDuy/7IgB2ICRiWJWBrTsyIq2rXA+b/awU8l4AJGBiFZY36uZA1gQUmJmACBkYhWSN/snFdYLv8V4UE+ueeBUzAsCjvLI8pZQV2/CeUkC9zRgmYgGFRnllTfn0TAbDd0dgkZAImYGCUT5bvYFID21WMjYYmYAIGRg1n+U8jO7Dj/45j+UUJmIBhUQNZ0F/2JwGs/n8GQhMwAQOj+rLQQ6mTAlZfnswETMDAqO4s/JXKCQMrV78yARMwMKoja9R5gC0Ay1cXMgETMDDKlTX2LNt2gKXLtSsTMJ/181189nfXg1dxfN64o/3JeO2TATbpJLb77hMFlq0GMgELDuwhtgNsCq4szH33KQNLV2VXJmChgd3GJoCh7wd1hLnvPnVg6fI+kQ+szQLrXTVgP97H2wYGvAXksTYMLFtht5aA7b9fxPGvJw2s+fZO55qz12aAZZMcbgueJLCbOH57l+x3fr3Mb999SIC8vj489DmOn12Xh4iP/75IPvOP+/xTb5Mbr64bwF7/X+148pd84bVXAebhaokXFdsCVizvv7q69XX2wrK9ngv5XxwC9jLO1tviZnaQ9/H48ZvyNVi6gzoeAn7OP35RBfbqfxsv2ApgzT3a8Pr2Df+ayWvaN0rrNFfYGXIAi59fZ+cmPmanAJ9e7+8u4qdf8ofO071VYSb5I35z//hPnD2afGp8uX+8ihtnEQVM66RW4BlyAMs83KROHj9lzLKDw+y/qaTSzE1B6Sp7tDg0TNUNA8N3vKQnOSy8saPNBWYNAXue7qXSfdeXBEdG6iG78/BQYeagL3+0vNV8H0zAgLBwSZy1WHstCyzz8T09LDy8yIpdwEo52aeWt256gRULry1gWBJnLdZeBMCSPVlJR8AqUdufGG0uMGsI2OEQ8fn994viVVfN3pRDRAHrDQuXxFmLtdeywNonOa4OJzmqwEad5BCw3rBwSZy1WHstCyx+dr2/vchYNE/T14DVT9Onh5OXGUkBGx0WLomzFmuvZYH99u74RvPn+hvNNWCNN5qL96FfCtj4sHBJnLVYey18kuPxz2Qv9ld+O71UKn51uFSqDqxxqVR+hdWDgI0PC5fEWYu11wpnEeddeG0Bw5I4a7H2EjABA5M4a7H2EjABA5M4a7H2EjABA5M4a7H2EjABA5M4a7H2OqWfaBawCWHhkjhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSMAEDkzhrsfYSsOWBef4KZQMTI2BgloANP3/xW149orY/MQIGZgnY0PMff4/ycNT2J0bAwCwBG3j+BFb2L5D4CDMwMQIGZglY//MffHkJMzAxAgZmCVjv8x99+QgzMDECBmYJWN/zV315CDMwMQIGZglYz/PXfQ0LMzAxAgZmCRgAbEiYgYkRMDBLwLqfv+VrSJiBiREwMEvA+oC1/71wAQsYxdlLwBYC5tiBDQgzMDECBmYJWA+wnRtYpzADEyNgYJaAdT1/5AbWJ8zAxAgYmCVgHc+fMXIBe9ItzMDECBiYJWCdwHYdwLqFGZgYAQOzBAwH1inMwMQIGJglYO7nj/qAdQkzMDECBmYJWBew9L9dwDqEGZgYAQOzBMz5/NEAsCfOn8A0MDECBmYJWAew7I9uYF9dwgxMjICBWQLmev5oGFj+hljdmIGJETAwS8DcwPI/e4F9bf2qDgMTI2BgloCNB9YyZmBiBAzMEjDH80fewOrEDEyMgIFZAuYEVnzgAaz6YszAxAgYmCVg7eePQGBfD6cUDUyMgIFZAuYCdvjIF1hBzMDECBiYJWCt54/GACuEzdlrfBJnLdZeAjY7sPJDAJjf7/6d0mt8Eucgs/YSMFJggYVxToyAgVkC1nz+aDSwsMI4J0bAwCwBawM7fgwCCyqMc2IEDMwSsMbzR1OA9f9Wt0m9piRxDjJrLwGbGVjlBgwsoDDOiREwMEvAggMLJIxzYgQMzBKw+vNHE4GFE8Y5MQIGZglYE1j11ghgwYRxToyAgVkCFhrYTsB8ozh7CdiMwKIAwAIJ45wYAQOzBKwBrPbYOGBhhHFOjICBWQJWff6mjPHApgvjnBgBA7MErA6s/thIYEF2YZwTI2BgloBVnr/lYiywEMI4J0bAwCwBqwFrPDYaWABhnBMjYGCWgM0GbKIwzokRMDBLwI7P3zYxHth0YZwTI2BgloBVgTUfmwBssjDOiREwMEvAyud3gJgCbKowzokRMDBLwCrAWo9NAjbxRAfnxAgYmCVgh+d3cZgGbJowzokRMDBLwI7A2o9NBDZJGOfECBiYJWBzApsijHNiBAzMErDi+Z0UQgAbK4xzYgQMzBKw/PndECYDmyCMc2IEDMwSsAMw12PTgY0XxjkxAgZmCdjMwEYL45wYAQOzBCx7/g4EIYCNFcY5MQIGZglYAcz5WBBgI4VxToyAgVkClj5/l4AwwMYJ45wYAQOzBGzf825VIGCjhHFOjICBWQK27zxADAdsjDDOiREwMEvA9j2XWwQDNkIY58QIGJglYPvuHVhAYLgwzokRMDBLwPY9kx8QGCyMc2IEDMwSsL65DwksEwYQ45wYAQOzBKxv6IMCA3dinBMjYGCWeWC9Mx8YGLQT45wYAQOzrAPrH/jQwBBhnBMjYGCWcWDJuPc9f3BgADHOiREwMMs8sN7vzAzAvIlxToyAgVm2gUVrAMuFDRrjnBgBA7NMA8umfHlgu4Ox3k/hnBgBA7MsA8tHfBVgHsQ4J0bAwCzDwIr5XgnY4GsxzokRMDDLLrDDdK8GbIAY58QIGJhlFlg52isC6722g3NiBAzMsgrsONirAusRxjkxAgZm2QRWHet1gXUfJnJOjICBWSaB1UZ6ZWCdwjgnRsDALIvA6gO9NrCuw0TOiREwMMsgsMY4rw/MLYxzYgQMzDIHrDXMBMCcwjgnRsDALGvA2pPMAMwljHNiBAzMMgYM3FMsBswhjHNiBAzMMgUMfq2zHLB2Oc6JETAwyxIw/HT4ksCawjgnRsDALDvAxryhuyiwxjtinBMjYGCWGWCjLklaFlidGOfECBiYZQTYyItqlwZ2+GHnoZ9TwxbpILP2IgP281189nfXg1dxfH68dfchjuNXfy0PrPcHr6iAHYk114RI0kFm7XWywD7H+fp9WWBTfnJ4BWDHzsGQkQ4ya69TBfYQH9bHJYFN+t0XawFr9ZqEjHSQWXuRAetdFWCPn+L4+fX+x/vkj/tFgQ1tg57HaIBla6wx0kFm7XWiwH5+eJHtuh4WBja8DXoe4wK2G7knIx1k1l4LAruJ47d3yS7n18v8dnqW4uz19eGh5EXVs+vyEPHx3xfJZ/5R4LlNbry6rp/kyFYF2C/5wmvbBbbrPgvS/XKtOTHTXtCN/DpXlIDF8cv8ZdPb4ma6zj4eP35Tvgb7flE8mmnLT2icvWgDq5grgO3h9e2b/+f6zaPBhW92ranLASx93XSbn5hI9j1Pr/d3F/HTL/lD5+meqACW/BG/uX/8J84eTU9oXO4fr+IWsMRheU5EwFZc+FbXmrwcwDINN6mT9CxFse96m/03lVQCuykoXWWPFrupVF0dWLqfK+/hP0REo7Z/zKPNBWYNActeL6X7ri+JloxU/iLq8FAB7KAvf7S81XwN9nBRPcUhYL1h4ZI4a7H2WhbYebHfefrl8CIrdgErT3Vkn1reuqkDS481f79vPAnzWUQ0avsTo80FZo0CluzJSjoAsMTX2WWTl4B1hYVL4qzF2mudQ8Tn998vilddNXvAIeJD7L7mA68tYFgSZy3WXssCa5/kuDqc5KgC8zjJUT1/KGAeYeGSOGux9loWWPzsen+b02iepq8Bq5+mTw8nLzOSR2BX1ZdwAjYcFi6JsxZrr2WB/fbu+Ebz5/obzTVgjTeai/ehXx6B1c+RCNhwWLgkzlqsvRY+yfH4Z7IXK36GK/+BrsOlUnVgjUul8iusHo7AjhfTC5hfWLgkzlqsvVY4izjvwmsLGJbEWYu1l4AJGJjEWYu1l4AJGJjEWYu1l4AJGJjEWYu1l4AJGJjEWYu11yn9RLOATQgLl8RZi7WXgAkYmMRZi7WXgAkYmMRZi7WXgAkYmMRZi7WXgAkYmMRZi7WXgAkYmMRZi7WXgAkYmMRZi7WXgC0FLP/1S0jU9idGwMAsAet6/uNvOPOP2v7ECBiYJWDu509hpb+nFxJmYGIEDMwSMNfzH3iBxAxMjICBWQLmeP4KL0iYgYkRMDBLwNrPX/dVEPOK2v7ECBiYJWCt52/5+vrEU5iBiREwMEvAms/f9vX1iacwAxMjYGCWgDWe3+Er/SfBvIQZmBgBA7MErAXM/W/uCVgRFjCKs5eAzQnMtQPL/1FLD2EGJkbAwCwBqz2/01cJbPDfU9/+xAgYmCVgDWCuf5c5/1eZh4UZmBgBA7MErPr8UR+wYWEGJkbAwCwBqzx/Bqgb2KAwAxMjYGCWgNWA7XqBDQkzMDECBmYJ2PH5o0FgXwVMwLAsAasCS//bC6xfmIGJETAwS8DK5488gXULMzAxAgZmCVgFWPZHP7BeYQYmRsDALAE7PH/kB6xPmIGJETAwS8COwPI/h4D1CDMwMQIGZglY8fyRN7BuYQYmRsDALAErgRW3h4F1CjMwMQIGZglY/vwRAqzr13QYmBgBA7ME7ADscNsHWMdOzMDECBiYJWDZ80coMKcwAxMjYGCWgBXAytuewFzCDEyMgIFZApY+fzQCmOOFmIGJETAwS8ByYMfb3sDawgxMjICBWQK2r+/AAGCtw0QDEyNgYJaA7es7MAhYQ5iBiREwMEvA9vUdGAbsq4BNiOLsJWDhgVVvY8BqwgxMjICBWQK2j6YCK7/cwMQIGJglYPvGuXYQWFWYgYkRMDBLwJpvZqHAdgI2Noqzl4CFBla/DQM7CjMwMQIGZglYEGB5hoGJETAwyzyw1hWFOLCdgI2L4uwlYIGBNe4YAewgzMDECBiYZR1Y+5J4AesPCxjF2UvAwgJrPv8YYIUwAxMjYGCWgAkYFhYwirOXgAUEFgUClgszMDECBmaZB9b6zowDthMwPIqzl4CFAxaFBBZZmBgBA7OsA2t/Z0YCy442tz8xAgZmmQYWCRgeFjCKs5eABQS2CwdsJ2BoFGcvAQsFLAoNrHVGcsrinBgBA7NsA8u2QePe0cAcV4VMWZwTI2BgloAJGBYWMIqzl4AFAhaFBhZWGOfECBiYZRpYvg0adwtYf1jAKM5eAhYGWBQeWPP350xanBMjYGCWZWDFNmjcL2D9YQGjOHsJWBBg0RzAQgrjnBgBA7MMAztsg8YDk4C1f0B69OKcGAEDswQsNLBQwjgnRsDALKvAopmAhRPGOTECBmbZBVZug8YjAtYfFjCKs5eABQAWzQYsmDDOiREwMMsssOM2aDw0FVgoYZwTI2Bglk1g0czAQgjjnBgBA7OsAqtsg8Zjk4EFEsY5MQIGZpkEFs0LLIwwzokRMDDLKLDqNmg8GABYkJdhnBMjYGCWRWDR7MBC7MM4J0bAwCybwGrboPFoEGABhHFOjICBWQaBRUsAmy6Mc2IEDMwyCay+DRoPBwI2WRjnxAgYmGUPWHPu5wKWCZtAjHNiBAzMsgissQ0ajwcDNlEY58QIGJhlDlhr5ucDNo0Y58QIGJhlDVh74OcEVhAbZYxzYgQMzLIHrLUNGrfDAhtPjHNiBAzMMgbMMepzAzsQQ5FxToyAgVnmgLW3QeN2eGC7ozEAGefECBiYZQuYa8IXAbbDjXFOjICBWaaAOad7KWBFAW9inBMjYGCWMWCubdC4PSewHXDOg3NiBAzMsgTMPdgLA9v5vjvGOTECBmYZAtYx1csD8yPGOTECBmbZAdY10msA8xHGOTECBmZZAtaxDRq3FwHmcbE958QIGJhlBljnPK8EbHAnxjkxAgZmWQHWPcxrARsSxjkxAgZmGQHWM8qrARs4TOScGAEDs2wAQwZ5QWC9OzHOiREwMMsEMOhQbElgfcQ4J0bAwCwLwLCTCcsC676yg3NiBAzMMgBs4Hz4ysA6iXFOjICBWZOB/XwXn/3d9eBVHJ8fb/34EMdnv98vDAx9v2lxYJUL7ft+Ier4RTrIrL1OFthDnK1nX5YEhl8xsQKwXdXYQRrnxAgYmLUcsOQT83Xe+CS8tjcwn6tqOYCVdRvMQizSQWbtRQasd1WBJTuwp9f7m+S/jV0YXtsTmN+IEgGrNQ+HjXSQWXudKrDbDxcfnTs8vLYfMM+hZARW9HI5GyGNdJBZey0ILNndvL17H8e/Xua379KzFK+vDw99Tl5QXZdiHv99kXzmH8U5jNvkxqvrq9YB4feL4x7sl3zhtQP8I+iVbdC4TQSsutzYvMSRDjJrr2WBvcxfN70tbqbr7OPx4zflLimRkz+aafucf/yiCezxU5FVAbaH17dvPp/VM5LbWvgG1FpnOYDFz6/3t8kfHw8vou7yXVD60Hm6tyqApacw3tw//pO/xEpPGF7uH6+apzSSO87+U94SsCAL335aKy0HsGyHdJM6SXc+xb7r7f54sqIAdlNQusoeLQ4NU3VVYGlE/Kx8CcZ5iDglavvHPNpcYNYQsOfpXirdd31JtGSkHrI7Dw8VwA768kfLW+3XYD8qJzkErDcsXBJnLdZeywLLfGRnJg4vsmIXsPJUR/ap5a2b9rteD6278NoChiVx1mLtRQAs2ZOVdEYAe16/WgqvLWBYEmct1l7rHCI+v6+eYN83gQ0fIv7878vDSzgKYNHh9LYmBgsLGMXZa1lg7ZMcV4eTHFVgwyc50i9/lp2EJDhELM/A7TQxaFjAKM5eywJLUdxeZIaap+lrwOqn6dPDycv8pGH1UqnqO2VrAktpfT0I08RgYQGjOHstC+y3d8c3mj/X32iuAWu80Vy8D/2yuruqvk+9JrCMV7byt5GmZNWXgYkRMDBrCNj545/JXuyv/HZ6qVT86nCpVB1Y41Kp/Aqr+inDypVWKwIreaXXQEVRqEvW02VgYgQMzBoE1uQQfuG1wwF7EoUkZmBiBAzMMges6iu7ijegMAMTI2BgljVgNV/5ZfLhhBmYGAEDs+wBa/8cSjBhBiZGwMAsY8AiF7BgwgxMjICBWb3Alll47Sn/RrPzJykFzD8sYBRnLwELDyyQMAMTI2BgljVgHb8LIMxBooGJETAwyxSw5g6s8ss2BMw3LGAUZy8BmwDsaxewIMIMTIyAgVmWgLV2YLVfFxVAmIGJETAwyxaw5u9kEzA8LGAUZy8BGwks6gcWQJiBiREwMMsUsNZvFRUwPCxgFGcvAZsJ2HRhBiZGwMAsO8AiAQsSFjCKs5eAjQW2GwA2WZiBiREwMEvABAwLCxjF2UvARgGLPIBNFWZgYgQMzDIELP2vgE0OCxjF2UvA5gP2VcAGwwJGcfYSsDHAIl9gU4QZmBgBA7PsAMv+ELDJYQGjOHsJ2AhgkSewacIMTIyAgVlmgOV/CtjksIBRnL0EbE5gk05zGJgYAQOzbACLEGDjhRmYGAEDs6wAKz4QsMlhAaM4ewnYrMCmCDMwMQIGZpkAFglYuLCAUZy9BGwEsMNHHsAmnOYwMDECBmYJmAPYWGEGJkbAwCwLwCIBC7cEDMuyAaz80AfY+GNEAxMjYGCWgLmAjRRmYGIEDMwyACwSsGBRAoZmmQB2/NgL2OhjRAMTI2BgloA5gY0TZmBiBAzM2j6wSMA4a7H2EjAUWOWGH7Cxx4gGJkbAwKzNA4vGARslzMDECBiYZQBY9ZYnsJ2AdYYFjOLsJWAIsGgssDHCDEyMgIFZ2wdWuylgk8MCRnH2ErAFgI07RjQwMQIGZm0cWHNPBAAbIczAxAgYmLV5YPXbAjY5LGAUZy8BWwLYqGNEAxMjYGDWtoG19kMIMFyYgYkRMDBr68Aad/gDG7MLMzAxAgZmbRpYey8EAYOFGZgYAQOzNg6seQ8AbMQuzMDECBiYtWVgjn2QgE0OCxjF2UvA/IG17sKAocIMTIyAgVkbBuYCggDDd2EGJkbAwKxNA2vfBwIDhRmYGAEDswSsGxgszMDECBiYtV1gTh0CNjksYBRnLwHzBea4EwOGCjMwMQIGZm0WmNuGgE0OCxjF2UvAPIG57gWBgcIMTIyAgVlbBdYhYwQwQJiBiREwMGu7wJx3o8CwXZiBiREwMGujwLpcwMAgYQYmRsDArM0Cc98/Cpi3MAMTI2BgloANAEN2YQYmRsDArG0C60QxAhggzMDECBiYtVVgHQ+MAeYvzMDECBiYtUlg3SIEbHJYwCjOXgLmAazrkVHAvIUZmBgBA7MEzAOYrzADEyNgYNYWgfVwELDJYQGjOHsJ2DCwzodGAvMUZmBiBAzMEjAvYH7CDEyMgIFZGwTWZ0HAJocFjOLsJWCDwLofGw3MS5iBiREwMGt7wHoljAfmI8zAxAgYmLVFYD0PCtjksIBRnL0EbB1gHsIMTIyAgVmbA9bPYAqwYWEGJkbAwKwNAuv7SgGbHBYwirOXgK0FbFCYgYkRMDBra8AGDEwG1ptuYGIEDMzaHrDer5wGbEiYgYkRMDBrY8CGDuImAhvINzAxAgZmbQ5Y/1dOBdYvzMDECBiYJWAwsO6nMDAxAgZmbQvY4In0ycB6hRmYGAEDs7YGbOArpwPLhHU8jYGJETAwS8BQYD3EDEyMgIFZmwI2fLVgEGC5MMdTGZgYAQOzNgZs6CvDADsQaz6dgYkRMDBrS8A8fqAkFDA3MQMTI2Bg1raADX5lOGA7x5GigYkRMDBrQ8B8fqg/KLDW6Q4DEyNgYNamgA1/ZWBgDWIGJkbAwCwBmwas9s6zgYkRMDBrO8C8frHaDMAqOzEDEyNgYNaWgHl85RzAjsIMTIyAgVmbAeb3y61nAVYeJhqYGAEDs7YCzPOfZ5gJWCHMwMQIGJi1HWBeXzkXsPww0cDECBiYtRFgvv9E3mzAeq+yH7U4J0bAwKxtAPMe7RmBdV4CPHJxToyAgVlbAeb5lXMCK69PdJaJ+h50Lc6JETAwazKwn+/is7+7HryK4/PaHY+f4vhjcGD+YzsvsOT/Jaqsslzf6g4bWcJZK9wSMCxrYWAP8QzAgN3C7MCKPt2QvJFxToyAgVnLAks+OTww5IXPIsDKWh6HhN2fxTkxAgZmTQbWu5rAkttzAPP/ygWBea8OYpwTI2Bg1qLA0gPEOV6D+S9GYLuOn94cmdVepIPM2mtBYDdx/PbufRz/epnfvvsQx2evrw8PfY7jZ9flIeLjvy+Sz/zjPv/U2+TGq+s6sORTn72vAPslX3jtzQFznWTknBgBA7OGgL3Mdjrx2+Jmus4+Hj9+U74G+35RPJpp+5x//KIGLOF2+akNbA+vb9+qtwZO021r4RtLi2c5gMXPr/e3+XFdcoD39Hp/dxE//ZI/dJ7urQpg6emLN/eP/8TZo+mx4OX+MX3JdQSW3Hn+KGDTFr6xtHiWA1i2Q7pJnRxs3GT7s5tcUgnspqB0lT1aHBqm6kpgyY2nX1zA8B3v+ENE1148YNT2j3m0ucCsIWDP071Uuu/6kgHJbyR3Hh4qgJVwskfLW9XXYDfpfQLmHxYuibMWa69lgWU+vqeHhYcXWbELWHmqI/vU8tbNEVjywPlcV3JM2wYBo7Y/MdpcYNYoYMmerLux2MQAAAZDSURBVKTjC+wmPq63AuYRFi6JsxZrr3UOEZ/ff78oXnXV7HkfIgoYGhYuibMWa69lgbVPclwdTnJUgQ2f5BAwNCxcEmct1l7LAoufXe9vLzJDzdP0NWD10/Tp4eRlRnKRq+mnbYOAUdufGG0uMGsI2G/vjvucz/U3mmvAGm80F/urlwI2PixcEmct1l4Ln+R4/DPZi/2V304vlYpfHS6VqgNrXCqVX2H1IGDjw8IlcdZi7bXCWcR5F15bwLAkzlqsvQRMwMAkzlqsvQRMwMAkzlqsvQRMwMAkzlqsvQRMwMAkzlqsvU7pJ5oFbEJYuCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9BEzAwCTOWqy9NgcMX7/8snYD9yLtRVqLtdeMtQRs2iLtRVqLtZeAsX5nWHuR1mLtJWCs3xnWXqS1WHsJGOt3hrUXaS3WXgLG+p1h7UVai7WXgLF+Z1h7kdZi7SVgWlqnuQRMS2vGJWBaWjMuAdPSmnEJmJbWjEvAtLRmXAKmpTXjEjAtrRkXM7DHPy/i+PX1wF3LL3eJn+/OV2lTLketuw9xfEa4ue7eJ73+uF+rUbY6Run7xfOgvYiB/XwXp+vpl967ll8dJa7idYE5an3O7onP/l6vlbPXTd7r2Zrfxo7v4uOn2Aywq/j59f5H7X/YcRdFr+QbcxWvDKxd6yE+u9ynd636F1K71/eLrNf7VTdYxygl9q0A+36RzcXPd8e/gB13UfTKj3nWBdaulfxl/HGf3ZX/ydIrme23lUdoauV32wF2UwzsTf7t6Lhr+eUqkfy99/vtusDatX6+Kwb4im1z5avst8Zy10r+TvofM6/Broq/dx+Og+u4a/nlKnHz7K91S/Vum1WBdfcKfToBWu5ayetoMyc5Hj8VO+/j/7HjLope+VoXWM+2WfWIurvX7cWKR67uWg/J4aGA7QXMsXq2zc2axbp6XcXx2V/rVEqXs1b2N5FFYIdDdcddFL3yRQOssW0eVj1N39Hr8b8vL+Kz/6xUqqNWdihtEZj2YMOru9bF2YrnEPu+Z3crHiO6at1k5w8FbC9gjtVV62blt5n7vmcP672f6aj1/SK7ywywkzqL6Lq98HLX+ryyr97v2Zp/T7ZrFZeXhL5SiBfY4R2K2vtgrbuWX10lVgbmqvV4te7lSOlq9zq8Ab4qsHYtc8BO6kqO/erAXLWu1r2mLFvOKznOa3+usTpHyc4hYvIX3bPG1WKOuyh6ZWtlYI5aNwS+XL2+X8S/3+8fVz187RwlO8D2PyrXOxevQH8wXE3v6JWulYG1axXXi8crXyXp2FwPxVX+a57e7PguWgK2//FnsgVeZ/+7h01QuYuq1359YK1aDzEFMOe3keDn1NzfRVPAtLROfgmYltaMS8C0tGZcAqalNeMSMC2tGZeAaWnNuARMS2vGJWBaWjMuAdPSmnEJmJbWjEvAtLRmXAKmpTXjEjAtrRmXgGlpzbj+H/4sHDHBDRTJAAAAAElFTkSuQmCC" width="432" /></p>
+<p><img src="data:image/png;base64,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" width="432" /></p>
 <p>… and here are intervals for each period compared with its neighbor:</p>
 <pre class="r"><code>contrast(period.emm, &quot;consec&quot;, reverse = TRUE)</code></pre>
-<pre class="ro"><code>##  contrast  estimate  lower.HPD upper.HPD
-##  1 - 2    0.9544005  0.3749803 1.5329574
-##  2 - 3    0.1332683 -0.5813314 0.9415829
-##  3 - 4    0.4394573 -0.4765553 1.6714750
+<pre class="ro"><code>##  contrast estimate lower.HPD upper.HPD
+##  1 - 2       0.954     0.375     1.533
+##  2 - 3       0.133    -0.581     0.942
+##  3 - 4       0.439    -0.477     1.671
 ## 
 ## Results are given on the log odds ratio (not the response) scale. 
 ## HPD interval probability: 0.95</code></pre>

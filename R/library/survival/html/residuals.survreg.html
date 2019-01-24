@@ -38,9 +38,7 @@ collapse=FALSE, weighted=FALSE, ...)
 
 <p>type of residuals, with choices of <code>"response"</code>, <code>"deviance"</code>,
 <code>"dfbeta"</code>, <code>"dfbetas"</code>, <code>"working"</code>, <code>"ldcase"</code>, <code>"lsresp"</code>,
-<code>"ldshape"</code>, and <code>"matrix"</code>.  See the LaTeX documentation
-(<code>survival/doc/survival.ps.gz</code>) for more
-detail.
+<code>"ldshape"</code>, and <code>"matrix"</code>. 
 </p>
 </td></tr>
 <tr valign="top"><td><code>rsigma</code></td>
@@ -84,10 +82,21 @@ function.  Let <i>L</i> be the log-likelihood, <i>p</i> be the linear predictor 
 and <i>s</i> be <i>\log(&sigma;)</i>.  Then the 6 columns of the matrix are
 <i>L</i>, <i>dL/dp</i>,<i>ddL/(dp dp)</i>,
 <i>dL/ds</i>, <i>ddL/(ds ds)</i>  and
-<i>ddL/(dp ds)</i>.  Diagnostics based on these quantities
-are discussed in an article by Escobar and Meeker.
+<i>ddL/(dp ds)</i>.
+Diagnostics based on these quantities
+are discussed in the book and article by Escobar and Meeker.
 The main ones are the likelihood displacement residuals for perturbation
-of a case weight (<code>ldcase</code>), the response value (<code>ldresp</code>), and the <code>shape</code>.
+of a case weight (<code>ldcase</code>), the response value (<code>ldresp</code>),
+and the <code>shape</code>.
+</p>
+<p>For a transformed distribution such as the log-normal or Weibull,
+matrix residuals are based on the log-likelihood of the transformed data
+log(y). 
+For a monotone function f the density of f(X) is the density of X
+divided by the derivative of f (the Jacobian), so subtract log(derivative) from
+each uncensored observation's loglik value in order to match the
+<code>loglik</code> component of the result.  The other colums of the matrix
+residual are unchanged by the transformation.
 </p>
 
 
@@ -97,6 +106,9 @@ of a case weight (<code>ldcase</code>), the response value (<code>ldresp</code>)
 Assessing influence in regression analysis with censored data.
 <em>Biometrics</em>
 <b>48</b>, 507-528.
+</p>
+<p>Escobar, L. A. and Meeker, W. Q. (1998).
+Statistical Methods for Reliablilty Data.  Wiley.
 </p>
 
 
@@ -108,9 +120,14 @@ Assessing influence in regression analysis with censored data.
 <h3>Examples</h3>
 
 <pre>
-fit &lt;- survreg(Surv(time,status) ~x, aml)
+fit &lt;- survreg(Surv(futime, death) ~ age + sex, mgus2)
+summary(fit)   # age and sex are both important
+
 rr  &lt;- residuals(fit, type='matrix')
+sum(rr[,1]) - with(mgus2, sum(log(futime[death==1]))) # loglik
+
+plot(mgus2$age, rr[,2], col= (1+mgus2$death)) # ldresp
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

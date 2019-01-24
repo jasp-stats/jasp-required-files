@@ -17,7 +17,7 @@ or construct a diagonal matrix.
 <h3>Usage</h3>
 
 <pre>
-diag(x = 1, nrow, ncol)
+diag(x = 1, nrow, ncol, names = TRUE)
 diag(x) &lt;- value
 </pre>
 
@@ -33,6 +33,12 @@ diag(x) &lt;- value
 <td>
 <p>optional dimensions for the result when <code>x</code> is
 not a matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+<p>(when <code>x</code> is a matrix) logical indicating if the
+resulting vector, the diagonal of <code>x</code>, should inherit
+<code><a href="names.html">names</a></code> from <code>dimnames(x)</code> if available.</p>
 </td></tr>
 <tr valign="top"><td><code>value</code></td>
 <td>
@@ -135,9 +141,11 @@ require(stats)
 ## diag(&lt;var-cov-matrix&gt;) = variances
 diag(var(M &lt;- cbind(X = 1:5, Y = rnorm(5))))
 #-&gt; vector with names "X" and "Y"
-rownames(M) &lt;- c(colnames(M), rep("", 3));
+rownames(M) &lt;- c(colnames(M), rep("", 3))
 M; diag(M) #  named as well
+diag(M, names = FALSE) # w/o names
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

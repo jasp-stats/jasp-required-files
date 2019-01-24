@@ -26,7 +26,9 @@ print(x, quote = FALSE, max.levels = NULL,
 
 ## S3 method for class 'table'
 print(x, digits = getOption("digits"), quote = FALSE,
-      na.print = "", zero.print = "0", justify = "none", ...)
+      na.print = "", zero.print = "0",
+      right = is.numeric(x) || is.complex(x),
+      justify = "none", ...)
 
 ## S3 method for class 'function'
 print(x, useSource = TRUE, ...)
@@ -76,6 +78,11 @@ such that the levels print on one line of width <code>width</code>.</p>
 <p>character specifying how zeros (<code>0</code>) should be
 printed; for sparse tables, using <code>"."</code> can produce more
 readable results, similar to printing sparse matrices in <a href="https://CRAN.R-project.org/package=Matrix"><span class="pkg">Matrix</span></a>.</p>
+</td></tr>
+<tr valign="top"><td><code>right</code></td>
+<td>
+<p>logical, indicating whether or not strings should be
+right aligned.</p>
 </td></tr>
 <tr valign="top"><td><code>justify</code></td>
 <td>
@@ -162,5 +169,5 @@ print.table(T[,2:8] * 1e9, digits=3, zero.print = ".")
 table(1, NA) # &lt; table of extent 1 x 0 &gt;
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -30,10 +30,11 @@ ns(x, df = NULL, knots = NULL, intercept = FALSE,
 </td></tr>
 <tr valign="top"><td><code>df</code></td>
 <td>
-<p>degrees of freedom. One can supply <code>df</code> rather than
+<p>degrees of freedom.  One can supply <code>df</code> rather than
 knots; <code>ns()</code> then chooses <code>df - 1 - intercept</code> knots at
 suitably chosen quantiles of <code>x</code> (which will ignore missing
-values).  The default, <code>df = 1</code>, corresponds to <em>no</em> knots.</p>
+values).  The default, <code>df = NULL</code>, sets the number of
+inner knots as <code>length(knots)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>knots</code></td>
 <td>
@@ -61,7 +62,7 @@ extend beyond <code>Boundary.knots</code></p>
 
 <h3>Details</h3>
 
-<p><code>ns</code> is based on the function <code><a href="splineDesign.html">spline.des</a></code>.  It
+<p><code>ns</code> is based on the function <code><a href="splineDesign.html">splineDesign</a></code>.  It
 generates a basis matrix for representing the family of
 piecewise-cubic splines with the specified sequence of
 interior knots, and the natural boundary conditions.  These enforce
@@ -117,5 +118,5 @@ lines(ht, predict(fm1, data.frame(height = ht)))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>splines</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>splines</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

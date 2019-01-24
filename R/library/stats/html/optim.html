@@ -66,7 +66,7 @@ method, or bounds in which to <em>search</em> for method <code>"Brent"</code>.</
 </td></tr>
 <tr valign="top"><td><code>control</code></td>
 <td>
-<p>A list of control parameters. See &lsquo;Details&rsquo;.</p>
+<p>a <code><a href="../../base/html/list.html">list</a></code> of control parameters.  See &lsquo;Details&rsquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>hessian</code></td>
 <td>
@@ -198,7 +198,13 @@ factor (default 1.0), <code>beta</code> the contraction factor (0.5) and
 is positive. Defaults to every 10 iterations for <code>"BFGS"</code> and
 <code>"L-BFGS-B"</code>, or every 100 temperatures for <code>"SANN"</code>.</p>
 </dd>
-<dt><code>type</code></dt><dd><p>for the conjugate-gradients method. Takes value
+<dt><code>warn.1d.NelderMead</code></dt><dd><p>a <code><a href="../../base/html/logical.html">logical</a></code> indicating
+if the (default) <code>"Nelder-Mean"</code> method should signal a
+warning when used for one-dimensional minimization.  As the
+warning is sometimes inappropriate, you can suppress it by setting
+this option to false.</p>
+</dd>
+<dt><code>type</code></dt><dd><p>for the conjugate-gradients method.  Takes value
 <code>1</code> for the Fletcher&ndash;Reeves update, <code>2</code> for
 Polak&ndash;Ribiere and <code>3</code> for Beale&ndash;Sorenson.</p>
 </dd>
@@ -319,24 +325,34 @@ Byrd, Lu-Chen and Nocedal obtained from Netlib (file
 
 <h3>References</h3>
 
-<p>Belisle, C. J. P. (1992) Convergence theorems for a class of simulated
-annealing algorithms on <i>Rd</i>. <em>J. Applied Probability</em>,
-<b>29</b>, 885&ndash;895.
+<p>Belisle, C. J. P. (1992).
+Convergence theorems for a class of simulated annealing algorithms on
+<i>Rd</i>.
+<em>Journal of Applied Probability</em>, <b>29</b>, 885&ndash;895.
+doi: <a href="http://doi.org/10.2307/3214721">10.2307/3214721</a>.
 </p>
-<p>Byrd, R. H., Lu, P., Nocedal, J. and Zhu, C.  (1995) A limited
-memory algorithm for bound constrained optimization.
-<em>SIAM J. Scientific Computing</em>, <b>16</b>, 1190&ndash;1208.
+<p>Byrd, R. H., Lu, P., Nocedal, J. and Zhu, C. (1995).
+A limited memory algorithm for bound constrained optimization.
+<em>SIAM Journal on Scientific Computing</em>, <b>16</b>, 1190&ndash;1208.
+doi: <a href="http://doi.org/10.1137/0916069">10.1137/0916069</a>.
 </p>
-<p>Fletcher, R. and Reeves, C. M. (1964) Function minimization by
-conjugate gradients. <em>Computer Journal</em> <b>7</b>, 148&ndash;154.
+<p>Fletcher, R. and Reeves, C. M. (1964).
+Function minimization by conjugate gradients.
+<em>Computer Journal</em> <b>7</b>, 148&ndash;154.
+doi: <a href="http://doi.org/10.1093/comjnl/7.2.149">10.1093/comjnl/7.2.149</a>.
 </p>
-<p>Nash, J. C. (1990) <em>Compact Numerical Methods for
-Computers. Linear Algebra and Function Minimisation.</em> Adam Hilger.
+<p>Nash, J. C. (1990).
+<em>Compact Numerical Methods for Computers. Linear Algebra and
+Function Minimisation</em>.
+Adam Hilger.
 </p>
-<p>Nelder, J. A. and Mead, R. (1965) A simplex algorithm for function
-minimization. <em>Computer Journal</em> <b>7</b>, 308&ndash;313.
+<p>Nelder, J. A. and Mead, R. (1965).
+A simplex algorithm for function minimization.
+<em>Computer Journal</em>, <b>7</b>, 308&ndash;313.
+doi: <a href="http://doi.org/10.1093/comjnl/7.4.308">10.1093/comjnl/7.4.308</a>.
 </p>
-<p>Nocedal, J. and Wright, S. J. (1999) <em>Numerical Optimization</em>.
+<p>Nocedal, J. and Wright, S. J. (1999).
+<em>Numerical Optimization</em>.
 Springer.
 </p>
 
@@ -438,7 +454,15 @@ plot(x, y, type = "n", asp = 1, xlab = "", ylab = "",
 arrows(tspres[s,1], tspres[s,2], tspres[s+1,1], tspres[s+1,2],
        angle = 10, col = "red")
 text(x, y, labels(eurodist), cex = 0.8)
+
+## 1-D minimization: "Brent" or optimize() being preferred.. but NM may be ok and "unavoidable",
+## ----------------   so we can suppress the check+warning :
+system.time(rO &lt;- optimize(function(x) (x-pi)^2, c(0, 10)))
+system.time(ro &lt;- optim(1, function(x) (x-pi)^2, control=list(warn.1d.NelderMead = FALSE)))
+rO$minimum - pi # 0 (perfect), on one platform
+ro$par - pi     # ~= 1.9e-4    on one platform
+utils::str(ro)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

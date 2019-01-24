@@ -4,6 +4,7 @@ exportPattern("^[^.]")
 importFrom("graphics", "abline", "axis", "plot", "rect", "segments")
 importFrom("stats", "runif")
 importFrom("utils", "flush.console")
+importFrom("parallel", "detectCores") ## really just to get `[,cluster`!
 
 S3method(plot, snowTimingData)
 S3method(print, snowTimingData)

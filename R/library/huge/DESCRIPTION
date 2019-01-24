@@ -32,5 +32,5 @@ Repository: CRAN
 NeedsCompilation: yes
 Packaged: 2015-09-15 17:56:38 UTC; tuozhao
 Date/Publication: 2015-09-16 10:05:23
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-06-02 10:12:44 UTC; windows
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-01-21 18:16:30 UTC; windows
 Archs: i386, x64

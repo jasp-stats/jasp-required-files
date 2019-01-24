@@ -19,7 +19,7 @@ the name of the current time zone.
 <pre>
 Sys.timezone(location = TRUE)
 
-OlsonNames()
+OlsonNames(tzdir = NULL)
 </pre>
 
 
@@ -28,12 +28,12 @@ OlsonNames()
 <table summary="R argblock">
 <tr valign="top"><td><code>location</code></td>
 <td>
-<p>logical: should an attempt be made to find the
-location name as used in the Olson/IANA database?
-(See &lsquo;Time zone names&rsquo; below.)
-</p>
-<p><code>location = FALSE</code> is deprecated.
-</p>
+<p>logical: defunct: ignored, with a warning for false values.</p>
+</td></tr>
+<tr valign="top"><td><code>tzdir</code></td>
+<td>
+<p>The time-zone database to be used: the default is to try
+known locations until one is found.</p>
 </td></tr>
 </table>
 
@@ -51,11 +51,13 @@ Solaris.
 <p>It should be possible to set the current time zone via the environment
 variable <span class="env">TZ</span>: see the section on &lsquo;Time zone names&rsquo; for
 suitable values.  <code>Sys.timezone()</code> will return the value of
-<span class="env">TZ</span> if set (and on some OSes it is always set), otherwise it will
-try to retrieve from the OS a value which if set for <span class="env">TZ</span> would
-select the system's idea of the time zone.  This is not in general
-possible, and <code>Sys.timezone(FALSE)</code> on Windows will retrieve the
-abbreviation used for the current time.
+<span class="env">TZ</span> if set initially (and on some OSes it is always set),
+otherwise it will try to retrieve from the OS a value which if set for
+<span class="env">TZ</span> would give the initial time zone. (&lsquo;Initially&rsquo; means
+before any time-zone functions are used: if <span class="env">TZ</span> is being set to
+override the OS setting or if the &lsquo;try&rsquo; does not get this
+right, it should be set before the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> process is started or (probably
+early enough) in file <code><a href="Startup.html">.Rprofile</a></code>).
 </p>
 
 
@@ -63,7 +65,8 @@ abbreviation used for the current time.
 the time zone colloquially known as <span class="samp">GMT</span> (see
 <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">https://en.wikipedia.org/wiki/Coordinated_Universal_Time</a>).
 (Some but not all platforms will give a warning for invalid values.)
-If it is unset or empty the <em>system</em> time zone is used.
+If it is unset or empty the <em>system</em> time zone is used (the one
+returned by <code>Sys.timezone</code>).
 </p>
 <p>Time zones did not come into use until the second half of the
 nineteenth century and were not widely adopted until the twentieth,
@@ -85,16 +88,18 @@ representations are becoming common; unfortunately on some 64-bit OSes
 available for the range 1901&ndash;2038, and incompletely for the end
 years.
 </p>
+<p>As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0, when a time zone location is first found in a
+session, its value is cached in object <code>.sys.timezone</code> in the
+base environment.
+</p>
 
 
 <h3>Value</h3>
 
 <p><code>Sys.timezone</code> returns an OS-specific character string, possibly
 <code>NA</code> or an empty string (which on some OSes means <span class="samp">UTC</span>).
-For the default <code>location = TRUE</code> this will be a location such as
-<code>"Europe/London"</code> if one can be ascertained.  For <code>location
-  = FALSE</code> it will be an abbreviation such as <code>"EST"</code> or
-<code>"CEST"</code> on Windows but <code>NA</code> on other platforms
+This will be a location such as <code>"Europe/London"</code> if one can be
+ascertained.
 </p>
 <p>A time zone region may be known by several names: for example
 <span class="samp">"Europe/London"</span> is also known as <span class="samp">GB</span>, <span class="samp">GB-Eire</span>,
@@ -104,7 +109,9 @@ are also known by a summary of their time zone,
 e.g. <span class="samp">PST8PDT</span> is an alias for
 <span class="samp">America/Los_Angeles</span>.
 </p>
-<p><code>OlsonNames</code> returns a character vector.
+<p><code>OlsonNames</code> returns a character vector, see the examples for
+typical cases.  It may have an attribute <code>"Version"</code>, something
+like <span class="samp">"2017c"</span>.
 </p>
 
 
@@ -269,8 +276,16 @@ have the courtesy not to blame <span style="font-family: Courier New, Courier; c
 <pre>
 Sys.timezone()
 
-str(OlsonNames()) ## around six hundred names
+str(OlsonNames()) ## typically close to 600 hundred names,
+## typically some acronyms/aliases such as "UTC", "NZ", "MET", "Eire", ..., but
+## mostly pairs (and triplets) such as "Pacific/Auckland"
+table(sl &lt;- grepl("/", OlsonNames()))
+OlsonNames()[ !sl ] # the simple ones
+head(Osl &lt;- strsplit(OlsonNames()[sl], "/"))
+(tOS1 &lt;- table(vapply(Osl, `[[`, "", 1))) # Continents, countries, ...
+table(lengths(Osl))# most are pairs, some triplets
+str(Osl[lengths(Osl) &gt;= 3])# "America" South and North ...
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

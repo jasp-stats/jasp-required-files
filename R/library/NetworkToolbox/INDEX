@@ -5,21 +5,24 @@ MaST                    Maximum Spanning Tree
 NetworkToolbox-package
                         NetworkToolbox-package
 TMFG                    Triangulated Maximally Filtered Graph
-animals                 Animal Verbal Fluency Data
+adapt.a                 Adaptive Alpha
 behavOpen               NEO-PI-3 for Resting-state Data
 betweenness             Betwenness Centrality
 binarize                Binarize Network
 bootgen                 Bootstrapped Network Generalization
-bootgenPlot             Bootstrapped Network Generalization Plots
+bootgen.plot            Bootstrapped Network Generalization Plots
 centlist                List of Centrality Measures
 closeness               Closeness Centrality
 clustcoeff              Clustering Coefficient
 comcat                  Communicating Nodes
-commboot                Bootstrapped Communities Likelihood
+comm.close              Community Closeness Centrality
+comm.eigen              Community Eigenvector Centrality
+comm.str                Community Strength/Degree Centrality
 conn                    Network Connectivity
 convert2igraph          Convert Network(s) to igraph's Format
 convertConnBrainMat     Import CONN Toolbox Brain Matrices to R format
 cor2cov                 Convert Correlation Matrix to Covariance Matrix
+core.items              Core Items
 cpmEV                   Connectome-based Predictive Modeling-External
                         Validation
 cpmFP                   Connectome-based Predictive
@@ -31,38 +34,36 @@ cpmIV                   Connectome-based Predictive Modeling-Internal
 degree                  Degree
 depend                  Dependency Network Approach
 depna                   Dependency Neural Networks
+desc                    Variable Descriptive Statisitcs
+desc.all                Dataset Descriptive Statisitcs
 distance                Distance
 diversity               Diversity Coefficient
 edgerep                 Edge Replication
 eigenvector             Eigenvector Centrality
+flow.frac               Flow Fraction
 gateway                 Gateway Coefficient
 hybrid                  Hybrid Centrality
 impact                  Node Impact
 is.graphical            Determines if Network is Graphical
+isSym                   isSymmetric Wrapper Function
 kld                     Kullback-Leibler Divergence
 lattnet                 Generates a Lattice Network
 leverage                Leverage Centrality
 louvain                 Louvain Community Detection Algorithm
 nams                    Network Adjusted Mean/Sum
 neoOpen                 NEO-PI-3 Openness to Experience Data
-neuralcorrtest          Neural-Behavioral Correlation Test
-neuralgrouptest         Neural Network Group Statistics Tests
+net.coverage            Network Coverage
 neuralnetfilter         Neural Network Filter
-neuralstat              Local and Global Neural Network Characteristics
 participation           Participation Coefficient
 pathlengths             Characteristic Path Lengths
 randnet                 Generates a Random Network
 reg                     Regression Matrix
+resp.rep                Repeated Responses Check
 rmse                    Root Mean Square Error
 rspbc                   Randomized Shortest Paths Betweenness
                         Centrality
-semnetboot              Partial Bootstrapped Semantic Network Analysis
-semnetmeas              Semantic Network Measures
 sim.swn                 Simulate Small-world Network
 smallworldness          Small-worldness Measure
-splitsamp               Split sample
-splitsampNet            Network Construction for splitsamp
-splitsampStats          Statistics for splitsamp Networks
 stable                  Stabilizing Nodes
 strength                Node Strength
 threshold               Threshold Filter

@@ -13,9 +13,9 @@ mlsl	mlsl
 mma	mma
 neldermead	neldermead
 newuoa	newuoa
-nl.grad	gradients
-nl.jacobian	gradients
-nl.opts	nloptions
+nl.grad	nl.grad
+nl.jacobian	nl.grad
+nl.opts	nl.opts
 nloptr	nloptr
 nloptr.get.default.options	nloptr.get.default.options
 nloptr.print.options	nloptr.print.options

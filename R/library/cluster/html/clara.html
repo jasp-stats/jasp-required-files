@@ -17,7 +17,8 @@ the data into <code>k</code> clusters.
 <h3>Usage</h3>
 
 <pre>
-clara(x, k, metric = "euclidean", stand = FALSE, samples = 5,
+clara(x, k, metric = c("euclidean", "manhattan", "jaccard"),
+      stand = FALSE, samples = 5,
       sampsize = min(n, 40 + 2 * k), trace = 0, medoids.x = TRUE,
       keep.data = medoids.x, rngR = FALSE, pamLike = FALSE, correct.d = TRUE)
 </pre>
@@ -44,8 +45,10 @@ observations (i.e., n = <code>nrow(x)</code>).</p>
 
 <p>character string specifying the metric to be used for calculating
 dissimilarities between observations.
-The currently available options are &quot;euclidean&quot; and &quot;manhattan&quot;.
-Euclidean distances are root sum-of-squares of differences, and
+The currently available options are &quot;euclidean&quot;, &quot;manhattan&quot;, and
+&quot;jaccard&quot;.
+</p>
+<p>Euclidean distances are root sum-of-squares of differences, and
 manhattan distances are the sum of absolute differences.
 </p>
 </td></tr>
@@ -60,17 +63,20 @@ deviation.
 </td></tr>
 <tr valign="top"><td><code>samples</code></td>
 <td>
-<p>integer, number of samples to be drawn from the
-dataset.  The default, <code>5</code>, is rather small for historical (and
-now back compatibility) reasons and we recommend to set
-<code>samples</code> an order of magnitude larger.
+<p>integer, say <i>N</i>, the number of samples to be drawn from the
+dataset.  The default, <code>N = 5</code>, is rather small for historical (and
+now back compatibility) reasons and we <em>recommend to set
+<code>samples</code> an order of magnitude larger</em>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>sampsize</code></td>
 <td>
-<p>integer, number of observations in each
-sample. <code>sampsize</code> should be higher than the number of clusters
-(<code>k</code>) and at most the number of observations (n = <code>nrow(x)</code>).</p>
+<p>integer, say <i>j</i>, the number of observations in each
+sample.  <code>sampsize</code> should be higher than the number of clusters
+(<code>k</code>) and at most the number of observations (n =
+<code>nrow(x)</code>).  While computational effort is proportional to <i>j^2</i>,
+see note below, it may still be advisable to set
+<i>j = </i><code>sampsize</code> to a <em>larger</em> value than the (historical) default.</p>
 </td></tr>
 <tr valign="top"><td><code>trace</code></td>
 <td>
@@ -193,6 +199,7 @@ several thousand observations.
 <h3>Author(s)</h3>
 
 <p>Kaufman and Rousseeuw (see <code><a href="agnes.html">agnes</a></code>), originally.
+Metric <code>"jaccard"</code>: Kamil Kozlowski and Kamil Jadeszko (from <a href="ownedoutcomes.com">ownedoutcomes.com</a>).
 All arguments from <code>trace</code> on, and most <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> documentation and all
 tests by Martin Maechler.
 </p>
@@ -247,8 +254,7 @@ if(length(iDoubt)) { # (not for all seeds)
   dimnames(tabD) &lt;- list(cluster = paste(1:nCl), obs = format(iDoubt))
   t(tabD) # how many times in which clusters
 }
-
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.0.6 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.0.7-1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -18,7 +18,7 @@ names for temporary files.
 
 <pre>
 tempfile(pattern = "file", tmpdir = tempdir(), fileext = "")
-tempdir()
+tempdir(check = FALSE)
 </pre>
 
 
@@ -37,6 +37,11 @@ of the name.</p>
 <tr valign="top"><td><code>fileext</code></td>
 <td>
 <p>a non-empty character vector giving the file extension</p>
+</td></tr>
+<tr valign="top"><td><code>check</code></td>
+<td>
+<p><code><a href="logical.html">logical</a></code> indicating if <code>tmpdir()</code>
+should be checked and recreated if no longer valid.</p>
 </td></tr>
 </table>
 
@@ -131,7 +136,18 @@ tempfile(c("ab", "a b c"))   # give file name with spaces in!
 tempfile("plot", fileext = c(".ps", ".pdf"))
 
 tempdir() # works on all platforms with a platform-dependent result
+
+
+## Show how 'check' is working on some platforms:
+if(exists("I'm brave") &amp;&amp; `I'm brave` &amp;&amp;
+   identical(.Platform$OS.type, "unix") &amp;&amp; grepl("^/tmp/", tempdir())) {
+  cat("Current tempdir(): ", tempdir(), "\n")
+  cat("Removing it :", file.remove(tempdir()),
+      "; dir.exists(tempdir()):", dir.exists(tempdir()), "\n")
+  cat("and now  tempdir(check = TRUE) :", tempdir(check = TRUE),"\n")
+}
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

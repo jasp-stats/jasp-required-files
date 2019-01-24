@@ -52,14 +52,22 @@ can also be <code>NULL</code>.</p>
 <p>Here, we describe the so called &ldquo;S3&rdquo; classes (and methods). For
 &ldquo;S4&rdquo; classes (and methods), see &lsquo;Formal classes&rsquo; below.
 </p>
+
 <p>Many <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects have a <code>class</code> attribute, a character vector
 giving the names of the classes from which the object <em>inherits</em>.
-If the object does not have a class attribute, it has an implicit
-class, <code>"matrix"</code>, <code>"array"</code> or the result of
-<code><a href="mode.html">mode</a>(x)</code> (except that integer vectors have implicit class
-<code>"integer"</code>).  (Functions <code>oldClass</code> and
-<code>oldClass&lt;-</code> get and set the attribute, which can also be done
-directly.)
+(Functions <code>oldClass</code> and <code>oldClass&lt;-</code> get and set the
+attribute, which can also be done directly.)
+</p>
+
+<p>If the object does not have a class attribute, it has an implicit
+class, notably <code>"matrix"</code>, <code>"array"</code>, <code>"function"</code> or
+<code>"numeric"</code> or the result of
+<code><a href="typeof.html">typeof</a>(x)</code> (which is similar to <code><a href="mode.html">mode</a>(x)</code>),
+but for type <code>"language"</code> and <code><a href="mode.html">mode</a></code> <code>"call"</code>,
+where the following extra classes exist for the corresponding function
+<code><a href="call.html">call</a></code>s:
+<code>if</code>, <code>while</code>, <code>for</code>, <code>=</code>, <code>&lt;-</code>, <code>(</code>,
+<code>{</code>, <code>call</code>.
 </p>
 <p>Note that <code><a href="NULL.html">NULL</a></code> objects cannot have attributes (hence not
 classes) and attempting to assign a class is an error.
@@ -159,7 +167,15 @@ class(x) &lt;- c("a", "b")
 inherits(x,"a") #TRUE
 inherits(x, "a", TRUE) # 1
 inherits(x, c("a", "b", "c"), TRUE) # 1 2 0
+
+class( quote(pi) )           # "name"
+## regular calls
+class( quote(sin(pi*x)) )    # "class"
+## special calls
+class( quote(x &lt;- 1) )       # "&lt;-"
+class( quote((1 &lt; 2)) )      # "("
+class( quote( if(8&lt;3) pi ) ) # "if"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

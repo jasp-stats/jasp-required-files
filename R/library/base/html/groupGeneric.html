@@ -142,6 +142,12 @@ If different methods are found, there is a warning about
 &lsquo;incompatible methods&rsquo;: in that case or if no method is found
 for either argument the internal method is used.
 </p>
+<p>Note that the <code><a href="data.frame.html">data.frame</a></code> methods for the comparison
+(<code>"Compare"</code>: <code>==</code>, <code>&lt;</code>, ...) and logic
+(<code>"Logic"</code>: <code>&amp;</code> <code>|</code> and <code>!</code>) operators return a
+logical <code><a href="matrix.html">matrix</a></code> instead of a data frame, for
+convenience and back compatibility.
+</p>
 <p>If the members of this group are called as functions, any argument
 names are removed to ensure that positional matching is always used.
 </p>
@@ -257,5 +263,5 @@ methods("Summary")
 methods("Complex")  # none in base R
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

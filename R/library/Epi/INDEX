@@ -98,9 +98,13 @@ ftrend                  Fit a floating trend to a factor in generalized
                         linear model
 gen.exp                 Generate covariates for drug-exposure follow-up
                         from drug purchase records.
+glm.Lexis               Fit intensity models to follow-up data in Lexis
+                        objects
 gmortDK                 Population mortality rates for Denmark in
                         5-years age groups.
 hivDK                   hivDK: seroconversion in a cohort of Danish men
+in.span                 Is 'x' in the column span of matrix 'A' and
+                        what columns are linearly dependent?
 lep                     An unmatched case-control study of leprosy
                         incidence
 lgrep                   Convenience versions of grep
@@ -131,6 +135,7 @@ plotCIF                 Plotting Aalen-Johansen curves for competing
 plotEst                 Plot estimates with confidence limits (forest
                         plot)
 plotevent               Plot Equivalence Classes
+poisreg                 Family Object for Poisson Regression
 projection.ip           Projection of columns of a matrix.
 rateplot                Functions to plot rates from a table classified
                         by age and calendar time (period)

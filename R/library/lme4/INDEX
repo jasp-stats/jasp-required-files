@@ -14,6 +14,8 @@ Pastes                  Paste strength by batch and cask
 Penicillin              Variation in penicillin testing
 VarCorr                 Extract Variance and Correlation Components
 VerbAgg                 Verbal Aggression item responses
+allFit                  Refit a fitted model with all available
+                        optimizers
 bootMer                 Model-based (Semi-)Parametric Bootstrap for
                         Mixed Models
 cake                    Breakage Angle of Chocolate Cakes
@@ -23,6 +25,8 @@ confint.merMod          Compute Confidence Intervals for Parameters of
                         a [ng]lmer Fit
 convergence             Assessing Convergence for Fitted Models
 devcomp                 Extract the deviance component list
+devfun2                 Deviance function defined in terms of standard
+                        deviations/correlations
 drop1.merMod            Drop all possible single fixed-effect terms
                         from a mixed effect model
 dummy                   Dummy variables (experimental)
@@ -47,8 +51,10 @@ golden-class            Class '"golden"' and Generator for Golden
 grouseticks             Data on red grouse ticks from Elston et al.
                         2001
 hatvalues.merMod        Diagonal elements of the hat matrix
+influence.merMod        Influence Diagnostics for Mixed-Effects Models
 isNested                Is f1 nested within f2?
 isREML                  Check characteristics of models
+isSingular              Test fitted model for (near) singularity
 lmList                  Fit List of lm or glm Objects with a Common
                         Model
 lmList4-class           Class "lmList4" of 'lm' Objects on Common Model
@@ -84,6 +90,7 @@ predict.merMod          Predictions from a model at new data values
 profile-methods         Profile method for merMod objects
 pvalues                 Getting p-values for fitted models
 ranef                   Extract the modes of the random effects
+rePCA                   PCA of random-effects covariance matrix
 rePos                   Generator object for the rePos (random-effects
                         positions) class
 rePos-class             Class '"rePos"'

@@ -51,13 +51,18 @@ the default is to extract all files.</p>
 </td></tr>
 <tr valign="top"><td><code>compressed</code></td>
 <td>
-<p>logical or character string.  Values <code>"gzip"</code>,
+<p>logical or character string, used only for an
+external <code>tar</code> command.  Values <code>"gzip"</code>,
 <code>"bzip2"</code> and <code>"xz"</code> select that form of compression (and
-may be abbreviated to the first letter).  <code>TRUE</code> indicates gzip
-compression, <code>FALSE</code> no known compression (but an external
-<code>tar</code> command may detect compression automagically), and
-<code>NA</code> (the default) indicates that the type is inferred from the
-file header.</p>
+may be abbreviated to the first letter).  <code>TRUE</code> indicates
+<code>gzip</code> compression, <code>FALSE</code> no known compression (but
+an external <code>tar</code> command may detect compression
+automagically), and <code>NA</code> (the default) indicates that the type
+is inferred from the file header.
+</p>
+<p>The external command may ignore the selected compression type but
+detect a type automagically.
+</p>
 </td></tr>
 <tr valign="top"><td><code>extras</code></td>
 <td>
@@ -67,7 +72,8 @@ program.</p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
 <td>
-<p>logical: if true echo the command used.</p>
+<p>logical: if true echo the command used for an external
+<code>tar</code> program.</p>
 </td></tr>
 <tr valign="top"><td><code>restore_times</code></td>
 <td>
@@ -84,9 +90,10 @@ file system (which on a FAT system is 2 seconds).
 </td></tr>
 <tr valign="top"><td><code>tar</code></td>
 <td>
-<p>character string: the path to the command to be used.  If
-the command itself contains spaces it needs to be quoted &ndash; but
-<code>tar</code> can also contain flags separated from the command by spaces.</p>
+<p>character string: the path to the command to be used or
+<code>"internal"</code>.  If the command itself contains spaces it needs
+to be quoted &ndash; but <code>tar</code> can also contain flags separated from
+the command by spaces.</p>
 </td></tr>
 </table>
 
@@ -100,20 +107,33 @@ internal implementation written in <span style="font-family: Courier New, Courie
 <code>tar.exe</code> is tried first).
 </p>
 <p>What options are supported will depend on the <code>tar</code> used.
-Modern GNU flavours of <code>tar</code> will support compressed archives,
+Modern GNU <code>tar</code> versions support compressed archives,
 and since 1.15 are able to detect the type of compression
-automatically: version 1.20 added support for <code>lzma</code> and
-version 1.22 for <code>xz</code> compression using LZMA2.  macOS 10.6 and
-later (and FreeBSD and some other OSes) have a <code>tar</code> (also
-known as <code>bsdtar</code>) from the <span class="samp">libarchive</span> project which
-can also detect <code>gzip</code> and <code>bzip2</code> compression
-automatically.  For other flavours of <code>tar</code>, environment
-variable <span class="env">R_GZIPCMD</span> gives the command to decompress
-<code>gzip</code> and <code>compress</code> files, and <code>R_BZIPCMD</code>
-for <code>bzip2</code> files.
+automatically: version 1.22 added support <code>xz</code> compression.
+macOS 10.6 and later (and FreeBSD and some other OSes) have a
+<code>tar</code> (also known as <code>bsdtar</code>) from the
+libarchive project which can also detect <code>gzip</code> and
+<code>bzip2</code> compression automatically.  For other flavours of
+<code>tar</code>, environment variable <span class="env">R_GZIPCMD</span> gives the command
+to decompress <code>gzip</code> and <code>compress</code> files, and
+<span class="env">R_BZIPCMD</span> for <code>bzip2</code> files.
 </p>
 <p>Arguments <code>compressed</code>, <code>extras</code> and <code>verbose</code> are only
 used when an external <code>tar</code> is used.
+</p>
+<p>Setting <code>compressed = FALSE</code> allows an external <code>tar</code> to
+select the compression type from the file header: some external
+commands will detect <code>lrzip</code>, <code>lzma</code>, <code>lz4</code>,
+<code>lzop</code> or <code>zstd</code> compression
+in addition to the three documented character values of
+<code>compressed</code>.  (For some external <code>tar</code> commands,
+compressed tarfiles can only be read if the appropriate utility
+program is available.)  For GNU <code>tar</code>, further (de)compression
+programs can be specified by e.g. <code>extras = "-I lz4"</code>.
+For <code>bsdtar</code> this could be
+<code>extras = "--use-compress-program lz4"</code>.
+Most commands will detect (the nowadays rarely seen) &lsquo;<span class="file">.tar.Z</span>&rsquo;
+archives compressed by <code>compress</code>.
 </p>
 <p>The internal implementation restores symbolic links as links on a
 Unix-alike, and as file copies on Windows (which works only for
@@ -169,5 +189,5 @@ paths of files contained in the tar archive.
 <p><code><a href="tar.html">tar</a></code>, <code><a href="unzip.html">unzip</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

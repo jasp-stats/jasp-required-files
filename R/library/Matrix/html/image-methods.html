@@ -33,7 +33,7 @@ image(x,
       useRaster = FALSE,
       useAbs = NULL, colorkey = !useAbs,
       col.regions = NULL,
-      lwd = NULL, ...)
+      lwd = NULL, border.col = NULL, ...)
 </pre>
 
 
@@ -109,6 +109,14 @@ rectangles of each non-zero matrix entry (drawn by
 <code><a href="../../grid/html/grid.rect.html">grid.rect</a></code>).  The default depends on the matrix
 dimension and the device size.</p>
 </td></tr>
+<tr valign="top"><td><code>border.col</code></td>
+<td>
+<p>color for the border of each rectangle. <code>NA</code>
+means no border is drawn.   When <code>NULL</code> as by default,
+<code>border.col &lt;- if(lwd &lt; .01) NA else NULL</code> is used.
+Consider using an opaque color instead of <code>NULL</code> which
+corresponds to <code>grid::<a href="../../grid/html/get.gpar.html">get.gpar</a>("col")</code>.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>further arguments passed to methods and
@@ -174,6 +182,13 @@ image(USCounties[1:400,1:200], lwd=.1)
 image(USCounties, c(1,200), c(1,400), lwd=.1)
 image(USCounties, c(1,300), c(1,200), lwd=.5 )
 image(USCounties, c(1,300), c(1,200), lwd=.01)
+## These 3 are all equivalent :
+(I1 &lt;- image(USCounties, c(1,100), c(1,100), useAbs=FALSE))
+ I2 &lt;- image(USCounties, c(1,100), c(1,100), useAbs=FALSE,        border.col=NA)
+ I3 &lt;- image(USCounties, c(1,100), c(1,100), useAbs=FALSE, lwd=2, border.col=NA)
+stopifnot(all.equal(I1, I2), all.equal(I2, I3))
+## using an opaque border color
+image(USCounties, c(1,100), c(1,100), useAbs=FALSE, lwd=3, border.col = adjustcolor("skyblue", 1/2))
 
 if(doExtras &lt;- interactive() || nzchar(Sys.getenv("R_MATRIX_CHECK_EXTRA")) ||
     identical("true", unname(Sys.getenv("R_PKG_CHECKING_doExtras")))) {
@@ -181,7 +196,7 @@ if(doExtras &lt;- interactive() || nzchar(Sys.getenv("R_MATRIX_CHECK_EXTRA")) ||
 ## however, for such a large matrix, this is typically considerably
 ## *slower* (than vector graphics rectangles) in most cases :
 if(doPNG &lt;- !dev.interactive())
-png("image-USCounties-raster.png", width=3200, height=3200)
+   png("image-USCounties-raster.png", width=3200, height=3200)
 image(USCounties, useRaster = TRUE) # should not suffer from anti-aliasing
 if(doPNG)
    dev.off()
@@ -189,5 +204,5 @@ if(doPNG)
 }#only if(doExtras)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
 </body></html>

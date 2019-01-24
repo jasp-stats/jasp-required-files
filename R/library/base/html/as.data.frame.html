@@ -28,7 +28,8 @@ as.data.frame(x, row.names = NULL, optional = FALSE, ...,
               stringsAsFactors = default.stringsAsFactors())
 
 ## S3 method for class 'matrix'
-as.data.frame(x, row.names = NULL, optional = FALSE, ...,
+as.data.frame(x, row.names = NULL, optional = FALSE,
+              make.names = TRUE, ...,
               stringsAsFactors = default.stringsAsFactors())
 
 is.data.frame(x)
@@ -54,7 +55,8 @@ converting column names (to syntactic names: see
 <code><a href="make.names.html">make.names</a></code>) is optional.  Note that all of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s
 <span class="pkg">base</span> package <code>as.data.frame()</code> methods use
 <code>optional</code> only for column names treatment, basically with the
-meaning of <code><a href="data.frame.html">data.frame</a>(*, check.names = !optional)</code>.</p>
+meaning of <code><a href="data.frame.html">data.frame</a>(*, check.names = !optional)</code>.
+See also the <code>make.names</code> argument of the <code>matrix</code> method.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -82,6 +84,18 @@ should be shortened (and the last 6 characters replaced by <code>" ..."</code>).
 <td>
 <p>logical indicating if empty column names, i.e.,
 <code>""</code> should be fixed up (in <code><a href="data.frame.html">data.frame</a></code>) or not.</p>
+</td></tr>
+</table>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>make.names</code></td>
+<td>
+<p>a <code><a href="logical.html">logical</a></code>, i.e., one of <code>FALSE, NA, TRUE</code>,
+indicating what should happen if the row names (of the matrix
+<code>x</code>) are invalid.  If they are invalid, the default,
+<code>TRUE</code>, calls <code><a href="make.names.html">make.names</a>(*, unique=TRUE)</code>;
+<code>make.names=NA</code> will use &ldquo;automatic&rdquo; row names and a
+<code>FALSE</code> value will signal an error for invalid row names.</p>
 </td></tr>
 </table>
 
@@ -147,5 +161,5 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 <code>table</code> method (which has additional arguments if called directly).
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

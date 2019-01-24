@@ -22,7 +22,7 @@ appropriate places, and creates skeleton help files and a
 package.skeleton(name = "anRpackage", list,
                  environment = .GlobalEnv,
                  path = ".", force = FALSE,
-                 code_files = character())
+                 code_files = character(), encoding = "unknown")
 </pre>
 
 
@@ -57,6 +57,14 @@ or <code>code_files</code> will be supplied.  See &lsquo;Details&rsquo;.</p>
 <td>
 <p>a character vector with the paths to R code files to
 build the package around.  See &lsquo;Details&rsquo;.</p>
+</td></tr>
+<tr valign="top"><td><code>encoding</code></td>
+<td>
+<p>optionally a <code><a href="../../base/html/character.html">character</a></code> string with an
+encoding for an optional <code>Encoding:</code> line in
+&lsquo;<span class="file">DESCRIPTION</span>&rsquo; when non-ASCII characters will be used; typically
+one of <code>"latin1"</code>, <code>"latin2"</code>, or <code>"UTF-8"</code>; see the
+WRE manual.</p>
 </td></tr>
 </table>
 
@@ -144,5 +152,5 @@ package.skeleton(list = c("f","g","d","e"), name = "mypkg")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

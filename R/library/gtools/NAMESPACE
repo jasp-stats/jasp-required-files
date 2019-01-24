@@ -7,8 +7,10 @@ export(
        ask,
        assert,
        assignEdgewise,
+       baseOf,
        binsearch,
        capture,
+       capwords,
        chr,
        checkRVersion,
        combinations,
@@ -38,9 +40,22 @@ export(
        scat,
        setTCPNoDelay,
        smartbind,
+       split_path,
        sprint,
        stars.pval,
        strmacro,
        unByteCode,
        unByteCodeAssign
        )
+
+importFrom("methods", "new")
+importFrom("stats", "na.omit", "quantile", "rgamma", "symnum")
+importFrom("utils", "available.packages", "flush.console", "head",
+           "help.search", "installed.packages", "modifyList",
+           "packageVersion")
+
+# Refer to all C routines by their name prefixed by C_
+useDynLib(gtools, .registration = TRUE, .fixes = "C_")
+
+
+

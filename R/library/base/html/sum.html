@@ -54,17 +54,19 @@ were <code>integer(0)</code>.
 <p>Loss of accuracy can occur when summing values of different signs:
 this can even occur for sufficiently long integer inputs if the
 partial sums would cause integer overflow.  Where possible
-extended-precision accumulators are used, but this is
-platform-dependent.
+extended-precision accumulators are used, typically well supported
+with C99 and newer, but possibly platform-dependent.
 </p>
 
 
 <h3>Value</h3>
 
-<p>The sum. If all of <code>...</code> are of type integer or logical, then
-the sum is integer, and in that case the result will be <code>NA</code> (with a
-warning) if integer overflow occurs.  Otherwise it is a length-one
-numeric or complex vector.
+<p>The sum.  If all of the <i>M</i> <code>...</code> arguments are of type
+integer or logical, then the sum is <code><a href="integer.html">integer</a></code> when
+possible and is <code>double</code> otherwise.  Integer overflow should no
+longer happen since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.5.0.
+For other argument types it is a length-one numeric
+(<code><a href="double.html">double</a></code>) or complex vector.
 </p>
 <p><strong>NB:</strong> the sum of an empty set is zero, by definition.
 </p>
@@ -112,5 +114,5 @@ sum(1:5, NA)
 sum(1:5, NA, na.rm = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

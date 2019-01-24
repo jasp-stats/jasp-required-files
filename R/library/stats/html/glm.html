@@ -21,12 +21,12 @@ description of the error distribution.
 glm(formula, family = gaussian, data, weights, subset,
     na.action, start = NULL, etastart, mustart, offset,
     control = list(...), model = TRUE, method = "glm.fit",
-    x = FALSE, y = TRUE, contrasts = NULL, ...)
+    x = FALSE, y = TRUE, singular.ok = TRUE, contrasts = NULL, ...)
 
 glm.fit(x, y, weights = rep(1, nobs),
         start = NULL, etastart = NULL, mustart = NULL,
         offset = rep(0, nobs), family = gaussian(),
-        control = list(), intercept = TRUE)
+        control = list(), intercept = TRUE, singular.ok = TRUE)
 
 ## S3 method for class 'glm'
 weights(object, type = c("prior", "working"), ...)
@@ -135,6 +135,11 @@ of the returned value.
 <code>n * p</code>, and <code>y</code> is a vector of observations of length
 <code>n</code>.
 </p>
+</td></tr>
+<tr valign="top"><td><code>singular.ok</code></td>
+<td>
+<p>logical; if <code>FALSE</code> a singular fit is an
+error.</p>
 </td></tr>
 <tr valign="top"><td><code>contrasts</code></td>
 <td>
@@ -502,6 +507,10 @@ clotting &lt;- data.frame(
     lot2 = c(69,35,26,21,18,16,13,12,12))
 summary(glm(lot1 ~ log(u), data = clotting, family = Gamma))
 summary(glm(lot2 ~ log(u), data = clotting, family = Gamma))
+## Aliased ("S"ingular) -&gt; 1 NA coefficient
+(fS &lt;- glm(lot2 ~ log(u) + log(u^2), data = clotting, family = Gamma))
+tools::assertError(update(fS, singular.ok=FALSE), verbose=interactive())
+## -&gt; .. "singular fit encountered"
 
 ## Not run: 
 ## for an example of the use of a terms object as a formula
@@ -509,5 +518,5 @@ demo(glm.vr)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

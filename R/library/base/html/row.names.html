@@ -16,6 +16,12 @@ length the number of rows with no duplicates nor missing values.
 other methods, and there are default methods for arrays.  The
 description here is for the <code>data.frame</code> method.
 </p>
+<p><code>`.rowNamesDF&lt;-`</code> is a (non-generic replacement) function to set
+row names for data frames, with extra argument <code>make.names</code>.
+This function only exists as workaround as we cannot easily change the
+<code>row.names&lt;-</code> generic without breaking legacy code in existing packages.
+
+</p>
 
 
 <h3>Usage</h3>
@@ -23,6 +29,7 @@ description here is for the <code>data.frame</code> method.
 <pre>
 row.names(x)
 row.names(x) &lt;- value
+.rowNamesDF(x, make.names=FALSE) &lt;- value
 </pre>
 
 
@@ -33,6 +40,16 @@ row.names(x) &lt;- value
 <td>
 <p>object of class <code>"data.frame"</code>, or any other class for
 which a method has been defined.</p>
+</td></tr>
+<tr valign="top"><td><code>make.names</code></td>
+<td>
+<p><code><a href="logical.html">logical</a></code>, i.e., one of <code>FALSE, NA, TRUE</code>,
+indicating what should happen if the specified row names, i.e.,
+<code>value</code>, are invalid, e.g., duplicated or <code>NA</code>.  The default
+(is back compatible), <code>FALSE</code>, will signal an error, where
+<code>NA</code> will &ldquo;automatic&rdquo; row names and <code>TRUE</code> will call
+<code><a href="make.names.html">make.names</a>(value, unique=TRUE)</code> for constructing valid
+names.</p>
 </td></tr>
 <tr valign="top"><td><code>value</code></td>
 <td>
@@ -102,5 +119,5 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 <p><code>.row_names_info</code> for the internal representations.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -118,6 +118,7 @@ crPlot.lm	crPlots
 crPlots	crPlots
 data.ellipse	car-defunct
 dataEllipse	Ellipses
+dbiwt	densityPlot
 deltaMethod	deltaMethod
 deltaMethod.coxph	deltaMethod
 deltaMethod.default	deltaMethod
@@ -133,6 +134,7 @@ deltaMethod.survreg	deltaMethod
 densityPlot	densityPlot
 densityPlot.default	densityPlot
 densityPlot.formula	densityPlot
+depan	densityPlot
 dfbeta.influence.lme	influence-mixed-models
 dfbeta.influence.merMod	influence-mixed-models
 dfbetaPlots	dfbetaPlots

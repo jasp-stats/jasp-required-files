@@ -27,7 +27,9 @@ tapply(X, INDEX, FUN = NULL, ..., default = NA, simplify = TRUE)
 <table summary="R argblock">
 <tr valign="top"><td><code>X</code></td>
 <td>
-<p>an atomic object, typically a vector.</p>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object for which a <code><a href="split.html">split</a></code> method
+exists.  Typically vector-like, allowing subsetting with
+<code><a href="Extract.html">[</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>INDEX</code></td>
 <td>
@@ -173,5 +175,5 @@ stopifnot(
                  `4` = NULL, `5` = NULL), dim=4, dimnames=list(as.character(2:5)))))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

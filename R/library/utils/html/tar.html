@@ -53,12 +53,12 @@ for the internal method.</p>
 <td>
 <p>character string: the path to the command to be used.  If
 the command itself contains spaces it needs to be quoted (e.g., by
-<code><a href="../../base/html/shQuote.html">shQuote</a></code>) &ndash; but argument <code>tar</code> can also contain
+<code><a href="../../base/html/shQuote.html">shQuote</a></code>) &ndash; but argument <code>tar</code> may also contain
 flags separated from the command by spaces.</p>
 </td></tr>
 <tr valign="top"><td><code>extra_flags</code></td>
 <td>
-<p>any extra flags for an external <code>tar</code>.</p>
+<p>Any extra flags for an external <code>tar</code>.</p>
 </td></tr>
 </table>
 
@@ -81,13 +81,24 @@ included in filepaths: however, this is the default for the
 <code>Rtools</code> <code>tar</code>).  For GNU <code>tar</code>,
 <span class="option">--format=ustar</span> forces a more portable format. (The default is
 set at compilation and will be shown at the end of the output from
-<code>tar --help</code>: for version 1.28 &lsquo;out-of-the-box&rsquo; it is 
+<code>tar --help</code>: for version 1.30 &lsquo;out-of-the-box&rsquo; it is 
 <span class="option">--format=gnu</span>, but the manual says the intention is to change
-to <span class="option">--format=pax</span> which GNU incorrectly calls &lsquo;POSIX&rsquo; &ndash;
+to <span class="option">--format=posix</span> which is the same as <code>pax</code> &ndash;
 it was never part of the POSIX standard for <code>tar</code> and should
 not be used.)
 For libarchive's <code>bsdtar</code>, <span class="option">--format=ustar</span> is more
 portable than the default.
+</p>
+
+<p>One issue which can cause an external command to fail is a command
+line too long for the system shell: as from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0 this is worked
+around if the external command is detected to be GNU <code>tar</code> or
+libarchive <code>tar</code> (aka <code>bsdtar</code>).
+</p>
+<p>Note that <code>files = '.'</code> will usually not work with an external
+<code>tar</code> as that would expand the list of files after
+<code>tarfile</code> is created.  (It does work with the default internal
+method.)
 </p>
 
 
@@ -103,12 +114,18 @@ version, invisibly.
 <p>The &lsquo;tar&rsquo; format no longer has an agreed standard!
 &lsquo;Unix Standard Tar&rsquo; was part of POSIX 1003.1:1998 but has been
 removed in favour of <code>pax</code>, and in any case many common
-implementations diverged from the former standard.  Many <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> platforms
-use a version of GNU <code>tar</code> (including <code>Rtools</code> on
-Windows), but the behaviour seems to be changed with each version.  OS
-X &gt;= 10.6 and FreeBSD use <code>bsdttar</code> from the
-&lsquo;libarchive&rsquo; project, and commercial Unixes will have their own
-versions.
+implementations diverged from the former standard.
+</p>
+<p>Many <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> platforms use a version of GNU <code>tar</code> (including
+<code>Rtools</code> on Windows), but the behaviour seems to be changed
+with each version.  macOS &gt;= 10.6 and FreeBSD use <code>bsdtar</code>
+from the libarchive project (but for macOS, a version from 2010), and
+commercial Unixes will have their own versions.  <code>bsdtar</code> is
+available for many other platforms: macOS up to at least 10.9 had GNU
+<code>tar</code> as <code>gnutar</code> and other platforms,
+e.g. Solaris, have it as <code>gtar</code>: on a Unix-alike
+<code>configure</code> will try <code>gnutar</code> and <code>gtar</code>
+before <code>tar</code>.
 </p>
 <p>Known problems arise from
 </p>
@@ -171,6 +188,27 @@ conventional to discard fractional seconds.
 </p>
 
 
+<h3>Compression</h3>
+
+<p>When an external <code>tar</code> command is used, compressing the tar
+archive may require the appropriate command (<code>gzip</code>,
+<code>bzip2</code> or <code>xz</code>) to be available.  For GNU
+<code>tar</code>, further compression programs can be specified by
+e.g. <code>extra_flags = "-I lz4"</code>.
+
+
+Some versions of <code>bsdtar</code> accept options such as
+<span class="option">--lz4</span>, <span class="option">--lzop</span> and <span class="option">--lrzip</span> or an external
+compressor <em>via</em> <code>--use-compress-program lz4</code>: these could
+be supplied in <code>extra_flags</code>.
+</p>
+<p>NetBSD prior to 8.0 used flag <span class="option">--xz</span> rather than <span class="option">-J</span>,
+so this should be used <em>via</em> <code>extra_flags = "--xz"</code> rather
+than <code>compression = "xz"</code>.  The commands from OpenBSD and the
+Heirloom Toolchest are not doumented to support <code>xz</code>.
+</p>
+
+
 <h3>Note</h3>
 
 <p>For users of macOS (formerly OS X).  Apple's HFS and HFS+ file systems
@@ -199,5 +237,5 @@ for the way the POSIX utility <code>pax</code> handles <code>tar</code> formats.
 <p><code><a href="untar.html">untar</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

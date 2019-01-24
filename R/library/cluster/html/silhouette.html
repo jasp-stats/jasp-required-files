@@ -166,17 +166,17 @@ the observation.  The <code><a href="../../base/html/colnames.html">colnames</a>
 <dt><code>si.summary</code>:</dt><dd><p>numerical <code><a href="../../base/html/summary.html">summary</a></code> of the
 individual silhouette widths <i>s(i)</i>.</p>
 </dd>
-<dt><code>sclus.avg.widths</code>:</dt><dd><p>numeric (rank 1) array of clusterwise
+<dt><code>clus.avg.widths</code>:</dt><dd><p>numeric (rank 1) array of clusterwise
 <em>means</em> of silhouette widths where <code>mean = FUN</code> is used.</p>
 </dd>
-<dt><code>savg.width</code>:</dt><dd><p>the total mean <code>FUN(s)</code> where
+<dt><code>avg.width</code>:</dt><dd><p>the total mean <code>FUN(s)</code> where
 <code>s</code> are the individual silhouette widths.</p>
 </dd>
-<dt><code>sclus.sizes</code>:</dt><dd><p><code><a href="../../base/html/table.html">table</a></code> of the <i>k</i> cluster sizes.</p>
+<dt><code>clus.sizes</code>:</dt><dd><p><code><a href="../../base/html/table.html">table</a></code> of the <i>k</i> cluster sizes.</p>
 </dd>
-<dt><code>scall</code>:</dt><dd><p>if available, the call creating <code>sil</code>.</p>
+<dt><code>call</code>:</dt><dd><p>if available, the <code><a href="../../base/html/call.html">call</a></code> creating <code>sil</code>.</p>
 </dd>
-<dt><code>sOrdered</code>:</dt><dd><p>logical identical to <code>attr(sil, "Ordered")</code>,
+<dt><code>Ordered</code>:</dt><dd><p>logical identical to <code>attr(sil, "Ordered")</code>,
 see below.</p>
 </dd>
 </dl>
@@ -254,15 +254,14 @@ par(op)
 ## clara(): standard silhouette is just for the best random subset
 data(xclara)
 set.seed(7)
-str(xc1k &lt;- xclara[sample(nrow(xclara), size = 1000) ,])
+str(xc1k &lt;- xclara[ sample(nrow(xclara), size = 1000) ,]) # rownames == indices
 cl3 &lt;- clara(xc1k, 3)
 plot(silhouette(cl3))# only of the "best" subset of 46
 ## The full silhouette: internally needs large (36 MB) dist object:
 sf &lt;- silhouette(cl3, full = TRUE) ## this is the same as
 s.full &lt;- silhouette(cl3$clustering, daisy(xc1k))
-if(paste(R.version$major, R.version$minor, sep=".") &gt;= "2.3.0")
-   stopifnot(all.equal(sf, s.full, check.attributes = FALSE, tolerance = 0))
-## color dependent on original "3 groups of each 1000":
+stopifnot(all.equal(sf, s.full, check.attributes = FALSE, tolerance = 0))
+## color dependent on original "3 groups of each 1000": % __FIXME ??__
 plot(sf, col = 2+ as.integer(names(cl3$clustering) ) %/% 1000,
      main ="plot(silhouette(clara(.), full = TRUE))")
 
@@ -276,5 +275,5 @@ si4 &lt;- silhouette(cutree(ar, k = 2), daisy(ruspini))
 plot(si4, nmax = 80, cex.names = 0.5)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.0.6 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.0.7-1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -14,7 +14,7 @@ stores it with name <code>name</code> in <code>.AutoloadEnv</code> environment.
 When <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> attempts to evaluate <code>name</code>, <code>autoloader</code> is run,
 the package is loaded and <code>name</code> is re-evaluated in the new
 package's environment.  The result is that <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> behaves as if
-<code>file</code> was loaded but it does not occupy memory.
+<code>package</code> was loaded but it does not occupy memory.
 </p>
 <p><code>.Autoloaded</code> contains the names of the packages for
 which autoloading has been promised.
@@ -86,5 +86,5 @@ search() ## and again
 detach("package:splines")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

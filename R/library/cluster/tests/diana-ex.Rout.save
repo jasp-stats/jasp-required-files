@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2017-03-08 r72321) -- "Unsuffered Consequences"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.5.0 alpha (2018-03-28 r74481)
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -182,7 +182,7 @@ Available components:
 [1] "order"     "height"    "dc"        "merge"     "diss"      "call"     
 [7] "order.lab"
 > cat('Time elapsed: ', proc.time() - .p00,'\n')
-Time elapsed:  0.006 0.003 0.009 0 0 
+Time elapsed:  0.006 0.003 0.008 0 0 
 > 
 > data(agriculture)
 > data(ruspini)
@@ -192,7 +192,7 @@ Time elapsed:  0.006 0.003 0.009 0 0
 > drusp0  <- diana(ruspini, keep.diss=FALSE, keep.data=FALSE)
 > drusp1  <- diana(ruspini, metric = "manhattan")
 > cat('Time elapsed: ', proc.time() - .p0,'\n')
-Time elapsed:  0.003 0 0.003 0 0 
+Time elapsed:  0.002 0 0.003 0 0 
 > 
 > summary(dia.agr)
 Merge:
@@ -428,10 +428,10 @@ List of 8
  $ height   : num [1:74] 12 9 22 36 5 24 11 5 2 12 ...
  $ dc       : num 0.958
  $ merge    : int [1:74, 1:2] -55 -27 -18 -49 -33 -32 -23 -59 -50 -29 ...
- $ diss     :Classes 'dissimilarity', 'dist'  atomic [1:2775] 11 12 29 13 25 43 33 22 27 39 ...
-  .. ..- attr(*, "Size")= int 75
-  .. ..- attr(*, "Metric")= chr "manhattan"
-  .. ..- attr(*, "Labels")= chr [1:75] "1" "2" "3" "4" ...
+ $ diss     : 'dissimilarity' num [1:2775] 11 12 29 13 25 43 33 22 27 39 ...
+  ..- attr(*, "Size")= int 75
+  ..- attr(*, "Metric")= chr "manhattan"
+  ..- attr(*, "Labels")= chr [1:75] "1" "2" "3" "4" ...
  $ call     : language diana(x = ruspini, metric = "manhattan")
  $ order.lab: chr [1:75] "1" "2" "3" "5" ...
  $ data     : int [1:75, 1:2] 4 5 10 9 13 13 12 15 18 19 ...
@@ -446,7 +446,7 @@ List of 8
 > .p1 <- proc.time()
 > dCH <- diana(swiss.x)
 > cat('Time elapsed: ', proc.time() - .p1,'\n')
-Time elapsed:  0.001 0.001 0 0 0 
+Time elapsed:  0.001 0 0.001 0 0 
 > str(as.dendrogram(as.hclust(dCH)))# keep back-compatible
 --[dendrogram w/ 2 branches and 47 members at h = 127]
   |--[dendrogram w/ 2 branches and 31 members at h = 99.2]
@@ -544,4 +544,4 @@ Time elapsed:  0.001 0.001 0 0 0
 > 
 > proc.time()
    user  system elapsed 
-  0.191   0.033   0.295 
+  0.192   0.044   0.292 

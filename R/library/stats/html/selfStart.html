@@ -9,7 +9,11 @@
 
 <h3>Description</h3>
 
-<p>Construct self-starting nonlinear models.
+<p>Construct self-starting nonlinear models to be used in
+<code><a href="nls.html">nls</a></code>, etc.  Via function <code>initial</code> to compute
+approximate parameter values from data, such models are
+&ldquo;self-starting&rdquo;, i.e., do not need a <code>start</code> argument in,
+e.g., <code><a href="nls.html">nls</a>()</code>.
 </p>
 
 
@@ -26,7 +30,7 @@ selfStart(model, initial, parameters, template)
 <tr valign="top"><td><code>model</code></td>
 <td>
 <p>a function object defining a nonlinear model or
-a nonlinear formula object of the form <code>~expression</code>.</p>
+a nonlinear <code><a href="formula.html">formula</a></code> object of the form <code>~ expression</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>initial</code></td>
 <td>
@@ -58,6 +62,9 @@ covariates in <code>model</code> coming first and the parameters in
 
 <h3>Details</h3>
 
+<p><code><a href="nls.html">nls</a>()</code> calls <code><a href="getInitial.html">getInitial</a></code> and the
+<code>initial</code> function for these self-starting models.
+</p>
 <p>This function is generic; methods functions can be written to handle
 specific classes of objects.
 </p>
@@ -65,9 +72,9 @@ specific classes of objects.
 
 <h3>Value</h3>
 
-<p>a function object of class <code>"selfStart"</code>, for the <code>formula</code>
-method obtained by applying
-<code>deriv</code> to the right hand side of the <code>model</code> formula.  An
+<p>a <code><a href="../../base/html/function.html">function</a></code> object of class <code>"selfStart"</code>, for the
+<code>formula</code> method obtained by applying <code><a href="deriv.html">deriv</a></code>
+to the right hand side of the <code>model</code> formula.  An
 <code>initial</code> attribute (defined by the <code>initial</code> argument) is
 added to the function to calculate starting estimates for the
 parameters in the model automatically.
@@ -82,11 +89,14 @@ parameters in the model automatically.
 <h3>See Also</h3>
 
 <p><code><a href="nls.html">nls</a></code>, <code><a href="getInitial.html">getInitial</a></code>.
-Each of the following are <code>"selfStart"</code> models (with examples)
+</p>
+<p>Each of the following are <code>"selfStart"</code> models (with examples)
 <code><a href="SSasymp.html">SSasymp</a></code>, <code><a href="SSasympOff.html">SSasympOff</a></code>, <code><a href="SSasympOrig.html">SSasympOrig</a></code>,
 <code><a href="SSbiexp.html">SSbiexp</a></code>, <code><a href="SSfol.html">SSfol</a></code>, <code><a href="SSfpl.html">SSfpl</a></code>,
 <code><a href="SSgompertz.html">SSgompertz</a></code>, <code><a href="SSlogis.html">SSlogis</a></code>, <code><a href="SSmicmen.html">SSmicmen</a></code>,
-<code><a href="SSweibull.html">SSweibull</a></code>
+<code><a href="SSweibull.html">SSweibull</a></code>.
+</p>
+<p>Further, package <a href="https://CRAN.R-project.org/package=nlme"><span class="pkg">nlme</span></a>'s <code><a href="../../nlme/html/nlsList.html">nlsList</a></code>.
 </p>
 
 
@@ -95,30 +105,34 @@ Each of the following are <code>"selfStart"</code> models (with examples)
 <pre>
 ## self-starting logistic model
 
-SSlogis &lt;- selfStart(~ Asym/(1 + exp((xmid - x)/scal)),
-  function(mCall, data, LHS)
-  {
-    xy &lt;- sortedXyData(mCall[["x"]], LHS, data)
-    if(nrow(xy) &lt; 4) {
-      stop("Too few distinct x values to fit a logistic")
-    }
+## The "initializer" (finds initial values for parameters from data):
+initLogis &lt;- function(mCall, data, LHS) {
+    xy &lt;- data.frame(sortedXyData(mCall[["input"]], LHS, data))
+    if(nrow(xy) &lt; 4)
+        stop("too few distinct input values to fit a logistic model")
     z &lt;- xy[["y"]]
-    if (min(z) &lt;= 0) { z &lt;- z + 0.05 * max(z) } # avoid zeroes
-    z &lt;- z/(1.05 * max(z))              # scale to within unit height
-    xy[["z"]] &lt;- log(z/(1 - z))         # logit transformation
+    ## transform to proportion, i.e. in (0,1) :
+    rng &lt;- range(z); dz &lt;- diff(rng)
+    z &lt;- (z - rng[1L] + 0.05 * dz)/(1.1 * dz)
+    xy[["z"]] &lt;- log(z/(1 - z))		# logit transformation
     aux &lt;- coef(lm(x ~ z, xy))
-    parameters(xy) &lt;- list(xmid = aux[1], scal = aux[2])
-    pars &lt;- as.vector(coef(nls(y ~ 1/(1 + exp((xmid - x)/scal)),
-                             data = xy, algorithm = "plinear")))
-    setNames(c(pars[3], pars[1], pars[2]),
-             mCall[c("Asym", "xmid", "scal")])
-  }, c("Asym", "xmid", "scal"))
+    pars &lt;- coef(nls(y ~ 1/(1 + exp((xmid - x)/scal)),
+                     data = xy,
+                     start = list(xmid = aux[[1L]], scal = aux[[2L]]),
+                     algorithm = "plinear"))
+    setNames(pars[c(".lin", "xmid", "scal")], nm = mCall[c("Asym", "xmid", "scal")])
+}
+
+SSlogis &lt;- selfStart(~ Asym/(1 + exp((xmid - x)/scal)),
+                     initial = initLogis,
+                     parameters = c("Asym", "xmid", "scal"))
+
 
 # 'first.order.log.model' is a function object defining a first order
 # compartment model
 # 'first.order.log.initial' is a function object which calculates initial
 # values for the parameters in 'first.order.log.model'
-
+#
 # self-starting first order compartment model
 ## Not run: 
 SSfol &lt;- selfStart(first.order.log.model, first.order.log.initial)
@@ -136,5 +150,5 @@ all(sapply(fSS, inherits, "selfStart"))  # -&gt; TRUE
 str(fSS, give.attr = FALSE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

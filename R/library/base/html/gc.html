@@ -19,7 +19,7 @@ prints memory usage statistics (<code>verbose = TRUE</code>).
 <h3>Usage</h3>
 
 <pre>
-gc(verbose = getOption("verbose"), reset = FALSE)
+gc(verbose = getOption("verbose"), reset = FALSE, full = TRUE)
 gcinfo(verbose)
 </pre>
 
@@ -37,6 +37,11 @@ statistics about cons cells and the space allocated for vectors.</p>
 <p>logical; if <code>TRUE</code> the values for maximum space used
 are reset to the current values.</p>
 </td></tr>
+<tr valign="top"><td><code>full</code></td>
+<td>
+<p>logical; if <code>TRUE</code> a full collection is performed;
+otherwise only more recently allocated objects may be collected.</p>
+</td></tr>
 </table>
 
 
@@ -44,9 +49,10 @@ are reset to the current values.</p>
 
 <p>A call of <code>gc</code> causes a garbage collection to take place.
 This will also take place automatically without user intervention, and the
-primary purpose of calling <code>gc</code> is for the report on memory usage.
+primary purpose of calling <code>gc</code> is for the report on memory
+usage. For an accurate report <code>full = TRUE</code> should be used.  
 </p>
-<p>However, it can be useful to call <code>gc</code> after a large object
+<p>It can be useful to call <code>gc</code> after a large object
 has been removed, as this may prompt <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> to return memory to the
 operating system.
 </p>
@@ -112,5 +118,5 @@ gc(TRUE)
 gc(reset = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -89,10 +89,11 @@ beginning of the record.
 <h3>Examples</h3>
 
 <pre>
-cat("NAME", "1:John", "2:Paul", file = "foo", sep = "\n")
-count.fields("foo", sep = ":")
-unlink("foo")
+fil &lt;- tempfile()
+cat("NAME", "1:John", "2:Paul", file = fil, sep = "\n")
+count.fields(fil, sep = ":")
+unlink(fil)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

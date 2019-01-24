@@ -20,5 +20,5 @@ NeedsCompilation: yes
 Packaged: 2018-04-25 08:37:11 UTC; sachaepskamp
 Repository: CRAN
 Date/Publication: 2018-04-25 12:46:58 UTC
-Built: R 3.4.4; x86_64-w64-mingw32; 2018-06-02 11:24:23 UTC; windows
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-01-21 19:35:29 UTC; windows
 Archs: i386, x64

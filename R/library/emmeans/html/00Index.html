@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;emmeans&rsquo; version 1.2.1</h2>
+</div><h2>Documentation for package &lsquo;emmeans&rsquo; version 1.3.2</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -25,6 +25,10 @@
 <td>Estimated marginal means (aka Least-squares means)</td></tr>
 <tr><td style="width: 25%;"><a href="rbind.emmGrid.html">+.emmGrid</a></td>
 <td>Combine or subset 'emmGrid' objects</td></tr>
+<tr><td style="width: 25%;"><a href="extending-emmeans.html">.emm_basis</a></td>
+<td>Support functions for model extensions</td></tr>
+<tr><td style="width: 25%;"><a href="extending-emmeans.html">.recover_data</a></td>
+<td>Support functions for model extensions</td></tr>
 <tr><td style="width: 25%;"><a href="add_grouping.html">add_grouping</a></td>
 <td>Add a grouping factor</td></tr>
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">as.data.frame.emmGrid</a></td>
@@ -43,10 +47,16 @@
 <td>Support for MCMC-based estimation</td></tr>
 <tr><td style="width: 25%;"><a href="auto.noise.html">auto.noise</a></td>
 <td>Auto Pollution Filter Noise</td></tr>
-<tr><td style="width: 25%;"><a href="cld.emmGrid.html">cld</a></td>
+<tr><td style="width: 25%;"><a href="CLD.emmGrid.html">CLD</a></td>
 <td>Extract and display information on all pairwise comparisons of least-squares means.</td></tr>
-<tr><td style="width: 25%;"><a href="cld.emmGrid.html">cld.emmGrid</a></td>
+<tr><td style="width: 25%;"><a href="old.cld.html">cld</a></td>
+<td>Temporary continued 'cld' support</td></tr>
+<tr><td style="width: 25%;"><a href="CLD.emmGrid.html">CLD.emmGrid</a></td>
 <td>Extract and display information on all pairwise comparisons of least-squares means.</td></tr>
+<tr><td style="width: 25%;"><a href="CLD.emmGrid.html">cld.emmGrid</a></td>
+<td>Extract and display information on all pairwise comparisons of least-squares means.</td></tr>
+<tr><td style="width: 25%;"><a href="emm_list-object.html">CLD.emm_list</a></td>
+<td>The 'emm_list' class</td></tr>
 <tr><td style="width: 25%;"><a href="contrast.html">coef.emmGrid</a></td>
 <td>Contrasts and linear functions of EMMs</td></tr>
 <tr><td style="width: 25%;"><a href="summary.emmGrid.html">confint.emmGrid</a></td>
@@ -71,8 +81,6 @@
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="emmeans.html">emmeans</a></td>
 <td>Estimated marginal means (Least-squares means)</td></tr>
-<tr><td style="width: 25%;"><a href="emmeans-deprecated.html">emmeans-deprecated</a></td>
-<td>Deprecated functions and arguments from 'lsmeans'</td></tr>
 <tr><td style="width: 25%;"><a href="emmGrid-class.html">emmGrid-class</a></td>
 <td>The 'emmGrid' class</td></tr>
 <tr><td style="width: 25%;"><a href="emmip.html">emmip</a></td>
@@ -83,12 +91,12 @@
 <td>Construct an 'emmGrid' object from scratch</td></tr>
 <tr><td style="width: 25%;"><a href="extending-emmeans.html">emm_basis</a></td>
 <td>Support functions for model extensions</td></tr>
-<tr><td style="width: 25%;"><a href="update.emmGrid.html">emm_defaults</a></td>
-<td>Set or retrieve options for objects and summaries</td></tr>
+<tr><td style="width: 25%;"><a href="emm_options.html">emm_defaults</a></td>
+<td>Set or change emmeans options</td></tr>
 <tr><td style="width: 25%;"><a href="emm_list-object.html">emm_list</a></td>
 <td>The 'emm_list' class</td></tr>
-<tr><td style="width: 25%;"><a href="update.emmGrid.html">emm_options</a></td>
-<td>Set or retrieve options for objects and summaries</td></tr>
+<tr><td style="width: 25%;"><a href="emm_options.html">emm_options</a></td>
+<td>Set or change emmeans options</td></tr>
 <tr><td style="width: 25%;"><a href="emtrends.html">emtrends</a></td>
 <td>Estimated marginal means of linear trends</td></tr>
 <tr><td style="width: 25%;"><a href="extending-emmeans.html">extending-emmeans</a></td>
@@ -99,9 +107,13 @@
 <td>Fiber data</td></tr>
 <tr><td style="width: 25%;"><a href="wrappers.html">get.lsm.option</a></td>
 <td>Wrappers for alternative naming of EMMs</td></tr>
-<tr><td style="width: 25%;"><a href="update.emmGrid.html">get_emm_option</a></td>
-<td>Set or retrieve options for objects and summaries</td></tr>
+<tr><td style="width: 25%;"><a href="emm_options.html">get_emm_option</a></td>
+<td>Set or change emmeans options</td></tr>
 <tr><td style="width: 25%;"><a href="glht-support.html">glht-support</a></td>
+<td>Support for 'multcomp::glht'</td></tr>
+<tr><td style="width: 25%;"><a href="glht-support.html">glht.emmGrid</a></td>
+<td>Support for 'multcomp::glht'</td></tr>
+<tr><td style="width: 25%;"><a href="glht-support.html">glht.emmlf</a></td>
 <td>Support for 'multcomp::glht'</td></tr>
 <tr><td style="width: 25%;"><a href="hpd.summary.html">hpd.summary</a></td>
 <td>Summarize an emmGrid from a Bayesian model</td></tr>
@@ -109,8 +121,6 @@
 <td>Compute joint tests of the terms in a model</td></tr>
 <tr><td style="width: 25%;"><a href="wrappers.html">lsm</a></td>
 <td>Wrappers for alternative naming of EMMs</td></tr>
-<tr><td style="width: 25%;"><a href="emmeans-deprecated.html">lsm.basis</a></td>
-<td>Deprecated functions and arguments from 'lsmeans'</td></tr>
 <tr><td style="width: 25%;"><a href="wrappers.html">lsm.options</a></td>
 <td>Wrappers for alternative naming of EMMs</td></tr>
 <tr><td style="width: 25%;"><a href="wrappers.html">lsmeans</a></td>
@@ -129,6 +139,8 @@
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="MOats.html">MOats</a></td>
 <td>Oats data in multivariate form</td></tr>
+<tr><td style="width: 25%;"><a href="glht-support.html">modelparm.emmwrap</a></td>
+<td>Support for 'multcomp::glht'</td></tr>
 <tr><td style="width: 25%;"><a href="models.html">models</a></td>
 <td>Models supported in 'emmeans'</td></tr>
 <tr><td style="width: 25%;"><a href="neuralgia.html">neuralgia</a></td>
@@ -165,16 +177,14 @@
 <td>Miscellaneous methods for 'emmGrid' objects</td></tr>
 <tr><td style="width: 25%;"><a href="xtable.emmGrid.html">print.xtable_emm</a></td>
 <td>Using 'xtable' for EMMs</td></tr>
+<tr><td style="width: 25%;"><a href="qdrg.html">qdrg</a></td>
+<td>Quick and dirty reference grid</td></tr>
 <tr><td style="width: 25%;"><a href="rbind.emmGrid.html">rbind.emmGrid</a></td>
 <td>Combine or subset 'emmGrid' objects</td></tr>
-<tr><td style="width: 25%;"><a href="emmeans-deprecated.html">recover.data</a></td>
-<td>Deprecated functions and arguments from 'lsmeans'</td></tr>
 <tr><td style="width: 25%;"><a href="extending-emmeans.html">recover_data</a></td>
 <td>Support functions for model extensions</td></tr>
 <tr><td style="width: 25%;"><a href="extending-emmeans.html">recover_data.call</a></td>
 <td>Support functions for model extensions</td></tr>
-<tr><td style="width: 25%;"><a href="emmeans-deprecated.html">ref.grid</a></td>
-<td>Deprecated functions and arguments from 'lsmeans'</td></tr>
 <tr><td style="width: 25%;"><a href="ref_grid.html">ref_grid</a></td>
 <td>Create a reference grid from a fitted model</td></tr>
 <tr><td style="width: 25%;"><a href="regrid.html">regrid</a></td>
@@ -198,7 +208,7 @@
 <tr><td style="width: 25%;"><a href="emmc-functions.html">tukey.emmc</a></td>
 <td>Contrast families</td></tr>
 <tr><td style="width: 25%;"><a href="update.emmGrid.html">update.emmGrid</a></td>
-<td>Set or retrieve options for objects and summaries</td></tr>
+<td>Update an 'emmGrid' object</td></tr>
 <tr><td style="width: 25%;"><a href="emmGrid-methods.html">vcov.emmGrid</a></td>
 <td>Miscellaneous methods for 'emmGrid' objects</td></tr>
 <tr><td style="width: 25%;"><a href="wrappers.html">wrappers</a></td>

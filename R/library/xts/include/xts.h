@@ -93,6 +93,13 @@ SEXP na_locf(SEXP x, SEXP fromlast, SEXP maxgap, SEXP limit);
 
 SEXP tryXts(SEXP x);
 
+SEXP xts_period_min(SEXP data, SEXP index);
+SEXP xts_period_max(SEXP data, SEXP index);
+SEXP xts_period_sum(SEXP data, SEXP index);
+SEXP xts_period_prod(SEXP data, SEXP index);
+
+SEXP xts_set_dimnames(SEXP x, SEXP value);
+
 
 void copyAttributes(SEXP x, SEXP y);    // internal only
 void copy_xtsAttributes(SEXP x, SEXP y);    // internal only
@@ -100,6 +107,7 @@ void copy_xtsCoreAttributes(SEXP x, SEXP y);// internal only
 
 int isXts(SEXP x);                          // is.xts analogue
 int firstNonNA(SEXP x);
+SEXP extract_col (SEXP x, SEXP j, SEXP drop, SEXP first_, SEXP last_);
 #endif /* _XTS */
 
 #ifdef __cplusplus

@@ -1,3 +1,61 @@
+# haven 2.0.0
+
+## BREAKING CHANGES
+
+*   `labelled()` and `labelled_spss()` now produce objects with class
+    "haven_labelled" and "haven_labelled_spss". Previously, the "labelled"
+    class name clashed with the labelled class defined by Hmisc (#329).
+    
+    Unfortunately I couldn't come up with a way to fix this problem except
+    to change the class name; it seems reasonable that haven should be the one 
+    to change names given that Hmisc has been around much longer. This
+    will require some changes to packages that use haven, but shouldn't
+    affect user code.
+
+## Minor improvements
+
+* `labelled()` and `labelled_spss()` now support adding the `label`
+  attribute to the resulting object. The `label` is a short,
+  human-readable description of the object, and is now also used
+  when printing, and can be easily removed using the new `zap_label()`
+  function. (#362, @huftis)
+  
+  Previously, the `label` attribute was supported both when reading
+  and writing SPSS files, but it was not possible to actually create
+  objects in R having the `label` attribute using the constructors
+  `labelled()` or `labelled_spss()`.
+
+# haven 1.1.2
+
+* haven can read and write non-ASCII paths in R 3.5 (#371).
+
+* `labelled_spss` objects preserve their attributes when subsetted 
+  (#360, @gergness).
+
+* `read_sav()` gains an `encoding` argument to override the encoding stored in 
+  the file (#305). `read_sav()` can now read `.zsav` files (#338). 
+  
+* `write_*()` functions now invisibly return the input data frame 
+  (as documented) (#349, @austensen).
+
+* `write_dta()` allows non-ASCII variable labels for version 14 and above 
+  (#383). It also uses a less strict check for integers so that a 
+  labelled double containing only integer values can written (#343).
+
+* `write_sav()` produces `.zsav` files when `compress = TRUE` (#338).
+
+* `write_xpt()` can now set the "member" name, which defaults to the file name
+  san extension (#328).
+
+* Update to latest readstat.
+
+  * Fixes out of memory error (#342)
+  * Now supports reading and writing stata 15 files (#339)
+  * Negative integer labelled values were tagged as missing (#367)
+
+* Fix for when `as_factor()` with option `levels="labels"` is used on tagged NAs
+  (#340, @gergness)
+
 # haven 1.1.1
 
 * Update to latest readstat. Includes:

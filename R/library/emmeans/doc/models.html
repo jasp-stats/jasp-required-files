@@ -10,9 +10,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Russ Lenth" />
+<meta name="author" content="emmeans package, Version 1.3.2" />
 
-<meta name="date" content="2018-05-20" />
 
 <title>Models supported by emmeans</title>
 
@@ -31,8 +30,7 @@
 
 
 <h1 class="title toc-ignore">Models supported by emmeans</h1>
-<h4 class="author"><em>Russ Lenth</em></h4>
-<h4 class="date"><em>2018-05-20</em></h4>
+<h4 class="author"><em>emmeans package, Version 1.3.2</em></h4>
 
 
 
@@ -123,6 +121,18 @@
 </tr>
 <tr class="even">
 <td align="left">gam</td>
+<td align="left">mgcv</td>
+<td align="center"><a href="#G">G</a></td>
+<td align="left"><code>freq = FALSE</code>, <code>unconditional = FALSE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">gamm</td>
+<td align="left">mgcv</td>
+<td align="center"><a href="#G">G</a></td>
+<td align="left"><code>call = object$gam$call</code></td>
+</tr>
+<tr class="even">
+<td align="left">Gam</td>
 <td align="left">gam</td>
 <td align="center"><a href="#G">G</a></td>
 <td align="left"><code>nboot = 800</code></td>
@@ -170,16 +180,16 @@
 <td align="left">Requires <code>data</code> argument</td>
 </tr>
 <tr class="even">
-<td align="left">glmmadmb</td>
-<td align="left">glmmADMB</td>
-<td align="center"><a href="#G">G</a></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
 <td align="left">glmerMod</td>
 <td align="left">lme4</td>
 <td align="center"><a href="#G">G</a></td>
 <td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">glmmadmb</td>
+<td align="left">glmmADMB</td>
+<td align="center"></td>
+<td align="left">No longer supported</td>
 </tr>
 <tr class="even">
 <td align="left">glmmPQL</td>
@@ -188,180 +198,186 @@
 <td align="left">inherits <code>lm</code> support</td>
 </tr>
 <tr class="odd">
+<td align="left">glmmTMB</td>
+<td align="left">glmmTMB</td>
+<td align="center"><a href="#P">P</a></td>
+<td align="left">Supported in <strong>glmmTMB</strong> package (dev. version only?)</td>
+</tr>
+<tr class="even">
 <td align="left">gls</td>
 <td align="left">nlme</td>
 <td align="center"><a href="#G">G</a></td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">hurdle</td>
 <td align="left">pscl</td>
 <td align="center"><a href="#C">C</a></td>
 <td align="left"><code>mode = c(&quot;response&quot;, &quot;count&quot;, &quot;zero&quot;, &quot;prob0&quot;),</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left"><code>lin.pred = c(FALSE, TRUE)</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">lm</td>
 <td align="left">stats</td>
 <td align="center"><a href="#A">A</a></td>
 <td align="left">Several other classes inherit from this and may be supported</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">lme</td>
 <td align="left">nlme</td>
 <td align="center"><a href="#K">K</a></td>
 <td align="left"><code>sigmaAdjust = c(TRUE, FALSE),</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left"><code>mode = c(&quot;containment&quot;, &quot;satterthwaite&quot;)</code> (<em>ad hoc</em>)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">lmerMod</td>
 <td align="left">lme4</td>
 <td align="center"><a href="#L">L</a></td>
 <td align="left"><code>lmer.df = c(&quot;kenward-roger&quot;, &quot;satterthwaite&quot;, &quot;asymptotic&quot;)</code>,</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left"><code>pbkrtest.limit = 3000</code>, <code>disable.pbkrtest = FALSE</code>.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left"><code>emm_options(lmer.df =, pbkrtest.limit =, disable.pbkrtest =)</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">manova</td>
 <td align="left">stats</td>
 <td align="center"><a href="#M">M</a></td>
 <td align="left"><code>mult.name</code>, <code>mult.levs</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">maov</td>
 <td align="left">stats</td>
 <td align="center"><a href="#M">M</a></td>
 <td align="left"><code>mult.name</code>, <code>mult.levs</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">mcmc</td>
 <td align="left">mcmc</td>
 <td align="center"><a href="#S">S</a></td>
 <td align="left">May require <code>formula</code>, <code>data</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">MCMCglmm</td>
 <td align="left">MCMCglmm</td>
 <td align="center"><a href="#M">M</a>,<a href="#S">S</a></td>
 <td align="left"><code>mult.name</code>, <code>mult.levs</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left"><code>data</code> is required</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">mixed</td>
 <td align="left">afex</td>
 <td align="center"><a href="#P">P</a></td>
 <td align="left">Supported in <strong>afex</strong> package</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">mlm</td>
 <td align="left">stats</td>
 <td align="center"><a href="#M">M</a></td>
 <td align="left"><code>mult.name</code>, <code>mult.levs</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">multinom</td>
 <td align="left">nnet</td>
 <td align="center"><a href="#N">N</a></td>
 <td align="left"><code>mode = c(&quot;prob&quot;, &quot;latent&quot;)</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left">Always include response in specs for <code>emmeans()</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">nauf</td>
 <td align="left">nauf.<em>xxx</em></td>
 <td align="center"><a href="#P">P</a></td>
 <td align="left">Supported in <strong>nauf</strong> package</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">nlme</td>
 <td align="left">nlme</td>
 <td align="center"><a href="#A">A</a></td>
 <td align="left">Supports fixed part. Requires <code>param</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">polr</td>
 <td align="left">MASS</td>
 <td align="center"><a href="#O">O</a></td>
 <td align="left"><code>mode = c(&quot;latent&quot;, &quot;linear.predictor&quot;, &quot;cum.prob&quot;,</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left"><code>&quot;exc.prob&quot;, &quot;prob&quot;, &quot;mean.class&quot;)</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">rlm</td>
 <td align="left">MASS</td>
 <td align="center"><a href="#A">A</a></td>
 <td align="left">inherits <code>lm</code> support</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">rms</td>
 <td align="left">rms</td>
 <td align="center"><a href="#O">O</a></td>
 <td align="left"><code>mode = (&quot;middle&quot;, &quot;latent&quot;, &quot;linear.predictor&quot;,</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
 <td align="left"><code>&quot;cum.prob&quot;, &quot;exc.prob&quot;, &quot;prob&quot;, &quot;mean.class&quot;)</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">rsm</td>
 <td align="left">rsm</td>
 <td align="center"><a href="#P">P</a></td>
 <td align="left">Supported in <strong>rsm</strong> package</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">stanreg</td>
 <td align="left">rstanarm</td>
 <td align="center"><a href="#S">S</a></td>
 <td align="left">Args for <code>stanreg_</code><em>xxx</em> similar to those for <em>xxx</em></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">survreg</td>
 <td align="left">survival</td>
 <td align="center"><a href="#A">A</a></td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">zeroinfl</td>
 <td align="left">pscl</td>
 <td align="center"><a href="#C">C</a></td>
 <td align="left"><code>mode = c(&quot;response&quot;, &quot;count&quot;, &quot;zero&quot;, &quot;prob0&quot;)</code>,</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"></td>
 <td align="left"></td>
 <td align="center"></td>
@@ -397,9 +413,12 @@
 </div>
 <div id="G" class="section level2">
 <h2>Group G – Generalized linear models and relatives</h2>
-<!-- @index Generalized linear models; `glm`*xxx* models -->
-<p>Models in this group receive only standard support as in <a href="#A">Group A</a>, but typically the tests and confidence intervals are asymptotic. Thus the <code>df</code> column for tabular results will be <code>Inf</code>.</p>
-<p>In the case of <code>gam::gam</code> objects, there is an optional <code>nboot</code> argument that sets the number of bootstrap replications used to estimate the variances and covariances of the smoothing portions of the model.</p>
+<!-- @index Generalized linear models; `glm`*xxx* models; 
+    Generalized additive models; `gam` models; -->
+<p>Most models in this group receive only standard support as in <a href="#A">Group A</a>, but typically the tests and confidence intervals are asymptotic. Thus the <code>df</code> column for tabular results will be <code>Inf</code>.</p>
+<p>In the case of <code>mgcv::gam</code> objects, there are optional <code>freq</code> and <code>unconditional</code> arguments as is detailed in the documentation for <code>mgcv::vcov.gam()</code>. Both default to <code>FALSE</code>. The value of <code>unconditional</code> matters only if <code>freq = FALSE</code> and <code>object$Vc</code> is non-null.</p>
+<p>For <code>mgcv::gamm</code> objects, <code>emmeans()</code> results are based on the <code>object$gam</code> part. Unfortunately, that is missing its <code>call</code> component, so the user must supply it in the <code>call</code> argument (e.g., <code>call = quote(gamm(y ~ s(x), data = dat))</code>) or give the dataset in the <code>data</code> argument. Alternatively (and recommended), you may first set <code>object$gam$call</code> to the quoted call ahead of time.</p>
+<p>With <code>gam::Gam</code> objects, standard errors are estimated using a bootstrap method when there are any smoothers involved. Accordingly, there is an optional <code>nboot</code> argument that sets the number of bootstrap replications used to estimate the variances and covariances of the smoothing portions of the model. Generally, it is better to use models fitted via <code>mgcv::gam()</code> rather than <code>gam::gam()</code>.</p>
 <p><a href="#quickref">Back to quick reference</a></p>
 </div>
 <div id="H" class="section level2">
@@ -465,7 +484,8 @@
 <div id="V" class="section level2">
 <h2>Group V – <code>aovList</code> objects</h2>
 <!-- @index `aovList` objects -->
-<p>Support for these objects is limited. To avoid strong biases in the predictions, the <code>contrasts</code> attribute of all factors should be of a type that sums to zero – for example, <code>&quot;contr.sum&quot;</code>, <code>&quot;contr.poly&quot;</code>, or <code>&quot;contr.helmert&quot;</code> but <em>not</em> <code>&quot;contr.treatment&quot;</code>. Only intra-block estimates of covariances are used. That is, if a factor appears in more than one error stratum, only the covariance structure from its lowest stratum is used in estimating standard errors. Degrees of freedom are obtained using the Satterthwaite method. In general, <code>aovList</code> support is best with balanced designs, with due caution in the use of contrasts. If a <code>vcov.</code> argument is supplied, it must yield a single covariance matrix for the unique fixed effects (not a set of them for each error stratum). In that case, the degrees of freedom are set to <code>NA</code>.</p>
+<p>Support for these objects is limited. To avoid strong biases in the predictions, it is strongly recommended that when fitting the model, the <code>contrasts</code> attribute of all factors should be of a type that sums to zero – for example, <code>&quot;contr.sum&quot;</code>, <code>&quot;contr.poly&quot;</code>, or <code>&quot;contr.helmert&quot;</code> but <em>not</em> <code>&quot;contr.treatment&quot;</code>. If that is found not to be the case, the model is re-fitted using sum-to-zero contrasts (thus requiring additional computation).</p>
+<p>Only intra-block estimates of covariances are used. That is, if a factor appears in more than one error stratum, only the covariance structure from its lowest stratum is used in estimating standard errors. Degrees of freedom are obtained using the Satterthwaite method. In general, <code>aovList</code> support is best with balanced designs, with due caution in the use of contrasts. If a <code>vcov.</code> argument is supplied, it must yield a single covariance matrix for the unique fixed effects (not a set of them for each error stratum). In that case, the degrees of freedom are set to <code>NA</code>.</p>
 <p><a href="#quickref">Back to quick reference</a></p>
 <p><a href="vignette-topics.html">Index of all vignette topics</a></p>
 </div>

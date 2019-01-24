@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parse an Rd file</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parse an Rd File</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for parse_Rd {tools}"><tr><td>parse_Rd {tools}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2> Parse an Rd file </h2>
+<h2>Parse an Rd File</h2>
 
 <h3>Description</h3>
 
@@ -92,7 +92,7 @@ in <a href="https://developer.r-project.org/parseRd.pdf">https://developer.r-pro
 </p>
 <p>It generates a warning for each parse error and attempts to continue
 parsing.  In order to continue, it is generally necessary to drop some
-parts of the file, so such warnings should not be ignored.  
+parts of the file, so such warnings should not be ignored.
 </p>
 <p>Files without a marked encoding are by default assumed to be in the
 native encoding.  An alternate default can be set using the
@@ -104,14 +104,14 @@ separate file using <span class="samp">\newcommand</span> or <span class="samp">
 An environment may also be given:  it would be produced by
 <code><a href="loadRdMacros.html">loadRdMacros</a></code>, <code><a href="loadRdMacros.html">loadPkgRdMacros</a></code>, or
 by a previous call to <code>parse_Rd</code>.  If a logical value
-is given, only the default built-in macros will be used; 
+is given, only the default built-in macros will be used;
 <code>FALSE</code> indicates that no <code>"macros"</code> attribute
 will be returned with the result.
 </p>
 <p>The <code>permissive</code> argument allows text to be parsed that is
 not completely in Rd format.  Typically it would be LaTeX code,
-used in an Rd fragment, e.g. in a <code><a href="../../utils/html/bibentry.html">bibentry</a></code>.  
-With <code>permissive = TRUE</code>, this will be passed through as plain 
+used in an Rd fragment, e.g. in a <code><a href="../../utils/html/bibentry.html">bibentry</a></code>.
+With <code>permissive = TRUE</code>, this will be passed through as plain
 text.  Since <code>parse_Rd</code> doesn't know how many arguments
 belong in LaTeX macros, it will guess based on the presence
 of braces after the macro; this is not infallible.
@@ -125,11 +125,11 @@ internal format of this object is subject to change.  The
 <code>as.character()</code> and <code>print()</code> methods defined for the
 class return character vectors and print them, respectively.
 </p>
-<p>Unless <code>macros = FALSE</code>, the object will have an attribute 
-named <code>"macros"</code>, which is an environment containing the 
-macros defined in <code>file</code>, in a format that can be used for 
-further <code>parse_Rd</code> calls  in the same session.  It is not 
-guaranteed to work if saved to a file and reloaded in a different 
+<p>Unless <code>macros = FALSE</code>, the object will have an attribute
+named <code>"macros"</code>, which is an environment containing the
+macros defined in <code>file</code>, in a format that can be used for
+further <code>parse_Rd</code> calls  in the same session.  It is not
+guaranteed to work if saved to a file and reloaded in a different
 session.
 </p>
 
@@ -150,5 +150,5 @@ session.
 <code>parse_Rd()</code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

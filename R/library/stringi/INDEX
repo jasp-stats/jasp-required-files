@@ -3,22 +3,18 @@
 stri_compare            Compare Strings with or without Collation
 stri_count              Count the Number of Pattern Matches
 stri_count_boundaries   Count the Number of Text Boundaries
-stri_datetime_add       [DRAFT API] Date and Time Arithmetic
-stri_datetime_create    [DRAFT API] Create a Date-Time Object
-stri_datetime_fields    [DRAFT API] Get Values for Date and Time Fields
-stri_datetime_format    [DRAFT API] Date and Time Formatting and
-                        Parsing
-stri_datetime_fstr      [DRAFT API] Convert 'strptime'-style Format
-                        Strings
-stri_datetime_now       [DRAFT API] Get Current Date and Time
-stri_datetime_symbols   [DRAFT API] List Localizable Date-Time
-                        Formatting Data
+stri_datetime_add       Date and Time Arithmetic
+stri_datetime_create    Create a Date-Time Object
+stri_datetime_fields    Get Values for Date and Time Fields
+stri_datetime_format    Date and Time Formatting and Parsing
+stri_datetime_fstr      Convert 'strptime'-style Format Strings
+stri_datetime_now       Get Current Date and Time
+stri_datetime_symbols   List Localizable Date-Time Formatting Data
 stri_detect             Detect a Pattern Match
 stri_dup                Duplicate Strings
 stri_duplicated         Determine Duplicated Elements
-stri_enc_detect         [DRAFT API] Detect Character Set and Language
-stri_enc_detect2        [DRAFT API] Detect Locale-Sensitive Character
-                        Encoding
+stri_enc_detect         Detect Character Set and Language
+stri_enc_detect2        Detect Locale-Sensitive Character Encoding
 stri_enc_fromutf32      Convert From UTF-32
 stri_enc_info           Query a Character Encoding
 stri_enc_isascii        Check If a Data Stream Is Possibly in ASCII
@@ -53,6 +49,7 @@ stri_locate_all_boundaries
                         Locate Specific Text Boundaries
 stri_match_all          Extract Regex Pattern Matches, Together with
                         Capture Groups
+stri_na2empty           Replace NAs with empty strings
 stri_numbytes           Count the Number of Bytes
 stri_opts_brkiter       Generate a List with BreakIterator Settings
 stri_opts_collator      Generate a List with Collator Settings
@@ -66,6 +63,8 @@ stri_rand_shuffle       Randomly Shuffle Code Points in Each String
 stri_rand_strings       Generate Random Strings
 stri_read_lines         [DRAFT API] Read Text Lines from a Text File
 stri_read_raw           [DRAFT API] Read Whole Text File as Raw
+stri_remove_empty       Remove all empty strings from a character
+                        vector
 stri_replace_all        Replace Occurrences of a Pattern
 stri_replace_na         Replace Missing Values in a Character Vector
 stri_reverse            Reverse Each String
@@ -80,11 +79,9 @@ stri_stats_latex        Statistics for a Character Vector Containing
 stri_sub                Extract a Substring From or Replace a Substring
                         In a Character Vector
 stri_subset             Select Elements that Match a Given Pattern
-stri_timezone_get       [DRAFT API] Set or Get Default Time Zone in
-                        'stringi'
-stri_timezone_info      [DRAFT API] Query a Given Time Zone
-stri_timezone_list      [DRAFT API] List Available Time Zone
-                        Identifiers
+stri_timezone_get       Set or Get Default Time Zone in 'stringi'
+stri_timezone_info      Query a Given Time Zone
+stri_timezone_list      List Available Time Zone Identifiers
 stri_trans_char         Translate Characters
 stri_trans_general      General Text Transforms, Including
                         Transliteration

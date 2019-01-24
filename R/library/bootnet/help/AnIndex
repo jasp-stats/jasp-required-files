@@ -5,9 +5,12 @@ bootnet	bootnet
 bootnet_adalasso	estimateNetwork
 bootnet_cor	estimateNetwork
 bootnet_EBICglasso	estimateNetwork
+bootnet_ggmModSelect	estimateNetwork
+bootnet_graphicalVAR	estimateNetwork
 bootnet_huge	estimateNetwork
 bootnet_IsingFit	estimateNetwork
 bootnet_IsingSampler	estimateNetwork
+bootnet_LoGo	estimateNetwork
 bootnet_mgm	estimateNetwork
 bootnet_pcor	estimateNetwork
 bootnet_relimp	estimateNetwork

@@ -99,20 +99,23 @@ dat[1:4, ]
 ## gzfile and gzcon can inter-work.
 ## Of course here one would use gzfile, but file() can be replaced by
 ## any other connection generator.
-zz &lt;- gzfile("ex.gz", "w")
+zzfil &lt;- tempfile(fileext = ".gz")
+zz &lt;- gzfile(zzfil, "w")
 cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = zz, sep = "\n")
 close(zz)
-readLines(zz &lt;- gzcon(file("ex.gz", "rb")))
+readLines(zz &lt;- gzcon(file(zzfil, "rb")))
 close(zz)
-unlink("ex.gz")
+unlink(zzfil)
 
-zz &lt;- gzcon(file("ex2.gz", "wb"))
+
+zzfil2 &lt;- tempfile(fileext = ".gz")
+zz &lt;- gzcon(file(zzfil2, "wb"))
 cat("TITLE extra line", "2 3 5 7", "", "11 13 17", file = zz, sep = "\n")
 close(zz)
-readLines(zz &lt;- gzfile("ex2.gz"))
+readLines(zz &lt;- gzfile(zzfil2))
 close(zz)
-unlink("ex2.gz")
+unlink(zzfil2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

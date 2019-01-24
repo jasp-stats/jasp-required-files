@@ -18,6 +18,7 @@ matrix-like object, or a factor of column labels.
 
 <pre>
 col(x, as.factor = FALSE)
+.col(dim)
 </pre>
 
 
@@ -28,6 +29,11 @@ col(x, as.factor = FALSE)
 <td>
 <p>a matrix-like object, that is one with a two-dimensional
 <code>dim</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dim</code></td>
+<td>
+<p>a matrix dimension, i.e., <code><a href="integer.html">integer</a></code> vector of
+length two (with non-negative entries).</p>
 </td></tr>
 <tr valign="top"><td><code>as.factor</code></td>
 <td>
@@ -55,7 +61,9 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="row.html">row</a></code> to get rows.
+<p><code><a href="row.html">row</a></code> to get rows;
+<code><a href="slice.index.html">slice.index</a></code> for a general way to get slice indices
+in an array.
 </p>
 
 
@@ -66,10 +74,10 @@ Wadsworth &amp; Brooks/Cole.
 ma &lt;- matrix(1:12, 3, 4)
 ma[row(ma) == col(ma) + 1]
 
-# create an identity 5-by-5 matrix
+# create an identity 5-by-5 matrix more slowly than diag(n = 5):
 x &lt;- matrix(0, nrow = 5, ncol = 5)
 x[row(x) == col(x)] &lt;- 1
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

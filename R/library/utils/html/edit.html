@@ -46,14 +46,14 @@ then the file specified by <code>file</code> is opened for editing.</p>
 </td></tr>
 <tr valign="top"><td><code>editor</code></td>
 <td>
-<p>usually a string naming the text editor you want to use.
-On Unix the default is set from the environment variables
-<span class="env">EDITOR</span> or <span class="env">VISUAL</span> if either is set, otherwise <code>vi</code>
-is used.  On Windows it defaults to <code>"internal"</code>, the script
-editor.  On the macOS GUI the argument is ignored and the document
-editor is always used.
+<p>usually a character string naming (or giving the path
+to) the text editor you want to use.  On Unix the default is set from
+the environment variables <span class="env">EDITOR</span> or <span class="env">VISUAL</span> if either is
+set, otherwise <code>vi</code> is used.  On Windows it defaults to
+<code>"internal"</code>, the script editor.  On the macOS GUI the argument
+is ignored and the document editor is always used.
 </p>
-<p><code>editor</code> can also be a function, in which case it is called
+<p><code>editor</code> can also be an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> function, in which case it is called
 with the arguments <code>name</code>, <code>file</code>, and <code>title</code>.  Note
 that such a function will need to independently implement all
 desired functionality.
@@ -134,5 +134,5 @@ vi(mean, file = "mean.out")
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

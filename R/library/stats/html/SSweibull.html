@@ -93,13 +93,19 @@ Dekker. (section 4.4.5)
 <pre>
 Chick.6 &lt;- subset(ChickWeight, (Chick == 6) &amp; (Time &gt; 0))
 SSweibull(Chick.6$Time, 160, 115, -5.5, 2.5)   # response only
-Asym &lt;- 160; Drop &lt;- 115; lrc &lt;- -5.5; pwr &lt;- 2.5
-SSweibull(Chick.6$Time, Asym, Drop, lrc, pwr)  # response and gradient
+local({ Asym &lt;- 160; Drop &lt;- 115; lrc &lt;- -5.5; pwr &lt;- 2.5
+  SSweibull(Chick.6$Time, Asym, Drop, lrc, pwr) # response _and_ gradient
+})
 getInitial(weight ~ SSweibull(Time, Asym, Drop, lrc, pwr), data = Chick.6)
 ## Initial values are in fact the converged values
 fm1 &lt;- nls(weight ~ SSweibull(Time, Asym, Drop, lrc, pwr), data = Chick.6)
 summary(fm1)
+## Data and Fit:
+plot(weight ~ Time, Chick.6, xlim = c(0, 21), main = "SSweibull() fit to Chick.6")
+ux &lt;- par("usr")[1:2]; x &lt;- seq(ux[1], ux[2], length.out=250)
+lines(x, do.call(SSweibull, c(list(x=x), coef(fm1))), col = "red", lwd=2)
+As &lt;- coef(fm1)[["Asym"]]; abline(v = 0, h = c(As, As - coef(fm1)[["Drop"]]), lty = 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

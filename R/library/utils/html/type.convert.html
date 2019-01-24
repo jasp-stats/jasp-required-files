@@ -1,24 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Type Conversion on Character Variables</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert Data to Appropriate Type</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for type.convert {utils}"><tr><td>type.convert {utils}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Type Conversion on Character Variables</h2>
+<h2>Convert Data to Appropriate Type</h2>
 
 <h3>Description</h3>
 
-<p>Convert a character vector to logical, integer, numeric, complex or
-factor as appropriate.
+<p>Convert a data object to logical, integer, numeric, complex, character
+or factor as appropriate.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
+type.convert(x, ...)
+## Default S3 method:
 type.convert(x, na.strings = "NA", as.is = FALSE, dec = ".",
-             numerals = c("allow.loss", "warn.loss", "no.loss"))
+             numerals = c("allow.loss", "warn.loss", "no.loss"), ...)
+## S3 method for class 'data.frame'
+type.convert(x, ...)
+## S3 method for class 'list'
+type.convert(x, ...)
 </pre>
 
 
@@ -27,7 +33,7 @@ type.convert(x, na.strings = "NA", as.is = FALSE, dec = ".",
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>a character vector.</p>
+<p>a vector, matrix, array, data frame, or list.</p>
 </td></tr>
 <tr valign="top"><td><code>na.strings</code></td>
 <td>
@@ -37,7 +43,9 @@ missing values in logical, integer, numeric or complex vectors.</p>
 </td></tr>
 <tr valign="top"><td><code>as.is</code></td>
 <td>
-<p>logical.  See &lsquo;Details&rsquo;.</p>
+<p>whether to convert factors to character vectors. The
+default is to convert character vectors to factors.  See
+&lsquo;Details&rsquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>dec</code></td>
 <td>
@@ -53,31 +61,38 @@ Can be abbreviated.  Possible values are
 
 <dl>
 <dt><code>numerals = "allow.loss"</code>, default:</dt><dd><p>the conversion
-happens with some accuracy loss.  This has been the only
-behavior of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions 3.0.3 and earlier.</p>
+happens with some accuracy loss.  This was the behavior of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+versions 3.0.3 and earlier, and the default from 3.1.1 onwards.</p>
 </dd>
 <dt><code>numerals = "warn.loss"</code>:</dt><dd><p>a <code><a href="../../base/html/warning.html">warning</a></code>
 about accuracy loss is signalled and the conversion happens as
 with <code>numerals = "allow.loss"</code>.</p>
 </dd>
 <dt><code>numerals = "no.loss"</code>:</dt><dd><p><code>x</code> is <em>not</em>
-converted to a number, but to a <code><a href="../../base/html/factor.html">factor</a></code> or left as
-character, depending on <code>as.is</code>.  This has been the only
+converted to a number, but to a <code><a href="../../base/html/factor.html">factor</a></code> or
+<code>character</code>, depending on <code>as.is</code>.  This was the
 behavior of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.1.0.</p>
 </dd>
 </dl>
 
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to be passed to or from methods.</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>This is principally a helper function for <code><a href="read.table.html">read.table</a></code>.
-Given a character vector, it attempts to convert it to logical,
-integer, numeric or complex, and failing that converts it to factor
-unless <code>as.is = TRUE</code>.  The first type that can accept all the
-non-missing values is chosen.
+<p>This helper function is used by <code><a href="read.table.html">read.table</a></code>. When the
+data object <code>x</code> is a data frame or list, the function is called
+recursively for each column or list element.
+</p>
+<p>Given a vector, the function attempts to convert it to logical,
+integer, numeric or complex, and failing that converts a character
+vector to factor unless <code>as.is = TRUE</code>.  The first type that can
+accept all the non-missing values is chosen.
 </p>
 <p>Vectors which are entirely missing values are converted to logical,
 since <code>NA</code> is primarily logical.
@@ -101,13 +116,49 @@ appropriate value of <code>as.is</code>.
 
 <h3>Value</h3>
 
-<p>An atomic vector or (for <code>as.is = FALSE</code>) a factor.
+<p>An object like <code>x</code> but using another storage mode when
+appropriate.
 </p>
+
+
+<h3>Author(s)</h3>
+
+<p>R Core, with a contribution by Arni Magnusson</p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="read.table.html">read.table</a></code></p>
+<p><code><a href="read.table.html">read.table</a></code>, <code><a href="../../base/html/class.html">class</a></code>,
+<code><a href="../../base/html/mode.html">storage.mode</a></code>.
+</p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+
+<h3>Examples</h3>
+
+<pre>
+## Numeric to integer
+class(rivers)
+x &lt;- type.convert(rivers)
+class(x)
+
+## Convert many columns
+auto &lt;- type.convert(mtcars)
+str(mtcars)
+str(auto)
+
+## Convert matrix
+phones &lt;- type.convert(WorldPhones)
+storage.mode(WorldPhones)
+storage.mode(phones)
+
+## Factor or character
+chr &lt;- c("A", "B", "B", "A")
+fac &lt;- factor(c("A", "B", "B", "A"))
+type.convert(chr)               # -&gt; factor
+type.convert(fac)               # -&gt; factor
+type.convert(chr, as.is = TRUE) # -&gt; character
+type.convert(fac, as.is = TRUE) # -&gt; character
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -23,3 +23,6 @@ S3method(mjca, table)
 S3method(mjca, array)
 S3method(mjca, data.frame)
 
+if(getRversion() >= "3.6.0") {
+  S3method(rgl::plot3d, ca)
+  }

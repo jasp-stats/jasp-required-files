@@ -26,7 +26,7 @@ car-deprecated          Deprecated Functions in the car Package
 car-internal.Rd         Internal Objects for the 'car' package
 carPalette              Set or Retrieve 'car' Package Color Palette
 carWeb                  Access to the R Companion to Applied Regression
-                        website
+                        Website
 ceresPlots              Ceres Plots
 compareCoefs            Print estimated coefficients and their standard
                         errors in a table for several regression

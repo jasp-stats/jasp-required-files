@@ -19,7 +19,8 @@ class <code>"Date"</code> representing calendar dates.
 <pre>
 as.Date(x, ...)
 ## S3 method for class 'character'
-as.Date(x, format, ...)
+as.Date(x, format, tryFormats = c("%Y-%m-%d", "%Y/%m/%d"),
+        optional = FALSE, ...)
 ## S3 method for class 'numeric'
 as.Date(x, origin, ...)
 ## S3 method for class 'POSIXct'
@@ -38,18 +39,28 @@ as.character(x, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>An object to be converted.</p>
+<p>an object to be converted.</p>
 </td></tr>
 <tr valign="top"><td><code>format</code></td>
 <td>
-<p>A character string.  If not specified, it will try
-<code>"%Y-%m-%d"</code> then <code>"%Y/%m/%d"</code> on the first
-non-<code>NA</code> element, and give an error if neither works.
-Otherwise, the processing is via <code><a href="strptime.html">strptime</a></code></p>
+<p><code><a href="character.html">character</a></code> string.  If not specified, it will try
+<code>tryFormats</code> one by one on the first non-<code>NA</code> element, and
+give an error if none works.  Otherwise, the processing is via
+<code><a href="strptime.html">strptime</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>tryFormats</code></td>
+<td>
+<p><code><a href="character.html">character</a></code> vector of <code>format</code>
+strings to try if <code>format</code> is not specified.</p>
+</td></tr>
+<tr valign="top"><td><code>optional</code></td>
+<td>
+<p><code><a href="logical.html">logical</a></code> indicating to return <code>NA</code>
+(instead of signalling an error) if the format guessing does not succeed.</p>
 </td></tr>
 <tr valign="top"><td><code>origin</code></td>
 <td>
-<p>a Date object, or something which can be coerced by
+<p>a <code>Date</code> object, or something which can be coerced by
 <code>as.Date(origin, ...)</code> to such an object.</p>
 </td></tr>
 <tr valign="top"><td><code>tz</code></td>
@@ -58,7 +69,7 @@ Otherwise, the processing is via <code><a href="strptime.html">strptime</a></cod
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>Further arguments to be passed from or to other methods,
+<p>further arguments to be passed from or to other methods,
 including <code>format</code> for <code>as.character</code> and <code>as.Date</code>
 methods.</p>
 </td></tr>
@@ -207,7 +218,7 @@ as.Date(34519, origin = "1904-01-01") # 1998-07-05
 ## (it takes the non-existent 0000-01-01 as day 1)
 ## so Matlab day 734373 can be imported as
 as.Date(734373, origin = "1970-01-01") - 719529 # 2010-08-23
-## (value from 
+## (value from
 ## http://www.mathworks.de/de/help/matlab/matlab_prog/represent-date-and-times-in-MATLAB.html)
 
 ## Time zone effect
@@ -218,5 +229,5 @@ as.Date(z, tz = "NZ")
 as.Date(z, tz = "HST") # Hawaii
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

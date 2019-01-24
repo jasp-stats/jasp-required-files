@@ -160,6 +160,7 @@ see <code><a href="package.skeleton.html">package.skeleton</a></code>.
 
 <pre>
 require(graphics)
+
 prompt(plot.default)
 prompt(interactive, force.function = TRUE)
 unlink("plot.default.Rd")
@@ -171,6 +172,7 @@ unlink("women.Rd")
 prompt(sunspots) # non-data.frame data
 unlink("sunspots.Rd")
 
+
 ## Not run: 
 ## Create a help file for each function in the .GlobalEnv:
 for(f in ls()) if(is.function(get(f))) prompt(name = f)
@@ -179,5 +181,5 @@ for(f in ls()) if(is.function(get(f))) prompt(name = f)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

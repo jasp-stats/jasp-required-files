@@ -188,13 +188,22 @@ changing (some of) the sources.  With <code>dir</code> and <code>old</code> the
 paths to the directories with the new and old sources, respectively,
 and the corresponding check results, possible changes in the check
 results can conveniently be analyzed as controlled via options
-<code>outputs</code> and <code>sources</code>.
+<code>outputs</code> and <code>sources</code>.  The changes object returned can be
+subscripted according to change in severity from the old to the new
+results by using one of <code>"=="</code>, <code>"!="</code>, <code>"&lt;"</code>,
+<code>"&lt;="</code>, <code>"&gt;"</code> or <code>"&gt;="</code> as row index.
 </p>
 <p><code>check_packages_in_dir_details</code> analyzes check log files to
 obtain check details as a data frame which can be used for further
 processing, providing check name, status and output for every check
 performed and not dropped according to status tag (via variables
 <code>Check</code>, <code>Status</code> and <code>Output</code>, respectively).
+</p>
+<p>Environment variable <span class="env">_R_CHECK_ELAPSED_TIMEOUT_</span> can be used to
+set a limit on the elapsed time of each <code>check</code> run.  See the
+&lsquo;R Internals&rsquo; manual for how the value is interpreted and for
+other environment variables which can be used for finer-grained
+control on timeouts within a <code>check</code> run.
 </p>
 
 
@@ -229,5 +238,5 @@ check_packages_in_dir(dir,
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

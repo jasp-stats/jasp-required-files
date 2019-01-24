@@ -1,9 +1,51 @@
                    stringi package NEWS and CHANGELOG
 ===============================================================================
 
+## 1.2.4 (2018-07-20) **CRAN**
+
+* [BUGFIX] #314: test U_CHARSET_IS_UTF8 in configure when using pkg-build
+
+* [BUGFIX] #317: include icudt61l.zip in the source bundle to solve the
+frequent `icudt download failed` error (also on CRAN's windows-release
+and windows-oldrel).
+
+
+## 1.2.3 (2018-05-16) **CRAN**
+
+* [BUGFIX] #296: Fixed the behavior of the `./configure` script on CentOS 6.
+
+* [BUGFIX] Fixed broken Windows build by updating the icudt mirror list.
+
+
+## 1.2.2 (2018-05-01) **CRAN**
+
+* [GENERAL] #193: `stringi` is now bundled with ICU4C 61.1,
+which is used on most Windows and OS X builds as well as on *nix systems
+not equipped with ICU. However, if the C++11 support is disabled,
+stringi will be built against ICU4C 55.1. The update to ICU brings
+Unicode 10.0 support, including new emoji characters.
+
+* [BUGFIX] #288: stri_match did not return the correct number of columns
+when input was empty.
+
+* [NEW FEATURE] #188: `stri_enc_detect` now returns a list of data frames.
+
+* [NEW FEATURE] #289: `stri_flatten` gained `na_empty` `omit_empty` arguments.
+
+* [NEW FEATURE] New functions: `stri_remove_empty`, `stri_na2empty`
+
+* [NEW FEATURE] #285: Coercion from a non-trivial list (one that consists
+of atomic vectors, each of length 1) to an atomic vector now issues a warning.
+
+* [WARN] Removed `-Wparentheses` warnings in `icu55/common/cstring.h:38:63`
+and `icu55/i18n/windtfmt.cpp` in the ICU4C 55.1 bundle.
+
+-------------------------------------------------------------------------------
+
+
 ## 1.1.7 (2018-03-06) **CRAN**
 
-* [BUGFIX] Fixed ICU55 code leading to some "significant warnings"
+* [BUGFIX] Fixed ICU4C 55.1 code leading to some "significant warnings"
 (`icu55/i18n/winnmfmt.cpp`) and "suppressing important diagnostics"
 (`src/icu55/i18n/decNumber.c`).
 

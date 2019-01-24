@@ -92,11 +92,11 @@ statement in a document.
 </p>
 <p>Non-ASCII source files must contain a line of the form
 </p>
-<pre>\usepackage[foo]{inputenc}</pre>
+<pre>  \usepackage[foo]{inputenc}</pre>
 <p>(where <span class="samp">foo</span> is typically <span class="samp">latin1</span>, <span class="samp">latin2</span>, <span class="samp">utf8</span> or
 <span class="samp">cp1252</span> or <span class="samp">cp1250</span>) or they will give an error.
-Re-encoding can be turned off completely with argument <code>encoding
-    = "bytes"</code>.
+Re-encoding can be turned off completely with argument
+<code>encoding = "bytes"</code>.
 </p>
 
 
@@ -155,10 +155,11 @@ the <span class="pkg">utils</span> package.
 <pre>
 testfile &lt;- system.file("Sweave", "Sweave-test-1.Rnw", package = "utils")
 
+
 ## enforce par(ask = FALSE)
 options(device.ask.default = FALSE)
 
-## create a LaTeX file
+## create a LaTeX file - in the current working directory, getwd():
 Sweave(testfile)
 
 ## This can be compiled to PDF by
@@ -175,5 +176,5 @@ source("Sweave-test-1.R")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -206,7 +206,7 @@ DLLs to a 32-bit install.
 
 <p>an optional character vector of additional option(s) to be passed to
 <code>R CMD INSTALL</code> for a source package install.  E.g.,
-<code>c("--html", "--no-multiarch")</code>.
+<code>c("--html", "--no-multiarch", "--no-test-load")</code>.
 </p>
 <p>Can also be a named list of character vectors to be used as
 additional options, with names the respective package names.
@@ -380,6 +380,28 @@ Bioconductor packages.
 </p>
 
 
+<h3>Timeouts</h3>
+
+<p>A limit on the elapsed time for each call to <code>R CMD INSTALL</code>
+(so for source installs) can be set <em>via</em> environment variable
+<span class="env">_R_INSTALL_PACKAGES_ELAPSED_TIMEOUT_</span>: in seconds (or in minutes
+or hours with optional suffix <span class="samp">m</span> or <span class="samp">h</span>, suffix <span class="samp">s</span>
+being allowed for the default seconds) with <code>0</code> meaning no limit.
+</p>
+<p>For non-parallel installs this is implemented <em>via</em> the
+<code>timeout</code> argument of <code><a href="../../base/html/system2.html">system2</a></code>: for parallel
+installs <em>via</em> the OS's <code>timeout</code> command.  (The one
+tested is from GNU <span class="pkg">coreutils</span>, commonly available on Linux but
+not other Unix-alikes.  If no such command is available the timeout
+request is ignored, with a warning.)  For parallel installs a
+<span class="samp">Error 124</span> message from <code>make</code> indicates that timeout
+occurred.
+</p>
+<p>Timeouts during installation might leave lock directories behind and
+not restore previous versions.
+</p>
+
+
 <h3>Note</h3>
 
 <p><code>install.packages</code> tries to detect if you have write permission
@@ -422,5 +444,5 @@ install.packages(c("ncdf4", "RNetCDF"),
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

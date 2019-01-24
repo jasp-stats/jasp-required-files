@@ -1,6 +1,6 @@
 as_factor	as_factor
 as_factor.data.frame	as_factor
-as_factor.labelled	as_factor
+as_factor.haven_labelled	as_factor
 format_tagged_na	tagged_na
 is.labelled	labelled
 is_tagged_na	tagged_na
@@ -23,6 +23,7 @@ write_sav	read_spss
 write_xpt	read_xpt
 zap_empty	zap_empty
 zap_formats	zap_formats
+zap_label	zap_label
 zap_labels	zap_labels
 zap_missing	zap_missing
 zap_widths	zap_widths

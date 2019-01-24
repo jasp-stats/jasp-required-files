@@ -8,21 +8,14 @@ Depends: ggplot2, R (>= 3.0.0)
 Imports: methods, igraph, IsingFit, qgraph, dplyr (>= 0.3.0.2), tidyr,
         gtools, corpcor, IsingSampler, mvtnorm, abind, Matrix,
         parallel, huge, parcor, mgm (>= 1.2), relaimpo, NetworkToolbox
-        (>= 1.1.0), pbapply
-Suggests: psych
+        (>= 1.1.0), pbapply, graphicalVAR, BDgraph, psych
 Description: Bootstrap methods to assess accuracy and stability of estimated network structures
               and centrality indices. Allows for flexible specification of any undirected network 
               estimation procedure in R, and offers default sets for 'qgraph', 'IsingFit', 'IsingSampler',
               'glasso', 'huge' and 'parcor' packages.
 License: GPL-2
-Built: R 3.4.4; ; 2018-05-17 15:59:42 UTC; windows
-RemoteType: github
-RemoteHost: https://api.github.com
-RemoteRepo: bootnet
-RemoteUsername: SachaEpskamp
-RemoteRef: master
-RemoteSha: 670241b2926d69512d45cef5b15851661851d2c1
-GithubRepo: bootnet
-GithubUsername: SachaEpskamp
-GithubRef: master
-GithubSHA1: 670241b2926d69512d45cef5b15851661851d2c1
+NeedsCompilation: no
+Packaged: 2018-07-27 14:39:41 UTC; sachaepskamp
+Repository: CRAN
+Date/Publication: 2018-07-27 15:10:02 UTC
+Built: R 3.5.2; ; 2019-01-21 20:19:47 UTC; windows

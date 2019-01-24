@@ -82,6 +82,11 @@ invisibly).
 many (simulated) smooths should be added.  This is currently only
 used by <code><a href="../../stats/html/plot.lm.html">plot.lm</a></code>.</p>
 </dd>
+<dt><code>askYesNo</code>:</dt><dd><p>a function (typically set by a front-end)
+to ask the user binary response functions in a consistent way,
+or a vector of strings used by <code><a href="../../utils/html/askYesNo.html">askYesNo</a></code> to use
+as default responses for such questions.</p>
+</dd>      
 <dt><code>browserNLdisabled</code>:</dt><dd><p>logical: whether newline is
 disabled as a synonym for <code>"n"</code> in the browser.</p>
 </dd>
@@ -316,6 +321,10 @@ when deciding to print numeric values in fixed or exponential
 notation.  Positive values bias towards fixed and negative towards
 scientific notation: fixed notation will be preferred unless it is
 more than <code>scipen</code> digits wider.</p>
+</dd>
+<dt><code>setWidthOnResize</code>:</dt><dd><p>a logical. If set and <code>TRUE</code>, <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+run in a terminal using a recent <code>readline</code> library will set
+the <code>width</code> option when the terminal is resized.</p>
 </dd>
 <dt><code>showWarnCalls</code>, <code>showErrorCalls</code>:</dt><dd><p>a logical.
 Should warning and error messages show a summary of the call
@@ -658,10 +667,12 @@ cell widths are used.</p>
 <dt><code>demo.ask</code>:</dt><dd><p>default for the <code>ask</code> argument of
 <code><a href="../../utils/html/demo.html">demo</a></code>.</p>
 </dd>
-<dt><code>editor</code>:</dt><dd><p>a non-empty string or a function that sets the
-default text editor, e.g., for <code><a href="../../utils/html/edit.html">edit</a></code>.  Set from the
-environment variable <span class="env">EDITOR</span> on UNIX, or if unset
-<span class="env">VISUAL</span> or <code>vi</code>.</p>
+<dt><code>editor</code>:</dt><dd><p>a non-empty character string or an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> function
+that sets the default text editor, e.g., for <code><a href="../../utils/html/edit.html">edit</a></code>
+and <code><a href="../../utils/html/file.edit.html">file.edit</a></code>.  Set from the environment variable
+<span class="env">EDITOR</span> on UNIX, or if unset <span class="env">VISUAL</span> or <code>vi</code>.
+As a string it should specify the name of or path to an external
+command.</p>
 </dd>
 <dt><code>example.ask</code>:</dt><dd><p>default for the <code>ask</code> argument of
 <code><a href="../../utils/html/example.html">example</a></code>.</p>
@@ -688,7 +699,7 @@ locking be used by <code><a href="../../utils/html/install.packages.html">instal
 for binary installs on macOS and Windows, but can be used in a
 startup file for source installs <em>via</em>
 <code>R CMD <a href="../../utils/html/INSTALL.html">INSTALL</a></code>.  For binary installs, can also be
-the character string <code>"pkgloack"</code>.</p>
+the character string <code>"pkglock"</code>.</p>
 </dd>
 <dt><code>internet.info</code>:</dt><dd><p>The minimum level of information to be
 printed on URL downloads etc, using the <code>"internal"</code> and
@@ -759,9 +770,6 @@ the path of the external program <code>unzip</code> or <code>"internal"</code>.
 Defaults to <code>"internal"</code> when the internal unzip code is
 used.
 </p>
-</dd>
-<dt><code>useHTTPS</code>:</dt><dd><p>logical.  Used by <code><a href="../../utils/html/chooseCRANmirror.html">chooseCRANmirror</a></code>:
-are secure mirrors preferred?  If not set, <code>TRUE</code> is assumed.</p>
 </dd>
 </dl>
 
@@ -887,5 +895,5 @@ if(tmp)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

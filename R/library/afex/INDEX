@@ -1,6 +1,8 @@
-afex-package            The afex Package
+afex-package            Analysis of Factorial Experiments Maintainer:
+                        NA
 afex_aov-methods        Methods for afex_aov objects
 afex_options            Set/get global afex options
+afex_plot               m-way Plot with Error Bars and Raw Data
 all_fit                 Refit 'lmer' model using multiple optimizers
 aov_car                 Convenient ANOVA estimation for factorial
                         designs

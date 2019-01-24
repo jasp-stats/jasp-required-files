@@ -10,8 +10,8 @@
 <h3>Description</h3>
 
 <p>Create a diagonal matrix object, i.e., an object inheriting from
-<code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code> (or a sparse diagonal matrix in
-cases that is prefered).
+<code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code> (or a &ldquo;standard&rdquo;
+<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> diagonal matrix in cases that is prefered).
 </p>
 
 
@@ -20,8 +20,8 @@ cases that is prefered).
 <pre>
 Diagonal(n, x = NULL)
 
-.symDiagonal(n, x = rep.int(1,n), uplo = "U",   kind = if(is.logical(x)) "l" else "d")
- .trDiagonal(n, x = 1, uplo = "U", unitri=TRUE, kind = if(is.logical(x)) "l" else "d")
+.symDiagonal(n, x = rep.int(1,n), uplo = "U",   kind)
+ .trDiagonal(n, x = 1, uplo = "U", unitri=TRUE, kind)
 .sparseDiagonal(n, x = 1, uplo = "U",
                 shape = if(missing(cols)) "t" else "g",
 	        unitri, kind, cols = if(n) 0:(n - 1L) else integer(0))
@@ -139,5 +139,5 @@ stopifnot(I4@diag == "U", all(I4 == diag(4)))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
 </body></html>

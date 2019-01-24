@@ -82,8 +82,8 @@ summary(ref_grid(wine.clm, mode = "scale"), type = "response")
 #  cbpp.rg <- ref_grid(example_model)
 
 ## ----echo = FALSE--------------------------------------------------------
-load(system.file("extdata", "cbpp.RData", package = "emmeans"))
-cbpp.rg <- do.call(emmobj, cbpp.list)
+cbpp.rg <- do.call(emmobj, 
+    readRDS(system.file("extdata", "cbpplist", package = "emmeans")))
 
 ## ------------------------------------------------------------------------
 cbpp.rg

@@ -4,8 +4,11 @@ ASCIIfy	ASCIIfy
 ask	ask
 assert	gtools-defunct
 assignEdgewise	unByteCode
+badDend	badDend
+baseOf	baseOf
 binsearch	binsearch
 capture	gtools-defunct
+capwords	capwords
 checkRVersion	checkRVersion
 chr	asc
 combinations	combinations
@@ -38,6 +41,7 @@ running	running
 scat	scat
 setTCPNoDelay	setTCPNoDelay
 smartbind	smartbind
+split_path	split_path
 sprint	gtools-defunct
 stars.pval	stars.pval
 strmacro	defmacro

@@ -1,5 +1,117 @@
+## NEWS for the emmeans package
+
+
+emmeans 1.3.2
+-------------
+
+  * I decided to enable "optimal digits" display by default. In summaries,
+    we try to show enough---but not too much---precision in estimates and
+    confidence intervals. If you don't like this and want to revert
+    to the old (exaggerated precision) behavior, do 
+    `emm_options(opt.digits = FALSE)`
+  * Added `include` argument to most `.emmc` functions (#67)
+  * Now allow character values for `ref`, `exclude`, and `include` in
+    `.emmc` functions (#68)
+  * Better handling of matrix predictors (#66)
+  * Fixed over-zealous choice to not pass `...` arguments in `emmeans()`
+    when two-sided formulas are present
+  * Fix to `clm` support when model is rank-deficient
+  * Fix to `regrid(..., transform = "log")` error when there are
+    existing non-estimable cases (issue #65)
+  * Improvements to `brmsfit` support (#43)
+  * Added support for `mgcv::gam` and `mgcv::gamm` models
+  * `.my.vcov()` now passes `...` to clients
+  * Removed **glmmADMB** support. This package appears to be dormant
+  * Fixed ordering bug for nested models (#71)
+  * Support for `manova` object no longer requires `data` keyword (#72)
+  * Added support for multivariate response in `aovlist` models (#73)
+  * Documentation clarification (#76)
+  * Fix to `CLD` fatal error when `sort = TRUE` (#77)
+  * Fix to issue with weights and incomplete cases with `lme` objects (#75)
+  * Nested fixed-effects yielded NonEsts when two factors are nested 
+    in the same factor(s) (#79)
+
+
+emmeans 1.3.1
+-------------
+
+  * `"mvt"` adjustment ignored `by` grouping
+  * `contrast()` mis-labeled estimates when levels varied among `by` groups
+    (most prominently this happened in `CLD(..., details = TRUE)`)
+  * Changed `aovlist` support so it re-fits the model when non-sum-to-zero
+    contrasts were used
+  * `print.summary_emm()` now cleans up numeric columns with `zapsmall()`
+  * More robust handling of `nesting` in `ref_grid()` and `update()`,
+    and addition of `covnest` argument for whether to include covariates
+    when auto-detecting nesting
+  * Revision of some vignettes
+  * Fixed bug in `hpd.summary()` and handoff to it from `summary()`
+  * Fixed bug where `ref_grid()` ignored `mult.levs`
+  * Fixes in emmeans where it passes `...` where it shouldn't
+  * `CLD()` now works for MCMC models (uses frequentist summary)
+  * Addition of `opt.digits` option
+
+
+emmeans 1.3.0
+-------------
+
+  * Deprecated functions like `ref.grid()` put to final rest, and we no 
+    longer support packages that provide `recover.data` or `lsm.basis` methods
+  * Courtesy exports `.recover_data()` and `.emm_basis()` to provide
+    access for extension developers to all available methods
+  * Streamlining of a stored example in `inst/extdata`
+  * Fix to `.all.vars()` that could cause errors when response variable
+    has a function call with character constants.
+  * Relabeling of differences as ratios when appropriate in `regrid()`
+    (so results match `summary()` labeling with `type = "response"`).
+  * `plot.emmGrid(..., comparisons = TRUE, type = "response")`
+    produced incorrect comparison arrows; now fixed
+
+
+emmeans 1.2.4
+-------------
+
+  * Support for model formulas such as `df$y ~ df$treat + df[["cov"]]`. This had
+    failed previously for two obscure reasons, but now works correctly.
+  * New `simplify.names` option for above types of models
+  * `emm_options()` with no arguments now returns all options in force,
+    including the defaults. This makes it more consistent with `options()`
+  * Bug fix for `emtrends()`; produced incorrect results in models with offsets. 
+  * Separated the help pages for `update.emmGrid()` and `emm_options()`
+  * New `qdrg()` function (quick and dirty reference grid) for help with
+    unsupported model objects
+
+
+emmeans 1.2.3
+-------------
+
+  * S3 methods involving packages **multcomp** and **coda** are now
+    dynamically registered, not merely exported as functions.
+    This passes checks when S3 methods are required to be registered.
+  * `cld()` has been deprecated in favor of `CLD()`. This had been a
+    headache. **multcomp** is the wrong place for the generic to be; 
+    it is too fancy a dance to export `cld` with or without having
+    **multcomp** installed.
+  * Added vignette caution regarding interdependent covariates
+  * Improved **glmmADMB** support to recover contrasts correctly
+  
+
+emmeans 1.2.2
+-------------
+
+  * Removed ggplot2, multcomp, and coda to Suggests -- thus vastly
+    reducing dependencies
+  * Added a FAQ to the FAQs vignette
+  * Modified advice in `xtending.Rmd` vignette on how to export methods
+  * Fixes to `revpairwise.emmc` and `cld` regarding comparing only 1 EMM
+  * `cld.emm_list` now returns results only for `object[[ which[1] ]]`,
+    along with a warning message.
+  * Deprecated `emmeans` specs like `cld ~ group`, a vestige of **lsmeans**
+    as it did not work correctly (and was already undocumented)
+
+
 emmeans 1.2.1
--------------------
+-------------
 
   * Moved **brms** to `Suggests` (dozens and dozens fewer dependencies)
 
@@ -23,7 +135,7 @@ emmeans 1.2
     rather than frequentist summary. Note: `summary()` automatically
     reroutes to it. Also `plot()` and `emmip()` play along.
   * Rudimentary support for **brms** package
-  * *Ad hoc* SAtterthwaite method for `nlme::lme` models
+  * *Ad hoc* Satterthwaite method for `nlme::lme` models
 
 
 emmeans 1.1.3

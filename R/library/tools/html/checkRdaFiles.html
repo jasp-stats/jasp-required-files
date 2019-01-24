@@ -25,7 +25,7 @@ the name of the function.
 <pre>
 checkRdaFiles(paths)
 resaveRdaFiles(paths, compress = c("auto", "gzip", "bzip2", "xz"),
-               compression_level)
+               compression_level, version = NULL)
 </pre>
 
 
@@ -43,6 +43,11 @@ this specifies a single directory, it is taken to refer to all
 <p>Type and level of compression: see
 <code><a href="../../base/html/save.html">save</a></code>.  Values of <code>compress</code> can be abbreviated.</p>
 </td></tr>
+<tr valign="top"><td><code>version</code></td>
+<td>
+<p>The format to be used when re-saving: see
+<code><a href="../../base/html/save.html">save</a></code>.</p>
+</td></tr>
 </table>
 
 
@@ -53,6 +58,9 @@ this specifies a single directory, it is taken to refer to all
 and if the <code>"gzip"</code> compressed size is over 10Kb, <code>"xz"</code> and
 choose the smallest compressed file (but with a 10% bias towards
 <code>"gzip"</code>).  This can be slow.
+</p>
+<p>For back-compatibility, <code>version = NULL</code> is interpreted to mean
+version 2: however version-3 files will only be saved as version 3.
 </p>
 
 
@@ -100,5 +108,5 @@ res[bad, ]
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

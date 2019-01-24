@@ -19,6 +19,8 @@ possibly modifying (a copy of) the original data.
 <pre>
 with(data, expr, ...)
 within(data, expr, ...)
+## S3 method for class 'list'
+within(data, expr, keepAttrs = TRUE, ...)
 </pre>
 
 
@@ -34,11 +36,27 @@ it can be a list or a data frame.</p>
 </td></tr>
 <tr valign="top"><td><code>expr</code></td>
 <td>
-<p>expression to evaluate.</p>
+<p>expression to evaluate; particularly for <code>within()</code>
+often a &ldquo;compound&rdquo; expression, i.e., of the form </p>
+<pre>   {
+     a &lt;- somefun()
+     b &lt;- otherfun()
+     .....
+     rm(unused1, temp)
+   }
+</pre></td></tr>
+<tr valign="top"><td><code>keepAttrs</code></td>
+<td>
+<p>for the <code><a href="list.html">list</a></code> method of <code>within()</code>,
+a <code><a href="logical.html">logical</a></code> specifying if the resulting list should keep
+the <code><a href="attributes.html">attributes</a></code> from <code>data</code> and have its
+<code><a href="names.html">names</a></code> in the same order.  Often this is unneeded as
+the result is a <em>named</em> list anyway, and then <code>keepAttrs =
+      FALSE</code> is more efficient.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>arguments to be passed to future methods.</p>
+<p>arguments to be passed to (future) methods.</p>
 </td></tr>
 </table>
 
@@ -124,6 +142,9 @@ aq &lt;- within(airquality, {     # Notice that multiple vars can be changed
 })
 head(aq)
 
+
+
+
 # example from boxplot:
 with(ToothGrowth, {
     boxplot(len ~ dose, boxwex = 0.25, at = 1:3 - 0.2,
@@ -150,5 +171,5 @@ legend(2, 9, c("Ascorbic acid", "Orange juice"),
        fill = c("yellow", "orange"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -55,5 +55,15 @@ path does not exist).
 their Windows analogues), <code><a href="file.info.html">file.info</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+
+<h3>Examples</h3>
+
+<pre>
+##' To check if files (incl. directories) are symbolic links:
+is.symlink &lt;- function(paths) isTRUE(nzchar(Sys.readlink(paths), keepNA=TRUE))
+## will return all FALSE when the platform has no `readlink` system call.
+is.symlink("/foo/bar")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,3 +1,4 @@
+FactorGraph             Draws a factor graph of a (time-varying) MGM
 bwSelect                Select optimal bandwidth for time-varying MGMs
                         and mVAR Models
 datasets                Example Datasets in the mgm Package
@@ -11,6 +12,7 @@ mvarsampler             Sampling from a mixed VAR model
 plotRes                 Plot summary of resampled sampling
                         distributions
 predict.mgm             Compute predictions from mgm model objects
+print.int               Print method for int objects
 print.mgm               Print method for mgm objects
 resample                Resampling scheme for mgm objects
 showInteraction         Retrieving details of interactions

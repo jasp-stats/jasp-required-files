@@ -9,7 +9,8 @@
 
 <h3>Description</h3>
 
-<p>Create or test for objects of mode <code>"call"</code>.
+<p>Create or test for objects of <code><a href="mode.html">mode</a></code> <code>"call"</code> (or
+<code>"("</code>, see Details).
 </p>
 
 
@@ -54,14 +55,26 @@ constructed call: if the first argument is named the name must
 partially match <code>name</code>.
 </p>
 <p><code>is.call</code> is used to determine whether <code>x</code> is a call (i.e.,
-of mode <code>"call"</code>).
+of mode <code>"call"</code> or <code>"("</code>).  Note that
 </p>
+
+<ul>
+<li><p><code>is.call(x)</code> is strictly equivalent to
+<code>typeof(x) == "language"</code>.
+</p>
+</li>
+<li><p><code><a href="is.language.html">is.language</a>()</code> is also true for calls (but also
+for <code><a href="../../grDevices/html/plotmath.html">symbol</a></code>s and <code><a href="expression.html">expression</a></code>s where
+<code>is.call()</code> is false).
+</p>
+</li></ul>
+
 <p>Objects of mode <code>"list"</code> can be coerced to mode <code>"call"</code>.
 The first element of the list becomes the function part of the call,
 so should be a function or the name of one (as a symbol; a quoted
 string will not do).
 </p>
-<p>All three are <a href="Primitive.html">primitive</a> functions. 
+<p>All three are <a href="Primitive.html">primitive</a> functions.
 </p>
 
 
@@ -101,8 +114,14 @@ is.call(call) #-&gt; FALSE: Functions are NOT calls
 cl &lt;- call("round", 10.5)
 is.call(cl) # TRUE
 cl
+identical(quote(round(10.5)), # &lt;- less functional, but the same
+          cl) # TRUE
 ## such a call can also be evaluated.
 eval(cl) # [1] 10
+
+class(cl) # "call"
+typeof(cl)# "language"
+is.call(cl) &amp;&amp; is.language(cl) # always TRUE for "call"s
 
 A &lt;- 10.5
 call("round", A)        # round(10.5)
@@ -122,5 +141,5 @@ eval(g)
 ## see also the examples in the help for do.call
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

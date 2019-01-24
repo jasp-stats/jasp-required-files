@@ -22,7 +22,7 @@ the current <code>on.exit</code> code is removed.
 <h3>Usage</h3>
 
 <pre>
-on.exit(expr = NULL, add = FALSE)
+on.exit(expr = NULL, add = FALSE, after = TRUE)
 </pre>
 
 
@@ -36,8 +36,15 @@ on.exit(expr = NULL, add = FALSE)
 <tr valign="top"><td><code>add</code></td>
 <td>
 <p>if TRUE, add <code>expr</code> to be executed after any previously
-set expressions; otherwise (the default) <code>expr</code> will overwrite
-any previously set expressions.</p>
+set expressions (or before if <code>after</code> is FALSE); otherwise (the
+default) <code>expr</code> will overwrite any previously set expressions.</p>
+</td></tr>
+<tr valign="top"><td><code>after</code></td>
+<td>
+<p>if <code>add</code> is TRUE and <code>after</code> is FALSE, then
+<code>expr</code> will be added on top of the expressions that were already
+registered. The resulting last in first out order is useful for freeing
+or closing resources in reverse order.</p>
 </td></tr>
 </table>
 
@@ -52,6 +59,9 @@ standard error handling).  Thus any functions or variables in the
 expression will be looked for in the function and its environment at
 the time of exit: to capture the current value in <code>expr</code> use
 <code><a href="substitute.html">substitute</a></code> or similar.
+</p>
+<p>If multiple <code>on.exit</code> expressions are set using <code>add = TRUE</code>
+then all expressions will be run even if one signals an error.
 </p>
 <p>This is a &lsquo;special&rsquo; <a href="Primitive.html">primitive</a> function: it only
 evaluates the argument <code>add</code>.
@@ -90,5 +100,5 @@ on.exit(par(opar))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

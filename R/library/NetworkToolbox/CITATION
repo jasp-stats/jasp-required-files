@@ -1,14 +1,18 @@
-citHeader("To cite qgraph in publications use:")
+citHeader("To cite NetworkToolbox in publications use:")
 
-citEntry(entry = "Manual",
-  title        = "{NetworkToolbox}: Methods and Measures forBrain, Cognitive, and Psychometric NetworkAnalysis in R",
-  author       = personList(as.person("Alexander Christensen")),
-  year         = "2018",
-  url          = "https://www.researchgate.net/publication/324043454_NetworkToolbox_Methods_and_Measures_for_Brain_Cognitive_and_Psychometric_Network_Analysis_in_R",
+citEntry(
+	entry = "Manual",
+	title = "{NetworkToolbox}: Methods and Measures for Brain, Cognitive, and Psychometric Network Analysis in R",
+	author = personList(as.person("Alexander P. Christensen")),
+	journal = "PsyArXiv",
+	year = "2018",
+	doi = "10.31234/osf.io/6kmav",
 
   textVersion  =
-  paste("Alexander P. Christensen (2018).",
-        "NetworkToolbox: Methods and Measures forBrain, Cognitive, and Psychometric NetworkAnalysis in R",
-        "R package version 1.1.2",
-        "https://www.researchgate.net/publication/324043454_NetworkToolbox_Methods_and_Measures_for_Brain_Cognitive_and_Psychometric_Network_Analysis_in_R")
+  paste(
+	"Christensen, A. P. (2018).",
+        "NetworkToolbox: Methods and measures for brain, cognitive, and psychometric network analysis in R.",
+	"PsyArXiv.",
+	"doi: 10.31234/osf.io/6kmav"
+	)
 )

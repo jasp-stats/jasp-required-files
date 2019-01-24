@@ -18,7 +18,7 @@ e16.28.1                Numerical verification of equations 16.28.1 to
 e18.10.9                Numerical checks of equations 18.10.9-11, page
                         650
 e1e2e3                  Calculate e1, e2, e3 from the invariants
-elliptic-package        Elliptic and modular functions
+elliptic-package        Weierstrass and Jacobi Elliptic Functions
 equianharmonic          Special cases of the Weierstrass elliptic
                         function
 eta                     Dedekind's eta function

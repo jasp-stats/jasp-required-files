@@ -5,8 +5,7 @@ NVL                     Convenience functions for handling 'NULL'
                         objects.
 all_identical           Test if all items in a vector or a list are
                         identical.
-append.rhs.formula      Functions for Querying, Validating and
-                        Extracting from ERGM Formulas
+as.rle                  Coerce to 'rle' if not already an 'rle' object.
 check.control.class     Check if the class of the control list is one
                         of those that can be used by the calling
                         function
@@ -16,8 +15,19 @@ compress_rows           A generic function to compress a row-weighted
 control.list.accessor   Named element accessor for ergm control lists
 control.remap           Overwrite control parameters of one
                         configuration with another.
+deprecation-utilities   Utilities to help with deprecating functions.
+despace                 A one-line function to strip whitespace from
+                        its argument.
+forkTimeout             Evaluate an R expression with a hard time limit
+                        by forking a process
+formula.utilities       Functions for Querying, Validating and
+                        Extracting from Formulas A suite of utilities
+                        for handling model formulas of the style used
+                        in Statnet packages.
 logspace.utils          Utilities for performing calculations on
                         logarithmic scale.
+mcmc-utilities          Utility operations for 'mcmc.list' objects
+message_print           'print' objects to the 'message' output.
 opttest                 Optionally test code depending on environment
                         variable.
 order                   Implement the 'sort' and 'order' methods for
@@ -26,15 +36,21 @@ order                   Implement the 'sort' and 'order' methods for
 paste.and               Concatenates the elements of a vector
                         (optionaly enclosing them in quotation marks or
                         parentheses) adding appropriate punctuation and
-                        unions.
+                        conjunctions.
 print.control.list      Pretty print the control list
 rle.utils               RLE utilities
 set.control.class       Set the class of the control list
 statnet.cite            'CITATION' file utilities for Statnet packages
+                        (DEPRECATED)
 statnetStartupMessage   Construct a "standard" startup message to be
                         printed when the package is loaded.
 sweep_cols.matrix       Suptract a elements of a vector from respective
                         columns of a matrix
+ult                     Extract or replace the _ult_imate (last)
+                        element of a vector or a list, or an element
+                        counting from the end.
+unwhich                 Construct a logical vector with 'TRUE' in
+                        specified positions.
 vector.namesmatch       reorder vector v into order determined by
                         matching the names of its elements to a vector
                         of names

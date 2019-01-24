@@ -33,8 +33,12 @@ $<-.data.frame	Extract.data.frame
 -.POSIXt	DateTimeClasses
 ->	assignOps
 ->>	assignOps
-...	Reserved
-..1	Reserved
+...	dots
+...elt	dots
+...length	dots
+..1	dots
+..2	dots
+..deparseOpts	deparseOpts
 ..getNamespace	ns-internal
 .Alias	base-defunct
 .amatch_bounds	agrep
@@ -49,6 +53,7 @@ $<-.data.frame	Extract.data.frame
 .Call	CallExternal
 .Call.graphics	Foreign-internal
 .Class	UseMethod
+.col	col
 .colMeans	colSums
 .colSums	colSums
 .conflicts.OK	attach
@@ -58,6 +63,7 @@ $<-.data.frame	Extract.data.frame
 .C_R_removeTaskCallback	base-internal
 .C_R_startbcprof	base-internal
 .C_R_stopbcprof	base-internal
+.Date	base-internal
 .decode_numeric_version	numeric_version
 .Defunct	Defunct
 .deparseOpts	deparseOpts
@@ -66,7 +72,9 @@ $<-.data.frame	Extract.data.frame
 .Device	dev
 .Devices	dev
 .difftime	base-internal
+.doSortWrap	base-internal
 .doTrace	trace
+.doWrap	base-internal
 .Dyn.libs	base-defunct
 .dynLibs	library.dynam
 .encode_numeric_version	numeric_version
@@ -80,6 +88,8 @@ $<-.data.frame	Extract.data.frame
 .First.lib	base-defunct
 .First.sys	Startup
 .Firstlib_as_onLoad	base-internal
+.fixupGFortranStderr	base-internal
+.fixupGFortranStdout	base-internal
 .format.zeros	formatc
 .Fortran	Foreign
 .F_dchdc	base-internal
@@ -151,12 +161,15 @@ $<-.data.frame	Extract.data.frame
 .readRDS	base-defunct
 .Renviron	Startup
 .rmpkg	search
+.row	row
 .rowMeans	colSums
+.rowNamesDF<-	row.names
 .rowSums	colSums
 .row_names_info	base-internal
 .Rprofile	Startup
 .S3method	base-defunct
 .S3PrimitiveGenerics	InternalMethods
+.S3_methods_table	ns-internal
 .saveRDS	base-defunct
 .Script	zScript
 .set_row_names	base-internal
@@ -164,6 +177,7 @@ $<-.data.frame	Extract.data.frame
 .standard_regexps	zutils
 .subset	base-internal
 .subset2	base-internal
+.sys.timezone	timezones
 .TAOCP1997init	base-internal
 .Traceback	traceback
 .traceback	traceback
@@ -215,6 +229,7 @@ all.equal.POSIXt	all.equal
 all.equal.raw	all.equal
 all.names	allnames
 all.vars	allnames
+allowInterrupts	conditions
 any	any
 anyDuplicated	duplicated
 anyDuplicated.array	duplicated
@@ -308,6 +323,7 @@ as.list.factor	list
 as.list.function	list
 as.list.numeric_version	numeric_version
 as.list.POSIXct	DateTimeClasses
+as.list.POSIXlt	DateTimeClasses
 as.logical	logical
 as.logical.factor	logical
 as.matrix	matrix
@@ -546,6 +562,7 @@ DLLInfoList	getLoadedDLLs
 DLLpath	dynload
 do.call	do.call
 dontCheck	dontCheck
+dots	dots
 double	double
 dput	dput
 dQuote	sQuote
@@ -792,6 +809,7 @@ is.vector	vector
 isatty	showConnections
 isBaseNamespace	ns-internal
 isdebugged	debug
+isFALSE	Logic
 isIncomplete	connections
 isNamespace	ns-internal
 isNamespaceLoaded	ns-load
@@ -841,7 +859,11 @@ LC_TIME	locales
 length	length
 length.POSIXlt	DateTimeClasses
 length<-	length
+length<-.Date	Dates
+length<-.difftime	difftime
 length<-.factor	length
+length<-.POSIXct	DateTimeClasses
+length<-.POSIXlt	DateTimeClasses
 lengths	lengths
 LETTERS	Constants
 letters	Constants
@@ -1080,6 +1102,7 @@ print.simple.list	print
 print.srcfile	srcfile
 print.srcref	srcfile
 print.summary.table	table
+print.summary.warnings	warnings
 print.summaryDefault	summary
 print.table	print
 print.tabular	base-defunct
@@ -1386,9 +1409,11 @@ summary.proc_time	proc.time
 summary.srcfile	srcfile
 summary.srcref	srcfile
 summary.table	table
+summary.warnings	warnings
 suppressMessages	message
 suppressPackageStartupMessages	message
 suppressWarnings	warning
+suspendInterrupts	conditions
 svd	svd
 sweep	sweep
 switch	switch
@@ -1551,8 +1576,6 @@ writeBin	readBin
 writeChar	readChar
 writeLines	writeLines
 xor	Logic
-xor.hexmode	hexmode
-xor.octmode	octmode
 xpdrows.data.frame	dataframeHelpers
 xtfrm	xtfrm
 xtfrm.AsIs	xtfrm
@@ -1572,6 +1595,7 @@ zapsmall	zapsmall
 [.Date	Dates
 [.difftime	difftime
 [.Dlist	Extract
+[.DLLInfoList	getLoadedDLLs
 [.factor	Extract.factor
 [.hexmode	hexmode
 [.listof	Extract
@@ -1596,6 +1620,7 @@ zapsmall	zapsmall
 [[.factor	Extract.factor
 [[.numeric_version	numeric_version
 [[.POSIXct	DateTimeClasses
+[[.POSIXlt	DateTimeClasses
 [[<-	Extract
 [[<-.data.frame	Extract.data.frame
 [[<-.factor	Extract.factor

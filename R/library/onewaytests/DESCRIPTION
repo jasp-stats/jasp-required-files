@@ -1,17 +1,16 @@
 Package: onewaytests
 Type: Package
 Title: One-Way Tests in Independent Groups Designs
-Version: 1.8
-Date: 2018-08-13
+Version: 1.9
+Date: 2018-10-18
 Depends: R (>= 2.15.0)
 Imports: stats, moments, car, ggplot2, nortest, graphics, utils
 Author: Osman Dag [aut, cre], Anil Dolgun [aut], N. Meric Konar [aut]
 Maintainer: Osman Dag <osman.dag@hacettepe.edu.tr>
-URL: http://www.softmed.hacettepe.edu.tr/onewaytests
-Description: Performs one-way tests in independent groups designs, pairwise comparisons, graphical approaches, assesses variance homogeneity and normality of data in each group via tests and plots. 
+Description: Performs one-way tests in independent groups designs, pairwise comparisons, graphical approaches, assesses variance homogeneity and normality of data in each group via tests and plots (Dag et al., 2018, <https://journal.r-project.org/archive/2018/RJ-2018-022/RJ-2018-022.pdf>). 
 License: GPL (>= 2)
 NeedsCompilation: no
-Packaged: 2018-08-13 08:24:48 UTC; osmandag
+Packaged: 2018-10-18 11:15:50 UTC; osmandag
 Repository: CRAN
-Date/Publication: 2018-08-13 11:20:03 UTC
-Built: R 3.4.4; ; 2018-09-16 02:25:00 UTC; windows
+Date/Publication: 2018-10-18 12:30:07 UTC
+Built: R 3.5.2; ; 2019-01-21 19:44:38 UTC; windows

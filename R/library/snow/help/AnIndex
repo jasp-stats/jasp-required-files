@@ -77,4 +77,3 @@ stopCluster.MPIcluster	snow-internal
 stopCluster.NWScluster	snow-internal
 stopCluster.spawnedMPIcluster	snow-internal
 stopNode	snow-internal
-[.cluster	snow-internal

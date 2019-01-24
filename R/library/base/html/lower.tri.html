@@ -27,7 +27,9 @@ upper.tri(x, diag = FALSE)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>a matrix.</p>
+<p>a matrix or other <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object with <code>length(dim(x)) == 2</code>.
+For back compatibility reasons, when the above is not fulfilled,
+<code><a href="matrix.html">as.matrix</a>(x)</code> is called first.</p>
 </td></tr>
 <tr valign="top"><td><code>diag</code></td>
 <td>
@@ -38,8 +40,9 @@ upper.tri(x, diag = FALSE)
 
 <h3>See Also</h3>
 
-<p><code><a href="diag.html">diag</a></code>,
-<code><a href="matrix.html">matrix</a></code>.
+<p><code><a href="diag.html">diag</a></code>, <code><a href="matrix.html">matrix</a></code>; further <code><a href="row.html">row</a></code>
+and <code><a href="col.html">col</a></code> on which <code>lower.tri()</code> and
+<code>upper.tri()</code> are built.
 </p>
 
 
@@ -52,5 +55,5 @@ m2[lower.tri(m2)] &lt;- NA
 m2
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

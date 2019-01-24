@@ -49,8 +49,10 @@ If <code>labels</code> is longer than <code>x</code> and
 <tr valign="top"><td><code>adj</code></td>
 <td>
 <p>one or two values in <i>[0, 1]</i> which specify the x
-(and optionally y) adjustment of the labels.  On most devices values
-outside that interval will also work.</p>
+(and optionally y) adjustment (&lsquo;justification&rsquo;) of the
+labels, with 0 for left/bottom, 1 for right/top, and 0.5 for
+centered.  On most devices values outside <i>[0, 1]</i> will also
+work.  See below.</p>
 </td></tr>
 <tr valign="top"><td><code>pos</code></td>
 <td>
@@ -58,13 +60,13 @@ outside that interval will also work.</p>
 overrides any <code>adj</code> value given.  Values of <code>1</code>,
 <code>2</code>, <code>3</code> and <code>4</code>, respectively indicate
 positions below, to the left of, above and to the right of
-the specified coordinates.</p>
+the specified <code>(x,y)</code> coordinates.</p>
 </td></tr>
 <tr valign="top"><td><code>offset</code></td>
 <td>
-<p>when <code>pos</code> is specified, this value gives the
-offset of the label from the specified coordinate in fractions
-of a character width.</p>
+<p>when <code>pos</code> is specified, this value controls the
+distance (&lsquo;offset&rsquo;) of the text label from the specified
+coordinate in fractions of a character width.</p>
 </td></tr>
 <tr valign="top"><td><code>vfont</code></td>
 <td>
@@ -101,10 +103,11 @@ In the latter case, quite a bit of
 mathematical notation is available such as sub- and superscripts,
 greek letters, fractions, etc.
 </p>
-<p><code>adj</code> allows <em>adj</em>ustment of the text with respect to
+<p><code>adj</code> allows <em>adj</em>ustment of the text position with respect to
 <code>(x, y)</code>.
-Values of 0, 0.5, and 1 specify left/bottom, middle and
-right/top alignment, respectively.  The default is for centered text, i.e.,
+Values of 0, 0.5, and 1 specify that <code>(x, y)</code> should align with
+the left/bottom, middle and
+right/top of the text, respectively.  The default is for centered text, i.e.,
 <code>adj = c(0.5, NA)</code>.  Accurate vertical centering needs
 character metric information on individual characters which is
 only available on some devices.  Vertical alignment is done slightly
@@ -120,8 +123,17 @@ with values returned by <code>identify</code> to recreate an interactively
 labelled plot.
 </p>
 <p>Text can be rotated by using <a href="par.html">graphical parameters</a> <code>srt</code>
-(see <code><a href="par.html">par</a></code>); this rotates about the centre set by
-<code>adj</code>.
+(see <code><a href="par.html">par</a></code>).  When <code>adj</code> is specified, a non-zero
+<code>srt</code> rotates the label about <code>(x, y)</code>.  If <code>pos</code> is
+specified, <code>srt</code> rotates the text about the point on its bounding
+box which is closest to <code>(x, y)</code>: top center for <code>pos = 1</code>,
+right center for <code>pos = 2</code>, bottom center for <code>pos = 3</code>, and
+left center for <code>pos = 4</code>.  The <code>pos</code> interface is not as
+useful for rotated text because the result is no longer centered
+vertically or horizontally with respect to <code>(x, y)</code>.  At present
+there is no interface in the <span class="pkg">graphics</span> package for directly
+rotating text about its center which is achievable however by fiddling
+with <code>adj</code> and <code>srt</code> simultaneously.
 </p>
 <p>Graphical parameters <code>col</code>, <code>cex</code> and <code>font</code> can be
 vectors and will then be applied cyclically to the <code>labels</code> (and
@@ -203,5 +215,5 @@ text(5, 9.8,
      "Jetz no chli züritüütsch: (noch ein bißchen Zürcher deutsch)")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

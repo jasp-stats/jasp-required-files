@@ -20,7 +20,7 @@ matplot(x, y, type = "p", lty = 1:5, lwd = 1, lend = par("lend"),
         pch = NULL,
         col = 1:6, cex = NULL, bg = NA,
         xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
-        ..., add = FALSE, verbose = getOption("verbose"))
+        log = "", ..., add = FALSE, verbose = getOption("verbose"))
 
 matpoints(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL,
           col = 1:6, ...)
@@ -97,11 +97,12 @@ default <code>NA</code> corresponds to the one of the underlying function
 <td>
 <p>ranges of x and y axes, as in <code><a href="plot.html">plot</a></code>.</p>
 </td></tr>
-<tr valign="top"><td><code>...</code></td>
+<tr valign="top"><td><code>log, ...</code></td>
 <td>
 <p>Graphical parameters (see <code><a href="par.html">par</a></code>) and any further
 arguments of <code>plot</code>, typically <code><a href="plot.default.html">plot.default</a></code>, may also be
-supplied as arguments to this function.  Hence, the high-level
+supplied as arguments to this function; even <code>panel.first</code> etc
+now work.  Hence, the high-level
 graphics control arguments described under <code><a href="par.html">par</a></code> and the
 arguments to <code><a href="title.html">title</a></code> may be supplied to this function.</p>
 </td></tr>
@@ -207,5 +208,5 @@ matplot(iris.S[, "Petal.Length",], iris.S[, "Petal.Width",], pch = "SCV",
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -28,8 +28,8 @@ as.tbl_cube.data.frame	as.tbl_cube
 as.tbl_cube.matrix	as.tbl_cube
 as.tbl_cube.table	as.tbl_cube
 as_data_frame	reexports
-as_data_frame.tbl_cube	as.table.tbl_cube
 as_tibble	reexports
+as_tibble.tbl_cube	as.table.tbl_cube
 auto_copy	auto_copy
 backend_dbplyr	backend_dbplyr
 band_instruments	band_members

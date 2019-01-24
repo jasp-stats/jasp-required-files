@@ -1,3 +1,12 @@
+## clipr 0.5.0
+
+- To comply with CRAN policy, `write_clip()` will now error by default if run in
+a non-interactive session. Non-interactive use must be explicitly enabled by
+setting an environment variable `CLIPR_ALLOW=TRUE`.
+
+- Documented that the default behavior when writing matrices to `write_clip()`
+is `col.names = FALSE`
+
 ## clipr 0.4.1
 
 - Correct a formatting error by adding and separation character to tables when

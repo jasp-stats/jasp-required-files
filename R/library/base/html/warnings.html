@@ -18,6 +18,16 @@ variable <code>last.warning</code> in a pleasing form.
 
 <pre>
 warnings(...)
+
+## S3 method for class 'warnings'
+summary(object, ...)
+
+## S3 method for class 'warnings'
+print(x, tags,
+      header = ngettext(n, "Warning message:\n", "Warning messages:\n"),
+      ...)
+## S3 method for class 'summary.warnings'
+print(x, ...)
 </pre>
 
 
@@ -26,7 +36,29 @@ warnings(...)
 <table summary="R argblock">
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>arguments to be passed to <code><a href="cat.html">cat</a></code>.</p>
+<p>arguments to be passed to <code><a href="cat.html">cat</a></code> (for
+<code>warnings()</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>a <code>"warnings"</code> object as returned by
+<code>warnings()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <code>"warnings"</code> or <code>"summary.warnings"</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>tags</code></td>
+<td>
+<p>if not <code><a href="missing.html">missing</a></code>, a <code><a href="character.html">character</a></code>
+vector of the same <code><a href="length.html">length</a></code> as <code>x</code>, to &ldquo;label&rdquo;
+the messages.  Defaults to <code>paste0(seq_len(n), ": ")</code> for
+<i>n &gt;= 2</i> where <code>n &lt;- length(x)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>header</code></td>
+<td>
+<p>a character string <code><a href="cat.html">cat</a>()</code>ed before the
+messages are printed.</p>
 </td></tr>
 </table>
 
@@ -51,8 +83,13 @@ been changed or if a catastrophic error occurred.
 
 <h3>Value</h3>
 
-<p>an object of S3 class <code>"warnings"</code>, basically a named
+<p><code>warnings()</code> returns an object of S3 class <code>"warnings"</code>, basically a named
 <code><a href="list.html">list</a></code>.
+</p>
+<p><code>summary(&lt;warnings&gt;)</code> returns a <code>"summary.warnings"</code>
+object which is basically the <code><a href="list.html">list</a></code> of unique warnings
+(<code>unique(object)</code>) with a <code>"counts"</code> attribute, somewhat
+experimentally.
 </p>
 
 
@@ -86,12 +123,20 @@ ow &lt;- options("warn")
 for(w in -1:1) {
    options(warn = w); cat("\n warn =", w, "\n")
    for(i in 1:3) { cat(i,"..\n"); m &lt;- matrix(1:7, 3,4) }
+   cat("--=--=--\n")
 }
-warnings()
-options(ow) # reset
+## at the end prints all three warnings, from the 'option(warn = 0)' above
+options(ow) # reset to previous, typically 'warn = 0'
 tail(warnings(), 2) # see the last two warnings only (via '[' method)
 
+## Often the most useful way to look at many warnings:
+summary(warnings())
+
+op &lt;- options(nwarnings = 10000) ## &lt;- get "full statistics"
+x &lt;- 1:36; for(n in 1:13) for(m in 1:12) A &lt;- matrix(x, n,m) # There were 105 warnings ...
+summary(warnings())
+options(op) # revert to previous (keeping 50 messages by default)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

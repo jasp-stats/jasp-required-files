@@ -1,24 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Symmetric Dense Numeric Matrices</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Symmetric Dense (Packed | Non-packed) Numeric Matrices</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for dsyMatrix-class {Matrix}"><tr><td>dsyMatrix-class {Matrix}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Symmetric Dense Numeric Matrices</h2>
+<h2>Symmetric Dense (Packed | Non-packed) Numeric Matrices</h2>
 
 <h3>Description</h3>
 
-<p>The <code>"dsyMatrix"</code> class is the class of symmetric, dense matrices
-in non-packed storage and <code>"dspMatrix"</code> is the class of symmetric
-dense matrices in packed storage.  Only the upper triangle or the
-lower triangle is stored.
+
+<ul>
+<li><p>The <code>"dsyMatrix"</code> class is the class of symmetric, dense matrices
+in <em>non-packed</em> storage and
 </p>
+</li>
+<li><p><code>"dspMatrix"</code> is the class of symmetric dense matrices in
+<em>packed</em> storage.  Only the upper triangle or the lower
+triangle is stored.
+</p>
+</li></ul>
+
 
 
 <h3>Objects from the Class</h3>
 
-<p>Objects can be created by calls of the form <code>new("dsyMatrix", ...)</code>.
+<p>Objects can be created by calls of the form <code>new("dsyMatrix",
+    ...)</code> or <code>new("dspMatrix", ...)</code>, respectively.
 </p>
 
 
@@ -96,6 +104,10 @@ symmetric matrices.</p>
 
 <h3>See Also</h3>
 
+<p>The <em>positive (Semi-)definite</em> dense (packed or non-packed
+numeric matrix classes <code><a href="dpoMatrix-class.html">dpoMatrix</a></code>,
+<code><a href="dpoMatrix-class.html">dppMatrix</a></code> and <code><a href="dpoMatrix-class.html">corMatrix</a></code>,
+</p>
 <p>Classes <code><a href="dgeMatrix-class.html">dgeMatrix</a></code> and <code><a href="Matrix-class.html">Matrix</a></code>;
 <code><a href="../../base/html/solve.html">solve</a></code>, <code><a href="norm.html">norm</a></code>, <code><a href="rcond.html">rcond</a></code>,
 <code><a href="../../base/html/t.html">t</a></code>
@@ -118,5 +130,5 @@ try(as(sy3, "dpoMatrix")) # -&gt; error: not positive definite
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
 </body></html>

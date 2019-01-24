@@ -2,15 +2,8 @@ library(cluster)
 options(digits = 6)
 data(votes.repub)
 
-## From Matrix' test-tools-1.R :
-showProc.time <- local({ ## function + 'pct' variable
-    pct <- proc.time()
-    function(final="\n") { ## CPU elapsed __since last called__
-	ot <- pct ; pct <<- proc.time()
-	## 'Time ..' *not* to be translated:  tools::Rdiff() skips its lines!
-	cat('Time elapsed: ', (pct - ot)[1:3], final)
-    }
-})
+source(system.file("test-tools.R", package = "cluster"), keep.source = FALSE)
+## -> showProc.time() ...  & doExtras
 
 agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
 summary(agn1)
@@ -48,7 +41,8 @@ dim(agr8 <- agriculture[i8, ])
 i5 <- -c(1:2, 8:12)
 dim(agr5 <- agriculture[i5, ])
 
-
+##' Check equivalence of method "flexible" (par=...)  with one
+##' of ("single", "complete", "weighted")
 chk <- function(d, method=c("single", "complete", "weighted"),
                 trace.lev = 1,
                 iC = -(6:7), # <- not using 'call' and 'method' for comparisons

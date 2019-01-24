@@ -20,8 +20,10 @@ a model formula.
 <h3>Usage</h3>
 
 <pre>
-agreg.fit(x, y, strata, offset, init, control, weights, method, rownames)
-coxph.fit(x, y, strata, offset, init, control, weights, method, rownames)
+agreg.fit(x, y, strata, offset, init, control, weights, method,
+rownames, resid=TRUE)
+coxph.fit(x, y, strata, offset, init, control, weights, method,
+rownames, resid=TRUE)
 </pre>
 
 
@@ -67,6 +69,10 @@ or 3 columns (agreg.fit).</p>
 <p>this is only needed for a NULL model, in which case it
 contains the rownames (if any) of the original data.</p>
 </td></tr>
+<tr valign="top"><td><code>resid</code></td>
+<td>
+<p>compute and return residuals.</p>
+</td></tr>
 </table>
 
 
@@ -75,6 +81,10 @@ contains the rownames (if any) of the original data.</p>
 <p>This routine does no checking that arguments are the proper length or
 type.
 Only use it if you know what you are doing!
+</p>
+<p>The <code>resid</code> and <code>concordance</code> arguments will save some compute
+time for calling routines that only need the likelihood,
+the generation of a permutation distribution for instance.
 </p>
 
 
@@ -92,5 +102,5 @@ Only use it if you know what you are doing!
 
 <p><code><a href="coxph.html">coxph</a></code></p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

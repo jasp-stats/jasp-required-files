@@ -134,6 +134,7 @@ tzone	indexTZ
 tzone<-	indexTZ
 use.reclass	as.xts
 use.xts	as.xts
+window.xts	window.xts
 xcoredata	coredata.xts
 xcoredata<-	coredata.xts
 xts	xts

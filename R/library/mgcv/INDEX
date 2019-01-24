@@ -22,6 +22,8 @@ bandchol                Choleski decomposition of a band diagonal
 betar                   GAM beta regression family
 bug.reports.mgcv        Reporting mgcv bugs.
 cSplineDes              Evaluate cyclic B spline basis
+choldrop                Down date a Cholesky factor on dropping a
+                        row/col
 choose.k                Basis dimension choice for smooths
 columb                  Reduced version of Columbus OH crime data
 concurvity              GAM concurvity measures
@@ -87,12 +89,13 @@ initial.sp              Starting values for multiple smoothing
 interpret.gam           Interpret a GAM formula
 jagam                   Just Another Gibbs Additive Modeller: JAGS
                         support for mgcv.
+k.check                 Checking smooth basis dimension
 ldTweedie               Log Tweedie density evaluation
 ldetS                   Getting log generalized determinant of penalty
                         matrices
 linear.functional.terms
                         Linear functionals of a smooth in GAMs
-logLik.gam              Log likelihood for a fitted GAM, for AIC
+logLik.gam              AIC and Log likelihood for a fitted GAM
 ls.size                 Size of list elements
 magic                   Stable Multiple Smoothing Parameter Estimation
                         by GCV or UBRE

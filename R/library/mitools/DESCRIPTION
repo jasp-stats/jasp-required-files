@@ -12,4 +12,4 @@ Packaged: 2014-09-20 11:47:46 UTC; ripley
 Depends: R (>= 2.10)
 NeedsCompilation: no
 Date/Publication: 2014-09-20 15:03:28
-Built: R 3.4.4; ; 2018-06-02 07:45:24 UTC; windows
+Built: R 3.5.2; ; 2019-01-21 15:28:56 UTC; windows

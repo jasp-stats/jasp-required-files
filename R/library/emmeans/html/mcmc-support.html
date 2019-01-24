@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Support for MCMC-based estimation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for as.mcmc.emmGrid {emmeans}"><tr><td>as.mcmc.emmGrid {emmeans}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Support for MCMC-based estimation</h2>
+
+<h3>Description</h3>
+
+<p>When a model is fitted using Markov chain Monte Carlo (MCMC) methods, 
+its reference grid contains a <code>post.beta</code> slot. These functions 
+transform those posterior samples to posterior samples of EMMs or
+related contrasts. They can then be summarized or plotted using,
+e.g., functions in the <span class="pkg">coda</span> package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'emmGrid'
+as.mcmc(x, names = TRUE, sep.chains = TRUE, ...)
+
+## S3 method for class 'emmGrid'
+as.mcmc.list(x, names = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An object of class <code>emmGrid</code></p>
+</td></tr>
+<tr valign="top"><td><code>names</code></td>
+<td>
+<p>Logical scalar or vector specifying whether variable names are
+appended to levels in the column labels for the <code>as.mcmc</code> or
+<code>as.mcmc.list</code> result &ndash; e.g., column names of <code>treat A</code> and
+<code>treat B</code> versus  just <code>A</code> and <code>B</code>. When there is more than
+one variable involved, the elements of <code>names</code> are used cyclically.</p>
+</td></tr>
+<tr valign="top"><td><code>sep.chains</code></td>
+<td>
+<p>Logical value. If <code>TRUE</code>, and there is more than one
+MCMC chain available, an <code><a href="../../coda/html/mcmc.list.html">mcmc.list</a></code> object is returned
+by <code>as.mcmc</code>, with separate EMMs posteriors in each chain.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments passed to <code><a href="../../coda/html/mcmc.html">mcmc</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code><a href="../../coda/html/mcmc.html">mcmc</a></code> or <code><a href="../../coda/html/mcmc.list.html">mcmc.list</a></code>.
+</p>
+
+
+<h3>Details</h3>
+
+<p>When the object's <code>post.beta</code> slot is non-trivial, <code>as.mcmc</code> will
+return an <code><a href="../../coda/html/mcmc.html">mcmc</a></code> or <code><a href="../../coda/html/mcmc.list.html">mcmc.list</a></code> object
+that can be summarized or plotted using methods in the <span class="pkg">coda</span> package.
+In these functions, <code>post.beta</code> is transformed by post-multiplying it by
+<code>t(linfct)</code>, creating a sample from the posterior distribution of LS
+means. In <code>as.mcmc</code>, if <code>sep.chains</code> is <code>TRUE</code> and there is in
+fact more than one chain, an <code>mcmc.list</code> is returned with each chain's
+results. The <code>as.mcmc.list</code> method is guaranteed to return an
+<code>mcmc.list</code>, even if it comprises just one chain.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>emmeans</em> version 1.3.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

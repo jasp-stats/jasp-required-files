@@ -55,7 +55,7 @@ try( mona(aniN2)    )
 try( mona(ani.non2) )
 try( mona(ani.idNA) )
 
-if(require(MASS)) withAutoprint({
+if(require(MASS, lib.loc=.Library)) withAutoprint({
     if(R.version$major != "1" || as.numeric(R.version$minor) >= 7)
         RNGversion("1.6")
     set.seed(253)

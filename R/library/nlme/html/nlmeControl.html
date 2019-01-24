@@ -20,8 +20,8 @@ used as the <code>control</code> argument to the <code>nlme</code> function.
 <pre>
 nlmeControl(maxIter, pnlsMaxIter, msMaxIter, minScale,
             tolerance, niterEM, pnlsTol, msTol,
-            returnObject, msVerbose, gradHess, apVar, .relStep,
-            minAbsParApVar = 0.05,
+            returnObject, msVerbose, msWarnNoConv,
+            gradHess, apVar, .relStep, minAbsParApVar = 0.05,
             opt = c("nlminb", "nlm"), natural = TRUE, sigma = NULL, ...)
 </pre>
 
@@ -42,9 +42,11 @@ optimization.  Default is 7.</p>
 </td></tr>
 <tr valign="top"><td><code>msMaxIter</code></td>
 <td>
-<p>maximum number of iterations
-for the <code>nlm</code> optimization step inside the <code>nlme</code>
-optimization.  Default is 50.</p>
+<p>maximum number of iterations for <code><a href="../../stats/html/nlminb.html">nlminb</a></code>
+(<code>iter.max</code>) or the <code><a href="../../stats/html/nlm.html">nlm</a></code> (<code>iterlim</code>, from the
+10-th step) optimization step inside the <code>nlme</code>
+optimization.  Default is 50 (which may be too small for e.g. for
+overparametrized cases).</p>
 </td></tr>
 <tr valign="top"><td><code>minScale</code></td>
 <td>
@@ -83,9 +85,16 @@ reached without convergence of the algorithm.  Default is
 </td></tr>
 <tr valign="top"><td><code>msVerbose</code></td>
 <td>
-<p>a logical value passed as the <code>trace</code> argument to
-<code>nlm</code> (see documentation on that function).  Default is
+<p>a logical value passed as the <code>trace</code> to
+<code><a href="../../stats/html/nlminb.html">nlminb</a>(.., control= list(trace = *, ..))</code> or
+as argument <code>print.level</code> to <code><a href="../../stats/html/nlm.html">nlm</a>()</code>.  Default is
 <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>msWarnNoConv</code></td>
+<td>
+<p>logical indicating if a <code><a href="../../base/html/warning.html">warning</a></code>
+should be signalled whenever the minimization by (<code>opt</code>) in the
+LME step does not converge; defaults to <code>TRUE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>gradHess</code></td>
 <td>
@@ -134,8 +143,9 @@ If <code>NULL</code>, as by default, or <code>0</code>, sigma is estimated.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>Further named control arguments to be passed to
-<code><a href="../../stats/html/nlminb.html">nlminb</a></code>, where used (<code>eval.max</code> and those from
+<p>Further, named control arguments to be passed to
+<code><a href="../../stats/html/nlminb.html">nlminb</a></code> (apart from <code>trace</code> and <code>iter.max</code>
+mentioned above), where used (<code>eval.max</code> and those from
 <code>abs.tol</code> down).</p>
 </td></tr>
 </table>
@@ -167,5 +177,5 @@ If <code>NULL</code>, as by default, or <code>0</code>, sigma is estimated.</p>
 nlmeControl(msMaxIter = 20, msVerbose = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-131.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
 </body></html>

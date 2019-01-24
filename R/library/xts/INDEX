@@ -43,6 +43,7 @@ split.xts               Divide into Groups by Time
 timeBased               Check if Class is Time-Based
 timeBasedSeq            Create a Sequence or Range of Times
 to.period               Convert time series data to an OHLC series
+window.xts              Extract time windows from an 'xts' series
 xts                     Create Or Test For An xts Time-Series Object
 xts-package             xts: extensible time-series
 xtsAPI                  xts C API Documentation

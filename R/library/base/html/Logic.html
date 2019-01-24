@@ -23,7 +23,8 @@ x | y
 x || y
 xor(x, y)
 
-isTRUE(x)
+isTRUE (x)
+isFALSE(x)
 </pre>
 
 
@@ -32,9 +33,9 @@ isTRUE(x)
 <table summary="R argblock">
 <tr valign="top"><td><code>x, y</code></td>
 <td>
-<p>raw or logical or &lsquo;number-like&rsquo; vectors (i.e., of types
-<code><a href="double.html">double</a></code> (class <code><a href="numeric.html">numeric</a></code>, <code><a href="integer.html">integer</a></code>
-and <code><a href="complex.html">complex</a></code>)), or objects for
+<p><code><a href="raw.html">raw</a></code>, <code><a href="logical.html">logical</a></code> or &lsquo;number-like&rsquo; vectors (i.e., of
+types <code><a href="double.html">double</a></code> (class <code><a href="numeric.html">numeric</a></code>),
+<code><a href="integer.html">integer</a></code> and <code><a href="complex.html">complex</a></code>), or objects for
 which methods have been written.</p>
 </td></tr>
 </table>
@@ -54,10 +55,13 @@ preferred in <code><a href="Control.html">if</a></code> clauses.
 </p>
 <p><code>xor</code> indicates elementwise exclusive OR.
 </p>
-<p><code>isTRUE(x)</code> is an abbreviation of <code>identical(TRUE, x)</code>, and
-so is true if and only if <code>x</code> is a length-one logical vector
-whose only element is <code>TRUE</code> and which has no attributes (not even
-names).
+<p><code>isTRUE(x)</code> is the same as
+<code>{ is.logical(x) &amp;&amp; length(x) == 1 &amp;&amp; !is.na(x) &amp;&amp; x }</code>;
+<code>isFALSE()</code> is defined analogously.  Consequently,
+<code>if(isTRUE(cond))</code> may be preferable to <code>if(cond)</code> because
+of <code><a href="NA.html">NA</a></code>s.<br />
+In earlier <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions, <code>isTRUE &lt;- function(x) identical(x, TRUE)</code>,
+had the drawback to be false e.g., for <code>x &lt;- c(val = TRUE)</code>.
 </p>
 <p>Numeric and complex vectors will be coerced to logical values, with
 zero being false and all non-zero values being true.  Raw vectors are
@@ -160,5 +164,5 @@ outer(x, x, "&amp;") ## AND table
 outer(x, x, "|") ## OR  table
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

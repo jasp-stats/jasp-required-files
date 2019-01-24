@@ -1,3 +1,92 @@
+Changed in xts 0.11-2:
+
+o  The to.period() family of functions now use the index timezone when
+   converting intraday index values to daily values (or lower frequency).
+   Thanks to Garrett See and Gabor Grothendieck for the reports (#53, #277).
+
+o  Make column names for merge() results with unnamed objects shorter and more
+   like zoo (#248). This also makes na.fill() much faster (#259).
+   BREAKING: This may break existing code for integer unnamed objects.
+
+o  Fix subset when 'index(x)' and 'i' contain duplicates. Thanks to Stack
+   Overflow user 'scs' (https://stackoverflow.com/users/4024268/scs) for the
+   report, and Philippe Verspeelt for debugging (#275).
+
+o  Fix if-statement in xts constructor that may use a logical with length > 1.
+   Thanks to @HughParsonage for the report and PR (#270, #272).
+
+o  Register shift.time.xts() method. Thanks to Philippe Verspeelt for the
+   report and PR (#268, #273).
+
+o  Conditionally register S3 methods for as.timeSeries.xts() and as.fts.xts()
+   when their respective packages are available (as requested by CRAN). Note
+   that this means these two functions are no longer exported. This may break
+   some existing code that calls the methods directly, though 'best practice'
+   is to let method dispatch determine which method to invoke.
+
+Changed in xts 0.11-1:
+
+o  Fix regression in .xts() that caused 'tclass' argument/attribute to be
+   incorrectly set to POSIXct regardless of user-provided value. Thanks to
+   @Eluvias for the report and Tom Andrews for the PR (#249, #250).
+
+o  Fix performance regression when xts object is subset by a date-time vector.
+   Thanks to Tom Andrews for the report, and the PR to fix the bug in my patch
+   (#251, #263, #264).
+
+o  Restore behavior from 0.10-2 so subsetting an empty xts object by a date-
+   time vector returns an empty xts object instead of throwing an error.
+   Thanks to @alkment for the report (#252).
+
+o  Add ability for merge.xts() to handle multiple character or complex xts
+   objects. Thanks to Ken Williams for the report (#44).
+
+o  Add ability to use "quarters" to specify tick/grid mark locations on plots.
+   This ran but produced an incorrect result in 0.10-2 and threw an error in
+   0.11-0. Thanks to Marc Weibel for the report (#256).
+
+o  Fix illegal read reported by valgrind. Thanks to Tom Andrews for the report
+   and PR (#236, #264).
+
+Changed in xts 0.11-0:
+
+o  Fix make.index.unique() to always return a unique and sorted index. Thanks
+   to Chris Katsulis for the report and example (#241).
+
+o  Add window.xts() method and completely refactor the internal binary search
+   function it depends on. Thanks to Corwin Joy for the PR, tests, review, and
+   patience (#100, #240).
+
+o  Better axis tick mark locations for plots. Thanks to Dirk Eddelbuettel for
+   the report (#246). Also incorporate axTicksByTime2() into axTicksByTime() to
+   reduce code duplication from the migration of quantmod::chart_Series() to
+   xts::plot.xts() (#74).
+
+o  Add details to plot.xts() parameters that are periodicity, now that RStudio
+   has argument completion. Thanks to Evelyn Mitchell for the PR (#154).
+
+o  periodicity() now warns instead of errors if the xts object contains less
+   than 2 observations (#230).
+
+o  first() and last() now keep dims when they would otherwise be dropped by a
+   regular row subset. This is consistent with head() and tail(). Thanks to
+   Davis Vaughan for the report (#226).
+
+o  Fix subset when ISO8601 string is outside the valid range, so it returns no
+   data instead of all rows (#96).
+
+o  Avoid partial name matches from parse.side() (inside .parseISO8601())
+   results that are passed to firstof() and lastof(). Thanks to @gp2x for the
+   report and the patch (#231).
+
+o  na.locf.xts() now loops over columns of multivariate objects in C code,
+   instead of in R. This should improve speed and memory performance. Thanks to
+   Chris Katsulis and Tom Andrews for their reports and patches (#232, #233,
+   #234, #235, #237).
+
+o  Change plot.xts() default 'pch = 0' (rectangles) to 'pch = 1' (circles) so
+   it looks more like base and zoo plots (#203).
+
 Changed in xts 0.10-2:
 
 o  na.locf.xts() and na.omit.xts() now support character xts objects. Thanks to
@@ -49,7 +138,7 @@ o  Fix weird result in merge.xts() when 'fill' argument is NULL or a zero-
 o  Fixed bug in endpoints() due to sub-second representation error via using
    integer division (%/%) with non- integer arguments (#202).
 
-o  endpoints() gained sub-second accuracy on Windows (#282).
+o  endpoints() gained sub-second accuracy on Windows (#202).
 
 o  plot.xts() no longer errors when called on an object containing a constant
    value. It chooses ylim values +/-20% from the series value (#156).

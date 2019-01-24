@@ -211,18 +211,24 @@ This is needed for system housekeeping.
 and <strong>not</strong> (as in S) that remapped by the defunct functions
 <code>symbol.C</code> or <code>symbol.For</code>.
 </p>
-<p>By default, the maximum number of DLLs that can be loaded is 100,
-which should be sufficient in almost all cases.  As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.4.0, the
-maximum can be increased <em>via</em> the environment variable
+<p>By default, the maximum number of DLLs that can be loaded is now 614
+when the OS limit on the number of open files allows or can be
+increased, but less otherwise (but it will be at least 100).  A
+specific maximum can be requested <em>via</em> the environment variable
 <span class="env">R_MAX_NUM_DLLS</span>, which has to be set (to a value between 100 and
-1000 inclusive) before starting an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session.  On Unix,
-<span class="env">R_MAX_NUM_DLLS</span> is in addition not allowed to be greater than
-60% of the OS limit on the number of open files (typically 1024, but
-256 on macOS), which can sometimes (including on macOS) be modified
-using command <code>ulimit -n</code> (<code>sh</code>, <code>bash</code>) or
-<code>limit descriptors</code> (<code>csh</code>) in the shell used to
-launch <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> .  Increasing <span class="env">R_MAX_NUM_DLLS</span> comes with some memory
-overhead.
+1000 inclusive) before starting an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session.  If the OS limit on
+the number of open files does not allow using this maximum and cannot
+be increased, <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> will fail to start with an error.  The maximum is not
+allowed to be greater than 60% of the OS limit on the number of open
+files (essentially unlimited on Windows, on Unix typically 1024, but
+256 on macOS).  The limit can sometimes (including on macOS) be
+modified using command <code>ulimit -n</code> (<code>sh</code>,
+<code>bash</code>) or <code>limit descriptors</code> (<code>csh</code>) in the
+shell used to launch <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.  Increasing <span class="env">R_MAX_NUM_DLLS</span> comes with
+some memory overhead.
+</p>
+<p>If the OS limit on the number of open files cannot be determined, the
+DLL limit is 100 and cannot be changed <em>via</em> <span class="env">R_MAX_NUM_DLLS</span>.
 </p>
 <p>The creation of DLLs and the runtime linking of them into executing
 programs is very platform dependent.  In recent years there has been
@@ -268,5 +274,5 @@ is.loaded("supsmu", "stats", "Fortran")
 is.loaded("PDF", type = "External") # pdf() device in grDevices
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

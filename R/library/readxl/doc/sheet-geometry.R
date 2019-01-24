@@ -18,7 +18,7 @@ library(readxl)
 #  read_excel("yo.xlsx", range = anchored("C4", dim = c(3, 2)))
 
 ## ----out.width = '70%', echo = FALSE-------------------------------------
-knitr::include_graphics("geometry.png")
+knitr::include_graphics("img/geometry.png")
 
 ## ------------------------------------------------------------------------
 read_excel(readxl_example("geometry.xlsx"))
@@ -39,7 +39,7 @@ read_excel(readxl_example("geometry.xlsx"), n_max = 1000)
 read_excel(readxl_example("deaths.xlsx"), range = "arts!A5:F15")
 
 ## ----out.width = '70%', echo = FALSE-------------------------------------
-knitr::include_graphics("geometry.png")
+knitr::include_graphics("img/geometry.png")
 
 ## ------------------------------------------------------------------------
 read_excel(readxl_example("geometry.xlsx"), range = "A2:C4")

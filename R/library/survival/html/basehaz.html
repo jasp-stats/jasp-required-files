@@ -38,10 +38,10 @@ prediction for all covariates equal to zero.</p>
 
 <h3>Details</h3>
 
-<p>This function is simply an alias for <code>survfit</code>, which is the
-actual function that does all the computations.  See the manual page
-for that function for the preferred use.  This function survives only
-for backwards support of prior usage.
+<p>This function is simply an alias for <code>survfit</code>, which does the
+actual work and has a richer set of options.  
+The alias exists only because some users look for predicted survival
+estimates under this name.
 </p>
 <p>The function returns a data frame containing the <code>time</code>,
 <code>cumhaz</code> and optionally the strata (if the fitted Cox model used
@@ -65,5 +65,5 @@ optionally <code>strata</code>.  The first is actually the cumulative hazard.
 
 <p><code><a href="survfit.coxph.html">survfit.coxph</a></code></p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

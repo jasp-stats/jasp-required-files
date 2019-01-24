@@ -123,8 +123,9 @@ title.  You may want to specify <code>oma</code> when changing <code>line.main</
 </td></tr>
 <tr valign="top"><td><code>row1attop</code></td>
 <td>
-<p>logical. Should the layout be matrix-like with row 1
-at the top, or graph-like with row 1 at the bottom?</p>
+<p>logical.  Should the layout be matrix-like with row 1
+at the top, or graph-like with row 1 at the bottom?  The latter (non
+default) leads to a basically symmetric scatterplot matrix.</p>
 </td></tr>
 <tr valign="top"><td><code>gap</code></td>
 <td>
@@ -133,7 +134,9 @@ at the top, or graph-like with row 1 at the bottom?</p>
 <tr valign="top"><td><code>log</code></td>
 <td>
 <p>a character string indicating if logarithmic axes are to be
-used: see <code><a href="plot.default.html">plot.default</a></code>.  <code>log = "xy"</code> specifies
+used, see <code><a href="plot.default.html">plot.default</a></code> <em>or</em> a numeric vector of
+indices specifying the indices of those variables where logarithmic
+axes should be used for both x and y.  <code>log = "xy"</code> specifies
 logarithmic axes for all variables.</p>
 </td></tr>
 </table>
@@ -172,7 +175,7 @@ are selected).
 3.2.0. If given the same value they can be used to select or re-order
 variables: with different ranges of consecutive values they can be
 used to plot rectangular windows of a full pairs plot; in the latter
-case &lsquo;diagonal&rsquo; refers to the diagonal of the full plot. 
+case &lsquo;diagonal&rsquo; refers to the diagonal of the full plot.
 </p>
 
 
@@ -197,11 +200,11 @@ Wadsworth &amp; Brooks/Cole.
 pairs(iris[1:4], main = "Anderson's Iris Data -- 3 species",
       pch = 21, bg = c("red", "green3", "blue")[unclass(iris$Species)])
 
-## formula method
-pairs(~ Fertility + Education + Catholic, data = swiss,
+## formula method, "graph" layout (row 1 at bottom):
+pairs(~ Fertility + Education + Catholic, data = swiss, row1attop=FALSE,
       subset = Education &lt; 20, main = "Swiss data, Education &lt; 20")
 
-pairs(USJudgeRatings)
+pairs(USJudgeRatings, gap=1/10) # (gap: not wasting plotting area)
 ## show only lower triangle (and suppress labeling for whatever reason):
 pairs(USJudgeRatings, text.panel = NULL, upper.panel = NULL)
 
@@ -231,12 +234,13 @@ panel.cor &lt;- function(x, y, digits = 2, prefix = "", cex.cor, ...)
     if(missing(cex.cor)) cex.cor &lt;- 0.8/strwidth(txt)
     text(0.5, 0.5, txt, cex = cex.cor * r)
 }
-pairs(USJudgeRatings, lower.panel = panel.smooth, upper.panel = panel.cor)
+pairs(USJudgeRatings, lower.panel = panel.smooth, upper.panel = panel.cor,
+      gap=0, row1attop=FALSE)
 
 pairs(iris[-5], log = "xy") # plot all variables on log scale
 pairs(iris, log = 1:4, # log the first four
       main = "Lengths and Widths in [log]", line.main=1.5, oma=c(2,2,3,2))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

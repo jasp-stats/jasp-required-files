@@ -72,8 +72,9 @@ that the algorithm failed to converge.
 <p> where <i>\bold{U}</i> and <i>\bold{V}</i> are
 orthogonal, <i>\bold{V'}</i> means <em>V transposed</em> (and conjugated
 for complex input), and <i>\bold{D}</i> is a diagonal matrix with the
-singular values <i>D[i,i]</i>.  Equivalently, <i>\bold{D = U'
-  X V}</i>, which is verified in the examples.
+(non-negative) singular values <i>D[i,i]</i> in decreasing
+order.  Equivalently, <i>\bold{D = U' X V}</i>, which is verified in
+the examples.
 </p>
 <p>The returned value is a list with components
 </p>
@@ -81,7 +82,7 @@ singular values <i>D[i,i]</i>.  Equivalently, <i>\bold{D = U'
 <tr valign="top"><td><code>d</code></td>
 <td>
 <p>a vector containing the singular values of <code>x</code>, of
-length <code>min(n, p)</code>.</p>
+length <code>min(n, p)</code>, sorted decreasingly.</p>
 </td></tr>
 <tr valign="top"><td><code>u</code></td>
 <td>
@@ -121,6 +122,9 @@ listed in the references.
 Available on-line at
 <a href="http://www.netlib.org/lapack/lug/lapack_lug.html">http://www.netlib.org/lapack/lug/lapack_lug.html</a>.
 </p>
+<p>The <a href="https://en.wikipedia.org/wiki/Singular-value_decomposition">
+&lsquo;Singular-value decomposition&rsquo;</a> Wikipedia article.
+</p>
 <p>Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
 <em>The New S Language</em>.
 Wadsworth &amp; Brooks/Cole.
@@ -144,5 +148,5 @@ s$u %*% D %*% t(s$v) #  X = U D V'
 t(s$u) %*% X %*% s$v #  D = U' X V
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

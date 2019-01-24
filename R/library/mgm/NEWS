@@ -1,3 +1,27 @@
+Changes in Version 1.2-5
+  o Bug fix in resample()
+  o Improved input checks in mgmsampler()
+  o Bug fix in prediction with mvar() objects
+  o Allow for prediction with time-varying models in new data sets
+
+Changes in Version 1.2-4
+  o Updated help files
+  o Added two example data sets for higher-order (moderated) MGMs
+
+Changes in Version 1.2-3
+  o Bug fix in bwSelect()
+  o Added verbatim option in resample() to detect zero variance bootstrap samples
+  o Fixed warning due to R 3.4.0: "Recycling array of length 1 in vector-array arithmetic is deprecatd.Use c() or as.vector() instead."
+  o Bug fix: resampling did not work together with new mvar() arguments dayvar/beepvar since Version 1.2-2
+  o Added argument "moderators" to the mgm() function that allows to ...
+  o Change default: in earlier versions if overparameterize=TRUE, all thresholds (intercepts) of categorical variables were set to zero. From this version on this threshold is estimated. The thresholds of categoricals can still be set to zero with the new argument "thresholdCat"
+  o If scale=TRUE, now interaction terms (k>2 or moderation) are scaled after computing the design matrix to ensure that all predictors have the same mean and standard deviation, which avoids different penalization depending on the scaling of a predictor
+  o Add CES-D depression dataset taken from Fried et al. (2015) to example datasets
+  o Added function FactorGraph() that computes and plots a factor graph from stationary or time-varying MGMs. The factorgraph output has been removed from the mgm() and tvmgm() functions.
+  o Added support of showInteraction() to continuous 3-way interactions
+  o For all time-varying models the estimation points are now specified on the unit interval [0,1]; for tvmvar() models, 0 is associated with the first data point that is not trivially excluded due to the maximum lag
+
+
 Changes in Version 1.2-2
   o Add running time to output of resample() function
   o Added a note and references on the normalizability of MGMs

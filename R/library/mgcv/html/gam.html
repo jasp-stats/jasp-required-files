@@ -76,7 +76,7 @@ which <code>gam</code> is called.</p>
 <tr valign="top"><td><code>weights</code></td>
 <td>
 <p> prior weights on the contribution of the data to the log likelihood. Note that a weight of 2, for example, 
-is equivalent to having made exactly the same observation twice. If you want to reweight the contributions 
+is equivalent to having made exactly the same observation twice. If you want to re-weight the contributions 
 of each datum without changing the overall magnitude of the log likelihood, then you should normalize the weights
 (e.g. <code>weights &lt;- weights/mean(weights)</code>). </p>
 </td></tr>
@@ -119,7 +119,7 @@ parameter estimation criterion (given by <code>method</code>). <code>"perf"</cod
 for the more stable direct approach. <code>"outer"</code> can use several alternative optimizers, specified in the 
 second element of <code>optimizer</code>: <code>"newton"</code> (default), <code>"bfgs"</code>, <code>"optim"</code>, <code>"nlm"</code> 
 and <code>"nlm.fd"</code> (the latter is based entirely on finite differenced derivatives and is very slow). <code>"efs"</code>
-for the extended Fellner Schall method - only currently available for general families.</p>
+for the extended Fellner Schall method of Wood and Fasiolo (2017).</p>
 </td></tr>
 <tr valign="top"><td><code>scale</code></td>
 <td>
@@ -234,11 +234,11 @@ conventional parametric component of the linear predictor. A simple example is:
 requires constraints on the smooth functions. By default these are imposed automatically and require that the function sums to zero over the observed covariate values (the presence of a metric <code>by</code> variable is the only case which usually suppresses this). 
 </p>
 <p>If absolutely any smooth functions were allowed in model fitting then maximum likelihood 
-estimation of such models would invariably result in complex overfitting estimates of 
+estimation of such models would invariably result in complex over-fitting estimates of 
 <i>f_1</i>  and <i>f_2</i>. For this reason the models are usually fit by 
 penalized likelihood 
 maximization, in which the model (negative log) likelihood is modified by the addition of 
-a penalty for each smooth function, penalizing its &lsquo;wiggliness&rsquo;. To control the tradeoff 
+a penalty for each smooth function, penalizing its &lsquo;wiggliness&rsquo;. To control the trade-off 
 between penalizing wiggliness and penalizing badness of fit each penalty is multiplied by 
 an associated smoothing parameter: how to estimate these parameters, and 
 how to practically represent the smooth functions are the main statistical questions 
@@ -274,10 +274,10 @@ coefficient matrices for each smooth term in the model formula, obtaining a mode
 the strictly parametric part of the model formula, and combining these to obtain a 
 complete model matrix (/design matrix) and a set of penalty matrices for the smooth terms. 
 The linear identifiability constraints are also obtained at this point. The model is 
-fit using <code><a href="gam.fit.html">gam.fit</a></code>, <code><a href="gam.fit3.html">gam.fit3</a></code> or varaints, which are modifications 
+fit using <code><a href="gam.fit.html">gam.fit</a></code>, <code><a href="gam.fit3.html">gam.fit3</a></code> or variants, which are modifications 
 of <code><a href="../../stats/html/glm.html">glm.fit</a></code>. The GAM 
 penalized likelihood maximization problem is solved by Penalized Iteratively 
-Reweighted  Least Squares (P-IRLS) (see e.g. Wood 2000). 
+Re-weighted  Least Squares (P-IRLS) (see e.g. Wood 2000). 
 Smoothing parameter selection is possible in one of two ways. (i)
 &lsquo;Performance iteration&rsquo; uses the fact that at each P-IRLS step a working penalized linear model
 is estimated, and the smoothing parameter estimation can be performed for each such working model.
@@ -396,6 +396,10 @@ generalized additive mixed models. Biometrics 62(4):1025-1036
 </p>
 <p>Wood S.N. (2017) Generalized Additive Models: An Introduction with R (2nd edition). Chapman
 and Hall/CRC Press.
+</p>
+<p>Wood, S.N. and M. Fasiolo (2017) A generalized Fellner-Schall method for smoothing
+parameter optimization with application to Tweedie location, scale and shape models.
+Biometrics 73 (4), 1071-1081
 </p>
 <p>Wood S.N., F. Scheipl and J.J. Faraway (2012) Straightforward intermediate rank tensor product smoothing
 in mixed models. Statistical Computing.
@@ -646,5 +650,5 @@ detach(eg)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-23 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -53,11 +53,28 @@ number of iterations for this outer loop.</p>
 </td></tr>
 <tr valign="top"><td><code>timefix</code></td>
 <td>
-<p>Resolve any near ties in the time variables.  (Floating
-point representation
-error can cause actual tied times to appear distinct.)</p>
+<p>Resolve any near ties in the time variables.</p>
 </td></tr>
 </table>
+
+
+<h3>Details</h3>
+
+<p>See the vignette &quot;Roundoff error and tied times&quot; for a more
+detailed explanation of the <code>timefix</code> option.  In short, when
+time intervals are created via subtraction then two time intervals that are
+actually identical can appear to be different due to floating point
+round off error, which in turn can make <code>coxph</code> and
+<code>survfit</code> results dependent
+on things such as the order in which operations were done or the
+particular computer that they were run on.
+Such cases are unfortunatedly not rare in practice.
+The <code>timefix=TRUE</code> option adds
+logic similar to <code>all.equal</code> to ensure reliable results.
+In analysis of simulated data sets, however, where often by defintion there
+can be no duplicates, the option will often need to be set to 
+<code>FALSE</code> to avoid spurious merging of close numeric values.
+</p>
 
 
 <h3>Value</h3>
@@ -66,15 +83,10 @@ error can cause actual tied times to appear distinct.)</p>
 </p>
 
 
-<h3>Author(s)</h3>
-
-<p>Terry Therneau </p>
-
-
 <h3>See Also</h3>
 
 <p><code><a href="coxph.html">coxph</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.41-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

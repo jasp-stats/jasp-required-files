@@ -44,8 +44,9 @@ See the comments in the help for <code><a href="save.html">save</a></code>.</p>
 <tr valign="top"><td><code>version</code></td>
 <td>
 <p>the workspace format version to use.  <code>NULL</code>
-specifies the current default version (2).  Versions prior to 2 are not
-supported, so this will only be relevant when there are later versions.</p>
+specifies the current default version (2), which has been the default
+since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 1.4.0. The only other supported value is 3, introduced in
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0.</p>
 </td></tr>
 <tr valign="top"><td><code>compress</code></td>
 <td>
@@ -115,38 +116,41 @@ non-ASCII saves.
 <h3>Examples</h3>
 
 <pre>
+fil &lt;- tempfile("women", fileext = ".rds")
 ## save a single object to file
-saveRDS(women, "women.rds")
+saveRDS(women, fil)
 ## restore it under a different name
-women2 &lt;- readRDS("women.rds")
+women2 &lt;- readRDS(fil)
 identical(women, women2)
 ## or examine the object via a connection, which will be opened as needed.
-con &lt;- gzfile("women.rds")
+con &lt;- gzfile(fil)
 readRDS(con)
 close(con)
 
 ## Less convenient ways to restore the object
 ## which demonstrate compatibility with unserialize()
-con &lt;- gzfile("women.rds", "rb")
+con &lt;- gzfile(fil, "rb")
 identical(unserialize(con), women)
 close(con)
-con &lt;- gzfile("women.rds", "rb")
+con &lt;- gzfile(fil, "rb")
 wm &lt;- readBin(con, "raw", n = 1e4) # size is a guess
 close(con)
 identical(unserialize(wm), women)
 
 ## Format compatibility with serialize():
-con &lt;- file("women2", "w")
+fil2 &lt;- tempfile("women")
+con &lt;- file(fil2, "w")
 serialize(women, con) # ASCII, uncompressed
 close(con)
-identical(women, readRDS("women2"))
-con &lt;- bzfile("women3", "w")
+identical(women, readRDS(fil2))
+fil3 &lt;- tempfile("women")
+con &lt;- bzfile(fil3, "w")
 serialize(women, con) # binary, bzip2-compressed
 close(con)
-identical(women, readRDS("women2"))
+identical(women, readRDS(fil3))
 
-
+unlink(c(fil, fil2, fil3))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.4.4 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
 </body></html>
