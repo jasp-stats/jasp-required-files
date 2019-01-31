@@ -1,4 +1,4 @@
-b96c2012373b5303e4d9166ab0d99a5e *DESCRIPTION
+636efed500e8949d7f9a8e721a640a63 *DESCRIPTION
 1992f595acb61c76175b43f5e1ee077a *INDEX
 815ca599c9df247a0c7f619bab123dad *LICENSE
 58ee0cb6a37b1efad119287f108d60b3 *Meta/Rd.rds
@@ -6,7 +6,7 @@ b96c2012373b5303e4d9166ab0d99a5e *DESCRIPTION
 bd456096574a22b17b1acc6f469417c2 *Meta/hsearch.rds
 124694881622a41567250935180e5e51 *Meta/links.rds
 ed434afa079d6c8810f82529f971d280 *Meta/nsInfo.rds
-9483d9f5124e1c0e794c24e3e160d669 *Meta/package.rds
+52c57851491a8aa96fe99d0ffa057d7d *Meta/package.rds
 f2ad5148ee5636024a07a3e9af39168d *Meta/vignette.rds
 e5beefd5b9909833643fc074adc105f7 *NAMESPACE
 e2f0ec2341d53e1b09dea59c539e467e *NEWS.md
@@ -38,14 +38,14 @@ ba950fc2e387d61d58b33c8d9662b58b *doc/datatable-secondary-indices-and-auto-index
 fb3e456e2c9b39a3bbb224ea64a77391 *doc/index.html
 b329234bed0b19fd7f8e47d896f374dc *help/AnIndex
 d9dd6250918313920b27895cf964c691 *help/aliases.rds
-a2419152d3ed1cb3f3a6373b83bfb129 *help/data.table.rdb
-fe9e2901a0c6638b835873a34f955c3a *help/data.table.rdx
-75bf25b1772e035ba086fb74898e9e46 *help/paths.rds
+316f4a7a2775bca11a6478a20e9464ac *help/data.table.rdb
+55df20419f80d06f62dd08df4a7ce543 *help/data.table.rdx
+05b9c2d75b1af7aeb0179fb8235ede65 *help/paths.rds
 d617c961971a0f377c8ea39fb28f6dd3 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-edf6509313133dc0e3a8965b9c1f1b18 *libs/i386/datatable.dll
+a87e1f00935fc26cb5e2de78e91eb336 *libs/i386/datatable.dll
 535756dca0541240bd4d50720726a11e *libs/i386/symbols.rds
-01ad24be5463cf2e80453af7739143fe *libs/x64/datatable.dll
+b8c970e129e6e0be4505f0ea3a175796 *libs/x64/datatable.dll
 26379dfd06633c4a5450a051aff40b99 *libs/x64/symbols.rds
 e48efd4babf364e97ff98e56b1980c8b *tests/1206FUT.txt
 28b57d31f67353c1192c6f65d69a12b1 *tests/1680-fread-header-encoding.csv
