@@ -6,7 +6,7 @@ from subprocess import check_output
 from subprocess import call
 import shutil
 
-current = "3.4"
+current = "3.5"
 if len(sys.argv) > 1 :
 	current = sys.argv[1]
 

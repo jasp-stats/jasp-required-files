@@ -1,0 +1,5 @@
+amodule                 Define Augmented and Parameterized Modules
+as.module               Coercion for Modules
+depend                  Declare dependencies of modules
+export                  Define Modules in R
+getSearchPath           Get the search path of an environment
