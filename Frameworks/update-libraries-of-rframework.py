@@ -27,7 +27,7 @@ def locate_libs(path):
 
 			locations.add(path)
 			#print("location: "  + path)
-			'''
+
 			output = check_output(["otool", "-L", path])
 
 			lines = output.split("\n")
@@ -36,6 +36,7 @@ def locate_libs(path):
 			for line in lines:
 
 				line = line.strip()
+				#print("otool line: " + line)
 
 				if line.startswith("/Library/Frameworks/R.framework/Versions/" + current + "/Resources/") or line.startswith("/opt/") or line.startswith("/usr/local/"):
 
@@ -46,7 +47,7 @@ def locate_libs(path):
 					if (file != path):
 						#print("recursing into " + file)
 						locations.update(locate_libs(file))
-			'''
+
 	elif os.path.isdir(path):
 
 
@@ -76,8 +77,6 @@ def extract_lib_dependencies(libs):
 
 	for lib in libs:
 
-		#print(lib)
-
 		output = check_output(["otool", "-L", lib])
 
 		lines = output.split("\n")
@@ -86,7 +85,6 @@ def extract_lib_dependencies(libs):
 		for line in lines:
 
 			line = line.strip()
-
 			if line.startswith("/Library/Frameworks/R.framework/") or line.startswith("/opt/") or line.startswith("/usr/local/"):
 
 				file = line.split()[0]
@@ -114,7 +112,9 @@ librarypath = os.path.join(wd, "R.framework/Versions/" + current + "/Resources/l
 out_lib_dir = os.path.join(wd, "R.framework/Versions/" + current + "/Resources/lib")
 
 libs = locate_libs(librarypath)
+#print(libs)
 dependencies = extract_lib_dependencies(libs)
+#print(dependencies)
 
 new_libs = [ ]
 changes = [ ]
@@ -125,11 +125,11 @@ for dependency in dependencies:
 	dep_target = os.path.join(out_lib_dir, dep_base)
 
 	if os.path.isfile(dependency):
-
+		print(dependency + " found!")
 #		if dependency != "/opt/X11/lib/libfreetype.6.dylib":
 		shutil.copyfile(dependency, dep_target)
 
-#		new_libs.append(dep_target)
+		new_libs.append(dep_target)
 
 		change = { "old" : dependency, "new" : linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/" + dep_base }
 		changes.append(change)
@@ -138,12 +138,10 @@ for dependency in dependencies:
 		changes.append(change)
 
 	else:
-
 		print(dependency + " not found!")
 
-#print(dependencies)
-#print(changes)
 
+#print(dependencies)
 for new_lib in new_libs:
 
 	lib_base = os.path.basename(new_lib)
@@ -205,9 +203,4 @@ removeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/R"))
 removeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/R"))
 removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/PrivateHeaders"))
 removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/man1"))
-removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/doc"))
-
-
-#call(["install_name_tool", "-id", linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/libR.dylib", "./R.framework/Versions/3.4/Resources/lib/libR.dylib"])
-
-#call(["install_name_tool", "-id", linkDir + "/Frameworks/R.framework/Versions/" + current + "/Resources/lib/libR.dylib", "libR.dylib"])
+#removeTreeFunc(os.path.join(wd, "R.framework/Versions/" + current + "/Resources/doc"))
