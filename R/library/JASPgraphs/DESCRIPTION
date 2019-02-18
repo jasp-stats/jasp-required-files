@@ -11,4 +11,4 @@ LazyData: true
 RoxygenNote: 6.1.1
 Suggests: testthat
 Imports: ggplot2, scales
-Built: R 3.5.2; ; 2019-01-31 12:55:22 UTC; windows
+Built: R 3.5.2; ; 2019-01-31 09:49:44 UTC; windows
