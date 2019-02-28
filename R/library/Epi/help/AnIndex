@@ -1,4 +1,6 @@
+absorbing	start.Lexis
 addCov.Lexis	addCov.Lexis
+after	start.Lexis
 apc.fit	apc.fit
 apc.frame	apc.frame
 apc.LCa	apc.LCa
@@ -9,6 +11,7 @@ as.Date.cal.yr	cal.yr
 B.dk	B.dk
 bdendo	bdendo
 bdendo11	bdendo11
+before	start.Lexis
 births	births
 blcaIT	blcaIT
 bootLexis	bootLexis
@@ -119,7 +122,6 @@ nid.Lexis	bootLexis
 Ns	Ns
 nState	simLexis
 occup	occup
-order.Lexis	transform.Lexis
 pc.lines	pc.lines
 pc.matlines	pc.lines
 pc.matpoints	pc.lines
@@ -138,6 +140,8 @@ points.Lexis	plot.Lexis
 pointsEst	plotEst
 poisreg	poisreg
 Pplot	rateplot
+pr	pr
+preceding	start.Lexis
 predict.LCa	LCa.fit
 print.floated	float
 print.Icens	Icens
@@ -159,7 +163,6 @@ ROC	ROC
 S.typh	S.typh
 show.apc.LCa	apc.LCa
 simLexis	simLexis
-sort.Lexis	transform.Lexis
 splitLexis	splitLexis
 stack.Lexis	stack.Lexis
 stackedCIF	plotCIF
@@ -167,6 +170,7 @@ stat.table	stattable
 status	start.Lexis
 subset.Lexis	subset.Lexis
 subset.stacked.Lexis	subset.Lexis
+succeeding	start.Lexis
 summary.LCa	LCa.fit
 summary.Lexis	summary.Lexis
 surv1	erl
@@ -182,6 +186,7 @@ tmat	stack.Lexis
 tmat.Lexis	stack.Lexis
 transform.Lexis	transform.Lexis
 transform.stacked.Lexis	transform.Lexis
+transient	start.Lexis
 twoby2	twoby2
 Wald	ci.lin
 Y.dk	Y.dk

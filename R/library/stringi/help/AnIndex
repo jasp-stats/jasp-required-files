@@ -214,6 +214,7 @@ stri_subset_fixed	stri_subset
 stri_subset_fixed<-	stri_subset
 stri_subset_regex	stri_subset
 stri_subset_regex<-	stri_subset
+stri_sub_replace	stri_sub
 stri_timezone_get	stri_timezone_set
 stri_timezone_info	stri_timezone_info
 stri_timezone_list	stri_timezone_list

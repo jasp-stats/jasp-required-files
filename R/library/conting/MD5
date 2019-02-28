@@ -1,4 +1,4 @@
-6ec3339a44af2c534e2bda187b024d08 *DESCRIPTION
+48dafcd97869fef6faf5cc1d02d05b39 *DESCRIPTION
 4b461ab4b19dd5003b3e218625b0c9b6 *INDEX
 3dc20a04f20431ed670078d55c133879 *Meta/Rd.rds
 3022c6fce19903bc1286941b170ae446 *Meta/data.rds
@@ -6,7 +6,7 @@
 fb6a70c875870e2e93de2b930876e039 *Meta/hsearch.rds
 ee4aa9f737a0c938c3acbafe7a3b6274 *Meta/links.rds
 d186a3eeac2848d748bca1133c5ae113 *Meta/nsInfo.rds
-6025871c12b33c27354f37f99a7451f8 *Meta/package.rds
+ff80d389a662029acd3019c9b7e48d35 *Meta/package.rds
 67dbc652656de0237051424e9187e90c *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/conting
 181599dfdbd95c9cef6fc2d50ae44cee *R/conting.rdb
@@ -17,8 +17,8 @@ bc0fceee9db6680289800945ba40c4d0 *R/conting.rdx
 02f469d3f15535f057ed109e5b40ecd1 *data/spina.rda
 21f5f7e25d63726ef96b4815a484aeed *help/AnIndex
 d8afcc4ae33c28ab60a9d639757c4367 *help/aliases.rds
-16cb1aa3224cb068b4e7d0c544808dab *help/conting.rdb
-76f62840a94bce65b9a8a48bec6a8102 *help/conting.rdx
-5515dc8039266c8a006e65ad06b9ccd7 *help/paths.rds
+c46be7bf8bf07397e6cb0362bdba2fb9 *help/conting.rdb
+9a304437ca8439e62f5798aa0327aba8 *help/conting.rdx
+1dc901160a40de8266f676dc05277b37 *help/paths.rds
 9d258ac2a0b6f6ce758dc8daffb8a1c1 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

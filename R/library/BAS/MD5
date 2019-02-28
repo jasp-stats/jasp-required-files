@@ -1,5 +1,5 @@
 a48bc93f2aa57e0c233fe386d8997c06 *CITATION
-34a1a2062a73cf94c2a76dd2d66c4399 *DESCRIPTION
+d47c041dbf1e6ca67ef5fe5f0d9e776d *DESCRIPTION
 d363a3d72ea15728907accf803815008 *INDEX
 8b184068e29fa4047321d8cf81fdba5d *Meta/Rd.rds
 a40a07003e562ab051fc5d7df9d8a8a4 *Meta/data.rds
@@ -8,7 +8,7 @@ a40a07003e562ab051fc5d7df9d8a8a4 *Meta/data.rds
 b2b9ba6ae704194a0368357a9544b97f *Meta/hsearch.rds
 d0edf46aede96b978725ef5f8d33e1c9 *Meta/links.rds
 de20b3f379ba686e3581aec9c4e4afdd *Meta/nsInfo.rds
-24c2502510e1467c154c0877f0f7c6a7 *Meta/package.rds
+50b513085ab4b4358668044c78c740de *Meta/package.rds
 0d9b3759bf452a8dabbc990a9b5f216e *Meta/vignette.rds
 af2d4ba7e87b9a8d8f02e844f1c2d169 *NAMESPACE
 708d06721d1f1aba2c1d6beea7af2263 *NEWS.md
@@ -25,15 +25,15 @@ f378765d1c7373d93373fa258c84e8e1 *doc/BAS-vignette.R
 2bdc7c576ca4b865783eff62bc162ac7 *doc/BAS-vignette.html
 1e70db0721a8c324971079bcfc602567 *doc/index.html
 fc004c98bd3883529733920a35d51604 *help/AnIndex
-23b26c8d8520c1c30dd560a73a174816 *help/BAS.rdb
-0e2d4791404995339ca944eebb1abf07 *help/BAS.rdx
+51b91ae5d00ea779b19248102f53756d *help/BAS.rdb
+6d201e9ba545fd46b31bcd93f1727b64 *help/BAS.rdx
 68782d8c4628a007fd0b7d45cf519704 *help/aliases.rds
 11ff3d8ca3498b0a34c7e5fafdd2f4dd *help/figures/unnamed-chunk-3-1.png
-4de761ff888732fd4efb212c68aa2553 *help/paths.rds
+0ff4ba7caedc81d2ff9fe8571f56f1c7 *help/paths.rds
 56a9201847bed742f959cc154cdafda0 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-e2f3ed6243299a885e0625c833bf0fbc *libs/i386/BAS.dll
+dfa646d4478d91c324c0bd3fce1b8e48 *libs/i386/BAS.dll
 14e98a49d3ce6d3c6d13e621236f533d *libs/i386/symbols.rds
-461372f23f2c0e1737d60fe64db3a40f *libs/x64/BAS.dll
+5c4492d78d8746eed330d362c2cbb509 *libs/x64/BAS.dll
 7abe36224d359d2f13fab958e57dc0f5 *libs/x64/symbols.rds
 133fe7f7c6d0c298a8b7aa8675ccb39b *testdata/JASP-testdata.csv

@@ -1,5 +1,5 @@
 36b4ecf2f670d7cc5dbd8ffc8393bf39 *CITATION
-aac4d86478ceb5698da22a1b5b23d9b8 *DESCRIPTION
+d1de8bdbdad7820627273241a58b62d3 *DESCRIPTION
 2e4b2ac5cc6a2df7652fb73e10536ef8 *INDEX
 bf4771a352eea182f8857ae19ab39f31 *LICENSE
 10212be515440c9b4dd6a9427d11f988 *Meta/Rd.rds
@@ -8,7 +8,7 @@ bf4771a352eea182f8857ae19ab39f31 *LICENSE
 ffa0f36a6941833472c80054138bd30a *Meta/hsearch.rds
 0af8477d258c34ff90dc1d6b5cc4d587 *Meta/links.rds
 2bbf592c157071db7577b62f3b871532 *Meta/nsInfo.rds
-740e3325c906ecb449b798ee2c9d2b1f *Meta/package.rds
+d672754fe699f6c7c8c86a054b72c865 *Meta/package.rds
 89cef505068b8112456bbc040469c298 *Meta/vignette.rds
 5b727d383e1ea6bef8ce90fee8d0534c *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/etm
@@ -24,12 +24,12 @@ d995bff8026f0562f9b944ada1ed995c *doc/etmCIF_tutorial.Rnw
 5ac2d7fb7c4cc97d8fc3b16083318a36 *doc/index.html
 6dd990e9824b7efe3eb9e972452c2b1d *help/AnIndex
 a88863fc3e284e7a1b9e7719847a0dd6 *help/aliases.rds
-72d04589e1ad5eaf85d68c808ead7ec0 *help/etm.rdb
-8bcc46b0dc4a6115bf1e5f3f298ce629 *help/etm.rdx
-fee43b3f94318dd219122499eb331bf9 *help/paths.rds
+86419740826b50c31c67118ded141a2c *help/etm.rdb
+021368d4d153cf94b48d084d9d13f2f6 *help/etm.rdx
+13579e01f70a954d4fa3856eba867b13 *help/paths.rds
 6a3cf2fb57fc012b070ad290ee8e0ebf *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-bcdd75c44b4c5476d9cd5bf563fdb8da *libs/i386/etm.dll
+220eb3e3542c180a6e9f2248a7c5a3e9 *libs/i386/etm.dll
 7c1aabda4bebee0f8ab26421c1093af4 *libs/i386/symbols.rds
-973c1093fccb3caafcfa8379483dd119 *libs/x64/etm.dll
+9ee36a4eef801194ec931b536e4ab148 *libs/x64/etm.dll
 734b49388bc1227cac915bd73a342520 *libs/x64/symbols.rds

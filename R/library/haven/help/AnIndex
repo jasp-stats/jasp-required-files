@@ -1,6 +1,7 @@
 as_factor	as_factor
 as_factor.data.frame	as_factor
 as_factor.haven_labelled	as_factor
+as_factor.labelled	as_factor
 format_tagged_na	tagged_na
 is.labelled	labelled
 is_tagged_na	tagged_na

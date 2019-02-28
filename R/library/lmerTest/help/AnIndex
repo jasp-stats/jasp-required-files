@@ -1,5 +1,6 @@
 lmerTest-package	lmerTest-package
 anova.lmerModLmerTest	anova.lmerModLmerTest
+anova.merModLmerTest	legacy
 as.data.frame.ls_means	as.data.frame.ls_means
 as_lmerModLmerTest	as_lmerModLmerTest
 calcSatterth	contestMD.lmerModLmerTest
@@ -17,8 +18,10 @@ contestMD.lmerModLmerTest	contestMD.lmerModLmerTest
 devfun_vp	devfun_vp
 difflsmeans	ls_means
 difflsmeans.lmerModLmerTest	ls_means.lmerModLmerTest
+difflsmeans.merModLmerTest	legacy
 doolittle	doolittle
 drop1.lmerModLmerTest	drop1.lmerModLmerTest
+drop1.merModLmerTest	legacy
 ensure_full_rank	ensure_full_rank
 get_contrasts_type1	get_contrasts_type1
 get_contrasts_type3	get_contrasts_type3
@@ -30,14 +33,19 @@ get_model_matrix	get_model_matrix
 get_rdX	get_rdX
 ham	ham
 is_estimable	is_estimable
+legacy	legacy
 lmer	lmer
 lmerModLmerTest	lmerModLmerTest-class
 lmerModLmerTest-class	lmerModLmerTest-class
 lmerTest	lmerTest-package
 lsmeansLT	ls_means
 lsmeansLT.lmerModLmerTest	ls_means.lmerModLmerTest
+lsmeansLT.merModLmerTest	legacy
 ls_means	ls_means
 ls_means.lmerModLmerTest	ls_means.lmerModLmerTest
+ls_means.merModLmerTest	legacy
+merModLmerTest	merModLmerTest-class
+merModLmerTest-class	merModLmerTest-class
 nullspace	nullspace
 plot.ls_means	plot.ls_means
 plot.step_list	plot.step_list
@@ -54,6 +62,8 @@ single_anova	single_anova
 step	step
 step.default	step
 step.lmerModLmerTest	step.lmerModLmerTest
+step.merModLmerTest	legacy
 summary.lmerModLmerTest	summary.lmerModLmerTest
+summary.merModLmerTest	legacy
 term_contain	term_contain
 TVbo	TVbo

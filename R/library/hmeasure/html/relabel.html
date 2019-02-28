@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Converts class labels to the default choice of numeric 0s and...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for relabel {hmeasure}"><tr><td>relabel {hmeasure}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Converts class labels to the default choice of numeric 0s and 1s
+</h2>
+
+<h3>Description</h3>
+
+<p>Converts class labels to the default choice of numeric 0s and 1s according to a specific set of conventions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+relabel(labels)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>labels</code></td>
+<td>
+
+<p>a vector/array of labels, with two levels
+</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function turns a vector of class labels into the default format: a numeric array with levels 0 and 1. It accepts numeric, logical, and factor arrays, and performs the conversion in accordance with the following conventions. For a numeric vector with values a and b, the minimum of (a,b) will be mapped to 0 and their maximum to 1. For a logical vector with values TRUE and FALSE, TRUE is mapped to 1 and FALSE to 0. Levels of a factor are interpreted as character strings and then mapped to 0s and 1s in alphabetical order, e.g., &quot;male&quot; is mapped to 1, and &quot;female&quot; to 0, and similarly &quot;true&quot; is mapped to 1 and &quot;false&quot; to 0. This convention being arbitrary, the user must make sure (s)he is happy with the results. For instance, if the labels are &quot;cases/non-cases&quot;, the default mapping maps &quot;cases&quot; to 0s, whereas 1s would have been the intuitive choice in this instance. To avoid confusion, a message is produced describing the switch whenever one happens. 
+</p>
+<p>The code will complain if the number of distinct labels in the input vector is not 2. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>a numeric array of 0s and 1s
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Christoforos Anagnostopoulos &lt;canagnos@imperial.ac.uk&gt; and David J. Hand &lt;d.j.hand@imperial.ac.uk&gt;
+</p>
+<p>Maintainer: Christoforos Anagnostopoulos &lt;canagnos@imperial.ac.uk&gt;
+</p>
+
+
+<h3>See Also</h3>
+
+<p>plotROC, summary.hmeasure, misclassCounts, HMeasure
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+relabel(c("0","1","1"))
+relabel(c("no","yes","yes"))
+relabel(c(FALSE,TRUE,TRUE))
+
+# the code complains if the number of classes present in the vector is not 2
+try(relabel(c("0","1","2")))
+try(relabel(c("1","1","1")))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>hmeasure</em> version 1.0-2 <a href="00Index.html">Index</a>]</div>
+</body></html>

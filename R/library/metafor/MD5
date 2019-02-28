@@ -1,5 +1,5 @@
 4c8495b58b58c2e4f08e82f2376d4846 *CITATION
-cdabc9e9d2af8958754e5f5649306a08 *DESCRIPTION
+ea7c4b20eea062a94ece91c4e37daea3 *DESCRIPTION
 6e163c9f4a1297f1c8f9946b118cbe6e *INDEX
 6f241509e5af201e8efbc32589e42964 *Meta/Rd.rds
 efad0b1d32f1b03c4cfbfa15d1633fec *Meta/data.rds
@@ -7,7 +7,7 @@ efad0b1d32f1b03c4cfbfa15d1633fec *Meta/data.rds
 ee6c5d8563cdf87c00b1bd62ea914604 *Meta/hsearch.rds
 1b285bc6c4b59947669ae2a673c34890 *Meta/links.rds
 a142a2f42d56ea864aedb6ab2775809a *Meta/nsInfo.rds
-d4bae64f296e2d6245004d8ec1265bc5 *Meta/package.rds
+da481f2b687723fd443aa806f7138d35 *Meta/package.rds
 39720fb13b951ff202a5a9aa2a7014a1 *Meta/vignette.rds
 fe6a2e12c0502bac4ac1b48f0bb2d24d *NAMESPACE
 65f60bd63ff179cac10b4394ce8355c3 *NEWS
@@ -26,8 +26,8 @@ b22e3397f4cea09c48a2c785ff0cae6a *doc/metafor.pdf.asis
 16473429c1574ed37f2cd21bbd6a06e4 *help/aliases.rds
 1b0e85579fb584a3391db02bdc8fa87f *help/figures/structs1.png
 4c9a0297ba0711e40d6ce909e7105d24 *help/figures/structs2.png
-d4e58a9aca226d0c54f1b4905e03ac2b *help/metafor.rdb
-a03c65d7bf7ccb436b7b29dd32c78928 *help/metafor.rdx
-e42ac45aab595adce96e47efa3f8bb16 *help/paths.rds
+85036ce1d4f51060ace98504e28b2a9e *help/metafor.rdb
+c3ec8d390e752044e777f2d14bdfaccf *help/metafor.rdx
+323fdf48ee412b195f033e8b5f183bf0 *help/paths.rds
 64d633fe407705aa4d461ff2467c7d9b *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

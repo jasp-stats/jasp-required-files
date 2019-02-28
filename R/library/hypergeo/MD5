@@ -1,11 +1,11 @@
-2e3fe7f2ccdeda760cc1e6b25214f262 *DESCRIPTION
+8cc784071a73931aed49e68462fcceeb *DESCRIPTION
 3ca67cd3aa794cce4b8f9c5c1b3d1b2e *INDEX
 91ba6b212b477a6492e1832d69b9d65f *Meta/Rd.rds
 77a30dbd9a48297ae6e6ef2194a95267 *Meta/features.rds
 b84a2efa985b11f34750b04dc268ee99 *Meta/hsearch.rds
 49a3cfecb9199cb48ac8907ea5512dd0 *Meta/links.rds
 23ab6a8e79c4502b55e8794e167c28b8 *Meta/nsInfo.rds
-ff1667c6ad0c1cfabeb89c712601ea17 *Meta/package.rds
+26b65582f406bce91f4309aefaeca57a *Meta/package.rds
 7db2fb6f40acc5fec04c5cbfee7eeea5 *Meta/vignette.rds
 4e86dd02472144647148025c26b1bd99 *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/hypergeo
@@ -17,8 +17,8 @@ ebf0fc819595d631b8bf280c4b049940 *R/hypergeo
 a30adbc98f6de9b389f92c0446715fe7 *doc/index.html
 70f96f36fa7e36a231a64a9a82a42fe2 *help/AnIndex
 8444595b54c72ed8a9c21a9411dc4ca3 *help/aliases.rds
-0f380f96167bed22c1a42666644d267c *help/hypergeo.rdb
-ed1ec89bafc4f1bf2c97617bd62e7327 *help/hypergeo.rdx
-050c760ac8d96cd50795610e927a8ae5 *help/paths.rds
+be6c92e750865caaabd1c5f14cf64f85 *help/hypergeo.rdb
+494903f809e2d1b2866a17c16a076fc2 *help/hypergeo.rdx
+d78e8704f12033b0f80248f4dcd3926d *help/paths.rds
 ab97700509d7b1d3440eb7fdf6eb7e3d *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

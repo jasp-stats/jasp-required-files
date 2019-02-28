@@ -1,6 +1,6 @@
 Package: readxl
 Title: Read Excel Files
-Version: 1.2.0
+Version: 1.3.0
 Authors@R: 
     c(person(given = "Hadley",
              family = "Wickham",
@@ -42,17 +42,16 @@ Description: Import excel files into R. Supports '.xls' via the
 License: GPL-3
 URL: http://readxl.tidyverse.org, https://github.com/tidyverse/readxl
 BugReports: https://github.com/tidyverse/readxl/issues
-Imports: cellranger, progress, Rcpp (>= 0.12.18), tibble (>= 1.3.1),
-        utils
+Imports: cellranger, Rcpp (>= 0.12.18), tibble (>= 1.3.1), utils
 Suggests: covr, knitr, rmarkdown, rprojroot (>= 1.1), testthat
 LinkingTo: progress, Rcpp
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-Note: libxls-SHA 53cd37b
+Note: libxls-SHA cef1393
 RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2018-12-19 21:54:40 UTC; jenny
+Packaged: 2019-02-15 03:28:35 UTC; jenny
 Author: Hadley Wickham [aut] (<https://orcid.org/0000-0003-4757-117X>),
   Jennifer Bryan [aut, cre] (<https://orcid.org/0000-0002-6983-2759>),
   RStudio [cph, fnd] (Copyright holder of all R code and all C/C++ code
@@ -65,6 +64,6 @@ Author: Hadley Wickham [aut] (<https://orcid.org/0000-0003-4757-117X>),
   Evan Miller [ctb, cph] (Author of included libxls code)
 Maintainer: Jennifer Bryan <jenny@rstudio.com>
 Repository: CRAN
-Date/Publication: 2018-12-19 23:50:03 UTC
-Built: R 3.5.2; x86_64-w64-mingw32; 2019-01-21 19:15:39 UTC; windows
+Date/Publication: 2019-02-15 15:10:07 UTC
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-02-26 06:13:42 UTC; windows
 Archs: i386, x64

@@ -1,3 +1,16 @@
+Changes in version 1.2.3
+
+o removed isSym function
+
+o fixed bugs in degree, strength, hybrid, and edgerep functions (symmetric matrix check is fixed)
+
+o naming order bug fix in comcat
+
+o removed bootgen and bootgen.plot functions (experimental funcitons that may return later)
+
+o updated several functions' documentation
+
+
 Changes in version 1.2.2
 
 o comcat: added functionality to compute connectivity across communities or for each community

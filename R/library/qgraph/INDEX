@@ -32,18 +32,9 @@ plot.qgraph             Plot method for "qgraph"
 print.qgraph            Print edgelist
 qgraph                  qgraph
 qgraph.animate          Animate a growing network
-qgraph.cfa              CFA using Structural Equation Modelling
-qgraph.efa              qgraph.efa
-qgraph.gui              Graphical user interface for qgraph
-qgraph.lavaan           qgraph: Structural Equation Modelling
 qgraph.layout.fruchtermanreingold
                         qgraph.layout.fruchtermanreingold
 qgraph.loadings         qgraph.loadings
-qgraph.panel            qgraph.panel
-qgraph.pca              qgraph.pca
-qgraph.sem              qgraph: Structural Equation Modelling
-qgraph.semModel         qgraph: SEM model pathdiagram
-qgraph.svg              qgraph.svg
 qgraphAnnotate          Annotates a qgraph object with mouseover
                         tooltips in a HTML file
 qgraphMixed             Plots a mixed graph with both directed and

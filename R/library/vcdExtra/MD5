@@ -1,4 +1,4 @@
-25d79da530df80d41d3bbaf02d7af4f2 *DESCRIPTION
+7240055e481164e2d2259a024ba2a017 *DESCRIPTION
 3f58cd7c030f3e03cca0622e83061092 *INDEX
 fb612d9b384d6223d6c73186775546d8 *Meta/Rd.rds
 dbf0564efa78d9cf76440362bfd42c69 *Meta/data.rds
@@ -7,7 +7,7 @@ af123e58a196f0bf91bd342d498b51e3 *Meta/demo.rds
 2a0e56d18c031a3979d39ed11c507d5c *Meta/hsearch.rds
 51adcaf7e316654cea14b065bbbb4e2b *Meta/links.rds
 3db0f01534ef23fbd8e6b220fcd2988a *Meta/nsInfo.rds
-06e0649d33e8eeafaf4db37b60d0ce1d *Meta/package.rds
+4e67e43ea65f30ecd1d4c9fb137cc016 *Meta/package.rds
 047d5c5155a0a078b531cfaa5f1d54f7 *Meta/vignette.rds
 54bd83d63a6c74ec0543e1704b88a5fc *NAMESPACE
 14d2e4e7edfa4b464cf43efd95306651 *NEWS
@@ -35,8 +35,8 @@ ce5a6081f161172160bd768613435101 *doc/index.html
 02bc6e94f98f98830a2879f9c06e298e *doc/vcd-tutorial.pdf
 a12ef10e1522032cf062e521f4ed1e7a *help/AnIndex
 b210263a51ab54381d99baf23815a74a *help/aliases.rds
-b29c5a63b4b79611b275bb513889171b *help/paths.rds
-4fe3a921be1dc804a61fc0b019f19ca0 *help/vcdExtra.rdb
-21f9df7b55e4d2777f1ab95288ad1665 *help/vcdExtra.rdx
+ac1f3113b47ff82ee276e2980877fee0 *help/paths.rds
+6037a87a089b505a0e4e33257fa1842d *help/vcdExtra.rdb
+dc3379ebcb26255450156a93a4f4ce5c *help/vcdExtra.rdx
 321fd9e45b73901049dbbdfcb2a4b921 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

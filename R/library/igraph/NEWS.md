@@ -1,4 +1,16 @@
 
+# igraph 1.2.4
+
+Feb 13, 2019
+
+No user visible changes.
+
+# igraph 1.2.3
+
+Jan 27, 2019
+
+No user visible changes.
+
 # igraph 1.2.2
 
 Jul  27, 2018

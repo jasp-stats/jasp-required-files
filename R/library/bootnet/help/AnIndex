@@ -1,6 +1,7 @@
 anRpackage-package	bootnet-package
 anRpackage	bootnet-package
 binarize	binarize
+bootInclude	bootInclude
 bootnet	bootnet
 bootnet_adalasso	estimateNetwork
 bootnet_cor	estimateNetwork
@@ -13,8 +14,11 @@ bootnet_IsingSampler	estimateNetwork
 bootnet_LoGo	estimateNetwork
 bootnet_mgm	estimateNetwork
 bootnet_pcor	estimateNetwork
+bootnet_piecewiseIsing	estimateNetwork
 bootnet_relimp	estimateNetwork
+bootnet_SVAR_lavaan	estimateNetwork
 bootnet_TMFG	estimateNetwork
+bootThreshold	bootThreshold
 corStability	corStability
 differenceTest	differenceTest
 estimateNetwork	estimateNetwork

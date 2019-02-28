@@ -1,5 +1,5 @@
 1868ee22006e7378323f6581a91690eb *CITATION
-757f98ae1c3b40665d6a1fda055eb05a *DESCRIPTION
+ccc76e014ad10f9b753861cddf114a7e *DESCRIPTION
 a191b9a33a93b57b405dad60d7e9c82e *INDEX
 b445b09270792855ecde8cde55a7efa1 *Meta/Rd.rds
 6cd2344e746dfa6a75cbb40e868f248e *Meta/data.rds
@@ -8,7 +8,7 @@ b445b09270792855ecde8cde55a7efa1 *Meta/Rd.rds
 68cfae1b6fa0b48257f7fe98883ad7de *Meta/hsearch.rds
 8f0885aad29028c6dbef9f0a8b3f69bd *Meta/links.rds
 7fa10e6883809cb139c1d4c2717d6b55 *Meta/nsInfo.rds
-c837f7814b3ad42d43f21d5310b45c5a *Meta/package.rds
+5566871cd12a8ebf97d60723a078382f *Meta/package.rds
 8e06dfd5980cb01b2b95c772a693da50 *Meta/vignette.rds
 d9d1b59e8b88b4ad346afc404ea475cc *NAMESPACE
 f5506329b79a2d8fd3e2ec8c7a2a3160 *NEWS.Rd
@@ -36,8 +36,8 @@ c9625f3e256af3b514d1a6d09f224256 *doc/residual-shadings.pdf
 6772a90b3b3a426beae043180b495e4a *doc/strucplot.pdf
 c1cd01642961326b312dc48a7123eb58 *help/AnIndex
 646a5cc557bbe9e6179f33585b649ba6 *help/aliases.rds
-fcacd901dfebcb12710745aecbf6490e *help/paths.rds
-0d615f777ce93f521b8670e5ec91b169 *help/vcd.rdb
-f9c5c9576fea2a1e0db9e806004fc476 *help/vcd.rdx
+ea4373be2f81e7cf2da0e5806f0c914d *help/paths.rds
+0a374e967bd969a82decd53621589c2e *help/vcd.rdb
+4a6b36158e4899e28bad1999ea89c69b *help/vcd.rdx
 917242738b9a5f7a8aaa964ff66a0581 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

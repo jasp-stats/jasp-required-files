@@ -1,5 +1,5 @@
 ## ---- results='asis', echo=FALSE-----------------------------------------
-cat(gsub("\\n   ", "", packageDescription("modules", fields = "Description")))
+cat(gsub("\\n   ", "", packageDescription("modules", fields = "Description",encoding = NA)))
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  install.packages("modules")
@@ -10,9 +10,13 @@ cat(gsub("\\n   ", "", packageDescription("modules", fields = "Description")))
 ## ------------------------------------------------------------------------
 library("modules")
 m <- module({
-  boringFunction <- function() "boring output"
+  foo <- function() "foo"
 })
-m$boringFunction()
+m$foo()
+
+## ----eval = FALSE--------------------------------------------------------
+#  m <- modules::use("module.R")
+#  m$foo()
 
 ## ----error=TRUE----------------------------------------------------------
 x <- "hey"
@@ -20,6 +24,7 @@ m <- module({
   someFunction <- function() x
 })
 m$someFunction()
+getSearchPathContent(m)
 
 ## ------------------------------------------------------------------------
 m <- module({
@@ -36,6 +41,7 @@ m <- module({
 
 })
 m$functionWithDep(1:10)
+getSearchPathContent(m)
 
 ## ------------------------------------------------------------------------
 m <- module({
@@ -46,6 +52,19 @@ m <- module({
 
 })
 m$functionWithDep(1:10)
+
+## ------------------------------------------------------------------------
+mm <- module({
+  m <- use(m)
+  anotherFunction <- function(x) m$functionWithDep(x)
+})
+mm$anotherFunction(1:10)
+
+## ----eval = FALSE--------------------------------------------------------
+#  module({
+#    m <- use("someFile.R")
+#    # ...
+#  })
 
 ## ------------------------------------------------------------------------
 m <- module({
@@ -60,7 +79,7 @@ m <- module({
 
 })
 
-names(m)
+m
 
 ## ----error=TRUE----------------------------------------------------------
 library("parallel")
@@ -80,100 +99,4 @@ m <- module({
 cl <- makeCluster(2)
 clusterMap(cl, m$fun, 1:2)
 stopCluster(cl)
-
-## ------------------------------------------------------------------------
-code <- "
-import('stats', 'median')
-functionWithDep <- function(x) median(x)
-"
-
-fileName <- tempfile(fileext = ".R")
-writeLines(code, fileName)
-
-## ------------------------------------------------------------------------
-m <- use(fileName)
-m$functionWithDep(1:2)
-
-## ------------------------------------------------------------------------
-m <- module({
-
-  import("stats", "median")
-  import("modules", "module")
-
-  anotherModule <- module({
-    fun <- function(x) median(x)
-  })
-
-})
-
-m$anotherModule$fun(1:2)
-
-## ------------------------------------------------------------------------
-m <- function(param) {
-  module(topEncl = environment(), {
-    fun <- function() param
-  })
-}
-
-m(1)$fun()
-
-## ------------------------------------------------------------------------
-module({
-  fun <- function(x) {
-    ## A function for illustrating documentation
-    ## x (numeric)
-    x
-  }
-})
-
-## ------------------------------------------------------------------------
-m <- module({
-  .generic <- function(x) UseMethod("generic")
-  generic.numeric <- function(x) cat("method for x ~ numeric")
-  generic <- function(x) .generic(x)
-})
-m$generic(1)
-
-## ------------------------------------------------------------------------
-mutableModule <- module({
-  .num <- NULL
-  get <- function() .num
-  set <- function(val) .num <<- val
-})
-mutableModule$get()
-mutableModule$set(2)
-
-## ------------------------------------------------------------------------
-complectModule <- module({
-  use(.GlobalEnv$mutableModule, attach = TRUE)
-  getNum <- function() get()
-  set(3)
-})
-mutableModule$get()
-complectModule$getNum()
-
-## ------------------------------------------------------------------------
-complectModule <- module({
-  use(.GlobalEnv$mutableModule, attach = TRUE, reInit = FALSE)
-  getNum <- function() get()
-  set(3)
-})
-mutableModule$get()
-complectModule$getNum()
-
-## ------------------------------------------------------------------------
-complectModule <- module({
-  expose(.GlobalEnv$mutableModule, reInit = TRUE)
-  set(4)
-})
-mutableModule$get()
-complectModule$get()
-
-## ------------------------------------------------------------------------
-complectModule <- module({
-  expose(.GlobalEnv$mutableModule, reInit = FALSE)
-  set(1)
-})
-mutableModule$get()
-complectModule$get()
 

@@ -1,3 +1,18 @@
+lmerTest 3.1-0
+------------------
+
+- Adding support for legacy model fits, i.e. `merModLmerTest` objects generated with lmerTest version `< 3.0-0`. This includes defining the `merModLmerTest` class and `anova`, `summary`, `drop1`, `ls_means`, `lsmeansLT` and `difflsmeans` methods. The usual `lme4` methods also work with objects of class `merModLmerTest`.
+
+lmerTest 3.0-1
+------------------
+
+- over-sensitive tests (failing on Solaris) have reduced tolerance
+- `sigma` and `sigma.merMod` defined and exported for `R <= 3.3.0`
+- Warn if Kenward-Roger is used with `R <= 3.3.0` since it may give incorrect results
+- Add `lme4 (>= 1.1-10)` and `R (>= 3.2.5)` to `Depends` (last available version where `lmerTest` checks out)
+- `pbkrtest` package loaded conditional on availability in tests
+
+
 lmerTest 3.0-0
 ------------------
  

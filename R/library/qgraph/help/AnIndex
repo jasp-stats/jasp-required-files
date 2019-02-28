@@ -32,17 +32,8 @@ plot.qgraph	plot.qgraph
 print.qgraph	print.qgraph
 qgraph	qgraph
 qgraph.animate	qgraph.animate
-qgraph.cfa	qgraph.cfa
-qgraph.efa	qgraph_efa
-qgraph.gui	qgraph.gui
-qgraph.lavaan	qgraph.lavaan
 qgraph.layout.fruchtermanreingold	qgraph.layout.fruchtermanreingold
 qgraph.loadings	qgraph_loadings
-qgraph.panel	qgraph.panel
-qgraph.pca	qgraph_pca
-qgraph.sem	qgraph_sem
-qgraph.semModel	qgraph.semModel
-qgraph.svg	qgraph_svg
 qgraphAnnotate	qgraphAnnotate
 qgraphMixed	qgraphMixed
 smallworldIndex	smallworldIndex

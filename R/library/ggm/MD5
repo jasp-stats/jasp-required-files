@@ -1,4 +1,4 @@
-65faa1c7177e45eae12d0f09b01f9b27 *DESCRIPTION
+3ce167c5717cd24f6e8dd93cbbae763a *DESCRIPTION
 51a473fac84a8f02c65b9fbf9b513ad5 *INDEX
 14e9c9736d53d0eaa6df1ab2e63ca651 *Meta/Rd.rds
 20aa81efeb22640ce0e52c497c294e04 *Meta/data.rds
@@ -6,7 +6,7 @@
 0c770519b27b66c3d2f703639537cbae *Meta/hsearch.rds
 91a4ac015615934891404cf9011950dc *Meta/links.rds
 72d2d1d54c8978a2b901f02a24f44e1b *Meta/nsInfo.rds
-0dc8a07a0f6539d66447a68acb969b8d *Meta/package.rds
+5346eff53022e6fcf357faa2331b57c9 *Meta/package.rds
 980da5deb93d563b80f5b76fcc6c3a59 *NAMESPACE
 dd49e58f89b1bba6208ab7c7e049473a *NEWS
 ebf0fc819595d631b8bf280c4b049940 *R/ggm
@@ -22,8 +22,8 @@ bc1a7337f079613cdeb4100ab7bb110f *data/stress.rda
 69d2a97bc1d33c264b9661f3a18c82d8 *doc/mixed-graphs.pdf
 21902a1499e09c60609c321a59859cea *help/AnIndex
 7707ce4ee08a48f1c7df8091aa738c5b *help/aliases.rds
-84dd6bccaa60eb9b49636b270f921ed9 *help/ggm.rdb
-dfd500684ccc83fa19932756e9055224 *help/ggm.rdx
-c158e35c19de654fdafc13dbd5121de2 *help/paths.rds
+46c68c9e5342b7012be6cabd4f089814 *help/ggm.rdb
+a2538247bf9bbbebe5cda8dd35fd1dc1 *help/ggm.rdx
+17d18f2d9939d2c3eaa6d36e1de80d15 *help/paths.rds
 5cb0d347f591a5b5b6fb2290384826f6 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

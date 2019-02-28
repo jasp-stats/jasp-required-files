@@ -1,9 +1,7 @@
 huge-package	huge-package
 huge	huge
-huge.ct	huge-internal
 huge.generator	huge.generator
-huge.glasso	huge-internal
-huge.mb	huge-internal
+huge.inference	huge.inference
 huge.npn	huge.npn
 huge.plot	huge.plot
 huge.roc	huge.roc
@@ -17,3 +15,4 @@ print.roc	print.roc
 print.select	print.select
 print.sim	print.sim
 stockdata	stockdata
+_PACKAGE	huge-package

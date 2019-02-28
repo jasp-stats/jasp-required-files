@@ -1,5 +1,5 @@
 1fc7d9ccd9c68a9f21d76744c19fd6ed *CITATION
-c719f8db2c93621375788f32d9202195 *DESCRIPTION
+22c7d109b821301200bf679c36798f80 *DESCRIPTION
 a427a20ec81212865a209c79153f35e0 *INDEX
 b5327781a4c1f10d4f30a0cd22a4f00e *LICENSE
 8f39c245b0684f423b9aa396e28c9fd4 *Meta/Rd.rds
@@ -7,7 +7,7 @@ b5327781a4c1f10d4f30a0cd22a4f00e *LICENSE
 b125fb4a015c02e82415d5bb87f2ffb8 *Meta/hsearch.rds
 acab7fa9fc22207070e8d64c199c025a *Meta/links.rds
 833dfb12d599df9079d373cbfd4c0ee2 *Meta/nsInfo.rds
-1311a21b23a1756a3ce770c5cac44f8e *Meta/package.rds
+01598d0a447349e154c2fc9799311e68 *Meta/package.rds
 e30831e322c2f70865141d7bc25cdb3b *Meta/vignette.rds
 fe5d0c1e8c60cce5c7402da62c88f20f *NAMESPACE
 6b8f067828d9cf48d15c2730239d99c3 *NEWS.md
@@ -20,14 +20,14 @@ ed6a95a989474b119c8570c570178c65 *R/checkmate.rdx
 ecc077bce09b9d0e3264d49f53f3eec4 *doc/index.html
 ebb00562f08d763260279ffae923370e *help/AnIndex
 ed04efec482943e88941050010213174 *help/aliases.rds
-971787dc9de8cc3c57e0ff7530aeecea *help/checkmate.rdb
-fb6a6a75bb6b241c8e4c3fb97cd5e353 *help/checkmate.rdx
-99fc9465f54f97a9b87ea112dd9dab3c *help/paths.rds
+96773ac328fdab59111fa47267ffff08 *help/checkmate.rdb
+7ac3c78261ab8c38713557e23aa6d774 *help/checkmate.rdx
+22ab0cd5c77aa3cff13dd7ea2944fc92 *help/paths.rds
 628d41d92d953bfd0a747e751d007fee *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
 022139fefe30297f3f1ef95ae27f3901 *include/checkmate.h
 7455ff6681ad01c81b9fe547128ec5d3 *include/checkmate_stub.c
-84a3cd0a91b3c0709c5c242dfc6e8fe9 *libs/i386/checkmate.dll
+84e3d8a8aae76041853047f705a3b08f *libs/i386/checkmate.dll
 41ff501c747b7034736e60dd9d24349e *libs/i386/symbols.rds
-45a8fcf8343b00ff0380a223f9e102aa *libs/x64/checkmate.dll
+1cdcc26ff9ad6a782ed0d304788d8dc2 *libs/x64/checkmate.dll
 b1c4c2de51bed1354ff5d2b8c30d2c0c *libs/x64/symbols.rds

@@ -1,5 +1,5 @@
 c22d19c217bc163a2c38b84add608c31 *CITATION
-9068ba3856635a0b245044fa0feef345 *DESCRIPTION
+e69c675149fa77630046d907eaf37697 *DESCRIPTION
 fb59eb5dac08b505571f55b21dd40311 *INDEX
 298bb770a8fd360d70ac389d7acc0ccd *Meta/Rd.rds
 52a83067ea63ee5471ac2cba739b5f5e *Meta/data.rds
@@ -7,7 +7,7 @@ fb59eb5dac08b505571f55b21dd40311 *INDEX
 f65042a3e2a5a5cfeb962766763262bb *Meta/hsearch.rds
 0551c6e6d169fe40428e5a67a9aba326 *Meta/links.rds
 18c96b138b9ecd3608b411592db9b95b *Meta/nsInfo.rds
-82c1236bbdadacbb308fbbbcc6b52b71 *Meta/package.rds
+f42261caede71e66173df9d329c33566 *Meta/package.rds
 7ae8c234b9f2af29c028f64aba4b4de4 *Meta/vignette.rds
 6951bd3e6cc1255a0f4475045bed81da *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/glmnet
@@ -30,13 +30,13 @@ b93977cfd7edb18aa6d6dab4e522c823 *doc/Coxnet.pdf
 abd0bd75674a2e0135468c4f19c075d7 *doc/index.html
 f1fb25a77635b9f9ff9a767d3e5f025c *help/AnIndex
 37a65e7b824d6862777537a592e4110a *help/aliases.rds
-9e0b0c68cf085ec4894e5e41d5b907ef *help/glmnet.rdb
-861721ce3a079327d7bf0381f02e4740 *help/glmnet.rdx
-68ac8747be7175f312546fb18b3f340e *help/paths.rds
+4fbd809bedcbe6c387b41fffe5954391 *help/glmnet.rdb
+12b204cc555b86395fce6601ca174a8d *help/glmnet.rdx
+ac2490f956dab6a6afd2e95458dcacde *help/paths.rds
 a1e1bee15e37ce78c4e049bf1aee7ae7 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-f804498fe7e04cf065ec8e20b718f7d8 *libs/i386/glmnet.dll
+ccbd8ed172e5b3b5e50b3016408caa33 *libs/i386/glmnet.dll
 ffa6d7ba2d1855410e8c1300b8b030dd *libs/i386/symbols.rds
-834a0a69056758cd5120a9cce794e23f *libs/x64/glmnet.dll
+d36727e716e0eec9d292f86bdff7a67b *libs/x64/glmnet.dll
 027ed6ba91301bd5156879bf2f0a7811 *libs/x64/symbols.rds
 74832d552d67eabb5dc9d7a65439d58a *mortran/glmnet5dp.m

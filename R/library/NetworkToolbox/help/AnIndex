@@ -3,8 +3,6 @@ adapt.a	adapt.a
 behavOpen	behavOpen
 betweenness	betweenness
 binarize	binarize
-bootgen	bootgen
-bootgen.plot	bootgen.plot
 centlist	centlist
 closeness	closeness
 clustcoeff	clustcoeff
@@ -37,7 +35,6 @@ gateway	gateway
 hybrid	hybrid
 impact	impact
 is.graphical	is.graphical
-isSym	isSym
 kld	kld
 lattnet	lattnet
 leverage	leverage

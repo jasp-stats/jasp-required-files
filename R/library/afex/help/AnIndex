@@ -5,6 +5,7 @@ afex_aov-methods	afex_aov-methods
 afex_options	afex_options
 afex_plot	afex_plot
 afex_plot.afex_aov	afex_plot
+afex_plot.default	afex_plot
 afex_plot.merMod	afex_plot
 afex_plot.mixed	afex_plot
 all_fit	all_fit

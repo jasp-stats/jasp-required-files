@@ -1,3 +1,62 @@
+2019-02-18 08:32  rsbivand
+
+	* R/point_line_distance.R: uncomment lines in snapPointsToLines
+
+2019-02-13 09:21  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
+2019-02-13 09:20  rsbivand
+
+	* R/gc_dist.R: logic checks
+
+2019-02-12 12:59  rsbivand
+
+	* _pkgdown.yml: pkgdown
+
+2019-02-12 12:50  rsbivand
+
+	* .Rbuildignore, DESCRIPTION, R/as.linnet.SL.R, _pkgdown.yml: start
+	  pkgdown
+
+2019-02-11 09:15  rsbivand
+
+	* ChangeLog, inst/ChangeLog: tidy
+
+2019-02-11 09:14  rsbivand
+
+	* DESCRIPTION, R/as.linnet.SL.R, man/as.linnet.SpatialLines.Rd:
+	  update as.linnet.SpatialLines
+
+2019-02-07 17:01  rsbivand
+
+	* ChangeLog: tidy
+
+2019-02-07 16:59  rsbivand
+
+	* DESCRIPTION, R/point_line_distance.R, man/snapPointsToLines.Rd:
+	  update to snapPointsToLines
+
+2019-02-07 16:19  rsbivand
+
+	* ChangeLog: tidy
+
+2018-09-19 07:40  rsbivand
+
+	* DESCRIPTION: tidy
+
+2018-09-10 18:34  rsbivand
+
+	* DESCRIPTION, NAMESPACE, R/AAA.R: delayed S3 method registration
+
+2018-07-30 20:31  rsbivand
+
+	* inst/ChangeLog: tidy
+
+2018-07-30 20:31  rsbivand
+
+	* ChangeLog: tidy
+
 2018-07-30 20:31  rsbivand
 
 	* ChangeLog, inst/ChangeLog: tidy
