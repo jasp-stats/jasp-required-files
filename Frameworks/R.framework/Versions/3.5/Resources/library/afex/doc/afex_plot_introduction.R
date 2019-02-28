@@ -1,6 +1,6 @@
 ## ----set-options, echo=FALSE, cache=FALSE-----------------------------------------------
 options(width = 90)
-knitr::opts_chunk$set(dpi=100)
+knitr::opts_chunk$set(dpi=80)
 
 ## ----message=FALSE, warning=FALSE-------------------------------------------------------
 library("afex")     
@@ -12,14 +12,14 @@ theme_set(theme_grey())
 data(md_12.1)
 (aw <- aov_ez("id", "rt", md_12.1, within = c("angle", "noise")))
 
-## ----fig.width=7.5, fig.height=3--------------------------------------------------------
+## ----fig.width=9, fig.height=4----------------------------------------------------------
 p_an <- afex_plot(aw, x = "angle", trace = "noise") 
 p_na <- afex_plot(aw, x = "noise", trace = "angle")
 plot_grid(p_an, p_na)  ## try adding: labels = "AUTO"
 
 ## ---------------------------------------------------------------------------------------
 p_an <- afex_plot(aw, x = "angle", trace = "noise", error = "within",
-                  new_levels = list(angle = c("0°", "4°", "8°"),
+                  factor_levels = list(angle = c("0°", "4°", "8°"),
                                     noise = c("Absent", "Present")), 
                   legend_title = "Noise") +
   labs(y = "RTs (in ms)", x = "Angle (in degrees)")
@@ -150,6 +150,12 @@ afex_plot(aw, x = "angle", panel = "noise", error = "within",
           error_arg = list(size = 1.5, width = 0.05)) +
   theme(legend.position="none")
 
+## ----fig.width=7, fig.height=3.5, message=FALSE-----------------------------------------
+plot_grid(
+  po1 + geom_line(aes(group = 1), color = "darkgrey", size = 1.5), 
+  po2 + geom_line(aes(group = 1))
+) 
+
 ## ---- eval=FALSE, echo=FALSE, results='hide'--------------------------------------------
 #  data("fhch2010") # load
 #  fhch <- droplevels(fhch2010[ fhch2010$correct,]) # remove errors
@@ -178,20 +184,20 @@ afex_plot(mrt, x = "stimulus", trace = "frequency", panel = "task")
 ## ----fig.width=7, fig.height=3.5--------------------------------------------------------
 plot_grid( 
   afex_plot(mrt, x = "stimulus", trace = "frequency", panel = "task", 
-            random = "id"), 
+            id = "id"), 
   afex_plot(mrt, x = "stimulus", trace = "frequency", panel = "task", 
-            random = "item"), 
+            id = "item"), 
   labels = c("ID", "Item") 
 )
 
 ## ----fig.width=7, fig.height=3.5--------------------------------------------------------
 plot_grid( 
   afex_plot(mrt, x = "stimulus", trace = "frequency", panel = "task", 
-            random = "item", dodge = 0.8,
+            id = "item", dodge = 0.8,
             data_geom = geom_violin, 
             data_arg = list(width = 0.5)), 
   afex_plot(mrt, x = "stimulus", trace = "frequency", panel = "task", 
-            random = "item", dodge = 0.8,
+            id = "item", dodge = 0.8,
             data_geom = geom_boxplot, 
             data_arg = list(width = 0.5),
             error_arg = list(size = 1.5, width = 0, linetype = 1))
@@ -203,9 +209,9 @@ pairs(emmeans::emmeans(mrt, c("stimulus", "frequency"), by = "task"))
 ## ----fig.width=7, fig.height=3.5--------------------------------------------------------
 plot_grid( 
   afex_plot(mrt, x = "stimulus", trace = "frequency", panel = "task", 
-            random = "id", error = "within"),
+            id = "id", error = "within"),
   afex_plot(mrt, x = "stimulus", trace = "frequency", panel = "task", 
-            random = "item", dodge = 0.8, error = "within",
+            id = "item", dodge = 0.8, error = "within",
             data_geom = geom_violin, 
             data_arg = list(width = 0.5))
 )

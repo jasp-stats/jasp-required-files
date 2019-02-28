@@ -3,7 +3,7 @@ B.dk                    Births in Denmark by year and month of birth
 BrCa                    Clinical status, relapse, metastasis and death
                         in 2982 women with breast cancer.
 DMconv                  Conversion to diabetes
-DMepi                   Epidmiological rates for diabetes in Denmark
+DMepi                   Epidemiological rates for diabetes in Denmark
                         1996-2015
 DMlate                  The Danish National Diabetes Register.
 Icens                   Fits a regression model to interval censored
@@ -63,7 +63,8 @@ cbind.Lexis             Combining a Lexis objects with data frames or
 ccwc                    Generate a nested case-control study
 ci.cum                  Compute cumulative sum of estimates.
 ci.lin                  Compute linear functions of parameters with
-                        standard errors and confidence limits
+                        standard errors and confidence limits,
+                        optionally transforming to a different scale.
 ci.pd                   Compute confidence limits for a difference of
                         two independent proportions.
 clogistic               Conditional logistic regression
@@ -73,13 +74,13 @@ crr.Lexis               Fit a competing risks regression model
                         (Fine-Gray model) using a Lexis object)
 cutLexis                Cut follow-up at a specified date for each
                         person.
-detrend                 Projection of a model matrix on to the
-                        orthogonal complement of a trend or curvature.
+detrend                 Projection of a model matrix on the orthogonal
+                        complement of a trend or curvature.
 diet                    Diet and heart data
 effx                    Function to calculate effects
 effx.match              Function to calculate effects for individually
                         matched case-control studies
-entry                   Time series methods for Lexis objects
+entry                   Time series and other methods for Lexis objects
 erl                     Compute survival functions from rates and
                         expected residual lifetime in an illness-death
                         model as well as years of life lost to disease.
@@ -136,6 +137,7 @@ plotEst                 Plot estimates with confidence limits (forest
                         plot)
 plotevent               Plot Equivalence Classes
 poisreg                 Family Object for Poisson Regression
+pr                      Diabetes prevance as of 2010-01-01 in Denmark
 projection.ip           Projection of columns of a matrix.
 rateplot                Functions to plot rates from a table classified
                         by age and calendar time (period)
@@ -154,5 +156,5 @@ thoro                   Thorotrast Study
 timeBand                Extract time band data from a split Lexis
                         object
 timeScales              The time scales of a Lexis object
-transform.Lexis         Transform a Lexis (or stacked.Lexis) objects
+transform.Lexis         Transform a Lexis (or stacked.Lexis) object
 twoby2                  Analysis of a two by two table

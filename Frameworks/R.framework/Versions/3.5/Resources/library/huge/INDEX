@@ -1,7 +1,7 @@
 huge                    High-dimensional undirected graph estimation
 huge-package            High-Dimensional Undirected Graph Estimation
 huge.generator          Data generator
-huge.mb                 Internal huge functions
+huge.inference          Graph inference
 huge.npn                Nonparanormal(npn) transformation
 huge.plot               Graph visualization
 huge.roc                Draw ROC Curve for a graph path

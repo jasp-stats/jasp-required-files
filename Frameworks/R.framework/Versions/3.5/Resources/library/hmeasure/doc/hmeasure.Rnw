@@ -1,6 +1,5 @@
 \documentclass{article}
 \usepackage{amssymb,amsthm,color,amsmath,graphicx,url}
-\usepackage{multirow}
 \def\AUC{\text{AUC}}
 \def\ROC{\text{ROC}}
 %\VignetteIndexEntry{hmeasure}
@@ -57,9 +56,7 @@ The simplest performance metrics rely on comparing the classifier's predicted cl
 
 \begin{center}
 \begin{tabular}{cc|c|c}
-&&\multicolumn{2}{c}{Predicted} \\
-&& $\hat{y}_i = 1$ & $\hat{y}_i = 0$\\\hline
-\multirow{2}{*}{Actual} 
+$\hat{y}_i = 1$ & $\hat{y}_i = 0$\\\hline
 & $y_i=1$ & \textbf{TP} & \textbf{FN}  \\\cline{2-4}
 & $y_i=0$ & \textbf{FP} & \textbf{TN} 
 \end{tabular}

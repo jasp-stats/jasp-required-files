@@ -1,8 +1,11 @@
 import(pbapply)
-
+import(lavaan)
+import(networktools)
 importFrom(NetworkToolbox,"TMFG")
 
 # Default functions:
+export(bootnet_SVAR_lavaan)
+export(bootInclude)
 export(bootnet_IsingFit)
 export(bootnet_EBICglasso)
 export(bootnet_ggmModSelect)
@@ -17,6 +20,8 @@ export(bootnet_TMFG)
 export(bootnet_LoGo)
 export(bootnet_ggmModSelect)
 export(bootnet_graphicalVAR)
+export(bootnet_piecewiseIsing)
+export(bootThreshold)
 
 
 
@@ -59,11 +64,14 @@ export(ggmGenerator)
 export(IsingGenerator)
 
 # Imports:
-import(dplyr)
+#import(dplyr)
 import(parallel)
 importFrom(IsingFit,"IsingFit")
 import(qgraph)
 import(ggplot2)
+importFrom("dplyr","anti_join","arrange","arrange_","bind_rows","filter","filter_","funs","group_by",
+           "group_by_","id","left_join","mutate","mutate_","rename","select","select_","summarize","summarize_",
+           "tally","ungroup")
 importFrom("igraph", "get.adjacency","watts.strogatz.game")
 import(tidyr)
 importFrom(gtools, "mixedorder")
@@ -89,3 +97,5 @@ importFrom(BDgraph, "bdgraph.sim")
   importFrom("stats", "as.formula")
   importFrom("utils", "packageVersion")
   importFrom("stats", "lm")
+    importFrom("stats", "weighted.mean")
+  importFrom("utils", "combn")

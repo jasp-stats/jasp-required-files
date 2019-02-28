@@ -1,13 +1,7 @@
-# hmeasure 1.0-1
+# hmeasure 1.0-2
 
-Tidying up package build.
+Updated license.
 
-## Build warnings fixes
+## Note fixes
 
-- Registered S3 methods
-- Exported functions to namespace as needed
-- Updated .Rbuildignore to ignore unneeded files
-
-## Features
-
-- `plotROC` now supports greyscale, user-defined colors and line types
+- License did not have the right copyright holder name

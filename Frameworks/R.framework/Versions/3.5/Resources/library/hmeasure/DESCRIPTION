@@ -2,8 +2,8 @@ Package: hmeasure
 Type: Package
 Title: The H-Measure and Other Scalar Classification Performance
         Metrics
-Version: 1.0-1
-Date: 2018-12-30
+Version: 1.0-2
+Date: 2019-02-26
 Author: Christoforos Anagnostopoulos
     <christoforos.anagnostopoulos06@imperial.ac.uk> and David J.
     Hand <d.j.hand@imperial.ac.uk>
@@ -21,9 +21,9 @@ Description: Classification performance metrics that are derived from the ROC
     tools for ROC curves and related statistics.
 License: MIT + file LICENSE
 URL: http://www.hmeasure.net
-Packaged: 2019-01-02 08:13:51 UTC; canagnos
+Packaged: 2019-02-26 14:44:25 UTC; canagnos
 Repository: CRAN
-Date/Publication: 2019-01-02 08:40:03 UTC
+Date/Publication: 2019-02-26 15:10:03 UTC
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Built: R 3.5.2; ; 2019-01-03 08:47:46 UTC; unix
+Built: R 3.5.2; ; 2019-02-27 18:31:35 UTC; unix

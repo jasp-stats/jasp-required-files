@@ -33,7 +33,7 @@ stri_encode             Convert Strings Between Given Encodings
 stri_escape_unicode     Escape Unicode Code Points
 stri_extract_all        Extract Occurrences of a Pattern
 stri_extract_all_boundaries
-                        Extract Text Between Text Boundaries
+                        Extract Data Between Text Boundaries
 stri_flatten            Flatten a String
 stri_info               Query Default Settings for 'stringi'
 stri_isempty            Determine if a String is of Length Zero
@@ -46,7 +46,7 @@ stri_locale_list        List Available Locales
 stri_locale_set         Set or Get Default Locale in 'stringi'
 stri_locate_all         Locate Occurrences of a Pattern
 stri_locate_all_boundaries
-                        Locate Specific Text Boundaries
+                        Locate Text Boundaries
 stri_match_all          Extract Regex Pattern Matches, Together with
                         Capture Groups
 stri_na2empty           Replace NAs with empty strings
@@ -69,7 +69,7 @@ stri_replace_all        Replace Occurrences of a Pattern
 stri_replace_na         Replace Missing Values in a Character Vector
 stri_reverse            Reverse Each String
 stri_split              Split a String By Pattern Matches
-stri_split_boundaries   Split a String at Specific Text Boundaries
+stri_split_boundaries   Split a String at Text Boundaries
 stri_split_lines        Split a String Into Text Lines
 stri_startswith         Determine if the Start or End of a String
                         Matches a Pattern
@@ -88,10 +88,10 @@ stri_trans_general      General Text Transforms, Including
 stri_trans_list         List Available Text Transforms and
                         Transliterators
 stri_trans_nfc          Perform or Check For Unicode Normalization
-stri_trans_tolower      Transform String with Case Mapping
+stri_trans_tolower      Transform Strings with Case Mapping
 stri_trim_both          Trim Characters from the Left and/or Right Side
                         of a String
-stri_unescape_unicode   Unescape All Escape Sequences
+stri_unescape_unicode   Un-escape All Escape Sequences
 stri_unique             Extract Unique Elements
 stri_width              Determine the Width of Code Points
 stri_wrap               Word Wrap Text to Format Paragraphs

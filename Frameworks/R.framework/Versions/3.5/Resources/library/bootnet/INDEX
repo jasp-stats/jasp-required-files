@@ -3,6 +3,9 @@ IsingGenerator          Generates a function that simulates data from
 anRpackage-package      Bootstrap Methods for Various Network
                         Estimation Routines
 binarize                Binarizes a dataset
+bootInclude             Inclusion proportion graph
+bootThreshold           Threshold network based on bootstrapped
+                        intervals
 bootnet                 Bootstrapped network estimation
 corStability            Correlation stability coefficient
 differenceTest          Bootstrapped difference test
