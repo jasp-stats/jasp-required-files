@@ -1,0 +1,5 @@
+export(readLisrel)
+export(lisrelMatrix)
+S3method(print, lisrel)
+# S3method(plot, lisrel)
+# S3method(summary, lisrel)
