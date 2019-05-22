@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a robustness or sequential plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PlotRobustnessSequential {JASPgraphs}"><tr><td>PlotRobustnessSequential {JASPgraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a robustness or sequential plot</h2>
+
+<h3>Description</h3>
+
+<p>Create a robustness or sequential plot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+PlotRobustnessSequential(dfLines, dfPoints = NULL, BF01 = NULL,
+  hasRightAxis = TRUE, xName = NULL, yName = bfSubscripts,
+  addEvidenceArrowText = TRUE, drawPizzaTxt = !is.null(BF01),
+  evidenceLeveltxt = !is.null(BF01), pointLegend = !is.null(dfPoints),
+  linesLegend = !is.null(dfLines$g), bfSubscripts = "BF[0][1]",
+  pizzaTxt = pizzaTxtFromBF(bfSubscripts), pointColors = c("grey",
+  "white", "black", "red"), lineColors = c("black", "grey", "black"),
+  lineTypes = c("dotted", "solid", "solid"), addLineAtOne = TRUE,
+  bty = list(type = "n", ldwX = 0.5, lwdY = 0.5), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dfLines</code></td>
+<td>
+<p>A dataframe with <code>$x</code>, <code>$y</code>, and optionally <code>$g</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dfPoints</code></td>
+<td>
+<p>A dataframe with <code>$x</code>, <code>$y</code>, and optionally <code>$g</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>BF01</code></td>
+<td>
+<p>Numeric, with value of Bayes factor.</p>
+</td></tr>
+<tr valign="top"><td><code>hasRightAxis</code></td>
+<td>
+<p>Logical, should there be a right axis displaying evidence?</p>
+</td></tr>
+<tr valign="top"><td><code>xName</code></td>
+<td>
+<p>String or expression, displayed on the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>yName</code></td>
+<td>
+<p>String or expression, displayed on the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>addEvidenceArrowText</code></td>
+<td>
+<p>Logical, should arrows indicating &quot;Evidence for H0/H1&quot; be drawn?</p>
+</td></tr>
+<tr valign="top"><td><code>drawPizzaTxt</code></td>
+<td>
+<p>Logical, should there be text above and below the pizza plot?</p>
+</td></tr>
+<tr valign="top"><td><code>evidenceLeveltxt</code></td>
+<td>
+<p>Logical, should &quot;Evidence for H0: extreme&quot; be drawn?
+Ignored if <code>!is.null(dfLines$g) &amp;&amp; linesLegend</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>pointLegend</code></td>
+<td>
+<p>Logical, should a legend of <code>dfPoints$g</code> be shown?</p>
+</td></tr>
+<tr valign="top"><td><code>linesLegend</code></td>
+<td>
+<p>Logical, should a legend of <code>dfLines$g</code> be shown?</p>
+</td></tr>
+<tr valign="top"><td><code>bfSubscripts</code></td>
+<td>
+<p>String, to be parsed as expression. Indicates what BF type to display.</p>
+</td></tr>
+<tr valign="top"><td><code>pizzaTxt</code></td>
+<td>
+<p>String vector of length 2, text to be drawn above and below pizza plot.</p>
+</td></tr>
+<tr valign="top"><td><code>pointColors</code></td>
+<td>
+<p>String vector, colors for points if <code>dfPoints$g</code> is not <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lineColors</code></td>
+<td>
+<p>String vector, colors for lines if <code>dfLines$g</code> is not <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lineTypes</code></td>
+<td>
+<p>String vector, line types if <code>dfLines$g</code> is not <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>addLineAtOne</code></td>
+<td>
+<p>Logical, should a black line be draw at BF = 1?</p>
+</td></tr>
+<tr valign="top"><td><code>bty</code></td>
+<td>
+<p>List of three elements. Type specifies the box type, ldwX the width of the x-axis, lwdY the width of the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Unused.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>JASPgraphs</em> version 0.3.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

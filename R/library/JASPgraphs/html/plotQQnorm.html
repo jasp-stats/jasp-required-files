@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Make a Q-Q plot</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plotQQnorm {JASPgraphs}"><tr><td>plotQQnorm {JASPgraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Make a Q-Q plot</h2>
+
+<h3>Description</h3>
+
+<p>Make a Q-Q plot
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plotQQnorm(residuals, lower = NULL, upper = NULL, abline = TRUE,
+  ablineColor = "red", xName = "Theoretical quantiles",
+  yName = "Observed quantiles")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>residuals</code></td>
+<td>
+<p>Numeric vector, the residuals of the analysis.</p>
+</td></tr>
+<tr valign="top"><td><code>lower</code></td>
+<td>
+<p>Numeric vector, lower confidence interval of each residual. If NULL, no error bars are drawn.</p>
+</td></tr>
+<tr valign="top"><td><code>upper</code></td>
+<td>
+<p>Numeric vector, lower confidence interval of each residual. If NULL, no error bars are drawn.</p>
+</td></tr>
+<tr valign="top"><td><code>abline</code></td>
+<td>
+<p>Logical, should an abline be drawn through the origin?</p>
+</td></tr>
+<tr valign="top"><td><code>ablineColor</code></td>
+<td>
+<p>String, color of the abline.</p>
+</td></tr>
+<tr valign="top"><td><code>xName</code></td>
+<td>
+<p>String, name for the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>yName</code></td>
+<td>
+<p>String, name for the y-axis.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is equivalent to <code>qqnorm(residuals); qqline(residuals)</code>, but uses <code>ggplot2</code> and allows for confidence bands.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+x &lt;- rnorm(100)
+lower &lt;- x - .1
+upper &lt;- x + .1
+JASPgraphs::plotQQnorm(x, lower, upper, ablineColor = "magenta")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>JASPgraphs</em> version 0.3.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
