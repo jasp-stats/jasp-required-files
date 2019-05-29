@@ -48,13 +48,10 @@ ByteCompile: yes
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 6.1.0
-Packaged: 2018-10-30 02:39:21 UTC; mclyde
 Author: Merlise Clyde [aut, cre, cph] (<https://orcid.org/-5469>),
   Michael Littman [ctb],
   Quanli Wang [ctb],
   Joyee Ghosh [ctb],
   Yingbo Li [ctb]
 Maintainer: Merlise Clyde <clyde@duke.edu>
-Date/Publication: 2018-10-30 10:40:14 UTC
-Built: R 3.5.0; x86_64-apple-darwin15.6.0; 2018-10-31 13:13:36 UTC; unix
-Archs: BAS.so.dSYM
+Built: R 3.5.2; x86_64-apple-darwin15.6.0; 2019-05-29 12:26:30 UTC; unix
