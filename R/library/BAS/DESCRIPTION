@@ -48,13 +48,22 @@ ByteCompile: yes
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 6.1.0
-Packaged: 2018-10-30 02:39:21 UTC; mclyde
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: BAS
+RemoteUsername: vandenman
+RemoteRef: master
+RemoteSha: d99b3d37131dffc31bc9e048699bbcc616ae1c2b
+GithubRepo: BAS
+GithubUsername: vandenman
+GithubRef: master
+GithubSHA1: d99b3d37131dffc31bc9e048699bbcc616ae1c2b
+Packaged: 2019-05-29 10:44:33 UTC; Frans Meerhoff
 Author: Merlise Clyde [aut, cre, cph] (<https://orcid.org/-5469>),
   Michael Littman [ctb],
   Quanli Wang [ctb],
   Joyee Ghosh [ctb],
   Yingbo Li [ctb]
 Maintainer: Merlise Clyde <clyde@duke.edu>
-Date/Publication: 2018-10-30 10:40:14 UTC
-Built: R 3.5.2; x86_64-w64-mingw32; 2019-02-26 00:42:31 UTC; windows
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-05-29 10:44:36 UTC; windows
 Archs: i386, x64
