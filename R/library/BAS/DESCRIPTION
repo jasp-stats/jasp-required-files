@@ -1,5 +1,5 @@
 Package: BAS
-Version: 1.5.3
+Version: 1.5.3.1
 Date: 2018-10-29
 Title: Bayesian Variable Selection and Model Averaging using Bayesian
         Adaptive Sampling
@@ -52,18 +52,18 @@ RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: BAS
 RemoteUsername: vandenman
-RemoteRef: master
-RemoteSha: d99b3d37131dffc31bc9e048699bbcc616ae1c2b
+RemoteRef: fixModelPriors
+RemoteSha: abb73a6ac9d145ced3586434d413130b2f6263e9
 GithubRepo: BAS
 GithubUsername: vandenman
-GithubRef: master
-GithubSHA1: d99b3d37131dffc31bc9e048699bbcc616ae1c2b
-Packaged: 2019-05-29 10:44:33 UTC; Frans Meerhoff
+GithubRef: fixModelPriors
+GithubSHA1: abb73a6ac9d145ced3586434d413130b2f6263e9
+Packaged: 2019-05-29 13:11:12 UTC; Frans Meerhoff
 Author: Merlise Clyde [aut, cre, cph] (<https://orcid.org/-5469>),
   Michael Littman [ctb],
   Quanli Wang [ctb],
   Joyee Ghosh [ctb],
   Yingbo Li [ctb]
 Maintainer: Merlise Clyde <clyde@duke.edu>
-Built: R 3.5.2; x86_64-w64-mingw32; 2019-05-29 10:44:36 UTC; windows
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-05-29 13:11:16 UTC; windows
 Archs: i386, x64
