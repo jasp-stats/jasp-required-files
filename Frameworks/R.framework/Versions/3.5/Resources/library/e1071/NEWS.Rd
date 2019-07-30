@@ -2,6 +2,23 @@
 \title{News for Package \pkg{e1071}}
 \newcommand{\cpkg}{\href{https://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 
+\section{Changes in version 1.7-2}{
+  \itemize{
+    \item Change license to GPL-2 OR GPL-3
+    \item add coef() method for SVMs with linear kernel
+  }
+}
+
+\section{Changes in version 1.7-1}{
+  \itemize{
+    \item add warning in \code{predict.naiveBayes()} if the variable
+    type (numeric/factor) does not match for training and new data.
+    \item Fix bug in tune when parameter space is sampled
+    \item Fix formula interface for NaiveBayes to account for
+          variable removal
+  }
+}
+
 \section{Changes in version 1.7-0}{
   \itemize{
     \item Bug fix in \code{lca()}
