@@ -12,6 +12,7 @@ centers.bclust	bclust
 classAgreement	classAgreement
 clusters.bclust	bclust
 cmeans	cmeans
+coef.svm	svm
 compareMatchedClasses	matchClasses
 countpattern	countpattern
 cshell	cshell
