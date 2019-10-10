@@ -1,7 +1,7 @@
 
-|- - - - - - - - - - - - - - - - - - -- - - - - - - - - - - |
-|               > > >  BDgraph NEWS  < < <                  |
-|- - - - - - - - - - - - - - - - - - -- - - - - - - - - - - |
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  
+|                   > >  BDgraph NEWS  < <                            |
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  
 
 - CHANGES IN VERSION 2.19
 
@@ -98,5 +98,51 @@
 	* In function "bdgraph()" and "bdgraph.ts()", option "prior.df" is changed to "df.prior".
 	
 	* In function "pgraph()", option "adj_g" is changed to "adj".
+
+- CHANGES IN VERSION 2.56
+
+	* In function "rgwish()", "rgcwish()" and "gnorm()", option "adj.g" is changed to "adj".
+	
+	* In function "compare()", option "sim.obj"      is changed to "target".
+	* In function "compare()", option "bdgraph.obj"  is changed to "est".
+	* In function "compare()", option "bdgraph.obj2" is changed to "est2".
+	* In function "compare()", option "bdgraph.obj3" is changed to "est3".
+
+	* In function "plotroc()", option "sim.obj"      is changed to "target".
+	* In function "plotroc()", option "bdgraph.obj"  is changed to "est".
+	* In function "plotroc()", option "bdgraph.obj2" is changed to "est2".
+	* In function "plotroc()", option "bdgraph.obj3" is changed to "est3".
+	* In function "plotroc()", option "bdgraph.obj4" is changed to "est4".
+	
+	* Bug fixed for "bdgraph()" function with option "method = gcgm".
+	* Function "summary.bdgraph", "plot.bdgraph", and "print.bdgraph" are modified.
+
+- CHANGES IN VERSION 2.57
+
+	* In function "compare()" option "est4" is added.
+	
+- CHANGES IN VERSION 2.58
+
+	* Bug fixed for "compare()" function.
+	* Function "get_graph()" is added to the package and used inside function "compare()".
+	* Function "get_g_prior()", "get_g_start()", "get_S_n_p()", "get_K_start()", and "get_cores()" 
+	    are added to the package and used inside function "bdgraph()".
+
+- CHANGES IN VERSION 2.60
+
+	* Function "precision()"  is added to the package.
+	* Function "covariance()" is added to the package.
+
+- CHANGES IN VERSION 2.61
+
+	* Bug fixed related to the C stack by Fortran functions.
+	* Function "bf()"       is added to the package.
+	* Function "adj2link()" is added to the package.
+	* Function "link2adj()" is added to the package.
+	* Function "bdgraph.ts()" is removed.
+
+
+
+
 
 

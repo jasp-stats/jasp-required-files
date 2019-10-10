@@ -102,7 +102,9 @@ collation services are used instead.</p>
 <dt><code>"default"</code>:</dt><dd>
 <p>obtains the locale from the OS as is done at the start of the
 session.  If environment variable <span class="env">R_ICU_LOCALE</span> is set to a
-non-empty value, its value is used rather than consulting the OS.
+non-empty value, its value is used rather than consulting the OS,
+unless environment variable <span class="env">LC_ALL</span> is set to 'C' (or unset but
+<span class="env">LC_COLLATE</span> is set to 'C').
 </p>
 </dd>
 <dt><code>""</code>, <code>"root"</code>:</dt><dd>
@@ -119,16 +121,25 @@ report that a locale is not supported, but falls back to its idea of
 <code>icuGetCollate("actual")</code>, often <code>"root"</code>).  Most English
 locales fall back to <code>"root"</code> as although e.g. <code>"en_GB"</code> is
 a valid locale (at least on some platforms), it contains no special
-rules for collation.  Note that <code>"C"</code> is not a supported ICU locale.
+rules for collation.  Note that <code>"C"</code> is not a supported ICU locale
+and hence <span class="env">R_ICU_LOCALE</span> should never be set to <code>"C"</code>.
 </p>
 <p>Some examples are <code>case_level = "on", strength = "primary"</code> to ignore
 accent differences and <code>alternate_handling = "shifted"</code> to ignore
 space and punctuation characters.
 </p>
-<p>Initially ICU will not be used for collation if the OS is set to use
-the <code>C</code> locale for collation.  Once this function is called with
-a value for <code>locale</code>, ICU will be used until it is called again
-with <code>locale = "none"</code>.
+<p>Initially ICU will not be used for collation if the OS is set to use the
+<code>C</code> locale for collation and <span class="env">R_ICU_LOCALE</span> is not set.  Once
+this function is called with a value for <code>locale</code>, ICU will be used
+until it is called again with <code>locale = "none"</code>.  ICU will not be
+used once <code>Sys.setlocale</code> is called with a <code>"C"</code> value for
+<code>LC_ALL</code> or <code>LC_COLLATE</code>, even if <span class="env">R_ICU_LOCALE</span> is set. 
+ICU will be used again honoring <span class="env">R_ICU_LOCALE</span> once
+<code>Sys.setlocale</code> is called to set a different collation order. 
+Environment variables <span class="env">LC_ALL</span> (or <span class="env">LC_COLLATE</span>) take precedence
+over <span class="env">R_ICU_LOCALE</span> if and only if they are set to 'C'.  Due to the
+interaction with other ways of setting the collation order,
+<span class="env">R_ICU_LOCALE</span> should be used with care and only when needed.
 </p>
 <p>All customizations are reset to the default for the locale if
 <code>locale</code> is specified: the collation engine is reset if the
@@ -195,5 +206,5 @@ if(capabilities("ICU")) {
 }
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

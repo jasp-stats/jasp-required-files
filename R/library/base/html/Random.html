@@ -28,9 +28,9 @@ were in an earlier <span style="font-family: Courier New, Courier; color: #66666
 <pre>
 .Random.seed &lt;- c(rng.kind, n1, n2, \dots)
 
-RNGkind(kind = NULL, normal.kind = NULL)
+RNGkind(kind = NULL, normal.kind = NULL, sample.kind = NULL)
 RNGversion(vstr)
-set.seed(seed, kind = NULL, normal.kind = NULL)
+set.seed(seed, kind = NULL, normal.kind = NULL, sample.kind = NULL)
 </pre>
 
 
@@ -50,6 +50,13 @@ interpretation of <code>NULL</code>.</p>
 string, set the method of Normal generation.  Use <code>"default"</code>
 to return to the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> default.  <code>NULL</code> makes no change.</p>
 </td></tr>
+<tr valign="top"><td><code>sample.kind</code></td>
+<td>
+<p>character string or <code>NULL</code>.  If it is a character
+string, set the method of discrete uniform generation (used in 
+<code><a href="sample.html">sample</a></code>, for instance).  Use <code>"default"</code> to return to 
+the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> default.  <code>NULL</code> makes no change.</p>
+</td></tr>
 <tr valign="top"><td><code>seed</code></td>
 <td>
 <p>a single value, interpreted as an integer, or <code>NULL</code>
@@ -58,8 +65,9 @@ to return to the <span style="font-family: Courier New, Courier; color: #666666;
 <tr valign="top"><td><code>vstr</code></td>
 <td>
 <p>a character string containing a version number,
-e.g., <code>"1.6.2"</code></p>
-</td></tr>
+e.g., <code>"1.6.2"</code>.  The default RNG configuration of the current
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version is used if <code>vstr</code> is greater than the current version.</p>
+</td></tr> 
 <tr valign="top"><td><code>rng.kind</code></td>
 <td>
 <p>integer code in <code>0:k</code> for the above <code>kind</code>.</p>
@@ -112,11 +120,16 @@ is possible but we will not publish one, not least as this generator
 is <b>not</b> exactly the same as that in recent versions of S-PLUS.</p>
 </dd>
 <dt><code>"Mersenne-Twister"</code>:</dt><dd>
-<p>From Matsumoto and Nishimura (1998). A twisted GFSR with period
+<p>From Matsumoto and Nishimura (1998); code updated in 2002.
+A twisted GFSR with period
 <i>2^19937 - 1</i> and equidistribution in 623
 consecutive dimensions (over the whole period).  The &lsquo;seed&rsquo; is a
 624-dimensional set of 32-bit integers plus a current position in
 that set.
+</p>
+<p>R uses its own initialization method due to B. D. Ripley and is
+not affected by the initialization issue in the 1998 code of
+Matsumoto and Nishimura addressed in a 2002 update.
 </p>
 </dd>
 <dt><code>"Knuth-TAOCP-2002"</code>:</dt><dd>
@@ -178,6 +191,12 @@ normals are generated and returned sequentially.  The state is reset
 whenever it is selected (even if it is the current normal generator)
 and when <code>kind</code> is changed.
 </p>
+<p><code>sample.kind</code> can be <code>"Rounding"</code> or <code>"Rejection"</code>,
+or partial matches to these.  The former was the default in versions
+prior to 3.6.0:  it made <code><a href="sample.html">sample</a></code> noticeably non-uniform
+on large populations, and should only be used for reproduction of old
+results.  See <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=17494">PR#17494</a> for a discussion. 
+</p>
 <p><code>set.seed</code> uses a single integer argument to set as many seeds
 as are required.  It is intended as a simple way to get quite different
 seeds by specifying small integer arguments, and also as a way to get
@@ -188,7 +207,8 @@ differently, although any exceptions would be extremely rare.  If
 called with <code>seed = NULL</code> it re-initializes (see &lsquo;Note&rsquo;)
 as if no seed had yet been set.
 </p>
-<p>The use of <code>kind = NULL</code> or <code>normal.kind = NULL</code> in
+<p>The use of <code>kind = NULL</code>, <code>normal.kind = NULL</code> or 
+<code>sample.kind = NULL</code> in
 <code>RNGkind</code> or <code>set.seed</code> selects the currently-used
 generator (including that used in the previous session if the
 workspace has been restored): if no generator has been used it selects
@@ -202,17 +222,19 @@ workspace has been restored): if no generator has been used it selects
 element <em>codes</em> the kind of RNG and normal generator. The lowest
 two decimal digits are in <code>0:(k-1)</code>
 where <code>k</code> is the number of available RNGs.  The hundreds
-represent the type of normal generator (starting at <code>0</code>).
+represent the type of normal generator (starting at <code>0</code>), and
+the ten thousands represent the type of discrete uniform sampler.
 </p>
 <p>In the underlying C, <code>.Random.seed[-1]</code> is <code>unsigned</code>;
 therefore in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> <code>.Random.seed[-1]</code> can be negative, due to
 the representation of an unsigned integer by a signed integer.
 </p>
-<p><code>RNGkind</code> returns a two-element character vector of the RNG and
-normal kinds selected <em>before</em> the call, invisibly if either
-argument is not <code>NULL</code>.  A type starts a session as the default,
-and is selected either by a call to <code>RNGkind</code> or by setting
-<code>.Random.seed</code> in the workspace.
+<p><code>RNGkind</code> returns a three-element character vector of the RNG,
+normal and sample kinds selected <em>before</em> the call, invisibly if 
+either argument is not <code>NULL</code>.  A type starts a session as the 
+default, and is selected either by a call to <code>RNGkind</code> or by setting
+<code>.Random.seed</code> in the workspace. (NB: prior to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6.0 the first
+two kinds were returned in a two-element character vector.)
 </p>
 <p><code>RNGversion</code> returns the same information as <code>RNGkind</code> about
 the defaults in a specific <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version.
@@ -250,7 +272,8 @@ the exception, and all give at least 30 varying bits.)
 
 <h3>Author(s)</h3>
 
-<p>of RNGkind: Martin Maechler. Current implementation, B. D. Ripley</p>
+<p>of RNGkind: Martin Maechler. Current implementation, B. D. Ripley
+with modifications by Duncan Murdoch.</p>
 
 
 <h3>References</h3>
@@ -268,19 +291,19 @@ Wadsworth &amp; Brooks/Cole.
 <p>Box, G. E. P. and Muller, M. E. (1958).
 A note on the generation of normal random deviates.
 <em>Annals of Mathematical Statistics</em>, <b>29</b>, 610&ndash;611.
-doi: <a href="http://doi.org/10.1214/aoms/1177706645">10.1214/aoms/1177706645</a>.
+doi: <a href="https://doi.org/10.1214/aoms/1177706645">10.1214/aoms/1177706645</a>.
 </p>
 <p>De Matteis, A. and Pagnutti, S. (1993).
 Long-range Correlation Analysis of the Wichmann-Hill Random Number
 Generator.
 <em>Statistics and Computing</em>, <b>3</b>, 67&ndash;70.
-doi: <a href="http://doi.org/10.1007/BF00153065">10.1007/BF00153065</a>.
+doi: <a href="https://doi.org/10.1007/BF00153065">10.1007/BF00153065</a>.
 </p>
 <p>Kinderman, A. J. and Ramage, J. G. (1976).
 Computer generation of normal random variables.
 <em>Journal of the American Statistical Association</em>, <b>71</b>,
 893&ndash;896.
-doi: <a href="http://doi.org/10.2307/2286857">10.2307/2286857</a>.
+doi: <a href="https://doi.org/10.2307/2286857">10.2307/2286857</a>.
 </p>
 <p>Knuth, D. E. (1997).
 <em>The Art of Computer Programming</em>.
@@ -295,7 +318,7 @@ Volume 2, third edition, ninth printing.
 Good parameters and implementations for combined multiple recursive
 random number generators.
 <em>Operations Research</em>, <b>47</b>, 159&ndash;164.
-doi: <a href="http://doi.org/10.1287/opre.47.1.159">10.1287/opre.47.1.159</a>.
+doi: <a href="https://doi.org/10.1287/opre.47.1.159">10.1287/opre.47.1.159</a>.
 </p>
 <p>Marsaglia, G. (1997).
 <em>A random number generator for C</em>.
@@ -305,7 +328,7 @@ September 29, 1997.
 <p>Marsaglia, G. and Zaman, A. (1994).
 Some portable very-long-period random number generators.
 <em>Computers in Physics</em>, <b>8</b>, 117&ndash;121.
-doi: <a href="http://doi.org/10.1063/1.168514">10.1063/1.168514</a>.
+doi: <a href="https://doi.org/10.1063/1.168514">10.1063/1.168514</a>.
 </p>
 <p>Matsumoto, M. and Nishimura, T. (1998).
 Mersenne Twister: A 623-dimensionally equidistributed uniform
@@ -324,7 +347,7 @@ Algorithm AS 183: An Efficient and Portable Pseudo-random Number
 Generator.
 <em>Applied Statistics</em>, <b>31</b>, 188&ndash;190; Remarks:
 <b>34</b>, 198 and <b>35</b>, 89.
-doi: <a href="http://doi.org/10.2307/2347988">10.2307/2347988</a>.
+doi: <a href="https://doi.org/10.2307/2347988">10.2307/2347988</a>.
 </p>
 
 
@@ -382,11 +405,13 @@ RNGkind()
 ## Reset:
 RNGkind(ok[1])
 
+RNGversion(getRversion()) # the default version for this R version
+
 ## ----
 sum(duplicated(runif(1e6))) # around 110 for default generator
 ## and we would expect about almost sure duplicates beyond about
 qbirthday(1 - 1e-6, classes = 2e9) # 235,000
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

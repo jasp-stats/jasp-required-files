@@ -43,7 +43,7 @@ word (if syntactically valid) or character string.
 <tr valign="top"><td><code>package</code></td>
 <td>
 <p>a name or character vector giving the packages to look
-into for documentation, or <code>NULL</code>.  By default, all packages 
+into for documentation, or <code>NULL</code>.  By default, all packages
 whose namespaces are loaded are used.  To avoid a name being deparsed use e.g.
 <code>(pkg_ref)</code> (see the examples).</p>
 </td></tr>
@@ -83,7 +83,12 @@ Case is ignored, and partial matching is allowed.</p>
 </li>
 <li><p> HTML help pages with hyperlinks to other topics, shown in a
 browser by <code><a href="browseURL.html">browseURL</a></code>.
-If for some reason HTML help is unavailable (see
+<br />
+(On Unix-alikes,
+where possible an existing browser window is re-used: the macOS
+GUI uses its own browser window.)
+</p>
+<p>If for some reason HTML help is unavailable (see
 <code><a href="../../tools/html/startDynamicHelp.html">startDynamicHelp</a></code>), plain text help will be used
 instead.
 </p>
@@ -93,9 +98,20 @@ see the section on &lsquo;Offline help&rsquo;.
 </p>
 </li></ul>
 
+
+<dl>
+<dt>On Unix-alikes:</dt><dd>
+<p>The &lsquo;factory-fresh&rsquo; default is text help except from the macOS
+GUI, which uses HTML help displayed in its own browser window.
+</p>
+</dd>
+<dt>On Windows:</dt><dd>
 <p>The default for the type of help is selected when <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> is installed &ndash;
 the &lsquo;factory-fresh&rsquo; default is HTML help.
 </p>
+</dd>
+</dl>
+
 <p>The rendering of text help will use directional quotes in suitable
 locales (UTF-8 and single-byte Windows locales): sometimes the fonts
 used do not support these quotes so this can be turned off by setting
@@ -176,8 +192,9 @@ specified explicitly, the loaded packages are <em>not</em> searched.
 <code>TRUE</code> and neither <code>packages</code> nor <code>lib.loc</code> is
 specified, then all the packages in the known library trees are
 searched for help on <code>topic</code> and a list of (any) packages where
-help may be found is displayed (with hyperlinks for <code>help_type =
-  "html"</code>).  <strong>NB:</strong> searching all packages can be slow, especially
+help may be found is displayed (with hyperlinks for
+<code>help_type = "html"</code>).
+<strong>NB:</strong> searching all packages can be slow, especially
 the first time (caching of files by the OS can expedite subsequent
 searches dramatically).
 </p>
@@ -239,5 +256,5 @@ topic &lt;- "family"; pkg_ref &lt;- "stats"
 help((topic), (pkg_ref))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -97,6 +97,16 @@ class auxlib
   
   
   //
+  // eig_gen_balance
+  
+  template<typename T1>
+  inline static bool eig_gen_balance(Mat< std::complex<typename T1::pod_type> >& vals, Mat< std::complex<typename T1::pod_type> >& vecs, const bool vecs_on, const Base<typename T1::pod_type,T1>& expr);
+  
+  template<typename T1>
+  inline static bool eig_gen_balance(Mat< std::complex<typename T1::pod_type> >& vals, Mat< std::complex<typename T1::pod_type> >& vecs, const bool vecs_on, const Base< std::complex<typename T1::pod_type>, T1 >& expr);
+  
+  
+  //
   // eig_pair
   
   template<typename T1, typename T2>
@@ -115,21 +125,24 @@ class auxlib
   template<typename T, typename T1> 
   inline static bool eig_sym(Col<T>& eigval, const Base<std::complex<T>,T1>& X);
   
-  template<typename eT, typename T1>
-  inline static bool eig_sym(Col<eT>& eigval, Mat<eT>& eigvec, const Base<eT,T1>& X);
+  template<typename eT>
+  inline static bool eig_sym(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X);
   
-  template<typename T, typename T1>
-  inline static bool eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<std::complex<T>,T1>& X);
+  template<typename T>
+  inline static bool eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< std::complex<T> >& X);
   
-  template<typename eT, typename T1>
-  inline static bool eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Base<eT,T1>& X);
+  template<typename eT>
+  inline static bool eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X);
   
-  template<typename T, typename T1>
-  inline static bool eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<std::complex<T>,T1>& X);
+  template<typename T>
+  inline static bool eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< std::complex<T> >& X);
   
   
   //
   // chol
+  
+  template<typename eT>
+  inline static bool chol_simple(Mat<eT>& X);
   
   template<typename eT>
   inline static bool chol(Mat<eT>& X, const uword layout);
@@ -335,6 +348,12 @@ class auxlib
   
   template<typename T1>
   inline static bool crippled_lapack(const Base<typename T1::elem_type, T1>&);
+  
+  template<typename eT>
+  inline static bool rudimentary_sym_check(const Mat<eT>& X);
+  
+  template<typename T>
+  inline static bool rudimentary_sym_check(const Mat< std::complex<T> >& X);
   };
 
 

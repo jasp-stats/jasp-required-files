@@ -1,7 +1,7 @@
 Bollen
 HS.ability.data
-HS.fake.data
 LongitudinalOverdispersedCounts: longData wideData
+Oscillator
 demoOneFactor
 demoTwoFactor
 dzfData
@@ -15,6 +15,7 @@ factorScaleExample2
 jointdata
 latentMultipleRegExample1
 latentMultipleRegExample2
+lazarsfeld
 multiData1
 myAutoregressiveData
 myFADataRaw

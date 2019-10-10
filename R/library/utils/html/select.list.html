@@ -53,7 +53,10 @@ initially.</p>
 <h3>Details</h3>
 
 <p>The normal default is <code>graphics = TRUE</code>.
-This  brings up a modal dialog box with a (scrollable) list
+</p>
+
+<dl>
+<dt>On Windows,</dt><dd><p>this brings up a modal dialog box with a (scrollable) list
 of items, which can be selected by the mouse.  If <code>multiple</code> is
 true, further items can be selected or deselected by holding the
 control key down whilst selecting, and shift-clicking can be used to
@@ -61,8 +64,16 @@ select ranges.
 </p>
 <p>Normal termination is via the &lsquo;OK&rsquo; button or by hitting Enter or
 double-clicking an item.  Selection can be aborted via the
-&lsquo;Cancel&rsquo; button or pressing Escape.
-</p>
+&lsquo;Cancel&rsquo; button or pressing Escape.</p>
+</dd>
+<dt>Under the macOS GUI,</dt><dd><p>this brings up a modal dialog box
+with a (scrollable) list of items, which can be selected by the mouse.</p>
+</dd>
+<dt>On other Unix-like platforms</dt><dd><p>it will use a Tcl/Tk listbox
+widget if possible.</p>
+</dd>
+</dl>
+
 <p>If <code>graphics</code> is FALSE or no graphical widget is available it
 displays a text list from which the user can choose by number(s). The
 <code>multiple = FALSE</code> case uses <code><a href="menu.html">menu</a></code>.  Preselection is
@@ -96,5 +107,5 @@ select.list(sort(.packages(all.available = TRUE)))
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

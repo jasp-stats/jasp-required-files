@@ -107,7 +107,9 @@ length of a file path.
 
 <p>The canonical form of paths may not be what you expect.  For example,
 on macOS absolute paths such as &lsquo;<span class="file">/tmp</span>&rsquo; and &lsquo;<span class="file">/var</span>&rsquo; are
-symbolic links.
+symbolic links. On Linux, a path produced by bash process substitution is
+a symbolic link (such as &lsquo;<span class="file">/proc/fd/63</span>&rsquo;) to a pipe and there is no
+canonical form of such path.
 </p>
 
 
@@ -123,5 +125,5 @@ symbolic links.
 cat(normalizePath(c(R.home(), tempdir())), sep = "\n")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

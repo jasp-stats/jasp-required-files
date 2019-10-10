@@ -16,10 +16,11 @@
 <h3>Usage</h3>
 
 <pre>
-attachNamespace(ns, pos = 2L, depends = NULL)
+attachNamespace(ns, pos = 2L, depends = NULL, exclude, include.only)
 loadNamespace(package, lib.loc = NULL,
               keep.source = getOption("keep.source.pkgs"),
-              partial = FALSE, versionCheck = NULL)
+              partial = FALSE, versionCheck = NULL,
+              keep.parse.data = getOption("keep.parse.data.pkgs"))
 requireNamespace(package, ..., quietly = FALSE)
 loadedNamespaces()
 unloadNamespace(ns)
@@ -53,9 +54,11 @@ recorded in object <code>.Depends</code> in the package.</p>
 </td></tr>
 <tr valign="top"><td><code>keep.source</code></td>
 <td>
-<p>Now ignored except during package installation.
-For more details see this argument to <code><a href="library.html">library</a></code>.
-</p>
+<p>Now ignored except during package installation.</p>
+</td></tr>
+<tr valign="top"><td><code>keep.parse.data</code></td>
+<td>
+<p>Ignored except during package installation.</p>
 </td></tr>
 <tr valign="top"><td><code>partial</code></td>
 <td>
@@ -74,6 +77,10 @@ with components <code>op</code> and <code>version</code>).</p>
 <td>
 <p>string or &lsquo;name&rsquo;, see <code><a href="name.html">as.symbol</a></code>,
 of a package, e.g., <code>"stats"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>exclude, include.only</code></td>
+<td>
+<p>character vectors; see <code><a href="library.html">library</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -188,5 +195,5 @@ stopifnot( ! isNamespaceLoaded("splines"))
 if (hasS) loadNamespace("splines") # (restoring previous state)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

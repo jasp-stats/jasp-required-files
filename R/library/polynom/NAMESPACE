@@ -1,13 +1,21 @@
 importFrom("stats", "coef", "deriv", "poly", "predict")
-importFrom("graphics", "lines", "par", "plot", "points")
+importFrom("graphics", "lines", "par", "plot", "points", "grid")
 
 export("GCD", "LCM",
-       "as.polylist", "as.polynomial",
+       "as.polylist",
+       "as.polynomial",
        "change.origin",
-       "integral", "is.polylist", "is.polynomial",
+       "integral",
+       "is.polylist",
+       "is.polynomial",
        "monic",
-       "poly.calc", "poly.from.roots", "poly.from.values",
-       "poly.from.zeros", "poly.orth", "polylist", "polynomial")
+       "poly.calc",
+       "poly.from.roots",
+       "poly.from.values",
+       "poly.from.zeros",
+       "poly.orth",
+       "polylist",
+       "polynomial")
 
 S3method("[", "polylist")
 S3method("GCD", "polylist")

@@ -154,7 +154,8 @@ substantially faster if this is set to false.</p>
 <p>Function <code>makeForkCluster</code> creates a socket cluster by forking
 (and hence is not available on Windows).  It supports options
 <code>port</code>, <code>timeout</code> and <code>outfile</code>, and always uses
-<code>useXDR = FALSE</code>.
+<code>useXDR = FALSE</code>. It is <em>strongly discouraged</em> to use the
+<code>"FORK"</code> cluster with GUI front-ends  or multi-threaded libraries.
 </p>
 <p>It is good practice to shut down the workers by calling
 <code><a href="makeCluster.html">stopCluster</a></code>: however the workers will terminate
@@ -185,5 +186,5 @@ cluster or <code>NULL</code> if there is no such cluster.
 <p>Derived from the <a href="https://CRAN.R-project.org/package=snow"><span class="pkg">snow</span></a> package.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -50,8 +50,9 @@ class Mat : public Base< eT, Mat<eT> >
   
   public:
   
-  static const bool is_col = false;
-  static const bool is_row = false;
+  static const bool is_col  = false;
+  static const bool is_row  = false;
+  static const bool is_xvec = false;
   
   inline ~Mat();
   inline  Mat();
@@ -158,7 +159,7 @@ class Mat : public Base< eT, Mat<eT> >
   template<typename T1, typename T2> inline Mat& operator*=(const subview_elem2<eT,T1,T2>& X);
   template<typename T1, typename T2> inline Mat& operator%=(const subview_elem2<eT,T1,T2>& X);
   template<typename T1, typename T2> inline Mat& operator/=(const subview_elem2<eT,T1,T2>& X);
-  
+
   // Operators on sparse matrices (and subviews)
   template<typename T1> inline explicit    Mat(const SpBase<eT, T1>& m);
   template<typename T1> inline Mat&  operator=(const SpBase<eT, T1>& m);
@@ -296,6 +297,9 @@ class Mat : public Base< eT, Mat<eT> >
   inline void shed_rows(const uword in_row1, const uword in_row2);
   inline void shed_cols(const uword in_col1, const uword in_col2);
   
+  template<typename T1> inline void shed_rows(const Base<uword, T1>& indices);
+  template<typename T1> inline void shed_cols(const Base<uword, T1>& indices);
+  
   inline void insert_rows(const uword row_num, const uword N, const bool set_to_zero = true);
   inline void insert_cols(const uword col_num, const uword N, const bool set_to_zero = true);
   
@@ -334,6 +338,22 @@ class Mat : public Base< eT, Mat<eT> >
   template<typename T1, typename op_type> inline Mat& operator*=(const mtOp<eT, T1, op_type>& X);
   template<typename T1, typename op_type> inline Mat& operator%=(const mtOp<eT, T1, op_type>& X);
   template<typename T1, typename op_type> inline Mat& operator/=(const mtOp<eT, T1, op_type>& X);
+
+  template<typename T1, typename op_type> inline             Mat(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat&  operator=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator+=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator-=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator*=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator%=(const CubeToMatOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator/=(const CubeToMatOp<T1, op_type>& X);
+  
+  template<typename T1, typename op_type> inline             Mat(const SpToDOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat&  operator=(const SpToDOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator+=(const SpToDOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator-=(const SpToDOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator*=(const SpToDOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator%=(const SpToDOp<T1, op_type>& X);
+  template<typename T1, typename op_type> inline Mat& operator/=(const SpToDOp<T1, op_type>& X);
   
   template<typename T1, typename T2, typename glue_type> inline             Mat(const Glue<T1, T2, glue_type>& X);
   template<typename T1, typename T2, typename glue_type> inline Mat&  operator=(const Glue<T1, T2, glue_type>& X);
@@ -396,6 +416,9 @@ class Mat : public Base< eT, Mat<eT> >
   inline arma_warn_unused bool is_sorted(const char* direction = "ascend")       const;
   inline arma_warn_unused bool is_sorted(const char* direction, const uword dim) const;
   
+  template<typename comparator>
+  inline arma_warn_unused bool is_sorted_helper(const comparator& comp, const uword dim) const;
+  
   arma_inline arma_warn_unused bool in_range(const uword ii) const;
   arma_inline arma_warn_unused bool in_range(const span& x ) const;
   
@@ -445,6 +468,8 @@ class Mat : public Base< eT, Mat<eT> >
   
   
   inline const Mat& replace(const eT old_val, const eT new_val);
+  
+  inline const Mat& clean(const pod_type threshold);
   
   inline const Mat& fill(const eT val);
   
@@ -701,6 +726,12 @@ class Mat : public Base< eT, Mat<eT> >
   inline bool  empty() const;
   inline uword size()  const;
   
+  inline       eT& front();
+  inline const eT& front() const;
+  
+  inline       eT& back();
+  inline const eT& back() const;
+  
   inline void swap(Mat& B);
   
   inline void steal_mem(Mat& X);  //!< don't use this unless you're writing code internal to Armadillo
@@ -773,8 +804,9 @@ class Mat<eT>::fixed : public Mat<eT>
   typedef eT                                elem_type;
   typedef typename get_pod_type<eT>::result pod_type;
   
-  static const bool is_col = (fixed_n_cols == 1);
-  static const bool is_row = (fixed_n_rows == 1);
+  static const bool is_col  = (fixed_n_cols == 1);
+  static const bool is_row  = (fixed_n_rows == 1);
+  static const bool is_xvec = false;
   
   static const uword n_rows;  // value provided below the class definition
   static const uword n_cols;  // value provided below the class definition

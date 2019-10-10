@@ -137,7 +137,20 @@ rm(A, B, score)
 
 
 ## multi-stratum example where efficiencies play a role
-utils::example(eff.aovlist)
+## An example from Yates (1932),
+## a 2^3 design in 2 blocks replicated 4 times
+
+Block &lt;- gl(8, 4)
+A &lt;- factor(c(0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,
+              0,1,0,1,0,1,0,1,0,1,0,1))
+B &lt;- factor(c(0,0,1,1,0,0,1,1,0,1,0,1,1,0,1,0,0,0,1,1,
+              0,0,1,1,0,0,1,1,0,0,1,1))
+C &lt;- factor(c(0,1,1,0,1,0,0,1,0,0,1,1,0,0,1,1,0,1,0,1,
+              1,0,1,0,0,0,1,1,1,1,0,0))
+Yield &lt;- c(101, 373, 398, 291, 312, 106, 265, 450, 106, 306, 324, 449,
+           272, 89, 407, 338, 87, 324, 279, 471, 323, 128, 423, 334,
+           131, 103, 445, 437, 324, 361, 302, 272)
+aovdat &lt;- data.frame(Block, A, B, C, Yield)
 fit &lt;- aov(Yield ~ A + B * C + Error(Block), data = aovdat)
 cont1 &lt;- c(-1, 1)[A]/32  # Helmert contrasts
 cont2 &lt;- c(-1, 1)[B] * c(-1, 1)[C]/32
@@ -150,5 +163,5 @@ fit2 &lt;- lme(Yield ~ A + B*C, random = ~1 | Block, data = aovdat)
 summary(fit2)$tTable # same estimates, similar (but smaller) se's.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

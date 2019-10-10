@@ -10,7 +10,8 @@
 <h3>Description</h3>
 
 <p>These functions handle the translation of a device-independent R graphics
-font family name to a windows font description.
+font family name to a windows font description  and are available only
+on Windows.
 </p>
 
 
@@ -74,11 +75,12 @@ font and <code>"mono"</code> for a monospaced font.
 <h3>Examples</h3>
 
 <pre>
-windowsFonts()
-windowsFonts("mono")
-
+if(.Platform$OS.type == "windows") withAutoprint({
+  windowsFonts()
+  windowsFonts("mono")
+})
 ## Not run: ## set up for Japanese: needs the fonts installed
-windows()  # make sure we have the right device type
+windows()  # make sure we have the right device type (available on Windows only)
 Sys.setlocale("LC_ALL", "ja")
 windowsFonts(JP1 = windowsFont("MS Mincho"),
              JP2 = windowsFont("MS Gothic"),
@@ -91,5 +93,5 @@ text(9, 2, "\u{5100}", family = "JP3")
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

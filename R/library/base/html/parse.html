@@ -1,16 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parse Expressions</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parse R Expressions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for parse {base}"><tr><td>parse {base}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Parse Expressions</h2>
+<h2>Parse R Expressions</h2>
 
 <h3>Description</h3>
 
-<p><code>parse</code> returns the parsed but unevaluated expressions in a
-list.
+<p><code>parse()</code> returns the parsed but unevaluated expressions in an
+<code><a href="expression.html">expression</a></code>, a &ldquo;list&rdquo; of <code><a href="call.html">call</a></code>s.
+</p>
+<p><code>str2expression(s)</code> and <code>str2lang(s)</code> return special versions
+of <code>parse(text=s, keep.source=FALSE)</code> and can therefore be regarded as
+transforming character strings <code>s</code> to expressions, calls, etc.
 </p>
 
 
@@ -20,6 +24,9 @@ list.
 parse(file = "", n = NULL, text = NULL, prompt = "?",
       keep.source = getOption("keep.source"), srcfile,
       encoding = "unknown")
+
+str2lang(s)
+str2expression(text)
 </pre>
 
 
@@ -70,11 +77,19 @@ part of the connection <code>con</code> or <em>via</em>
 <code><a href="options.html">options</a>(encoding=)</code>: see the example under
 <code><a href="connections.html">file</a></code>.</p>
 </td></tr>
+<tr valign="top"><td><code>s</code></td>
+<td>
+<p>a <code><a href="character.html">character</a></code> vector of length <code>1</code>, i.e., a
+&ldquo;string&rdquo;.</p>
+</td></tr>
 </table>
 
 
 <h3>Details</h3>
 
+
+<dl>
+<dt><code>parse(....)</code>: </dt><dd>
 <p>If <code>text</code> has length greater than zero (after coercion) it is used in
 preference to <code>file</code>.
 </p>
@@ -103,12 +118,39 @@ include the name, but source reference information will not be added
 to the result.  When <code>srcfile</code> is a <code><a href="srcfile.html">srcfile</a></code>
 object, source reference information will be retained.
 </p>
+</dd>
+<dt><code>str2expression(s)</code>: </dt><dd><p>for a <code><a href="character.html">character</a></code> vector
+<code>s</code>, <code>str2expression(s)</code> corresponds to
+<code><a href="parse.html">parse</a>(text = s, keep.source=FALSE)</code>, which is always of
+type (<code><a href="typeof.html">typeof</a></code>) and <code><a href="class.html">class</a></code> <code>expression</code>.
+</p>
+</dd>
+<dt><code>str2lang(s)</code>: </dt><dd><p>for a <code><a href="character.html">character</a></code> string
+<code>s</code>, <code>str2lang(s)</code> corresponds to
+<code><a href="parse.html">parse</a>(text = s, keep.source=FALSE)[[1]]</code> (plus a check
+that both <code>s</code> and the <code>parse(*)</code> result are of length one)
+which is typically a <code>call</code> but may also be a <code>symbol</code> aka
+<code><a href="name.html">name</a></code>, <code><a href="NULL.html">NULL</a></code> or an atomic constant such as
+<code>2</code>, <code>1L</code>, or <code>TRUE</code>.  Put differently, the value of
+<code>str2lang(.)</code> is a call or one of its parts, in short
+&ldquo;a call or simpler&rdquo;.
+</p>
+</dd>
+</dl>
+
+<p>Currently, encoding is not handled in <code>str2lang()</code> and
+<code>str2expression()</code>.
+</p>
 
 
 <h3>Value</h3>
 
-<p>An object of type <code>"<a href="expression.html">expression</a>"</code>, with up to <code>n</code>
+<p><code>parse()</code> and <code>str2expression()</code> return an object of type
+<code>"<a href="expression.html">expression</a>"</code>, for <code>parse()</code> with up to <code>n</code>
 elements if specified as a non-negative integer.
+</p>
+<p><code>str2lang(s)</code>, <code>s</code> a string, returns &ldquo;a
+<code><a href="call.html">call</a></code> or simpler&rdquo;, see the &lsquo;Details:&rsquo; section.
 </p>
 <p>When <code>srcfile</code> is non-<code>NULL</code>, a <code>"srcref"</code> attribute
 will be attached to the result containing a list of
@@ -144,6 +186,15 @@ to <code>"parent"</code> entries that are not present.
 </p>
 
 
+<h3>Note</h3>
+
+<p>Using <code>parse(text = *, ..)</code> or its simplified and hence more
+efficient versions <code>str2lang()</code> or <code>str2expression()</code> is at
+least an order of magnitude less efficient than <code><a href="call.html">call</a>(..)</code> or
+<code><a href="call.html">as.call</a>()</code>.
+</p>
+
+
 <h3>References</h3>
 
 <p>Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988)
@@ -163,7 +214,7 @@ References</a>.  <em>The R Journal</em> 2/2, 16-19.
 </p>
 <p>The source reference information can be used for debugging (see
 e.g. <code><a href="../../utils/html/findLineNum.html">setBreakpoint</a></code>) and profiling (see
-<code><a href="../../utils/html/Rprof.html">Rprof</a></code>). It can be examined by <code><a href="../../utils/html/sourceutils.html">getSrcref</a></code>
+<code><a href="../../utils/html/Rprof.html">Rprof</a></code>).  It can be examined by <code><a href="../../utils/html/sourceutils.html">getSrcref</a></code>
 and related functions.  More detailed information is available through
 <code><a href="../../utils/html/getParseData.html">getParseData</a></code>.
 </p>
@@ -178,6 +229,15 @@ cat("x &lt;- c(1, 4)\n  x ^ 3 -10 ; outer(1:7, 5:9)\n", file = fil)
 parse(file = fil, n = 3)
 unlink(fil)
 
+## str2lang(&lt;string&gt;)  || str2expression(&lt;character&gt;) :
+stopifnot(exprs = {
+  identical( str2lang("x[3] &lt;- 1+4"), quote(x[3] &lt;- 1+4))
+  identical( str2lang("log(y)"),      quote(log(y)) )
+  identical( str2lang("abc"   ),      quote(abc) -&gt; qa)
+  is.symbol(qa) &amp; !is.call(qa)           # a symbol/name, not a call
+  identical( str2lang("1.375" ), 1.375)  # just a number, not a call
+})
+
 # A partial parse with a syntax error
 txt &lt;- "
 x &lt;- 1
@@ -188,5 +248,5 @@ try(parse(text = txt, srcfile = sf))
 getParseData(sf)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

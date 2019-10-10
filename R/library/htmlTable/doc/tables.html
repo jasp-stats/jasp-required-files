@@ -7,12 +7,13 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Max Gordon" />
 
-<meta name="date" content="2019-01-05" />
+<meta name="date" content="2019-09-21" />
 
 <title>Tables with htmlTable and some alternatives</title>
 
@@ -20,41 +21,67 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
 </style>
 <script>
@@ -70,7 +97,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -81,7 +108,170 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20" rel="stylesheet" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+}
+pre {
+white-space: pre-wrap; 
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } </style>
+
+
+
 
 </head>
 
@@ -91,8 +281,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Tables with htmlTable and some alternatives</h1>
-<h4 class="author"><em>Max Gordon</em></h4>
-<h4 class="date"><em>2019-01-05</em></h4>
+<h4 class="author">Max Gordon</h4>
+<h4 class="date">2019-09-21</h4>
 
 
 <div id="TOC">
@@ -131,23 +321,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="the-htmltable-package" class="section level2">
 <h2>The <code>htmlTable</code>-package</h2>
 <p>I developed the <code>htmlTable</code> in order to get tables matching those available in top medical journals. After finding no HTML-alternative to the <code>Hmisc::latex</code> function on <a href="http://stackoverflow.com/questions/11950703/html-with-multicolumn-table-in-markdown-using-knitr">Stack Overflow</a> I wrote a basic function allowing column spanners and row groups. Below is a basic example on these two:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">matrix</span>(<span class="kw">paste</span>(<span class="st">&quot;Content&quot;</span>, LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>]), 
-         <span class="dt">ncol=</span><span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
-
-<span class="kw">library</span>(htmlTable)
-<span class="kw">htmlTable</span>(output,
-          <span class="dt">header =</span>  <span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;2nd&quot;</span>,
-                            <span class="st">&quot;3rd&quot;</span>, <span class="st">&quot;4th&quot;</span>), <span class="st">&quot;header&quot;</span>),
-          <span class="dt">rnames =</span> <span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;2nd&quot;</span>,
-                           <span class="st">&quot;3rd&quot;</span>, <span class="st">&quot;4th&quot;</span>), <span class="st">&quot;row&quot;</span>),
-          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;Group A&quot;</span>,
-                     <span class="st">&quot;Group B&quot;</span>),
-          <span class="dt">n.rgroup =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),
-          <span class="dt">cgroup =</span> <span class="kw">c</span>(<span class="st">&quot;Cgroup 1&quot;</span>, <span class="st">&quot;Cgroup 2&amp;dagger;&quot;</span>),
-          <span class="dt">n.cgroup =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), 
-          <span class="dt">caption=</span><span class="st">&quot;Basic table with both column spanners (groups) and row groups&quot;</span>,
-          <span class="dt">tfoot=</span><span class="st">&quot;&amp;dagger; A table footer commment&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">output &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw">matrix</span>(<span class="kw">paste</span>(<span class="st">&quot;Content&quot;</span>, LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>]), </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">         <span class="dt">ncol=</span><span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">library</span>(htmlTable)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">htmlTable</span>(output,</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">          <span class="dt">header =</span>  <span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;2nd&quot;</span>,</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">                            <span class="st">&quot;3rd&quot;</span>, <span class="st">&quot;4th&quot;</span>), <span class="st">&quot;header&quot;</span>),</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">          <span class="dt">rnames =</span> <span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;2nd&quot;</span>,</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">                           <span class="st">&quot;3rd&quot;</span>, <span class="st">&quot;4th&quot;</span>), <span class="st">&quot;row&quot;</span>),</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;Group A&quot;</span>,</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">                     <span class="st">&quot;Group B&quot;</span>),</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">          <span class="dt">n.rgroup =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">          <span class="dt">cgroup =</span> <span class="kw">c</span>(<span class="st">&quot;Cgroup 1&quot;</span>, <span class="st">&quot;Cgroup 2&amp;dagger;&quot;</span>),</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">          <span class="dt">n.cgroup =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">          <span class="dt">caption=</span><span class="st">&quot;Basic table with both column spanners (groups) and row groups&quot;</span>,</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">          <span class="dt">tfoot=</span><span class="st">&quot;&amp;dagger; A table footer commment&quot;</span>)</a></code></pre></div>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
@@ -292,25 +482,25 @@ Content P
 <h3>Example based upon Swedish statistics</h3>
 <p>In order to make a more interesting example we will try to look at how the average age changes between Swedish counties the last 15 years. <strong>Goal: visualize migration patterns</strong>.</p>
 <p>The dataset has been downloaded from Statistics Sweden and is attached to the htmlTable-package. We will start by reshaping our tidy dataset into a more table adapted format.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(SCB)
-
-<span class="co"># The SCB has three other coulmns and one value column</span>
-<span class="kw">library</span>(reshape)
-SCB<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">relevel</span>(SCB<span class="op">$</span>region, <span class="st">&quot;Sweden&quot;</span>)
-SCB &lt;-<span class="st"> </span><span class="kw">cast</span>(SCB, year <span class="op">~</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>sex, <span class="dt">value =</span> <span class="st">&quot;values&quot;</span>)
-
-<span class="co"># Set rownames to be year</span>
-<span class="kw">rownames</span>(SCB) &lt;-<span class="st"> </span>SCB<span class="op">$</span>year
-SCB<span class="op">$</span>year &lt;-<span class="st"> </span><span class="ot">NULL</span>
-
-<span class="co"># The dataset now has the rows</span>
-<span class="kw">names</span>(SCB)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(SCB)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># The SCB has three other coulmns and one value column</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">library</span>(reshape)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">SCB<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">relevel</span>(SCB<span class="op">$</span>region, <span class="st">&quot;Sweden&quot;</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">SCB &lt;-<span class="st"> </span><span class="kw">cast</span>(SCB, year <span class="op">~</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>sex, <span class="dt">value =</span> <span class="st">&quot;values&quot;</span>)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co"># Set rownames to be year</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">rownames</span>(SCB) &lt;-<span class="st"> </span>SCB<span class="op">$</span>year</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">SCB<span class="op">$</span>year &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co"># The dataset now has the rows</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="kw">names</span>(SCB)</a></code></pre></div>
 <pre><code>## [1] &quot;Sweden_men&quot;              &quot;Sweden_women&quot;           
 ## [3] &quot;Norrbotten county_men&quot;   &quot;Norrbotten county_women&quot;
 ## [5] &quot;Stockholm county_men&quot;    &quot;Stockholm county_women&quot; 
 ## [7] &quot;Uppsala county_men&quot;      &quot;Uppsala county_women&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># and the dimensions</span>
-<span class="kw">dim</span>(SCB)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># and the dimensions</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">dim</span>(SCB)</a></code></pre></div>
 <pre><code>## [1] 15  8</code></pre>
 <p>The next step is to calculate two new columns:</p>
 <ul>
@@ -359,65 +549,65 @@ Age
 </td>
 </tr>
 </table>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mx &lt;-<span class="st"> </span><span class="ot">NULL</span>
-<span class="cf">for</span> (n <span class="cf">in</span> <span class="kw">names</span>(SCB)){
-  tmp &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Sweden_&quot;</span>, <span class="kw">strsplit</span>(n, <span class="st">&quot;_&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>])
-  mx &lt;-<span class="st"> </span><span class="kw">cbind</span>(mx,
-              <span class="kw">cbind</span>(SCB[[n]], 
-                    SCB[[n]] <span class="op">-</span><span class="st"> </span>SCB[[n]][<span class="dv">1</span>],
-                    SCB[[n]] <span class="op">-</span><span class="st"> </span>SCB[[tmp]]))
-}
-<span class="kw">rownames</span>(mx) &lt;-<span class="st"> </span><span class="kw">rownames</span>(SCB)
-<span class="kw">colnames</span>(mx) &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, 
-                      <span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt;&quot;</span>,
-                      <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt;&quot;</span>), 
-                    <span class="dt">times =</span> <span class="kw">ncol</span>(SCB))
-mx &lt;-<span class="st"> </span>mx[,<span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">6</span>)]
-
-<span class="co"># This automated generation of cgroup elements is </span>
-<span class="co"># somewhat of an overkill</span>
-cgroup &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">unique</span>(<span class="kw">sapply</span>(<span class="kw">names</span>(SCB), 
-                <span class="cf">function</span>(x) <span class="kw">strsplit</span>(x, <span class="st">&quot;_&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>], 
-                <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>))
-n.cgroup &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">sapply</span>(cgroup, 
-         <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="kw">paste0</span>(<span class="st">&quot;^&quot;</span>, x), <span class="kw">names</span>(SCB))), 
-         <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>)<span class="op">*</span><span class="dv">3</span>
-n.cgroup[cgroup <span class="op">==</span><span class="st"> &quot;Sweden&quot;</span>] &lt;-
-<span class="st">  </span>n.cgroup[cgroup <span class="op">==</span><span class="st"> &quot;Sweden&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">2</span>
-
-cgroup &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">c</span>(cgroup, <span class="kw">rep</span>(<span class="ot">NA</span>, <span class="kw">ncol</span>(SCB) <span class="op">-</span><span class="st"> </span><span class="kw">length</span>(cgroup))),
-        Hmisc<span class="op">::</span><span class="kw">capitalize</span>(
-          <span class="kw">sapply</span>(<span class="kw">names</span>(SCB), 
-                 <span class="cf">function</span>(x) <span class="kw">strsplit</span>(x, <span class="st">&quot;_&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>],
-                 <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>)))
-n.cgroup &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">c</span>(n.cgroup, <span class="kw">rep</span>(<span class="ot">NA</span>, <span class="kw">ncol</span>(SCB) <span class="op">-</span><span class="st"> </span><span class="kw">length</span>(n.cgroup))),
-        <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>, <span class="kw">rep</span>(<span class="dv">3</span>, <span class="kw">ncol</span>(cgroup) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)))
-
-<span class="kw">print</span>(cgroup)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">mx &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="cf">for</span> (n <span class="cf">in</span> <span class="kw">names</span>(SCB)){</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  tmp &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Sweden_&quot;</span>, <span class="kw">strsplit</span>(n, <span class="st">&quot;_&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  mx &lt;-<span class="st"> </span><span class="kw">cbind</span>(mx,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">              <span class="kw">cbind</span>(SCB[[n]], </a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">                    SCB[[n]] <span class="op">-</span><span class="st"> </span>SCB[[n]][<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">                    SCB[[n]] <span class="op">-</span><span class="st"> </span>SCB[[tmp]]))</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="kw">rownames</span>(mx) &lt;-<span class="st"> </span><span class="kw">rownames</span>(SCB)</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="kw">colnames</span>(mx) &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, </a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">                      <span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt;&quot;</span>,</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">                      <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt;&quot;</span>), </a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">                    <span class="dt">times =</span> <span class="kw">ncol</span>(SCB))</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">mx &lt;-<span class="st"> </span>mx[,<span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">-6</span>)]</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co"># This automated generation of cgroup elements is </span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co"># somewhat of an overkill</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">cgroup &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="st">  </span><span class="kw">unique</span>(<span class="kw">sapply</span>(<span class="kw">names</span>(SCB), </a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">                <span class="cf">function</span>(x) <span class="kw">strsplit</span>(x, <span class="st">&quot;_&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>], </a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">                <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">n.cgroup &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="st">  </span><span class="kw">sapply</span>(cgroup, </a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">         <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="kw">paste0</span>(<span class="st">&quot;^&quot;</span>, x), <span class="kw">names</span>(SCB))), </a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">         <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>)<span class="op">*</span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">n.cgroup[cgroup <span class="op">==</span><span class="st"> &quot;Sweden&quot;</span>] &lt;-</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="st">  </span>n.cgroup[cgroup <span class="op">==</span><span class="st"> &quot;Sweden&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb6-29" data-line-number="29">cgroup &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="st">  </span><span class="kw">rbind</span>(<span class="kw">c</span>(cgroup, <span class="kw">rep</span>(<span class="ot">NA</span>, <span class="kw">ncol</span>(SCB) <span class="op">-</span><span class="st"> </span><span class="kw">length</span>(cgroup))),</a>
+<a class="sourceLine" id="cb6-31" data-line-number="31">        Hmisc<span class="op">::</span><span class="kw">capitalize</span>(</a>
+<a class="sourceLine" id="cb6-32" data-line-number="32">          <span class="kw">sapply</span>(<span class="kw">names</span>(SCB), </a>
+<a class="sourceLine" id="cb6-33" data-line-number="33">                 <span class="cf">function</span>(x) <span class="kw">strsplit</span>(x, <span class="st">&quot;_&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb6-34" data-line-number="34">                 <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>)))</a>
+<a class="sourceLine" id="cb6-35" data-line-number="35">n.cgroup &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb6-36" data-line-number="36"><span class="st">  </span><span class="kw">rbind</span>(<span class="kw">c</span>(n.cgroup, <span class="kw">rep</span>(<span class="ot">NA</span>, <span class="kw">ncol</span>(SCB) <span class="op">-</span><span class="st"> </span><span class="kw">length</span>(n.cgroup))),</a>
+<a class="sourceLine" id="cb6-37" data-line-number="37">        <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>, <span class="kw">rep</span>(<span class="dv">3</span>, <span class="kw">ncol</span>(cgroup) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>)))</a>
+<a class="sourceLine" id="cb6-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb6-39" data-line-number="39"><span class="kw">print</span>(cgroup)</a></code></pre></div>
 <pre><code>##      [,1]     [,2]                [,3]               [,4]            
 ## [1,] &quot;Sweden&quot; &quot;Norrbotten county&quot; &quot;Stockholm county&quot; &quot;Uppsala county&quot;
 ## [2,] &quot;Men&quot;    &quot;Women&quot;             &quot;Men&quot;              &quot;Women&quot;         
 ##      [,5]  [,6]    [,7]  [,8]   
 ## [1,] NA    NA      NA    NA     
 ## [2,] &quot;Men&quot; &quot;Women&quot; &quot;Men&quot; &quot;Women&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(n.cgroup)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">print</span>(n.cgroup)</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
 ## [1,]    4    6    6    6   NA   NA   NA   NA
 ## [2,]    2    2    3    3    3    3    3    3</code></pre>
 <p>Next step is to output the table after rounding to the correct number of decimals. The <code>txtRound</code> function helps with this, as it uses the <code>sprintf</code> function instead of the <code>round</code> the resulting strings have the correct number of decimals, i.e. 1.02 will by round become 1 while we want it to retain the last decimal, i.e. be shown as 1.0.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>), 
-          <span class="dt">cgroup =</span> cgroup,
-          <span class="dt">n.cgroup =</span> n.cgroup,
-          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;First period&quot;</span>, 
-                     <span class="st">&quot;Second period&quot;</span>,
-                     <span class="st">&quot;Third period&quot;</span>),
-          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),
-          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,
-                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">          <span class="dt">cgroup =</span> cgroup,</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">          <span class="dt">n.cgroup =</span> n.cgroup,</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;First period&quot;</span>, </a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">                     <span class="st">&quot;Second period&quot;</span>,</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">                     <span class="st">&quot;Third period&quot;</span>),</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>))</a></code></pre></div>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
@@ -1992,16 +2182,16 @@ Third period
 </tfoot>
 </table>
 <p>In order to increase the readability we may want to separate the Sweden columns from the county columns, one way is to use the align option with a |. Note that in 1.0 the function continues with the same alignment until the end, i.e. you no longer need count to have the exact right number of columns in your alignment argument.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>), 
-          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,
-          <span class="dt">cgroup =</span> cgroup,
-          <span class="dt">n.cgroup =</span> n.cgroup,
-          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;First period&quot;</span>, 
-                     <span class="st">&quot;Second period&quot;</span>,
-                     <span class="st">&quot;Third period&quot;</span>),
-          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),
-          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,
-                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">          <span class="dt">cgroup =</span> cgroup,</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">          <span class="dt">n.cgroup =</span> n.cgroup,</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;First period&quot;</span>, </a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">                     <span class="st">&quot;Second period&quot;</span>,</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">                     <span class="st">&quot;Third period&quot;</span>),</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,</a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>))</a></code></pre></div>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
@@ -3576,18 +3766,18 @@ Third period
 </tfoot>
 </table>
 <p>If we still feel that we want more separation it is always possible to add colors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>), 
-          <span class="dt">col.columns =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;#E6E6F0&quot;</span>, <span class="dv">4</span>),
-                          <span class="kw">rep</span>(<span class="st">&quot;none&quot;</span>, <span class="kw">ncol</span>(mx) <span class="op">-</span><span class="st"> </span><span class="dv">4</span>)),
-          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,
-          <span class="dt">cgroup =</span> cgroup,
-          <span class="dt">n.cgroup =</span> n.cgroup,
-          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;First period&quot;</span>, 
-                     <span class="st">&quot;Second period&quot;</span>,
-                     <span class="st">&quot;Third period&quot;</span>),
-          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),
-                    <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,
-                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">          <span class="dt">col.columns =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;#E6E6F0&quot;</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">                          <span class="kw">rep</span>(<span class="st">&quot;none&quot;</span>, <span class="kw">ncol</span>(mx) <span class="op">-</span><span class="st"> </span><span class="dv">4</span>)),</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">          <span class="dt">cgroup =</span> cgroup,</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">          <span class="dt">n.cgroup =</span> n.cgroup,</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;First period&quot;</span>, </a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">                     <span class="st">&quot;Second period&quot;</span>,</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">                     <span class="st">&quot;Third period&quot;</span>),</a>
+<a class="sourceLine" id="cb12-10" data-line-number="10">          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11">                    <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>))</a></code></pre></div>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
@@ -5162,23 +5352,23 @@ Third period
 </tfoot>
 </table>
 <p>If we add a color to the row group and restrict the rgroup spanner we may even have a more visual aid.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>),
-          <span class="dt">col.rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;none&quot;</span>, <span class="st">&quot;#FFFFCC&quot;</span>),
-          <span class="dt">col.columns =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;#EFEFF0&quot;</span>, <span class="dv">4</span>),
-                          <span class="kw">rep</span>(<span class="st">&quot;none&quot;</span>, <span class="kw">ncol</span>(mx) <span class="op">-</span><span class="st"> </span><span class="dv">4</span>)),
-          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,
-          <span class="dt">cgroup =</span> cgroup,
-          <span class="dt">n.cgroup =</span> n.cgroup,
-          <span class="co"># I use the &amp;nbsp; - the no breaking space as I don't want to have a</span>
-          <span class="co"># row break in the row group. This adds a little space in the table</span>
-          <span class="co"># when used together with the cspan.rgroup=1.</span>
-          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;1st&amp;nbsp;period&quot;</span>, 
-                     <span class="st">&quot;2nd&amp;nbsp;period&quot;</span>,
-                     <span class="st">&quot;3rd&amp;nbsp;period&quot;</span>),
-          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),
-          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,
-                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>),
-          <span class="dt">cspan.rgroup =</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">htmlTable</span>(<span class="kw">txtRound</span>(mx, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">          <span class="dt">col.rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;none&quot;</span>, <span class="st">&quot;#FFFFCC&quot;</span>),</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">          <span class="dt">col.columns =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;#EFEFF0&quot;</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">                          <span class="kw">rep</span>(<span class="st">&quot;none&quot;</span>, <span class="kw">ncol</span>(mx) <span class="op">-</span><span class="st"> </span><span class="dv">4</span>)),</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">          <span class="dt">cgroup =</span> cgroup,</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">          <span class="dt">n.cgroup =</span> n.cgroup,</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">          <span class="co"># I use the &amp;nbsp; - the no breaking space as I don't want to have a</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">          <span class="co"># row break in the row group. This adds a little space in the table</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">          <span class="co"># when used together with the cspan.rgroup=1.</span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;1st&amp;nbsp;period&quot;</span>, </a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">                     <span class="st">&quot;2nd&amp;nbsp;period&quot;</span>,</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">                     <span class="st">&quot;3rd&amp;nbsp;period&quot;</span>),</a>
+<a class="sourceLine" id="cb13-14" data-line-number="14">          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; correspnds to the change since start&quot;</span>,</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16">                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>),</a>
+<a class="sourceLine" id="cb13-17" data-line-number="17">          <span class="dt">cspan.rgroup =</span> <span class="dv">1</span>)</a></code></pre></div>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
@@ -6948,45 +7138,45 @@ Age
 </tfoot>
 </table>
 <p>If you want to further add to the visual hints you can use specific HTML-code and insert it into the cells. Here we will color the Δ<sub>std</sub> according to color. By default htmlTable does not escape HTML characters.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cols_2_clr &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt;&quot;</span>, <span class="kw">colnames</span>(mx))
-<span class="co"># We need a copy as the formatting causes the matrix to loos</span>
-<span class="co"># its numerical property</span>
-out_mx &lt;-<span class="st"> </span><span class="kw">txtRound</span>(mx, <span class="dv">1</span>)
-
-min_delta &lt;-<span class="st"> </span><span class="kw">min</span>(mx[,cols_2_clr])
-span_delta &lt;-<span class="st"> </span><span class="kw">max</span>(mx[,cols_2_clr]) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(mx[,cols_2_clr]) 
-<span class="cf">for</span> (col <span class="cf">in</span> cols_2_clr){
-  out_mx[, col] &lt;-<span class="st"> </span><span class="kw">mapply</span>(<span class="cf">function</span>(val, strength)
-    <span class="kw">paste0</span>(<span class="st">&quot;&lt;span style='font-weight: 900; color: &quot;</span>, 
-           <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;#009900&quot;</span>, <span class="st">&quot;#000000&quot;</span>, <span class="st">&quot;#990033&quot;</span>))(<span class="dv">101</span>)[strength],
-           <span class="st">&quot;'&gt;&quot;</span>,
-           val, <span class="st">&quot;&lt;/span&gt;&quot;</span>), 
-    <span class="dt">val =</span> out_mx[,col], 
-    <span class="dt">strength =</span> <span class="kw">round</span>((mx[,col] <span class="op">-</span><span class="st"> </span>min_delta)<span class="op">/</span>span_delta<span class="op">*</span><span class="dv">100</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),
-    <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>)
-}
-
-<span class="kw">htmlTable</span>(out_mx,
-          <span class="dt">caption =</span> <span class="st">&quot;Average age in Sweden counties over a period of</span>
-<span class="st">                     15 years. The Norbotten county is typically known</span>
-<span class="st">                     for having a negative migration pattern compared to</span>
-<span class="st">                     Stockholm, while Uppsala has a proportionally large </span>
-<span class="st">                     population of students.&quot;</span>,
-          <span class="dt">pos.rowlabel =</span> <span class="st">&quot;bottom&quot;</span>,
-          <span class="dt">rowlabel=</span><span class="st">&quot;Year&quot;</span>, 
-          <span class="dt">col.rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;none&quot;</span>, <span class="st">&quot;#FFFFCC&quot;</span>),
-          <span class="dt">col.columns =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;#EFEFF0&quot;</span>, <span class="dv">4</span>),
-                          <span class="kw">rep</span>(<span class="st">&quot;none&quot;</span>, <span class="kw">ncol</span>(mx) <span class="op">-</span><span class="st"> </span><span class="dv">4</span>)),
-          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,
-          <span class="dt">cgroup =</span> cgroup,
-          <span class="dt">n.cgroup =</span> n.cgroup,
-          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;1st&amp;nbsp;period&quot;</span>, 
-                     <span class="st">&quot;2nd&amp;nbsp;period&quot;</span>,
-                     <span class="st">&quot;3rd&amp;nbsp;period&quot;</span>),
-          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),
-          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; corresponds to the change since start&quot;</span>,
-                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>),
-          <span class="dt">cspan.rgroup =</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">cols_<span class="dv">2</span>_clr &lt;-<span class="st"> </span><span class="kw">grep</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt;&quot;</span>, <span class="kw">colnames</span>(mx))</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co"># We need a copy as the formatting causes the matrix to loos</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co"># its numerical property</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">out_mx &lt;-<span class="st"> </span><span class="kw">txtRound</span>(mx, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">min_delta &lt;-<span class="st"> </span><span class="kw">min</span>(mx[,cols_<span class="dv">2</span>_clr])</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">span_delta &lt;-<span class="st"> </span><span class="kw">max</span>(mx[,cols_<span class="dv">2</span>_clr]) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(mx[,cols_<span class="dv">2</span>_clr]) </a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="cf">for</span> (col <span class="cf">in</span> cols_<span class="dv">2</span>_clr){</a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">  out_mx[, col] &lt;-<span class="st"> </span><span class="kw">mapply</span>(<span class="cf">function</span>(val, strength)</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">    <span class="kw">paste0</span>(<span class="st">&quot;&lt;span style='font-weight: 900; color: &quot;</span>, </a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">           <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;#009900&quot;</span>, <span class="st">&quot;#000000&quot;</span>, <span class="st">&quot;#990033&quot;</span>))(<span class="dv">101</span>)[strength],</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">           <span class="st">&quot;'&gt;&quot;</span>,</a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">           val, <span class="st">&quot;&lt;/span&gt;&quot;</span>), </a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">    <span class="dt">val =</span> out_mx[,col], </a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">    <span class="dt">strength =</span> <span class="kw">round</span>((mx[,col] <span class="op">-</span><span class="st"> </span>min_delta)<span class="op">/</span>span_delta<span class="op">*</span><span class="dv">100</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">    <span class="dt">USE.NAMES =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb14-17" data-line-number="17">}</a>
+<a class="sourceLine" id="cb14-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb14-19" data-line-number="19"><span class="kw">htmlTable</span>(out_mx,</a>
+<a class="sourceLine" id="cb14-20" data-line-number="20">          <span class="dt">caption =</span> <span class="st">&quot;Average age in Sweden counties over a period of</span></a>
+<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="st">                     15 years. The Norbotten county is typically known</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="st">                     for having a negative migration pattern compared to</span></a>
+<a class="sourceLine" id="cb14-23" data-line-number="23"><span class="st">                     Stockholm, while Uppsala has a proportionally large </span></a>
+<a class="sourceLine" id="cb14-24" data-line-number="24"><span class="st">                     population of students.&quot;</span>,</a>
+<a class="sourceLine" id="cb14-25" data-line-number="25">          <span class="dt">pos.rowlabel =</span> <span class="st">&quot;bottom&quot;</span>,</a>
+<a class="sourceLine" id="cb14-26" data-line-number="26">          <span class="dt">rowlabel=</span><span class="st">&quot;Year&quot;</span>, </a>
+<a class="sourceLine" id="cb14-27" data-line-number="27">          <span class="dt">col.rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;none&quot;</span>, <span class="st">&quot;#FFFFCC&quot;</span>),</a>
+<a class="sourceLine" id="cb14-28" data-line-number="28">          <span class="dt">col.columns =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;#EFEFF0&quot;</span>, <span class="dv">4</span>),</a>
+<a class="sourceLine" id="cb14-29" data-line-number="29">                          <span class="kw">rep</span>(<span class="st">&quot;none&quot;</span>, <span class="kw">ncol</span>(mx) <span class="op">-</span><span class="st"> </span><span class="dv">4</span>)),</a>
+<a class="sourceLine" id="cb14-30" data-line-number="30">          <span class="dt">align=</span><span class="st">&quot;rrrr|r&quot;</span>,</a>
+<a class="sourceLine" id="cb14-31" data-line-number="31">          <span class="dt">cgroup =</span> cgroup,</a>
+<a class="sourceLine" id="cb14-32" data-line-number="32">          <span class="dt">n.cgroup =</span> n.cgroup,</a>
+<a class="sourceLine" id="cb14-33" data-line-number="33">          <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;1st&amp;nbsp;period&quot;</span>, </a>
+<a class="sourceLine" id="cb14-34" data-line-number="34">                     <span class="st">&quot;2nd&amp;nbsp;period&quot;</span>,</a>
+<a class="sourceLine" id="cb14-35" data-line-number="35">                     <span class="st">&quot;3rd&amp;nbsp;period&quot;</span>),</a>
+<a class="sourceLine" id="cb14-36" data-line-number="36">          <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb14-37" data-line-number="37">          <span class="dt">tfoot =</span> <span class="kw">txtMergeLines</span>(<span class="st">&quot;&amp;Delta;&lt;sub&gt;int&lt;/sub&gt; corresponds to the change since start&quot;</span>,</a>
+<a class="sourceLine" id="cb14-38" data-line-number="38">                                <span class="st">&quot;&amp;Delta;&lt;sub&gt;std&lt;/sub&gt; corresponds to the change compared to national average&quot;</span>),</a>
+<a class="sourceLine" id="cb14-39" data-line-number="39">          <span class="dt">cspan.rgroup =</span> <span class="dv">1</span>)</a></code></pre></div>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
@@ -8770,29 +8960,29 @@ Age
 <div id="the-ztable-package" class="section level3">
 <h3>The <code>ztable</code>-package</h3>
 <p>A promising and interesting alternative package is the <code>ztable</code> package. The package can also export to LaTeX and if you need this functionality it may be a good choice. The grouping for columns is currently (version 0.1.5) not working entirely as expected and the html-code does not fully validate, but the package is under active development and will hopefully soon be a fully functional alternative.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ztable)
-<span class="kw">options</span>(<span class="dt">ztable.type=</span><span class="st">&quot;html&quot;</span>)
-zt &lt;-<span class="st"> </span><span class="kw">ztable</span>(out_mx, 
-             <span class="dt">caption =</span> <span class="st">&quot;Average age in Sweden counties over a period of</span>
-<span class="st">             15 years. The Norbotten county is typically known</span>
-<span class="st">             for having a negative migration pattern compared to</span>
-<span class="st">             Stockholm, while Uppsala has a proportionally large </span>
-<span class="st">             population of students.&quot;</span>,
-             <span class="dt">zebra.type =</span> <span class="dv">1</span>,
-             <span class="dt">zebra =</span> <span class="st">&quot;peach&quot;</span>,
-             <span class="dt">align=</span><span class="kw">paste</span>(<span class="kw">rep</span>(<span class="st">&quot;r&quot;</span>, <span class="kw">ncol</span>(out_mx) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>))
-<span class="co"># zt &lt;- addcgroup(zt,</span>
-<span class="co">#                 cgroup = cgroup,</span>
-<span class="co">#                 n.cgroup = n.cgroup)</span>
-<span class="co"># Causes an error:</span>
-<span class="co"># Error in if (result &lt;= length(vlines)) { : </span>
-zt &lt;-<span class="st"> </span><span class="kw">addrgroup</span>(zt, 
-                <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;1st&amp;nbsp;period&quot;</span>, 
-                           <span class="st">&quot;2nd&amp;nbsp;period&quot;</span>,
-                           <span class="st">&quot;3rd&amp;nbsp;period&quot;</span>),
-                <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>))
-
-<span class="kw">print</span>(zt)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(ztable)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">options</span>(<span class="dt">ztable.type=</span><span class="st">&quot;html&quot;</span>)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">zt &lt;-<span class="st"> </span><span class="kw">ztable</span>(out_mx, </a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">             <span class="dt">caption =</span> <span class="st">&quot;Average age in Sweden counties over a period of</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="st">             15 years. The Norbotten county is typically known</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="st">             for having a negative migration pattern compared to</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">             Stockholm, while Uppsala has a proportionally large </span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="st">             population of students.&quot;</span>,</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">             <span class="dt">zebra.type =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">             <span class="dt">zebra =</span> <span class="st">&quot;peach&quot;</span>,</a>
+<a class="sourceLine" id="cb15-11" data-line-number="11">             <span class="dt">align=</span><span class="kw">paste</span>(<span class="kw">rep</span>(<span class="st">&quot;r&quot;</span>, <span class="kw">ncol</span>(out_mx) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co"># zt &lt;- addcgroup(zt,</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#                 cgroup = cgroup,</span></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">#                 n.cgroup = n.cgroup)</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co"># Causes an error:</span></a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"><span class="co"># Error in if (result &lt;= length(vlines)) { : </span></a>
+<a class="sourceLine" id="cb15-17" data-line-number="17">zt &lt;-<span class="st"> </span><span class="kw">addrgroup</span>(zt, </a>
+<a class="sourceLine" id="cb15-18" data-line-number="18">                <span class="dt">rgroup =</span> <span class="kw">c</span>(<span class="st">&quot;1st&amp;nbsp;period&quot;</span>, </a>
+<a class="sourceLine" id="cb15-19" data-line-number="19">                           <span class="st">&quot;2nd&amp;nbsp;period&quot;</span>,</a>
+<a class="sourceLine" id="cb15-20" data-line-number="20">                           <span class="st">&quot;3rd&amp;nbsp;period&quot;</span>),</a>
+<a class="sourceLine" id="cb15-21" data-line-number="21">                <span class="dt">n.rgroup =</span> <span class="kw">rep</span>(<span class="dv">5</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb15-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="kw">print</span>(zt)</a></code></pre></div>
 <head>
 <style>
         table {
@@ -8814,72 +9004,28 @@ Average age in Sweden counties over a period of 15 years. The Norbotten county i
 <th style="border-left: 0px solid black;background-color: #FFFFFF;border-top: 2px solid gray;border-bottom: 1px solid gray;">
  
 </th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>std</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>std</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>std</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>std</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>std</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Age
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>int</sub>
-</th>
-<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-right:0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">
-Δ<sub>std</sub>
-</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>std</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>std</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>std</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>std</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>std</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Age</th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>int</sub></th>
+<th <th align="center" style="font-weight: normal;border-left: 0px solid black;border-right:0px solid black;border-bottom: 1px solid gray;border-top: 2px solid gray;">Δ<sub>std</sub></th>
 </tr>
 <tr>
 <td colspan="23" align="left" style="font-weight: bold; border-left: 0px solid black; border-right:0px solid black;border-bottom: 1px solid black;border-top: 1px solid black;">
@@ -9970,21 +10116,21 @@ Age
 <div id="the-xtable-package" class="section level3">
 <h3>The <code>xtable</code>-package</h3>
 <p>The <code>xtable</code> is a solution that delivers both HTML and LaTeX. The syntax is very similar to <code>kable</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">matrix</span>(<span class="kw">sprintf</span>(<span class="st">&quot;Content %s&quot;</span>, LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]),
-         <span class="dt">ncol=</span><span class="dv">2</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)
-<span class="kw">colnames</span>(output) &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;1st header&quot;</span>, <span class="st">&quot;2nd header&quot;</span>)
-<span class="kw">rownames</span>(output) &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;1st row&quot;</span>, <span class="st">&quot;2nd row&quot;</span>)
-
-<span class="kw">library</span>(xtable)
-<span class="kw">print</span>(<span class="kw">xtable</span>(output, 
-             <span class="dt">caption=</span><span class="st">&quot;A test table&quot;</span>, 
-             <span class="dt">align =</span> <span class="kw">c</span>(<span class="st">&quot;l&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;r&quot;</span>)), 
-      <span class="dt">type=</span><span class="st">&quot;html&quot;</span>)</code></pre></div>
-<!-- html table generated in R 3.5.2 by xtable 1.8-3 package -->
-<!-- Sat Jan  5 13:11:11 2019 -->
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">output &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">matrix</span>(<span class="kw">sprintf</span>(<span class="st">&quot;Content %s&quot;</span>, LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]),</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">         <span class="dt">ncol=</span><span class="dv">2</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">colnames</span>(output) &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;1st header&quot;</span>, <span class="st">&quot;2nd header&quot;</span>)</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="kw">rownames</span>(output) &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;1st row&quot;</span>, <span class="st">&quot;2nd row&quot;</span>)</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="kw">library</span>(xtable)</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="kw">print</span>(<span class="kw">xtable</span>(output, </a>
+<a class="sourceLine" id="cb16-11" data-line-number="11">             <span class="dt">caption=</span><span class="st">&quot;A test table&quot;</span>, </a>
+<a class="sourceLine" id="cb16-12" data-line-number="12">             <span class="dt">align =</span> <span class="kw">c</span>(<span class="st">&quot;l&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;r&quot;</span>)), </a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">      <span class="dt">type=</span><span class="st">&quot;html&quot;</span>)</a></code></pre></div>
+<!-- html table generated in R 3.6.1 by xtable 1.8-4 package -->
+<!-- Sat Sep 21 22:45:25 2019 -->
 <table border="1">
 <caption align="bottom">
 A test table
@@ -10060,10 +10206,10 @@ Content C   | Content D
 <div id="the-knitrkable-function" class="section level2">
 <h2>The <code>knitr::kable</code> function</h2>
 <p>Now this is not the R way, we want to use a function that does this. The <strong>knitr</strong> comes with a table function well suited for this, <strong>kable</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
-<span class="kw">kable</span>(output, 
-      <span class="dt">caption=</span><span class="st">&quot;A test table&quot;</span>, 
-      <span class="dt">align =</span> <span class="kw">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;r&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">library</span>(knitr)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">kable</span>(output, </a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">      <span class="dt">caption=</span><span class="st">&quot;A test table&quot;</span>, </a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">      <span class="dt">align =</span> <span class="kw">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;r&quot;</span>))</a></code></pre></div>
 <table>
 <caption>A test table</caption>
 <thead>
@@ -10097,13 +10243,13 @@ Content C   | Content D
 <div id="the-panderpandoc.table-function" class="section level2">
 <h2>The <code>pander::pandoc.table</code> function</h2>
 <p>Another option is to use the pander function that can help with text-formatting inside a markdown-compatible table (Thanks Gergely Daróczi for the tip). Here’s a simple example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pander)
-<span class="kw">pandoc.table</span>(output, <span class="dt">emphasize.rows =</span> <span class="dv">1</span>, <span class="dt">emphasize.strong.cols =</span> <span class="dv">2</span>)</code></pre></div>
-<table style="width:62%;">
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(pander)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">pandoc.table</span>(output, <span class="dt">emphasize.rows =</span> <span class="dv">1</span>, <span class="dt">emphasize.strong.cols =</span> <span class="dv">2</span>)</a></code></pre></div>
+<table style="width:64%;">
 <colgroup>
 <col width="19%"></col>
 <col width="19%"></col>
-<col width="23%"></col>
+<col width="25%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -10198,16 +10344,16 @@ Content C   | Content D
 </thead>
 <tbody>
 <tr class="odd">
-<td><p>Bananas</p></td>
-<td><p>$1.34</p></td>
+<td>Bananas</td>
+<td>$1.34</td>
 <td><ul>
 <li>built-in wrapper</li>
 <li>bright color</li>
 </ul></td>
 </tr>
 <tr class="even">
-<td><p>Oranges</p></td>
-<td><p>$2.10</p></td>
+<td>Oranges</td>
+<td>$2.10</td>
 <td><ul>
 <li>cures scurvy</li>
 <li>tasty</li>
@@ -10218,6 +10364,9 @@ Content C   | Content D
 </div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

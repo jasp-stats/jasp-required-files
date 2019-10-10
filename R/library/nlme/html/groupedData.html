@@ -30,10 +30,10 @@ models.
 
 <pre>
 groupedData(formula, data, order.groups, FUN, outer, inner,
- labels, units)
+            labels, units)
 ## S3 method for class 'groupedData'
 update(object, formula, data, order.groups, FUN,
-outer, inner, labels, units, ...)
+       outer, inner, labels, units, ...)
 </pre>
 
 
@@ -160,7 +160,7 @@ Springer-Verlag, New York.
 </p>
 <p>Pinheiro, J.C. and Bates, D.M. (1997) &quot;Future Directions in
 Mixed-Effects Software: Design of NLME 3.0&quot; available at
-http://nlme.stat.wisc.edu/
+http://nlme.stat.wisc.edu/ 
 </p>
 <p>Pinheiro, J.C., and Bates, D.M. (2000) &quot;Mixed-Effects Models
 in S and S-PLUS&quot;, Springer.  
@@ -182,6 +182,7 @@ in S and S-PLUS&quot;, Springer.
 <h3>Examples</h3>
 
 <pre>
+
 Orth.new &lt;-  # create a new copy of the groupedData object
   groupedData( distance ~ age | Subject,
               data = as.data.frame( Orthodont ),
@@ -190,15 +191,12 @@ Orth.new &lt;-  # create a new copy of the groupedData object
               labels = list( x = "Age",
                 y = "Distance from pituitary to pterygomaxillary fissure" ),
               units = list( x = "(yr)", y = "(mm)") )
-## Not run: 
 plot( Orth.new )         # trellis plot by Subject
-
-## End(Not run)
 formula( Orth.new )      # extractor for the formula
 gsummary( Orth.new )     # apply summary by Subject
 fm1 &lt;- lme( Orth.new )   # fixed and groups formulae extracted from object
 Orthodont2 &lt;- update(Orthodont, FUN = mean)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-140 <a href="00Index.html">Index</a>]</div>
 </body></html>

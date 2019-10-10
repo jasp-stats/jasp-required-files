@@ -14,5 +14,5 @@ NeedsCompilation: yes
 Packaged: 2018-03-22 14:27:01 UTC; liawand
 Repository: CRAN
 Date/Publication: 2018-03-25 15:00:24 UTC
-Built: R 3.5.3; x86_64-w64-mingw32; 2019-07-24 00:46:47 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 16:32:58 UTC; windows
 Archs: i386, x64

@@ -39,11 +39,11 @@ factors by <code><a href="factor.html">as.factor</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>FUN</code></td>
 <td>
-<p>the function to be applied, or <code>NULL</code>.  In the case of
-functions like <code>+</code>, <code>%*%</code>, etc., the function name must
-be backquoted or quoted.  If <code>FUN</code> is <code>NULL</code>, tapply
-returns a vector which can be used to subscript the multi-way array
-<code>tapply</code> normally produces.</p>
+<p>a function (or name of a function) to be applied, or <code>NULL</code>.
+In the case of functions like <code>+</code>, <code>%*%</code>, etc.,
+the function name must be backquoted or quoted.  If <code>FUN</code> is
+<code>NULL</code>, tapply returns a vector which can be used to subscript
+the multi-way array <code>tapply</code> normally produces.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -72,12 +72,16 @@ with the mode of the scalar.</p>
 </table>
 
 
-<h3>Value</h3>
+<h3>Details</h3>
 
 <p>If <code>FUN</code> is not <code>NULL</code>, it is passed to
 <code><a href="match.fun.html">match.fun</a></code>, and hence it can be a function or a symbol or
 character string naming a function.
 </p>
+
+
+<h3>Value</h3>
+
 <p>When <code>FUN</code> is present, <code>tapply</code> calls <code>FUN</code> for each
 cell that has any data in it.  If <code>FUN</code> returns a single atomic
 value for each such cell (e.g., functions <code>mean</code> or <code>var</code>)
@@ -89,8 +93,7 @@ the number of levels (<code>nlevels()</code>) in the corresponding component
 of <code>INDEX</code>.  Note that if the return value has a class (e.g., an
 object of class <code>"<a href="Dates.html">Date</a>"</code>) the class is discarded.
 </p>
-<p>Note that contrary to S, <code>simplify = TRUE</code> always returns an
-array, possibly 1-dimensional.
+<p><code>simplify = TRUE</code> always returns an array, possibly 1-dimensional.
 </p>
 <p>If <code>FUN</code> does not return a single atomic value, <code>tapply</code>
 returns an array of mode <code><a href="list.html">list</a></code> whose components are the
@@ -175,5 +178,5 @@ stopifnot(
                  `4` = NULL, `5` = NULL), dim=4, dimnames=list(as.character(2:5)))))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

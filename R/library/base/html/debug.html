@@ -11,7 +11,7 @@
 
 <p>Set, unset or query the debugging flag on a function.
 The <code>text</code> and <code>condition</code> arguments are the same as those
-that can be supplied via a call to <code>browser</code>. They can be retrieved
+that can be supplied via a call to <code><a href="browser.html">browser</a></code>.  They can be retrieved
 by the user once the browser has been entered, and provide a mechanism to
 allow users to identify which breakpoint has been activated.
 </p>
@@ -66,15 +66,15 @@ of those values sets the state.  If the debugging state is
 
 <p>When a function flagged for debugging is entered, normal execution
 is suspended and the body of function is executed one statement at a
-time.  A new browser context is initiated for each step (and the
-previous one destroyed).
+time.  A new <code><a href="browser.html">browser</a></code> context is initiated for each step
+(and the previous one destroyed).
 </p>
 <p>At the debug prompt the user can enter commands or <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> expressions,
 followed by a newline.  The commands are described in the
 <code><a href="browser.html">browser</a></code> help topic.
 </p>
 <p>To debug a function which is defined inside another function,
-single-step though to the end of its definition, and then call
+single-step through to the end of its definition, and then call
 <code>debug</code> on its name.
 </p>
 <p>If you want to debug a function not starting at the very beginning,
@@ -83,7 +83,7 @@ use <code><a href="trace.html">trace</a>(..., at = *)</code> or <code><a href=".
 <p>Using <code>debug</code> is persistent, and unless debugging is turned off
 the debugger will be entered on every invocation (note that if the
 function is removed and replaced the debug state is not preserved).
-Use <code>debugonce</code> to enter the debugger only the next time the
+Use <code>debugonce()</code> to enter the debugger only the next time the
 function is invoked.
 </p>
 <p>To debug an S4 method by explicit signature, use
@@ -117,14 +117,15 @@ disabled.
 <p><code>debug</code> and <code>undebug</code> invisibly return <code>NULL</code>.
 </p>
 <p><code>isdebugged</code> returns <code>TRUE</code> if the function or method is
-marked for debugging, and <code>FALSE</code> otherwise.
+</p>
+<p>marked for debugging, and <code>FALSE</code> otherwise.
 </p>
 
 
 <h3>See Also</h3>
 
 <p><code><a href="../../utils/html/debugcall.html">debugcall</a></code> for conveniently debugging methods,
-<code><a href="browser.html">browser</a></code>, <code><a href="trace.html">trace</a></code>;
+<code><a href="browser.html">browser</a></code> notably for its &lsquo;<em>commands</em>&rsquo;, <code><a href="trace.html">trace</a></code>;
 <code><a href="traceback.html">traceback</a></code> to see the stack after an <code>Error: ...</code>
 message; <code><a href="../../utils/html/recover.html">recover</a></code> for another debugging approach.
 </p>
@@ -147,5 +148,5 @@ sample(10, 1)
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

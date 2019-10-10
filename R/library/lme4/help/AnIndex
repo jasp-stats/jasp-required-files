@@ -17,6 +17,7 @@ as.data.frame.thpr	profile-methods
 as.data.frame.VarCorr.merMod	VarCorr
 as.function.merMod	merMod-class
 bootMer	bootMer
+boundary	isSingular
 cake	cake
 cbpp	cbpp
 checkConv	checkConv

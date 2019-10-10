@@ -287,6 +287,19 @@ auxlib::inv_sympd(Mat<eT>& out, const Base<eT,T1>& X)
   
   if(out.is_empty())  { return true; }
   
+  // if(auxlib::rudimentary_sym_check(out) == false)
+  //   {
+  //   if(is_cx<eT>::no )  { arma_debug_warn("inv_sympd(): given matrix is not symmetric"); }
+  //   if(is_cx<eT>::yes)  { arma_debug_warn("inv_sympd(): given matrix is not hermitian"); }
+  //   return false;
+  //   }
+  
+  if((arma_config::debug) && (auxlib::rudimentary_sym_check(out) == false))
+    {
+    if(is_cx<eT>::no )  { arma_debug_warn("inv_sympd(): given matrix is not symmetric"); }
+    if(is_cx<eT>::yes)  { arma_debug_warn("inv_sympd(): given matrix is not hermitian"); }
+    }
+  
   if(out.n_rows <= 4)
     {
     Mat<eT> tmp;
@@ -407,6 +420,8 @@ auxlib::det_tinymat(const Mat<eT>& X, const uword N)
   {
   arma_extra_debug_sigprint();
   
+  const eT* Xm = X.memptr();
+  
   switch(N)
     {
     case 0:
@@ -414,13 +429,11 @@ auxlib::det_tinymat(const Mat<eT>& X, const uword N)
       break;
     
     case 1:
-      return X[0];
+      return Xm[0];
       break;
     
     case 2:
       {
-      const eT* Xm = X.memptr();
-      
       return ( Xm[pos<0,0>::n2]*Xm[pos<1,1>::n2] - Xm[pos<0,1>::n2]*Xm[pos<1,0>::n2] );
       }
       break;
@@ -435,8 +448,6 @@ auxlib::det_tinymat(const Mat<eT>& X, const uword N)
       // const double tmp6 = X.at(2,2) * X.at(1,0) * X.at(0,1);
       // return (tmp1+tmp2+tmp3) - (tmp4+tmp5+tmp6);
       
-      const eT* Xm = X.memptr();
-      
       const eT val1 = Xm[pos<0,0>::n3]*(Xm[pos<2,2>::n3]*Xm[pos<1,1>::n3] - Xm[pos<2,1>::n3]*Xm[pos<1,2>::n3]);
       const eT val2 = Xm[pos<1,0>::n3]*(Xm[pos<2,2>::n3]*Xm[pos<0,1>::n3] - Xm[pos<2,1>::n3]*Xm[pos<0,2>::n3]);
       const eT val3 = Xm[pos<2,0>::n3]*(Xm[pos<1,2>::n3]*Xm[pos<0,1>::n3] - Xm[pos<1,1>::n3]*Xm[pos<0,2>::n3]);
@@ -447,8 +458,6 @@ auxlib::det_tinymat(const Mat<eT>& X, const uword N)
     
     case 4:
       {
-      const eT* Xm = X.memptr();
-      
       const eT val = \
           Xm[pos<0,3>::n4] * Xm[pos<1,2>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,0>::n4] \
         - Xm[pos<0,2>::n4] * Xm[pos<1,3>::n4] * Xm[pos<2,1>::n4] * Xm[pos<3,0>::n4] \
@@ -606,15 +615,15 @@ auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, const 
     
     // on output tmp appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
     
-    sword sign = (is_complex<eT>::value == false) ? ( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
-    eT    val  = (is_complex<eT>::value == false) ? std::log( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? tmp.at(0,0)*T(-1) : tmp.at(0,0) ) : std::log( tmp.at(0,0) );
+    sword sign = (is_cx<eT>::no) ? ( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
+    eT    val  = (is_cx<eT>::no) ? std::log( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? tmp.at(0,0)*T(-1) : tmp.at(0,0) ) : std::log( tmp.at(0,0) );
     
     for(uword i=1; i < tmp.n_rows; ++i)
       {
       const eT x = tmp.at(i,i);
       
-      sign *= (is_complex<eT>::value == false) ? ( (access::tmp_real(x) < T(0)) ? -1 : +1 ) : +1;
-      val  += (is_complex<eT>::value == false) ? std::log( (access::tmp_real(x) < T(0)) ? x*T(-1) : x ) : std::log(x);
+      sign *= (is_cx<eT>::no) ? ( (access::tmp_real(x) < T(0)) ? -1 : +1 ) : +1;
+      val  += (is_cx<eT>::no) ? std::log( (access::tmp_real(x) < T(0)) ? x*T(-1) : x ) : std::log(x);
       }
     
     for(uword i=0; i < tmp.n_rows; ++i)
@@ -657,15 +666,15 @@ auxlib::log_det(eT& out_val, typename get_pod_type<eT>::result& out_sign, const 
     
     // on output tmp appears to be L+U_alt, where U_alt is U with the main diagonal set to zero
     
-    sword sign = (is_complex<eT>::value == false) ? ( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
-    eT    val  = (is_complex<eT>::value == false) ? std::log( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? tmp.at(0,0)*T(-1) : tmp.at(0,0) ) : std::log( tmp.at(0,0) );
+    sword sign = (is_cx<eT>::no) ? ( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? -1 : +1 ) : +1;
+    eT    val  = (is_cx<eT>::no) ? std::log( (access::tmp_real( tmp.at(0,0) ) < T(0)) ? tmp.at(0,0)*T(-1) : tmp.at(0,0) ) : std::log( tmp.at(0,0) );
     
     for(uword i=1; i < tmp.n_rows; ++i)
       {
       const eT x = tmp.at(i,i);
       
-      sign *= (is_complex<eT>::value == false) ? ( (access::tmp_real(x) < T(0)) ? -1 : +1 ) : +1;
-      val  += (is_complex<eT>::value == false) ? std::log( (access::tmp_real(x) < T(0)) ? x*T(-1) : x ) : std::log(x);
+      sign *= (is_cx<eT>::no) ? ( (access::tmp_real(x) < T(0)) ? -1 : +1 ) : +1;
+      val  += (is_cx<eT>::no) ? std::log( (access::tmp_real(x) < T(0)) ? x*T(-1) : x ) : std::log(x);
       }
     
     for(uword i=0; i < tmp.n_rows; ++i)
@@ -1091,6 +1100,216 @@ auxlib::eig_gen
 
 
 
+//! eigen decomposition of general square matrix (real, balance given matrix)
+template<typename T1>
+inline
+bool
+auxlib::eig_gen_balance
+  (
+         Mat< std::complex<typename T1::pod_type> >& vals,
+         Mat< std::complex<typename T1::pod_type> >& vecs,
+  const bool                                         vecs_on,
+  const Base<typename T1::pod_type,T1>&              expr
+  )
+  {
+  arma_extra_debug_sigprint();
+  
+  #if defined(ARMA_USE_LAPACK)
+    {
+    typedef typename T1::pod_type T;
+    
+    Mat<T> X = expr.get_ref();
+    
+    arma_debug_check( (X.is_square() == false), "eig_gen(): given matrix must be square sized" );
+    
+    arma_debug_assert_blas_size(X);
+    
+    if(X.is_empty())
+      {
+      vals.reset();
+      vecs.reset();
+      return true;
+      }
+    
+    if(X.is_finite() == false)  { return false; }
+    
+    vals.set_size(X.n_rows, 1);
+    
+    Mat<T> tmp(1,1);
+    
+    if(vecs_on)
+      {
+      vecs.set_size(X.n_rows, X.n_rows);
+       tmp.set_size(X.n_rows, X.n_rows);
+      }
+    
+    podarray<T> junk(1);
+    
+    char     bal   = 'B'; 
+    char     jobvl = 'N';
+    char     jobvr = (vecs_on) ? 'V' : 'N';
+    char     sense = 'N';
+    blas_int N     = blas_int(X.n_rows);
+    T*       vl    = junk.memptr();
+    T*       vr    = (vecs_on) ? tmp.memptr() : junk.memptr();
+    blas_int ldvl  = blas_int(1);
+    blas_int ldvr  = (vecs_on) ? blas_int(tmp.n_rows) : blas_int(1);
+    blas_int ilo   = blas_int(0);
+    blas_int ihi   = blas_int(0);
+    T        abnrm = T(0);
+    blas_int lwork = 3 * ((std::max)(blas_int(1), blas_int(2*N)));
+    blas_int info  = blas_int(0);
+    
+    podarray<T>  scale(X.n_rows);
+    podarray<T> rconde(X.n_rows);
+    podarray<T> rcondv(X.n_rows);
+    
+    podarray<T>         work( static_cast<uword>(lwork) );
+    podarray<blas_int> iwork( uword(1) );  // iwork not used by lapack::geevx() as sense = 'N'
+    
+    podarray<T> vals_real(X.n_rows);
+    podarray<T> vals_imag(X.n_rows);
+    
+    arma_extra_debug_print("lapack::geevx() -- START");
+    lapack::geevx(&bal, &jobvl, &jobvr, &sense, &N, X.memptr(), &N, vals_real.memptr(), vals_imag.memptr(), vl, &ldvl, vr, &ldvr, &ilo, &ihi, scale.memptr(), &abnrm, rconde.memptr(), rcondv.memptr(), work.memptr(), &lwork, iwork.memptr(), &info);
+    arma_extra_debug_print("lapack::geevx() -- END");
+    
+    if(info != 0)  { return false; }
+    
+    arma_extra_debug_print("reformatting eigenvalues and eigenvectors");
+    
+    std::complex<T>* vals_mem = vals.memptr();
+    
+    for(uword i=0; i < X.n_rows; ++i)  { vals_mem[i] = std::complex<T>(vals_real[i], vals_imag[i]); }
+    
+    if(vecs_on)
+      {
+      for(uword j=0; j < X.n_rows; ++j)
+        {
+        if( (j < (X.n_rows-1)) && (vals_mem[j] == std::conj(vals_mem[j+1])) )
+          {
+          for(uword i=0; i < X.n_rows; ++i)
+            {
+            vecs.at(i,j)   = std::complex<T>( tmp.at(i,j),  tmp.at(i,j+1) );
+            vecs.at(i,j+1) = std::complex<T>( tmp.at(i,j), -tmp.at(i,j+1) );
+            }
+          
+          ++j;
+          }
+        else
+          {
+          for(uword i=0; i<X.n_rows; ++i)
+            {
+            vecs.at(i,j) = std::complex<T>(tmp.at(i,j), T(0));
+            }
+          }
+        }
+      }
+    
+    return true;
+    }
+  #else
+    {
+    arma_ignore(vals);
+    arma_ignore(vecs);
+    arma_ignore(vecs_on);
+    arma_ignore(expr);
+    arma_stop_logic_error("eig_gen(): use of LAPACK must be enabled");
+    return false;
+    }
+  #endif
+  }
+
+
+
+//! eigen decomposition of general square matrix (complex, balance given matrix)
+template<typename T1>
+inline
+bool
+auxlib::eig_gen_balance
+  (
+         Mat< std::complex<typename T1::pod_type> >&     vals,
+         Mat< std::complex<typename T1::pod_type> >&     vecs, 
+  const bool                                             vecs_on,
+  const Base< std::complex<typename T1::pod_type>, T1 >& expr
+  )
+  {
+  arma_extra_debug_sigprint();
+  
+  #if defined(ARMA_CRIPPLED_LAPACK)
+    {
+    arma_extra_debug_print("auxlib::eig_gen_balance(): redirecting to auxlib::eig_gen() due to crippled LAPACK");
+    
+    return auxlib::eig_gen(vals, vecs, vecs_on, expr);
+    }
+  #elif defined(ARMA_USE_LAPACK)
+    {
+    typedef typename T1::pod_type     T;
+    typedef typename std::complex<T> eT;
+    
+    Mat<eT> X = expr.get_ref();
+    
+    arma_debug_check( (X.is_square() == false), "eig_gen(): given matrix must be square sized" );
+    
+    arma_debug_assert_blas_size(X);
+    
+    if(X.is_empty())
+      {
+      vals.reset();
+      vecs.reset();
+      return true;
+      }
+    
+    if(X.is_finite() == false)  { return false; }
+    
+    vals.set_size(X.n_rows, 1);
+    
+    if(vecs_on)  { vecs.set_size(X.n_rows, X.n_rows); }
+    
+    podarray<eT> junk(1);
+    
+    char     bal   = 'B';
+    char     jobvl = 'N';
+    char     jobvr = (vecs_on) ? 'V' : 'N';
+    char     sense = 'N';
+    blas_int N     = blas_int(X.n_rows);
+    eT*      vl    = junk.memptr();
+    eT*      vr    = (vecs_on) ? vecs.memptr() : junk.memptr();
+    blas_int ldvl  = blas_int(1);
+    blas_int ldvr  = (vecs_on) ? blas_int(vecs.n_rows) : blas_int(1);
+    blas_int ilo   = blas_int(0);
+    blas_int ihi   = blas_int(0);
+    T        abnrm = T(0);
+    blas_int lwork = 3 * ((std::max)(blas_int(1), blas_int(2*N)));
+    blas_int info  = blas_int(0);
+    
+    podarray<T>  scale(X.n_rows);
+    podarray<T> rconde(X.n_rows);
+    podarray<T> rcondv(X.n_rows);
+    
+    podarray<eT>  work( static_cast<uword>(lwork) );
+    podarray< T> rwork( static_cast<uword>(2*N)   );
+    
+    arma_extra_debug_print("lapack::cx_geevx() -- START");
+    lapack::cx_geevx(&bal, &jobvl, &jobvr, &sense, &N, X.memptr(), &N, vals.memptr(), vl, &ldvl, vr, &ldvr, &ilo, &ihi, scale.memptr(), &abnrm, rconde.memptr(), rcondv.memptr(), work.memptr(), &lwork, rwork.memptr(), &info);
+    arma_extra_debug_print("lapack::cx_geevx() -- END");
+    
+    return (info == 0);
+    }
+  #else
+    {
+    arma_ignore(vals);
+    arma_ignore(vecs);
+    arma_ignore(vecs_on);
+    arma_ignore(expr);
+    arma_stop_logic_error("eig_gen(): use of LAPACK must be enabled");
+    return false;
+    }
+  #endif
+  }
+
+
+
 //! eigendecomposition of general square real matrix pair (real)
 template<typename T1, typename T2>
 inline
@@ -1356,6 +1575,17 @@ auxlib::eig_sym(Col<eT>& eigval, const Base<eT,T1>& X)
       return true;
       }
     
+    // if(auxlib::rudimentary_sym_check(A) == false)
+    //   {
+    //   arma_debug_warn("eig_sym(): given matrix is not symmetric");
+    //   return false;
+    //   }
+    
+    if((arma_config::debug) && (auxlib::rudimentary_sym_check(A) == false))
+      {
+      arma_debug_warn("eig_sym(): given matrix is not symmetric");
+      }
+    
     arma_debug_assert_blas_size(A);
     
     eigval.set_size(A.n_rows);
@@ -1408,6 +1638,17 @@ auxlib::eig_sym(Col<T>& eigval, const Base<std::complex<T>,T1>& X)
       return true;
       }
     
+    // if(auxlib::rudimentary_sym_check(A) == false)
+    //   {
+    //   arma_debug_warn("eig_sym(): given matrix is not hermitian");
+    //   return false;
+    //   }
+    
+    if((arma_config::debug) && (auxlib::rudimentary_sym_check(A) == false))
+      {
+      arma_debug_warn("eig_sym(): given matrix is not hermitian");
+      }
+    
     arma_debug_assert_blas_size(A);
     
     eigval.set_size(A.n_rows);
@@ -1440,16 +1681,16 @@ auxlib::eig_sym(Col<T>& eigval, const Base<std::complex<T>,T1>& X)
 
 
 //! eigenvalues and eigenvectors of a symmetric real matrix
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::eig_sym(Col<eT>& eigval, Mat<eT>& eigvec, const Base<eT,T1>& X)
+auxlib::eig_sym(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    eigvec = X.get_ref();
+    eigvec = X;
     
     arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
@@ -1492,10 +1733,10 @@ auxlib::eig_sym(Col<eT>& eigval, Mat<eT>& eigvec, const Base<eT,T1>& X)
 
 
 //! eigenvalues and eigenvectors of a hermitian complex matrix
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<std::complex<T>,T1>& X)
+auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< std::complex<T> >& X)
   {
   arma_extra_debug_sigprint();
   
@@ -1503,7 +1744,7 @@ auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<std::
     {
     typedef typename std::complex<T> eT;
     
-    eigvec = X.get_ref();
+    eigvec = X;
     
     arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
@@ -1547,16 +1788,16 @@ auxlib::eig_sym(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<std::
 
 
 //! eigenvalues and eigenvectors of a symmetric real matrix (divide and conquer algorithm)
-template<typename eT, typename T1>
+template<typename eT>
 inline
 bool
-auxlib::eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Base<eT,T1>& X)
+auxlib::eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Mat<eT>& X)
   {
   arma_extra_debug_sigprint();
   
   #if defined(ARMA_USE_LAPACK)
     {
-    eigvec = X.get_ref();
+    eigvec = X;
     
     arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
@@ -1601,10 +1842,10 @@ auxlib::eig_sym_dc(Col<eT>& eigval, Mat<eT>& eigvec, const Base<eT,T1>& X)
 
 
 //! eigenvalues and eigenvectors of a hermitian complex matrix (divide and conquer algorithm)
-template<typename T, typename T1>
+template<typename T>
 inline
 bool
-auxlib::eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<std::complex<T>,T1>& X)
+auxlib::eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Mat< std::complex<T> >& X)
   {
   arma_extra_debug_sigprint();
   
@@ -1612,7 +1853,7 @@ auxlib::eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<st
     {
     typedef typename std::complex<T> eT;
     
-    eigvec = X.get_ref();
+    eigvec = X;
     
     arma_debug_check( (eigvec.is_square() == false), "eig_sym(): given matrix must be square sized" );
     
@@ -1651,6 +1892,49 @@ auxlib::eig_sym_dc(Col<T>& eigval, Mat< std::complex<T> >& eigvec, const Base<st
     arma_ignore(eigvec);
     arma_ignore(X);
     arma_stop_logic_error("eig_sym(): use of LAPACK must be enabled");
+    return false;
+    }
+  #endif
+  }
+
+
+
+template<typename eT>
+inline
+bool
+auxlib::chol_simple(Mat<eT>& X)
+  {
+  arma_extra_debug_sigprint();
+  
+  #if defined(ARMA_USE_ATLAS)
+    {
+    arma_debug_assert_atlas_size(X);
+    
+    int info = 0;
+    
+    arma_extra_debug_print("atlas::clapack_potrf()");
+    info = atlas::clapack_potrf(atlas::CblasColMajor, atlas::CblasUpper, X.n_rows, X.memptr(), X.n_rows);
+    
+    return (info == 0);
+    }
+  #elif defined(ARMA_USE_LAPACK)
+    {
+    arma_debug_assert_blas_size(X);
+    
+    char      uplo = 'U';
+    blas_int  n    = blas_int(X.n_rows);
+    blas_int  info = 0;
+    
+    arma_extra_debug_print("lapack::potrf()");
+    lapack::potrf(&uplo, &n, X.memptr(), &n, &info);
+    
+    return (info == 0);
+    }
+  #else
+    {
+    arma_ignore(X);
+    
+    arma_stop_logic_error("chol(): use of ATLAS or LAPACK must be enabled");
     return false;
     }
   #endif
@@ -1921,7 +2205,7 @@ auxlib::qr(Mat<eT>& Q, Mat<eT>& R, const Base<eT,T1>& X)
       lapack::orgqr(&m, &m, &k, Q.memptr(), &m, tau.memptr(), work.memptr(), &lwork, &info);
       }
     else
-    if( (is_supported_complex_float<eT>::value) || (is_supported_complex_double<eT>::value) )
+    if( (is_cx_float<eT>::value) || (is_cx_double<eT>::value) )
       {
       arma_extra_debug_print("lapack::ungqr()");
       lapack::ungqr(&m, &m, &k, Q.memptr(), &m, tau.memptr(), work.memptr(), &lwork, &info);
@@ -2033,7 +2317,7 @@ auxlib::qr_econ(Mat<eT>& Q, Mat<eT>& R, const Base<eT,T1>& X)
       lapack::orgqr(&m, &n, &k, Q.memptr(), &m, tau.memptr(), work.memptr(), &lwork, &info);
       }
     else
-    if( (is_supported_complex_float<eT>::value) || (is_supported_complex_double<eT>::value) )
+    if( (is_cx_float<eT>::value) || (is_cx_double<eT>::value) )
       {
       arma_extra_debug_print("lapack::ungqr()");
       lapack::ungqr(&m, &n, &k, Q.memptr(), &m, tau.memptr(), work.memptr(), &lwork, &info);
@@ -3768,11 +4052,13 @@ auxlib::solve_approx_svd(Mat<typename T1::pod_type>& out, Mat<typename T1::pod_t
     
     podarray<eT> S(min_mn);
     
+    // NOTE: with LAPACK 3.8, can use the workspace query to also obtain liwork,
+    // NOTE: which makes the call to lapack::laenv() redundant
     
     blas_int ispec = blas_int(9);
     
     const char* const_name = (is_float<eT>::value) ? "SGELSD" : "DGELSD";
-    const char* const_opts = "";
+    const char* const_opts = " ";
     
     char* name = const_cast<char*>(const_name);
     char* opts = const_cast<char*>(const_opts);
@@ -3782,7 +4068,9 @@ auxlib::solve_approx_svd(Mat<typename T1::pod_type>& out, Mat<typename T1::pod_t
     blas_int n3 = nrhs;
     blas_int n4 = lda;
     
-    blas_int smlsiz = (std::max)( blas_int(25), lapack::laenv(&ispec, name, opts, &n1, &n2, &n3, &n4) );  // in case lapack::laenv() returns -1
+    blas_int laenv_result = (arma_config::hidden_args) ? blas_int(lapack::laenv(&ispec, name, opts, &n1, &n2, &n3, &n4, 6, 1)) : blas_int(0);
+    
+    blas_int smlsiz    = (std::max)( blas_int(25), laenv_result );
     blas_int smlsiz_p1 = blas_int(1) + smlsiz;
     
     blas_int nlvl   = (std::max)( blas_int(0), blas_int(1) + blas_int( std::log(double(min_mn) / double(smlsiz_p1))/double(0.69314718055994530942) ) );
@@ -3797,6 +4085,8 @@ auxlib::solve_approx_svd(Mat<typename T1::pod_type>& out, Mat<typename T1::pod_t
     lapack::gelsd(&m, &n, &nrhs, A.memptr(), &lda, tmp.memptr(), &ldb, S.memptr(), &rcond, &rank, &work_query[0], &lwork_query, iwork.memptr(), &info);
     
     if(info != 0)  { return false; }
+    
+    // NOTE: in LAPACK 3.8, iwork[0] returns the minimum liwork
     
     blas_int lwork = static_cast<blas_int>( access::tmp_real(work_query[0]) );
     
@@ -3884,7 +4174,7 @@ auxlib::solve_approx_svd(Mat< std::complex<typename T1::pod_type> >& out, Mat< s
     blas_int ispec = blas_int(9);
     
     const char* const_name = (is_float<T>::value) ? "CGELSD" : "ZGELSD";
-    const char* const_opts = "";
+    const char* const_opts = " ";
     
     char* name = const_cast<char*>(const_name);
     char* opts = const_cast<char*>(const_opts);
@@ -3894,7 +4184,9 @@ auxlib::solve_approx_svd(Mat< std::complex<typename T1::pod_type> >& out, Mat< s
     blas_int n3 = nrhs;
     blas_int n4 = lda;
     
-    blas_int smlsiz = (std::max)( blas_int(25), lapack::laenv(&ispec, name, opts, &n1, &n2, &n3, &n4) );  // in case lapack::laenv() returns -1
+    blas_int laenv_result = (arma_config::hidden_args) ? blas_int(lapack::laenv(&ispec, name, opts, &n1, &n2, &n3, &n4, 6, 1)) : blas_int(0);
+    
+    blas_int smlsiz = (std::max)( blas_int(25), laenv_result );
     blas_int smlsiz_p1 = blas_int(1) + smlsiz;
     
     blas_int nlvl = (std::max)( blas_int(0), blas_int(1) + blas_int( std::log(double(min_mn) / double(smlsiz_p1))/double(0.69314718055994530942) ) );
@@ -4841,8 +5133,8 @@ auxlib::qz(Mat<T>& A, Mat<T>& B, Mat<T>& vsl, Mat<T>& vsr, const Base<T,T1>& X_e
     podarray<T> alphai(A.n_rows);
     podarray<T>   beta(A.n_rows);
     
-    podarray<T>   work( static_cast<uword>(lwork) );
-    podarray<T>  bwork( static_cast<uword>(N)     );
+    podarray<T>         work( static_cast<uword>(lwork) );
+    podarray<blas_int> bwork( static_cast<uword>(N)     );
     
     arma_extra_debug_print("lapack::gges()");
     
@@ -4931,9 +5223,9 @@ auxlib::qz(Mat< std::complex<T> >& A, Mat< std::complex<T> >& B, Mat< std::compl
     podarray<eT> alpha(A.n_rows);
     podarray<eT>  beta(A.n_rows);
     
-    podarray<eT>  work( static_cast<uword>(lwork) );
-    podarray< T> rwork( static_cast<uword>(8*N)   );
-    podarray< T> bwork( static_cast<uword>(N)     );
+    podarray<eT>        work( static_cast<uword>(lwork) );
+    podarray< T>       rwork( static_cast<uword>(8*N)   );
+    podarray<blas_int> bwork( static_cast<uword>(N)     );
     
     arma_extra_debug_print("lapack::cx_gges()");
     
@@ -5198,6 +5490,84 @@ auxlib::crippled_lapack(const Base<typename T1::elem_type, T1>&)
     return false;
     }
   #endif
+  }
+
+
+
+template<typename eT>
+inline
+bool
+auxlib::rudimentary_sym_check(const Mat<eT>& X)
+  {
+  arma_extra_debug_sigprint();
+  
+  const uword N   = X.n_rows;
+  const uword Nm2 = N-2;
+  
+  if(N != X.n_cols)  { return false; }
+  if(N <= uword(1))  { return true;  }
+  
+  const eT* X_mem = X.memptr();
+  
+  const eT* X_offsetA = &(X_mem[Nm2  ]);
+  const eT* X_offsetB = &(X_mem[Nm2*N]);
+  
+  const eT A1 = *(X_offsetA  ); 
+  const eT A2 = *(X_offsetA+1);  // bottom-left corner (ie. last value in first column)
+  const eT B1 = *(X_offsetB  );  
+  const eT B2 = *(X_offsetB+N);  // top-right   corner (ie. first value in last column)
+  
+  const eT C1 = (std::max)(std::abs(A1), std::abs(B1));
+  const eT C2 = (std::max)(std::abs(A2), std::abs(B2));
+  
+  const eT delta1 = std::abs(A1 - B1);
+  const eT delta2 = std::abs(A2 - B2);
+  
+  const eT tol = eT(10000)*std::numeric_limits<eT>::epsilon();  // allow some leeway
+  
+  const bool okay1 = ( (delta1 <= tol) || (delta1 <= (C1 * tol)) );
+  const bool okay2 = ( (delta2 <= tol) || (delta2 <= (C2 * tol)) );
+  
+  return (okay1 && okay2);
+  }
+
+
+
+template<typename T>
+inline
+bool
+auxlib::rudimentary_sym_check(const Mat< std::complex<T> >& X)
+  {
+  arma_extra_debug_sigprint();
+  
+  // NOTE: the function name is a misnomer, as it checks for hermitian complex matrices;
+  // NOTE: for simplicity of use, the function name is the same as for real matrices
+  
+  typedef typename std::complex<T> eT;
+  
+  const uword N   = X.n_rows;
+  const uword Nm1 = N-1;
+  
+  if(N != X.n_cols)  { return false; }
+  if(N == uword(0))  { return true;  }
+  
+  const eT* X_mem = X.memptr();
+  
+  const eT& A = X_mem[Nm1  ];  // bottom-left corner (ie. last value in first column)
+  const eT& B = X_mem[Nm1*N];  // top-right   corner (ie. first value in last column)
+  
+  const T C_real = (std::max)(std::abs(A.real()), std::abs(B.real()));
+  const T C_imag = (std::max)(std::abs(A.imag()), std::abs(B.imag()));
+  
+  const T delta_real = std::abs(A.real() - B.real());
+  const T delta_imag = std::abs(A.imag() + B.imag());  // take into account the conjugate
+  
+  const T tol = T(10000)*std::numeric_limits<T>::epsilon();  // allow some leeway
+  
+  const bool okay_real = ( (delta_real <= tol) || (delta_real <= (C_real * tol)) );
+  const bool okay_imag = ( (delta_imag <= tol) || (delta_imag <= (C_imag * tol)) );
+  
+  return (okay_real && okay_imag);
   }
 
 

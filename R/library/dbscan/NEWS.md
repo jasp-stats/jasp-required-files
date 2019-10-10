@@ -1,3 +1,14 @@
+# dbscan 1.1-4 (2019-08-05)
+
+## Bugfixes
+* kNNdist now correctly returns the distances to the kth neighbor 
+  (reported by zschuster).
+* dbscan: check eps and minPts parameters to avoid undefined results (reported by ArthurPERE).
+
+## New Features
+* kNNdist gained parameter all to indicate if a matrix with the distance to all 
+  nearest neighbors up to k should be returned.
+
 # dbscan 1.1-3 (2018-11-12)
 
 ## Bugfix

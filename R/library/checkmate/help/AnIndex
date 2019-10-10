@@ -253,7 +253,6 @@ expect_set_equal	checkSetEqual
 expect_string	checkString
 expect_subset	checkSubset
 expect_tibble	checkTibble
-expect_vector	checkVector
 makeAssertCollection	AssertCollection
 makeAssertion	makeAssertion
 makeAssertionFunction	makeAssertion

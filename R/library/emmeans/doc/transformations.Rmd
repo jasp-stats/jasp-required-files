@@ -22,7 +22,9 @@ This vignette covers the intricacies of transformations and link functions in **
   4. [Both a response transformation and a link](#tranlink)
   5. [Special transformations](#special)
   6. [Specifying a transformation after the fact](#after)
+  6. [Auto-detected transformations](#auto)
   7. [Faking a log transformation](#logs)
+  8. [Bias adjustment](#bias-adj)
   
 [Index of all vignette topics](vignette-topics.html) 
 
@@ -229,7 +231,7 @@ One may also use `"unlink"` as a `transform` argument in `regrid()` or through
 <!-- @index Transformations!Custom; `make.tran()` -->
 The `make.tran()` function provides several special transformations and sets
 things up so they can be handled in **emmeans** with relative ease. 
-(See [`help("make.tran", "emmeans")](../html/make.tran.html) for descriptions
+(See `help("make.tran", "emmeans")` for descriptions
 of what is available.) `make.tran()` works much like `stats::make.link()` in
 that it returns a list of functions `linkfun()`, `linkinv()`, etc. that serve
 in managing results on a transformed scale. The difference is that most 
@@ -238,12 +240,12 @@ transformations with `make.tran()` require additional arguments.
 To use this capability in `emmeans()`, it is fortuitous to first obtain the 
 `make.tran()` result, and then to use it as the enclosing environment
 for fitting the model, with `linkfun` as the transformation. 
-For example, suppose we want to use the response
-transformation $\log(y + \frac12)$. Then proceed like this:
+For example, suppose the response variable is a percentage and we want to use the response
+transformation $\sin^{-1}\sqrt{y/100}$. Then proceed like this:
 ```{r eval = FALSE}
-tran <- make.tran("genlog", 1/2)
+tran <- make.tran("asin.sqrt", 100)
 my.model <- with(tran, 
-    lmer(linkfun(yield) ~ treatment + (1|Block), data = mydata))
+    lmer(linkfun(percent) ~ treatment + (1|Block), data = mydata))
 ```
 Subsequent calls to `ref_grid()`, `emmeans()`, `regrid()`, etc. will then 
 be able to access the transformation information correctly.
@@ -257,7 +259,7 @@ using a Box-Cox transformation.
 <!-- @index Transformations!Adding after the fact; `update()`!`tran` -->
 It is not at all uncommon to fit a model using statements like the following:
 ```{r eval = FALSE}
-mydata <- transform(mydata, logy.5 = log(yield + .5))
+mydata <- transform(mydata, logy.5 = log(yield + 0.5))
 my.model <- lmer(logy.5 ~ treatment + (1|Block), data = mydata)
 ```
 In this case, there is no way for `ref_grid()` to figure out that a response
@@ -274,6 +276,26 @@ of the transformation; e.g.,
 ```{r eval = FALSE}
 model.rg <- update(ref_grid(model), tran = "sqrt")
 ```
+
+## Auto-detected response transformations {#auto}
+<!-- @index Transformations!Auto-detected -->
+As can be seen in the initial `pigs.lm` example in this vignette,
+certain straightforward response transformations such as `log`, `sqrt`, etc. are
+automatically detected when `emmeans()` (really, `ref_grid()`) is called on the model
+object. In fact, scaling and shifting is supported too; so the preceding example with
+`my.model` could have been done more easily by specifying the transformation
+directly in the model formula:
+```r
+my.better.model <- lmer(log(yield + 0.5) ~ treatment + (1|Block), data = mydata)
+```
+The transformation would be auto-detected, saving you the trouble of adding it later.
+Similarly, a response transformation of `2 * sqrt(y + 1)` would be correctly 
+auto-detected. A model with a linearly transformed response, e.g. `4*(y - 1)`, 
+would *not* be auto-detected, but `4*I(y + -1)` would be interpreted as `4*identity(y + -1)`.
+Parsing is such that the response expression must be of the form `mult * fcn(resp + const)`;
+operators of `-` and `/` are not recognized.
+
+
 
 [Back to Contents](#contents)
 
@@ -294,6 +316,91 @@ confidence intervals [above](#timing) for the EMMs and the [pairwise ratios in
 the "comparisons" vignette](comparisons.html#logs), where the fitted model
 actually used a log response.
 
+
+[Back to Contents](#contents)
+
+
+## Bias adjustment {#bias-adj}
+<!-- @index Transformations!Bias adjustment; Bias adjustment!When back-transforming;
+    Means!Generalized; Geometric means; -->
+So far, we have discussed ideas related to back-transforming results as a simple way
+of expressing results on the same scale as the response. In particular, means
+obtained in this way are known as *generalized means*; for example, a log
+transformation of the response is associated with geometric means. When the goal
+is simply to make inferences about which means are less than which other means,
+and a response transformation is used, it is often acceptable to present
+estimates and comparisons of these generalized means.
+However, sometimes it is important to report results that actually do reflect
+expected values of the untransformed response. An example is a financial study,
+where the response is in some monetary unit. It may be convenient to use a
+response transformation for modeling purposes, but ultimately we may want to
+make financial projections in those same units. 
+
+In such settings, we need to
+make a bias adjustment when we back-transform, because any nonlinear
+transformation biases the expected values of statistical quantities. More
+specifically, suppose that we have a response $Y$ and the transformed
+response is $U$. To back-transform, we use $Y = h(U)$; and using a Taylor
+approximation, $Y \approx h(\eta) + h'(\eta)(U-\eta) +
+\frac12h''(\eta)(U-\eta)^2$, so that 
+$E(Y) \approx h(\eta) + \frac12h''(\eta)Var(U)$. 
+This shows that the amount of needed bias adjustment is approximately
+$\frac12h''(\eta)\sigma^2$ where $\sigma$ is the error SD in the model for $U$.
+It depends on $\sigma$, and the larger this is, the greater the bias adjustment
+is needed. This second-order bias adjustment is what is currently used
+in the **emmeans** package when bias-adjustment is requested. There are better or exact adjustments for certain cases, and future updates may incorporate some of those.
+
+### Response transformations vs. link functions {#link-bias}
+<!-- @index Transformations!Response versus link functions;
+    Bias adjustment!For link functions vs. response transformations; Bias adjustment!In GLMMs and GEE models; -->
+At this point, it is important to point out that the above discussion focuses on
+response transformations, as opposed to link functions used in generalized linear
+models (GLMs). In an ordinary GLM, no bias adjustment is needed or appropriate
+because the link function is just used to define a nonlinear relationship
+between the actual response mean $\eta$ and the linear predictor. However, in a
+generalized linear *mixed* model, including generalized estimating equations and
+such, there are random components involved, and then bias adjustment becomes
+appropriate.
+
+### CBPP example {#cbpp}
+<!-- @index Examples!`cbpp` -->
+Consider an example adapted from the help page for `lme4::cbpp`. 
+Contagious bovine pleuropneumonia (CBPP) is a disease in African cattle,
+and the dataset contains data on incidence of CBPP in several herds of cattle
+over four time periods. We will fit a mixed model that accounts for herd variations
+as well as overdispersion (variations larger than expected with a simple binomial model): 
+
+```{r, message = FALSE}
+require(lme4)
+cbpp <- transform(cbpp, unit = 1:nrow(cbpp))
+cbpp.glmer <- glmer(cbind(incidence, size - incidence) ~ period + (1 | herd) +  (1|unit),
+                    family = binomial, data = cbpp)
+
+emm <- emmeans(cbpp.glmer, "period")
+summary(emm, type = "response")
+```
+The above summary reflects the back-transformed estimates, with no bias adjustment. However, the model estimates two independent sources of random variation that probably should be taken into account:
+```{r}
+lme4::VarCorr(cbpp.glmer)
+```
+Notably, the over-dispersion SD is considerably greater than the herd SD.
+Suppose we want to estimate the marginal probabilities of CBPP incidence,
+averaged over herds and over-dispersion variations. For this purpose, we need
+the combined effect of these variations; so we compute the overall SD
+via the Pythagorean theorem:
+```{r}
+total.SD = sqrt(0.89107^2 + 0.18396^2)
+```
+Accordingly, here are the bias-adjusted estimates of the marginal probabilities:
+```{r}
+summary(emm, type = "response", bias.adjust = TRUE, sigma = total.SD)
+```
+These estimates are somewhat larger than the unadjusted estimates (actually, any estimates greater than 0.5 would have been adjusted downward). These adjusted estimates are more appropriate for describing the marginal incidence of CBPP for all herds. In fact, these estimates are fairly close to those obtained directly from the incidences in the data:
+```{r}
+cases <- with(cbpp, tapply(incidence, period, sum))
+trials <- with(cbpp, tapply(size, period, sum))
+cases / trials
+```
 
 [Back to Contents](#contents)
 

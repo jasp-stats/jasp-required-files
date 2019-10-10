@@ -24,7 +24,8 @@ file(description = "", open = "", blocking = TRUE,
 
 url(description, open = "", blocking = TRUE,
     encoding = getOption("encoding"),
-    method = getOption("url.method", "default"))
+    method = getOption("url.method", "default"),
+    headers = NULL)
 
 gzfile(description, open = "", encoding = getOption("encoding"),
        compression = 6)
@@ -100,6 +101,13 @@ file when opening for text-mode reading, and asserts that the
 
 see &lsquo;Details&rsquo;.</p>
 </td></tr>
+<tr valign="top"><td><code>headers</code></td>
+<td>
+<p>named character vector of HTTP headers to use in HTTP
+requests.  It is ignored for non-HTTP URLs.  The <code>User-Agent</code>
+header, coming from the <code>HTTPUserAgent</code> option (see
+<code><a href="options.html">options</a></code>) is used as the first header, automatically.</p>
+</td></tr>
 <tr valign="top"><td><code>compression</code></td>
 <td>
 <p>integer in 0&ndash;9.  The amount of compression to be
@@ -163,7 +171,9 @@ a complete URL (when it is the same as calling <code>url</code>), or
 C-level &lsquo;standard input&rsquo; of the process (which need not be
 connected to anything in a console or embedded version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>, and is
 not in <code>RGui</code> on Windows).  See also <code><a href="showConnections.html">stdin</a>()</code> for
-the subtly different R-level concept of <code>stdin</code>.
+the subtly different R-level concept of <code>stdin</code>. See
+<code><a href="showConnections.html">nullfile</a>()</code> for a platform-independent way to get
+filename of the null device.
 </p>
 <p>For <code>url</code> the description is a complete URL including scheme
 (such as <span class="samp">http://</span>, <span class="samp">https://</span>, <span class="samp">ftp://</span> or
@@ -701,5 +711,5 @@ A &lt;- read.table(con &lt;- file("students", encoding = "UCS-2LE")); close(con)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

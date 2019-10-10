@@ -125,7 +125,8 @@ over the default would be to allow semi-transparent colours to be used.
 <p>For graphics parameters such as <code>"cra"</code> that need to work in
 pixels, the default resolution of 72dpi is always used.
 </p>
-<p>Paths for <code>file</code> and <span class="env">R_GSCMD</span> which contain spaces are
+<p>On Windows only,
+paths for <code>file</code> and <span class="env">R_GSCMD</span> which contain spaces are
 mapped to short names <em>via</em> <code><a href="../../utils/html/shortPathName.html">shortPathName</a></code>.
 </p>
 
@@ -169,7 +170,8 @@ setup) URW Nimbus Sans.
 
 <h3>Note</h3>
 
-<p>Use of <code>bitmap</code> will leave a temporary file (with file name
+<p>On Windows,
+Use of <code>bitmap</code> will leave a temporary file (with file name
 starting <code>Rbit</code>).
 </p>
 <p>Although using <code>type = "pdfwrite"</code> will work for simple plots, it
@@ -192,5 +194,5 @@ record of the current plot.
 <p>To display an array of data, see <code><a href="../../graphics/html/image.html">image</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

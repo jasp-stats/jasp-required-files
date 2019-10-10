@@ -134,7 +134,7 @@ censored data via the condition
 If 1/2 coding is used and all the subjects are censored, it will 
 guess wrong.
 In any questionable case it is safer to use logical coding,
-e.g., <code>Surv(time, status==3)</code> would indicate that a <code>3</code> is
+e.g., <code>Surv(time, status==3)</code> would indicate that '3' is
 the code for an event.
 For multi-state survival the status variable will be a factor, whose
 first level is assumed to correspond to censoring.
@@ -171,20 +171,37 @@ inherits from class <code>"Surv"</code>, otherwise an <code>FALSE</code>.
 </p>
 
 
+<h3>Note</h3>
+
+<p>The use of 1/2 coding for status is an interesting historical
+artifact.
+For data contained on punch cards, IBM 360 Fortran treated blank as a zero,
+which led to a policy within the Mayo Clinic section of Biostatistics to never
+use &quot;0&quot; as a data value since one could not distinguish it from a
+missing value.
+Policy became habit, as is often the case, and the use of 1/2 coding for
+alive/dead endured long after the demise of the punch cards that had
+sired the practice.
+At the time <code>Surv</code> was written many Mayo data sets still used this
+convention, e.g., the 1994 <code>lung</code> data set found in the package.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code><a href="coxph.html">coxph</a></code>,  
 <code><a href="survfit.html">survfit</a></code>,  
-<code><a href="survreg.html">survreg</a></code>.   
+<code><a href="survreg.html">survreg</a></code>, <code>link{lung}</code>.   
 </p>
 
 
 <h3>Examples</h3>
 
 <pre>
-with(lung, Surv(time, status))
+with(aml, Surv(time, status))
+survfit(Surv(time, status) ~ ph.ecog, data=lung)
 Surv(heart$start, heart$stop, heart$event) 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

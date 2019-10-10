@@ -133,10 +133,29 @@ another sub-architecture, use <span class="option">--libs-only</span>.
 <p>There are two ways to install for all available sub-architectures.  If
 the configure script is known to work for both Windows architectures,
 use flag <span class="option">--force-biarch</span> (and packages can specify this
-<em>via</em> a <span class="samp">Biarch</span> field in their <code>DESCRIPTION</code> files).
+<em>via</em> a <span class="samp">Biarch: yes</span> field in their <code>DESCRIPTION</code> files).
 Second, a single tarball can be installed with
 </p>
 <pre>R CMD INSTALL --merge-multiarch mypkg_version.tar.gz</pre>
+
+
+<h3>Staged installation</h3>
+
+<p>The default way to install source packages changed in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6.0, so
+packages are first installed to a temporary location and then (if
+successful) moved to the destination library directory.  Some older
+packages were written in ways that assume direct installation to the
+destination library.
+</p>
+<p>Staged installation can currently be overridden by having a line
+<span class="samp">StagedInstall: no</span> in the package's &lsquo;<span class="file">DESCRIPTION</span>&rsquo; file,
+<em>via</em> flag <span class="option">--no-staged-install</span> or by setting environment
+variable <span class="env">R_INSTALL_STAGED</span> to a false value
+(e.g. <span class="samp">false</span> or <span class="samp">no</span>).
+</p>
+<p>Staged installation requires either <span class="option">--pkglock</span> or
+<span class="option">--lock</span>, one of which is used by default.
+</p>
 
 
 <h3>Note</h3>
@@ -160,9 +179,9 @@ the Internet or a local repository.
 Administration&rdquo; and the chapter on &ldquo;Creating R packages&rdquo; in
 &ldquo;Writing <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> Extensions&rdquo;
 (on the Help menu in <code>RGui</code>),
-<code><a href="RShowDoc.html">RShowDoc</a></code> and the &lsquo;<span class="file">doc/manual</span>&rsquo; subdirectory of the
-<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> source tree.
+<em>via</em> <code><a href="RShowDoc.html">RShowDoc</a></code> or in the &lsquo;<span class="file">doc/manual</span>&rsquo;
+subdirectory of the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> source tree.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

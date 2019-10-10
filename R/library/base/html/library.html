@@ -18,12 +18,19 @@
 <pre>
 library(package, help, pos = 2, lib.loc = NULL,
         character.only = FALSE, logical.return = FALSE,
-        warn.conflicts = TRUE, quietly = FALSE,
-        verbose = getOption("verbose"))
+        warn.conflicts, quietly = FALSE,
+        verbose = getOption("verbose"),
+        mask.ok, exclude, include.only,
+        attach.required = missing(include.only))
 
 require(package, lib.loc = NULL, quietly = FALSE,
-        warn.conflicts = TRUE,
-        character.only = FALSE)
+        warn.conflicts,
+        character.only = FALSE,
+        mask.ok, exclude, include.only,
+        attach.required = missing(include.only))
+
+conflictRules(pkg, mask.ok = NULL, exclude = NULL)
+
 </pre>
 
 
@@ -66,7 +73,8 @@ Non-existent library trees are silently ignored.</p>
 <p>logical.  If <code>TRUE</code>, warnings are
 printed about <code><a href="conflicts.html">conflicts</a></code> from attaching the new
 package.  A conflict is a function masking a function,
-or a non-function masking a non-function.
+or a non-function masking a non-function. The default is <code>TRUE</code>
+unless specified as <code>FALSE</code> in the <code>conflicts.policy</code> option.
 </p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
@@ -79,6 +87,28 @@ printed.</p>
 <p>a logical.  If <code>TRUE</code>, no message confirming
 package attaching is printed, and most often, no errors/warnings are
 printed if package attaching fails.</p>
+</td></tr>
+<tr valign="top"><td><code>pkg</code></td>
+<td>
+<p>character string naming a package.</p>
+</td></tr>
+<tr valign="top"><td><code>mask.ok</code></td>
+<td>
+<p>character vector of names of objects that can mask
+objects on the search path without signaling an error when strict
+conflict checking is enabled</p>
+</td></tr>
+<tr valign="top"><td><code>exclude,include.only</code></td>
+<td>
+<p>character vector of names of objects to
+exclude or include in the attached frame. Only one of these arguments
+may be used in a call to <code>library</code> or <code>require</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>attach.required</code></td>
+<td>
+<p>logical specifying whether required packages
+listed in the <code>Depends</code> clause of the <code>DESCRIPTION</code> file
+should be attached automatically.</p>
 </td></tr>
 </table>
 
@@ -129,6 +159,50 @@ class <code>"packageInfo"</code>.
 <p><code>require</code> returns (invisibly) a logical indicating whether the required
 package is available.
 </p>
+
+
+<h3>Conflicts</h3>
+
+<p>Handling of conflicts depends on the setting of the
+<code>conflicts.policy</code> option. If this option is not set, then
+conflicts result in warning messages if the argument
+<code>warn.conflicts</code> is <code>TRUE</code>. If the option is set to the
+character string <code>"strict"</code>, then all unresolved conflicts signal
+errors.  Conflicts can be resolved using the <code>mask.ok</code>,
+<code>exclude</code>, and <code>include.only</code> arguments to <code>library</code> and
+<code>require</code>. Defaults for <code>mask.ok</code> and <code>exclude</code> can be
+specified using <code>conflictRules</code>.
+</p>
+<p>If the <code>conflicts.policy</code> option is set to the string
+<code>"depends.ok"</code> then conflicts resulting from attaching declared
+dependencies will not produce errors, but other conflicts will.
+This is likely to be the best setting for most users wanting some
+additional protection against unexpected conflicts.
+</p>
+<p>The policy can be tuned further by specifying the
+<code>conflicts.policy</code> option as a named list with the following
+fields:
+</p>
+
+<dl>
+<dt><code>error</code>:</dt><dd><p>logical; if <code>TRUE</code> treat unresolved
+conflicts as errors.</p>
+</dd>
+<dt><code>warn</code>:</dt><dd><p>logical; unless <code>FALSE</code> issue a warning
+message when conflicts are found.</p>
+</dd>
+<dt><code>generics.ok</code>:</dt><dd><p>logical; if <code>TRUE</code> ignore conflicts
+created by defining S4 generics for functions on the search path.</p>
+</dd>
+<dt><code>depends.ok</code>:</dt><dd><p>logical; if <code>TRUE</code> do not treat
+conflicts with required packages as errors.</p>
+</dd>
+<dt><code>can.mask</code>:</dt><dd><p>character vector of names of packages that
+are allowed to be masked. These would typically be base packages
+attached by default.</p>
+</dd>
+</dl>
+
 
 
 <h3>Licenses</h3>
@@ -208,7 +282,7 @@ Wadsworth &amp; Brooks/Cole.
 <p><code><a href="libPaths.html">.libPaths</a></code>, <code><a href="zpackages.html">.packages</a></code>.
 </p>
 <p><code><a href="attach.html">attach</a></code>, <code><a href="detach.html">detach</a></code>, <code><a href="search.html">search</a></code>,
-<code><a href="ls.html">objects</a></code>, <code><a href="autoload.html">autoload</a></code>, 
+<code><a href="ls.html">objects</a></code>, <code><a href="autoload.html">autoload</a></code>,
 <code><a href="ns-load.html">requireNamespace</a></code>,
 <code><a href="library.dynam.html">library.dynam</a></code>, <code><a href="../../utils/html/data.html">data</a></code>,
 <code><a href="../../utils/html/install.packages.html">install.packages</a></code> and
@@ -246,5 +320,5 @@ library(mypkg, pos = "package:base")
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -138,9 +138,11 @@ toRd.bibentry	toRd
 toRd.default	toRd
 toTitleCase	toTitleCase
 undoc	undoc
+update_PACKAGES	updatePACKAGES
 update_pkg_po	update_pkg_po
-vignetteDepends	vignetteDepends
+vignetteDepends	tools-deprecated
 vignetteEngine	vignetteEngine
+vignetteInfo	vignetteInfo
 write_PACKAGES	writePACKAGES
 xgettext	xgettext
 xgettext2pot	xgettext

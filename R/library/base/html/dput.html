@@ -115,10 +115,12 @@ Wadsworth &amp; Brooks/Cole.
 
 <pre>
 fil &lt;- tempfile()
-## Write an ASCII version of function mean to our temp file 
-dput(mean, fil)
-## And read it back into 'bar'
+## Write an ASCII version of the 'base' function mean() to our temp file, ..
+dput(base::mean, fil)
+## ... read it back into 'bar' and confirm it is the same
 bar &lt;- dget(fil)
+stopifnot(all.equal(bar, base::mean))
+
 ## Create a function with comments
 baz &lt;- function(x) {
   # Subtract from one
@@ -147,5 +149,5 @@ dput(xn, control = "S_compat") # no names
 dput(xn, control = c("keepNA", "keepInteger", "showAttributes"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

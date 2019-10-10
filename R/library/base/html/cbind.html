@@ -22,7 +22,7 @@ cbind(..., deparse.level = 1)
 rbind(..., deparse.level = 1)
 ## S3 method for class 'data.frame'
 rbind(..., deparse.level = 1, make.row.names = TRUE,
-      stringsAsFactors = default.stringsAsFactors())
+      stringsAsFactors = default.stringsAsFactors(), factor.exclude = NA)
 </pre>
 
 
@@ -57,6 +57,14 @@ constructed from the arguments.</p>
 <p>logical, passed to <code><a href="as.data.frame.html">as.data.frame</a></code>;
 only has an effect when the <code>...</code> arguments contain a
 (non-<code>data.frame</code>) <code><a href="character.html">character</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>factor.exclude</code></td>
+<td>
+<p>if the data frames contain factors,
+<code>TRUE</code> ensures that <code>NA</code> levels of factors are kept, see
+<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=17562">PR#17562</a> and the &lsquo;Data frame methods&rsquo;.  In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions up
+to 3.6.x, <code>factor.exclude = NA</code> has been implicitly hardcoded
+(<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> &lt;= 3.6.0) or the default (<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> = 3.6.x, x &gt;= 1).</p>
 </td></tr>
 </table>
 
@@ -154,6 +162,14 @@ the result is an ordered factor if and only if all the components were
 ordered factors.  (The last point differs from S-PLUS.)  Old-style
 categories (integer vectors with levels) are promoted to factors.
 </p>
+<p>Note that for result column <code>j</code>, <code><a href="factor.html">factor</a>(., exclude = X(j))</code>
+is applied, where </p>
+<pre>  X(j) := if(isTRUE(factor.exclude)) {
+             if(!NA.lev[j]) NA # else NULL
+          } else factor.exclude</pre>
+<p>where <code>NA.lev[j]</code> is true iff any contributing data frame has had a
+<code><a href="factor.html">factor</a></code> in column <code>j</code> with an explicit <code>NA</code> level.
+</p>
 
 
 <h3>Dispatch</h3>
@@ -242,5 +258,5 @@ stopifnot(identical(df1, rbind(df,  new, make.row.names=FALSE)),
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

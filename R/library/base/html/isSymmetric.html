@@ -48,7 +48,9 @@ to length zero will skip the pre-tests.</p>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>further arguments passed to methods; the matrix method
-passes these to <code><a href="all.equal.html">all.equal</a></code>.</p>
+passes these to <code><a href="all.equal.html">all.equal</a></code>.  If the row and column
+names of <code>object</code> are allowed to differ for the symmetry check
+do use <code>check.attributes = FALSE</code>!</p>
 </td></tr>
 </table>
 
@@ -94,7 +96,11 @@ Z
 isSymmetric(Z)      # TRUE
 isSymmetric(Z + 1)  # TRUE
 isSymmetric(Z + 1i) # FALSE -- a Hermitian matrix has a *real* diagonal
+
+colnames(D3) &lt;- c("X", "Y", "Z")
+isSymmetric(D3)                         # FALSE (as row and column names differ)
+isSymmetric(D3, check.attributes=FALSE) # TRUE  (as names are not checked)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

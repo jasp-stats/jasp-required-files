@@ -30,11 +30,11 @@ concordance(object, ..., newdata, cluster, ymin, ymax,
 ## S3 method for class 'coxph'
 concordance(object, ..., newdata, cluster, ymin, ymax,
   timewt= c("n", "S", "S/G", "n/G", "n/G2", "I"), influence=0,
-  ranks=FALSE, timefix=TRUE)
+  ranks=FALSE, timefix=FALSE)
 ## S3 method for class 'survreg'
 concordance(object, ..., newdata, cluster, ymin, ymax,
   timewt= c("n", "S", "S/G", "n/G", "n/G2", "I"), influence=0,
-  ranks=FALSE, timefix=TRUE)
+  ranks=FALSE, timefix=FALSE)
 </pre>
 
 
@@ -129,7 +129,9 @@ the common example of this. </p>
 <td>
 <p>if the response is a Surv object, correct for possible
 rounding error; otherwise this argument has no effect.  See the
-vignette on tied times for more explanation. 
+vignette on tied times for more explanation.  For the coxph and
+survreg methods this issue will have already been addressed in the
+parent routine, so should not be revisited.
 </p>
 </td></tr>
 </table>
@@ -227,5 +229,5 @@ fit2 &lt;- glm(pstat ~ age + sex + mspike, binomial, data= mgus2)
 concordance(fit2)  # equal to the AUC
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

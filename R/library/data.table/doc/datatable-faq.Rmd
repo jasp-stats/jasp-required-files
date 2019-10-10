@@ -15,6 +15,7 @@ vignette: >
 h2 {
     font-size: 20px;
 }
+#TOC { width: 100%; }
 </style>
 
 ```{r, echo = FALSE, message = FALSE}
@@ -371,7 +372,7 @@ A key advantage of column vectors in R is that they are _ordered_, unlike SQL[^2
  - `DT[3]` refers to the 3rd _row_, but `DF[3]` refers to the 3rd _column_
  - `DT[3, ] == DT[3]`, but `DF[ , 3] == DF[3]` (somewhat confusingly in data.frame, whereas data.table is consistent)
  - For this reason we say the comma is _optional_ in `DT`, but not optional in `DF`
- - `DT[[3]] == DF[3] == DF[[3]]`
+ - `DT[[3]] == DF[, 3] == DF[[3]]`
  - `DT[i, ]`, where `i` is a single integer, returns a single row, just like `DF[i, ]`, but unlike a matrix single-row subset which returns a vector.
  - `DT[ , j]` where `j` is a single integer returns a one-column data.table, unlike `DF[, j]` which returns a vector by default
  - `DT[ , "colA"][[1]] == DF[ , "colA"]`.
@@ -572,7 +573,7 @@ DT[ , b := rnorm(5)]  # 'replace' integer column with a numeric column
 
 ## Reading data.table from RDS or RData file
 
-`*.RDS` and `*.RData` are file types which can store in-memory R objects on disk efficiently. However, storing data.table into the binary file loses its column over-allocation. This isn't a big deal -- your data.table will be copied in memory on the next _by reference_ operation and throw a warning. Therefore it is recommended to call `alloc.col()` on each data.table loaded with `readRDS()` or `load()` calls.
+`*.RDS` and `*.RData` are file types which can store in-memory R objects on disk efficiently. However, storing data.table into the binary file loses its column over-allocation. This isn't a big deal -- your data.table will be copied in memory on the next _by reference_ operation and throw a warning. Therefore it is recommended to call `setalloccol()` on each data.table loaded with `readRDS()` or `load()` calls.
 
 # General questions about the package
 
@@ -595,7 +596,7 @@ Please file suggestions, bug reports and enhancement requests on our [issues tra
 
 Please do star the package on [GitHub](https://github.com/Rdatatable/data.table/wiki). This helps encourage the developers and helps other R users find the package.
 
-You can submit pull requests to change the code and/or documentation yourself; see our [Contribution Guidelines](https://github.com/Rdatatable/data.table/blob/master/CONTRIBUTING.md).
+You can submit pull requests to change the code and/or documentation yourself; see our [Contribution Guidelines](https://github.com/Rdatatable/data.table/wiki/Contributing).
 
 ## I think it's not great. How do I warn others about my experience?
 

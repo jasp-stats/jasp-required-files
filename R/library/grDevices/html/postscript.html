@@ -74,12 +74,25 @@ See &lsquo;Families&rsquo; below.  Defaults to <code>NULL</code>.</p>
 <tr valign="top"><td><code>encoding</code></td>
 <td>
 <p>the name of an encoding file.  Defaults to
-<code>"default"</code>.  The latter is interpreted as
-&lsquo;<span class="file">&quot;CP1250.enc&quot;</span>&rsquo; (Central European), <code>"CP1251.enc"</code> (Cyrillic),
+<code>"default"</code>.  The latter is interpreted
+</p>
+
+<dl>
+<dt>on Unix-alikes</dt><dd>
+<p>as &lsquo;<span class="file">&quot;ISOLatin1.enc&quot;</span>&rsquo; unless the locale is recognized as
+corresponding to a language using ISO 8859-{2,5,7,13,15} or KOI8-{R,U}.
+</p>
+</dd>
+<dt>on Windows</dt><dd>
+<p>as &lsquo;<span class="file">&quot;CP1250.enc&quot;</span>&rsquo; (Central European), <code>"CP1251.enc"</code> (Cyrillic),
 <code>"CP1253.enc"</code> (Greek) or <code>"CP1257.enc"</code> (Baltic) if one
 of those codepages is in use, otherwise &lsquo;<span class="file">&quot;WinAnsi.enc&quot;</span>&rsquo;
 (codepage 1252).
-The file is looked for in the &lsquo;<span class="file">enc</span>&rsquo; directory of package
+</p>
+</dd>
+</dl>
+
+<p>The file is looked for in the &lsquo;<span class="file">enc</span>&rsquo; directory of package
 <span class="pkg">grDevices</span> if the path does not contain a path separator.  An
 extension <code>".enc"</code> can be omitted.
 </p>
@@ -144,7 +157,7 @@ Defaults to false.</p>
 <p>the command to be used for &lsquo;printing&rsquo;.  Defaults
 to <code>"default"</code>, the value of option <code>"printcmd"</code>.  The
 length limit is <code>2*PATH_MAX</code>,
-520 bytes.
+typically 8096 bytes on Unix-alikes and 520 bytes on Windows.
 </p>
 </td></tr>
 <tr valign="top"><td><code>colormodel</code></td>
@@ -497,12 +510,20 @@ require(graphics)
 postscript("foo.ps")
 # produce the desired graph(s)
 dev.off()              # turn off the postscript device
+
+## On Unix-alikes only:
+postscript("|lp -dlw")
+# produce the desired graph(s)
+dev.off()              # plot will appear on printer
+
+## On Windows:
 options(printcmd = 'redpr -P"\\printhost\lw"')
 postscript(file = tempfile("Rps."), print.it = TRUE)
 # produce the desired graph(s)
 dev.off()              # send plot file to the printer
-## alternative using GSView 4.x
+## alternative using GSView 4.x :
 options(printcmd = '/GhostGum/gsview/gsprint -query')
+
 
 # for URW PostScript devices
 postscript("foo.ps", family = "NimbusSan")
@@ -539,5 +560,5 @@ TestChars("WinAnsi")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

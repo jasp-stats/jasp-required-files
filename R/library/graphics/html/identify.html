@@ -25,7 +25,7 @@ identify(x, ...)
 ## Default S3 method:
 identify(x, y = NULL, labels = seq_along(x), pos = FALSE,
          n = length(x), plot = TRUE, atpen = FALSE, offset = 0.5,
-         tolerance = 0.25, ...)
+         tolerance = 0.25, order = FALSE, ...)
 </pre>
 
 
@@ -77,6 +77,12 @@ used if <code>atpen = TRUE</code>.</p>
 <td>
 <p>the maximal distance (in inches) for the pointer to be
 &lsquo;close enough&rsquo; to a point.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>if <code>order</code> is <code>TRUE</code>, a component is added to the
+return value which indicates the order in which points were
+identified: see Value.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -135,14 +141,19 @@ will give unpredictable results.
 
 <h3>Value</h3>
 
-<p>If <code>pos</code> is <code>FALSE</code>, an integer vector containing the
-indices of the identified points, in the order they were identified.
+<p>If both <code>pos</code> and <code>order</code> are <code>FALSE</code>,
+an integer vector containing the
+indices of the identified points.
 </p>
-<p>If <code>pos</code> is <code>TRUE</code>, a list containing a component
-<code>ind</code>, indicating which points were identified and a component
+<p>If either of <code>pos</code> or <code>order</code> is <code>TRUE</code>,
+a list containing a component
+<code>ind</code>, indicating which points were identified and (if
+<code>pos</code> is <code>TRUE</code>) a component
 <code>pos</code>, indicating where the labels were placed relative to the
 identified points (1=below, 2=left, 3=above, 4=right and 0=no offset,
-used if <code>atpen = TRUE</code>).
+used if <code>atpen = TRUE</code>) and (if <code>order</code> is <code>TRUE</code>)
+a component <code>order</code>, indicating the order in which points
+were identified.
 </p>
 
 
@@ -211,5 +222,5 @@ if(dev.interactive()) { ## use it
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

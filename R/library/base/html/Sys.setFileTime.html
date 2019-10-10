@@ -28,14 +28,15 @@ Sys.setFileTime(path, time)
 <tr valign="top"><td><code>path</code></td>
 <td>
 
-<p>A length-one character vector specifying the path to a file or directory.
+<p>A character vector containing file or directory paths.
 </p>
 </td></tr>
 <tr valign="top"><td><code>time</code></td>
 <td>
 
-<p>A date-time of class <code>"<a href="DateTimeClasses.html">POSIXct</a>"</code> or an object which can
-be coerced to one.  Fractions of a second may be ignored.
+<p>A date-time of class <code>"<a href="DateTimeClasses.html">POSIXct</a>"</code> or an object which can be
+coerced to one.  Fractions of a second may be ignored.  Recycled along
+<code>paths</code>.
 </p>
 </td></tr>
 </table>
@@ -55,12 +56,16 @@ requisite system calls and suitable filesystems.
 &lsquo;last write time&rsquo;.  Some Windows file systems only record the
 time at a resolution of two seconds.
 </p>
+<p><code>Sys.setFileTime</code> has been vectorized in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6.0.  Earlier versions
+of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> required <code>path</code> and <code>time</code> to be vectors of length one.
+</p>
 
 
 <h3>Value</h3>
 
-<p>Logical, invisibly.  An indication if the operation succeeded.
+<p>A logical vector indicating if the operation succeeded for each of the
+files and directories attempted, returned invisibly.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

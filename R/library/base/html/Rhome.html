@@ -66,8 +66,24 @@ switched to the 8.3 short form of path elements if required and if
 the Windows service to do that is enabled.  The value of
 <span class="env">R_HOME</span> is set to use forward slashes (since many package
 maintainers pass it unquoted to shells, for example in
-&lsquo;<span class="file">Makefile</span>&rsquo;s).  
+&lsquo;<span class="file">Makefile</span>&rsquo;s).
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+
+<h3>See Also</h3>
+
+<p><code><a href="commandArgs.html">commandArgs</a>()[1]</code> may provide related information.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## These result quite platform dependently :
+rbind(home = R.home(),
+      bin  = R.home("bin")) # often a sub directory of 'home'
+list.files(R.home("bin"))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -37,6 +37,10 @@ is.language(x)
 <p>A <code>name</code> is also known as &lsquo;symbol&rsquo;, from its type
 (<code><a href="typeof.html">typeof</a></code>), see <code><a href="name.html">is.symbol</a></code>.
 </p>
+<p>If <code><a href="typeof.html">typeof</a>(x) == "language"</code>, then <code>is.language(x)</code>
+is always true, but the reverse does not hold as expressions or
+names <code>y</code> also fulfill <code>is.language(y)</code>, see the examples.
+</p>
 <p>This is a <a href="Primitive.html">primitive</a> function.
 </p>
 
@@ -59,5 +63,5 @@ sapply(ll, mode)
 stopifnot(sapply(ll, is.language))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

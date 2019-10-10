@@ -42,7 +42,7 @@ the mode: one of <code>"numeric"</code>, <code>"double"</code>,
 </td></tr>
 <tr valign="top"><td><code>n</code></td>
 <td>
-<p>integer.  The (maximal) number of records to be
+<p>numeric.  The (maximal) number of records to be
 read.  You can use an over-estimate here, but not too large as
 storage is reserved for <code>n</code> items.</p>
 </td></tr>
@@ -77,7 +77,7 @@ endian-ness.</p>
 
 <h3>Details</h3>
 
-<p>These functions are intended to be used with binary-mode connections.
+<p>These functions can only be used with binary-mode connections.
 If <code>con</code> is a character string, the functions call
 <code><a href="connections.html">file</a></code> to obtain a binary-mode file connection which is
 opened for the duration of the function call.
@@ -144,10 +144,6 @@ from <code>double</code>.
 which does not contain C-style character strings, warnings (usually
 many) are given.  From a file or connection, the input will be broken
 into pieces of length 10000 with any final part being discarded.
-</p>
-<p>Using these functions on a text-mode connection may work but should
-not be mixed with text-mode access to the connection, especially if
-the connection was opened with an <code>encoding</code> argument.
 </p>
 
 
@@ -226,5 +222,5 @@ z &lt;- writeBin(c("a", "test", "of", "character"), raw())
 readBin(z, character(), 4)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -185,12 +185,10 @@ class <code>Variogram</code>.
 <h3>Examples</h3>
 
 <pre>
-## Not run: 
 fm1 &lt;- gls(weight ~ Time * Diet, BodyWeight)
-Variogram(fm1, form = ~ Time | Rat)[1:10,]
-
-## End(Not run)
+Vm1 &lt;- Variogram(fm1, form = ~ Time | Rat)
+print(head(Vm1), digits = 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-140 <a href="00Index.html">Index</a>]</div>
 </body></html>

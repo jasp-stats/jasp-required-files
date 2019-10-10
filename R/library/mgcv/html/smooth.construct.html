@@ -295,10 +295,10 @@ Statistical Science, 11(2):89-121
 ## using this, since mgcv can happily handle non-identity 
 ## penalties.)
 
-smooth.construct.tr.smooth.spec&lt;-function(object,data,knots)
+smooth.construct.tr.smooth.spec&lt;-function(object,data,knots) {
 ## a truncated power spline constructor method function
 ## object$p.order = null space dimension
-{ m &lt;- object$p.order[1]
+  m &lt;- object$p.order[1]
   if (is.na(m)) m &lt;- 2 ## default 
   if (m&lt;1) stop("silly m supplied")
   if (object$bs.dim&lt;0) object$bs.dim &lt;- 10 ## default
@@ -333,9 +333,9 @@ smooth.construct.tr.smooth.spec&lt;-function(object,data,knots)
   object
 }
 
-Predict.matrix.tr.smooth&lt;-function(object,data)
+Predict.matrix.tr.smooth&lt;-function(object,data) {
 ## prediction method function for the `tr' smooth class
-{ x &lt;- data[[object$term]]
+  x &lt;- data[[object$term]]
   x &lt;- x - object$x.shift # stabilizing shift
   m &lt;- object$m;     # spline order (3=cubic)
   k&lt;-object$knots    # knot locations
@@ -362,5 +362,5 @@ b &lt;- gam(y~te(x,z,bs=c("tr","tr"),m=c(2,2)),data=dat)
 vis.gam(b)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
 </body></html>

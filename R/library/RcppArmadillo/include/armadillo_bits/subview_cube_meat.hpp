@@ -1215,6 +1215,28 @@ subview_cube<eT>::replace(const eT old_val, const eT new_val)
 template<typename eT>
 inline
 void
+subview_cube<eT>::clean(const typename get_pod_type<eT>::result threshold)
+  {
+  arma_extra_debug_sigprint();
+
+  const uword local_n_rows   = n_rows;
+  const uword local_n_cols   = n_cols;
+  const uword local_n_slices = n_slices;
+  
+  for(uword slice = 0; slice < local_n_slices; ++slice)
+    {
+    for(uword col = 0; col < local_n_cols; ++col)
+      {
+      arrayops::clean( slice_colptr(slice,col), local_n_rows, threshold );
+      }
+    }
+  }
+
+
+
+template<typename eT>
+inline
+void
 subview_cube<eT>::fill(const eT val)
   {
   arma_extra_debug_sigprint();
@@ -1869,7 +1891,7 @@ subview_cube<eT>::plus_inplace(Mat<eT>& out, const subview_cube<eT>& in)
     {
     if( (arma_config::debug) && ((out_n_rows != in_n_rows) || (out_n_cols != in_n_cols)) )
       {
-      std::stringstream tmp;
+      std::ostringstream tmp;
       
       tmp
         << "in-place addition: "
@@ -1970,7 +1992,7 @@ subview_cube<eT>::minus_inplace(Mat<eT>& out, const subview_cube<eT>& in)
     {
     if( (arma_config::debug) && ((out_n_rows != in_n_rows) || (out_n_cols != in_n_cols)) )
       {
-      std::stringstream tmp;
+      std::ostringstream tmp;
       
       tmp
         << "in-place subtraction: "
@@ -2071,7 +2093,7 @@ subview_cube<eT>::schur_inplace(Mat<eT>& out, const subview_cube<eT>& in)
     {
     if( (arma_config::debug) && ((out_n_rows != in_n_rows) || (out_n_cols != in_n_cols)) )
       {
-      std::stringstream tmp;
+      std::ostringstream tmp;
       
       tmp
         << "in-place element-wise multiplication: "
@@ -2172,7 +2194,7 @@ subview_cube<eT>::div_inplace(Mat<eT>& out, const subview_cube<eT>& in)
     {
     if( (arma_config::debug) && ((out_n_rows != in_n_rows) || (out_n_cols != in_n_cols)) )
       {
-      std::stringstream tmp;
+      std::ostringstream tmp;
       
       tmp
         << "in-place element-wise division: "

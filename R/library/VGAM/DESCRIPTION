@@ -34,5 +34,5 @@ LazyData: yes
 Packaged: 2019-02-15 02:09:20 UTC; tyee001
 Repository: CRAN
 Date/Publication: 2019-02-18 10:50:12 UTC
-Built: R 3.5.3; x86_64-w64-mingw32; 2019-05-19 00:11:07 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 16:30:51 UTC; windows
 Archs: i386, x64

@@ -30,3 +30,4 @@ sk2011.1                Data from Singmann & Klauer (2011, Experiment
                         1)
 sk2011.2                Data from Singmann & Klauer (2011, Experiment
                         2)
+test_levene             Assumption Tests for ANOVAs

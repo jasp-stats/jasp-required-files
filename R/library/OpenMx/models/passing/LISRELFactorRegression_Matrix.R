@@ -173,6 +173,11 @@ ex1Run <- omxCheckWarning(mxRun(Jor82Ex1),
 summary(ex1Run)
 
 
+#--------------------------------------------------------------------
+# Check for errors/warnings
+omxCheckWarning(mxGetExpected(ex1Run, 'means'), "Means requested, but model has no means.\nAdd appropriate TX, TY, KA, and/or AL matrices to get real means.")
+
+
 #------------------------------------------------------------------------------
 # Published Results
 

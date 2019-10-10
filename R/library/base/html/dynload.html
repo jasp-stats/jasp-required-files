@@ -132,7 +132,9 @@ this class.
 </p>
 <p>The function <code>dyn.unload</code> unlinks the DLL.  Note that unloading a
 DLL and then re-loading a DLL of the same name may or may not work: on
-Solaris it uses the first version loaded.
+Solaris it uses the first version loaded. Note also that some DLLs cannot
+be safely unloaded at all: unloading a DLL which implements C finalizers
+but does not unregister them on unload causes R to crash.
 </p>
 <p><code>is.loaded</code> checks if the symbol name is loaded <em>and
 searchable</em> and hence available for use as a character string value
@@ -274,5 +276,5 @@ is.loaded("supsmu", "stats", "Fortran")
 is.loaded("PDF", type = "External") # pdf() device in grDevices
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

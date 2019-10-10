@@ -10,7 +10,7 @@ sim.mod <- "
 f1 =~ 1*y1 + 1*y2 + 1*y3+ 1*y4 + 1*y5
 f1 ~ 0*x1 + 0*x2 + 0*x3 + 0*x4 + 0*x5 + 0.2*x6 + 0.5*x7 + 0.8*x8
 f1~~1*f1"
-dat.sim = simulateData(sim.mod,sample.nobs=60,seed=12)
+dat.sim = simulateData(sim.mod,sample.nobs=100,seed=12)
 
 ## ------------------------------------------------------------------------
 run.mod <- "
@@ -26,7 +26,7 @@ parameterestimates(lav.out)[6:13,] # just look at regressions
 semPaths(lav.out)
 
 ## ----results='hide'------------------------------------------------------
-reg.out <- cv_regsem(lav.out,n.lambda=50,type="lasso",jump=0.03,
+reg.out <- cv_regsem(lav.out,n.lambda=30,type="lasso",jump=0.04,
                      pars_pen=c("c1","c2","c3","c4","c5","c6","c7","c8"))
 
 ## ----eval=FALSE----------------------------------------------------------

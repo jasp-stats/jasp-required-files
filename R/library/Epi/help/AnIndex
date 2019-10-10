@@ -1,3 +1,4 @@
+Epi-package	Epi
 absorbing	start.Lexis
 addCov.Lexis	addCov.Lexis
 after	start.Lexis
@@ -10,7 +11,7 @@ Aplot	rateplot
 as.Date.cal.yr	cal.yr
 B.dk	B.dk
 bdendo	bdendo
-bdendo11	bdendo11
+bdendo11	bdendo
 before	start.Lexis
 births	births
 blcaIT	blcaIT
@@ -33,6 +34,7 @@ ci.mat	ci.lin
 ci.pd	ci.pd
 ci.pred	ci.lin
 ci.ratio	ci.lin
+ci.surv	ci.cum
 clear	lls
 clogistic	clogistic
 contr.2nd	contr.cum
@@ -62,6 +64,7 @@ dur	start.Lexis
 effx	effx
 effx.match	effx.match
 entry	start.Lexis
+Epi	Epi
 erl	erl
 erl1	erl
 etm	foreign.Lexis
@@ -182,11 +185,13 @@ thinCol	in.span
 thoro	thoro
 timeBand	time.band
 timeScales	time.scales
+timeSince	time.scales
 tmat	stack.Lexis
 tmat.Lexis	stack.Lexis
 transform.Lexis	transform.Lexis
 transform.stacked.Lexis	transform.Lexis
 transient	start.Lexis
+tsNA20	time.scales
 twoby2	twoby2
 Wald	ci.lin
 Y.dk	Y.dk

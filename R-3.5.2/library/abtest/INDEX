@@ -1,0 +1,11 @@
+ab_test                 Bayesian A/B Test
+dprior                  Prior Density
+elicit_prior            Elicit Prior
+plot_posterior          Plot Posterior
+plot_prior              Plot Prior
+plot_sequential         Plot Sequential Analysis
+pprior                  Prior Cumulative Distribution Function (CDF)
+prob_wheel              Plot Probability Wheel
+qprior                  Prior Quantile Function
+seqdata                 Synthetic Sequential Data
+simulate_priors         Simulate from Parameter Priors

@@ -86,11 +86,8 @@ strings to try if <code>format</code> is not specified.</p>
 
 <p>The <code>as.POSIX*</code> functions convert an object to one of the two
 classes used to represent date/times (calendar dates plus time to the
-nearest second).  They can convert a wide variety of objects,
-including objects of the other class and of classes <code>"Date"</code>,
-<code>"date"</code> (from package <span class="pkg"><a href="../../date/html/as.date.html">date</a></span>),
-<code>"chron"</code> and <code>"dates"</code> (from package
-<span class="pkg"><a href="../../chron/html/chron.html">chron</a></span>) to these classes.  Dates without times are
+nearest second).  They can convert objects of the other class and of
+class <code>"Date"</code> to these classes.  Dates without times are
 treated as being at midnight UTC.
 </p>
 <p>They can also convert character strings of the formats
@@ -243,5 +240,5 @@ tmp &lt;- read.delim(file.path(R.home("share"), "zoneinfo", "zone.tab"),
 if(interactive()) View(tmp)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

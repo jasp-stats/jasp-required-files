@@ -1,7 +1,7 @@
 #!/usr/bin/env r
 #                     -*- mode: R; ess-indent-level: 4; indent-tabs-mode: nil; -*-
 #
-# Copyright (C) 2010 - 2015  Dirk Eddelbuettel and Romain Francois
+# Copyright (C) 2010 - 2019  Dirk Eddelbuettel and Romain Francois
 #
 # This file is part of Rcpp.
 #
@@ -21,6 +21,9 @@
 .runThisTest <- Sys.getenv("RunAllRcppTests") == "yes"
 
 if (.runThisTest) {
+
+    ## Needed for a change in R 3.6.0 reducing a bias in very large samples
+    suppressWarnings(RNGversion("3.5.0"))
 
     .setUp <- Rcpp:::unitTestSetup("sugar.cpp")
 
@@ -681,6 +684,36 @@ if (.runThisTest) {
             sort(unique(x), na.last = TRUE),
             sort(runit_unique_dbl(x), na.last = TRUE),
             "unique / numeric / with NA"
+        )
+    }
+
+    test.sort_unique <- function() {
+
+        set.seed(123)
+        x <- sample(LETTERS[1:5], 10, TRUE)
+        checkEquals(
+            sort(unique(x), decreasing = TRUE),
+            runit_sort_unique_ch(x, decreasing = TRUE),
+            "unique / character / without NA / decreasing sort"
+        )
+
+        checkEquals(
+            sort(unique(x), decreasing = FALSE),
+            runit_sort_unique_ch(x, decreasing = FALSE),
+            "unique / character / without NA / increasing sort"
+        )
+
+        x <- c(x, NA, NA)
+        checkEquals(
+            sort(unique(x), decreasing = TRUE, na.last = FALSE),
+            runit_sort_unique_ch(x, decreasing = TRUE),
+            "unique / character / with NA / decreasing sort"
+        )
+
+        checkEquals(
+            sort(unique(x), decreasing = FALSE, na.last = TRUE),
+            runit_sort_unique_ch(x, decreasing = FALSE),
+            "unique / character / with NA / increasing sort"
         )
     }
 

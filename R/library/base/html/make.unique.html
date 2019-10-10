@@ -77,9 +77,15 @@ make.unique(c(make.unique(c("a", "a")), "a"))
 make.unique(c("a", "a", "a.2", "a"))
 make.unique(c(make.unique(c("a", "a")), "a.2", "a"))
 
-rbind(data.frame(x = 1), data.frame(x = 2), data.frame(x = 3))
-rbind(rbind(data.frame(x = 1), data.frame(x = 2)), data.frame(x = 3))
+## Now show a bit where this is used :
+trace(make.unique)
+## Applied in data.frame() constructions:
+(d1 &lt;- data.frame(x = 1, x = 2, x = 3)) # direct
+ d2 &lt;- data.frame(data.frame(x = 1, x = 2), x = 3) # pairwise
+stopifnot(identical(d1, d2),
+          colnames(d1) == c("x", "x.1", "x.2"))
+untrace(make.unique)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

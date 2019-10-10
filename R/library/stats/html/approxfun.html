@@ -84,11 +84,12 @@ right-continuous for <code>f == 0</code> and left-continuous for <code>f
 </td></tr>
 <tr valign="top"><td><code>ties</code></td>
 <td>
-<p>handling of tied <code>x</code> values.  Either a function
-with a single vector argument returning a single number result or
-the string <code>"ordered"</code>; note that the latter is the fastest for
-large <code>length(x)</code>.</p>
-</td></tr>
+<p>handling of tied <code>x</code> values.  The string
+<code>"ordered"</code> or a function (or the name of a function)
+taking a single vector argument and returning a single number
+or a <code><a href="../../base/html/list.html">list</a></code> of both, e.g.,
+<code>list("ordered", mean)</code>, see &lsquo;Details&rsquo;.</p>
+</td></tr> 
 </table>
 
 
@@ -97,12 +98,24 @@ large <code>length(x)</code>.</p>
 <p>The inputs can contain missing values which are deleted, so at least
 two complete <code>(x, y)</code> pairs are required (for <code>method =
   "linear"</code>, one otherwise).  If there are duplicated (tied) <code>x</code>
-values and <code>ties</code> is a function it is applied to the <code>y</code>
-values for each distinct <code>x</code> value.
+values and <code>ties</code> contains a function it is applied to the <code>y</code>
+values for each distinct <code>x</code> value to produce <code>(x,y)</code> pairs
+with unique <code>x</code>.
 Useful functions in this context include <code><a href="../../base/html/mean.html">mean</a></code>,
-<code><a href="../../base/html/Extremes.html">min</a></code>, and <code><a href="../../base/html/Extremes.html">max</a></code>.  If <code>ties = "ordered"</code>
-the <code>x</code> values are assumed to be already ordered.  The first
-<code>y</code> value will be used for interpolation to the left and the last
+<code><a href="../../base/html/Extremes.html">min</a></code>, and <code><a href="../../base/html/Extremes.html">max</a></code>.
+</p>
+<p>If <code>ties = "ordered"</code> the <code>x</code> values are assumed to be already
+ordered (and unique) and ties are <em>not</em> checked but kept if present.
+This is the fastest option for large <code>length(x)</code>.
+</p>
+<p>If <code>ties</code> is a <code><a href="../../base/html/list.html">list</a></code> of length two, <code>ties[[2]]</code>
+must be a function to be applied to ties, see above, but if
+<code>ties[[1]]</code> is identical to <code>"ordered"</code>, the <code>x</code> values
+are assumed to be sorted and are only checked for ties.  Consequently,
+<code>ties = list("ordered", mean)</code> will be slightly more efficient than
+the default <code>ties = mean</code> in such a case.
+</p>
+<p>The first <code>y</code> value will be used for interpolation to the left and the last
 one for interpolation to the right.
 </p>
 
@@ -169,14 +182,18 @@ plot(approxfun(x, y, rule = 2:1), 0, 11,
 
 x &lt;- c(2,2:4,4,4,5,5,7,7,7)
 y &lt;- c(1:6, 5:4, 3:1)
-approx(x, y, xout = x)$y # warning
-(ay &lt;- approx(x, y, xout = x, ties = "ordered")$y)
-stopifnot(ay == c(2,2,3,6,6,6,4,4,1,1,1))
+(amy &lt;- approx(x, y, xout = x)$y) # warning, can be avoided by specifying 'ties=':
+op &lt;- options(warn=2) # warnings would be error
+stopifnot(identical(amy, approx(x, y, xout = x, ties=mean)$y))
+options(op) # revert
+(ay  &lt;- approx(x, y, xout = x, ties = "ordered")$y)
+stopifnot(amy == c(1.5,1.5, 3, 5,5,5, 4.5,4.5, 2,2,2),
+          ay  == c(2, 2,    3, 6,6,6, 4, 4,    1,1,1))
 approx(x, y, xout = x, ties = min)$y
 approx(x, y, xout = x, ties = max)$y
 
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -28,8 +28,8 @@ This will be the order in which <code>col</code>, <code>lty</code>, etc are used
 ## S3 method for class 'survfit'
 plot(x, conf.int=, mark.time=FALSE, 
  pch=3, col=1, lty=1, lwd=1, cex=1, log=FALSE, xscale=1, yscale=1,  
- firstx=0, firsty=1, xmax, ymin=0, fun, 
- xlab="", ylab="", xaxs="S",  conf.times, conf.cap=.005,
+ xmax, ymin=0, fun, 
+ xlab="", ylab="", xaxs="r",  conf.times, conf.cap=.005,
  conf.offset=.012, mark, ...)
 </pre>
 
@@ -125,18 +125,6 @@ will perform as it did without the <code>yscale</code> argument.
 A value of 365.25 will give labels in years instead of the original days.  
 </p>
 </td></tr>
-<tr valign="top"><td><code>firstx, firsty</code></td>
-<td>
-
-<p>the starting point for the survival curves.  If either of these is set to 
-<code>NA</code> the plot will start at the first time point of the curve. 
-By default, the plot program obeys tradition by having the plot start at
-(0,0).
-</p>
-<p>If <code>start.time</code> argument is used in <code>survfit</code>, <code>firstx</code>
-is set to that value.
-</p>
-</td></tr>
 <tr valign="top"><td><code>xmax</code></td>
 <td>
 
@@ -190,11 +178,13 @@ allowed as synonyms for <code>type="S"</code>.
 <td>
 
 <p>either <code>"S"</code> for a survival curve or a standard x axis style as
-listed in <code>par</code>.
-Survival curves are usually displayed with the curve touching the y-axis,
-but not touching the bounding box of the plot on the other 3 sides.
+listed in <code>par</code>; &quot;r&quot; (regular) is the R default.
+Survival curves have historically been displayed with the curve
+touching the y-axis,
+but not touching the bounding box of the plot on the other 3 sides,
 Type <code>"S"</code> accomplishes this by manipulating the plot range and
 then using the <code>"i"</code> style internally.
+The &quot;S&quot; style is becoming increasingly less common, however.
 </p>
 </td></tr>
 <tr valign="top"><td><code>conf.times</code></td>
@@ -286,5 +276,5 @@ plot(lsurv2, lty=2:3, fun="cumhaz",
 	xlab="Months", ylab="Cumulative Hazard") 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

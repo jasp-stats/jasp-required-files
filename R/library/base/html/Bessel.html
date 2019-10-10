@@ -35,8 +35,8 @@ besselY(x, nu)
 </td></tr>
 <tr valign="top"><td><code>nu</code></td>
 <td>
-<p>numeric; The <em>order</em> (maybe fractional!) of the
-corresponding Bessel function.</p>
+<p>numeric; The <em>order</em> (maybe fractional and negative) of
+the corresponding Bessel function.</p>
 </td></tr>
 <tr valign="top"><td><code>expon.scaled</code></td>
 <td>
@@ -125,23 +125,23 @@ Bessel Functions of Real Argument and Integer Order.
 <p>Cody, William J. (1983).
 Algorithm 597: Sequence of modified Bessel functions of the first kind.
 <em>ACM Transactions on Mathematical Software</em>, <b>9</b>(2), 242&ndash;245.
-doi: <a href="http://doi.org/10.1145/357456.357462">10.1145/357456.357462</a>.
+doi: <a href="https://doi.org/10.1145/357456.357462">10.1145/357456.357462</a>.
 </p>
 <p>Campbell, J.B. (1980).
 On Temme's algorithm for the modified Bessel function of the third kind.
 <em>ACM Transactions on Mathematical Software</em>, <b>6</b>(4), 581&ndash;586.
-doi: <a href="http://doi.org/10.1145/355921.355928">10.1145/355921.355928</a>.
+doi: <a href="https://doi.org/10.1145/355921.355928">10.1145/355921.355928</a>.
 </p>
 <p>Campbell, J.B. (1979).
 Bessel functions J_nu(x) and Y_nu(x) of float order and float argument.
 <em>Computer Physics Communications</em>, <b>18</b>, 133&ndash;142.
-doi: <a href="http://doi.org/10.1016/0010-4655(79)90030-4">10.1016/0010-4655(79)90030-4</a>.
+doi: <a href="https://doi.org/10.1016/0010-4655(79)90030-4">10.1016/0010-4655(79)90030-4</a>.
 </p>
 <p>Temme, Nico M. (1976).
 On the numerical evaluation of the ordinary Bessel function of the
 second kind.
 <em>Journal of Computational Physics</em>, <b>21</b>, 343&ndash;350.
-doi: <a href="http://doi.org/10.1016/0021-9991(76)90032-2">10.1016/0021-9991(76)90032-2</a>.
+doi: <a href="https://doi.org/10.1016/0021-9991(76)90032-2">10.1016/0021-9991(76)90032-2</a>.
 </p>
 
 
@@ -166,42 +166,60 @@ plot(x, x, ylim = c(0, 6), ylab = "", type = "n",
 for(nu in nus) lines(x, besselI(x, nu = nu), col = nu + 2)
 legend(0, 6, legend = paste("nu=", nus), col = nus + 2, lwd = 1)
 
-x &lt;- seq(0, 40, length.out = 801); yl &lt;- c(-.8, .8)
+x &lt;- seq(0, 40, length.out = 801); yl &lt;- c(-.5, 1)
 plot(x, x, ylim = yl, ylab = "", type = "n",
      main = "Bessel Functions  J_nu(x)")
+abline(h=0, v=0, lty=3)
 for(nu in nus) lines(x, besselJ(x, nu = nu), col = nu + 2)
-legend(32, -.18, legend = paste("nu=", nus), col = nus + 2, lwd = 1)
+legend("topright", legend = paste("nu=", nus), col = nus + 2, lwd = 1, bty="n")
 
-## Negative nu's :
+## Negative nu's --------------------------------------------------
 xx &lt;- 2:7
 nu &lt;- seq(-10, 9, length.out = 2001)
-op &lt;- par(lab = c(16, 5, 7))
+## --- I() --- --- --- ---
 matplot(nu, t(outer(xx, nu, besselI)), type = "l", ylim = c(-50, 200),
         main = expression(paste("Bessel ", I[nu](x), " for fixed ", x,
                                 ",  as ", f(nu))),
         xlab = expression(nu))
 abline(v = 0, col = "light gray", lty = 3)
-legend(5, 200, legend = paste("x=", xx), col=seq(xx), lty=seq(xx))
-par(op)
+legend(5, 200, legend = paste("x=", xx), col=seq(xx), lty=1:5)
 
-x0 &lt;- 2^(-20:10)
-plot(x0, x0^-8, log = "xy", ylab = "", type = "n",
-     main = "Bessel Functions  J_nu(x)  near 0\n log - log  scale")
-for(nu in sort(c(nus, nus+0.5)))
-    lines(x0, besselJ(x0, nu = nu), col = nu + 2)
-legend(3, 1e50, legend = paste("nu=", paste(nus, nus+0.5, sep=",")),
-       col = nus + 2, lwd = 1)
+## --- J() --- --- --- ---
+bJ &lt;- t(outer(xx, nu, besselJ))
+matplot(nu, bJ, type = "l", ylim = c(-500, 200),
+        xlab = quote(nu), ylab = quote(J[nu](x)),
+        main = expression(paste("Bessel ", J[nu](x), " for fixed ", x)))
+abline(v = 0, col = "light gray", lty = 3)
+legend("topright", legend = paste("x=", xx), col=seq(xx), lty=1:5)
 
-plot(x0, x0^-8, log = "xy", ylab = "", type = "n",
-     main = "Bessel Functions  K_nu(x)  near 0\n log - log  scale")
+## ZOOM into right part:
+matplot(nu[nu &gt; -2], bJ[nu &gt; -2,], type = "l",
+        xlab = quote(nu), ylab = quote(J[nu](x)),
+        main = expression(paste("Bessel ", J[nu](x), " for fixed ", x)))
+abline(h=0, v = 0, col = "gray60", lty = 3)
+legend("topright", legend = paste("x=", xx), col=seq(xx), lty=1:5)
+
+
+##---------------  x --&gt; 0  -----------------------------
+x0 &lt;- 2^seq(-16, 5, length.out=256)
+plot(range(x0), c(1e-40, 1), log = "xy", xlab = "x", ylab = "", type = "n",
+     main = "Bessel Functions  J_nu(x)  near 0\n log - log  scale") ; axis(2, at=1)
 for(nu in sort(c(nus, nus+0.5)))
-    lines(x0, besselK(x0, nu = nu), col = nu + 2)
-legend(3, 1e50, legend = paste("nu=", paste(nus, nus + 0.5, sep = ",")),
-       col = nus + 2, lwd = 1)
+    lines(x0, besselJ(x0, nu = nu), col = nu + 2, lty= 1+ (nu%%1 &gt; 0))
+legend("right", legend = paste("nu=", paste(nus, nus+0.5, sep=", ")),
+       col = nus + 2, lwd = 1, bty="n")
+
+x0 &lt;- 2^seq(-10, 8, length.out=256)
+plot(range(x0), 10^c(-100, 80), log = "xy", xlab = "x", ylab = "", type = "n",
+     main = "Bessel Functions  K_nu(x)  near 0\n log - log  scale") ; axis(2, at=1)
+for(nu in sort(c(nus, nus+0.5)))
+    lines(x0, besselK(x0, nu = nu), col = nu + 2, lty= 1+ (nu%%1 &gt; 0))
+legend("topright", legend = paste("nu=", paste(nus, nus + 0.5, sep = ", ")),
+       col = nus + 2, lwd = 1, bty="n")
 
 x &lt;- x[x &gt; 0]
 plot(x, x, ylim = c(1e-18, 1e11), log = "y", ylab = "", type = "n",
-     main = "Bessel Functions  K_nu(x)")
+     main = "Bessel Functions  K_nu(x)"); axis(2, at=1)
 for(nu in nus) lines(x, besselK(x, nu = nu), col = nu + 2)
 legend(0, 1e-5, legend=paste("nu=", nus), col = nus + 2, lwd = 1)
 
@@ -222,5 +240,5 @@ title(expression(besselY(x, nu) * "   " *
                  {nu == list(-0.1, -0.2, ..., -2)}))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

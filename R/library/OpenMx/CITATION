@@ -50,20 +50,20 @@ citEntry(entry="article",
 	title="State Space Modeling in an Open Source, Modular, Structural Equation Modeling Environment",
 	author=c(person(c("Michael", "D."), "Hunter")),
 	journal="Structural Equation Modeling",
-	year="in press",
-	volume="",
-	number="",
-	pages="1-18",
+	year="2018",
+	volume="25",
+	number="2",
+	pages="307-324",
 	doi="10.1080/10705511.2017.1369354",
 	textVersion=paste("Hunter, M. D.",
-		"(in press). State space modeling in an open source, modular,",
+		"(2018). State space modeling in an open source, modular,",
 		"structural equation modeling environment.",
-		"Structural Equation Modeling, 1-18. doi: 10.1080/10705511.2017.1369354")
+		"Structural Equation Modeling, 25(2), 307-324. doi: 10.1080/10705511.2017.1369354")
 )
 
 year <- 2019
-revision <- "2.12.2"
-authors <-  c(person(c("Steven", "M."), "Boker", role="aut"), person(c("Michael", "C."), "Neale", role="aut"), person(c("Hermine", "H."), "Maes", role="aut"), person(c("Michael", "J."), "Wilde", role="ctb"), person("Michael", "Spiegel", role="aut"), person(c("Timothy", "R."), "Brick", role="aut"), person("Ryne", "Estabrook", role="aut"), person(c("Timothy", "C."), "Bates", role="aut"), person("Paras", "Mehta", role="ctb"), person("Timo", c("von", "Oertzen"), role="ctb"), person(c("Ross", "J."), "Gore", role="aut"), person(c("Michael", "D."), "Hunter", role="aut"), person(c("Daniel", "C."), "Hackett", role="ctb"), person("Julian", "Karch", role="ctb"), person(c("Andreas", "M."), "Brandmaier", role="ctb"), person(c("Joshua", "N."), "Pritikin", email="jpritikin@pobox.com", role=c("aut", 'cre')), person("Mahsa", "Zahery", role="aut"), person(c("Robert", "M."), "Kirkpatrick", role="aut"), person(c("Yang"), "Wang", role="ctb"), person(c("Charles"), "Driver", email="driver@mpib-berlin.mpg.de", role="ctb"), person("Massachusetts Institute of Technology", role="cph"), person("S. G.", "Johnson", role="cph"), person("Association for Computing Machinery", role="cph"), person("Dieter", "Kraft", role="cph"), person("Stefan", "Wilhelm", role="cph"), person("Sarah", "Medland", role="cph"), person(c("Carl", 'F.'), "Falk", role="cph"), person("Matt", "Keller", role="cph"), person("Manjunath B G", role="cph"), person("The Regents of the University of California", role="cph"), person("Lester", "Ingber", role="cph"), person("Wong", "Shao Voon", role="cph"))
+revision <- "2.14.11"
+authors <-  c(person(c("Steven", "M."), "Boker", role="aut"), person(c("Michael", "C."), "Neale", role="aut"), person(c("Hermine", "H."), "Maes", role="aut"), person(c("Michael", "J."), "Wilde", role="ctb"), person("Michael", "Spiegel", role="aut"), person(c("Timothy", "R."), "Brick", role="aut"), person("Ryne", "Estabrook", role="aut"), person(c("Timothy", "C."), "Bates", role="aut"), person("Paras", "Mehta", role="ctb"), person("Timo", c("von", "Oertzen"), role="ctb"), person(c("Ross", "J."), "Gore", role="aut"), person(c("Michael", "D."), "Hunter", role="aut"), person(c("Daniel", "C."), "Hackett", role="ctb"), person("Julian", "Karch", role="ctb"), person(c("Andreas", "M."), "Brandmaier", role="ctb"), person(c("Joshua", "N."), "Pritikin", email="jpritikin@pobox.com", role=c("aut", 'cre')), person("Mahsa", "Zahery", role="aut"), person(c("Robert", "M."), "Kirkpatrick", role="aut"), person(c("Yang"), "Wang", role="ctb"), person(c("Charles"), "Driver", email="driver@mpib-berlin.mpg.de", role="ctb"), person("Massachusetts Institute of Technology", role="cph"), person("S. G.", "Johnson", role="cph"), person("Association for Computing Machinery", role="cph"), person("Dieter", "Kraft", role="cph"), person("Stefan", "Wilhelm", role="cph"), person("Sarah", "Medland", role="cph"), person(c("Carl", 'F.'), "Falk", role="cph"), person("Matt", "Keller", role="cph"), person("Manjunath B G", role="cph"), person("The Regents of the University of California", role="cph"), person("Lester", "Ingber", role="cph"), person("Wong", "Shao Voon", role="cph"), person("Juan", "Palacios", role="cph"), person("Jiang", "Yang", role="cph"))
      
 citEntry(entry="manual",
 	title = paste("OpenMx", revision, "User Guide"),

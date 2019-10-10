@@ -67,7 +67,7 @@ direct fixpoint iteration
 <tr valign="top"><td><code>only.values</code></td>
 <td>
 <p>logical; if <code>TRUE</code>, the result is just the
-vector of eigen values of the approximating matrix.</p>
+vector of eigenvalues of the approximating matrix.</p>
 </td></tr>
 <tr valign="top"><td><code>ensureSymmetry</code></td>
 <td>
@@ -80,7 +80,7 @@ for an <b>a</b>symmetric input <code>x</code>, is typically nonsense!</p>
 <tr valign="top"><td><code>eig.tol</code></td>
 <td>
 <p>defines relative positiveness of eigenvalues compared
-to largest one, <i>&lambda;_1</i>. Eigen values <i>&lambda;_k</i> are
+to largest one, <i>&lambda;_1</i>. Eigenvalues <i>&lambda;_k</i> are
 treated as if zero when <i>&lambda;_k / &lambda;_1 &le; eig.tol</i>.</p>
 </td></tr>
 <tr valign="top"><td><code>conv.tol</code></td>
@@ -115,24 +115,25 @@ should be traced.</p>
 
 <p>This implements the algorithm of Higham (2002), and then (if
 <code>do2eigen</code> is true) forces positive definiteness using code from
-<code><a href="../../sfsmisc/html/posdefify.html">posdefify</a></code>.  The algorithm of Knol DL and ten
-Berge (1989) (not implemented here) is more general in (1) that it
-allows constraints to fix some rows (and columns) of the matrix and (2)
-to force the smallest eigenvalue to have a certain value.
+<code><a href="../../sfsmisc/html/posdefify.html">posdefify</a></code>.  The algorithm of Knol and ten
+Berge (1989) (not implemented here) is more general in that it
+allows constraints to (1) fix some rows (and columns) of the matrix and
+(2) force the smallest eigenvalue to have a certain value.
 </p>
 <p>Note that setting <code>corr = TRUE</code> just sets <code>diag(.) &lt;- 1</code>
 within the algorithm.
 </p>
 <p>Higham (2002) uses Dykstra's correction, but the version by Jens
-Oehlschlaegel did not use it (accidentally), and has still lead to
-good results; this simplification, now only via <code>doDykstra = FALSE</code>,
-was active in <code>nearPD()</code> upto Matrix version 0.999375-40.
+Oehlschlaegel did not use it (accidentally), and still gave
+reasonable results; this simplification, now only
+used if <code>doDykstra = FALSE</code>,
+was active in <code>nearPD()</code> up to Matrix version 0.999375-40.
 </p>
 
 
 <h3>Value</h3>
 
-<p>If <code>only.values = TRUE</code>, a numeric vector of eigen values of the
+<p>If <code>only.values = TRUE</code>, a numeric vector of eigenvalues of the
 approximating matrix;
 Otherwise, as by default, an S3 object of <code><a href="../../base/html/class.html">class</a></code>
 <code>"nearPD"</code>, basically a list with components
@@ -145,7 +146,7 @@ computed positive-definite matrix.</p>
 </td></tr>
 <tr valign="top"><td><code>eigenvalues</code></td>
 <td>
-<p>numeric vector of eigen values of <code>mat</code>.</p>
+<p>numeric vector of eigenvalues of <code>mat</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>corr</code></td>
 <td>
@@ -274,5 +275,5 @@ abline(0,1, col="red3",lty=2)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-17 <a href="00Index.html">Index</a>]</div>
 </body></html>

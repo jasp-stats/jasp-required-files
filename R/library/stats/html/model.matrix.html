@@ -41,8 +41,9 @@ another sort of object, <code>model.frame</code> is called first.</p>
 </td></tr>
 <tr valign="top"><td><code>contrasts.arg</code></td>
 <td>
-<p>A list, whose entries are values (numeric
-matrices or character strings naming functions) to be used
+<p>a list, whose entries are values (numeric
+matrices, <code><a href="../../base/html/function.html">function</a></code>s or character strings naming
+functions) to be used
 as replacement values for the <code><a href="contrasts.html">contrasts</a></code>
 replacement function and whose names are the names of
 columns of <code>data</code> containing <code><a href="../../base/html/factor.html">factor</a></code>s.</p>
@@ -74,6 +75,8 @@ formula must be logical, integer, numeric or factor.
 <p>If <code>contrasts.arg</code> is specified for a factor it overrides the
 default factor coding for that variable and any <code>"contrasts"</code>
 attribute set by <code><a href="zC.html">C</a></code> or <code><a href="contrasts.html">contrasts</a></code>.
+Whereas invalid <code>contrasts.arg</code>s have been ignored always, they are
+warned about since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.6.0.
 </p>
 <p>In an interaction term, the variable whose levels vary fastest is the
 first one to appear in the formula (and not in the term), so in
@@ -134,13 +137,17 @@ utils::str(m &lt;- model.frame(ff, trees))
 mat &lt;- model.matrix(ff, m)
 
 dd &lt;- data.frame(a = gl(3,4), b = gl(4,1,12)) # balanced 2-way
-options("contrasts")
+options("contrasts") # typically 'treatment' (for unordered factors)
 model.matrix(~ a + b, dd)
 model.matrix(~ a + b, dd, contrasts = list(a = "contr.sum"))
-model.matrix(~ a + b, dd, contrasts = list(a = "contr.sum", b = "contr.poly"))
+model.matrix(~ a + b, dd, contrasts = list(a = "contr.sum", b = contr.poly))
 m.orth &lt;- model.matrix(~a+b, dd, contrasts = list(a = "contr.helmert"))
 crossprod(m.orth) # m.orth is  ALMOST  orthogonal
+# invalid contrasts.. ignored with a warning:
+stopifnot(identical(
+   model.matrix(~ a + b, dd),
+   model.matrix(~ a + b, dd, contrasts.arg = "contr.FOO")))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

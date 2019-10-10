@@ -17,7 +17,7 @@ names of the random effects (coefficients). If a single factor is
 specified in <code>form</code>, its levels determine the dot-plot rows
 (with possibly multiple dots per row); otherwise, if <code>form</code>
 specifies a crossing of factors, the dot-plot rows are determined by
-all combinations of the levels of the individual factors in the 
+all combinations of the levels of the individual factors in the
 formula. The Trellis function <code>dotplot</code> is used in this method
 function.
 </p>
@@ -25,7 +25,7 @@ function.
 with a different panel for each variable listed in the right hand side
 of <code>form</code>. Scatter plots are generated for numeric variables and
 boxplots are generated for categorical (<code>factor</code> or
-<code>ordered</code>) variables. 
+<code>ordered</code>) variables.
 </p>
 
 
@@ -47,7 +47,7 @@ plot(x, form, grid, control, ...)
 estimated random effects for the <code>lmList</code> object from which it was
 produced.
 </p>
-</td></tr> 
+</td></tr>
 <tr valign="top"><td><code>form</code></td>
 <td>
 <p>an optional formula specifying the desired type of plot. If
@@ -92,7 +92,7 @@ margin parameters for the x-axis (default is <code>c(2, 0.5, 0)</code>).</p>
 <p>optional arguments passed to the Trellis <code>dotplot</code>
 function.
 </p>
-</td></tr> 
+</td></tr>
 </table>
 
 
@@ -121,8 +121,8 @@ fm1 &lt;- lmList(distance ~ age | Subject, Orthodont)
 plot(ranef(fm1))
 fm1RE &lt;- ranef(fm1, aug = TRUE)
 plot(fm1RE, form = ~ Sex)
-## Not run: plot(fm1RE, form = age ~ Sex)
+plot(fm1RE, form = age ~ Sex)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-140 <a href="00Index.html">Index</a>]</div>
 </body></html>

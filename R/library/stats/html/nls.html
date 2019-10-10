@@ -397,9 +397,11 @@ with(muscle, table(Strip)) # 2, 3 or 4 obs per strip
 ## We first use the plinear algorithm to fit an overall model,
 ## ignoring that alpha and beta might vary with Strip.
 
+## IGNORE_RDIFF_BEGIN
 musc.1 &lt;- nls(Length ~ cbind(1, exp(-Conc/th)), muscle,
               start = list(th = 1), algorithm = "plinear")
 summary(musc.1)
+## IGNORE_RDIFF_END
 
 ## Then we use nls' indexing feature for parameters in non-linear
 ## models to use the conventional algorithm to fit a model in which
@@ -410,9 +412,12 @@ summary(musc.1)
 b &lt;- coef(musc.1)
 musc.2 &lt;- nls(Length ~ a[Strip] + b[Strip]*exp(-Conc/th), muscle,
               start = list(a = rep(b[2], 21), b = rep(b[3], 21), th = b[1]))
+## IGNORE_RDIFF_BEGIN
 summary(musc.2)
+## IGNORE_RDIFF_END
+
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

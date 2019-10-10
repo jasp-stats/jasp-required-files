@@ -97,10 +97,12 @@ aovdat &lt;- data.frame(Block, A, B, C, Yield)
 
 old &lt;- getOption("contrasts")
 options(contrasts = c("contr.helmert", "contr.poly"))
+## IGNORE_RDIFF_BEGIN
 (fit &lt;- aov(Yield ~ A*B*C + Error(Block), data = aovdat))
+## IGNORE_RDIFF_END
 eff.aovlist(fit)
 options(contrasts = old)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -127,6 +127,8 @@ e.g. Solaris, have it as <code>gtar</code>: on a Unix-alike
 <code>configure</code> will try <code>gnutar</code> and <code>gtar</code>
 before <code>tar</code>.
 </p>
+
+
 <p>Known problems arise from
 </p>
 
@@ -191,12 +193,11 @@ conventional to discard fractional seconds.
 <h3>Compression</h3>
 
 <p>When an external <code>tar</code> command is used, compressing the tar
-archive may require the appropriate command (<code>gzip</code>,
-<code>bzip2</code> or <code>xz</code>) to be available.  For GNU
-<code>tar</code>, further compression programs can be specified by
-e.g. <code>extra_flags = "-I lz4"</code>.
-
-
+archive requires that <code>tar</code> supports the <span class="option">-z</span>,
+<span class="option">-j</span> or <span class="option">-J</span> flag, and may require the appropriate
+command (<code>gzip</code>, <code>bzip2</code> or <code>xz</code>) to be
+available.  For GNU <code>tar</code>, further compression programs can be
+specified by e.g. <code>extra_flags = "-I lz4"</code>.
 Some versions of <code>bsdtar</code> accept options such as
 <span class="option">--lz4</span>, <span class="option">--lzop</span> and <span class="option">--lrzip</span> or an external
 compressor <em>via</em> <code>--use-compress-program lz4</code>: these could
@@ -205,7 +206,10 @@ be supplied in <code>extra_flags</code>.
 <p>NetBSD prior to 8.0 used flag <span class="option">--xz</span> rather than <span class="option">-J</span>,
 so this should be used <em>via</em> <code>extra_flags = "--xz"</code> rather
 than <code>compression = "xz"</code>.  The commands from OpenBSD and the
-Heirloom Toolchest are not doumented to support <code>xz</code>.
+Heirloom Toolchest are not documented to support <code>xz</code>.
+</p>
+<p>The <code>tar</code> programs in commercial Unixen such as AIX and
+Solaris do not support compression.
 </p>
 
 
@@ -237,5 +241,5 @@ for the way the POSIX utility <code>pax</code> handles <code>tar</code> formats.
 <p><code><a href="untar.html">untar</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

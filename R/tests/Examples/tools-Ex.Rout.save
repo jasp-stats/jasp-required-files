@@ -1,6 +1,6 @@
 
-R version 3.5.2 RC (2018-12-13 r75856) -- "Eggshell Igloo"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 3.6.0 Patched (2019-06-07 r76684) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -203,7 +203,7 @@ Error in assertWarning(ff()) :
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x208b1b0>
+<environment: 0x2c23510>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -916,17 +916,26 @@ An illustration of lexical scoping.
 > 
 > 
 > cleanEx()
-> nameEx("vignetteDepends")
-> ### * vignetteDepends
+> nameEx("updatePACKAGES")
+> ### * updatePACKAGES
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: vignetteDepends
-> ### Title: Retrieve Dependency Information for a Vignette
-> ### Aliases: vignetteDepends
-> ### Keywords: utilities
+> ### Name: update_PACKAGES
+> ### Title: Update Existing PACKAGES Files
+> ### Aliases: update_PACKAGES
+> ### Keywords: file utilities
 > 
 > ### ** Examples
+> 
+> ## Not run: 
+> ##D write_PACKAGES("c:/myFolder/myRepository") # on Windows
+> ##D update_PACKAGES("c:/myFolder/myRepository") # on Windows
+> ##D write_PACKAGES("/pub/RWin/bin/windows/contrib/2.9",
+> ##D type = "win.binary") # on Linux
+> ##D update_PACKAGES("/pub/RWin/bin/windows/contrib/2.9",
+> ##D type = "win.binary") # on Linux
+> ## End(Not run)
 > 
 > 
 > cleanEx()
@@ -953,6 +962,20 @@ List of 6
   ..$ filter : chr "Sweave"
   ..$ control: chr "-t"
 > 
+> 
+> 
+> cleanEx()
+> nameEx("vignetteInfo")
+> ### * vignetteInfo
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: vignetteInfo
+> ### Title: Basic Information about a Vignette
+> ### Aliases: vignetteInfo
+> ### Keywords: utilities
+> 
+> ### ** Examples
 > 
 > 
 > cleanEx()
@@ -998,7 +1021,7 @@ List of 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.313 0.012 0.333 0 0 
+Time elapsed:  0.332 0.013 0.346 0 0 
 > grDevices::dev.off()
 null device 
           1 

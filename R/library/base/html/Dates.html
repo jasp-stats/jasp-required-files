@@ -19,6 +19,9 @@
 ## S3 method for class 'Date'
 summary(object, digits = 12, ...)
 
+## S3 method for class 'Date'
+print(x, max = NULL, ...)
+
 
 </pre>
 
@@ -26,17 +29,23 @@ summary(object, digits = 12, ...)
 <h3>Arguments</h3>
 
 <table summary="R argblock">
-<tr valign="top"><td><code>object</code></td>
+<tr valign="top"><td><code>object, x</code></td>
 <td>
-<p>a <code>Date</code> object to be summarized.</p>
+<p>a <code>Date</code> object to be summarized or printed.</p>
 </td></tr>
 <tr valign="top"><td><code>digits</code></td>
 <td>
-<p>Number of significant digits for the computations.</p>
+<p>number of significant digits for the computations.</p>
+</td></tr>
+<tr valign="top"><td><code>max</code></td>
+<td>
+<p>numeric or <code>NULL</code>, specifying the maximal number of
+entries to be printed.  By default, when <code>NULL</code>,
+<code><a href="options.html">getOption</a>("max.print")</code> used.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>Further arguments to be passed from or to other methods.</p>
+<p>further arguments to be passed from or to other methods.</p>
 </td></tr>
 </table>
 
@@ -57,7 +66,8 @@ ignored when printing.  It is possible to produce fractional days via
 the <code>mean</code> method or by adding or subtracting (see
 <code><a href="Ops.Date.html">Ops.Date</a></code>).
 </p>
-<p>The print methods respect <code><a href="options.html">options</a>("max.print")</code>.
+<p>From the many methods, see <code>methods(class = "Date")</code>, a few are
+documented separately, see below.
 </p>
 
 
@@ -65,18 +75,23 @@ the <code>mean</code> method or by adding or subtracting (see
 
 <p><code><a href="Sys.time.html">Sys.Date</a></code> for the current date.
 </p>
-<p><code><a href="Ops.Date.html">Ops.Date</a></code> for operators on <code>"Date"</code> objects.
-</p>
-<p><code><a href="as.Date.html">format.Date</a></code> for conversion to and from character strings.
-</p>
-<p><code><a href="../../graphics/html/axis.POSIXct.html">axis.Date</a></code> and
-<code><a href="../../graphics/html/hist.POSIXt.html">hist.Date</a></code> for plotting.
-</p>
 <p><code><a href="weekday.POSIXt.html">weekdays</a></code> for convenience extraction functions.
 </p>
-<p><code><a href="seq.Date.html">seq.Date</a></code>, <code><a href="cut.POSIXt.html">cut.Date</a></code>,
-<code><a href="round.POSIXt.html">round.Date</a></code> for utility operations.
+<p>Methods with extra arguments and documentation:
 </p>
+
+<dl>
+<dt><code><a href="Ops.Date.html">Ops.Date</a></code></dt><dd><p>for operators on <code>"Date"</code> objects.</p>
+</dd>
+<dt><code><a href="as.Date.html">format.Date</a></code></dt><dd><p>for conversion to and from character strings.</p>
+</dd>
+<dt><code><a href="../../graphics/html/axis.POSIXct.html">axis.Date</a></code></dt><dd><p>and <code><a href="../../graphics/html/hist.POSIXt.html">hist.Date</a></code> for plotting.</p>
+</dd>
+<dt><code><a href="seq.Date.html">seq.Date</a></code></dt><dd><p>, <code><a href="cut.POSIXt.html">cut.Date</a></code>, and
+<code><a href="round.POSIXt.html">round.Date</a></code> for utility operations.</p>
+</dd>
+</dl>
+
 <p><code><a href="DateTimeClasses.html">DateTimeClasses</a></code> for date-time classes.
 </p>
 
@@ -89,6 +104,7 @@ format(today, "%d %b %Y")  # with month as a word
 (tenweeks &lt;- seq(today, length.out=10, by="1 week")) # next ten weeks
 weekdays(today)
 months(tenweeks)
+
 (Dls &lt;- as.Date(.leap.seconds))
 
 ##  length(&lt;Date&gt;) &lt;- n   now works
@@ -103,5 +119,5 @@ stopifnot(exprs = {
 })
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Get the self-reported Windows version number.  
+<p>Get the self-reported Microsoft Windows version number.
 </p>
 
 
@@ -29,13 +29,13 @@ win.version()
 
 <h3>Value</h3>
 
-<p>A character string describing the version of Windows reported to be in use. 
+<p>A character string describing the version of Windows reported to be in use.
 </p>
 
 
 <h3>Note</h3>
 
-<p>This function is only available on Microsoft Windows.  
+<p>This function is only available on Microsoft Windows.
 </p>
 <p>The result is based on the Windows <code>GetVersionEx</code> API function,
 which for recent versions of Windows reports the compatibility version,
@@ -44,5 +44,13 @@ as 8). If the API call reports 8, this function returns
 <code>&gt;= 8</code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+
+<h3>Examples</h3>
+
+<pre>
+if(.Platform$OS.type == "windows")
+   print(win.version())
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

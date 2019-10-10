@@ -1,8 +1,8 @@
 Package: eigenmodel
 Title: Semiparametric Factor and Regression Models for Symmetric
         Relational Data
-Version: 1.10
-Date: 2018-05-26
+Version: 1.11
+Date: 2019-05-28
 Author: Peter Hoff
 Maintainer: Peter Hoff <peter.hoff@duke.edu>
 Description: Estimation of the parameters in a model for
@@ -18,7 +18,7 @@ License: GPL-2
 URL: https://pdhoff.github.io/
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2018-05-28 14:26:34 UTC; pdhoff
+Packaged: 2019-05-28 14:48:11 UTC; pdh10
 Repository: CRAN
-Date/Publication: 2018-06-03 14:57:31 UTC
-Built: R 3.5.2; ; 2018-12-26 01:38:34 UTC; windows
+Date/Publication: 2019-05-28 15:40:03 UTC
+Built: R 3.6.0; ; 2019-05-28 21:05:04 UTC; windows

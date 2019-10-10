@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Standard Errors and CIs for Standardized Regression...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for seBeta {Bain}"><tr><td>seBeta {Bain}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Standard Errors and CIs for Standardized Regression Coefficients
+</h2>
+
+<h3>Description</h3>
+
+<p>Computes Normal Theory and ADF Standard Errors and CIs for Standardized Regression Coefficients
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+  seBeta(X, y, cov.x = NULL, cov.xy = NULL, var.y = NULL, Nobs = NULL,
+         alpha = 0.05, estimator = "ADF", digits = 3)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>X</code></td>
+<td>
+
+<p>Matrix of predictor scores.
+</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+
+<p>Vector of criterion scores.
+</p>
+</td></tr>
+<tr valign="top"><td><code>cov.x</code></td>
+<td>
+
+<p>Covariance or correlation matrix of predictors.
+</p>
+</td></tr>
+<tr valign="top"><td><code>cov.xy</code></td>
+<td>
+
+<p>Vector of covariances or correlations between predictors and criterion.
+</p>
+</td></tr>
+<tr valign="top"><td><code>var.y</code></td>
+<td>
+
+<p>Criterion variance.
+</p>
+</td></tr>
+<tr valign="top"><td><code>Nobs</code></td>
+<td>
+
+<p>Number of observations.
+</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+
+<p>Desired Type I error rate; default = .05.
+</p>
+</td></tr>
+<tr valign="top"><td><code>estimator</code></td>
+<td>
+
+<p>'ADF' or 'Normal' confidence intervals - requires raw X and raw y; default = 'ADF'.
+</p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+
+<p>Number of significant digits to print; default = 3.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<table summary="R valueblock">
+<tr valign="top"><td><code>cov.Beta</code></td>
+<td>
+
+<p>Normal theory or ADF covariance matrix of standardized regression coefficients.
+</p>
+</td></tr>
+<tr valign="top"><td><code>se.Beta</code></td>
+<td>
+
+<p>standard errors for standardized regression coefficients.
+</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+
+<p>desired Type-I error rate.
+</p>
+</td></tr>
+<tr valign="top"><td><code>CI.Beta</code></td>
+<td>
+
+<p>Normal theory or ADF (1-alpha)
+</p>
+</td></tr>
+<tr valign="top"><td><code>estimator</code></td>
+<td>
+
+<p>estimator = &quot;ADF&quot; or &quot;Normal&quot;.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Jeff Jones and Niels Waller
+</p>
+
+
+<h3>References</h3>
+
+<p>Jones, J. A, and Waller, N. G. (2015). The Normal-Theory and Asymptotic Distribution-Free (ADF) covariance matrix of standardized regression coefficients: Theoretical extensions and finite sample behavior. Psychometrika, 80, 365-378.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(MASS)
+
+set.seed(123)
+
+R &lt;- matrix(.5, 3, 3)
+diag(R) &lt;- 1
+X &lt;- mvrnorm(n = 200, mu = rep(0, 3), Sigma = R, empirical = TRUE)
+Beta &lt;- c(.2, .3, .4)
+y &lt;- X %*% Beta + .64 * scale(rnorm(200))
+seBeta(X, y, Nobs = 200, alpha = .05, estimator = 'ADF')
+
+# 95% CIs for Standardized Regression Coefficients:
+#
+#        lbound estimate ubound
+# beta_1  0.104    0.223  0.341
+# beta_2  0.245    0.359  0.473
+# beta_3  0.245    0.360  0.476
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Bain</em> version 0.1.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

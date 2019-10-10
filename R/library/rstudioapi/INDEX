@@ -9,6 +9,7 @@ createProjectTemplate   Create a Project Template
 dictionaries            Interact with RStudio's Dictionaries
 document_position       Create a Document Position
 document_range          Create a Range
+executeCommand          Execute Command
 file-dialogs            Select a File / Folder
 getActiveProject        Path to Active RStudio Project
 getThemeInfo            Retrieve Themes
@@ -25,6 +26,18 @@ jobRunScript            Run R Script As Job
 jobSetProgress          Set Job Progress
 jobSetState             Set Job State
 jobSetStatus            Set Job Status
+launcher                Retrieve Launcher Information
+launcherConfig          Define a Launcher Configuration
+launcherContainer       Define a Launcher Container
+launcherControlJob      Interact with (Control) a Job
+launcherGetJob          Retrieve Job Information
+launcherHostMount       Define a Launcher Host Mount
+launcherNfsMount        Define a Launcher NFS Mount
+launcherPlacementConstraint
+                        Define a Launcher Placement Constraint
+launcherResourceLimit   Define a Launcher Resource Limit
+launcherSubmitJob       Submit a Launcher Job
+launcherSubmitR         Execute an R Script as a Launcher Job
 navigateToFile          Navigate to File
 persistent-values       Persistent Keys and Values
 previewRd               Preview an Rd topic in the Help pane

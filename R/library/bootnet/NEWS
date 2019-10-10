@@ -1,3 +1,17 @@
+Changes in Version 1.2.4
+  - Resolved a bug with expected influence crashing bootnet when empty networks were estimated
+
+Changes in Version 1.2.3
+  - More informative error when statistics are not included in the plot.
+  - Updated psych to psychTools
+
+Changes in Version 1.2.2
+- Added 'adjacency' argument to pcor default set, which allows for estimating a network with a fixed structure.
+- Fixed parametric bootstrapping
+
+Changes in Version 1.2.1
+  - corStability should now return the non-finite values warning less often
+
 Changes in Version 1.2
   o New features:
       - Added support for statistics "bridgeStrength", "bridgeCloseness", "bridgeBetweenness", and "bridgeExpectedInfluence". Thanks to Payton Jones!

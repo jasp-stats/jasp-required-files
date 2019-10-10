@@ -21,7 +21,8 @@ invoked directly.
 bxp(z, notch = FALSE, width = NULL, varwidth = FALSE,
     outline = TRUE, notch.frac = 0.5, log = "",
     border = par("fg"), pars = NULL, frame.plot = axes,
-    horizontal = FALSE, add = FALSE, at = NULL, show.names = NULL,
+    horizontal = FALSE, ann = TRUE,
+    add = FALSE, at = NULL, show.names = NULL,
     ...)
 </pre>
 
@@ -85,6 +86,11 @@ logarithmic scale, as in <code><a href="plot.default.html">plot.default</a></cod
 <td>
 <p>logical indicating if the  boxplots should be
 horizontal; default <code>FALSE</code> means vertical boxes.</p>
+</td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+<p>a logical value indicating whether the default annotation
+(title and x and y axis labels) should appear on the plot.</p>
 </td></tr>
 <tr valign="top"><td><code>add</code></td>
 <td>
@@ -249,5 +255,5 @@ boxplot(z, boxfill = "light gray", outpch = 21:25, outlty = 2,
         medcol = "dark blue", medcex = 2, medpch = 20)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

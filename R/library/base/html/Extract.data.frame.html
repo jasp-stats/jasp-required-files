@@ -24,8 +24,7 @@ x[i, j] &lt;- value
 x[[..., exact = TRUE]]
 ## S3 replacement method for class 'data.frame'
 x[[i, j]] &lt;- value
-## S3 method for class 'data.frame'
-x$name
+
 ## S3 replacement method for class 'data.frame'
 x$name &lt;- value
 </pre>
@@ -79,12 +78,11 @@ column is selected.</p>
 <code>x[[i]]</code>), they index the data frame as if it were a list.  In
 this usage a <code>drop</code> argument is ignored, with a warning.
 </p>
-<p>The <code>data.frame</code> method for <code>$</code>, treats <code>x</code> as a
-list, except that (as of R-3.1.0) partial matching of <code>name</code> to
-the names of <code>x</code> will generate a warning; this may become an
-error in future versions.  The replacement method checks
-<code>value</code> for the correct number of rows, and replicates it if
-necessary.
+<p>There is no <code>data.frame</code> method for <code>$</code>, so <code>x$name</code>
+uses the default method which treats <code>x</code> as a list (with partial
+matching of column names if the match is unique, see
+<code><a href="Extract.html">Extract</a></code>).  The replacement method (for <code>$</code>) checks
+<code>value</code> for the correct number of rows, and replicates it if necessary.
 </p>
 <p>When <code>[</code> and <code>[[</code> are used with two indices (<code>x[i, j]</code>
 and <code>x[[i, j]]</code>) they act like indexing a matrix:  <code>[[</code> can
@@ -208,6 +206,7 @@ sw[1]        # a one-column data frame
 sw[, 1, drop = FALSE]  # the same
 sw[, 1]      # a (unnamed) vector
 sw[[1]]      # the same
+sw$Fert      # the same (possibly w/ warning, see ?Extract)
 
 sw[1,]       # a one-row data frame
 sw[1,, drop = TRUE]  # a list
@@ -228,6 +227,7 @@ sw[["new2"]] &lt;- letters[1:5] # ditto
 sw[, "new3"] &lt;- LETTERS[1:5] # ditto
 sw$new4 &lt;- 1:5
 sapply(sw, class)
+sw$new  # -&gt; NULL: no unique partial match
 sw$new4 &lt;- NULL              # delete the column
 sw
 sw[6:8] &lt;- list(letters[10:14], NULL, aa = 1:5)
@@ -262,5 +262,5 @@ str(d[2:4, -1]) # 'u' keeps its "unit"
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

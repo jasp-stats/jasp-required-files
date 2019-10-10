@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;Epi&rsquo; version 2.34</h2>
+</div><h2>Documentation for package &lsquo;Epi&rsquo; version 2.38</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
@@ -21,6 +21,7 @@
 
 
 <p style="text-align: center;">
+<a href="# "> </a>
 <a href="#A">A</a>
 <a href="#B">B</a>
 <a href="#C">C</a>
@@ -44,6 +45,10 @@
 <a href="#misc">misc</a>
 </p>
 
+<table width="100%">
+<tr><td style="width: 25%;"><a href="Epi.html">Epi-package</a></td>
+<td>Epi: Functions for manipulation and statistical analysis of epidemiological data</td></tr>
+</table>
 
 <h2><a name="A">-- A --</a></h2>
 
@@ -77,8 +82,8 @@
 <td>Births in Denmark by year and month of birth and sex</td></tr>
 <tr><td style="width: 25%;"><a href="bdendo.html">bdendo</a></td>
 <td>A case-control study of endometrial cancer</td></tr>
-<tr><td style="width: 25%;"><a href="bdendo11.html">bdendo11</a></td>
-<td>A 1:1 subset of the endometrial cancer case-control study</td></tr>
+<tr><td style="width: 25%;"><a href="bdendo.html">bdendo11</a></td>
+<td>A case-control study of endometrial cancer</td></tr>
 <tr><td style="width: 25%;"><a href="start.Lexis.html">before</a></td>
 <td>Time series and other methods for Lexis objects</td></tr>
 <tr><td style="width: 25%;"><a href="births.html">births</a></td>
@@ -86,7 +91,7 @@
 <tr><td style="width: 25%;"><a href="blcaIT.html">blcaIT</a></td>
 <td>Bladder cancer mortality in Italian males</td></tr>
 <tr><td style="width: 25%;"><a href="bootLexis.html">bootLexis</a></td>
-<td>Create a bootstrap sample of persons ('lex.id') from a Lexis object</td></tr>
+<td>Create a bootstrap sample of persons (as identified by 'lex.id') from a Lexis object</td></tr>
 <tr><td style="width: 25%;"><a href="boxes.MS.html">boxarr</a></td>
 <td>Draw boxes and arrows for illustration of multistate models.</td></tr>
 <tr><td style="width: 25%;"><a href="boxes.MS.html">boxes</a></td>
@@ -128,6 +133,8 @@
 <td>Compute linear functions of parameters with standard errors and confidence limits, optionally transforming to a different scale.</td></tr>
 <tr><td style="width: 25%;"><a href="ci.lin.html">ci.ratio</a></td>
 <td>Compute linear functions of parameters with standard errors and confidence limits, optionally transforming to a different scale.</td></tr>
+<tr><td style="width: 25%;"><a href="ci.cum.html">ci.surv</a></td>
+<td>Compute cumulative sum of estimates.</td></tr>
 <tr><td style="width: 25%;"><a href="lls.html">clear</a></td>
 <td>Functions to manage and explore the workspace</td></tr>
 <tr><td style="width: 25%;"><a href="clogistic.html">clogistic</a></td>
@@ -196,6 +203,8 @@
 <td>Function to calculate effects for individually matched case-control studies</td></tr>
 <tr><td style="width: 25%;"><a href="start.Lexis.html">entry</a></td>
 <td>Time series and other methods for Lexis objects</td></tr>
+<tr><td style="width: 25%;"><a href="Epi.html">Epi</a></td>
+<td>Epi: Functions for manipulation and statistical analysis of epidemiological data</td></tr>
 <tr><td style="width: 25%;"><a href="erl.html">erl</a></td>
 <td>Compute survival functions from rates and expected residual lifetime in an illness-death model as well as years of life lost to disease.</td></tr>
 <tr><td style="width: 25%;"><a href="erl.html">erl1</a></td>
@@ -342,9 +351,9 @@
 <tr><td style="width: 25%;"><a href="nickel.html">nickel</a></td>
 <td>A Cohort of Nickel Smelters in South Wales</td></tr>
 <tr><td style="width: 25%;"><a href="bootLexis.html">nid</a></td>
-<td>Create a bootstrap sample of persons ('lex.id') from a Lexis object</td></tr>
+<td>Create a bootstrap sample of persons (as identified by 'lex.id') from a Lexis object</td></tr>
 <tr><td style="width: 25%;"><a href="bootLexis.html">nid.Lexis</a></td>
-<td>Create a bootstrap sample of persons ('lex.id') from a Lexis object</td></tr>
+<td>Create a bootstrap sample of persons (as identified by 'lex.id') from a Lexis object</td></tr>
 <tr><td style="width: 25%;"><a href="Ns.html">Ns</a></td>
 <td>Natural splines - (cubic splines linear beyond outermost knots) with convenient specification of knots and possibility of centering, detrending and clamping.</td></tr>
 <tr><td style="width: 25%;"><a href="simLexis.html">nState</a></td>
@@ -496,6 +505,8 @@
 <td>Extract time band data from a split Lexis object</td></tr>
 <tr><td style="width: 25%;"><a href="time.scales.html">timeScales</a></td>
 <td>The time scales of a Lexis object</td></tr>
+<tr><td style="width: 25%;"><a href="time.scales.html">timeSince</a></td>
+<td>The time scales of a Lexis object</td></tr>
 <tr><td style="width: 25%;"><a href="stack.Lexis.html">tmat</a></td>
 <td>Functions to facilitate analysis of multistate models.</td></tr>
 <tr><td style="width: 25%;"><a href="stack.Lexis.html">tmat.Lexis</a></td>
@@ -506,6 +517,8 @@
 <td>Transform a Lexis (or stacked.Lexis) object</td></tr>
 <tr><td style="width: 25%;"><a href="start.Lexis.html">transient</a></td>
 <td>Time series and other methods for Lexis objects</td></tr>
+<tr><td style="width: 25%;"><a href="time.scales.html">tsNA20</a></td>
+<td>The time scales of a Lexis object</td></tr>
 <tr><td style="width: 25%;"><a href="twoby2.html">twoby2</a></td>
 <td>Analysis of a two by two table</td></tr>
 </table>

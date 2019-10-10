@@ -17,7 +17,7 @@
 
 <pre>
 Rprof(filename = "Rprof.out", append = FALSE, interval = 0.02,
-       memory.profiling = FALSE, gc.profiling = FALSE, 
+       memory.profiling = FALSE, gc.profiling = FALSE,
        line.profiling = FALSE, numfiles = 100L, bufsize = 10000L)
 </pre>
 
@@ -74,6 +74,11 @@ function or the wrapper script <code>R CMD Rprof</code> can be used to
 process the output file to produce a summary of the usage; use
 <code>R CMD Rprof --help</code> for usage information.
 </p>
+<p>How time is measured varies by platform:
+</p>
+
+<dl>
+<dt>On Windows:</dt><dd>
 <p>Exactly what the time interval measures is subtle: it is time that the
 <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> process is running and executing an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> command.  It is not however just
 CPU time, for if <code>readline()</code> is waiting for input, that counts
@@ -83,6 +88,18 @@ CPU time, for if <code>readline()</code> is waiting for input, that counts
 in each profiling step is added to the interval.  What is feasible is
 machine-dependent, but 10ms seemed as small as advisable on a 1GHz machine.
 </p>
+</dd>
+<dt>On Unix-alikes</dt><dd><p>it is the CPU
+time of the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> process, so for example excludes time when <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> is waiting
+for input or for processes run by <code><a href="../../base/html/system.html">system</a></code> to return.
+</p>
+<p>Note that the timing interval cannot usefully be too small: once the
+timer goes off, the information is not recorded until the next timing
+click (probably in the range 1&ndash;10 ms).
+</p>
+</dd>
+</dl>
+
 <p>Functions will only be recorded in the profile log if they put a
 context on the call stack (see <code><a href="../../base/html/sys.parent.html">sys.calls</a></code>).  Some
 <a href="../../base/html/Primitive.html">primitive</a> functions do not do so: specifically those which are
@@ -94,23 +111,35 @@ for more details).
 was parsed with source references.  See <code><a href="../../base/html/parse.html">parse</a></code> for a
 discussion of source references.  By default the statement locations
 are not shown in <code><a href="summaryRprof.html">summaryRprof</a></code>, but see that help page
-for options to enable the display.    
+for options to enable the display.
 </p>
 
 
 <h3>Note</h3>
 
+
+<dl>
+<dt>On Unix-alikes:</dt><dd>
+<p>Profiling is not available on all platforms.  By default,
+support for profiling is compiled in if possible &ndash; configure <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> with
+<span class="option">--disable-R-profiling</span> to change this.
+</p>
+<p>As <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> profiling uses the same mechanisms as C profiling, the two
+cannot be used together, so do not use <code>Rprof</code> in an executable
+built for C-level profiling.
+</p>
+</dd>
+<dt>On Windows:</dt><dd>
 <p><code>filename</code> can be a UTF-8-encoded filepath that cannot be translated to
 the current locale.
 </p>
-
-
-<h3>Note</h3>
+</dd>
+</dl>
 
 <p>The profiler interrupts R asynchronously, and it cannot allocate
 memory to store results as it runs.  This affects line profiling,
 which needs to store an unknown number of file pathnames.  The
-<code>numfiles</code> and <code>bufsize</code> arguments control the size of 
+<code>numfiles</code> and <code>bufsize</code> arguments control the size of
 pre-allocated buffers to hold these results:  the former counts the
 maximum number of paths, the latter counts the numbers of bytes in
 them.  If the profiler runs out of space it will skip recording the
@@ -147,5 +176,5 @@ Rprof(NULL)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

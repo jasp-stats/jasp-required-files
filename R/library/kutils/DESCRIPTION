@@ -1,8 +1,8 @@
 Package: kutils
 Type: Package
 Title: Project Management Tools
-Version: 1.67
-Date: 2019-03-04
+Version: 1.69
+Date: 2019-05-09
 Authors@R: c(person("Paul","Johnson",email="pauljohn@ku.edu",role = c("aut", "cre")),
 		   person("Benjamin","Kite",email="bakite@ku.edu",role="aut"),
 		   person("Charles","Redmon",email="redmon@ku.edu",role="aut"),
@@ -19,8 +19,8 @@ Description: Tools for data importation, recoding, and inspection that
     variable in a data frame.  The main feature here is the systematic
     implementation of the "variable key" framework for data
     importation and recoding.  We are eager to have community feedback
-    about the variable key and the vignette about it. In version 1.66,
-    the function semTable is deprecated. We have proposed a new package
+    about the variable key and the vignette about it. In version 1.67,
+    the function semTable() is deprecated. We have proposed a new package
     of that name.
 License: GPL-2
 Depends: R (>= 3.3.0)
@@ -30,7 +30,7 @@ Suggests: rockchalk
 RoxygenNote: 6.1.1
 LazyData: TRUE
 NeedsCompilation: no
-Packaged: 2019-03-02 22:11:32 UTC; pauljohn
+Packaged: 2019-05-09 18:52:22 UTC; pauljohn
 Author: Paul Johnson [aut, cre],
   Benjamin Kite [aut],
   Charles Redmon [aut],
@@ -39,5 +39,5 @@ Author: Paul Johnson [aut, cre],
   Po-Yi Chen [ctb],
   Shadi Pirhosseinloo [ctb]
 Repository: CRAN
-Date/Publication: 2019-03-03 18:20:03 UTC
-Built: R 3.5.3; ; 2019-04-11 00:27:42 UTC; windows
+Date/Publication: 2019-05-12 05:00:18 UTC
+Built: R 3.6.1; ; 2019-10-07 18:29:28 UTC; windows

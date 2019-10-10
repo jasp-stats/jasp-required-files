@@ -35,15 +35,18 @@ extendrange(x, r = range(x, na.rm = TRUE), f = 0.05)
 </td></tr>
 <tr valign="top"><td><code>f</code></td>
 <td>
-<p>number specifying the fraction by which the range should be
-extended.</p>
+<p>positive number(s) specifying the fraction by which the range should be
+extended.  If longer than one, <code>f[1]</code> is used on the left, and
+<code>f[2]</code> on the right.</p>
 </td></tr>
 </table>
 
 
 <h3>Value</h3>
 
-<p>A numeric vector of length 2, <code>r + c(-f,f) * diff(r)</code>.
+<p>A numeric vector of length 2, <code>r + c(-f1,f2) * diff(r)</code>, where
+f1 is <code>f[1]</code> and f2 is <code>f[2]</code> or <code>f</code> if it is of length
+one.
 </p>
 
 
@@ -61,10 +64,14 @@ x &lt;- 1:5
 (r &lt;- range(x))         # 1    5
 extendrange(x)          # 0.8  5.2
 extendrange(x, f= 0.01) # 0.96 5.04
+
+## extend more to the right:
+extendrange(x, f=c(.01,.03)) # 0.96 5.12
+
 ## Use 'r' if you have it already:
 stopifnot(identical(extendrange(r = r),
                     extendrange(x)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -49,3 +49,5 @@ set_treatment_contrasts	set_sum_contrasts
 sk2011.1	sk2011.1
 sk2011.2	sk2011.2
 summary.afex_aov	afex_aov-methods
+test_levene	test_assumptions
+test_sphericity	test_assumptions

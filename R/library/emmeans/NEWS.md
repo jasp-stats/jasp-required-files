@@ -1,5 +1,126 @@
 ## NEWS for the emmeans package
 
+emmeans 1.4.1
+-------------
+  * Added non-estimability infrastructure for Bayesian models, `stanreg`
+    in particular (#114)
+  * Added `max.degree` argument in `emtrends()` making it possible to
+    obtain higher-order trends (#133). Plus minor tuneups, e.g., smaller 
+    default increment for difference quotients
+  * Made `emmeans()` more forgiving with 'by` variables; e.g.,
+    `emmeans(model, ~ dose | treat, by = "route")` will find both `by`
+    variables whereas previously `"route"` would be ignored.
+  * Temporary fix for glitch in gls support where Satterthwaite isn't
+    always right.
+  * Attempt to make annotations clearer and more consistent regarding
+    degrees-of-freedom methods.
+  * Provisions whereby externally provided `emm_basis()` and `recover_data()`
+    methods are used in preference to internal ones - so package developers
+    can provide improvements over what I've cobbled together.
+  * Tried to produce more informative message when `recover_data()` fails
+  * Fixed bug in `contrast()` in identifying true contrasts (#134)
+  * Fixed a bug in `plot.summary_emm()` regarding `CIs` and `intervals` (#137)
+  * Improved support for response transformations. Models with formulas like
+    like `log(y + 1) ~ ...` and `2*sqrt(y + 0.5) ~ ...` are now auto-detected.
+    [This may cause discrepancies with examples in past usages, but if so, that
+    would be because the response transformation was previously incorrectly 
+    interpreted.]
+  * Added a `ratios` argument to `contrast()` to decide how to handle `log` and `logit`
+  * Added message/annotation when contrasts are summarized with `type = "response"`
+    but there is no way to back-transform them (or we opted out with `ratios = FALSE`)
+    
+
+emmeans 1.4
+-----------
+
+  * Added a courtesy function `.emm_register()` to make it easier for other
+    packages to register their **emmeans** support methods
+  * Clarified the "confidence intervals" vignette discussion of `infer`,
+    explaining that Bayesian models are handled differently (#128)
+  * Added `PIs` option to `plot.emmGrid()` and `emmip()` (#131). Also, in
+    `plot.emmGrid()`, the `intervals` argument has been changed to `CIs`
+    for sake of consistency and less confusion; `intervals` is still
+    supported for backaward compatibility.
+  * `plot.emmGrid` gains a `colors` argument so we can customize colors used.
+  * Bug fix for `glht` support (#132 contributed by Balsz Banfai)
+  * `regrid` gains `sim` and `N.sim` arguments whereby we can generate a
+    fake posterior sample from a frequentist model.
+    
+
+emmeans 1.3.5.1
+-------------
+  * Bug fix for `gls` objects with non-matrix `apVar` member (#119)
+  * Repairs faulty links in 1.3.5 vignettes
+
+
+emmeans 1.3.5
+-------------
+
+   * First steps to take prediction seriously. This includes
+     * Addition of a `sigma` argument to `ref_grid()` (defaults to
+       `sigma(object)` if available)
+     * Addition of an `interval` argument in `predict.emmGrid()`
+     * Addition of a `likelihood` argument in `as.mcmc` to allow
+       for simulating from the posterior predictive distribution
+     * Crude provisions for bias adjustment when back-transforming. This
+       is not really prediction, but it is made possible by availability
+       of `sigma` in object
+  * Further steps to lower the profile of `cld()` and `CLD()`
+  * Family size for Tukey adjustment was wrong when using `exclude` (#107)
+  * Provided for direct passing of info from `recover_data` to `emm_basis`
+  * Attempts to broaden `MCMCglmm` support
+
+
+emmeans 1.3.4
+-------------
+
+  * Un-naming a lot of arguments in `do.call(paste, ...)` and `do.call(order, ...)`,
+    to prevent problems with factor names like `method` that are argument names
+    for these functions (#94)
+  * Fix to a logic error in `summary.emmGrid()` whereby transformations of class
+    `list` were ignored.
+  * Enhancement to `update.emmGrid(..., levels = levs)` whereby we can easily
+    relabel the reference grid and ensure that the `grid` and `roles` slots
+    stay consistent. Added vignette example.
+  * Clarified ordering rules used by `emmeans()`. We now ensure that the
+    original order of the reference grid is preserved. Previously, the grid 
+    was re-ordered if any numeric or character levels occurred out of order, 
+    per `order()`
+  * Curbing use of "statistical significance" language. This includes
+    additional vignette material and plans to deprecate `CLD()` due to its 
+    misleading display of pairwise-comparison tests.
+  * Bug fix for `betareg` objects, where the wrong `terms` component was 
+    sometimes used.
+  * Correction to logic error that affected multiplicity adjustments when
+    `by` variables are present (#98).
+  * Addition of `pwpp()` function to plot *P* values of comparisons
+  * Improvement to `summary(..., adjust = "scheffe")`. We now actually
+    compute and use the rank of the matrix of linear functions to obtain
+    the *F* numerator d.f., rather than trying to guess the likely correct 
+    value.
+  * Removal of vignette on transitioning from **lsmeans** -- 
+    it's been a long enough time now.
+  
+
+emmeans 1.3.3
+-------------
+
+  * Fix to unintended consequence of #71 that caused incorrect ordering 
+    of `contrast()` results if they are later used by `emmeans()`.
+    This was first noticed with ordinal models in `prob` mode (#83).
+  * Improved checking of conformability of parameters -- for models
+    with rank deficiency not handled same way as lm()'s NA convention
+  * Added basic support for `sommer::mmer`, `MuMIn::averaging`, and
+    `mice::mira` objects
+  * Fix in `nnet::multinom` support when there are 2 outcomes (#19)
+  * Added Satterthwaite d.f. to `gls` objects
+  * `famSize` now correct when `exclude` or `include` is used in 
+    a contrast function (see #68)
+  * Stronger warnings of possible bias with `aovList` objects, in part
+    due to the popularity of `afex::aov_ez()` which uses these models.
+  * Updates to FAQs vignette
+
+
 
 emmeans 1.3.2
 -------------

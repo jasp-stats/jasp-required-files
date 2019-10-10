@@ -112,7 +112,7 @@ registration information.  This too can be used in calls to
 <code><a href="CallExternal.html">.External</a></code>.
 </p>
 </td></tr>
-<tr valign="top"><td><code>package</code></td>
+<tr valign="top"><td><code>dll</code></td>
 <td>
 <p>a list containing 3 elements:
 </p>
@@ -157,6 +157,15 @@ rather than the list containing that one element.
 
 <h3>Note</h3>
 
+<p>The third element of the <code>NativeSymbolInfo</code> objects was renamed
+from <code>package</code> to <code>dll</code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.6.0, for consistency
+with the names of the <code>NativeSymbolInfo</code> objects returned by
+<code><a href="getDLLRegisteredRoutines.html">getDLLRegisteredRoutines</a>()</code>.
+</p>
+
+
+<h3>Note</h3>
+
 <p>One motivation for accessing this reflectance information is to be
 able to pass native routines to C routines as function pointers in C.
 This allows us to treat native routines and <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> functions in a similar
@@ -193,5 +202,5 @@ R-News, volume 1, number 3, 2001, p20&ndash;23
 <code><a href="dynload.html">dyn.load</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

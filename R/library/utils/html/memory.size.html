@@ -1,20 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Report on Memory Allocation</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Report on Memory Allocation (on Windows)</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for memory.size {utils}"><tr><td>memory.size {utils}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Report on Memory Allocation</h2>
+<h2>Report on Memory Allocation (on Windows)</h2>
 
 <h3>Description</h3>
 
-<p><code>memory.size</code> reports the current or maximum memory allocation of
+
+<dl>
+<dt>On MS Windows,</dt><dd>
+<p><code>memory.size()</code> reports the current or maximum memory allocation of
 the <code>malloc</code> function used in this version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
 </p>
-<p><code>memory.limit</code> reports or increases the limit in force
-on the total allocation.
-</p>
+<p><code>memory.limit()</code> reports or increases the limit in force
+on the total allocation.</p>
+</dd>
+<dt>On non-Windows platforms</dt><dd><p>these are
+stubs which report infinity (<code><a href="../../base/html/is.finite.html">Inf</a></code>) with a warning.</p>
+</dd>
+</dl>
+
 
 
 <h3>Usage</h3>
@@ -64,16 +72,17 @@ specify the initial limit.
 
 <h3>Value</h3>
 
-<p>Size in Mb (1048576 bytes), rounded to 0.01 Mb for <code>memory.size</code>
+<p>A number: On Windows, size in Mb (1048576 bytes), rounded to 0.01 Mb for <code>memory.size</code>
 and rounded down for <code>memory.limit</code>.
+<br /> On other platforms: <code><a href="../../base/html/is.finite.html">Inf</a></code> always.
 </p>
 
 
 <h3>Note</h3>
 
-<p>These functions exist on other platforms but always report infinity as
-<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> does itself provide limits on memory allocation&mdash;the OS's own
-facilities can be used. 
+<p>These functions exist on all platforms, but on non-Windows always
+report infinity as <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> does itself provide limits on memory
+allocation&mdash;the OS's own facilities can be used.
 </p>
 
 
@@ -81,17 +90,19 @@ facilities can be used.
 
 <p><a href="../../base/html/Memory-limits.html">Memory-limits</a> for other limits.
 </p>
-<p>The rw-FAQ for more details and references.
+<p>On Windows: The rw-FAQ for more details and references.
 </p>
 
 
 <h3>Examples</h3>
 
 <pre>
+if(.Platform$OS.type == "windows") withAutoprint({
 memory.size()
 memory.size(TRUE)
 memory.limit()
+})
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

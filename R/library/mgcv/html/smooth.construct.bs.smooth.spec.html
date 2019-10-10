@@ -121,7 +121,7 @@ for the elements that this object will contain.
   fv &lt;- predict(b,pd,se=TRUE)
   ul &lt;- fv$fit + fv$se.fit*2; ll &lt;- fv$fit - fv$se.fit*2
   plot(x,y,xlim=c(-.7,1.7),ylim=range(c(y,ll,ul)),main=
-  "1st order penalties: red tps; blue bs over (0,1); black bs over (-.5,1.5)")
+  "Order 1 penalties: red tps; blue bs on (0,1); black bs on (-.5,1.5)")
   ## penalty defined on (-.5,1.5) gives plausible predictions and intervals
   ## over this range...
   lines(pd$x,fv$fit);lines(pd$x,ul,lty=2);lines(pd$x,ll,lty=2)
@@ -168,5 +168,5 @@ for the elements that this object will contain.
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
 </body></html>

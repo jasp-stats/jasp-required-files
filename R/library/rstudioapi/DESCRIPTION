@@ -2,7 +2,7 @@ Package: rstudioapi
 Title: Safely Access the RStudio API
 Description: Access the RStudio API (if available) and provide informative error
     messages when it's not.
-Version: 0.9.0
+Version: 0.10
 Authors@R: c(
     person("Kevin", "Ushey", role = c("aut", "cre"), email = "kevin@rstudio.com"),
     person("JJ", "Allaire", role = c("aut"), email = "jj@rstudio.com"),
@@ -19,12 +19,12 @@ Suggests: testthat, knitr, rmarkdown
 VignetteBuilder: knitr
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-01-08 22:18:21 UTC; kevin
+Packaged: 2019-03-19 18:45:29 UTC; kevin
 Author: Kevin Ushey [aut, cre],
   JJ Allaire [aut],
   Hadley Wickham [aut],
   Gary Ritchie [aut],
   RStudio [cph]
 Repository: CRAN
-Date/Publication: 2019-01-09 08:30:03 UTC
-Built: R 3.5.2; ; 2019-02-26 00:31:59 UTC; windows
+Date/Publication: 2019-03-19 20:30:03 UTC
+Built: R 3.6.1; ; 2019-10-07 16:29:24 UTC; windows

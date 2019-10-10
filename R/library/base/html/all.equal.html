@@ -26,6 +26,8 @@ all.equal(target, current, ...)
 ## S3 method for class 'numeric'
 all.equal(target, current,
           tolerance = sqrt(.Machine$double.eps), scale = NULL,
+          countEQ = FALSE,
+          formatFUN = function(err, what) format(err),
           ..., check.attributes = TRUE)
 
 ## S3 method for class 'list'
@@ -57,7 +59,7 @@ attr.all.equal(target, current, ...,
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>Further arguments for different methods, notably the
+<p>further arguments for different methods, notably the
 following two, for numerical comparison:</p>
 </td></tr>
 <tr valign="top"><td><code>tolerance</code></td>
@@ -68,7 +70,23 @@ following two, for numerical comparison:</p>
 </td></tr>
 <tr valign="top"><td><code>scale</code></td>
 <td>
-<p>numeric scalar &gt; 0 (or <code>NULL</code>). See &lsquo;Details&rsquo;.</p>
+<p><code>NULL</code> or numeric &gt; 0, typically of length 1 or
+<code>length(target)</code>.  See &lsquo;Details&rsquo;.</p>
+</td></tr>
+<tr valign="top"><td><code>countEQ</code></td>
+<td>
+<p>logical indicating if the <code>target == current</code>
+cases should be counted when computing the mean (absolute or
+relative) differences.  The default, <code>FALSE</code> may seem
+misleading in cases where <code>target</code> and <code>current</code> only
+differ in a few places; see the extensive example.</p>
+</td></tr>
+<tr valign="top"><td><code>formatFUN</code></td>
+<td>
+<p>a <code><a href="function.html">function</a></code> of two arguments,
+<code>err</code>, the relative, absolute or scaled error, and
+<code>what</code>, a character string indicating the <em>kind</em> of error;
+maybe used, e.g., to format relative and absolute errors differently.</p>
 </td></tr>
 <tr valign="top"><td><code>check.attributes</code></td>
 <td>
@@ -116,11 +134,13 @@ numerical vectors is computed.  If this is smaller than
 <code>tolerance</code> or not finite, absolute differences are used,
 otherwise relative differences scaled by the mean absolute
 <code>target</code> value.
-(Note that these comparisons are computed only for those vector elements
-where <code>target</code> is not <code><a href="NA.html">NA</a></code> and differs from <code>current</code>.)
+Note that these comparisons are computed only for those vector elements
+where <code>target</code> is not <code><a href="NA.html">NA</a></code> and differs from <code>current</code>.
+If <code>countEQ</code> is true, the equal and <code>NA</code> cases are
+<em>counted</em> in determining &ldquo;sample&rdquo; size.
 </p>
-<p>If <code>scale</code> is positive, absolute comparisons are made after
-scaling (dividing) by <code>scale</code>.
+<p>If <code>scale</code> is numeric (and positive), absolute comparisons are
+made after scaling (dividing) by <code>scale</code>.
 </p>
 <p>For complex <code>target</code>, the modulus (<code><a href="complex.html">Mod</a></code>) of the
 difference is used: <code>all.equal.numeric</code> is called so arguments
@@ -185,7 +205,24 @@ ae &lt;- all.equal(as.environment("package:stats"),
 stopifnot(is.character(ae), length(ae) &gt; 10,
           ## were incorrectly "considered equal" in R &lt;= 3.1.1
           all.equal(asNamespace("stats"), asNamespace("stats")))
+
+## A situation where  'countEQ = TRUE' makes sense:
+x1 &lt;- x2 &lt;- (1:100)/10;  x2[2] &lt;- 1.1*x1[2]
+## 99 out of 100 pairs (x1[i], x2[i]) are equal:
+plot(x1,x2, main = "all.equal.numeric() -- not counting equal parts")
+all.equal(x1,x2) ## "Mean relative difference: 0.1"
+mtext(paste("all.equal(x1,x2) :", all.equal(x1,x2)), line= -2)
+##' extract the 'Mean relative difference' as number:
+all.eqNum &lt;- function(...) as.numeric(sub(".*:", '', all.equal(...)))
+set.seed(17)
+## When x2 is jittered, typically all pairs (x1[i],x2[i]) do differ:
+summary(r &lt;- replicate(100, all.eqNum(x1, x2*(1+rnorm(x1)*1e-7))))
+mtext(paste("mean(all.equal(x1, x2*(1 + eps_k))) {100 x} Mean rel.diff.=",
+            signif(mean(r), 3)), line = -4, adj=0)
+## With argument  countEQ=TRUE, get "the same" (w/o need for jittering):
+mtext(paste("all.equal(x1,x2, countEQ=TRUE) :",
+          signif(all.eqNum(x1,x2, countEQ=TRUE), 3)), line= -6, col=2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

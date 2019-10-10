@@ -31,12 +31,12 @@ buildVignette(file, dir = ".", weave = TRUE, latex = TRUE, tangle = TRUE,
 <table summary="R argblock">
 <tr valign="top"><td><code>file</code></td>
 <td>
-<p>character; the vignette source file</p>
+<p>character; the vignette source file.</p>
 </td></tr>
 <tr valign="top"><td><code>dir</code></td>
 <td>
 <p>character; the working directory in which the intermediate and 
-output files will be produced</p>
+output files will be produced.</p>
 </td></tr>
 <tr valign="top"><td><code>weave</code></td>
 <td>
@@ -71,14 +71,17 @@ use.  Overrides any <code>\VignetteEngine{}</code> markup in the vignette.</p>
 </td></tr>
 <tr valign="top"><td><code>buildPkg</code></td>
 <td>
-<p><code>NULL</code> or character; an optional package in which to find
-the vignette engine.</p>
+<p><code>NULL</code> or a character vector; optional packages
+in which to find the vignette engine.</p>
 </td></tr>
 <tr valign="top"><td><code>encoding</code></td>
 <td>
-<p>the encoding to assume for the file.  If not specified, it will
-be inferred from the file contents.</p>
-</td></tr>
+<p>the encoding to assume for the file.  If not
+specified, it will be read if possible from the file's contents.
+Note that if the vignette is part of a package,
+<code><a href="buildVignettes.html">buildVignettes</a></code> reads the package's encoding from the
+&lsquo;<span class="file">DESCRIPTION</span>&rsquo; file but this function does not.</p>
+</td></tr> 
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>Additional arguments passed to weave and tangle.</p>
@@ -97,13 +100,14 @@ etc, and not any in <code>keep</code>) will be deleted.  If <code>clean</code> i
 files (e.g., &lsquo;<span class="file">.tex</span>&rsquo;) will not be deleted even if a &lsquo;<span class="file">.pdf</span>&rsquo;
 file has been produced from them.  
 </p>
-<p>If <code>buildPkg</code> is specified, it will be loaded before the vignette
-is processed, and will be used as the default package in the search
-for a vignette engine, but an explicitly specified package in the
-vignette source (e.g., using <code>\VignetteEngine{utils::Sweave}</code>
-to specify the <code>Sweave</code> engine in the <span class="pkg">utils</span> package) will
-override it.  In contrast, if the <code>engine</code> argument is given, it
-will override the vignette source.
+<p>If <code>buildPkg</code> is specified, those packages will be loaded before
+the vignette is processed and will be used as the default packages in
+the search for a vignette engine, but an explicitly specified package
+in the vignette source (e.g., using
+<code>\VignetteEngine{utils::Sweave}</code> to specify the <code>Sweave</code>
+engine in the <span class="pkg">utils</span> package) will override it.  In contrast, if
+the <code>engine</code> argument is given, it will override the vignette
+source.
 </p>
 
 
@@ -124,5 +128,5 @@ will override the vignette source.
 <p><code><a href="buildVignettes.html">buildVignettes</a></code> for building all vignettes in a package.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

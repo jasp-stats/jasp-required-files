@@ -398,6 +398,7 @@ n.field.obs <- 31
 # observations, which here means the observations of fluid speed when
 # the sink is at a known, specified, position.
 
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(0)
 
 latin.hypercube <- function (n, d){

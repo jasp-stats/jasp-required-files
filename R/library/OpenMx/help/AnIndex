@@ -57,7 +57,6 @@ factorScaleExample2	factorScaleExample2_data
 FullMatrix-class	MxMatrix-class
 genericFitDependencies,MxBaseFitFunction-method	genericFitDependencies-MxBaseFitFunction-method
 HS.ability.data	HS.ability.data
-HS.fake.data	HS.ability.data
 IdenMatrix-class	MxMatrix-class
 ieigenval	eigenvec
 ieigenvec	eigenvec
@@ -95,7 +94,6 @@ imxDeparse,UnitMatrix-method	imxDeparse
 imxDeparse,ZeroMatrix-method	imxDeparse
 imxDependentModels	imxDependentModels
 imxDetermineDefaultOptimizer	imxDetermineDefaultOptimizer
-imxDiff	imxDiff
 imxDmvnorm	imxDmvnorm
 imxEvalByName	imxEvalByName
 imxExtractMethod	imxExtractMethod
@@ -117,6 +115,7 @@ imxHasDefinitionVariable	imxHasDefinitionVariable
 imxHasNPSOL	imxHasNPSOL
 imxHasOpenMP	imxHasOpenMP
 imxHasThresholds	imxHasThresholds
+imxHasWLS	imxHasWLS
 imxIdentifier	imxIdentifier
 imxIndependentModels	imxIndependentModels
 imxInitModel	imxInitModel
@@ -124,8 +123,9 @@ imxInitModel,MxLISRELModel-method	imxInitModel
 imxInitModel,MxModel-method	imxInitModel
 imxInitModel,MxRAMModel-method	imxInitModel
 imxIsDefinitionVariable	imxIsDefinitionVariable
+imxIsMultilevel	imxIsMultilevel
 imxIsPath	imxIsPath
-imxJiggle	imxJiggle
+imxJiggle	mxJiggle
 imxLocateFunction	imxLocateFunction
 imxLocateIndex	imxLocateIndex
 imxLocateLabel	imxLocateLabel
@@ -200,6 +200,7 @@ imxWlsStandardErrors	imxWlsStandardErrors
 jointdata	jointdata_data
 latentMultipleRegExample1	latentMultipleRegExample1_data
 latentMultipleRegExample2	latentMultipleRegExample2_data
+lazarsfeld	lazarsfeld_data
 length,MxMatrix-method	MxMatrix-class
 lgamma1p	mxAlgebra
 logm	logm
@@ -261,6 +262,8 @@ mxComputeIterate	mxComputeIterate
 MxComputeIterate-class	mxComputeIterate
 mxComputeJacobian	mxComputeJacobian
 MxComputeJacobian-class	mxComputeJacobian
+mxComputeLoadContext	mxComputeLoadContext
+MxComputeLoadContext-class	mxComputeLoadContext
 mxComputeLoadData	mxComputeLoadData
 MxComputeLoadData-class	mxComputeLoadData
 mxComputeLoadMatrix	mxComputeLoadMatrix
@@ -289,6 +292,8 @@ mxComputeSimAnnealing	mxComputeSimAnnealing
 MxComputeSimAnnealing-class	mxComputeSimAnnealing
 mxComputeStandardError	mxComputeStandardError
 MxComputeStandardError-class	mxComputeStandardError
+mxComputeTryCatch	mxComputeTryCatch
+MxComputeTryCatch-class	mxComputeTryCatch
 mxComputeTryHard	mxComputeTryHard
 MxComputeTryHard-class	mxComputeTryHard
 MxConstraint	MxConstraint-class
@@ -306,6 +311,7 @@ MxDataLegacyWLS-class	mxDataWLS
 MxDataStatic	MxDataStatic-class
 MxDataStatic-class	MxDataStatic-class
 mxDataWLS	mxDataWLS
+mxDescribeDataWLS	mxDescribeDataWLS
 MxDirectedGraph	MxDirectedGraph-class
 MxDirectedGraph-class	MxDirectedGraph-class
 mxEval	mxEval
@@ -358,6 +364,7 @@ mxGetExpected	mxGetExpected
 mxGREMLDataHandler	mxGREMLDataHandler
 MxInterval	MxCI-class
 MxInterval-class	MxInterval-class
+mxJiggle	mxJiggle
 mxKalmanScores	mxKalmanScores
 MxLISRELModel-class	MxLISRELModel-class
 mxLISRELObjective	mxLISRELObjective
@@ -378,6 +385,7 @@ mxOption	mxOption
 MxOptionalChar-class	MxOptionalChar-class
 MxOptionalCharOrNumber-class	MxOptionalCharOrNumber-class
 MxOptionalDataFrame-class	MxOptionalDataFrame-class
+MxOptionalInteger-class	MxOptionalInteger-class
 MxOptionalLogical-class	MxOptionalLogical-class
 MxOptionalMatrix-class	MxOptionalMatrix-class
 MxOptionalNumeric-class	MxOptionalNumeric-class
@@ -390,12 +398,12 @@ mxPower	mxPower
 mxPowerSearch	mxPower
 MxRAMGraph	MxRAMGraph-class
 MxRAMGraph-class	MxRAMGraph-class
-MxRAMMetaData-class	MxRAMMetaData-class
 MxRAMModel-class	MxRAMModel-class
 mxRAMObjective	mxRAMObjective
 mxRefModels	omxSaturatedModel
 mxRename	mxRename
 mxRestore	mxRestore
+mxRestoreFromDataFrame	mxRestore
 mxRetro	mxRetro
 mxRObjective	mxRObjective
 mxRobustLog	mxAlgebra
@@ -454,6 +462,7 @@ omxBootstrapEval	mxBootstrapEval
 omxBootstrapEvalByName	mxBootstrapEval
 omxBootstrapEvalCov	mxBootstrapEval
 omxBrownie	omxBrownie
+omxBuildAutoStartModel	omxBuildAutoStartModel
 omxCbind	omxMatrixOperations
 omxCheckCloseEnough	omxCheckCloseEnough
 omxCheckEquals	omxCheckEquals
@@ -493,6 +502,7 @@ omxPnbinom	mxAlgebra
 omxQuotes	omxQuotes
 omxRAMtoML	omxRAMtoML
 omxRbind	omxMatrixOperations
+omxReadGRMBin	omxReadGRMBin
 omxRMSEA	omxRMSEA
 omxRunCI	omxParallelCI
 omxSapply	omxSapply
@@ -505,6 +515,7 @@ omxSymbolTable	omxSymbolTable
 omxTranspose	omxMatrixOperations
 OpenMx	OpenMx
 ordinalTwinData	ordinalTwinData
+Oscillator	Oscillator_data
 p2z	mxAlgebra
 print,BaseCompute-method	BaseCompute-class
 print,MxAlgebra-method	MxAlgebra-class

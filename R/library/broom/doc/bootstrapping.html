@@ -11,14 +11,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2018-12-04" />
+<meta name="date" content="2019-04-07" />
 
 <title>Tidy bootstrapping</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -80,7 +80,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -268,6 +290,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -276,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Tidy bootstrapping</h1>
-<h4 class="date"><em>2018-12-04</em></h4>
+<h4 class="date">2019-04-07</h4>
 
 
 
@@ -286,10 +311,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>Bootstrapping consists of randomly sampling a dataset with replacement, then performing the analysis individually on each bootstrapped replicate. The variation in the resulting estimate is then a reasonable approximation of the variance in our estimate.</p>
 <p>Let’s say we want to fit a nonlinear model to the weight/mileage relationship in the <code>mtcars</code> dataset.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; Warning: package &#39;ggplot2&#39; was built under R version 3.5.1</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">    </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>We might use the method of nonlinear least squares (via the <code>nls</code> function) to fit a model.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">nlsfit &lt;-<span class="st"> </span><span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, mtcars, <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))</a>
@@ -318,30 +342,28 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>An <code>rsplit</code> object has two main components: an analysis dataset and an assessment dataset, accessible via <code>analysis(rsplit)</code> and <code>assessment(rsplit)</code> respectively. For bootstrap samples, the analysis dataset is the bootstrap sample itself, and the assessment dataset consists of all the out of bag samples.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(rsample)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Warning: package &#39;rsample&#39; was built under R version 3.5.1</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Warning: package &#39;tidyr&#39; was built under R version 3.5.1</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">library</span>(broom)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">set.seed</span>(<span class="dv">27</span>)</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">set.seed</span>(<span class="dv">27</span>)</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">boots &lt;-<span class="st"> </span><span class="kw">bootstraps</span>(mtcars, <span class="dt">times =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">boots</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; # Bootstrap sampling </span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; # A tibble: 100 x 2</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;    splits          id          </span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;    &lt;list&gt;          &lt;chr&gt;       </span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt;  1 &lt;split [32/12]&gt; Bootstrap001</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;  2 &lt;split [32/15]&gt; Bootstrap002</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt;  3 &lt;split [32/10]&gt; Bootstrap003</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;  4 &lt;split [32/10]&gt; Bootstrap004</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;  5 &lt;split [32/12]&gt; Bootstrap005</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;  6 &lt;split [32/12]&gt; Bootstrap006</span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;  7 &lt;split [32/13]&gt; Bootstrap007</span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;  8 &lt;split [32/9]&gt;  Bootstrap008</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;  9 &lt;split [32/9]&gt;  Bootstrap009</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; 10 &lt;split [32/14]&gt; Bootstrap010</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; # ... with 90 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-8" data-line-number="8">boots &lt;-<span class="st"> </span><span class="kw">bootstraps</span>(mtcars, <span class="dt">times =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">boots</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; # Bootstrap sampling </span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; # A tibble: 100 x 2</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;    splits          id          </span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;    &lt;list&gt;          &lt;chr&gt;       </span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  1 &lt;split [32/12]&gt; Bootstrap001</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;  2 &lt;split [32/15]&gt; Bootstrap002</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt;  3 &lt;split [32/10]&gt; Bootstrap003</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt;  4 &lt;split [32/10]&gt; Bootstrap004</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt;  5 &lt;split [32/12]&gt; Bootstrap005</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt;  6 &lt;split [32/12]&gt; Bootstrap006</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt;  7 &lt;split [32/13]&gt; Bootstrap007</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt;  8 &lt;split [32/9]&gt;  Bootstrap008</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt;  9 &lt;split [32/9]&gt;  Bootstrap009</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; 10 &lt;split [32/14]&gt; Bootstrap010</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; # ... with 90 more rows</span></a></code></pre></div>
 <p>We create a helper function to fit an <code>nls</code> model on each bootstrap sample, and then use <code>purrr::map</code> to apply this function to all the bootstrap samples at once. Similarly, we create a column of tidy coefficient information by unnesting.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">fit_nls_on_bootstrap &lt;-<span class="st"> </span><span class="cf">function</span>(split) {</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">    <span class="kw">nls</span>(mpg <span class="op">~</span><span class="st"> </span>k <span class="op">/</span><span class="st"> </span>wt <span class="op">+</span><span class="st"> </span>b, <span class="kw">analysis</span>(split), <span class="dt">start =</span> <span class="kw">list</span>(<span class="dt">k =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">0</span>))</a>

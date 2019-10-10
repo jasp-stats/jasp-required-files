@@ -20,7 +20,7 @@ specification of the side, position, labels, and other options.
 axis(side, at = NULL, labels = TRUE, tick = TRUE, line = NA,
      pos = NA, outer = FALSE, font = NA, lty = "solid",
      lwd = 1, lwd.ticks = lwd, col = NULL, col.ticks = NULL,
-     hadj = NA, padj = NA, ...)
+     hadj = NA, padj = NA, gap.axis = NA, ...)
 </pre>
 
 
@@ -82,7 +82,7 @@ margin.</p>
 <tr valign="top"><td><code>lwd, lwd.ticks</code></td>
 <td>
 <p>line widths for the axis line and the tick
-marks. Zero or negative values will suppress the line or ticks.</p>
+marks.  Zero or negative values will suppress the line or ticks.</p>
 </td></tr>
 <tr valign="top"><td><code>col, col.ticks</code></td>
 <td>
@@ -111,11 +111,29 @@ will be recycled as necessary.
 <code>par("las")</code> determines the adjustment.  For strings plotted
 perpendicular to the axis the default is to centre the string.</p>
 </td></tr>
+<tr valign="top"><td><code>gap.axis</code></td>
+<td>
+<p>an optional (typically non-negative) numeric factor to
+be multiplied with the size of an &lsquo;m&rsquo; to determine the
+minimal gap between labels that are drawn, see &lsquo;Details&rsquo;.
+The default, <code>NA</code>, corresponds to <code>1</code> for tick labels drawn
+<em>parallel</em> to the axis and <code>0.25</code> otherwise, i.e., the
+default is equivalent to </p>
+<pre>  perpendicular &lt;- function(side, las) {
+    is.x &lt;- (side %% 2 == 1) # is horizontal x-axis
+    ( is.x &amp;&amp; (las %in% 2:3)) ||
+    (!is.x &amp;&amp; (las %in% 1:2))
+  }
+  gap.axis &lt;- if(perpendicular(side, las)) 0.25 else 1</pre>
+<p><code>gap.axis</code> may typically be relevant when <code>at = ..</code>
+tick-mark positions are specified explicitly.
+</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>other <a href="par.html">graphical parameters</a> may also be passed as
-arguments to this function, particularly, <code>cex.axis</code>,
-<code>col.axis</code> and <code>font.axis</code> for axis annotation, <code>mgp</code>
+arguments to this function, particularly, <code>cex.axis</code>, <code>col.axis</code>
+and <code>font.axis</code> for axis annotation, i.e. tick labels, <code>mgp</code>
 and <code>xaxp</code> or <code>yaxp</code> for positioning, <code>tck</code> or
 <code>tcl</code> for tick mark length and direction, <code>las</code> for
 vertical/horizontal label orientation, or <code>fg</code> instead of
@@ -154,12 +172,13 @@ were a numeric vector printed by <code><a href="../../base/html/print.default.ht
 </p>
 <p>The code tries hard not to draw overlapping tick labels, and so will
 omit labels where they would abut or overlap previously drawn labels.
-Currently, this applies only for labels written <em>parallel</em> to the
-axis direction, hence not for e.g., <code>las = 2</code>.  It is planned to
-extend this, so perpendicular labels would also not overlap.
 This can result in, for example, every other tick being labelled.
-(The ticks are drawn left to right or bottom to top, and space at
-least the size of an &lsquo;m&rsquo; is left between labels.)
+The ticks are drawn left to right or bottom to top, and space at
+least the size of an &lsquo;m&rsquo;, multiplied by <code>gap.axis</code>,
+is left between labels.  In previous <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions, this applied only
+for labels written <em>parallel</em> to the axis direction, hence not
+for e.g., <code>las = 2</code>.  Using <code>gap.axis = -1</code> restores that
+(buggy) previous behaviour (in the perpendicular case).
 </p>
 <p>If either <code>line</code> or <code>pos</code> is set, they (rather than
 <code>par("mgp")[3]</code>) determine the position of the axis line and tick
@@ -229,7 +248,25 @@ axis(3, col = "gold", lty = 2, lwd = 0.5)
 # one way to have a custom x axis
 plot(1:10, xaxt = "n")
 axis(1, xaxp = c(2, 9, 7))
+
+## Changing default gap between labels:
+plot(0:100, type="n", axes=FALSE, ann=FALSE)
+title(quote("axis(1, .., gap.axis = f)," ~~ f &gt;= 0))
+axis(2, at = 5*(0:20), las = 1, gap.axis = 1/4)
+gaps &lt;- c(4, 2, 1, 1/2, 1/4, 0.1, 0)
+chG &lt;- paste0(ifelse(gaps == 1, "default:  ", ""),
+              "gap.axis=", formatC(gaps))
+jj &lt;- seq_along(gaps)
+linG &lt;- -2.5*(jj-1)
+for(j in jj) {
+    isD &lt;- gaps[j] == 1 # is default
+    axis (1, at=5*(0:20), gap.axis = gaps[j], padj=-1, line = linG[j],
+          col.axis = if(isD) "forest green" else 1, font.axis= 1+isD)
+}
+mtext(chG, side=1, padj=-1, line = linG -1/2, cex=3/4,
+      col = ifelse(gaps == 1, "forest green", "blue3"))
+## now shrink the window (in x- and y-direction) and observe the axis labels drawn
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

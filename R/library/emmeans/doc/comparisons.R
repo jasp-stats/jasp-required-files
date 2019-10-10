@@ -11,7 +11,15 @@ pairs(pigs.emm.s)
 plot(pigs.emm.s, comparisons = TRUE)
 
 ## ------------------------------------------------------------------------
-CLD(pigs.emm.s)
+pwpp(pigs.emm.s)
+
+## ---- fig.width = 9------------------------------------------------------
+pigs.lmint <- lm(log(conc) ~ source * factor(percent), data = pigs)
+pigs.cells <- emmeans(pigs.lmint, ~ source * percent)
+pwpp(pigs.cells, type = "response")
+
+## ---- fig.width = 6------------------------------------------------------
+pwpp(pigs.cells, by = "source", type = "response")
 
 ## ------------------------------------------------------------------------
 coef(pairs(pigs.emm.s))

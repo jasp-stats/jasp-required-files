@@ -85,17 +85,17 @@ The metric system of identification of criminals, as used in in Great
 Britain and Ireland.
 <em>The Journal of the Anthropological Institute of Great Britain
 and Ireland</em>, <b>30</b>, 161&ndash;198.
-doi: <a href="http://doi.org/10.2307/2842627">10.2307/2842627</a>.
+doi: <a href="https://doi.org/10.2307/2842627">10.2307/2842627</a>.
 </p>
 <p>MacDonell, W.R. (1902).
 On criminal anthropometry and the identification of criminals.
 <em>Biometrika</em>, <b>1</b>(2), 177&ndash;227.
-doi: <a href="http://doi.org/10.2307/2331487">10.2307/2331487</a>.
+doi: <a href="https://doi.org/10.2307/2331487">10.2307/2331487</a>.
 </p>
 <p>Student (1908).
 The probable error of a mean.
 <em>Biometrika</em>, <b>6</b>, 1&ndash;25.
-doi: <a href="http://doi.org/10.2307/2331554">10.2307/2331554</a>.
+doi: <a href="https://doi.org/10.2307/2331554">10.2307/2331554</a>.
 </p>
 
 
@@ -141,7 +141,7 @@ zobs &lt;- (h.mean - mean(d.hei[,"height"]))/h.sd
 
 # 6) Replace infinite values by +/- 6 as in Student's paper:
 
-zobs[infZ &lt;- is.infinite(zobs)] # 3 of them
+zobs[infZ &lt;- is.infinite(zobs)] # none of them 
 zobs[infZ] &lt;- 6 * sign(zobs[infZ])
 
 # 7) Plot the distribution:
@@ -152,5 +152,5 @@ hist(x = zobs, probability = TRUE, xlab = "Student's z",
      main = "Distribution of Student's z score  for 'crimtab' data")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>datasets</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>datasets</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

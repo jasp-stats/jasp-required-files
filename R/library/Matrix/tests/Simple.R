@@ -31,18 +31,25 @@ if(interactive()) {
                                         #   ^^^^^^ to show Matrix.msg()s
 
 ### Matrix() ''smartness''
-(d4 <- d40 <- Matrix(diag(4)))
+(d40 <- Matrix( diag(4)))
 (z4 <- Matrix(0*diag(4)))
 (o4 <- Matrix(1+diag(4)))
 (tr <- Matrix(cbind(1,0:1)))
 (M4 <- Matrix(m4 <- cbind(0,rbind(6*diag(3),0))))
 dM4 <- Matrix(M4, sparse = FALSE)
 d4. <- diag(4); dimnames(d4.) <- dns <- rep(list(LETTERS[1:4]), 2)
+d4a <- diag(4); dimnames(d4a) <- dna <- list(LETTERS[1:4], letters[1:4])# "a"symmetric
+m1a <- matrix(0, dimnames=list("A","b"))# "a"symmetric
 d4di<- as(d4., "diagonalMatrix")
+d4da<- as(d4a, "diagonalMatrix")
 d4d <- as(d4., "denseMatrix")
+d4aS <- Matrix(d4a, sparse=TRUE, doDiag=FALSE)
+d1aS <- Matrix(m1a, sparse=TRUE, doDiag=FALSE)
 stopifnot(identical(d4di@x, numeric()), # was "named" unnecessarily
-          identical(dimnames(d4 <- Matrix(d4.)), dns), identical(unname(d4), d40),
+          identical(dimnames(d4 <- Matrix(d4.)), dns),
+          identical4(d40, Matrix(diag(4)), unname(d4), unname(d4da)),
           identical3(d4, as(d4., "Matrix"), as(d4., "diagonalMatrix")),
+          is(d4aS, "dtCMatrix"), # not "dsC*", as asymmetric dimnames
           is(d4d, "denseMatrix"))
 
 class(mN <-  Matrix(NA, 3,4)) # NA *is* logical
@@ -69,6 +76,7 @@ stopifnot(all(is.na(sL@x)), ## not yet:  all(is.na(sL)),
           validObject(Matrix(c(NA,0), 4, 4)))
 stopifnotValid(Matrix(c(NA,0,0,0), 4, 4), "sparseMatrix")
 I <- i1 <- I1 <- Diagonal(1)
+## TODO? stopifnot(identical(I, Matrix(1, sparse=TRUE))) # doDiag=TRUE default
 I1[1,1] <- i1[1, ] <- I [ ,1] <- NA
 stopifnot(identical3(I,i1,I1))
 image(d4) # gave infinite recursion
@@ -330,6 +338,7 @@ stopifnot(grep("too large", e1) == 1,
 stopifnot(suppressWarnings(any(Lrg)))# (double -> logical  warning)
 rm(e2)# too large...
 
+RNGversion("3.6.0")# future proof
 if(doExtras && is.finite(memGB) && memGB > 24) # need around .. GB
 {
     cat("computing SM .. \n")
@@ -733,9 +742,18 @@ stopifnot(## something like the equivalent of  all(I. == Diagonal(3125)) :
 
 ## printSpMatrix() ;  "suppressing (columns | rows) .." {and do it correctly!}
 IT3
-op <- options(width = 70, max.print = 1000)
+op0 <- options(width = 70, max.print = 1000)
 T125[-(1:50),] ## suppression ... is it correctly done?
 
+## Still buggy -- FIXME: see ../TODO --- even if we'd require max.print >= 5 or so
+for(mm in 1:21) {
+    options(max.print=mm)
+    cat("----------\n\nmax.print=",mm,":\n", sep="")
+    cat("\n>> U:   ") ; show(U)
+    cat("\n>> slp: ") ; show(slp)
+}
+
+options(op0)# revert to max.print = 1000
 
 ###-- row- and column operations  {was ./rowcolOps.R }
 

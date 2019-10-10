@@ -8,6 +8,7 @@ MIcombine	MIcombine
 MIcombine.default	MIcombine
 MIcombine.imputationResultList	MIcombine
 MIextract	MIextract
+pisamaths	pisamaths
 print.imputationList	imputationList
 print.MIresult	MIcombine
 rbind.imputationList	imputationList
@@ -16,3 +17,5 @@ summary.MIresult	MIcombine
 update.imputationList	imputationList
 vcov.MIresult	MIcombine
 with.imputationList	with.imputationList
+withPV	PV
+withPV.default	PV

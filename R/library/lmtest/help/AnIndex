@@ -13,9 +13,11 @@ coeftest.default	coeftest
 coeftest.glm	coeftest
 coeftest.mlm	coeftest
 coeftest.survreg	coeftest
+confint.coeftest	coeftest
 coxtest	coxtest
 currencysubstitution	currencysubstitution
 df.residual.bgtest	bgtest
+df.residual.coeftest	coeftest
 dwtest	dwtest
 encomptest	encomptest
 ftemp	ftemp

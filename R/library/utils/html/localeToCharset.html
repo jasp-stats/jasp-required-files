@@ -37,9 +37,22 @@ localeToCharset(locale = Sys.getlocale("LC_CTYPE"))
 <h3>Details</h3>
 
 <p>The operation differs by OS.
-A Windows locale is specified like <code>"English_United Kingdom.1252"</code>.
+</p>
+
+<dl>
+<dt>On Windows,</dt><dd><p>a locale is specified like <code>"English_United Kingdom.1252"</code>.
 The final component gives the codepage, and this defines the encoding.
 </p>
+</dd>
+<dt>On Unix-alikes:</dt><dd>
+<p>Locale names are normally like <code>es_MX.iso88591</code>.  If final
+component indicates an encoding and it is not <code>utf8</code> we just need
+to look up the equivalent encoding name.  Otherwise, the language
+(here <code>es</code>) is used to choose a primary or fallback encoding.
+</p>
+</dd>
+</dl>
+
 <p>In the <code>C</code> locale the answer will be <code>"ASCII"</code>.
 </p>
 
@@ -70,5 +83,5 @@ to work with <code>glibc</code> but maybe not with commercial Unixen.
 localeToCharset()
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -2,6 +2,7 @@ indentPrint	indentPrint
 plot.qv	plot.qv
 print.qv	qvcalc
 qvcalc	qvcalc
+qvcalc.coxph	qvcalc
 qvcalc.default	qvcalc
 qvcalc.itempar	qvcalc
 qvcalc.lm	qvcalc

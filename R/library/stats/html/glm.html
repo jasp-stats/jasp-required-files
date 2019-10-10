@@ -285,10 +285,10 @@ saturated model has deviance zero.</p>
 <td>
 <p>A version of Akaike's <em>An Information Criterion</em>,
 minus twice the maximized log-likelihood plus twice the number of
-parameters, computed by the <code>aic</code> component of the family.
+parameters, computed via the <code>aic</code> component of the family.
 For binomial and Poison families the dispersion is
 fixed at one and the number of parameters is the number of
-coefficients. For gaussian, Gamma and inverse gaussian families the
+coefficients.  For gaussian, Gamma and inverse gaussian families the
 dispersion is estimated from the residual deviance, and the number
 of parameters is the number of coefficients plus one.  For a
 gaussian family the MLE of the dispersion is used so this is a valid
@@ -491,6 +491,18 @@ print(d.AD &lt;- data.frame(treatment, outcome, counts))
 glm.D93 &lt;- glm(counts ~ outcome + treatment, family = poisson())
 anova(glm.D93)
 summary(glm.D93)
+## Computing AIC [in many ways]:
+(A0 &lt;- AIC(glm.D93))
+(ll &lt;- logLik(glm.D93))
+A1 &lt;- -2*c(ll) + 2*attr(ll, "df")
+A2 &lt;- glm.D93$family$aic(counts, mu=fitted(glm.D93), wt=1) +
+        2 * length(coef(glm.D93))
+stopifnot(exprs = {
+  all.equal(A0, A1)
+  all.equal(A1, A2)
+  all.equal(A1, glm.D93$aic)
+})
+
 
 ## an example with offsets from Venables &amp; Ripley (2002, p.189)
 utils::data(anorexia, package = "MASS")
@@ -518,5 +530,5 @@ demo(glm.vr)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

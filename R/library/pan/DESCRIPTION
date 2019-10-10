@@ -18,5 +18,5 @@ Packaged: 2018-06-29 10:01:17 UTC; jhz22
 License_restricts_use: no
 Repository: CRAN
 Date/Publication: 2018-06-29 14:12:56 UTC
-Built: R 3.5.2; x86_64-w64-mingw32; 2019-02-26 00:36:30 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 16:31:07 UTC; windows
 Archs: i386, x64

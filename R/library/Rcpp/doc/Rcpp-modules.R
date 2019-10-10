@@ -112,11 +112,23 @@
 #  b$stats()
 
 ## ---- eval=FALSE---------------------------------------------------------
+#  dv1 <- new(Base, "d1")
+#  dv1$name() # returns "Derived1"
+#  dv2 <- new(Base, "d2")
+#  dv2$name() # returns "Derived2"
+
+## ---- eval=FALSE---------------------------------------------------------
 #  setMethod("show", yada$World , function(object) {
 #      msg <- paste("World object with message : ",
 #                   object$greet())
 #      writeLines(msg)
 #  } )
+
+## ---- eval=FALSE---------------------------------------------------------
+#  foo <- new(Foo)
+#  bar <- new(Bar)
+#  bar$handleFoo(foo)
+#  #> Got a Foo!
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  # for code compiled on the fly using

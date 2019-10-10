@@ -81,10 +81,10 @@ London: Chapman and Hall.
 
 <pre>
 fit &lt;- rpart(skips ~ Opening + Solder + Mask + PadType + Panel,
-             data = solder, method = "anova")
+             data = solder.balance, method = "anova")
 summary(residuals(fit))
 plot(predict(fit),residuals(fit))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>rpart</em> version 4.1-13 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>rpart</em> version 4.1-15 <a href="00Index.html">Index</a>]</div>
 </body></html>

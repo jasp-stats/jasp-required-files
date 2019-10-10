@@ -53,12 +53,12 @@ emmeans(warp.glm, ~ tension | wool, type = "response")
 emmeans(warp.glm, ~ tension | wool, type = "unlink")
 
 ## ----eval = FALSE--------------------------------------------------------
-#  tran <- make.tran("genlog", 1/2)
+#  tran <- make.tran("asin.sqrt", 100)
 #  my.model <- with(tran,
-#      lmer(linkfun(yield) ~ treatment + (1|Block), data = mydata))
+#      lmer(linkfun(percent) ~ treatment + (1|Block), data = mydata))
 
 ## ----eval = FALSE--------------------------------------------------------
-#  mydata <- transform(mydata, logy.5 = log(yield + .5))
+#  mydata <- transform(mydata, logy.5 = log(yield + 0.5))
 #  my.model <- lmer(logy.5 ~ treatment + (1|Block), data = mydata)
 
 ## ----eval = FALSE--------------------------------------------------------
@@ -72,4 +72,27 @@ pigroot.lm <- lm(sqrt(conc) ~ source + factor(percent), data = pigs)
 piglog.emm.s <- regrid(emmeans(pigroot.lm, "source"), transform = "log")
 confint(piglog.emm.s, type = "response")
 pairs(piglog.emm.s, type = "response")
+
+## ---- message = FALSE----------------------------------------------------
+require(lme4)
+cbpp <- transform(cbpp, unit = 1:nrow(cbpp))
+cbpp.glmer <- glmer(cbind(incidence, size - incidence) ~ period + (1 | herd) +  (1|unit),
+                    family = binomial, data = cbpp)
+
+emm <- emmeans(cbpp.glmer, "period")
+summary(emm, type = "response")
+
+## ------------------------------------------------------------------------
+lme4::VarCorr(cbpp.glmer)
+
+## ------------------------------------------------------------------------
+total.SD = sqrt(0.89107^2 + 0.18396^2)
+
+## ------------------------------------------------------------------------
+summary(emm, type = "response", bias.adjust = TRUE, sigma = total.SD)
+
+## ------------------------------------------------------------------------
+cases <- with(cbpp, tapply(incidence, period, sum))
+trials <- with(cbpp, tapply(size, period, sum))
+cases / trials
 

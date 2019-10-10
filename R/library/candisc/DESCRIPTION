@@ -29,4 +29,4 @@ VignetteBuilder: knitr
 NeedsCompilation: no
 Repository: CRAN
 Date/Publication: 2017-09-19 17:18:42 UTC
-Built: R 3.5.2; ; 2019-02-26 07:44:41 UTC; windows
+Built: R 3.6.1; ; 2019-10-08 02:11:41 UTC; windows

@@ -27,5 +27,5 @@ NeedsCompilation: yes
 Packaged: 2019-01-25 22:28:42 UTC; harrelfe
 Repository: CRAN
 Date/Publication: 2019-01-26 23:20:03 UTC
-Built: R 3.5.2; x86_64-w64-mingw32; 2019-02-26 06:58:07 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-08 00:55:19 UTC; windows
 Archs: i386, x64

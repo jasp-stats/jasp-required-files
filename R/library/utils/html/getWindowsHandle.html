@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Get the Windows handle of a window or of the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> process.
+<p>Get the Windows handle of a window or of the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> process in MS Windows.
 </p>
 
 
@@ -25,8 +25,8 @@ getWindowsHandle(which = "Console")
 <table summary="R argblock">
 <tr valign="top"><td><code>which</code></td>
 <td>
-<p>A string (see below), or the number of a
-graphics device window</p>
+<p>a string (see below), or the number of a graphics device
+window (which must a <code><a href="../../grDevices/html/windows.html">windows</a></code> one).</p>
 </td></tr>
 </table>
 
@@ -91,8 +91,9 @@ through this function.
 <h3>Examples</h3>
 
 <pre>
-getWindowsHandle()
+if(.Platform$OS.type == "windows")
+  print( getWindowsHandle() )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

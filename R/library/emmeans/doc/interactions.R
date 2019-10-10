@@ -27,7 +27,7 @@ contrast(noise.emm, "consec", simple = "each", combine = TRUE, adjust = "mvt")
 contrast(emm_s.t[[1]], "poly")   ## 'by = "type"' already in previous result 
 
 ## ------------------------------------------------------------------------
-IC_st <- contrast(emm_s.t[[1]], interaction = c("poly", "consec"))
+IC_st <- contrast(emm_s.t[[1]], interaction = c("poly", "consec"), by = NULL)
 IC_st
 
 ## ------------------------------------------------------------------------

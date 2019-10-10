@@ -1,12 +1,18 @@
 huge                    High-dimensional undirected graph estimation
 huge-package            High-Dimensional Undirected Graph Estimation
+huge.ct                 Graph estimation via correlation thresholding
+                        (ct)
 huge.generator          Data generator
+huge.glasso             The graphical lasso (glasso) using sparse
+                        matrix output
 huge.inference          Graph inference
+huge.mb                 Meinshausen & Buhlmann graph estimation
 huge.npn                Nonparanormal(npn) transformation
 huge.plot               Graph visualization
 huge.roc                Draw ROC Curve for a graph path
 huge.select             Model selection for high-dimensional undirected
                         graph estimation
+huge.tiger              Tuning-insensitive graph estimation
 plot.huge               Plot function for S3 class "huge"
 plot.roc                Plot function for S3 class "roc"
 plot.select             Plot function for S3 class "select"

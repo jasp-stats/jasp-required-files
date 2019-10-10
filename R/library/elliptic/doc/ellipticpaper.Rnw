@@ -594,7 +594,7 @@ null <- dev.off()
     \caption{Visualization of~$f=\sigma(z,1,1+2i)$ using
     \code{view()}; colour indicates~${\rm Arg}(f)$.  Thus points at
     which~$f(z)$ is on the negative real axis, that is
-    $\{z:f(z)\in\mathbbm{R}^-\}$, are visible as discontinuities of
+    $\{z\colon f(z)\in\mathbbm{R}^-\}$, are visible as discontinuities of
     (colourimetric) value.  These discontinuities are semi-infinite;
     note that the zeros of~$f$ occur, \label{sigma.green} at the
     (finite) end of each line, on a regular lattice.  As~$|z|$
@@ -759,7 +759,7 @@ work with the algebraically equivalent form~$\log\left(\prod
 Figure~\ref{upper.halfplane.flow} shows two sources and two sinks, all
 of equal strength.  Because the flowfield is symmetric with respect to
 the real axis, there is no flux across it; we may therefore ignore the
-flow in the lower half plane (ie~$\{z:\rm{Im}(z)<0\}$) and consider
+flow in the lower half plane (ie~$\{z\colon \rm{Im}(z)<0\}$) and consider
 the flow to be bounded below by the real axis.  This is known as {\em
 the method of images}~\citep{milne1949}.
 
@@ -977,6 +977,7 @@ n.field.obs <- 31
 # observations, which here means the observations of fluid speed when
 # the sink is at a known, specified, position.
 
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(0)
 
 latin.hypercube <- function (n, d){

@@ -3,6 +3,41 @@ title: "News"
 output: github_document
 ---
 
+# mice 3.6.0
+
+* Copy `toenail` data from orphaned `DPpackage` package
+* Remove `DPpackage`  from `Suggests` field in `DESCRIPTION` 
+* Adds support for rotated names in `md.pattern()` (#170, #177)
+
+# mice 3.5.0
+
+* This version has some error fixes
+* Fixes a bug in the sampler that ignored imputed values in variables outside the active block (#175, @alexanderrobitzsch)
+* Adds a note to the documenation of `as.mids`() (#173)
+* Removes a superfluous warning from process_mipo() (#92)
+* Fixes an error in the degrees of freedom of the P-value calculation (#171)
+
+# mice 3.4.0 
+
+* Add a hex sticker to the mice package. Designed by Jaden M. Walters.
+* Specify the R3.5.0 random generator in order to pass CRAN tests
+* Remove test-fix.coef.R from tests
+* Adds a rotate.names argument to md.pattern() (#154, #160)
+* Fix to solve the name-matching problem (#156, #149, #147)
+* Fix that removes the pre-check for existence of `mice.impute.xxx()` so that `mice::mice()` works as expected (#55)
+* Solves a bug that crashed `mids2spss()`, thanks Edgar Schoreit (#149)
+* Solves a problem in the routing logic (#149) causing that passive 
+imputation was not done when no predictors were specified. No passive
+imputation correctly will ignore any the specification of 
+`predictorMatrix`.
+* Implements an alternative solution for #93 and #96. Instead of skipping 
+imputation of variables without predictors, `mice 3.3.1` will impute 
+those variables using the intercept only
+* Adds a routine contributed by Simon Grund that checks for deprecated 
+arguments #137
+* Improves the `nelsonaalen()` function for data where variables 
+`time` or `status` have already been defined (#140), thanks matthieu-faron
+
 # mice 3.3.0
 
 * Solves bug in passive imputation (#130). *Warning: This bug may 

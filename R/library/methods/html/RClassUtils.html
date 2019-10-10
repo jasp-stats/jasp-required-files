@@ -41,11 +41,10 @@ isVirtualClass(Class, where)
 newBasic(Class, ...)
 
 makeExtends(Class, to, coerce, test, replace, by, package, slots,
-                 classDef1, classDef2)
+            classDef1, classDef2)
 
 reconcilePropertiesAndPrototype(name, properties, prototype,
-       superClasses, where)
-
+                                superClasses, where)
 tryNew(Class, where)
 
 empty.dump()
@@ -54,9 +53,9 @@ showClass(Class, complete=TRUE, propertiesAreCalled="Slots")
 
 showExtends(ext, printTo = stdout())
 
-possibleExtends(class1, class2, ClassDef1 = getClassDef(class1),
-                 ClassDef2 = getClassDef(class2, where =
-                 .classEnv(ClassDef1)))
+possibleExtends(class1, class2,
+                ClassDef1 = getClassDef(class1),
+                ClassDef2 = getClassDef(class2, where = .classEnv(ClassDef1)))
 
 completeExtends(ClassDef, class2, extensionDef, where)
 
@@ -77,9 +76,8 @@ isClassDef(object)
 
 validSlotNames(names)
 
-getDataPart(object)
+getDataPart(object, NULL.for.none = FALSE)
 setDataPart(object, value, check = TRUE)
-
 </pre>
 
 
@@ -382,5 +380,5 @@ stopifnot(TRUE
 if(get4) detach("package:stats4")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>methods</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>methods</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -6,6 +6,8 @@ DMconv                  Conversion to diabetes
 DMepi                   Epidemiological rates for diabetes in Denmark
                         1996-2015
 DMlate                  The Danish National Diabetes Register.
+Epi                     Epi: Functions for manipulation and statistical
+                        analysis of epidemiological data
 Icens                   Fits a regression model to interval censored
                         data.
 LCa.fit                 Fit Lee-Carter-type models for rates to
@@ -46,12 +48,10 @@ apc.frame               Produce an empty frame for display of
                         Age-Period-Cohort-models.
 apc.lines               Plot APC-estimates in an APC-frame.
 bdendo                  A case-control study of endometrial cancer
-bdendo11                A 1:1 subset of the endometrial cancer
-                        case-control study
 births                  Births in a London Hospital
 blcaIT                  Bladder cancer mortality in Italian males
-bootLexis               Create a bootstrap sample of persons ('lex.id')
-                        from a Lexis object
+bootLexis               Create a bootstrap sample of persons (as
+                        identified by 'lex.id') from a Lexis object
 boxes.MS                Draw boxes and arrows for illustration of
                         multistate models.
 brv                     Bereavement in an elderly cohort

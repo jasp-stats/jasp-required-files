@@ -21,7 +21,9 @@ in the active graphics window.
 plot(x, y = NULL, type = "p",  xlim = NULL, ylim = NULL,
      log = "", main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
      ann = par("ann"), axes = TRUE, frame.plot = axes,
-     panel.first = NULL, panel.last = NULL, asp = NA, ...)
+     panel.first = NULL, panel.last = NULL, asp = NA,
+     xgap.axis = NA, ygap.axis = NA,
+     ...)
 </pre>
 
 
@@ -115,6 +117,12 @@ comments about <code>panel.first</code>.</p>
 <tr valign="top"><td><code>asp</code></td>
 <td>
 <p>the <i>y/x</i> aspect ratio, see <code><a href="plot.window.html">plot.window</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xgap.axis, ygap.axis</code></td>
+<td>
+<p>the <i>x/y</i> axis gap factors, passed as
+<code>gap.axis</code> to the two <code><a href="axis.html">axis</a>()</code> calls (when
+<code>axes</code> is true, as per default).</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -238,5 +246,5 @@ axis(2, at = at.y, col.axis = "red", las = 1,
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,6 +1,6 @@
 Encoding: UTF-8
 Package: OpenMx
-Date: 2019-02-08
+Date: 2019-09-21
 Title: Extended Structural Equation Modelling
 Authors@R: c(person(c("Steven", "M."), "Boker", role="aut"),
     person(c("Michael", "C."), "Neale", role="aut"), person(c("Hermine", "H."),
@@ -27,31 +27,30 @@ Authors@R: c(person(c("Steven", "M."), "Boker", role="aut"),
     person("Manjunath B G", role="cph"),
     person("The Regents of the University of California", role="cph"),
     person("Lester", "Ingber", role="cph"),
-    person("Wong", "Shao Voon", role="cph"))
+    person("Wong", "Shao Voon", role="cph"),
+    person("Juan", "Palacios", role="cph"),
+    person("Jiang", "Yang", role="cph"))
 URL: http://openmx.ssri.psu.edu, https://github.com/OpenMx/OpenMx
 BugReports: http://openmx.ssri.psu.edu/forums
-Description: Facilitates treatment of statistical model specifications
-    as things that can be generated and manipulated programmatically.
-    Structural equation models may be specified with reticular action model matrices or paths,
-    linear structural relations matrices or paths, or
-    directly in matrix algebra.
-    Fit functions include full information maximum likelihood,
-    maximum likelihood, and weighted least squares.
+Description: Create structural equation models that can be manipulated programmatically.
+    Models may be specified with matrices or paths (LISREL or RAM)
     Example models include confirmatory factor, multiple group, mixture
     distribution, categorical threshold, modern test theory, differential
-    equations, state space, and many others.  MacOS users can download the most up-to-date 
-    package binaries from <http://openmx.ssri.psu.edu>.
-    See Neale, Hunter, Pritikin, Zahery, Brick,
+    Fit functions include full information maximum likelihood, maximum likelihood, and weighted least squares.
+    equations, state space, and many others.
+	Support and advanced package binaries available at <http://openmx.ssri.psu.edu>.
+    The software is described in Neale, Hunter, Pritikin, Zahery, Brick,
     Kirkpatrick, Estabrook, Bates, Maes, & Boker (2016) <doi:10.1007/s11336-014-9435-8>.
 SystemRequirements: GNU make
 ByteCompile: yes
+Language: en-US
 License: Apache License (== 2.0)
-LinkingTo: Rcpp, RcppEigen, StanHeaders (>= 2.10.0.2), BH (>= 1.60),
-        rpf (>= 0.45)
-Imports: Rcpp, digest, MASS, methods, Matrix, parallel
-Depends: R (>= 3.1.0)
+LinkingTo: Rcpp, RcppEigen, StanHeaders (>= 2.10.0.2), BH (>=
+        1.69.0-1), rpf (>= 0.45)
+Imports: digest, MASS, Matrix, methods, Rcpp, parallel
+Depends: R (>= 3.5.0)
 Suggests: mvtnorm, numDeriv, roxygen2 (>= 6.1), Rmpi, rpf (>= 0.45),
-        snowfall, lme4
+        snowfall, lme4, covr, testthat
 LazyLoad: yes
 LazyData: yes
 Collate: '0ClassUnion.R' 'cache.R' 'MxBaseNamed.R' 'MxData.R'
@@ -62,10 +61,10 @@ Collate: '0ClassUnion.R' 'cache.R' 'MxBaseNamed.R' 'MxData.R'
         'LowerMatrix.R' 'SdiagMatrix.R' 'StandMatrix.R' 'SymmMatrix.R'
         'UnitMatrix.R' 'ZeroMatrix.R' 'MxMatrixFunctions.R'
         'MxAlgebra.R' 'MxCycleDetection.R' 'MxDependencies.R'
-        'MxAlgebraConvert.R' 'MxAlgebraTransform.R' 'MxSquareBracket.R'
-        'MxEval.R' 'MxRename.R' 'MxPath.R' 'MxObjectiveMetaData.R'
-        'MxRAMMetaData.R' 'MxExpectation.R' 'MxExpectationNormal.R'
-        'MxExpectationRAM.R' 'MxExpectationLISREL.R' 'MxFitFunction.R'
+        'MxAlgebraConvert.R' 'MxSquareBracket.R' 'MxEval.R'
+        'MxRename.R' 'MxPath.R' 'MxObjectiveMetaData.R'
+        'MxExpectation.R' 'MxExpectationNormal.R' 'MxExpectationRAM.R'
+        'MxExpectationLISREL.R' 'MxFitFunction.R'
         'MxFitFunctionAlgebra.R' 'MxFitFunctionML.R'
         'MxFitFunctionMultigroup.R' 'MxFitFunctionRow.R'
         'MxFitFunctionWLS.R' 'MxRAMObjective.R' 'MxLISRELObjective.R'
@@ -78,7 +77,7 @@ Collate: '0ClassUnion.R' 'cache.R' 'MxBaseNamed.R' 'MxData.R'
         'MxRunHelperFunctions.R' 'MxSummary.R' 'MxCompare.R'
         'MxSwift.R' 'MxOptions.R' 'MxThreshold.R' 'OriginalMx.R'
         'MxGraph.R' 'MxGraphviz.R' 'MxDeparse.R' 'MxCommunication.R'
-        'MxRestore.R' 'MxVersion.R' 'MxPPML.R' 'MxRAMtoML.R' 'MxDiff.R'
+        'MxRestore.R' 'MxVersion.R' 'MxPPML.R' 'MxRAMtoML.R'
         'MxErrorHandling.R' 'MxDetectCores.R' 'MxSaturatedModel.R'
         'omxBrownie.R' 'omxConstrainThresholds.R' 'omxGetNPSOL.R'
         'MxFitFunctionR.R' 'MxRObjective.R'
@@ -87,12 +86,12 @@ Collate: '0ClassUnion.R' 'cache.R' 'MxBaseNamed.R' 'MxData.R'
         'MxFitFunctionGREML.R' 'MxExpectationGREML.R' 'MxMI.R'
         'MxFactorScores.R' 'MxRobustSE.R' 'MxAvailableOptimizers.R'
         'MxTryHard.R' 'MxSE.R' 'MxAutoStart.R' 'MxRetro.R' 'MxMMI.R'
-        'zzz.R'
+        'omxReadGRMBin.R' 'zzz.R'
 Biarch: true
-Version: 2.12.2
+Version: 2.14.11
 RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-02-08 14:27:24 UTC; joshua
+Packaged: 2019-09-21 15:37:38 UTC; joshua
 Author: Steven M. Boker [aut],
   Michael C. Neale [aut],
   Hermine H. Maes [aut],
@@ -124,9 +123,11 @@ Author: Steven M. Boker [aut],
   Manjunath B G [cph],
   The Regents of the University of California [cph],
   Lester Ingber [cph],
-  Wong Shao Voon [cph]
+  Wong Shao Voon [cph],
+  Juan Palacios [cph],
+  Jiang Yang [cph]
 Maintainer: Joshua N. Pritikin <jpritikin@pobox.com>
 Repository: CRAN
-Date/Publication: 2019-02-08 16:13:51 UTC
-Built: R 3.5.3; x86_64-w64-mingw32; 2019-04-11 02:48:03 UTC; windows
+Date/Publication: 2019-09-22 17:30:07 UTC
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 21:49:58 UTC; windows
 Archs: i386, x64

@@ -19,7 +19,7 @@ of a package.
 
 <pre>
 buildVignettes(package, dir, lib.loc = NULL, quiet = TRUE,
-               clean = TRUE, tangle = FALSE)
+               clean = TRUE, tangle = FALSE, ser_elibs = NULL)
 
 pkgVignettes(package, dir, subdirs = NULL, lib.loc = NULL,
 	     output = FALSE, source = FALSE, check = FALSE)
@@ -63,6 +63,10 @@ were copies there before.</p>
 <td>
 <p>logical.  Do tangling as well as weaving.</p>
 </td></tr>
+<tr valign="top"><td><code>ser_elibs</code></td>
+<td>
+<p>For use from <code>R CMD check</code>.</p>
+</td></tr>
 <tr valign="top"><td><code>subdirs</code></td>
 <td>
 <p>a character vector of subdirectories of <code>dir</code> in which
@@ -94,7 +98,7 @@ filename matching a pattern defined by one of the vignette engines.</p>
 <p><code>buildVignettes</code> is used by <code>R CMD build</code> and <code>R CMD
     check</code> to (re-)build vignette PDFs from their sources. 
 </p>
-<p>As of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.4.1, both of these functions ignore files that are listed in
+<p>As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.4.1, both of these functions ignore files that are listed in
 the &lsquo;<span class="file">.Rbuildignore</span>&rsquo; file in <code>dir</code>.
 </p>
 
@@ -117,5 +121,5 @@ gVigns &lt;- pkgVignettes("grid")
 str(gVigns)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -72,10 +72,11 @@ is to take place.</p>
 </td></tr>
 <tr valign="top"><td><code>ties</code></td>
 <td>
-<p>handling of tied <code>x</code> values.  Either a function
-with a single vector argument returning a single number result or
-the string <code>"ordered"</code>; note that the latter is the fastest for
-large <code>length(x)</code>.</p>
+<p>handling of tied <code>x</code> values.  The string
+<code>"ordered"</code> or a function (or the name of a function) taking a
+single vector argument and returning a single number or a length-2
+<code><a href="../../base/html/list.html">list</a></code> of both, see <code><a href="approxfun.html">approx</a></code> and its
+&lsquo;Details&rsquo; section, and the example below.</p>
 </td></tr>
 </table>
 
@@ -150,7 +151,7 @@ Wadsworth &amp; Brooks/Cole.
 Positivity-, monotonicity-, or convexity-preserving cubic and quintic
 Hermite interpolation.
 <em>Mathematics of Computation</em>, <b>52</b>, 471&ndash;494.
-doi: <a href="http://doi.org/10.1090/S0025-5718-1989-0962209-1">10.1090/S0025-5718-1989-0962209-1</a>.
+doi: <a href="https://doi.org/10.1090/S0025-5718-1989-0962209-1">10.1090/S0025-5718-1989-0962209-1</a>.
 </p>
 <p>Forsythe, G. E., Malcolm, M. A. and Moler, C. B. (1977).
 <em>Computer Methods for Mathematical Computations</em>.
@@ -159,13 +160,13 @@ Wiley.
 <p>Fritsch, F. N. and Carlson, R. E. (1980).
 Monotone piecewise cubic interpolation.
 <em>SIAM Journal on Numerical Analysis</em>, <b>17</b>, 238&ndash;246.
-doi: <a href="http://doi.org/10.1137/0717021">10.1137/0717021</a>.
+doi: <a href="https://doi.org/10.1137/0717021">10.1137/0717021</a>.
 </p>
 <p>Hyman, J. M. (1983).
 Accurate monotonicity preserving cubic interpolation.
 <em>SIAM Journal on Scientific and Statistical Computing</em>, <b>4</b>,
 645&ndash;654.
-doi: <a href="http://doi.org/10.1137/0904045">10.1137/0904045</a>.
+doi: <a href="https://doi.org/10.1137/0904045">10.1137/0904045</a>.
 </p>
 
 
@@ -233,6 +234,16 @@ ry &lt;- matrix(unlist(tapply(y, match(x, mx), range, simplify = FALSE)),
              ncol = 2, byrow = TRUE)
 segments(mx, ry[, 1], mx, ry[, 2], col = "blue", lwd = 2)
 
+## Another example with sorted x, but ties:
+set.seed(8); x &lt;- sort(round(rnorm(30), 1)); y &lt;- round(sin(pi * x) + rnorm(30)/10, 3)
+summary(diff(x) == 0) # -&gt; 7 duplicated x-values
+str(spline(x, y, n = 201, ties="ordered")) # all '$y' entries are NaN
+## The default (ties=mean) is ok, but most efficient to use instead is
+sxyo &lt;- spline(x, y, n = 201, ties= list("ordered", mean))
+sapply(sxyo, summary)# all fine now
+plot(x, y, main = "spline(x,y, ties=list(\"ordered\", mean)  for when x has ties")
+lines(sxyo, col="blue")
+
 ## An example of monotone interpolation
 n &lt;- 20
 set.seed(11)
@@ -277,5 +288,5 @@ legend("topright",
 ## here, and both are 'much worse' than the regular fmm spline.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

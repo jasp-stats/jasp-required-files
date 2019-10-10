@@ -48,6 +48,6 @@ Author: R Core Team [aut, cph, cre],
   Free Software Foundation, Inc. [cph]
 Maintainer: R Core Team <R-core@R-project.org>
 Repository: CRAN
-Date/Publication: 2018-07-20 09:16:45 UTC
-Built: R 3.5.2; x86_64-w64-mingw32; 2018-12-20 09:48:41 UTC; windows
+Date/Publication: 2018-07-20 09:15:53 UTC
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-07-05 08:12:44 UTC; windows
 Archs: i386, x64

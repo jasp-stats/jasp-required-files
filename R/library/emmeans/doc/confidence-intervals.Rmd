@@ -17,7 +17,6 @@ knitr::opts_chunk$set(fig.width = 4.5, class.output = "ro")
 ## Contents {#contents}
 This vignette describes various ways of summarizing `emmGrid` objects.
 
-  1. [`emmGrid` objects, described](#emmobj)
   2. [`summary()`, `confint()`, and `test()`](#summary)
   3. [Back-transforming to response scale](#tran)
      (See also the ["transformations" vignette](transformations.html))
@@ -29,59 +28,30 @@ This vignette describes various ways of summarizing `emmGrid` objects.
   
 [Index of all vignette topics](vignette-topics.html)
 
-## Objects, structures, and methods {#emmobj}
-<!-- @index `emmGrid` objects -->
-The `ref_grid()` and `emmeans()` functions are introduced in 
-[the "Basics" vignette](basics.html). These functions, and a few related ones,
-return an object of class `emmGrid`:
-```{r}
-pigs.lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
-pigs.rg <- ref_grid(pigs.lm)
-class(pigs.rg)
-
-pigs.emm.s <- emmeans(pigs.rg, "source")
-class(pigs.emm.s)
-```
-If you simply show these objects, you get different-looking results:
-```{r}
-pigs.rg
-
-pigs.emm.s
-```
-This is based on guessing what users most need to see when displaying the object.
-You can override these defaults; for example to just see a quick summary of
-what is there, do
-```{r}
-str(pigs.emm.s)
-```
-<!-- @index `str()`; `summary_emm` object; `print.summary_emm()` -->
-The most important method for `emmGrid` objects is `summary()`. It is used as the
-default for displaying an `emmeans()` result like `pigs.emm.s`. This `summary()`
-method for `emmGrid` objects) actually produces a `data.frame`, but with extra bells 
-and whistles:
-```{r}
-class(summary(pigs.emm.s))
-```
-This can be useful to know because if you want to actually *use* `emmeans()` results
-in other computations, you should save its summary, and then you can access those
-results just like you would access data in a data frame. The `emmGrid` object itself
-is not so accessible. There is a `print.summary_emm()` function that is what
-actually produces the output you see above -- a data frame with extra
-annotations.
-
-[Back to Contents](#contents)
-
-## `summary()` and its relatives {#summary}
+## `summary()`, `confint()`, and `test()` {#summary}
 <!-- @index `summary()`; `summary()`!`infer`; `confint()`; `test()`; Confidence intervals;
-            Tests!One- and two-sided; Tests!Nonzero null -->
-As you may have gathered, the most important method for `emmGrid` objects is `summary()`.
-It has a lot of options, and the detailed documentation via 
-[`help("summary.emm")`](../html/summary.emm.html) is worth a look.
+            Tests!One- and two-sided; Tests!Nonzero null;
+            `summary()`!Bayesian models; `summary()`!`hpd.summary()`;
+            Examples!`pigs` -->
+The most important method for `emmGrid` objects is `summary()`. For one thing, it is
+called by default when you display an `emmeans()` result.
+The `summary()` function has a lot of options, and the detailed documentation via 
+`help("summary.emmGrid")` is worth a look.
+
+For ongoing illustrations, let's re-create some of the objects in the ["basics" vignette](basics.html) for the `pigs` example:
+```{r}
+pigs.lm1 <- lm(log(conc) ~ source + factor(percent), data = pigs)
+pigs.rg <- ref_grid(pigs.lm1)
+pigs.emm.s <- emmeans(pigs.rg, "source")
+```
 
 Just `summary(<object>)` by itself will produce a summary that varies somewhat
 according to context. It does this by setting different defaults for the `infer`
 argument, which consists of two logical values, specifying confidence intervals 
-and tests, respectively. 
+and tests, respectively. [The exception is models fitted using MCMC methods,
+where `summary()` is diverted to the `hpd.summary()` function, a 
+preferable summary for many Bayesians.]
+
 The summary of a newly made reference grid will show just estimates and
 standard errors, but not confidence intervals or tests (that is, `infer =
 c(FALSE, FALSE)`). The summary of an `emmeans()` result, as we see above, will
@@ -139,8 +109,8 @@ how to change the confidence level.)
      Tukey adjustment; Sidak adjustment -->
 Both tests and confidence intervals may be adjusted for simultaneous inference. 
 Such adjustments ensure that the confidence coefficient for a whole set of 
-intervals is at least the specified level, or to control the overall
-significance level for a whole family of tests. This is done via the `adjust`
+intervals is at least the specified level, or to control for multiplicity
+in a whole family of tests. This is done via the `adjust`
 argument. For `ref_grid()` and `emmeans()` results, the default is `adjust =
 "none"`. For most `contrast()` results, `adjust` is often something else,
 depending on what type of contrasts are created. For example, pairwise
@@ -165,8 +135,7 @@ For a large set of tests (and especially confidence intervals), the
 computational lag becomes noticeable if not intolerable.
 
 For tests, `adjust` increases the *P* values over those otherwise obtained with
-`adjust = "none"`, making it harder to declare an individual test as
-"significant." Compare the following adjusted tests with the unadjusted ones
+`adjust = "none"`. Compare the following adjusted tests with the unadjusted ones
 previously computed.
 ```{r}
 test(pigs.emm.s, null = log(40), side = ">", adjust = "bonferroni")
@@ -247,8 +216,13 @@ a "Type-III ANOVA", but may differ in situations where there are empty cells or
 other non-estimability issues, or if generalizations are present such as unequal
 weighting. (Another distinction is that sums of squares and mean squares are not
 shown; that is because these really are tests of contrasts among predictions,
-and they may or may not corresopond to model sums of squares.) One may use `by`
-variables to obtain separate tables of joint tests.
+and they may or may not correspond to model sums of squares.) 
+
+One may use `by` variables with `joint_tests`. For example:
+```{r}
+joint_tests(pigsint.rg, by = "source")
+```
+
 
 [Back to Contents](#contents)
 
@@ -258,16 +232,18 @@ variables to obtain separate tables of joint tests.
 The `delta` argument in `summary()` or `test()` allows the user to
 specify a threshold value to use in a test of equivalence, noninferiority, 
 or nonsuperiority. An equivalence test is kind of a backwards significance 
-test, where differences enough smaller than `delta` are the ones that can 
-be significant.  The help page for `summary.emmGrid` gives the details of 
+test, where small *P* values are associated with small differences relative 
+to a specified threshold value `delta`.
+The help page for `summary.emmGrid` gives the details of 
 these tests.
 Suppose in the present example, we consider two sources to be equivalent if they 
 are within 25% of each other. We can test this as follows:
 ```{r}
 test(pigs.prs.s, delta = log(1.25), adjust = "none")
 ```
-By our 25% standard, soy and skim are equivalent at the $\alpha = .05$ level,
-when no multiplicity adjustment is used.
+By our 25% standard, the *P* value is quite small for comparing soy and skim, 
+providing statistical evidence that their difference is enough smaller than the
+threshold to consider them equivalent.
 
 [Back to Contents](#contents)
 

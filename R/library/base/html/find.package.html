@@ -20,6 +20,8 @@ find.package(package, lib.loc = NULL, quiet = FALSE,
              verbose = getOption("verbose"))
 
 path.package(package, quiet = FALSE)
+
+packageNotFoundError(package, lib.loc, call = NULL)
 </pre>
 
 
@@ -46,6 +48,10 @@ if the package is not found?</p>
 <td>
 <p>a logical.  If <code>TRUE</code>, additional diagnostics are
 printed, notably when a package is found more than once.</p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>call expression.</p>
 </td></tr>
 </table>
 
@@ -75,6 +81,10 @@ available, ....
 were loaded, or if none were named, for all currently attached packages.
 Unless <code>quiet = TRUE</code> it will warn if some of the packages named
 are not attached, and given an error if none are.
+</p>
+<p><code>packageNotFoundError</code> creates an error condition object of class
+<code>packageNotFoundError</code> for signaling errors. The condition object
+contains the fields <code>package</code> and <code>lib.loc</code>.  
 </p>
 
 
@@ -107,5 +117,5 @@ findPkgAll("MASS")
 findPkgAll("knitr")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

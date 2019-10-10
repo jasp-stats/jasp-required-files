@@ -5,7 +5,6 @@ base-package	base-package
 !=	Comparison
 "	Quotes
 $	Extract
-$.data.frame	Extract.data.frame
 $.DLLInfo	getLoadedDLLs
 $.package_version	numeric_version
 $<-	Extract
@@ -370,6 +369,7 @@ asin	Trig
 asinh	Hyperbolic
 AsIs	AsIs
 asNamespace	ns-internal
+asplit	asplit
 asS3	isS4
 asS4	isS4
 assign	assign
@@ -490,6 +490,7 @@ conditionCall.condition	conditions
 conditionMessage	conditions
 conditionMessage.condition	conditions
 conditions	conditions
+conflictRules	library
 conflicts	conflicts
 Conj	complex
 connection	connections
@@ -600,6 +601,7 @@ environment variables	EnvVar
 environment<-	environment
 environmentIsLocked	bindenv
 environmentName	environment
+errorCondition	conditions
 eval	eval
 eval.parent	eval
 evalq	eval
@@ -839,6 +841,7 @@ La.svd	svd
 labels	labels
 labels.default	labels
 LANGUAGE	EnvVar
+language	is.language
 language object	is.language
 language objects	is.language
 lapply	lapply
@@ -939,6 +942,8 @@ mean.difftime	difftime
 mean.POSIXct	DateTimeClasses
 mean.POSIXlt	DateTimeClasses
 mem.limits	base-defunct
+mem.maxNSize	memlimits
+mem.maxVSize	memlimits
 memCompress	memCompress
 memDecompress	memCompress
 Memory	Memory
@@ -998,6 +1003,7 @@ NotYetUsed	notyet
 NROW	nrow
 nrow	nrow
 NULL	NULL
+nullfile	showConnections
 numeric	numeric
 NumericConstants	NumericConstants
 numeric_version	numeric_version
@@ -1029,6 +1035,7 @@ outer	outer
 package.description	base-defunct
 packageEvent	userhooks
 packageHasNamespace	ns-internal
+packageNotFoundError	find.package
 packageStartupMessage	message
 package_version	numeric_version
 packBits	rawConversion
@@ -1265,6 +1272,7 @@ R_PROFILE	Startup
 R_PROFILE_USER	Startup
 R_RD4PDF	EnvVar
 R_SHARE_DIR	EnvVar
+R_SUPPORT_OLD_TARS	EnvVar
 R_system_version	numeric_version
 R_TEXI2DVICMD	EnvVar
 R_UNZIPCMD	EnvVar
@@ -1367,6 +1375,8 @@ stopifnot	stopifnot
 storage.mode	mode
 storage.mode<-	mode
 str.POSIXt	DateTimeClasses
+str2expression	parse
+str2lang	parse
 strftime	strptime
 strptime	strptime
 strrep	strrep
@@ -1472,7 +1482,6 @@ taskCallbackManager	taskCallbackManager
 tcrossprod	crossprod
 tempdir	tempfile
 tempfile	tempfile
-testPlatformEquivalence	base-internal
 tetragamma	base-defunct
 textConnection	textconnections
 textConnectionValue	textconnections
@@ -1552,6 +1561,7 @@ Vectorize	Vectorize
 Version	base-defunct
 version	Version
 warning	warning
+warningCondition	conditions
 warnings	warnings
 weekdays	weekday.POSIXt
 weekdays.Date	weekday.POSIXt
@@ -1586,7 +1596,6 @@ xtfrm.factor	xtfrm
 xtfrm.numeric_version	numeric_version
 xtfrm.POSIXct	xtfrm
 xtfrm.POSIXlt	xtfrm
-xtfrm.Surv	xtfrm
 xzfile	connections
 zapsmall	zapsmall
 [	Extract
@@ -1625,6 +1634,7 @@ zapsmall	zapsmall
 [[<-.data.frame	Extract.data.frame
 [[<-.factor	Extract.factor
 [[<-.numeric_version	numeric_version
+[[<-.POSIXlt	DateTimeClasses
 ^	Arithmetic
 `	Quotes
 {	Paren

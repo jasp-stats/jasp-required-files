@@ -19,7 +19,7 @@ etc.
 <h3>Usage</h3>
 
 <pre>
-influence.measures(model)
+influence.measures(model, infl = influence(model))
 
 rstandard(model, ...)
 ## S3 method for class 'lm'
@@ -139,6 +139,10 @@ respectively. (These re-normalize the residuals to have unit variance,
 using an overall and leave-one-out measure of the error variance
 respectively.)
 </p>
+<p>Note that for <em>multivariate</em> <code>lm()</code> models (of class
+<code>"mlm"</code>), these functions return 3d arrays instead of matrices,
+or matrices instead of vectors.
+</p>
 <p>Values for generalized linear models are approximations, as described
 in Williams (1987) (except that Cook's distances are scaled as
 <i>F</i> rather than as chi-square values).  The approximations can be
@@ -193,7 +197,7 @@ London: Chapman and Hall.
 Generalized linear model diagnostics using the deviance and single
 case deletions.
 <em>Applied Statistics</em>, <b>36</b>, 181&ndash;191.
-doi: <a href="http://doi.org/10.2307/2347550">10.2307/2347550</a>.
+doi: <a href="https://doi.org/10.2307/2347550">10.2307/2347550</a>.
 </p>
 <p>Fox, J. (1997).
 <em>Applied Regression, Linear Models, and Related Methods</em>.
@@ -278,5 +282,5 @@ stopifnot(all.equal(imI$infmat[,"cook.d"],
           cooks.distance(glmI)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

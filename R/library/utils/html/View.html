@@ -39,7 +39,7 @@ prefixed by <code>Data:</code>.</p>
 <h3>Details</h3>
 
 <p>Object <code>x</code> is coerced (if possible) to a data frame, then
-columns are converted to character using <code><a href="../../base/html/format.html">format.data.frame</a></code>.  
+columns are converted to character using <code><a href="../../base/html/format.html">format.data.frame</a></code>.
 The object is then viewed in a spreadsheet-like data viewer, a
 read-only version of <code><a href="dataentry.html">data.entry</a></code>.
 </p>
@@ -48,13 +48,21 @@ they are displayed in a separate first column called <code>row.names</code>.
 </p>
 <p>Objects with zero columns or zero rows are not accepted.
 </p>
-<p>The array of cells can be navigated <em>via</em> the scrollbars and
-by the cursor keys, Home, End, Page Up and Page Down.
+
+<dl>
+<dt>On Unix-alikes,</dt><dd><p>the array of cells can be navigated by the
+cursor keys and Home, End, Page Up and Page Down (where supported by
+X11) as well as Enter and Tab.</p>
+</dd>
+<dt>On Windows,</dt><dd><p>the array of cells can be navigated <em>via</em>
+the scrollbars and by the cursor keys, Home, End, Page Up and Page Down.
 </p>
-<p>The initial size of the data viewer window is taken from the default
-dimensions of a pager (see <code><a href="Rconsole.html">Rconsole</a></code>), but adjusted
-downwards to show a whole number of rows and columns.
-</p>
+<p>On Windows, the initial size of the data viewer window is taken
+from the default dimensions of a pager (see <code><a href="Rconsole.html">Rconsole</a></code>),
+but adjusted downwards to show a whole number of rows and columns.</p>
+</dd>
+</dl>
+
 
 
 <h3>Value</h3>
@@ -70,5 +78,5 @@ immediately: the window can be closed via its controls or menus.
 <code><a href="dataentry.html">data.entry</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,6 +1,6 @@
 Package: htmlTable
-Version: 1.13.1
-Date: 2019-01-05
+Version: 1.13.2
+Date: 2019-09-21
 Title: Advanced Tables for Markdown/HTML
 Authors@R: c(
   person("Max", "Gordon", email = "max@gforge.se",
@@ -27,10 +27,10 @@ Encoding: UTF-8
 NeedsCompilation: no
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
-Packaged: 2019-01-05 12:11:12 UTC; max
+Packaged: 2019-09-21 20:45:26 UTC; max
 Author: Max Gordon [aut, cre],
   Stephen Gragg [aut],
   Peter Konings [aut]
 Repository: CRAN
-Date/Publication: 2019-01-07 21:40:12 UTC
-Built: R 3.5.2; ; 2019-02-26 03:15:41 UTC; windows
+Date/Publication: 2019-09-22 13:00:05 UTC
+Built: R 3.6.1; ; 2019-10-07 19:54:43 UTC; windows

@@ -17,8 +17,8 @@ double left and right quotation marks.
 <h3>Usage</h3>
 
 <pre>
-sQuote(x)
-dQuote(x)
+sQuote(x, q = getOption("useFancyQuotes"))
+dQuote(x, q = getOption("useFancyQuotes"))
 </pre>
 
 
@@ -28,6 +28,10 @@ dQuote(x)
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object, to be coerced to a character vector.</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>the kind of quotes to be used, see &lsquo;Details&rsquo;.</p>
 </td></tr>
 </table>
 
@@ -59,8 +63,9 @@ on Windows.  TeX uses grave and apostrophe for the directional single
 quotation marks, and doubled grave and doubled apostrophe for the
 directional double quotation marks.
 </p>
-<p>What rendering is used depend on the <code><a href="options.html">options</a></code> setting for
-<code>useFancyQuotes</code>.  If this is <code>FALSE</code> then the undirectional
+<p>What rendering is used depends on <code>q</code> which by default depends on
+the <code><a href="options.html">options</a></code> setting for <code>useFancyQuotes</code>.  If this
+is <code>FALSE</code> then the undirectional
 ASCII quotation style is used.  If this is <code>TRUE</code> (the default),
 Unicode directional quotes are used are used where available
 (currently, UTF-8 locales on Unix-alikes and all Windows locales
@@ -139,5 +144,5 @@ if(l10n_info()$`Latin-1`) {
 options(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

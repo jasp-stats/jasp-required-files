@@ -15,8 +15,10 @@ coefficient. Rows in the dot-plot correspond to the names of the
 <code>lm</code> components of the <code>lmList</code> object used to produce
 <code>x</code>. The lower and upper confidence limits are connected by
 a line segment and the estimated coefficients are marked with a
-<code>"+"</code>. The Trellis function <code>dotplot</code> is used in this method
-function.  
+<code>"+"</code>. 
+</p>
+<p>This is based on function <code><a href="../../lattice/html/dotplot.html">dotplot</a>()</code> from
+package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>.
 </p>
 
 
@@ -24,7 +26,9 @@ function.
 
 <pre>
 ## S3 method for class 'intervals.lmList'
-plot(x, ...)
+plot(x, xlab = "", ylab = attr(x, "groupsName"),
+     strip = function(...) strip.default(..., style = 1),
+     ...)
 </pre>
 
 
@@ -39,12 +43,20 @@ in the <code>lm</code> components of the <code>lmList</code> object used to
 produce <code>x</code>.
 </p>
 </td></tr>
+<tr valign="top"><td><code>xlab, ylab</code></td>
+<td>
+<p>axis labels, each with a sensible default.</p>
+</td></tr>
+<tr valign="top"><td><code>strip</code></td>
+<td>
+<p>a <code><a href="../../base/html/function.html">function</a></code> or <code>FALSE</code>, see
+<code><a href="../../lattice/html/dotplot.html">dotplot</a>()</code> from package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>optional arguments passed to the Trellis <code>dotplot</code>
-function.
-</p>
-</td></tr> 
+<p>optional arguments passed to the <code>dotplot</code> function
+(see above).</p>
+</td></tr>
 </table>
 
 
@@ -52,7 +64,7 @@ function.
 
 <p>a Trellis plot with the confidence intervals on the coefficients of
 the individual <code>lm</code> components of the <code>lmList</code> that
-generated <code>x</code>. 
+generated <code>x</code>.
 </p>
 
 
@@ -75,5 +87,5 @@ fm1 &lt;- lmList(distance ~ age | Subject, Orthodont)
 plot(intervals(fm1))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-137 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-140 <a href="00Index.html">Index</a>]</div>
 </body></html>

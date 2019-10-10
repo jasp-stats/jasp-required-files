@@ -1,0 +1,13 @@
+drawBFpizza	drawBFpizza
+JASPcolors	colors
+makeGridLines	makeGridLines
+needsParsing	parseThis
+parseThis	parseThis
+plotPieChart	plotPieChart
+PlotPriorAndPosterior	PlotPriorAndPosterior
+plotQQnorm	plotQQnorm
+PlotRobustnessSequential	PlotRobustnessSequential
+scale_JASPcolor_continuous	colors
+scale_JASPcolor_discrete	colors
+scale_JASPfill_continuous	colors
+scale_JASPfill_discrete	colors

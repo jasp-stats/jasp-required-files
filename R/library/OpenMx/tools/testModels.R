@@ -42,8 +42,6 @@ if (system2(rexec, args='--vanilla', stdout=FALSE, stderr=FALSE,
 
 library(OpenMx)
 
-options('mxPrintUnitTests' = FALSE)
-
 directories <- c('models/passing')
 
 if (any(args == 'nightly')) {
@@ -153,7 +151,7 @@ if (totalErrors > 0) {
 				print(oerr[[i]])
 				cat('\n')
 			}
-			system(paste("cat", outputFilename[[opt]][[ fileName[[i]] ]]))
+			system(paste("cat", outputFilename[[opt]][[ fileName[[i]] ]]), wait=FALSE)
 		}
 	}
 } else {

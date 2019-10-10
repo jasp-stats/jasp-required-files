@@ -1,4 +1,74 @@
                     *************************
+                    ** afex VERSION 0.25-x **
+                    *************************
+                    
+                    Changes in afex Version 0.25-x
+                    Released August 2019
+                    
+    Significant User Visible Changes and New Features
+    
+    o   Better error messages for ANOVA in some case in which data shows 
+        structural problems (e.g., missing design cells).
+        
+    o   afex_plot() now first draws all graphical elements belonging to a 
+        specific factor level, before drawing graphical elements belonging to 
+        the next factor level in interaction plots (does not apply to data in 
+        the background). This avoids inconsistencies in plotting order between
+        error bars and connecting lines.
+        
+
+    Bugfixes
+
+    o   Correct Type III ANOVA results for character variables if 
+        factorize = FALSE.
+        
+    o   afex_plot() for mixed or merMod objects uses actual dv on y-axis.
+    
+    o   afex_plot() x-labels and legend-title display correctly in case more 
+        than one variable is displayed.
+        
+    o   The default method for afex_plot() can now aggregate via the id argument 
+        even if the corresponding factor is only part if the random effects 
+        terms (see rstanarm examples in vignette).
+        
+    o   Removed certain non-ASCII characters in examples:
+        https://github.com/singmann/afex/issues/66
+
+
+
+                    *************************
+                    ** afex VERSION 0.24-x **
+                    *************************
+                    
+                    Changes in afex Version 0.24-x
+                    Released July 2019
+                    
+    Significant User Visible Changes and New Features
+    
+    o   Added possibility to suppress calculation of aov object for ANOVAs, via
+        argument 'include_aov' (with default = TRUE). Suppressing the 
+        calculation of the aov object can significantly reduce estimation 
+        time of ANOVAs for models with large N and within-subjects factors. Even 
+        for small models, a speed increase by more than 10% is expected.
+        For ANOVAs without aov object, emmeans are always based on the 
+        multivariate or lm model. 
+
+    o   Added test_levene() and test_sphercitiy() functions for assumption tests
+        for ANOVA models. Thanks to Mattan S. Ben-Shachar. Addresses #55, 
+        https://github.com/singmann/afex/issues/55
+
+    o   afex now depends on R (>= 3.5.0), as it uses binary/serialized objects 
+        version 3.
+
+    Bugfixes
+
+    o   Sum-to-zero contrasts will now be set to all character variables 
+        passed to mixed(). Before, only factor variables were assigned 
+        sum-to-zero contrasts and transformation into factors happened only in 
+        the call to model.matrix() (which then used the global contrasts).
+
+
+                    *************************
                     ** afex VERSION 0.23-x **
                     *************************
                     

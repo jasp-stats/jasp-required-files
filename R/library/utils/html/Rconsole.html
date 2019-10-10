@@ -9,9 +9,8 @@
 
 <h3>Description</h3>
 
-<p>The file &lsquo;<span class="file">Rconsole</span>&rsquo; configures the R GUI console in this
-Windows port. The <code>loadRconsole</code> function loads a new
-configuration.
+<p>The file &lsquo;<span class="file">Rconsole</span>&rsquo; configures the R GUI (<code>Rgui</code>) console
+under MS Windows and <code>loadRconsole(*)</code> loads a new configuration.
 </p>
 <p>The file &lsquo;<span class="file">Rdevga</span>&rsquo; configures the graphics devices
 <code><a href="../../grDevices/html/windows.html">windows</a></code>, <code>win.graph</code>, <code>win.metafile</code> and
@@ -115,22 +114,24 @@ to a file.
 <h3>Examples</h3>
 
 <pre>
-ruser &lt;- Sys.getenv("R_USER")
-cat("\n\nLocation for personal configuration files is\n   R_USER = ",
-    ruser, "\n\n", sep = "")
-## see if there are personal configuration files
-file.exists(file.path(ruser, c("Rconsole", "Rdevga")))
+if(.Platform$OS.type == "windows") withAutoprint({
+  ruser &lt;- Sys.getenv("R_USER")
+  cat("\n\nLocation for personal configuration files is\n   R_USER = ",
+      ruser, "\n\n", sep = "")
+  ## see if there are personal configuration files
+  file.exists(file.path(ruser, c("Rconsole", "Rdevga")))
 
-## show the configuration files used
-showConfig &lt;- function(file)
-{
-    ruser &lt;- Sys.getenv("R_USER")
-    path &lt;- file.path(ruser, file)
-    if(!file.exists(path)) path &lt;- file.path(R.home(), "etc", file)
-    file.show(path, header = path)
-}
-showConfig("Rconsole")
+  ## show the configuration files used
+  showConfig &lt;- function(file)
+  {
+      ruser &lt;- Sys.getenv("R_USER")
+      path &lt;- file.path(ruser, file)
+      if(!file.exists(path)) path &lt;- file.path(R.home(), "etc", file)
+      file.show(path, header = path)
+  }
+  showConfig("Rconsole")
+})
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

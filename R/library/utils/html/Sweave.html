@@ -79,9 +79,9 @@ run using <code><a href="../../base/html/source.html">source</a></code>.  (Code 
 statements is ignored by <code>Stangle</code>.)
 </p>
 <p><code>Stangle</code> is just a wrapper to <code>Sweave</code> specifying a
-different default driver.  Alternative drivers can be used: the CRAN
-package <a href="https://CRAN.R-project.org/package=cacheSweave"><span class="pkg">cacheSweave</span></a> and the Bioconductor package <span class="pkg">weaver</span>
-both provide drivers based on the default driver
+different default driver.  Alternative drivers can be used: the former
+CRAN package <a href="https://CRAN.R-project.org/package=cacheSweave"><span class="pkg">cacheSweave</span></a> and the Bioconductor package
+<span class="pkg">weaver</span> provide drivers based on the default driver
 <code><a href="RweaveLatex.html">RweaveLatex</a></code> which incorporate ideas of <em>caching</em>
 the results of computations on code chunks.
 </p>
@@ -140,11 +140,12 @@ the <span class="pkg">utils</span> package.
 </p>
 <p><code><a href="RweaveLatex.html">RweaveLatex</a></code>, <code><a href="Rtangle.html">Rtangle</a></code>.
 </p>
-<p>Packages <a href="https://CRAN.R-project.org/package=cacheSweave"><span class="pkg">cacheSweave</span></a>, <span class="pkg">weaver</span> (Bioconductor) and
-<a href="https://CRAN.R-project.org/package=SweaveListingUtils"><span class="pkg">SweaveListingUtils</span></a>.
+<p>Packages <a href="https://CRAN.R-project.org/package=cacheSweave"><span class="pkg">cacheSweave</span></a> (archived), <span class="pkg">weaver</span> (Bioconductor) and
+<a href="https://CRAN.R-project.org/package=SweaveListingUtils"><span class="pkg">SweaveListingUtils</span></a> (archived).
 </p>
 <p>Further Sweave drivers are in, for example, packages <a href="https://CRAN.R-project.org/package=R2HTML"><span class="pkg">R2HTML</span></a>,
-<a href="https://CRAN.R-project.org/package=ascii"><span class="pkg">ascii</span></a>, <a href="https://CRAN.R-project.org/package=odfWeave"><span class="pkg">odfWeave</span></a> and <a href="https://CRAN.R-project.org/package=pgfSweave"><span class="pkg">pgfSweave</span></a>.
+<a href="https://CRAN.R-project.org/package=ascii"><span class="pkg">ascii</span></a>, <a href="https://CRAN.R-project.org/package=odfWeave"><span class="pkg">odfWeave</span></a> (archived) and <a href="https://CRAN.R-project.org/package=pgfSweave"><span class="pkg">pgfSweave</span></a>
+(archived).
 </p>
 <p>Non-Sweave vignettes may be built with <code>tools::<a href="../../tools/html/buildVignette.html">buildVignette</a></code>.
 </p>
@@ -164,8 +165,14 @@ Sweave(testfile)
 
 ## This can be compiled to PDF by
 ## tools::texi2pdf("Sweave-test-1.tex")
+
 ## or outside R by
-## Rcmd texify --pdf Sweave-test-1.tex
+##
+## 	R CMD texi2pdf Sweave-test-1.tex
+## on Unix-alikes which sets the appropriate TEXINPUTS path.
+##
+## On Windows,
+##      Rcmd texify --pdf Sweave-test-1.tex
 ## if MiKTeX is available.
 
 ## create an R source file from the code chunks
@@ -176,5 +183,5 @@ source("Sweave-test-1.R")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -12,5 +12,5 @@ Packaged: 2014-01-23 19:05:03 UTC; svnuser
 NeedsCompilation: yes
 Repository: CRAN
 Date/Publication: 2014-01-23 20:17:07
-Built: R 3.5.2; x86_64-w64-mingw32; 2018-12-26 00:50:32 UTC; windows
+Built: R 3.6.0; x86_64-w64-mingw32; 2019-05-28 20:46:28 UTC; windows
 Archs: i386, x64

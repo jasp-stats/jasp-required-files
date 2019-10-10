@@ -26,7 +26,7 @@ filled.contour(x = seq(0, 1, length.out = nrow(z)),
                ylim = range(y, finite = TRUE),
                zlim = range(z, finite = TRUE),
                levels = pretty(zlim, nlevels), nlevels = 20,
-               color.palette = cm.colors,
+               color.palette = function(n) hcl.colors(n, "YlOrRd", rev = TRUE),
                col = color.palette(length(levels) - 1),
                plot.title, plot.axes, key.title, key.axes,
                asp = NA, xaxs = "i", yaxs = "i", las = 1,
@@ -173,7 +173,7 @@ the <code>plot.axes</code> argument.  See the examples.
 
 <h3>Author(s)</h3>
 
-<p>Ross Ihaka and R-core.</p>
+<p>Ross Ihaka and R Core Team</p>
 
 
 <h3>References</h3>
@@ -187,6 +187,7 @@ Summit, New Jersey: Hobart.
 <h3>See Also</h3>
 
 <p><code><a href="contour.html">contour</a></code>, <code><a href="image.html">image</a></code>,
+<code><a href="../../grDevices/html/palettes.html">hcl.colors</a></code>, <code><a href="../../grDevices/html/gray.colors.html">gray.colors</a></code>,
 <code><a href="../../grDevices/html/palette.html">palette</a></code>; <code><a href="../../lattice/html/levelplot.html">contourplot</a></code>
 and <code><a href="../../lattice/html/levelplot.html">levelplot</a></code> from package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>.
 </p>
@@ -195,12 +196,12 @@ and <code><a href="../../lattice/html/levelplot.html">levelplot</a></code> from 
 <h3>Examples</h3>
 
 <pre>
-require(grDevices) # for colours
-filled.contour(volcano, color = terrain.colors, asp = 1) # simple
+require("grDevices") # for colours
+filled.contour(volcano, asp = 1) # simple
 
 x &lt;- 10*1:nrow(volcano)
 y &lt;- 10*1:ncol(volcano)
-filled.contour(x, y, volcano, color = terrain.colors,
+filled.contour(x, y, volcano, color = function(n) hcl.colors(n, "terrain"),
     plot.title = title(main = "The Topography of Maunga Whau",
     xlab = "Meters North", ylab = "Meters West"),
     plot.axes = { axis(1, seq(100, 800, by = 100))
@@ -225,5 +226,5 @@ filled.contour(cos(r^2)*exp(-r/(2*pi)), frame.plot = FALSE,
                plot.axes = {})
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

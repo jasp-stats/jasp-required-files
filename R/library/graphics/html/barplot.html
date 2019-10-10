@@ -28,7 +28,11 @@ barplot(height, width = 1, space = NULL,
         axes = TRUE, axisnames = TRUE,
         cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
         inside = TRUE, plot = TRUE, axis.lty = 0, offset = 0,
-        add = FALSE, args.legend = NULL, ...)
+        add = FALSE, ann = !add &amp;&amp; par("ann"), args.legend = NULL, ...)
+
+## S3 method for class 'formula'
+barplot(formula, data, subset, na.action,
+        horiz = FALSE, xlab = NULL, ylab = NULL, ...)
 </pre>
 
 
@@ -198,11 +202,44 @@ relative to the x axis.</p>
 <p>logical specifying if bars should be added to an already
 existing plot; defaults to <code>FALSE</code>.</p>
 </td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+<p>logical specifying if the default annotation (<code>main</code>,
+<code>sub</code>, <code>xlab</code>, <code>ylab</code>) should appear on the plot, see
+<code><a href="title.html">title</a></code>.</p>
+</td></tr>
 <tr valign="top"><td><code>args.legend</code></td>
 <td>
 <p>list of additional arguments to pass to
 <code><a href="legend.html">legend</a>()</code>; names of the list are used as argument
 names.  Only used if <code>legend.text</code> is supplied.</p>
+</td></tr>
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a formula where the <code>y</code> variables are numeric data
+to plot against the categorical <code>x</code> variables.  The formula
+can have one of three forms: </p>
+<pre>
+      y ~ x
+      y ~ x1 + x2
+      cbind(y1, y2) ~ x</pre><p>,
+see the examples.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame (or list) from which the variables in formula
+should be taken.</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>an optional vector specifying a subset of observations
+to be used.</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>a function which indicates what should happen when
+the data contain <code><a href="../../base/html/NA.html">NA</a></code> values.  The default is to ignore missing
+values in the given variables.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -216,13 +253,6 @@ default method these can include further arguments (such as
 </table>
 
 
-<h3>Details</h3>
-
-<p>This is a generic function, it currently only has a default method.
-A formula interface may be added eventually.
-</p>
-
-
 <h3>Value</h3>
 
 <p>A numeric vector (or matrix, when <code>beside = TRUE</code>), say
@@ -232,6 +262,11 @@ drawn, useful for adding to the graph.
 <p>If <code>beside</code> is true, use <code>colMeans(mp)</code> for the
 midpoints of each <em>group</em> of bars, see example.
 </p>
+
+
+<h3>Author(s)</h3>
+
+<p>R Core, with a contribution by Arni Magnusson.</p>
 
 
 <h3>References</h3>
@@ -246,14 +281,34 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="plot.html">plot</a>(..., type = "h")</code>, <code><a href="dotchart.html">dotchart</a></code>,
-<code><a href="hist.html">hist</a></code>.
+<p><code><a href="plot.html">plot</a>(..., type = "h")</code>, <code><a href="dotchart.html">dotchart</a></code>;
+<code><a href="hist.html">hist</a></code> for bars of a <em>continuous</em> variable.
+<code><a href="mosaicplot.html">mosaicplot</a>()</code>, more sophisticated to visualize
+<em>several</em> categorical variables.
 </p>
 
 
 <h3>Examples</h3>
 
 <pre>
+# Formula method
+barplot(GNP ~ Year, data = longley)
+barplot(cbind(Employed, Unemployed) ~ Year, data = longley)
+
+## 3rd form of formula - 2 categories :
+op &lt;- par(mfrow = 2:1, mgp = c(3,1,0)/2, mar = .1+c(3,3:1))
+summary(d.Titanic &lt;- as.data.frame(Titanic))
+barplot(Freq ~ Class + Survived, data = d.Titanic,
+        subset = Age == "Adult" &amp; Sex == "Male",
+        main = "barplot(Freq ~ Class + Survived, *)", ylab = "# {passengers}", legend = TRUE)
+# Corresponding table :
+(xt &lt;- xtabs(Freq ~ Survived + Class + Sex, d.Titanic, subset = Age=="Adult"))
+# Alternatively, a mosaic plot :
+mosaicplot(xt[,,"Male"], main = "mosaicplot(Freq ~ Class + Survived, *)", color=TRUE)
+par(op)
+
+
+# Default method
 require(grDevices) # for colours
 tN &lt;- table(Ni &lt;- stats::rpois(100, lambda = 5))
 r &lt;- barplot(tN, col = rainbow(20))
@@ -294,15 +349,15 @@ barplot(VADeaths, angle = 15+10*1:5, density = 20, col = "black",
         legend = rownames(VADeaths))
 title(main = list("Death Rates in Virginia", font = 4))
 
-# border :
+# Border color
 barplot(VADeaths, border = "dark blue") 
 
 
-# log scales (not much sense here):
+# Log scales (not much sense here)
 barplot(tN, col = heat.colors(12), log = "y")
 barplot(tN, col = gray.colors(20), log = "xy")
 
-# args.legend
+# Legend location
 barplot(height = cbind(x = c(465, 91) / 465 * 100,
                        y = c(840, 200) / 840 * 100,
                        z = c(37, 17) / 37 * 100),
@@ -313,5 +368,5 @@ barplot(height = cbind(x = c(465, 91) / 465 * 100,
         args.legend = list(x = "topleft"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

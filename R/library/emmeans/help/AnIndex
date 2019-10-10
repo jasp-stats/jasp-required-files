@@ -1,6 +1,7 @@
 emmeans-package	emmeans-package
 +.emmGrid	rbind.emmGrid
 .emm_basis	extending-emmeans
+.emm_register	extending-emmeans
 .recover_data	extending-emmeans
 add_grouping	add_grouping
 as.data.frame.emmGrid	summary.emmGrid
@@ -12,7 +13,6 @@ as.mcmc.emmGrid	mcmc-support
 as.mcmc.list.emmGrid	mcmc-support
 auto.noise	auto.noise
 CLD	CLD.emmGrid
-cld	old.cld
 CLD.emmGrid	CLD.emmGrid
 cld.emmGrid	CLD.emmGrid
 CLD.emm_list	emm_list-object
@@ -76,6 +76,7 @@ poly.emmc	emmc-functions
 predict.emmGrid	summary.emmGrid
 print.emmGrid	emmGrid-methods
 print.xtable_emm	xtable.emmGrid
+pwpp	pwpp
 qdrg	qdrg
 rbind.emmGrid	rbind.emmGrid
 recover_data	extending-emmeans

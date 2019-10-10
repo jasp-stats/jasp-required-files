@@ -52,7 +52,8 @@ for <code>relistable</code> objects.
 first level items in <code>x</code>.
 </p>
 <p>Factors are treated specially.  If all non-list elements of <code>x</code>
-are factors (or ordered factors) then the result will be a factor with
+are <code><a href="factor.html">factor</a></code> (or ordered factor) objects then the result
+will be a factor with
 levels the union of the level sets of the elements, in the order the
 levels occur in the level sets of the elements (which means that if
 all the elements have the same level set, that is the level set of the
@@ -129,5 +130,5 @@ for(x in ll)
   stopifnot(identical(x, unlist(x)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

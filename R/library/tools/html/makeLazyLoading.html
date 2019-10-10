@@ -17,7 +17,9 @@
 
 <pre>
 makeLazyLoading(package, lib.loc = NULL, compress = TRUE,
-                keep.source = getOption("keep.source.pkgs"))
+                keep.source = getOption("keep.source.pkgs"),
+                keep.parse.data = getOption("keep.parse.data.pkgs"),
+                set.install.dir = NULL)
 </pre>
 
 
@@ -36,9 +38,20 @@ makeLazyLoading(package, lib.loc = NULL, compress = TRUE,
 <td>
 <p>logical; should sources be kept when saving from source</p>
 </td></tr>
+<tr valign="top"><td><code>keep.parse.data</code></td>
+<td>
+<p>logical; should parse data be kept with sources
+when <code>keep.source</code> is <code>TRUE</code>.</p>
+</td></tr>
 <tr valign="top"><td><code>compress</code></td>
 <td>
 <p>logical; whether to compress entries on the database.</p>
+</td></tr>
+<tr valign="top"><td><code>set.install.dir</code></td>
+<td>
+<p>character or null; if not null, set installation
+directory to this value before serializing internal data structures
+(for internal use, staged installation)</p>
 </td></tr>
 </table>
 
@@ -57,5 +70,5 @@ packages other than <span class="pkg">base</span> you can use
 
 <p>Luke Tierney and Brian Ripley</p>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

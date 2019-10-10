@@ -1,6 +1,6 @@
 ## ----set-options, echo=FALSE, cache=FALSE-----------------------------------------------
 options(width = 90)
-knitr::opts_chunk$set(dpi=80)
+knitr::opts_chunk$set(dpi=72)
 
 ## ----message=FALSE, warning=FALSE-------------------------------------------------------
 library("afex")     
@@ -72,22 +72,24 @@ p2 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", dodge = 0.5,
                   dodge.width = 0.5,  ## needs to be same as dodge
                   cex = 0.8,
                   color = "darkgrey"))
-p3 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", 
-          data_geom = ggplot2::geom_violin, 
-          data_arg = list(width = 0.5))
+p3 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", dodge = 0.5,
+                data_geom = geom_count)
 p4 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", 
-          data_geom = ggplot2::geom_boxplot, 
-          data_arg = list(width = 0.3))
-p5 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", dodge = 0.7, 
-          data_geom = ggpol::geom_boxjitter, 
-          data_arg = list(
-            width = 0.5, 
-            jitter.width = 0,
-            jitter.height = 10,
-            outlier.intersect = TRUE),
-          point_arg = list(size = 2.5), 
-          error_arg = list(size = 1.5, width = 0))
-plot_grid(p1, p2, p3, p4, p5, ncol = 2, labels = 1:5)  
+                data_geom = ggplot2::geom_violin, 
+                data_arg = list(width = 0.5))
+p5 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", 
+                data_geom = ggplot2::geom_boxplot, 
+                data_arg = list(width = 0.3, linetype = 1))
+p6 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", dodge = 0.7, 
+                data_geom = ggpol::geom_boxjitter, 
+                data_arg = list(
+                  width = 0.5, 
+                  jitter.width = 0,
+                  jitter.height = 10,
+                  outlier.intersect = TRUE),
+                point_arg = list(size = 2.5), 
+                error_arg = list(size = 1.5, width = 0))
+plot_grid(p1, p2, p3, p4, p5, p6, ncol = 2, labels = 1:6)  
 
 ## ----fig.width=8.5, fig.height=8, dpi = 150---------------------------------------------
 p2 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", dodge = 0.5,
@@ -116,6 +118,18 @@ p5 <- afex_plot(aw, x = "noise", trace = "angle", error = "within", dodge = 0.7,
                 line_arg = list(linetype = 0),
                 error_arg = list(size = 1.5, width = 0))
 plot_grid(p2, p3, p4, p5, ncol = 2, labels = 2:5) 
+
+## ----fig.width=8.5, fig.height=4, dpi = 150---------------------------------------------
+p1 <- afex_plot(aw, x = "noise", trace = "angle", mapping = "color", 
+                error = "within", 
+                point_arg = list(size = 5), line_arg = list(size = 2),
+                error_arg = list(size = 2))
+p2 <- afex_plot(aw, x = "noise", trace = "angle", 
+                mapping = c("color", "shape", "linetype"), 
+                error = "within", 
+                point_arg = list(size = 5), line_arg = list(size = 2),
+                error_arg = list(size = 2, width = 0, linetype = 1))
+plot_grid(p1, p2, ncol = 2)
 
 ## ----fig.width=7, fig.height=3.5, message=FALSE-----------------------------------------
 po1 <- afex_plot(aw, x = "angle", mapping = "color", error = "within", 

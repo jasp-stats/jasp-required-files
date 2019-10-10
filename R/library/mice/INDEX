@@ -158,6 +158,7 @@ stripplot.mids          Stripplot of observed and imputed data
 summary.mira            Summary of a 'mira' object
 supports.transparent    Supports semi-transparent foreground colors?
 tbc                     Terneuzen birth cohort
+toenail                 Toenail data
 version                 Echoes the package version number
 walking                 Walking disability data
 windspeed               Subset of Irish wind speed data

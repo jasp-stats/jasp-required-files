@@ -1,0 +1,85 @@
+AG                      Ancestral graph
+DAG                     Directed acyclic graphs (DAGs)
+DG                      Directed graphs
+In                      Indicator matrix
+InducedGraphs           Graphs induced by marginalization or
+                        conditioning
+MAG                     Maximal ancestral graph
+MRG                     Maximal ribbonless graph
+MSG                     Maximal summary graph
+MarkEqMag               Markov equivalence of maximal ancestral graphs
+MarkEqRcg               Markov equivalence for regression chain graphs.
+Max                     Maximisation for graphs
+RG                      Ribbonless graph
+RepMarBG                Representational Markov equivalence to
+                        bidirected graphs.
+RepMarDAG               Representational Markov equivalence to directed
+                        acyclic graphs.
+RepMarUG                Representational Markov equivalence to
+                        undirected graphs.
+SG                      summary graph
+UG                      Defining an undirected graph (UG)
+adjMatrix               Adjacency matrix of a graph
+allEdges                All edges of a graph
+anger                   Anger data
+basiSet                 Basis set of a DAG
+bd                      Simple graph operations
+bfsearch                Breadth first search
+binve                   Inverts a marginal log-linear parametrization
+blkdiag                 Block diagonal matrix
+blodiag                 Block diagonal matrix
+checkIdent              Identifiability of a model with one latent
+                        variable
+cmpGraph                The complementary graph
+conComp                 Connectivity components
+correlations            Marginal and partial correlations
+cycleMatrix             Fundamental cycles
+dSep                    d-separation
+derived                 Data on blood pressure body mass and age
+diagv                   Matrix product with a diagonal matrix
+drawGraph               Drawing a graph with a simple point and click
+                        interface.
+edgematrix              Edge matrix of a graph
+essentialGraph          Essential graph
+findPath                Finding paths
+fitAncestralGraph       Fitting of Gaussian Ancestral Graph Models
+fitConGraph             Fitting a Gaussian concentration graph model
+fitCovGraph             Fitting of Gaussian covariance graph models
+fitDag                  Fitting of Gaussian DAG models
+fitDagLatent            Fitting Gaussian DAG models with one latent
+                        variable
+fitmlogit               Multivariate logistic models
+fundCycles              Fundamental cycles
+ggm                     The package 'ggm': summary information
+glucose                 Glucose control
+grMAT                   Graph to adjacency matrix
+isADMG                  Acyclic directed mixed graphs
+isAG                    Ancestral graph
+isAcyclic               Graph queries
+isGident                G-identifiability of an UG
+makeMG                  Mixed Graphs
+marg.param              Link function of marginal log-linear
+                        parameterization
+marks                   Mathematics marks
+mat.mlogit              Multivariate logistic parametrization
+msep                    The m-separation criterion
+null                    Null space of a matrix
+parcor                  Partial correlations
+pcor                    Partial correlation
+pcor.test               Test for zero partial association
+plotGraph               Plot of a mixed graph
+powerset                Power set
+rcorr                   Random correlation matrix
+rem                     Utility functions
+rnormDag                Random sample from a decomposable Gaussian
+                        model
+rsphere                 Random vectors on a sphere
+shipley.test            Test of all independencies implied by a given
+                        DAG
+stress                  Stress
+surdata                 A simulated data set
+swp                     Sweep operator
+topSort                 Topological sort
+transClos               Transitive closure of a graph
+triDec                  Triangular decomposition of a covariance matrix
+unmakeMG                Loopless mixed graphs components

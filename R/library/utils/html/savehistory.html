@@ -78,14 +78,32 @@ the matching.</p>
 <h3>Details</h3>
 
 <p>There are several history mechanisms available for the different <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
-consoles, which work in similar but not identical ways.  There are
-separate versions of this help file for Unix and Windows.
+consoles, which work in similar but not identical ways.  Notably,
+there are different implementations for Unix and Windows.
 </p>
+
+<dl>
+<dt>Windows:</dt><dd>
 <p>The functions described here work in <code>Rgui</code> and interactive
 <code>Rterm</code> but not in batch use of <code>Rterm</code> nor in
 embedded/DCOM versions.
 </p>
-<p>The history mechanism is
+</dd>
+<dt>Unix-alikes:</dt><dd>
+<p>The functions described here work under the
+<code>readline</code> command-line interface but may not otherwise (for
+example, in batch use or in an embedded application).  Note that <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+can be built without <code>readline</code>.
+</p>
+<p><code>R.app</code>, the console on macOS, has a separate and largely
+incompatible history mechanism, which by default uses a file
+&lsquo;<span class="file">.Rapp.history</span>&rsquo; and saves up to 250 entries.  These functions are
+not currently implemented there.
+</p>
+</dd>
+</dl>
+
+<p>The (<code>readline</code> on Unix-alikes) history mechanism
 is controlled by two environment variables: <span class="env">R_HISTSIZE</span> controls
 the number of lines that are saved (default 512), and <span class="env">R_HISTFILE</span>
 (default &lsquo;<span class="file">.Rhistory</span>&rsquo;) sets the filename used for the
@@ -98,6 +116,11 @@ is actually generated.
 </p>
 <p>These environment variables are read at the time of saving, so can be
 altered within a session by the use of <code><a href="../../base/html/Sys.setenv.html">Sys.setenv</a></code>.
+</p>
+<p>On Unix-alikes:
+Note that <code>readline</code> history library saves files with permission
+<code>0600</code>, that is with read/write permission for the user and not
+even read permission for any other account.
 </p>
 <p>The <code>timestamp</code> function writes a timestamp (or other message)
 into the history and echos it to the console.  On platforms that do not
@@ -124,5 +147,5 @@ workspace), you can put a call to <code>savehistory()</code> in
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

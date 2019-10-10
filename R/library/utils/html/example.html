@@ -80,7 +80,7 @@ the example is run and the (saved) state is restored.
 <code>setRNG = TRUE</code> sets the same state as
 <code>R CMD <a href="PkgUtils.html">check</a></code> does for
 running a package's examples.  This is currently equivalent to
-<code>setRNG = {RNGkind("default", "default"); set.seed(1)}</code>.</p>
+<code>setRNG = {RNGkind("default", "default", "default"); set.seed(1)}</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>ask</code></td>
 <td>
@@ -140,8 +140,9 @@ and the <code>example()</code> function.  This was previously
 <code>testonly</code>, and that form is still accepted.</p>
 </dd>
 <dt><code>donttest</code></dt><dd><p>encloses code that typically should be run,
-but not during package checking.  The default <code>run.donttest
-	= <a href="../../base/html/interactive.html">interactive</a>()</code> leads <code>example()</code> use in other help
+but not during package checking.  The default
+<code>run.donttest = <a href="../../base/html/interactive.html">interactive</a>()</code>
+leads <code>example()</code> use in other help
 page examples to skip <code style="white-space: pre;">\donttest</code> sections appropriately.</p>
 </dd>
 </dl>
@@ -192,5 +193,5 @@ lmex &lt;- sapply(apropos("^lm", mode = "function"),
 sapply(lmex, length)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

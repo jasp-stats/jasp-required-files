@@ -38,15 +38,31 @@ install.packages(pkgs, lib, repos = getOption("repos"),
 <p>character vector of the names of packages whose
 current versions should be downloaded from the repositories.
 </p>
-<p>If <code>repos = NULL</code>, a character vector of
-file paths of &lsquo;<span class="file">.zip</span>&rsquo; files containing binary builds of
+<p>If <code>repos = NULL</code>, a character vector of file paths,
+</p>
+
+<dl>
+<dt>on windows,</dt><dd>
+<p>file paths of &lsquo;<span class="file">.zip</span>&rsquo; files containing binary builds of
 packages.  (<code>http://</code> and <code>file://</code> URLs are also accepted
 and the files will be downloaded and installed from local copies.)
 Source directories or file paths or URLs of archives may be
 specified with <code>type = "source"</code>, but some packages need
 suitable tools installed (see the &lsquo;Details&rsquo; section).
 </p>
-<p>If this is missing or a zero-length character vector, a listbox of
+</dd>
+<dt>On Unix-alikes,</dt><dd><p>these file paths can be source directories or archives
+or binary package archive files (as created by <code>R CMD build
+      --binary</code>).  (<code>http://</code> and <code>file://</code> URLs are also
+accepted and the files will be downloaded and installed from local
+copies.)  On a CRAN build of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> for macOS these can be &lsquo;<span class="file">.tgz</span>&rsquo;
+files containing binary package archives.
+Tilde-expansion will be done on file paths.
+</p>
+</dd>
+</dl>
+
+<p>If this is missing, a listbox of
 available packages is presented where possible in an interactive <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
 session.
 </p>
@@ -111,8 +127,9 @@ at the end of the session).
 <td>
 <p>logical indicating whether to also install
 uninstalled packages which these packages depend on/link
-to/import/suggest (and so on recursively).  Not used if <code>repos
-    = NULL</code>.  Can also be a character vector, a subset of
+to/import/suggest (and so on recursively).
+Not used if <code>repos = NULL</code>.
+Can also be a character vector, a subset of
 <code>c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")</code>.
 </p>
 <p>Only supported if <code>lib</code> is of length one (or missing),
@@ -181,8 +198,8 @@ of the package installation in addition to removing intermediate files.
 <p>the number of parallel processes to use for a parallel
 install of more than one source package.  Values greater than one
 are supported if the <code>make</code> command specified by
-<code>Sys.getenv("MAKE", "make")</code> accepts argument <code>-k -j
-    <var>Ncpus</var></code>.
+<code>Sys.getenv("MAKE", "make")</code> accepts argument
+<code>-k -j <var>Ncpus</var></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
@@ -249,7 +266,8 @@ if there is more than one.)  If <code>lib</code> is omitted or is of length
 one and is not a (group) writable directory, in interactive use the
 code offers to create a personal library tree (the first element of
 <code>Sys.getenv("R_LIBS_USER")</code>) and install there.
-Detection of a writable directory is problematic on Windows: see the
+</p>
+<p>Detection of a writable directory is problematic on Windows: see the
 &lsquo;Note&rsquo; section.
 </p>
 <p>For installs from a repository an attempt is made to install the
@@ -304,7 +322,11 @@ either <code>contriburl</code> or <code>available</code> is specified.
 </p>
 <p>Using packages with <code>type = "source"</code> always works provided the
 package contains no C/C++/Fortran code that needs compilation.
-Otherwise you will need to have installed the Rtools
+Otherwise,
+</p>
+
+<dl>
+<dt>on Windows</dt><dd><p>you will need to have installed the Rtools
 collection as described in the &lsquo;R for Windows FAQ&rsquo; <em>and</em>
 you must have the <span class="env">PATH</span> environment variable set up as required
 by Rtools.
@@ -322,6 +344,16 @@ currently in use.  In some circumstances (e.g., multiple instances of
 <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> running at the same time and sharing a library) it will not detect a
 problem, but the installation may fail as Windows locks files in use.
 </p>
+</dd>
+<dt>On Unix-alikes,</dt><dd><p>when the package contains C/C++/Fortran code
+that needs compilation, on macOS you need to have installed the
+&lsquo;Command-line tools for Xcode&rsquo; (see the &lsquo;R Installation
+and Administration Manual&rsquo;) and if needed by the package a Fortran
+compiler, and have them in your path.
+</p>
+</dd>
+</dl>
+
 
 
 <h3>Locking</h3>
@@ -342,11 +374,13 @@ Finally locking (and restoration on error) can be suppressed by
 <span class="option">--no-lock</span>.
 
 </p>
-<p>For a macOS or Windows binary install, no locking is done by
-default.  Setting argument <code>lock</code> to <code>TRUE</code> (it defaults to
-the value of <code><a href="../../base/html/options.html">getOption</a>("install.lock", FALSE)</code>) will use
-per-directory locking as described for source installs: if the value
-is <code>"pkglock"</code> per-package locking will be used.
+<p>For a macOS binary install, no locking is done by default.  Setting
+argument <code>lock</code> to <code>TRUE</code> (it defaults to the value of
+<code><a href="../../base/html/options.html">getOption</a>("install.lock", FALSE)</code>) will use per-directory
+locking as described for source installs.  For Windows binary install,
+per-directory locking is used by default (<code>lock</code> defaults to the
+value of <code><a href="../../base/html/options.html">getOption</a>("install.lock", TRUE)</code>).  If the value is
+<code>"pkglock"</code> per-package locking will be used.
 </p>
 <p>If package locking is used on Windows with <code>libs_only = TRUE</code> and
 the installation fails, the package will be restored to its previous
@@ -404,6 +438,20 @@ not restore previous versions.
 
 <h3>Note</h3>
 
+
+<dl>
+<dt>On Unix-alikes:</dt><dd>
+<p>Some binary distributions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> have <code>INSTALL</code> in a separate
+bundle, e.g. an <code>R-devel</code> RPM.  <code>install.packages</code> will
+give an error if called with <code>type = "source"</code> on such a system.
+</p>
+<p>Some binary Linux distributions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> can be installed on a machine
+without the tools needed to install packages: a possible remedy is to
+do a complete install of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> which should bring in all those tools as
+dependencies.
+</p>
+</dd>
+<dt>On Windows:</dt><dd>
 <p><code>install.packages</code> tries to detect if you have write permission
 on the library directories specified, but Windows reports unreliably.
 If there is only one library directory (the default), <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> tries to
@@ -412,6 +460,9 @@ whole story: you may have permission to write in a library directory
 but lack permission to write binary files (such as &lsquo;<span class="file">.dll</span>&rsquo; files)
 there.  See the &lsquo;R for Windows FAQ&rsquo; for workarounds.
 </p>
+</dd>
+</dl>
+
 
 
 <h3>See Also</h3>
@@ -444,5 +495,5 @@ install.packages(c("ncdf4", "RNetCDF"),
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -38,8 +38,6 @@ Arguments.getRegularExpression	getRegularExpression.Arguments
 Arguments.getVector	getVector.Arguments
 Arguments.getVerbose	getVerbose.Arguments
 Arguments.getWritablePathname	getWritablePathname.Arguments
-arrayIndex	arrayIndex
-arrayIndex.default	arrayIndex
 as.character,GString-method	as.character.GString
 as.character,Options-method	as.character.Options
 as.character,ProgressBar-method	as.character.ProgressBar
@@ -196,7 +194,6 @@ evaluate,Verbose-method	evaluate.Verbose
 evaluate.GString	evaluate.GString
 evaluate.NullVerbose	writeRaw.NullVerbose
 evaluate.Verbose	evaluate.Verbose
-evalWithTimeout	withTimeout
 exit	Non-documented_objects
 exit,NullVerbose-method	writeRaw.NullVerbose
 exit,Verbose-method	exit.Verbose
@@ -720,8 +717,6 @@ reset,VComments-method	reset.VComments
 reset.ProgressBar	reset.ProgressBar
 reset.SmartComments	reset.SmartComments
 reset.VComments	reset.VComments
-resetWarnings	resetWarnings
-resetWarnings.default	resetWarnings
 ruler	Non-documented_objects
 ruler,NullVerbose-method	writeRaw.NullVerbose
 ruler,Verbose-method	ruler.Verbose

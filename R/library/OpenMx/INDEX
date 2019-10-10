@@ -1,8 +1,8 @@
 BaseCompute-class       BaseCompute
 Bollen                  Bollen Data on Industrialization and Political
                         Democracy
-HS.ability.data         Holzinger and Swineford (1939) Ability data in
-                        301 children from two schools
+HS.ability.data         Holzinger & Swineford (1939) Ability in 301
+                        children from 2 schools
 LongitudinalOverdispersedCounts
                         Longitudinal, Overdispersed Count Data
 MxAlgebra-class         MxAlgebra Class
@@ -44,6 +44,8 @@ MxOptionalCharOrNumber-class
                         A character, integer, or NULL
 MxOptionalDataFrame-class
                         An optional data.frame
+MxOptionalInteger-class
+                        An optional integer
 MxOptionalLogical-class
                         An optional logical
 MxOptionalMatrix-class
@@ -51,26 +53,30 @@ MxOptionalMatrix-class
 MxOptionalNumeric-class
                         An optional numeric
 MxRAMGraph-class        MxRAMGraph
-MxRAMMetaData-class     Meta Data for RAM
 MxRAMModel-class        MxRAMModel
 MxVersionType-class     A package_version or character
 Named-entity            Named Entities
 OpenMx                  OpenMx: An package for Structural Equation
                         Modeling and Matrix Algebra Optimization
+Oscillator              Oscillator Data for Latent Differential
+                        Equations
 as.statusCode           Convert a numeric or character vector into an
                         optimizer status code factor
 cvectorize              Vectorize By Column
 demoOneFactor           Demonstration data for a one factor model
 demoTwoFactor           Demonstration data for a two factor model
 diag2vec                Extract Diagonal of a Matrix
-dzfData                 DZ female data
-dzmData                 DZ Male data
-dzoData                 DZ opposite sex data
+dzfData                 Example twin extended kinship data: DZ female
+                        data
+dzmData                 Example twin extended kinship data: DZ Male
+                        data
+dzoData                 Example twin extended kinship data: DZ opposite
+                        sex twins
 eigenvec                Eigenvector/Eigenvalue Decomposition
-example1                Bivariate twin data example from Classic Mx
-                        Manual
-example2                Bivariate twin data example from Classic Mx
-                        Manual
+example1                Bivariate twin data, wide-format from Classic
+                        Mx Manual
+example2                Bivariate twin data, long-format from Classic
+                        Mx Manual
 expm                    Matrix exponential
 factorExample1          Example Factor Analysis Data
 factorScaleExample1     Example Factor Analysis Data for Scaling the
@@ -99,7 +105,6 @@ imxDeparse              Deparse for MxObjects
 imxDependentModels      Are submodels dependence?
 imxDetermineDefaultOptimizer
                         imxDetermineDefaultOptimizer
-imxDiff                 Set difference on regular types or S4 objects
 imxDmvnorm              A C implementation of dmvnorm
 imxEvalByName           imxEvalByName
 imxExtractMethod        imxExtractMethod
@@ -123,13 +128,14 @@ imxHasDefinitionVariable
 imxHasNPSOL             imxHasNPSOL
 imxHasOpenMP            imxHasOpenMP
 imxHasThresholds        imxHasThresholds
+imxHasWLS               imxHasWLS
 imxIdentifier           imxIdentifier
 imxIndependentModels    Are submodels independent?
 imxInitModel            imxInitModel
 imxIsDefinitionVariable
                         imxIsDefinitionVariable
+imxIsMultilevel         imxIsMultilevel
 imxIsPath               imxIsPath
-imxJiggle               imxJiggle
 imxLocateFunction       imxLocateFunction
 imxLocateIndex          imxLocateIndex
 imxLocateLabel          imxLocateLabel
@@ -138,7 +144,7 @@ imxLookupSymbolTable    imxLookupSymbolTable
 imxModelBuilder         imxModelBuilder
 imxModelTypes           imxModelTypes
 imxMpiWrap              imxMpiWrap
-imxOriginalMx           imxOriginalMx
+imxOriginalMx           Run an classic mx script
 imxPPML                 imxPPML
 imxPPML.Test.Battery    imxPPML.Test.Battery
 imxPPML.Test.Test       imxPPML.Test.Test
@@ -179,6 +185,7 @@ latentMultipleRegExample1
 latentMultipleRegExample2
                         Example data for multiple regression among
                         latent variables
+lazarsfeld              Respondent-soldiers on four dichotomous items
 logm                    Matrix logarithm
 multiData1              Data for multiple regression
 mxAlgebra               Create MxAlgebra Object
@@ -215,6 +222,7 @@ mxComputeIterate        Repeatedly invoke a series of compute objects
                         until change is less than tolerance
 mxComputeJacobian       Numerically estimate the Jacobian with respect
                         to free parameters
+mxComputeLoadContext    Load contextual data to supplement checkpoint
 mxComputeLoadData       Load columns into an MxData object
 mxComputeLoadMatrix     Load data from CSV files directly into the
                         backend
@@ -238,6 +246,7 @@ mxComputeSimAnnealing   Optimization using generalized simulated
                         annealing
 mxComputeStandardError
                         Compute standard errors
+mxComputeTryCatch       Execute a sub-compute plan, catching errors
 mxComputeTryHard        Repeatedly attempt a compute plan until
                         successful
 mxConstraint            Create MxConstraint Object
@@ -245,6 +254,9 @@ mxData                  Create MxData Object
 mxDataDynamic           Create dynamic data
 mxDataWLS               Create legacy MxData Object for Least Squares
                         (WLS, DWLS, ULS) Analyses
+mxDescribeDataWLS       Determine whether a dataset will have weights
+                        and summary statistics for the means if used
+                        with mxFitFunctionWLS
 mxEval                  Evaluate Values in MxModel
 mxEvaluateOnGrid        Evaluate an algebra on an abscissa grid and
                         collect column results
@@ -267,14 +279,17 @@ mxFitFunctionAlgebra    Create MxFitFunctionAlgebra Object
 mxFitFunctionGREML      Create MxFitFunctionGREML Object
 mxFitFunctionML         Create MxFitFunctionML Object
 mxFitFunctionMultigroup
-                        Create MxFitFunctionMultigroup object
+                        Create a fit function used to fit
+                        multiple-group models
 mxFitFunctionR          Create MxFitFunctionR Object
 mxFitFunctionRow        Create an MxFitFunctionRow Object
 mxFitFunctionWLS        Create MxFitFunctionWLS Object
 mxGREMLDataHandler      Helper Function for Structuring GREML Data
-mxGenerateData          Generate data based on an MxModel object
+mxGenerateData          Generate data based on an mxModel (or a
+                        data.frame)
 mxGetExpected           Extract the component from a model's
                         expectation
+mxJiggle                Jiggle parameter values.
 mxKalmanScores          Estimate Kalman scores and error covariance
                         matrices
 mxLISRELObjective       Create MxLISRELObjective Object
@@ -296,12 +311,12 @@ mxPowerSearch           Power curve
 mxRAMObjective          DEPRECATED: Create MxRAMObjective Object
 mxRObjective            DEPRECATED: Create MxRObjective Object
 mxRename                Rename MxModel or a Submodel
-mxRestore               Restore From Checkpoint File
+mxRestore               Restore model state from a checkpoint file
 mxRetro                 Return random classic Mx error message
 mxRowObjective          DEPRECATED: Create MxRowObjective Object
-mxRun                   Send a Model to the Optimizer
+mxRun                   Run an OpenMx model
 mxSE                    Compute standard errors in OpenMx
-mxSave                  Save End State to Checkpoint File
+mxSave                  Save model state to a checkpoint file
 mxSetDefaultOptions     Reset global options to the default
 mxSimplify2Array        Like simplify2array but works with vectors of
                         different lengths
@@ -323,9 +338,11 @@ myRegData               Example regression data with correlated
                         predictors
 myRegDataRaw            Example regression data with correlated
                         predictors
-myTwinData              Twin data on weight and height
-mzfData                 MZ female example twin data
-mzmData                 MZ Male example data
+myTwinData              Duplicate of twinData
+mzfData                 Example twin extended kinship data: MZ female
+                        twins
+mzmData                 Example twin extended kinship data: MZ Male
+                        data
 nuclear_twin_design_data
                         Twin data from a nuclear family design
 numHess1                numeric Hessian data 1
@@ -339,6 +356,8 @@ omxAugmentDataWithWLSSummary
                         Estimate summary statistics used by the WLS fit
                         function
 omxBrownie              Make Brownies in OpenMx
+omxBuildAutoStartModel
+                        Build the model used for mxAutoStart
 omxCheckCloseEnough     Approximate Equality Testing Function
 omxCheckEquals          Equality Testing Function
 omxCheckError           Correct Error Message Function
@@ -379,6 +398,7 @@ omxQuotes               omxQuotes
 omxRAMtoML              omxRAMtoML
 omxRMSEA                Get the RMSEA with confidence intervals from
                         model
+omxReadGRMBin           Read a GCTA-Format Binary GRM into R.
 omxSapply               On-Demand Parallel Sapply
 omxSaturatedModel       Create Reference (Saturated and Independence)
                         Models
@@ -390,7 +410,8 @@ rvectorize              Vectorize By Row
 summary.MxModel         Model Summary
 tr                      trace
 twinData                Australian twin sample biometric data.
-twin_NA_dot             Twin data on weight and height
+twin_NA_dot             Twin biometric data (Practice cleaning: "." for
+                        missing data, wrong data types etc.)
 vec2diag                Create Diagonal Matrix From Vector
 vech                    Half-vectorization
 vech2full               Inverse Half-vectorization

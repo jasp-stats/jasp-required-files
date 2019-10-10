@@ -42,8 +42,7 @@ formula.nlrq	nlrq
 formula.rq	rq.object
 gasprice	gasprice
 index.dynrq	dynrq
-KhmaladzeTest	khmaladzeTest
-khmaladzize	khmaladzeTest
+KhmaladzeTest	KhmaladzeTest
 kselect	kuantile
 kuantile	kuantile
 kunique	kuantile
@@ -62,6 +61,7 @@ nlrq	nlrq
 nlrq.control	nlrq.control
 nlrqModel	nlrq
 Peirce	Peirce
+plot.KhmaladzeTest	plot.KhmaladzeTest
 plot.qss1	plot.rqss
 plot.qss2	plot.rqss
 plot.rq.process	plot.rq.process
@@ -84,6 +84,7 @@ print.anova.rq	anova.rq
 print.crq	crq
 print.dynrq	dynrq
 print.dynrqs	dynrq
+print.KhmaladzeTest	print.KhmaladzeTest
 print.nlrq	nlrq
 print.rq	print.rq
 print.rqs	print.rq
@@ -96,7 +97,6 @@ print.summary.nlrq	nlrq
 print.summary.rq	print.summary.rq
 print.summary.rqs	print.summary.rq
 print.summary.rqss	summary.rqss
-qdensity	khmaladzeTest
 qrisk	qrisk
 qss	qss
 qss1	qss

@@ -50,9 +50,9 @@ correctly and not subsequently modified.
 <h3>Value</h3>
 
 <p>A character vector of the same length as <code>files</code>, with names
-equal to <code>files</code>.  The elements will be <code>NA</code> for non-existent
-or unreadable files, otherwise a 32-character string of hexadecimal
-digits.
+equal to <code>files</code> (possibly expanded).  The elements will be
+<code>NA</code> for non-existent or unreadable files, otherwise a
+32-character string of hexadecimal digits.
 </p>
 
 
@@ -75,5 +75,5 @@ a 2001 release of <code>glibc</code>.
 as.vector(md5sum(dir(R.home(), pattern = "^COPY", full.names = TRUE)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

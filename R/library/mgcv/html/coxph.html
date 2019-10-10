@@ -48,8 +48,8 @@ censoring.
 <p>Stratification is possible, allowing for different baseline hazards in different strata. In that case the response has two columns: the first is event/censoring time and the second is a numeric stratum index. See below for an example.  
 </p>
 <p>Prediction from the fitted model object (using the <code>predict</code> method) with <code>type="response"</code> will predict on the 
-survivor function scale. See example code below for extracting the cumulative baseline hazard/survival directly.
-Martingale or deviance 
+survivor function scale. This requires evaluation times to be provided as well as covariates (see example). Also see example code
+below for extracting the cumulative baseline hazard/survival directly. Martingale or deviance 
 residuals can be extracted. The <code>fitted.values</code> stored in the model object are survival function estimates for each 
 subject at their event/censoring time. 
 </p>
@@ -191,5 +191,5 @@ ms &lt;- clogit(case ~ spontaneous + induced + strata(stratum), data=infert,
 summary(mg)$p.table[1:2,]; ms
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
 </body></html>

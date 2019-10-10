@@ -51,9 +51,9 @@ In this very short vignette, I will use contour integration to evaluate
 using numerical methods.  This document is part of the \pkg{elliptic}
 package~\citep{hankin2006}. 
 
-The residue theorem tells us that the integral of~$f(z)$ along any
-closed nonintersecting path, traversed anticlockwise, is equal
-to~$2\pi i$ times the sum of the residues inside it.
+If $f$ is meromorphic, the residue theorem tells us that the integral
+of~$f$ along any closed nonintersecting path, traversed anticlockwise,
+is equal to~$2\pi i$ times the sum of the residues inside it.
 
 
 \begin{figure}[htbp]
@@ -66,12 +66,13 @@ to~$2\pi i$ times the sum of the residues inside it.
   \end{center}
 \end{figure}
 
-Take a semicircular path~$P$ from $-R$ to $+R$ along the real axis,
-then following a semicircle in the upper half plane, of radius $R$ to
-close the loop (figure~\ref{semicircular_path}.  Now consider
-large~$R$.  Then~$P$ encloses a pole at~$i$ [there is one at $-i$
-  also, but this is outside P, so irrelevent here] at which the
-residue is~$-i/2e$.  Thus
+To evaluate the integral above, we define
+$f(z)=\frac{e^{iz}}{1+z^2}$. Then we take a semicircular path~$P$ from
+$-R$ to $+R$ along the real axis, then following a semicircle in the
+upper half plane, of radius $R$ to close the loop
+(figure~\ref{semicircular_path}).  Now we make~$R$ large.  Then~$P$
+encloses a pole at~$i$ [there is one at $-i$ also, but this is outside
+  $P$, so irrelevent here] at which the residue is~$-i/2e$.  Thus
 
 \begin{equation}
   \oint_P f(z)\,dz=2\pi i\cdot(-i/2e) = \pi/e
@@ -156,7 +157,7 @@ residue theorem states that
 
 Function \code{residue()} is a wrapper that takes a function~$f(z)$
 and integrates~$f(z)/\left(z-z_0\right)$ around a closed loop which
-encloses~$z_0$.  We can test this numerically:
+encloses~$z_0$.  We can test this numerically by evaluating $\sin(1)$:
 
 <<residuetest>>=
 f <- function(z){sin(z)}

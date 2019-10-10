@@ -20,14 +20,16 @@ knitr::opts_chunk$set(fig.width = 4.5, class.output = "ro")
   2. [EMMs defined](#EMMdef)
       a. [Reference grids](#ref_grid)
       b. [Estimated marginal means](#emmeans)
-      b. [Altering the reference grid](#altering)
-      b. [Derived covariates](#depcovs)
-      b. [Graphical displays](#plots)
-      c. [Weighting](#weights)
-      d. [Multivariate models](#multiv)
-  3. [Summary](#summary)
-  4. [The back story of **emmeans**](#backstory)
-  5. [Further reading](#more)
+      c. [Altering the reference grid](#altering)
+      d. [Derived covariates](#depcovs)
+      e. [Graphical displays](#plots)
+      f. [Weighting](#weights)
+      g. [Multivariate models](#multiv)
+  3. [Objects, structures, and methods](#emmobj)
+  3. [P values, "significance", and scientific integrity](#pvalues)
+  4. [Summary](#summary)
+  5. [The back story of **emmeans**](#backstory)
+  6. [Further reading](#more)
   
 [Index of all vignette topics](vignette-topics.html)
 
@@ -41,8 +43,11 @@ different percentages of protein (`percent`) from different sources (`source`)
 in their diet, and later we measure the concentration (`conc`) of leucine.
 Here's an interaction plot showing the mean `conc` at each combination of 
 the other factors.
-```{r}
+```{r, echo = FALSE}
 par(mar = .1 + c(4, 4, 1, 1))   # reduce head space
+
+```
+```{r}
 with(pigs, interaction.plot(percent, source, conc))
 ```
 
@@ -91,7 +96,7 @@ the weight as the other two values.
 The point is that the marginal means of `cell.means` give *equal weight* to each
 cell. In many situations (especially with experimental data), that is a much
 fairer way to compute marginal means, in that they are not biased by imbalances
-in the data. we are, in a sense, estimating what the marginal means *would* be,
+in the data. We are, in a sense, estimating what the marginal means *would* be,
 had the experiment been balanced. Estimated marginal means (EMMs) serve that
 need.
 
@@ -267,8 +272,8 @@ ref_grid(mtcars.2)
 For both models, the reference grid uses the `disp` mean of 230.72. But for
 `mtcars.2`, we also set `dispsq` to its mean of 68113. This is not right,
 because `dispsq` should be the square of `disp` (about 53232, not 68113) in order to be
-consistent. If we use that value of `dispsq`, we get the same results as for
-`mtcars.1` (discrepancies due to rounding of `disp`):
+consistent. If we use that value of `dispsq`, we get the same results (modulus
+rounding error) as for `mtcars.1`:
 ```{r}
 emmeans(mtcars.2, "Cyl", at = list(dispsq = 230.72^2))
 ```
@@ -381,7 +386,7 @@ Here is a model and reference grid:
 MOats.lm <- lm (yield ~ Block + Variety, data = MOats)
 ref_grid (MOats.lm, mult.name = "nitro")
 ```
-So, `nitro` is in essence a factor having 4 levels corresponding to the 4
+So, `nitro` is regarded as a factor having 4 levels corresponding to the 4
 dimensions of `yield`. We can subsequently obtain EMMs for any of the factors
 `Block`, `Variety`, `nitro`, or combinations thereof. The argument `mult.name =
 "nitro"` is optional; if it had been excluded, the multivariate levels would
@@ -389,8 +394,137 @@ have been named `rep.meas`.
 
 [Back to Contents](#contents)
 
+
+
+
+
+## Objects, structures, and methods {#emmobj}
+<!-- @index `emmGrid` objects -->
+The `ref_grid()` and `emmeans()` functions are introduced previously.
+These functions, and a few related ones,
+return an object of class `emmGrid`:
+```{r}
+pigs.rg <- ref_grid(pigs.lm1)
+class(pigs.rg)
+
+pigs.emm.s <- emmeans(pigs.rg, "source")
+class(pigs.emm.s)
+```
+If you simply show these objects, you get different-looking results:
+```{r}
+pigs.rg
+
+pigs.emm.s
+```
+This is based on guessing what users most need to see when displaying the object.
+You can override these defaults; for example to just see a quick summary of
+what is there, do
+```{r}
+str(pigs.emm.s)
+```
+<!-- @index `str()`; `summary_emm` object; `print.summary_emm()` -->
+The most important method for `emmGrid` objects is `summary()`. It is used as the
+default for displaying an `emmeans()` result like `pigs.emm.s`. This `summary()`
+method for `emmGrid` objects) actually produces a `data.frame`, but with extra bells 
+and whistles:
+```{r}
+class(summary(pigs.emm.s))
+```
+This can be useful to know because if you want to actually *use* `emmeans()` results
+in other computations, you should save its summary, and then you can access those
+results just like you would access data in a data frame. The `emmGrid` object itself
+is not so accessible. There is a `print.summary_emm()` function that is what
+actually produces the output you see above -- a data frame with extra
+annotations.
+
+[Back to Contents](#contents)
+
+
+
+
+## P values, "significance", and scientific integrity {#pvalues}
+<!-- @index Significance!Assessing; 
+    "Significant"@significant!Why you shouldn't say this;
+    *P* values!Interpreting; ATOM; 
+    ASA Statement on *P* values -->
+There is a growing consensus among statisticians and researchers that *P* values
+are widely misunderstood, and that the term "statistical significance" is
+downright misleading. If you have a small *P* value, it *only* means that the
+effect being tested is unlikely to be explained by chance variation alone, in
+the context of the current study and the current statistical model underlying
+the test. If you have a large *P* value, it *only* means that the observed
+effect could plausibly be due to chance alone: it is *wrong* to conclude that
+there is no effect.
+
+The American Statistical Association has for some time been advocating very
+cautious use of *P* values (Wasserman *et al.* 2014, 2019). The ASA now
+*advises against ever using the term "statistically significant"* 
+(or a related descriptor) because it is
+too often misinterpreted, and too often used carelessly. 
+
+Wasserman *et al.* (2019),
+and the 43 articles it accompanies in the same issue of *TAS*, recommend a
+number of alternatives. I do not agree with all that is said in the main
+article, and there are portions that are too cutesy or wander off-topic.
+Further, it is quite dizzying to try to digest all the accompanying articles,
+and to reconcile their disagreeing viewpoints. But the basic ideas are
+summarized with the help of the acronym **ATOM**, for the four highlighted words
+below:
+
+  * **Acceptance** of uncertainty. If you
+    were to repeat your study, you would get somewhat different results and perhaps
+    different effects will stand out. Likewise, there are other reasonable
+    models that you might have chosen, and those would have yielded different
+    results. If the topic is worth studying, others will try to replicate it,
+    perhaps with different study designs and different ways of operationalizing
+    important concepts -- again, yielding different results.
+    
+  * **Thoughtfulness**. Design your study with clear objectives in mind, and
+    spend time considering the best way to address those objectives in your study
+    design. Pilot the study to ensure that the procedures actually work, how much
+    variability to expect, and ensure that the sample size is adequate. How do
+    your results fit in the big picture, scientifically? Think about the
+    importance of the effects you have observed in your model(s)/data
+    in the context of the science. Think carefully about how well your model 
+    fits the data and if there are other possibilities.
+    
+  * **Openness**. Be transparent in disclosing the methods used, and reporting 
+    comprehensively all the successes and failures, the small and large effects.
+    If hypothesis tests are used, report the actual *P* values found (e.g., "*P* = 0.075")
+    and don't suppress or withhold results just because they are "nonsignificant,"
+    because those results may still be useful to other researchers via meta-analysis.
+    Trust in the expert judgment of other researchers.
+    
+  * **Modesty**. Be clear in examining and expressing the limitations of your work.
+    Understand that other researchers with different subject-area strengths may choose
+    other models that may cast a different light on your work. Encourage others to try to
+    reproduce your work, and be a good scientific colleague to them. Do not
+    exaggerate the importance of your findings. Your study is not final or
+    definitive; recognize that it is just one part of a broader picture.
+    Ironically, the more important the research, the more related research will
+    be undertaken, making that picture bigger (and, potentially,  your part of it smaller).
+
+  
+
+### References
+ Wasserman RL, Lazar NA (2016)
+   "The ASA's Statement on *p*-Values: Context, Process, and Purpose,"
+   *The American Statistician*, **70**, 129--133,
+   https://doi.org/10.1080/00031305.2016.1154108
+ 
+ Wasserman RL, Schirm AL, Lazar, NA (2019)
+   "Moving to a World Beyond 'p < 0.05',"
+   *The American Statistician*, **73**, 1--19,
+   https://doi.org/10.1080/00031305.2019.1583913
+
+
+
+
+[Back to Contents](#contents)
+
+
 ## Summary of main points {#summary}
-  * EMMs are based on a *model*. A different model for the same data may lead
+  * EMMs are derived from a *model*. A different model for the same data may lead
     to different EMMs.
   * EMMs are based on a *reference grid* consisting of all combinations
     of factor levels, with each covariate set to its average (by default).
@@ -403,6 +537,10 @@ have been named `rep.meas`.
   * Reference grids and `emmeans()` results may be plotted via `plot()`
     (for parallel confidence intervals) or `emmip()` (for an interaction-style
     plot).
+  * Be cautious with the terms "significant" and "nonsignificant", and avoid using hard
+    thresholds like *P* < 0.05 as a criterion for scientific meaning or
+    importance. The importance of a result is established by scientific context,
+    not by some *P* value. Remember ATOM.
     
 [Back to Contents](#contents)
 
@@ -452,7 +590,7 @@ the log scale.
 
 The lesson is that it is possible that even university service duties can lead
 to technical developments in statistics. One never knows where new ideas and
-inspirations will arise. Speaking of this, I have learned and benefitted
+inspirations will arise. Speaking of this, I have learned and benefited
 enormously from users' questions about the package, and basically all recent
 improvements to **emmeans** are a direct result of those communications. So
 don't be shy about asking questions or requesting features.
@@ -474,10 +612,12 @@ also be accessed via `vignette("`*name*`", "emmeans")`
     ["transformations"](transformations.html)
   * Multi-factor models with interactions: ["interactions"](interactions.html)
   * Working with messy data and nested effects: ["messy-data"](messy-data.html)
+  * Making predictions from your model: ["predictions"](predictions.html)
   * Examples of more sophisticated models (e.g., mixed, ordinal, MCMC)
     ["sophisticated"](sophisticated.html)
   * Utilities for working with `emmGrid` objects: ["utilities"](utilities.html)
   * Frequently asked questions: ["FAQs"](FAQs.html)
+  * Adding **emmeans** support to your package: ["xtending"](xtending.html)
 
 [Back to Contents](#contents)
 

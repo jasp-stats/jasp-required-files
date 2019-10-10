@@ -19,29 +19,30 @@ side of the assignment as the object's attributes (if appropriate).
 <h3>Usage</h3>
 
 <pre>
-attributes(obj)
-attributes(obj) &lt;- value
-mostattributes(obj) &lt;- value
+attributes(x)
+attributes(x) &lt;- value
+mostattributes(x) &lt;- value
 </pre>
 
 
 <h3>Arguments</h3>
 
 <table summary="R argblock">
-<tr valign="top"><td><code>obj</code></td>
+<tr valign="top"><td><code>x</code></td>
 <td>
-<p>an object</p>
+<p>any <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object</p>
 </td></tr>
 <tr valign="top"><td><code>value</code></td>
 <td>
-<p>an appropriate named list of attributes, or <code>NULL</code>.</p>
+<p>an appropriate named <code><a href="list.html">list</a></code> of attributes, or
+<code>NULL</code>.</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>Unlike <code><a href="attr.html">attr</a></code> it is possible to set attributes on a
+<p>Unlike <code><a href="attr.html">attr</a></code> it is not an error to set attributes on a
 <code>NULL</code> object: it will first be coerced to an empty list.
 </p>
 <p>Note that some attributes (namely <code><a href="class.html">class</a></code>,
@@ -113,5 +114,5 @@ mostattributes(x) &lt;- list(mycomment = "really special", dim = 3:2,
 x # dim(), but not {dim}names
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

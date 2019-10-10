@@ -78,8 +78,10 @@ the browser (by <code><a href="browseURL.html">browseURL</a></code>, accessible 
 news since the 3.0.0 release of R (corresponding to R's top-level
 &lsquo;<span class="file">NEWS</span>&rsquo; file).  Otherwise, if the given add-on package can be
 found in the given libraries, it is attempted to read its news in
-structured form from files &lsquo;<span class="file">inst/NEWS.Rd</span>&rsquo;, &lsquo;<span class="file">NEWS</span>&rsquo; or
-&lsquo;<span class="file">inst/NEWS</span>&rsquo; (in that order).
+structured form from files &lsquo;<span class="file">inst/NEWS.Rd</span>&rsquo;, &lsquo;<span class="file">NEWS.md</span>&rsquo;
+(since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.6.0, needs packages <a href="https://CRAN.R-project.org/package=commonmark"><span class="pkg">commonmark</span></a> and
+<a href="https://CRAN.R-project.org/package=xml2"><span class="pkg">xml2</span></a> to be available), &lsquo;<span class="file">NEWS</span>&rsquo; or &lsquo;<span class="file">inst/NEWS</span>&rsquo;
+(in that order).
 </p>
 <p>File &lsquo;<span class="file">inst/NEWS.Rd</span>&rsquo; should be an Rd file given the entries as Rd
 <code style="white-space: pre;">\itemize</code> lists, grouped according to version using
@@ -91,6 +93,14 @@ possibly further grouped according to categories using
 <code style="white-space: pre;">\subsection</code> elements named as the categories.
 At the very end of <code style="white-space: pre;">\section{..}</code>, the date may also be specified
 as <code style="white-space: pre;">(%Y-%m-%d, &lt;note&gt;)</code>, i.e., including parentheses.
+</p>
+<p>File &lsquo;<span class="file">NEWS.md</span>&rsquo; should contain the news in Markdown (following the
+CommonMark (<a href="https://commonmark.org/">https://commonmark.org/</a>) specification), with the
+primary heading level giving the version number after a prefix
+followed by a space, and optionally followed by a space and a
+parenthesized ISO 8601 format date.  Where available, secondary
+heading are taken to indicate categories.  To accommodate for common
+practice, news entries are only split down to the category level.
 </p>
 <p>The plain text &lsquo;<span class="file">NEWS</span>&rsquo; files in add-on packages use a variety of
 different formats; the default news reader should be capable to
@@ -123,8 +133,9 @@ texts.
 <p>Package <span class="pkg">tools</span> provides an (internal) utility function
 <code>news2Rd</code> to convert plain text &lsquo;<span class="file">NEWS</span>&rsquo; files to Rd.  For
 &lsquo;<span class="file">NEWS</span>&rsquo; files in a format which can successfully be handled by the
-default reader, package maintainers can use <code>tools:::news2Rd(dir,
-    "NEWS.Rd")</code>, possibly with additional argument <code>codify = TRUE</code>,
+default reader, package maintainers can use
+<code>tools:::news2Rd(dir, "NEWS.Rd")</code>,
+possibly with additional argument <code>codify = TRUE</code>,
 with <code>dir</code> a character string specifying the path to a package's
 root directory.  Upon success, the &lsquo;<span class="file">NEWS.Rd</span>&rsquo; file can further be
 improved and then be moved to the &lsquo;<span class="file">inst</span>&rsquo; subdirectory of the
@@ -183,5 +194,5 @@ sort(table(db[, "Category"]), decreasing = TRUE)
 table(news(Version &gt;= "3.0.0", db = db)$Version)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

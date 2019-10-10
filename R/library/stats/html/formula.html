@@ -22,6 +22,7 @@ attributes when <code>object</code> already inherits from
 
 <pre>
 formula(x, ...)
+DF2formula(x, env = parent.frame())
 as.formula(object, env = parent.frame())
 
 ## S3 method for class 'formula'
@@ -34,7 +35,7 @@ print(x, showEnv = !identical(e, .GlobalEnv), ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x, object</code></td>
 <td>
-<p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object.</p>
+<p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object, for <code>DF2formula()</code> a <code><a href="../../base/html/data.frame.html">data.frame</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -123,7 +124,13 @@ component of the object (and evaluates it), then a <code>"terms"</code>
 component, then a <code>formula</code> parameter of the call (and evaluates
 its value) and finally a <code>"formula"</code> attribute.
 </p>
-<p>There is a <code>formula</code> method for data frames.  If there is only
+<p>There is a <code>formula</code> method for data frames.  When there's
+<code>"terms"</code> attribute with a formula, e.g., for a
+<code><a href="model.frame.html">model.frame</a>()</code>, that formula is returned.  If you'd like the
+previous (<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> <i>&lt;=</i> 3.5.x) behavior, use the auxiliary
+<code>DF2formula()</code> which does not consider a <code>"terms"</code> attribute.
+Otherwise, if
+there is only
 one column this forms the RHS with an empty LHS.  For more columns,
 the first column is the LHS of the formula and the remaining columns
 separated by <code>+</code> form the RHS.
@@ -188,5 +195,5 @@ xnam &lt;- paste0("x", 1:25)
 (fmla &lt;- as.formula(paste("y ~ ", paste(xnam, collapse= "+"))))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

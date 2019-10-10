@@ -85,6 +85,7 @@ partialInvarianceCat	partialInvariance
 PAVranking	PAVranking
 permuteMeasEq	permuteMeasEq
 permuteMeasEq-class	permuteMeasEq-class
+plausibleValues	plausibleValues
 plotProbe	plotProbe
 plotRMSEAdist	plotRMSEAdist
 plotRMSEApower	plotRMSEApower
@@ -122,8 +123,6 @@ singleParamTest	singleParamTest
 skew	skew
 splitSample	splitSample
 SSpower	SSpower
-standardizeMx	semTools-deprecated
-standardizeMx-deprecated	standardizeMx-deprecated
 summary,BootMiss-method	BootMiss-class
 summary,EFA-method	EFA-class
 summary,FitDiff-method	FitDiff-class

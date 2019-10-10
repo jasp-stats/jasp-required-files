@@ -3,6 +3,123 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/RcppArmadillo/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/RcppArmadillo/issues/#1}{##1}}
 
+\section{Changes in RcppArmadillo version 0.9.700.2.0 (2019-09-01)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.700.2 (Gangster Democracy)
+    \itemize{
+      \item faster handling of cubes by \code{vectorise()}
+      \item faster faster handling of sparse matrices by \code{nonzeros()}
+      \item faster row-wise \code{index_min()} and \code{index_max()}
+      \item expanded \code{join_rows()} and \code{join_cols()} to handle joining up to 4 matrices
+      \item expanded \code{.save()} and \code{.load()} to allow storing sparse matrices in CSV format
+      \item added \code{randperm()} to generate a vector with random
+      permutation of a sequence of integers 
+    }
+    \item Expanded the list of known good \code{gcc} and \code{clang}
+    versions in \code{configure.ac}
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.600.4.0 (2019-07-14)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.600.4 (Napa Invasion)
+    \itemize{
+      \item faster handling of sparse submatrices
+      \item faster handling of sparse diagonal views
+      \item faster handling of sparse matrices by \code{symmatu()} and \code{symmatl()}
+      \item faster handling of sparse matrices by \code{join_cols()}
+      \item expanded \code{clamp()} to handle sparse matrices
+      \item added \code{.clean()} to replace elements below a threshold with zeros
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.500.2.0 (2019-06-11)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.500.2 (Riot Compact)
+    \itemize{
+      \item Expanded \code{solve()} with \code{solve_opts::likely_sympd}
+      to indicate that the given matrix is likely positive definite 
+      \item more robust automatic detection of positive definite
+      matrices by \code{solve()} and \code{inv()} 
+      \item faster handling of sparse submatrices
+      \item expanded \code{eigs_sym()} to print a warning if the given
+      matrix is not symmetric 
+      \item extended LAPACK function prototypes to follow Fortran
+      passing conventions for so-called "hidden arguments", in order
+      to address GCC Bug 90329; to use previous LAPACK function
+      prototypes without the "hidden arguments",
+      \code{#define ARMA_DONT_USE_FORTRAN_HIDDEN_ARGS before
+        #include <armadillo> }
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.400.3.0 (2019-05-09)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.400.3 (Surrogate Miscreant)
+    \itemize{
+      \item check for symmetric / hermitian matrices (used by
+      decomposition functions) has been made more robust
+      \item \code{linspace()} and \code{logspace()} now honour requests
+      for generation of vectors with zero elements
+      \item fix for vectorisation / flattening of complex sparse matrices
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.400.2.0 (2019-04-28)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.400.2 (Surrogate Miscreant)
+    \itemize{
+      \item faster \code{cov()} and \code{cor()}
+      \item added \code{.as_col()} and \code{.as_row()}
+      \item expanded \code{.shed_rows()} / \code{.shed_cols()} /
+      \code{.shed_slices()} to remove rows/columns/slices specified in a
+      vector 
+      \item expanded \code{vectorise()} to handle sparse matrices
+      \item expanded element-wise versions of \code{max()} and
+      \code{min()} to handle sparse matrices
+      \item optimised handling of sparse matrix expressions:
+      \code{sparse \% (sparse +- scalar)} and \code{sparse / (sparse +- scalar)} 
+      \item expanded \code{eig_sym()}, \code{chol()},
+      \code{expmat_sym()}, \code{logmat_sympd()}, \code{sqrtmat_sympd()},
+      \code{inv_sympd()} to print a warning if the given matrix is not
+      symmetric 
+      \item more consistent detection of vector expressions
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.300.2.0 (2019-03-21)}{
+  \itemize{
+    \item Upgraded to Armadillo release 9.300.2 (Fomo Spiral)
+    \itemize{
+      \item Faster handling of compound complex matrix expressions by
+      \code{trace()} 
+      \item More efficient handling of element access for inplace
+      modifications in sparse matrices 
+      \item Added \code{.is_sympd()} to check whether a matrix is
+      symmetric/hermitian positive definite 
+      \item Added \code{interp2()} for 2D data interpolation
+      \item Added \code{expm1()} and \code{log1p()}
+      \item Expanded \code{.is_sorted()} with options "strictascend" and
+      "strictdescend" 
+      \item Expanded \code{eig_gen()} to optionally perform balancing
+      prior to decomposition 
+    }
+  }
+}
+
+\section{Changes in RcppArmadillo version 0.9.200.7.1 (2019-03-08)}{
+  \itemize{
+    \item Explicit setting of \code{RNGversion("3.5.0")} in one unit
+    test to accomodate the change in \code{sample()} in R 3.6.0
+    \item Back-ported a fix to the Wishart RNG from upstream (Dirk in
+    \ghpr{248} fixing \ghit{247})
+  }
+}
+
 \section{Changes in RcppArmadillo version 0.9.200.7.0 (2019-01-17)}{
   \itemize{
     \item Upgraded to Armadillo release 9.200.7 (Carpe Noctem)
@@ -15,7 +132,7 @@
   }
 }
 
-\section{Changes in RcppArmadillo version 0.9.200.5.0 (2018-11-09)}{
+\section{Changes in RcppArmadillo version 0.9.200.5.0 (2018-11-27)}{
   \itemize{
     \item Upgraded to Armadillo release 9.200.5 (Carpe Noctem)
     \item Changes in this release

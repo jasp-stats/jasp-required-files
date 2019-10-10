@@ -78,6 +78,7 @@ brief.polr	brief
 car-defunct	car-defunct
 car-deprecated	car-deprecated
 car-internal.Rd	car-internal
+carHexsticker	carHexsticker
 carPalette	carPalette
 carWeb	carWeb
 ceres.plot	car-defunct
@@ -161,6 +162,7 @@ infIndexPlot	infIndexPlot
 infIndexPlot.influence.lme	infIndexPlot
 infIndexPlot.influence.merMod	infIndexPlot
 infIndexPlot.lm	infIndexPlot
+infIndexPlot.lmerMod	infIndexPlot
 influence.lme	influence-mixed-models
 influence.merMod	influence-mixed-models
 influence.mixed.models	influence-mixed-models
@@ -168,6 +170,7 @@ influence.plot	influencePlot
 influenceIndexPlot	infIndexPlot
 influencePlot	influencePlot
 influencePlot.lm	influencePlot
+influencePlot.lmerMod	influencePlot
 inverseResponsePlot	invResPlot
 inverseResponsePlot.lm	invResPlot
 invResPlot	invResPlot
@@ -232,6 +235,7 @@ outlier.test	car-defunct
 outlierTest	outlierTest
 outlierTest.glm	outlierTest
 outlierTest.lm	outlierTest
+outlierTest.lmerMod	outlierTest
 panel.car	panel.car
 poTest	poTest
 poTest.polr	poTest

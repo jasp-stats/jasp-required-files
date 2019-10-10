@@ -1,8 +1,8 @@
 Package: shinyAce
 Type: Package
 Title: Ace Editor Bindings for Shiny
-Version: 0.3.3
-Date: 2018-12-25
+Version: 0.4.1
+Date: 2019-9-23
 Authors@R: c(
   person("Vincent", "Nijs", role = c("aut", "cre"), email = "radiant@rady.ucsd.edu"),
   person("Forest", "Fang", role = "aut", email = "forest.fang@outlook.com"),
@@ -13,14 +13,15 @@ Authors@R: c(
 Description: Ace editor bindings to enable a rich text editing environment
     within Shiny.
 License: MIT + file LICENSE
-Depends: R (>= 3.4.0)
-Imports: shiny (>= 1.0.5), jsonlite
-Suggests: testthat (>= 2.0.0), dplyr (>= 0.7.4)
+Depends: R (>= 3.3.0)
+Imports: shiny (>= 1.0.5), jsonlite, utils, tools
+Suggests: testthat (>= 2.0.0), dplyr (>= 0.8.3)
 BugReports: https://github.com/trestletech/shinyAce/issues
 Encoding: UTF-8
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
+Language: en-US
 NeedsCompilation: no
-Packaged: 2019-01-02 21:41:52 UTC; vnijs
+Packaged: 2019-09-24 03:57:52 UTC; vnijs
 Author: Vincent Nijs [aut, cre],
   Forest Fang [aut],
   Trestle Technology, LLC [aut],
@@ -29,5 +30,5 @@ Author: Vincent Nijs [aut, cre],
   Ajax.org B.V. [ctb, cph] (Ace)
 Maintainer: Vincent Nijs <radiant@rady.ucsd.edu>
 Repository: CRAN
-Date/Publication: 2019-01-03 09:30:07 UTC
-Built: R 3.5.2; ; 2019-02-26 05:19:48 UTC; windows
+Date/Publication: 2019-09-24 10:10:07 UTC
+Built: R 3.6.1; ; 2019-10-07 21:52:46 UTC; windows

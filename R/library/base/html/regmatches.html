@@ -113,8 +113,7 @@ x &lt;- "John (fishing, hunting), Paul (hiking, biking)"
 ## non-matched parts.
 ## First, match the parenthesized hobby lists.
 m &lt;- gregexpr("\\([^)]*\\)", x)
-## Write a little utility for creating blank strings with given numbers
-## of characters.
+## Create blank strings with given numbers of characters.
 blanks &lt;- function(n) strrep(" ", n)
 ## Create a copy of x with the parenthesized parts blanked out.
 s &lt;- x
@@ -127,5 +126,5 @@ m &lt;- gregexpr(", *", s)
 regmatches(x, m, invert = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

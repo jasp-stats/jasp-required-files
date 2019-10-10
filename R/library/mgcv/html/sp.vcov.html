@@ -18,7 +18,7 @@ that evaluated the required Hessian.
 <h3>Usage</h3>
 
 <pre>
-sp.vcov(x)
+sp.vcov(x,edge.correct=TRUE,reg=1e-3)
 </pre>
 
 
@@ -29,6 +29,14 @@ sp.vcov(x)
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p> a fitted model object of class <code>gam</code> as produced by <code>gam()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>edge.correct</code></td>
+<td>
+<p> if the model was fitted with <code>edge.correct=TRUE</code> (see <code><a href="gam.control.html">gam.control</a></code>), then thereturned covariance matrix will be for the edge corrected log smoothing parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>reg</code></td>
+<td>
+<p>regularizer for Hessian - default is equivalent to prior variance of 1000 on log smoothing parameters.</p>
 </td></tr>
 </table>
 
@@ -43,9 +51,8 @@ the log smoothing parameters, if this has been obtained as part of fitting.
 <h3>Value</h3>
 
 <p> A matrix corresponding to the estimated covariance matrix of the log smoothing parameter estimators,
-if this can be extracted, otherwise <code>NULL</code>. If the scale parameter has been (RE)ML estimated (i.e. if the method was 
-<code>"ML"</code> or <code>"REML"</code> and the scale parameter was unknown) then the 
-last row and column relate to the log scale parameter.  
+if this can be extracted, otherwise <code>NULL</code>. If the scale parameter has been (RE)ML estimated (i.e. if the method was <code>"ML"</code> or <code>"REML"</code> and the scale parameter was unknown) then the 
+last row and column relate to the log scale parameter. If <code>edge.correct=TRUE</code> and this was used in fitting then the edge corrected smoothing parameters are in attribute <code>lsp</code> of the returned matrix.  
 </p>
 
 
@@ -57,7 +64,10 @@ last row and column relate to the log scale parameter.
 
 <h3>References</h3>
 
-<p>Wood, S.N. (2006) On confidence intervals for generalized additive models based on penalized regression splines. Australian and New Zealand Journal of Statistics. 48(4): 445-464.
+<p>Wood, S.N., N. Pya and B. Saefken (2016), Smoothing parameter and
+model selection for general smooth models (with discussion).
+Journal of the American Statistical Association 111, 1548-1575
+<a href="http://dx.doi.org/10.1080/01621459.2016.1180986">http://dx.doi.org/10.1080/01621459.2016.1180986</a>
 </p>
 
 
@@ -78,5 +88,5 @@ mod &lt;- gam(y~s(x,bs="cc",k=10)+s(z),knots=list(x=seq(0,1,length=10)),
 sp.vcov(mod)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
 </body></html>

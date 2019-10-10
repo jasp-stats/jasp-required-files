@@ -1,0 +1,16 @@
+Package: glasso
+Title: Graphical Lasso: Estimation of Gaussian Graphical Models
+Version: 1.10
+Author: Jerome Friedman, Trevor Hastie and Rob Tibshirani
+Description: Estimation of a sparse inverse covariance matrix using a lasso (L1)
+             penalty. Facilities are provided for estimates along a path of values
+	     for the regularization parameter.
+Maintainer: Rob Tibshirani <tibs@stat.stanford.edu>
+License: GPL-2
+URL: http://www-stat.stanford.edu/~tibs/glasso
+Packaged: 2018-07-12 23:45:19 UTC; naras
+Repository: CRAN
+Date/Publication: 2018-07-13 04:40:06 UTC
+NeedsCompilation: yes
+Built: R 3.5.2; x86_64-w64-mingw32; 2018-12-26 00:55:46 UTC; windows
+Archs: i386, x64

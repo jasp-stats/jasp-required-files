@@ -78,15 +78,16 @@ recover_data.rsm = function(object, data, mode = c("asis", "coded", "decoded"), 
         new.trms = update(trms, reformulate(c("1", cpred)))           #20
         attr(new.trms, "orig") = trms
         attr(data, "terms") = new.trms
+        attr(data, "misc") = cod
     }
     data
 }
 
 ## ------------------------------------------------------------------------
 emm_basis.rsm = function(object, trms, xlev, grid, 
-                         mode = c("asis", "coded", "decoded"), ...) {
+                         mode = c("asis", "coded", "decoded"), misc, ...) {
     mode = match.arg(mode)
-    cod = rsm::codings(object)
+    cod = misc
     if(!is.null(cod) && mode == "decoded") {                          # 5
         grid = rsm::coded.data(grid, formulas = cod)
         trms = attr(trms, "orig")

@@ -3,23 +3,9 @@ require("emmeans")
 knitr::opts_chunk$set(fig.width = 4.5, class.output = "ro")
 
 ## ------------------------------------------------------------------------
-pigs.lm <- lm(log(conc) ~ source + factor(percent), data = pigs)
-pigs.rg <- ref_grid(pigs.lm)
-class(pigs.rg)
-
+pigs.lm1 <- lm(log(conc) ~ source + factor(percent), data = pigs)
+pigs.rg <- ref_grid(pigs.lm1)
 pigs.emm.s <- emmeans(pigs.rg, "source")
-class(pigs.emm.s)
-
-## ------------------------------------------------------------------------
-pigs.rg
-
-pigs.emm.s
-
-## ------------------------------------------------------------------------
-str(pigs.emm.s)
-
-## ------------------------------------------------------------------------
-class(summary(pigs.emm.s))
 
 ## ------------------------------------------------------------------------
 test(pigs.emm.s)
@@ -60,6 +46,9 @@ test(pigs.prs.s, joint = TRUE)
 
 ## ------------------------------------------------------------------------
 joint_tests(pigsint.rg)
+
+## ------------------------------------------------------------------------
+joint_tests(pigsint.rg, by = "source")
 
 ## ------------------------------------------------------------------------
 test(pigs.prs.s, delta = log(1.25), adjust = "none")

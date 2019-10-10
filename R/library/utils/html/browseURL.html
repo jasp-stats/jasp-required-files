@@ -55,6 +55,48 @@ Fortunately, most URLs do not need encoding.</p>
 
 <h3>Details</h3>
 
+
+<dl>
+<dt>On Unix-alikes:</dt><dd>
+<p>The default browser is set by option <code>"browser"</code>, in turn set by
+the environment variable <span class="env">R_BROWSER</span> which is by default set in
+file &lsquo;<span class="file"><var><a href="../../base/html/Rhome.html">R_HOME</a></var>/etc/Renviron</span>&rsquo; to a choice
+made manually or automatically when <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> was configured.  (See
+<code><a href="../../base/html/Startup.html">Startup</a></code> for where to override that default value.)
+To suppress showing URLs altogether, use the value <code>"false"</code>.
+</p>
+<p>On many platforms it is best to set option <code>"browser"</code> to a
+generic program/script and let that invoke the user's choice of
+browser.  For example, on macOS use <code>open</code> and on many other
+Unix-alikes use <code>xdg-open</code>.
+</p>
+<p>If <code>browser</code> supports remote control and <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> knows how to perform
+it, the URL is opened in any already-running browser or a new one if
+necessary.  This mechanism currently is available for browsers which
+support the <code>"-remote openURL(...)"</code> interface (which includes
+Mozilla and Opera), Galeon, KDE konqueror (<em>via</em> kfmclient) and
+the GNOME interface to Mozilla. (Firefox has dropped support, but
+defaults to using an already-running browser.)  Note that the type of
+browser is determined from its name, so this mechanism will only be
+used if the browser is installed under its canonical name.
+</p>
+<p>Because <code>"-remote"</code> will use any browser displaying on the X
+server (whatever machine it is running on), the remote control
+mechanism is only used if <code>DISPLAY</code> points to the local host.
+This may not allow displaying more than one URL at a time from a
+remote host.
+</p>
+<p>It is the caller's responsibility to encode <code>url</code> if necessary
+(see <code><a href="URLencode.html">URLencode</a></code>).
+</p>
+<p>To suppress showing URLs altogether, set <code>browser = "false"</code>.
+</p>
+<p>The behaviour for arguments <code>url</code> which are not URLs is
+platform-dependent.  Some platforms accept absolute file paths; fewer
+accept relative file paths.
+</p>
+</dd>
+<dt>On Windows:</dt><dd>
 <p>The default browser is set by option <code>"browser"</code>, in turn set by
 the environment variable <span class="env">R_BROWSER</span> if that is set, otherwise to
 <code>NULL</code>.
@@ -66,6 +108,9 @@ path separator even though the RFC1738 standard requires <code>/</code>.
 </p>
 <p>To suppress showing URLs altogether, set <code>browser = "false"</code>.
 </p>
+</dd>
+</dl>
+
 
 
 <h3>URL schemes</h3>
@@ -83,11 +128,17 @@ both browser and OS.
 <h3>Examples</h3>
 
 <pre>
-## Not run: browseURL("https://www.r-project.org")
+## Not run: 
+## for KDE users who want to open files in a new tab
+options(browser = "kfmclient newTab")
+
+browseURL("https://www.r-project.org")
+
+## On Windows-only, something like
 browseURL("file://d:/R/R-2.5.1/doc/html/index.html",
           browser = "C:/Program Files/Mozilla Firefox/firefox.exe")
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

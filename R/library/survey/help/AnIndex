@@ -302,6 +302,7 @@ weights.survey.design	weights.survey.design
 weights.survey_fpc	weights.survey.design
 weights.svyrep.design	weights.survey.design
 with.svyimputationList	with.svyimputationList
+withPV.survey.design	withPV.survey.design
 withReplicates	withReplicates
 withReplicates.svrepstat	withReplicates
 withReplicates.svrepvar	withReplicates

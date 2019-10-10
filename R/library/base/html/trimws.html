@@ -16,7 +16,7 @@
 <h3>Usage</h3>
 
 <pre>
-trimws(x, which = c("both", "left", "right"))
+trimws(x, which = c("both", "left", "right"), whitespace = "[ \t\r\n]")
 </pre>
 
 
@@ -33,13 +33,24 @@ trimws(x, which = c("both", "left", "right"))
 leading and trailing whitespace (default), or only leading
 (<code>"left"</code>) or trailing (<code>"right"</code>).  Can be abbreviated.</p>
 </td></tr>
+<tr valign="top"><td><code>whitespace</code></td>
+<td>
+<p>a string specifying a regular expression to match
+(one character of) &ldquo;white space&rdquo;, see Details for
+alternatives to the default.</p>
+</td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>For portability, &lsquo;whitespace&rsquo; is taken as the character class
-<code>[ \t\r\n]</code> (space, horizontal tab, line feed, carriage return).
+<p>Internally, <code><a href="grep.html">sub</a>(re, "", *, perl = TRUE)</code>, i.e., PCRE
+library regular expressions are used.
+For portability, the default &lsquo;whitespace&rsquo; is the character class
+<code>[ \t\r\n]</code> (space, horizontal tab, carriage return,
+newline).  Alternatively, <code>[\h\v]</code> is a good (PCRE)
+generalization to match all Unicode horizontal and vertical white
+space characters, see also <a href="https://www.pcre.org">https://www.pcre.org</a>.
 </p>
 
 
@@ -51,7 +62,13 @@ x
 trimws(x)
 trimws(x, "l")
 trimws(x, "r")
+
+## Unicode --&gt; need "stronger" 'whitespace' to match all :
+tt &lt;- "text with unicode 'non breakable space'."
+xu &lt;- paste(" \t\v", tt, "\u00a0 \n\r")
+(tu &lt;- trimws(xu, whitespace = "[\\h\\v]"))
+stopifnot(identical(tu, tt))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

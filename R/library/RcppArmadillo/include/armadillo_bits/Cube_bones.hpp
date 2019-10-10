@@ -194,6 +194,8 @@ class Cube : public BaseCube< eT, Cube<eT> >
   inline void shed_cols(const uword in_col1, const uword in_col2);
   inline void shed_slices(const uword in_slice1, const uword in_slice2);
   
+  template<typename T1> inline void shed_slices(const Base<uword, T1>& indices);
+  
   inline void insert_rows(const uword row_num, const uword N, const bool set_to_zero = true);
   inline void insert_cols(const uword row_num, const uword N, const bool set_to_zero = true);
   inline void insert_slices(const uword slice_num, const uword N, const bool set_to_zero = true);
@@ -276,7 +278,7 @@ class Cube : public BaseCube< eT, Cube<eT> >
   arma_inline const Cube& operator--();
   arma_inline void        operator--(int);
   
-  arma_inline arma_warn_unused bool is_finite() const;
+       inline arma_warn_unused bool is_finite() const;
   arma_inline arma_warn_unused bool is_empty()  const;
   
   inline arma_warn_unused bool has_inf() const;
@@ -326,6 +328,8 @@ class Cube : public BaseCube< eT, Cube<eT> >
   template<typename functor> inline const Cube&     imbue(functor F);
   
   inline const Cube& replace(const eT old_val, const eT new_val);
+  
+  inline const Cube& clean(const pod_type threshold);
   
   inline const Cube& fill(const eT val);
   

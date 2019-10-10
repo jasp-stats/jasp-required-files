@@ -23,5 +23,5 @@ Maintainer: Jesse Krijthe <jkrijthe@gmail.com>
 License_is_FOSS: yes
 Repository: CRAN
 Date/Publication: 2018-11-10 16:30:21 UTC
-Built: R 3.5.3; x86_64-w64-mingw32; 2019-07-24 01:00:46 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 16:32:24 UTC; windows
 Archs: i386, x64

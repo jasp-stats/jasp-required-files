@@ -29,7 +29,8 @@ pairs(x, labels, panel = points, ...,
       diag.panel = NULL, text.panel = textPanel,
       label.pos = 0.5 + has.diag/3, line.main = 3,
       cex.labels = NULL, font.labels = 1,
-      row1attop = TRUE, gap = 1, log = "")
+      row1attop = TRUE, gap = 1, log = "",
+      horOdd = !row1attop, verOdd = !row1attop)
 </pre>
 
 
@@ -139,6 +140,13 @@ indices specifying the indices of those variables where logarithmic
 axes should be used for both x and y.  <code>log = "xy"</code> specifies
 logarithmic axes for all variables.</p>
 </td></tr>
+<tr valign="top"><td><code>horOdd, verOdd</code></td>
+<td>
+<p><code><a href="../../base/html/logical.html">logical</a></code> (or integer) determining
+how the horizontal and vertical axis labeling happens.  If true, the
+axis labelling starts at the first (from top left) row or column,
+respectively.</p>
+</td></tr>
 </table>
 
 
@@ -219,7 +227,7 @@ panel.hist &lt;- function(x, ...)
     rect(breaks[-nB], 0, breaks[-1], y, col = "cyan", ...)
 }
 pairs(USJudgeRatings[1:5], panel = panel.smooth,
-      cex = 1.5, pch = 24, bg = "light blue",
+      cex = 1.5, pch = 24, bg = "light blue", horOdd=TRUE,
       diag.panel = panel.hist, cex.labels = 2, font.labels = 2)
 
 ## put (absolute) correlations on the upper panels,
@@ -242,5 +250,5 @@ pairs(iris, log = 1:4, # log the first four
       main = "Lengths and Widths in [log]", line.main=1.5, oma=c(2,2,3,2))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

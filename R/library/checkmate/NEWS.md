@@ -1,3 +1,18 @@
+# Version 1.9.4
+* Fixed factors being detected as integerish.
+* Fixed error message for name checks of vectors.
+
+# Version 1.9.3
+* New argument `extension` for `checkPathForOutput()` (#162).
+* Fixed handling of different NA types in all set functions (#158).
+* `expect_vector` removed due to a nameclash with package `testthat`.
+
+# Version 1.9.2
+* `assert*(..., coerce = TRUE)` does not drop names during conversion (#157),
+  thanks to @mb706.
+* Fixed documentation in `checkDataFrame` (#159), thanks to @harvey131.
+* Changed heuristic in `vname()` to improve lookup of variable names.
+
 # Version 1.9.1
 * Fix segfault on Solaris
 * Fix warnings reported by rchk

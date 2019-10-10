@@ -12,5 +12,5 @@ License: GPL (>= 2)
 Packaged: 2012-03-19 16:06:34 UTC; kmullen
 Repository: CRAN
 Date/Publication: 2012-03-19 16:28:59
-Built: R 3.5.2; x86_64-w64-mingw32; 2018-12-26 00:48:35 UTC; windows
+Built: R 3.6.0; x86_64-w64-mingw32; 2019-05-28 20:44:01 UTC; windows
 Archs: i386, x64

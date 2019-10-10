@@ -99,8 +99,8 @@ elements that do <em>not</em> match.</p>
 <tr valign="top"><td><code>replacement</code></td>
 <td>
 <p>a replacement for matched pattern in <code>sub</code> and
-<code>gsub</code>.  Coerced to character if possible.  For <code>fixed =
-      FALSE</code> this can include backreferences <code>"\1"</code> to
+<code>gsub</code>.  Coerced to character if possible.  For
+<code>fixed = FALSE</code> this can include backreferences <code>"\1"</code> to
 <code>"\9"</code> to parenthesized subexpressions of <code>pattern</code>.  For
 <code>perl = TRUE</code> only, it can also contain <code>"\U"</code> or
 <code>"\L"</code> to convert the rest of the replacement to upper or
@@ -225,8 +225,9 @@ this is regarded as a non-match, usually with a warning.
 <h3>Warning</h3>
 
 <p>The POSIX 1003.2 mode of <code>gsub</code> and <code>gregexpr</code> does not
-work correctly with repeated word-boundaries (e.g., <code>pattern =
-  "\b"</code>).  Use <code>perl = TRUE</code> for such matches (but that may not
+work correctly with repeated word-boundaries (e.g.,
+<code>pattern = "\b"</code>).
+Use <code>perl = TRUE</code> for such matches (but that may not
 work as expected with non-ASCII inputs, as the meaning of
 &lsquo;word&rsquo; is system-dependent).
 </p>
@@ -348,7 +349,7 @@ txt &lt;- c("The", "licenses", "for", "most", "software", "are",
 stopifnot( txt[i] == grep("[gu]", txt, value = TRUE) )
 
 ## Note that in locales such as en_US this includes B as the
-## collation order is aAbBcCdEe ...
+## collation order is aAbBcCdDe ...
 (ot &lt;- sub("[b-e]",".", txt))
 txt[ot != gsub("[b-e]",".", txt)]#- gsub does "global" substitution
 
@@ -432,5 +433,5 @@ lapply(regmatches(s, gregexpr(pattern, s)),
        function(e) regmatches(e, regexec(pattern, e)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

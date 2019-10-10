@@ -262,3 +262,10 @@ March 04 2010:
 - Implemented flexible link functions for clm()s
 - Added new article submitted to JSS as vignette and moved old vignettes to 
   GitHub
+
+2019-03-09:
+- Massage tests to check out on R-devel
+
+2019-04-25:
+- Change in formula evaluation in base R prompts this update - very kindly 
+  fixed by Martin Maechler (R core) in PR#18 

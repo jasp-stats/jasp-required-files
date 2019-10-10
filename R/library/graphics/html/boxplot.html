@@ -20,6 +20,9 @@ boxplot(x, ...)
 
 ## S3 method for class 'formula'
 boxplot(formula, data = NULL, ..., subset, na.action = NULL,
+        xlab = mklab(y_var = horizontal),
+        ylab = mklab(y_var =!horizontal),
+        add = FALSE, ann = !add, horizontal = FALSE,
         drop = FALSE, sep = ".", lex.order = FALSE)
 
 ## Default S3 method:
@@ -27,7 +30,7 @@ boxplot(x, ..., range = 1.5, width = NULL, varwidth = FALSE,
         notch = FALSE, outline = TRUE, names, plot = TRUE,
         border = par("fg"), col = NULL, log = "",
         pars = list(boxwex = 0.8, staplewex = 0.5, outwex = 0.5),
-        horizontal = FALSE, add = FALSE, at = NULL)
+         ann = !add, horizontal = FALSE, add = FALSE, at = NULL)
 </pre>
 
 
@@ -38,7 +41,8 @@ boxplot(x, ..., range = 1.5, width = NULL, varwidth = FALSE,
 <td>
 <p>a formula, such as <code>y ~ grp</code>, where <code>y</code> is a
 numeric vector of data values to be split into groups according to
-the grouping variable <code>grp</code> (usually a factor).</p>
+the grouping variable <code>grp</code> (usually a factor).  Note that
+<code>~ g1 + g2</code> is equivalent to <code>g1:g2</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
 <td>
@@ -55,6 +59,16 @@ to be used for plotting.</p>
 <p>a function which indicates what should happen
 when the data contain <code>NA</code>s.  The default is to ignore missing
 values in either the response or the group.</p>
+</td></tr>
+<tr valign="top"><td><code>xlab, ylab</code></td>
+<td>
+<p>x- and y-axis annotation, since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6.0 with a
+non-empty default.  Can be suppressed by <code>ann=FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+<p><code><a href="../../base/html/logical.html">logical</a></code> indicating if axes should be annotated (by
+<code>xlab</code> and <code>ylab</code>).</p>
 </td></tr>
 <tr valign="top"><td><code>drop, sep, lex.order</code></td>
 <td>
@@ -269,16 +283,18 @@ sets).
 <pre>
 ## boxplot on a formula:
 boxplot(count ~ spray, data = InsectSprays, col = "lightgray")
-# *add* notches (somewhat funny here):
+# *add* notches (somewhat funny here &lt;--&gt; warning "notches .. outside hinges"):
 boxplot(count ~ spray, data = InsectSprays,
         notch = TRUE, add = TRUE, col = "blue")
 
-boxplot(decrease ~ treatment, data = OrchardSprays,
-        log = "y", col = "bisque")
+boxplot(decrease ~ treatment, data = OrchardSprays, col = "bisque",
+        log = "y")
+## horizontal=TRUE, switching  y &lt;--&gt; x :
+boxplot(decrease ~ treatment, data = OrchardSprays, col = "bisque",
+        log = "x", horizontal=TRUE)
 
 rb &lt;- boxplot(decrease ~ treatment, data = OrchardSprays, col = "bisque")
 title("Comparing boxplot()s and non-robust mean +/- SD")
-
 mn.t &lt;- tapply(OrchardSprays$decrease, OrchardSprays$treatment, mean)
 sd.t &lt;- tapply(OrchardSprays$decrease, OrchardSprays$treatment, sd)
 xi &lt;- 0.3 + seq(rb$n)
@@ -320,5 +336,5 @@ boxplot(len ~ dose:supp, data = ToothGrowth,
 ## more examples in  help(bxp)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

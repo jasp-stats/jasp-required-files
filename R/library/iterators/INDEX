@@ -8,4 +8,5 @@ irnorm                  Random Number Iterators
 isplit                  Split Iterator
 iter                    Iterator Factory Functions
 iterators-package       The Iterators Package
+makeIwrapper            Iterator Maker Generator
 nextElem                Get Next Element of Iterator

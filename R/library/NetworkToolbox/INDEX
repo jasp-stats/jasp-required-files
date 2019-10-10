@@ -1,6 +1,7 @@
 ECO                     ECO Neural Network Filter
 ECOplusMaST             ECO+MaST Network Filter
-LoGo                    Local/Global Inversion Method (GGM of 'TMFG')
+LoGo                    Local/Global Inversion Method
+MFCF                    Maximally Filtered Clique Forest
 MaST                    Maximum Spanning Tree
 NetworkToolbox-package
                         NetworkToolbox-package
@@ -9,7 +10,6 @@ adapt.a                 Adaptive Alpha
 behavOpen               NEO-PI-3 for Resting-state Data
 betweenness             Betweenness Centrality
 binarize                Binarize Network
-centlist                List of Centrality Measures
 closeness               Closeness Centrality
 clustcoeff              Clustering Coefficient
 comcat                  Communicating Nodes
@@ -21,24 +21,18 @@ convert2igraph          Convert Network(s) to igraph's Format
 convertConnBrainMat     Import CONN Toolbox Brain Matrices to R format
 cor2cov                 Convert Correlation Matrix to Covariance Matrix
 core.items              Core Items
-cpmEV                   Connectome-based Predictive Modeling-External
-                        Validation
-cpmFP                   Connectome-based Predictive
-                        Modeling-Fingerprinting
-cpmFPperm               Connectome-based Predictive
-                        Modeling-Fingerprinting Permutation
-cpmIV                   Connectome-based Predictive Modeling-Internal
-                        Validation
+cpm                     Connectome Predictive Modeling
 degree                  Degree
 depend                  Dependency Network Approach
 depna                   Dependency Neural Networks
-desc                    Variable Descriptive Statisitcs
-desc.all                Dataset Descriptive Statisitcs
+desc                    Variable Descriptive Statistics
+desc.all                Dataset Descriptive Statistics
 distance                Distance
 diversity               Diversity Coefficient
 edgerep                 Edge Replication
 eigenvector             Eigenvector Centrality
 flow.frac               Flow Fraction
+gain.functions          MFCF Gain Functions
 gateway                 Gateway Coefficient
 hybrid                  Hybrid Centrality
 impact                  Node Impact
@@ -47,10 +41,11 @@ kld                     Kullback-Leibler Divergence
 lattnet                 Generates a Lattice Network
 leverage                Leverage Centrality
 louvain                 Louvain Community Detection Algorithm
-nams                    Network Adjusted Mean/Sum
 neoOpen                 NEO-PI-3 Openness to Experience Data
 net.coverage            Network Coverage
 neuralnetfilter         Neural Network Filter
+node.multidimensional   Detects Node Crossings in a Network
+node.redundant          Detects Redundant Nodes in a Network
 participation           Participation Coefficient
 pathlengths             Characteristic Path Lengths
 randnet                 Generates a Random Network
@@ -59,6 +54,7 @@ resp.rep                Repeated Responses Check
 rmse                    Root Mean Square Error
 rspbc                   Randomized Shortest Paths Betweenness
                         Centrality
+sim.chordal             Simulate Chordal Network
 sim.swn                 Simulate Small-world Network
 smallworldness          Small-worldness Measure
 stable                  Stabilizing Nodes

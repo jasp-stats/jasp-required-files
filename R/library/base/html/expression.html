@@ -104,11 +104,14 @@ length(ex1 &lt;- expression(1 + 0:9)) # 1
 ex1
 eval(ex1) # 1:10
 
-length(ex3 &lt;- expression(u, v, 1+ 0:9)) # 3
+length(ex3 &lt;- expression(u, 2, u + 0:9)) # 3
 mode(ex3 [3])   # expression
 mode(ex3[[3]])  # call
+## but not all components are 'call's :
+sapply(ex3, mode  ) #  name  numeric  call
+sapply(ex3, typeof) # symbol  double  language
 rm(ex3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

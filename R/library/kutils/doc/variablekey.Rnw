@@ -1,4 +1,4 @@
-%% LyX 2.3.1 created this file.  For more info, see http://www.lyx.org/.
+%% LyX 2.3.2 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[english,american,noae]{scrartcl}
 \usepackage{lmodern}
@@ -239,6 +239,7 @@ V54532 & income & . & numeric\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
+
 It was tedious to assemble that table, but it helped quite a bit in
 our discussions. The vertical bars were used to indicate that the
 original data had discrete values. When a variable has a natural ordering,
@@ -377,11 +378,10 @@ key_long <- keyTemplate(mydf, long = TRUE, file = "key_long.csv", max.levels = 5
 
 Apart from the long argument, the \code{keyTemplate} function has
 two especially noteworthy arguments, \code{file} and \code{max.levels}.
-If the file argument is supplied, \code{\noindent keyTemplate} uses
-the suffix to determine storage format. Legal suffixes are \code{\noindent .csv},
-\code{\noindent .xlsx}, and \code{\noindent .rds} (for creating
-comma separated variables, Excel spreadsheets, and R serialization
-data structures). 
+If the file argument is supplied, \code{keyTemplate} uses the suffix
+to determine storage format. Legal suffixes are \code{.csv}, \code{.xlsx},
+and \code{.rds} (for creating comma separated variables, Excel spreadsheets,
+and R serialization data structures). 
 
 The \code{max.levels} argument is also important. This is used in
 the same sense that functions like \code{read.spss} in the foreign
@@ -398,13 +398,13 @@ a wide key; the recoding information is tightly packed into \code{value\_old}
 and \code{value\_new}. The key includes more or less obvious columns
 for the old and new variable names, their classes, and values of the
 variables. Note that the values of x5 and x4 are not enumerated because
-we set max.levels at 5. The \code{\noindent max.levels} parameter
-defaults to 15, so that an integer variable with less than 15 values
-will have each value displayed. For this example, the display of that
-variable key was too wide for the page, so we reduced the number of
-values. When the observed number of scores is above \code{\noindent max.levels},
-the key does not try to list the individual values (compare the treatment
-of variables \code{\noindent x4} and \code{\noindent x6}). 
+we set max.levels at 5. The \code{max.levels} parameter defaults
+to 15, so that an integer variable with less than 15 values will have
+each value displayed. For this example, the display of that variable
+key was too wide for the page, so we reduced the number of values.
+When the observed number of scores is above \code{max.levels}, the
+key does not try to list the individual values (compare the treatment
+of variables \code{x4} and \code{x6}). 
 
 <<key0, include=F>>=
 library(kutils)
@@ -431,6 +431,7 @@ key_long <- keyTemplate(mydf, long = TRUE, max.levels = 5)
 print(xtable(key_wide), include.rownames = FALSE, size = "small", floating = FALSE )
 @
 \end{table}
+
 \begin{table}
 \caption{The Long Key Template\label{tab:Long-Key}}
 
@@ -439,6 +440,7 @@ print(xtable(key_wide), include.rownames = FALSE, size = "small", floating = FAL
 print(xtable(key_long), include.rownames = FALSE, size = "small", floating = FALSE)
 @
 \end{table}
+
 The value of \code{class\_old} in the key is the first element in
 the return from the function class for a variable. There is one exception,
 where we have tried to differentiate integer variables from numeric
@@ -672,6 +674,7 @@ x2 & x2.gpa & character & integer & a|b|c|d|f & 4|3|2|1|0\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
+
 In line one of Table \ref{tab:Change-Type-Example1}, the class \code{character}
 remains the same. That line will produce a new character variable
 with embellished values. Line two demonstrates how to create an R
@@ -698,6 +701,7 @@ x6 & x6.f & integer & factor & 1|2|3|4|5 & F|D|C|B|A\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
+
 If a variable's \code{class\_old} is ordered, and we simply want
 to relabel the existing levels, the work is also easy (see Table \ref{tab:Change-Type-Example3}).
 The second row in Table \ref{tab:Change-Type-Example3} shows that
@@ -717,6 +721,7 @@ x7 & x7.gpa & ordered & integer & f<d<c<b<a & 0|1|2|3|4\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
+
 Working with ordered variables, whether as input or output, becomes
 more complicated if the existing data are not ordered in the way we
 want. In the \code{mydf} example, the variable \code{mydf\$x3} was
@@ -750,6 +755,7 @@ x3 & x3.passfail & ordered & ordered & low<med<hi & low<pass<pass\tabularnewline
 \hline 
 \end{tabular}
 \end{table}
+
 The key importer will check that all ``duplicated levels'' are adjacent
 with one another, so that the values above low are grouped together.
 
@@ -774,6 +780,7 @@ x3 & x3.passfail & ordered & ordered & high & pass\\
 \bottomrule
 \end{tabular}
 \end{table}
+
 What to do about missing values. Even within our small group, there
 is some disagreement about this. The SAS tradition would have us enter
 a period, ``.'', in value\_new for a level that is to be treated
@@ -851,6 +858,7 @@ c(a,b) & values equal to or greater than a and less than or equal to b  & c(-999
 \hline 
 \end{tabular}
 \end{table}
+
 The key specification for \code{recodes} is discussed in the help
 page of the \code{assignRecode} function in \code{kutils}. The \code{recodes}
 column takes R code and applies it to the desired variable. For example,
@@ -876,6 +884,7 @@ x6 & x6 & integer & integer & 1$|$2$|$3$|$4$|$5 & 1$|$2$|$3$|$4$|$5 & c(-9) & \\
 \end{tabular}
 }
 \end{table}
+
 
 \subsection{Class conversions}
 

@@ -29,13 +29,13 @@ formatSpMatrix(x, digits = NULL, maxp = 1e9,
                col.names, note.dropping.colnames = TRUE, uniDiag = TRUE,
                align = c("fancy", "right"))
 
-printSpMatrix(x, digits = NULL, maxp = getOption("max.print"),
+printSpMatrix(x, digits = NULL, maxp = max(100L, getOption("max.print")),
               cld = getClassDef(class(x)),
               zero.print = ".", col.names, note.dropping.colnames = TRUE,
               uniDiag = TRUE, col.trailer = "",
               align = c("fancy", "right"))
 
-printSpMatrix2(x, digits = NULL, maxp = getOption("max.print"),
+printSpMatrix2(x, digits = NULL, maxp = max(100L, getOption("max.print")),
               zero.print = ".", col.names, note.dropping.colnames = TRUE,
               uniDiag = TRUE, suppRows = NULL, suppCols = NULL,
               col.trailer = if(suppCols) "......" else "",
@@ -60,8 +60,12 @@ corresponds to using <code><a href="../../base/html/options.html">getOption</a>(
 <tr valign="top"><td><code>maxp</code></td>
 <td>
 <p>integer, default from <code><a href="../../base/html/options.html">options</a>(max.print)</code>,
-influences how many entries of large matrices are printed at all.</p>
-</td></tr>
+influences how many entries of large matrices are printed at all.
+Typically should not be smaller than around 1000; values smaller than
+100 are silently &ldquo;rounded up&rdquo; to 100.</p>
+</td></tr></table>
+
+<table summary="R argblock">
 <tr valign="top"><td><code>cld</code></td>
 <td>
 <p>the class definition of <code>x</code>; must be equivalent to
@@ -210,5 +214,5 @@ print(t(X2), zero.print = "-", col.names="substring 2")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-15 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-17 <a href="00Index.html">Index</a>]</div>
 </body></html>

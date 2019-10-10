@@ -1,6 +1,9 @@
 NEWS/ChangeLog for doSNOW
 -----------------------------
 
+1.0.17 2018-04-04
+    o  Changes to support enhanced exports via future (if available).
+
 1.0.16 2017-12-08
     o  Modified test report path for compliance with CRAN policies.
 	   

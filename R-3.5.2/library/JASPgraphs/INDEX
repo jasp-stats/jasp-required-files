@@ -1,0 +1,9 @@
+JASPcolors              JASP color palettes
+PlotPriorAndPosterior   Create a prior-posterior plot.
+PlotRobustnessSequential
+                        Create a robustness or sequential plot
+drawBFpizza             Make a pizza plot
+makeGridLines           custom Gridlines for ggplot objects
+parseThis               Tell that this string should be parsed.
+plotPieChart            Make a Pie Chart
+plotQQnorm              Make a Q-Q plot

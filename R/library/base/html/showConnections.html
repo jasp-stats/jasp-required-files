@@ -23,6 +23,7 @@ closeAllConnections()
 stdin()
 stdout()
 stderr()
+nullfile()
 
 isatty(con)
 </pre>
@@ -62,6 +63,9 @@ output from <code>stdout()</code> can be split: see the help page).
 </p>
 <p>The encoding for <code><a href="showConnections.html">stdin</a>()</code> when redirected can
 be set by the command-line flag <span class="option">--encoding</span>.
+</p>
+<p><code>nullfile()</code> returns filename of the null device (<code>"/dev/null"</code>
+on Unix, <code>"nul:"</code> on Windows).
 </p>
 <p><code>showConnections</code> returns a matrix of information.  If a
 connection object has been lost or forgotten, <code>getConnection</code>
@@ -131,5 +135,5 @@ mycon &lt;- getConnection(3)
 c(isatty(stdin()), isatty(stdout()), isatty(stderr()))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

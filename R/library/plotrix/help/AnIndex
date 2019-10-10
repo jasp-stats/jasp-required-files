@@ -37,6 +37,7 @@ count.overplot	count.overplot
 cylindrect	cylindrect
 death_reg	death_reg
 dendroPlot	dendroPlot
+densityGrid	densityGrid
 diamondplot	diamondplot
 dispbars	dispersion
 dispersion	dispersion
@@ -82,6 +83,7 @@ intersectDiagram	intersectDiagram
 jiggle	jiggle
 joyPlot	joyPlot
 kiteChart	kiteChart
+l2010	l2010
 labbePlot	labbePlot
 ladderplot	ladderplot
 ladderplot.default	ladderplot
@@ -89,6 +91,7 @@ legendg	legendg
 lengthKey	lengthKey
 listDepth	listDepth
 makeDendrite	makeDendrite
+makeDensityMatrix	makeDensityMatrix
 makeIntersectList	makeIntersectList
 maxEmptyRect	maxEmptyRect
 mtext3d	mtext3d

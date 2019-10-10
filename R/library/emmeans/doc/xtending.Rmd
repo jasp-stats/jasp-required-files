@@ -22,9 +22,11 @@ This vignette explains how developers may incorporate **emmeans** support in the
   2. [Data example](#dataex)
   3. [Supporting `rlm` objects](#rlm)
   4. [Supporting `lqs` objects](#lqs)
+  5. [Communication between methods](#communic)
   5. [Hook functions](#hooks)
   6. [Exported methods from **emmeans**](#exported)
   7. [Existing support for `rsm` objects](#rsm)
+  7. [Dispatching and restrictions](#dispatch)
   8. [Exporting and registering your methods](#exporting)
   9. [Conclusions](#concl)
   
@@ -196,6 +198,15 @@ Let's go through the listing of this method, line-by-line:
 [Back to Contents](#contents)
 
 
+## Communication between methods {#communic}
+<!-- @index `emm_basis()`!Communicating with `recover_data()`;
+   `recover_data()!Communicating with `emm_basis()`; `misc` attribute and argument -->
+If you need to pass information obtained in `recover_data()` to the `emm_basis()` method,
+simply incorporate it as `attr(data, "misc")` where `data` is the dataset returned by
+`recover_data()`. Subsequently, that attribute is available in `emm_grid()` by adding a
+`misc` argument.
+
+
 ## Hook functions {#hooks}
 <!-- @index Hook functions; `emm_basis()`!Hook functions 
      `estHook`; `vcovHook`; `postGridHook` -->
@@ -206,7 +217,7 @@ In addition, you may want to apply some form of special post-processing after th
 [Back to Contents](#contents)
 
 ## Exported methods from **emmeans** {#exported}
-<!-- @index **emmeans** package!Exports useful to developers -->
+<!-- @index Extending **emmeans**!Exports useful to developers -->
 For package developers' convenience, **emmeans** exports some of its S3 methods
 for `recover_data` and/or `emm_basis`---use `methods("recover_data")` and
 `methods("emm_basis")` to discover which ones. It may be that all you need is to
@@ -298,6 +309,7 @@ recover_data.rsm = function(object, data, mode = c("asis", "coded", "decoded"), 
         new.trms = update(trms, reformulate(c("1", cpred)))           #20
         attr(new.trms, "orig") = trms
         attr(data, "terms") = new.trms
+        attr(data, "misc") = cod
     }
     data
 }
@@ -309,15 +321,17 @@ By the way, the codings comprise a list of formulas with the coded name on the l
 
 Now, there is a nasty technicality. The `ref_grid` function in **emmeans** has a few lines of code after `recover_data` is called that determine if any terms in the model convert covariates to factors or vice versa; and this code uses the model formula. That formula involves variables on the coded scale, and those variables are no longer present in the data, so an error will occur if it tries to access them. Luckily, if we simply take those terms out of the formula, it won't hurt because those coded predictors would not have been converted in that way. So in line 20, we update `trms` with a simpler model with the coded variables excluded (the intercept is explicitly included to ensure there will be a right-hand side even is `cpred` is empty). We save that as the `terms` attribute, and the original terms as a new `"orig"` attribute to be retrieved later. The `data` object, modified or not, is returned. If data have been decoded, `ref_grid` will construct its grid using decoded variables.
 
+In line 23, we save the codings as the `"misc"` attribute, to be accessed later by `emm_basis()`.
+
 ### The `emm_basis` method {#ebrsm}
 <!-- @index `emm_basis()`!for `rsm` objects@rsm -->
 Now comes the `emm_basis` method that will be called after the grid is defined. 
 It is listed below:
 ```{r}
 emm_basis.rsm = function(object, trms, xlev, grid, 
-                         mode = c("asis", "coded", "decoded"), ...) {
+                         mode = c("asis", "coded", "decoded"), misc, ...) {
     mode = match.arg(mode)
-    cod = rsm::codings(object)
+    cod = misc
     if(!is.null(cod) && mode == "decoded") {                          # 5
         grid = rsm::coded.data(grid, formulas = cod)
         trms = attr(trms, "orig")
@@ -340,7 +354,7 @@ emm_basis.rsm = function(object, trms, xlev, grid,
 }
 ```
 
-This is much simpler. All we have to do is determine if decoding was done (line 5); and, if so, convert the grid back to the coded scale (line 6) and recover the original `terms` attribute (line 7). The rest is borrowed directly from the `emm_basis.lm` method in **emmeans**. Note that line 13 uses one of the exported functions we described in the preceding section. Lines 15--18 use functions from the **estimability** package to handle the possibility that the model is rank-deficient.
+This is much simpler. The coding formulas are obtained from `misc` (line 4) so that we don't have to re-obtain them from the object. All we have to do is determine if decoding was done (line 5); and, if so, convert the grid back to the coded scale (line 6) and recover the original `terms` attribute (line 7). The rest is borrowed directly from the `emm_basis.lm` method in **emmeans**. Note that line 13 uses one of the exported functions we described in the preceding section. Lines 15--18 use functions from the **estimability** package to handle the possibility that the model is rank-deficient.
 
 
 ### A demonstration {#demo}
@@ -367,6 +381,27 @@ emmeans(CR.rs2, ~ Time * Temp, mode = "decoded",
 Since the supplied settings are the same on the decoded scale as were used on the coded scale, the EMMs are identical to those in the previous output.
 
 
+## Dispatching and restrictions {#dispatch}
+<!-- @index Extending **emmeans**!Restrictions; 
+    `recover_data()`!Dispatching; `emm_basis()`!Dispatching -->
+The **emmeans** package has internal support for a number of model classes.
+When `recover_data()` and `emm_basis()` are dispatched, a search is made
+for external methods for a given class; and if found, those methods are
+used instead of the internal ones. However, certain restrictions apply
+when you aim to override an existing internal method:
+
+  1. The class name being extended must appear in the first or second
+     position in the results of `class(object)`. That is, you may have a
+     base class for which you provide `recover_data()` and `emm_basis()` 
+     methods, and those will also work for *direct* descendants thereof;
+     but any class in third place or later in the inheritance is ignored.
+  2. Certain classes vital to the correct operation of the package, e.g.,
+     `"lm"`, `"glm"`, etc., may not be overridden.
+     
+If there are no existing internal methods for the class(es) you provide
+methods for, there are no restrictions on them.
+
+
 ## Exporting and registering your methods {#exporting}
 <!-- @index **emmeans** package!Exporting extensions to 
      Registering `recover_data` and `emm_basis` methods -->
@@ -374,52 +409,23 @@ To make the methods available to users of your package, the methods must be expo
 R and CRAN are evolving in a way that having S3 methods in the registry is
 increasingly important; so it is a good idea to provide for that.
 The problem is not all of your package users will have **emmeans** installed.
-Thus, registering the methods must be done conditionally.
 
-One solution is to list `emmeans` and `estimability` in the `Imports` field of your `DESCRIPTION` file.
-Then, in the package `NAMESPACE` file, insert something like the following,
-replacing "foo" with your object class name:
+Thus, registering the methods must be done conditionally. We provide a
+courtesy function `.emm_register()` to make this simple. 
+Suppose that your package offers two model classes `foo` and `bar`, and it
+includes the corresponding functions `recover_data.foo`, `recover_data.bar`,
+`emm_basis.foo`, and `emm_basis.bar`.
+Then to register these methods, add or modify the
+`.onLoad` function in your package (traditionally saved in the source file `zzz.R`):
 ```r
-if (requireNamespace("emmeans", quietly = TRUE)) {
-    importFrom("emmeans", "recover_data", "emm_basis")
-    importFrom("estimability", "all.estble", "nonest.basis")
-    S3method(recover_data, foo)
-    S3method(emm_basis, foo)
-}
-```
-(You can get by without testing **estimability** since it is already required by **emmeans**.)
-
-The disadvantage of the above solution is that it adds several other packages as
-dependencies. An alternative method that avoids those extra dependencies is as follows:
-Put `emmeans` and
-`estimability` in `Suggests` rather than `Imports`, and add code to
-*dynamically* register the methods to one of your R source files (typically one
-named `zzz.R`, the last source file to be read). Put code like this there:
-```r
-register_s3_method <- function(pkg, generic, class) {
-    fun <- get(paste0(generic, ".", class), envir = parent.frame())
-    if (isNamespaceLoaded(pkg))
-        registerS3method(generic, class, fun, envir = asNamespace(pkg))
-    # Also ensure registration is done if pkg is loaded later:
-    setHook(
-        packageEvent(pkg, "onLoad"),
-        function(...)
-            registerS3method(generic, class, fun, envir = asNamespace(pkg))
-    )
-}
-
 .onLoad <- function(libname, pkgname) {
-    if (requireNamespace("emmeans", quietly = TRUE)) {
-        register_s3_method("emmeans", "recover_data", "foo")
-        register_s3_method("emmeans", "emm_basis", "foo")
-    }
+    if (requireNamespace("emmeans", quietly = TRUE))
+        emmeans::.emm_register(c("foo", "bar"), pkgname)
 }
 
 ```
-This code is adapted and simplified from the **hms** package. The original
-`register_s3_method` function is more general and includes type-checking
-of its arguments; but since this is just used internally, that checking
-seems unnecessary.
+You should also add `emmeans (>= 1.4)` and `estimability` (which is required by **emmeans**)
+to the `Suggests` field of your `DESCRIPTION` file.
 
 
 [Back to Contents](#contents)

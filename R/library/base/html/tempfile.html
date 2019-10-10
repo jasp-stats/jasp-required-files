@@ -83,11 +83,15 @@ is created before the interpreter is started.
 </p>
 <p>For <code>tempdir</code>, the path of the per-session temporary directory.
 </p>
-<p>Both will use backslash as the path separator.
+<p>On Windows, both will use a backslash as the path separator.
+</p>
+<p>On a Unix-alike, the value will be an absolute path (unless
+<code>tmpdir</code> is set to a relative path), but it need not be canonical
+(see <code><a href="normalizePath.html">normalizePath</a></code>) and on macOS it often is not.  
 </p>
 
 
-<h3>Note on parallel</h3>
+<h3>Note on parallel use</h3>
 
 <p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> processes forked by functions such as <code><a href="../../parallel/html/mcdummies.html">mclapply</a></code> and
 <code><a href="../../parallel/html/makeCluster.html">makeForkCluster</a></code> in package <span class="pkg">parallel</span> share a
@@ -103,8 +107,6 @@ that <code>tempfile</code> calls in different children try different names.
 <p>The final component of <code>tempdir()</code> is created by the POSIX system
 call <code>mkdtmp</code>, or if this is not available (e.g. on
 Windows) a version derived from the source code of GNU <code>glibc</code>.
-
-
 </p>
 <p>It will be of the form &lsquo;<span class="file">RtmpXXXXXX</span>&rsquo; where the last 6 characters
 are replaced in a platform-specific way.  POSIX only requires that the
@@ -149,5 +151,5 @@ if(exists("I'm brave") &amp;&amp; `I'm brave` &amp;&amp;
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

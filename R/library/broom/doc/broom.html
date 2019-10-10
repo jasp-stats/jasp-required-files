@@ -11,14 +11,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2018-12-04" />
+<meta name="date" content="2019-04-07" />
 
 <title>Introduction to broom</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -80,7 +80,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -268,6 +290,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -276,7 +301,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Introduction to broom</h1>
-<h4 class="date"><em>2018-12-04</em></h4>
+<h4 class="date">2019-04-07</h4>
 
 
 
@@ -342,7 +367,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">augment</span>(lmfit)</a></code></pre></div>
 <pre><code>## # A tibble: 32 x 10
 ##    .rownames   mpg    wt .fitted .se.fit .resid   .hat .sigma .cooksd
-##  * &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
 ##  1 Mazda RX4  21    2.62    23.3   0.634 -2.28  0.0433   3.07 1.33e-2
 ##  2 Mazda RX~  21    2.88    21.9   0.571 -0.920 0.0352   3.09 1.72e-3
 ##  3 Datsun 7~  22.8  2.32    24.9   0.736 -2.09  0.0584   3.07 1.54e-2
@@ -359,7 +384,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">glance</span>(lmfit)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 11
 ##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-## *     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     0.753         0.745  3.05      91.4 1.29e-10     2  -80.0  166.  170.
 ## # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
 <p>This distinction between the <code>tidy</code>, <code>augment</code> and <code>glance</code> functions is explored in a different context in the <a href="kmeans.html">k-means vignette</a>.</p>
@@ -379,7 +404,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">augment</span>(glmfit)</a></code></pre></div>
 <pre><code>## # A tibble: 32 x 10
 ##    .rownames    am    wt .fitted .se.fit .resid   .hat .sigma .cooksd
-##  * &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##    &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
 ##  1 Mazda RX4     1  2.62   1.50    0.918  0.635 0.126   0.803 0.0184 
 ##  2 Mazda RX~     1  2.88   0.471   0.676  0.985 0.108   0.790 0.0424 
 ##  3 Datsun 7~     1  2.32   2.70    1.28   0.360 0.0963  0.810 0.00394
@@ -442,9 +467,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">wt &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(wt <span class="op">~</span><span class="st"> </span>am, mtcars)</a>
 <a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">tidy</span>(wt)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 4
-##   statistic   p.value method                                   alternative
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                    &lt;chr&gt;      
-## 1      230. 0.0000435 Wilcoxon rank sum test with continuity ~ two.sided</code></pre>
+##   statistic   p.value method                                    alternative
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                     &lt;chr&gt;      
+## 1      230. 0.0000435 Wilcoxon rank sum test with continuity c~ two.sided</code></pre>
 <p>Since the <code>tidy</code> output is already only one row, <code>glance</code> returns the same output:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">glance</span>(tt)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 10
@@ -455,9 +480,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 ## #   alternative &lt;chr&gt;</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">glance</span>(wt)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 4
-##   statistic   p.value method                                   alternative
-##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                    &lt;chr&gt;      
-## 1      230. 0.0000435 Wilcoxon rank sum test with continuity ~ two.sided</code></pre>
+##   statistic   p.value method                                    alternative
+##       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                     &lt;chr&gt;      
+## 1      230. 0.0000435 Wilcoxon rank sum test with continuity c~ two.sided</code></pre>
 <p><code>augment</code> method is defined only for chi-squared tests, since there is no meaningful sense, for other tests, in which a hypothesis test produces output about each initial data point.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">chit &lt;-<span class="st"> </span><span class="kw">chisq.test</span>(<span class="kw">xtabs</span>(Freq <span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Class, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(Titanic)))</a>
 <a class="sourceLine" id="cb31-2" data-line-number="2"><span class="kw">tidy</span>(chit)</a></code></pre></div>

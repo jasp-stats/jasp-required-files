@@ -19,7 +19,7 @@ plot(cl$hc, main="HDBSCAN* Hierarchy")
 ## ------------------------------------------------------------------------
 cl <- hdbscan(moons, minPts = 5)
 check <- rep(F, nrow(moons)-1)
-core_dist <- kNNdist(moons, k=5-1)[,5-1]
+core_dist <- kNNdist(moons, k=5-1)
 
 ## cutree doesn't distinguish noise as 0, so we make a new method to do it manually 
 cut_tree <- function(hcl, eps, core_dist){

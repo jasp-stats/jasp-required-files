@@ -5,9 +5,7 @@
 
 <table width="100%" summary="page for validUTF8 {base}"><tr><td>validUTF8 {base}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>
-Check if a Character Vector is Validly Encoded
-</h2>
+<h2>Check if a Character Vector is Validly Encoded</h2>
 
 <h3>Description</h3>
 
@@ -20,7 +18,6 @@ encoding.
 
 <pre>
 validUTF8(x)
-
 validEnc(x)
 </pre>
 
@@ -30,7 +27,7 @@ validEnc(x)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>A character vector.</p>
+<p>a character vector.</p>
 </td></tr>
 </table>
 
@@ -80,8 +77,17 @@ c("Jetz", "no", "chli", "z\xc3\xbcrit\xc3\xbc\xc3\xbctsch:",
 validUTF8(x)
 validEnc(x) # depends on the locale
 Encoding(x) &lt;-"UTF-8"
-validEnc(x)
+validEnc(x) # typically the last, x[10], is invalid
+
+## Maybe advantageous to declare it "unknown":
+G &lt;- x ; Encoding(G[!validEnc(G)]) &lt;- "unknown"
+try( substr(x, 1,1) ) # gives 'invalid multibyte string' error
+try( substr(G, 1,1) ) # works
+nchar(G) # fine, too
+## but it is not "more valid" typically:
+all.equal(validEnc(x),
+          validEnc(G)) # typically TRUE
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

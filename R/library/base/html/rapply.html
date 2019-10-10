@@ -9,7 +9,8 @@
 
 <h3>Description</h3>
 
-<p><code>rapply</code> is a recursive version of <code><a href="lapply.html">lapply</a></code>.
+<p><code>rapply</code> is a recursive version of <code><a href="lapply.html">lapply</a></code> with
+flexibility in <em>how</em> the result is structured (<code>how = ".."</code>).
 </p>
 
 
@@ -26,15 +27,16 @@ rapply(object, f, classes = "ANY", deflt = NULL,
 <table summary="R argblock">
 <tr valign="top"><td><code>object</code></td>
 <td>
-<p>A list.</p>
+<p>a <code><a href="list.html">list</a></code> or <code><a href="expression.html">expression</a></code>, i.e., &ldquo;list-like&rdquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>f</code></td>
 <td>
-<p>A function of a single argument.</p>
+<p>a <code><a href="function.html">function</a></code> of one &ldquo;principal&rdquo; argument,
+passing further arguments via <code>...</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>classes</code></td>
 <td>
-<p>A character vector of <code><a href="class.html">class</a></code> names, or
+<p>character vector of <code><a href="class.html">class</a></code> names, or
 <code>"ANY"</code> to match any class.</p>
 </td></tr>
 <tr valign="top"><td><code>deflt</code></td>
@@ -43,7 +45,7 @@ rapply(object, f, classes = "ANY", deflt = NULL,
 </td></tr>
 <tr valign="top"><td><code>how</code></td>
 <td>
-<p>A character string partially matching the three possibilities given:
+<p>character string partially matching the three possibilities given:
 see &lsquo;Details&rsquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
@@ -56,11 +58,12 @@ see &lsquo;Details&rsquo;.</p>
 <h3>Details</h3>
 
 <p>This function has two basic modes.  If <code>how = "replace"</code>, each
-element of the list which is not itself a list and has a class
+element of <code>object</code> which is not itself list-like and has a class
 included in <code>classes</code> is replaced by the result of applying
 <code>f</code> to the element.
 </p>
-<p>If the mode is <code>how = "list"</code> or <code>how = "unlist"</code>, the list
+<p>Otherwise, with mode <code>how = "list"</code> or <code>how = "unlist"</code>,
+conceptually <code>object</code>
 is copied, all non-list elements which have a class included in
 <code>classes</code> are replaced by the result of applying <code>f</code> to the
 element and all others are replaced by <code>deflt</code>.  Finally, if
@@ -70,12 +73,15 @@ the result.
 <p>The semantics differ in detail from <code><a href="lapply.html">lapply</a></code>: in
 particular the arguments are evaluated before calling the C code.
 </p>
+<p>In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.x and earlier, <code>object</code> was required to be a list,
+which was <em>not</em> the case for its list-like components.
+</p>
 
 
 <h3>Value</h3>
 
-<p>If <code>how = "unlist"</code>, a vector, otherwise a list of similar
-structure to <code>object</code>.
+<p>If <code>how = "unlist"</code>, a vector, otherwise &ldquo;list-like&rdquo;
+of similar structure as <code>object</code>.
 </p>
 
 
@@ -97,16 +103,28 @@ Springer.<br />
 <h3>Examples</h3>
 
 <pre>
-X &lt;- list(list(a = pi, b = list(c = 1:1)), d = "a test")
-rapply(X, function(x) x, how = "replace")
+X &lt;- list(list(a = pi, b = list(c = 1L)), d = "a test")
+# the "identity operation":
+rapply(X, function(x) x, how = "replace") -&gt; X.; stopifnot(identical(X, X.))
 rapply(X, sqrt, classes = "numeric", how = "replace")
-rapply(X, nchar, classes = "character",
-       deflt = as.integer(NA), how = "list")
-rapply(X, nchar, classes = "character",
-       deflt = as.integer(NA), how = "unlist")
-rapply(X, nchar, classes = "character", how = "unlist")
+rapply(X, deparse, control = "all") # passing extras. argument of deparse()
+rapply(X, nchar, classes = "character", deflt = NA_integer_, how = "list")
+rapply(X, nchar, classes = "character", deflt = NA_integer_, how = "unlist")
+rapply(X, nchar, classes = "character",                      how = "unlist")
 rapply(X, log, classes = "numeric", how = "replace", base = 2)
+
+## with expression() / list():
+E  &lt;- expression(list(a = pi, b = expression(c = C1 * C2)), d = "a test")
+LE &lt;- list(expression(a = pi, b = expression(c = C1 * C2)), d = "a test")
+rapply(E, nchar, how="replace") # "expression(c = C1 * C2)" are 23 chars
+rapply(E, nchar, classes = "character", deflt = NA_integer_, how = "unlist")
+rapply(LE, as.character) # a "pi" | b1 "expression" | b2 "C1 * C2" ..
+rapply(LE, nchar)        # (see above)
+stopifnot(exprs = {
+  identical(E , rapply(E , identity, how = "replace"))
+  identical(LE, rapply(LE, identity, how = "replace"))
+})
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,6 +1,8 @@
 FactorGraph             Draws a factor graph of a (time-varying) MGM
 bwSelect                Select optimal bandwidth for time-varying MGMs
                         and mVAR Models
+condition               Computes mgm object conditional on a set of
+                        variables
 datasets                Example Datasets in the mgm Package
 mgm                     Estimating Mixed Graphical Models
 mgm-package             Estimating Time-Varying k-order Mixed Graphical

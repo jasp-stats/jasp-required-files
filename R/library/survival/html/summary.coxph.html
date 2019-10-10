@@ -56,13 +56,74 @@ associated with one scale unit.
 
 <h3>Value</h3>
 
-<p>An object of class <code>summary.coxph</code>. 
+<p>An object of class <code>summary.coxph</code>, with components:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>n, nevent</code></td>
+<td>
+<p>number of observations and number of events,
+respectively, in the fit</p>
+</td></tr>
+<tr valign="top"><td><code>loglik</code></td>
+<td>
+<p>the log partial likelihood at the initial and final
+values</p>
+</td></tr>
+<tr valign="top"><td><code>coefficients</code></td>
+<td>
+<p>a matrix with one row for each coefficient, and
+columns containing the coefficient, the hazard ratio exp(coef),
+standard error, Wald statistic, and P value.</p>
+</td></tr>
+<tr valign="top"><td><code>conf.int</code></td>
+<td>
+<p>a matrix with one row for each coefficient, containing
+the confidence limits for exp(coef)</p>
+</td></tr>
+<tr valign="top"><td><code>logtest, sctest, waldtest</code></td>
+<td>
+<p>the overall likelihood ratio, score,
+and Wald test statistics for the model</p>
+</td></tr>
+<tr valign="top"><td><code>concordance</code></td>
+<td>
+<p>the concordance statistic and its standard error</p>
+</td></tr>
+<tr valign="top"><td><code>used.robust</code></td>
+<td>
+<p>whether an asymptotic or robust variance was used</p>
+</td></tr>
+<tr valign="top"><td><code>rsq</code></td>
+<td>
+<p>an approximate R^2 based on Nagelkirke (Biometrika 1991).</p>
+</td></tr>
+<tr valign="top"><td><code>fail</code></td>
+<td>
+<p>a message, if the underlying coxph call failed</p>
+</td></tr>
+<tr valign="top"><td><code>call</code></td>
+<td>
+<p>a copy of the call</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+<p>information on missing values</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>The pseudo r-squared of Nagelkirke is attractive because it is simple,
+but further work has shown that it has poor properties and it is now
+depricated.  The value is no longer printed by default, and will
+eventually be removed from the object.
 </p>
 
 
 <h3>See Also</h3>
 
-<p>coxph, print.coxph  
+<p><code><a href="coxph.html">coxph</a></code>, <code><a href="coxph.object.html">print.coxph</a></code>  
 </p>
 
 
@@ -70,27 +131,8 @@ associated with one scale unit.
 
 <pre>
 fit &lt;- coxph(Surv(time, status) ~ age + sex, lung) 
-summary(fit) 
-## Not run: 
-Call: 
-coxph(formula = Surv(time, status) ~ age + sex, data = lung) 
-  
-  n= 228  
-  
-      coef exp(coef) se(coef)     z      p  
-age  0.017     1.017  0.00922  1.85 0.0650 
-sex -0.513     0.599  0.16745 -3.06 0.0022 
-  
-    exp(coef) exp(-coef) lower .95 upper .95  
-age     1.017      0.983     0.999     1.036 
-sex     0.599      1.670     0.431     0.831 
-  
-Rsquare= 0.06   (max possible= 0.999 ) 
-Likelihood ratio test= 14.1  on 2 df,   p=0.000857 
-Wald test            = 13.5  on 2 df,   p=0.00119 
-Score (logrank) test = 13.7  on 2 df,   p=0.00105 
+summary(fit)
+</pre>
 
-## End(Not run)</pre>
-
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.43-3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

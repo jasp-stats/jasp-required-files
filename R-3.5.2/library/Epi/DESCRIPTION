@@ -1,0 +1,36 @@
+Package: Epi
+Version: 2.34
+Date: 2019-02-09
+Title: A Package for Statistical Analysis in Epidemiology
+Authors@R: c(person("Bendix", "Carstensen", role = c("aut", "cre"),
+                    email = "b@bxc.dk"),
+             person("Martyn", "Plummer", role = "aut",
+                    email = "plummerm@iarc.fr"),
+             person("Esa", "Laara", role = "ctb"),
+             person("Michael", "Hills", role = "ctb"))
+Depends: R (>= 3.5.0), utils
+Imports: cmprsk, etm, splines, MASS, survival, plyr, Matrix, numDeriv,
+        data.table, zoo, mgcv
+Suggests: mstate, nlme, lme4, popEpi
+Description: Functions for demographic and epidemiological analysis in
+  the Lexis diagram, i.e. register and cohort follow-up data, in
+  particular representation, manipulation and simulation of multistate 
+  data - the Lexis suite of functions, which includes interfaces to
+  'mstate', 'etm' and 'cmprsk' packages. 
+  Also contains functions for Age-Period-Cohort and Lee-Carter
+  modeling and a function for interval censored data and some useful
+  functions for tabulation and plotting, as well as a number of
+  epidemiological data sets. 
+License: GPL-2
+URL: http://BendixCarstensen.com/Epi/
+NeedsCompilation: yes
+Packaged: 2019-02-10 13:53:58 UTC; bendix
+Author: Bendix Carstensen [aut, cre],
+  Martyn Plummer [aut],
+  Esa Laara [ctb],
+  Michael Hills [ctb]
+Maintainer: Bendix Carstensen <b@bxc.dk>
+Repository: CRAN
+Date/Publication: 2019-02-10 15:13:15 UTC
+Built: R 3.5.2; x86_64-w64-mingw32; 2019-02-26 04:46:17 UTC; windows
+Archs: i386, x64

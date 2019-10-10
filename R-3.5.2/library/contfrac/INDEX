@@ -1,0 +1,4 @@
+CF                      Continued fraction convergents
+as_cf                   Approximates a real number in continued
+                        fraction form
+convergents             Partial convergents of continued fractions

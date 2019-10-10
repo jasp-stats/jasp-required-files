@@ -17,7 +17,7 @@ box.heresy              Display a sort of box plot
 boxed.labels            Place labels in boxes
 brkdn.plot              A point/line plotting routine
 brkdnNest               Perform a nested breakdown of numeric values
-bumpchart               Display a "bumps" chart
+bumpchart               Display a "bumps" (sequential ranking) chart
 categoryReshape         Convert object label/attribute label coding.
 centipede.plot          Display a centipede plot
 clean.args              Remove inappropriate arguments from an argument
@@ -39,6 +39,7 @@ count.overplot          Show overlying points as counts
 cylindrect              Display an apparent cylinder
 death_reg               Death registrations from 1996 to 2010
 dendroPlot              Display distributions as dendrites
+densityGrid             Display a matrix of cell values as symbols.
 diamondplot             Plot multiple variables as polygons on a radial
                         grid
 dispersion              Display a measure of dispersion.
@@ -90,6 +91,7 @@ intersectDiagram        Display set intersections
 jiggle                  Calculate equally spaced values within a range.
 joyPlot                 Display a series of density curves.
 kiteChart               Magnitude by position chart.
+l2010                   World lightning strike data from 2010
 labbePlot               Display a L'Abbe plot
 ladderplot              Ladder Plot
 legendg                 Legend with grouped bars, lines or symbols
@@ -97,6 +99,8 @@ lengthKey               Key for interpreting lengths in a plot
 listDepth               Find the maximum depth of a list
 makeDendrite            Build a list of the mutually exclusive
                         attributes of objects
+makeDensityMatrix       Compute a matrix of counts from a list of x,y
+                        positions
 makeIntersectList       Count set intersections
 maxEmptyRect            Find an empty space on a plot
 mtext3d                 Display text in the margins of a 3D plot

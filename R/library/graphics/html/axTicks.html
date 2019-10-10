@@ -71,13 +71,15 @@ at all.  Note that the meaning of <code>axp</code> differs significantly
 when <code>log</code> is <code>TRUE</code>; see the documentation on
 <code><a href="par.html">par</a>(xaxp = .)</code>.
 </p>
-<p><code>axTicks()</code> can be used an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> interface to the C function
+<p><code>axTicks()</code> may be seen as an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> implementation of the C function
 <code>CreateAtVector()</code> in &lsquo;<span class="file">..../src/main/plot.c</span>&rsquo;
 which is called by <code><a href="axis.html">axis</a>(side, *)</code> when no argument
-<code>at</code> is specified.
+<code>at</code> is specified or directly by <code><a href="../../grDevices/html/axisTicks.html">axisTicks</a>()</code> (in package
+<span class="pkg">grDevices</span>).
+<br />
 The delicate case, <code>log = TRUE</code>, now makes use of
-<code><a href="../../grDevices/html/axisTicks.html">axisTicks</a></code> (in package <span class="pkg">grDevices</span>) unless
-<code>nintLog = Inf</code> which exists for back compatibility.
+<code><a href="../../grDevices/html/axisTicks.html">axisTicks</a></code> unless <code>nintLog = Inf</code> which exists for back
+compatibility.
 </p>
 
 
@@ -148,5 +150,5 @@ plot(0:1, ylims, log = "y", yaxs = "r")
 stopifnot(all.equal(aT.r, axTicks(side = 2)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

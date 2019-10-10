@@ -22,7 +22,7 @@ invokes particular <code><a href="../../utils/html/methods.html">methods</a></co
 summary(object, ...)
 
 ## Default S3 method:
-summary(object, ..., digits)
+summary(object, ..., digits, quantile.type = 7)
 ## S3 method for class 'data.frame'
 summary(object, maxsum = 7,
        digits = max(3, getOption("digits")-3), ...)
@@ -68,6 +68,11 @@ only round in the <code>print</code> and <code>format</code> methods).</p>
 </td></tr></table>
 
 <table summary="R argblock">
+<tr valign="top"><td><code>quantile.type</code></td>
+<td>
+<p>integer code used in <code>quantile(*, type=quantile.type)</code>
+for the default method.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>additional arguments affecting the summary produced.</p>
@@ -133,5 +138,5 @@ summary(lst)
 summary(as.factor(lst))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

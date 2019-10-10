@@ -6,6 +6,9 @@ bootmds.smacofB	bootmds.smacofB
 bread	bread
 breakfast	breakfast
 CanadaNews	CanadaNews
+confEllipse	confEllipse.smacofID
+confEllipse.smacofB	confEllipse.smacofID
+confEllipse.smacofID	confEllipse.smacofID
 crimes	crimes
 csrranking	csrranking
 dissWeights	dissWeights
@@ -27,7 +30,6 @@ idioscal	smacofIndDiff
 indscal	smacofIndDiff
 indvalues	indvalues
 intelligence	intelligence
-inverseMDS	inverseMDS
 jackknife	jackknife.smacofB
 jackknife.smacofB	jackknife.smacofB
 kinshipdelta	kinshipdelta
@@ -45,6 +47,7 @@ permtest	permtest.smacof
 permtest.smacof	permtest.smacof
 permtest.smacofR	permtest.smacof
 Plato7	Plato7
+plot.confell	confEllipse.smacofID
 plot.driftvec	driftVectors
 plot.icexplore	icExplore
 plot.mdsbi	biplotmds.smacof
@@ -56,6 +59,7 @@ plot.smacofJK	jackknife.smacofB
 plot.smacofPerm	permtest.smacof
 plot.smacofR	plot.smacof
 plot.uniscale	uniscale
+plot.vmu	vmu
 prefscal	smacofRect
 print.smacofB	summary.smacofB
 print.smacofID	summary.smacofB
@@ -63,6 +67,7 @@ print.smacofJK	jackknife.smacofB
 print.smacofPerm	permtest.smacof
 print.smacofR	summary.smacofB
 print.uniscale	uniscale
+print.vmu	vmu
 Procrustes	Procrustes
 PVQ40	PVQ40
 PVQ40agg	PVQ40
@@ -92,5 +97,6 @@ transPrep	transform
 unfolding	smacofRect
 uniscale	uniscale
 VaziriXu	VaziriXu
+vmu	vmu
 winedat	winedat
 wish	wish

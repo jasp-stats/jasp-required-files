@@ -1,15 +1,16 @@
 Package: xfun
 Type: Package
 Title: Miscellaneous Functions by 'Yihui Xie'
-Version: 0.5
+Version: 0.10
 Authors@R: c(
   person("Yihui", "Xie", role = c("aut", "cre", "cph"), email = "xie@yihui.name", comment = c(ORCID = "0000-0003-0645-5666")),
   person("Daijiang", "Li", role = "ctb"),
   person("Xianying", "Tan", role = "ctb"),
+  person("Salim", "Brüggemann", role = "ctb", email = "salim-b@pm.me"),
   person()
   )
 Description: Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'.
-Imports: tools
+Imports: stats, tools
 Suggests: testit, parallel, rstudioapi, tinytex, mime, markdown, knitr,
         htmltools, base64enc, remotes, rmarkdown
 License: MIT + file LICENSE
@@ -20,11 +21,12 @@ LazyData: true
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-02-20 22:32:29 UTC; yihui
+Packaged: 2019-10-01 15:28:13 UTC; yihui
 Author: Yihui Xie [aut, cre, cph] (<https://orcid.org/0000-0003-0645-5666>),
   Daijiang Li [ctb],
-  Xianying Tan [ctb]
+  Xianying Tan [ctb],
+  Salim Brüggemann [ctb]
 Maintainer: Yihui Xie <xie@yihui.name>
 Repository: CRAN
-Date/Publication: 2019-02-20 23:20:03 UTC
-Built: R 3.5.2; ; 2019-02-25 23:35:13 UTC; windows
+Date/Publication: 2019-10-01 18:20:02 UTC
+Built: R 3.6.1; ; 2019-10-07 16:29:21 UTC; windows

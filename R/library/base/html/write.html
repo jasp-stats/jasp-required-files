@@ -37,6 +37,10 @@ write(x, file = "data",
 the file to write to.  If <code>""</code>, print to the standard output
 connection.
 </p>
+<p>When <code><a href="Platform.html">.Platform</a>$OS.type != "windows"</code>, and it
+is <code>"|cmd"</code>, the output is piped to the command given
+by &lsquo;<span class="file">cmd</span>&rsquo;.
+</p>
 </td></tr>
 <tr valign="top"><td><code>ncolumns</code></td>
 <td>
@@ -92,5 +96,5 @@ unlink(fil) # tidy up
 write(x, "", sep = "\t")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

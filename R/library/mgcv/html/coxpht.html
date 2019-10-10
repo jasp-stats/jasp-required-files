@@ -60,13 +60,13 @@ tdpois &lt;- function(dat,event="z",et="futime",t="day",status="status1",
     ## Now do the interpolation of covariates to event times...
     um &lt;- data.frame(lapply(X=di,FUN=app,t=di[[t]],to=tr))
     ## Mark the actual event...
-    if (um[[et]][1]==max(tr)&amp;&amp;um[[status]]==1) um[[event]][nrow(um)] &lt;- 1 
+    if (um[[et]][1]==max(tr)&amp;&amp;um[[status]][1]==1) um[[event]][nrow(um)] &lt;- 1 
     um[[et]] &lt;- tr ## reset time to relevant event times
     dap[start:(start-1+nrow(um)),] &lt;- um ## copy to dap
     start &lt;- start + nrow(um)
     if (inter) setTxtProgressBar(prg, i)
   }
-  close(prg)
+  if (inter) close(prg)
   dap[1:(start-1),]
 } ## tdpois
 
@@ -108,5 +108,5 @@ rug(pbcseq$day[pbcseq$id==25]) ## measurement times
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-26 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
 </body></html>

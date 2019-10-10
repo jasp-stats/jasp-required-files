@@ -83,7 +83,7 @@ the length of the longest vector.
 </p>
 <p>The length of the result is determined by <code>nn</code> for
 <code>rwilcox</code>, and is the maximum of the lengths of the
-numerical arguments for the other functions.  
+numerical arguments for the other functions.
 </p>
 <p>The numerical arguments other than <code>nn</code> are recycled to the
 length of the result.  Only the first elements of the logical
@@ -113,7 +113,7 @@ statistic: see <code><a href="wilcox.test.html">wilcox.test</a></code> for detai
 
 <h3>Source</h3>
 
-<p>These are calculated via recursion, based on <code>cwilcox(k, m, n)</code>,
+<p>These (&quot;d&quot;,&quot;p&quot;,&quot;q&quot;) are calculated via recursion, based on <code>cwilcox(k, m, n)</code>,
 the number of choices with statistic <code>k</code> from samples of size
 <code>m</code> and <code>n</code>, which is itself calculated recursively and the
 results cached.  Then <code>dwilcox</code> and <code>pwilcox</code> sum
@@ -121,7 +121,9 @@ appropriate values of <code>cwilcox</code>, and <code>qwilcox</code> is based on
 inversion.
 </p>
 <p><code>rwilcox</code> generates a random permutation of ranks and evaluates
-the statistic.
+the statistic.  Note that it is based on the same C code as <code><a href="../../base/html/sample.html">sample</a>()</code>,
+and hence is determined by <code><a href="../../base/html/Random.html">.Random.seed</a></code>, notably from
+<code><a href="../../base/html/Random.html">RNGkind</a>(sample.kind = ..)</code> which changed with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.6.0.
 </p>
 
 
@@ -168,5 +170,5 @@ n &lt;- as.numeric(names(print(tU &lt;- table(U))))
 text(n+.2, n+.5, labels = tU, col = "red")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

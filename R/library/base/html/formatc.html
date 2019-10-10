@@ -9,13 +9,13 @@
 
 <h3>Description</h3>
 
-<p>Formatting numbers individually and flexibly, <code>formatC()</code> using
+<p><code>formatC()</code> formats numbers individually and flexibly using
 <code>C</code> style format specifications.
 </p>
 <p><code>prettyNum()</code> is used for &ldquo;prettifying&rdquo; (possibly
 formatted) numbers, also in <code><a href="format.html">format.default</a></code>.
 </p>
-<p><code>.format.zeros()</code>, an auxiliary function of <code>prettyNum()</code>
+<p><code>.format.zeros(x)</code>, an auxiliary function of <code>prettyNum()</code>,
 re-formats the zeros in a vector <code>x</code> of formatted numbers.
 </p>
 
@@ -28,17 +28,20 @@ formatC(x, digits = NULL, width = NULL,
         big.mark = "", big.interval = 3L,
         small.mark = "", small.interval = 5L,
         decimal.mark = getOption("OutDec"),
-        preserve.width = "individual", zero.print = NULL,
+        preserve.width = "individual",
+        zero.print = NULL, replace.zero = TRUE,
         drop0trailing = FALSE)
 
 prettyNum(x, big.mark = "",   big.interval = 3L,
           small.mark  = "", small.interval = 5L,
           decimal.mark = getOption("OutDec"), input.d.mark = decimal.mark,
           preserve.width = c("common", "individual", "none"),
-          zero.print = NULL, drop0trailing = FALSE, is.cmplx = NA,
+          zero.print = NULL, replace.zero = FALSE,
+          drop0trailing = FALSE, is.cmplx = NA,
           ...)
 
-.format.zeros(x, zero.print, nx = suppressWarnings(as.numeric(x)))
+.format.zeros(x, zero.print, nx = suppressWarnings(as.numeric(x)),
+              replace = FALSE, warn.non.fitting = TRUE)
 </pre>
 
 
@@ -87,12 +90,15 @@ integers, <code>"g"</code> for reals.
 <p><code>"f"</code> gives numbers in the usual
 <code>xxx.xxx</code> format;  <code>"e"</code> and <code>"E"</code> give <code>n.ddde+nn</code> or
 <code>n.dddE+nn</code> (scientific format); <code>"g"</code> and <code>"G"</code> put
-<code>x[i]</code> into scientific format only if it saves space to do so.
+<code>x[i]</code> into scientific format only if it saves space to do so
+<em>and</em> drop trailing zeros and decimal point - unless <code>flag</code>
+contains <code>"#"</code> which keeps trailing zeros for the <code>"g", "G"</code>
+formats.
 </p>
-<p><code>"fg"</code> uses fixed format as <code>"f"</code>, but <code>digits</code> as
-the minimum number of <em>significant</em> digits.  This can lead
-to quite long result strings, see examples below.  Note that unlike
-<code><a href="Round.html">signif</a></code> this prints large numbers with
+<p><code>"fg"</code> (our own hybrid format) uses fixed format as <code>"f"</code>,
+but <code>digits</code> as the minimum number of <em>significant</em> digits.
+This can lead to quite long result strings, see examples below.  Note
+that unlike <code><a href="Round.html">signif</a></code> this prints large numbers with
 more significant digits than <code>digits</code>.  Trailing zeros are
 <em>dropped</em> in this format, unless <code>flag</code> contains
 <code>"#"</code>.</p>
@@ -101,15 +107,31 @@ more significant digits than <code>digits</code>.  Trailing zeros are
 <td>
 <p>for <code>formatC</code>, a character string giving a
 format modifier as in Kernighan and Ritchie (1988, page 243) or the
-C+99 standard.
-<code>"0"</code> pads leading zeros; <code>"-"</code> does left adjustment,
-others are <code>"+"</code>, <code>" "</code>, and <code>"#"</code>; on some
-platform&ndash;locale combination, <code>"'"</code> activates
-&ldquo;thousands' grouping&rdquo; for decimal conversion, and versions of
-&lsquo;<span class="file">glibc</span>&rsquo; allow <code>"I"</code> for integer conversion to use the locale's
-alternative output digits, if any.
-</p>
-<p>There can be more than one of these, in any order.  Other characters
+C+99 standard.</p>
+
+<dl>
+<dt><code>"0"</code></dt><dd><p>pads leading zeros;</p>
+</dd>
+<dt><code>"-"</code></dt><dd><p>does left adjustment,</p>
+</dd>
+<dt><code>"+"</code></dt><dd><p>ensures a sign in all cases, i.e., <code>"+"</code> for
+positive numbers ,</p>
+</dd>
+<dt><code>" "</code></dt><dd><p>if the first character is not a sign, the space
+character <code>" "</code> will be used instead.</p>
+</dd>
+<dt><code>"#"</code></dt><dd><p>specifies &ldquo;an alternative output form&rdquo;,
+specifically depending on <code>format</code>.</p>
+</dd>
+<dt><code>"'"</code></dt><dd><p>on some platform&ndash;locale combination, activates
+&ldquo;thousands' grouping&rdquo; for decimal conversion,</p>
+</dd>
+<dt><code>"I"</code></dt><dd><p>in some versions of &lsquo;<span class="file">glibc</span>&rsquo; allow for integer
+conversion to use the locale's alternative output digits, if any.</p>
+</dd>
+</dl>
+
+<p>There can be more than one of these flags, in any order.  Other characters
 used to have no effect for <code>character</code> formatting, but signal
 an error since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.4.0.
 </p>
@@ -166,11 +188,33 @@ whereas <code>"individual"</code> is the default in
 if and how <em>zeros</em> should be formatted specially.  Useful for
 pretty printing &lsquo;sparse&rsquo; objects.</p>
 </td></tr>
+<tr valign="top"><td><code>replace.zero, replace</code></td>
+<td>
+<p>logical; if <code>zero.print</code> is a
+character string, indicates if the exact zero entries in <code>x</code>
+should be simply replaced by <code>zero.print</code>.  Otherwise,
+depending on the widths of the respective strings, the (formatted)
+zeroes are <em>partly</em> replaced by <code>zero.print</code> and then
+padded with <code>" "</code> to the right were applicable.  In that case
+(false <code>replace[.zero]</code>), if the <code>zero.print</code> string does
+not fit, a warning is produced (if <code>warn.non.fitting</code> is true).
+</p>
+<p>This works via <code>prettyNum()</code>, which calls <code>.format.zeros(*,
+    replace=replace.zero)</code> three times in this case, see the &lsquo;Details&rsquo;.
+</p>
+</td></tr>
+<tr valign="top"><td><code>warn.non.fitting</code></td>
+<td>
+<p>logical; if it is true, <code>replace[.zero]</code> is
+false and the <code>zero.print</code> string does not fit, a
+<code><a href="warning.html">warning</a></code> is signalled.</p>
+</td></tr>
 <tr valign="top"><td><code>drop0trailing</code></td>
 <td>
 <p>logical, indicating if trailing zeros,
 i.e., <code>"0"</code> <em>after</em> the decimal mark, should be removed;
-also drops <code>"e+00"</code> in exponential formats.</p>
+also drops <code>"e+00"</code> in exponential formats.  This is simply passed
+to <code>prettyNum()</code>, see the &lsquo;Details&rsquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>is.cmplx</code></td>
 <td>
@@ -193,6 +237,12 @@ numbers of which the character vector <code>x</code> is the pre-format.</p>
 
 <h3>Details</h3>
 
+<p>For numbers, <code>formatC()</code> calls <code>prettyNum()</code> when needed
+which itself calls <code>.format.zeros(*, replace=replace.zero)</code>.
+(<em>&ldquo;when needed&rdquo;</em>: when <code>zero.print</code> is not
+<code>NULL</code>, <code>drop0trailing</code> is true, or one of <code>big.mark</code>,
+<code>small.mark</code>, or <code>decimal.mark</code> is not at default.)
+</p>
 <p>If you set <code>format</code> it overrides the setting of <code>mode</code>, so
 <code>formatC(123.45, mode = "double", format = "d")</code> gives <code>123</code>.
 </p>
@@ -279,11 +329,17 @@ improved by the R Core team.
 <h3>Examples</h3>
 
 <pre>
-xx  &lt;- pi * 10^(-5:4)
+xx &lt;- pi * 10^(-5:4)
 cbind(format(xx, digits = 4), formatC(xx))
 cbind(formatC(xx, width = 9, flag = "-"))
 cbind(formatC(xx, digits = 5, width = 8, format = "f", flag = "0"))
 cbind(format(xx, digits = 4), formatC(xx, digits = 4, format = "fg"))
+
+f &lt;- (-2:4); f &lt;- f*16^f
+# Default ("g") format:
+formatC(pi*f)
+# Fixed ("f") format, more than one flag ('width' partly "enlarged"):
+cbind(formatC(pi*f, digits = 3, width=9, format = "f", flag = "0+"))
 
 formatC(    c("a", "Abc", "no way"), width = -7)  # &lt;=&gt; flag = "-"
 formatC(c((-1:1)/0,c(1,100)*pi), width = 8, digits = 1)
@@ -296,6 +352,7 @@ formatC(xx)
 formatC(xx, format = "fg")       # special "fixed" format.
 formatC(xx[1:4], format = "f", digits = 75) #&gt;&gt; even longer strings
 
+formatC(c(3.24, 2.3e-6), format = "f", digits = 11)
 formatC(c(3.24, 2.3e-6), format = "f", digits = 11, drop0trailing = TRUE)
 
 r &lt;- c("76491283764.97430", "29.12345678901", "-7.1234", "-100.1","1123")
@@ -338,7 +395,7 @@ prettyNum(fv, drop0trailing = TRUE) # a bit nicer
 options(op)
 
 ## The  '  flag :
-doLC &lt;- FALSE # R warns, so change to TRUE manually if you want see the effect
+doLC &lt;- FALSE # &lt;= R warns, so change to TRUE manually if you want see the effect
 if(doLC)
   oldLC &lt;- Sys.setlocale("LC_NUMERIC", "de_CH.UTF-8")
 formatC(1.234 + 10^(0:4), format = "fg", width = 11, flag = "'")
@@ -347,5 +404,5 @@ if(doLC) ## revert, typically to  "C"  :
   Sys.setlocale("LC_NUMERIC", oldLC)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

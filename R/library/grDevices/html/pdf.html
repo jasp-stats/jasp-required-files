@@ -134,6 +134,7 @@ around font display problems in broken PDF viewers: although this
 font is one of the 14 guaranteed to be available in all PDF viewers,
 that guarantee is not always honoured.
 </p>
+<p>On Unix-alikes (incl. Mac), see the &lsquo;Note&rsquo; for a possible fix for some viewers.</p>
 </td></tr>
 <tr valign="top"><td><code>useKerning</code></td>
 <td>
@@ -188,9 +189,18 @@ to ensure that these fonts are available on the system and third-party
 software (e.g., Ghostscript) may be required to embed the fonts so
 that the PDF can be included in other documents (e.g., LaTeX): see
 <code><a href="embedFonts.html">embedFonts</a></code>.  The URW-based families described for
-<code><a href="postscript.html">postscript</a></code> can be used with viewers
-such as GSView which utilise URW fonts.
-Since <code><a href="embedFonts.html">embedFonts</a></code> makes use of Ghostscript, it should be
+<code><a href="postscript.html">postscript</a></code> can be used with viewers, platform dependently:
+</p>
+
+<dl>
+<dt>on Unix-alikes</dt><dd><p>viewers set up to use URW fonts, which is
+usual with those based on <code>xpdf</code> or Ghostscript.</p>
+</dd>
+<dt>on Windows</dt><dd><p>viewers such as GSView which utilise URW fonts.</p>
+</dd>
+</dl>
+
+<p>Since <code><a href="embedFonts.html">embedFonts</a></code> makes use of Ghostscript, it should be
 able to embed the URW-based families for use with other viewers.
 </p>
 <p>See <code><a href="postscript.html">postscript</a></code> for details of encodings, as the internal
@@ -321,12 +331,40 @@ different font metrics from the true fonts.
 be needed for the full use of encodings other than Latin-1 (although
 they may be offered for download as needed).
 </p>
+
+<dl>
+<dt>On some Unix-alike systems</dt><dd><p>the default plotting character
+<code>pch = 1</code> was
+displayed in some PDF viewers incorrectly as a <code>"q"</code>
+character.  (These seem to be viewers based on the <span class="samp">poppler</span> PDF
+rendering library).  This may be due to incorrect or incomplete mapping
+of font names to those used by the system.  Adding the following lines
+to &lsquo;<span class="file">~/.fonts.conf</span>&rsquo; or &lsquo;<span class="file">/etc/fonts/local.conf</span>&rsquo; may circumvent
+this problem, although this has largely been corrected on the affected
+systems.
+</p>
+<pre>&lt;fontconfig&gt;
+&lt;alias binding="same"&gt;
+  &lt;family&gt;ZapfDingbats&lt;/family&gt;
+  &lt;accept&gt;&lt;family&gt;Dingbats&lt;/family&gt;&lt;/accept&gt;
+&lt;/alias&gt;
+&lt;/fontconfig&gt;
+</pre>
+<p>Some further workarounds for problems with symbol fonts on
+viewers using &lsquo;fontconfig&rsquo; are given in the &lsquo;Cairo Fonts&rsquo;
+section of the help for <code><a href="x11.html">X11</a></code>.
+</p>
+</dd>
+<dt>On Windows:</dt><dd>
 <p>The TeXworks PDF viewer was one of those which has been seen to fail to
 display Dingbats (used by e.g. <code>pch = 1</code>) correctly.
 Whereas on other platforms the problems seen were incorrect output, on
 Windows points were silently omitted: however recent versions seem to
 manage to display Dingbats.
 </p>
+</dd>
+</dl>
+
 <p>There is a different font bug in the <code>pdf.js</code> viewer included
 in Firefox 19 and later: that maps Dingbats to the Symbol font and so
 displays symbols such <code>pch = 1</code> as lambda.
@@ -340,7 +378,7 @@ displays symbols such <code>pch = 1</code> as lambda.
 <code><a href="Devices.html">Devices</a></code>,
 <code><a href="postscript.html">postscript</a></code>.
 </p>
-<p><code><a href="cairo.html">cairo_pdf</a></code> and (on macOS only) <code>quartz</code>
+<p><code><a href="cairo.html">cairo_pdf</a></code> and (on macOS only) <code><a href="quartz.html">quartz</a></code>
 for other devices that can produce PDF.
 </p>
 <p>More details of font families and encodings and especially handling
@@ -379,5 +417,5 @@ TestChars("ISOLatin2", family = "URWHelvetica")
 ## works well for viewing in gs-based viewers, and often in xpdf.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

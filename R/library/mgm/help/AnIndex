@@ -3,23 +3,32 @@ autism_data	datasets
 autism_data_large	datasets
 B5MS	datasets
 bwSelect	bwSelect
-bwSelPredict, calcLL, calcNeighbors, glmnetRequirements,	mgm-internal
+bwSelPredict	mgm-internal
+calcLL	mgm-internal
+calcNeighbors	mgm-internal
+condition	condition
 datasets	datasets
-DrawFG, DrawFGtv, FlagSymmetric, autism_data,	mgm-internal
+DrawFG	mgm-internal
+DrawFGtv	mgm-internal
 FactorGraph	FactorGraph
+FlagSymmetric	mgm-internal
 Fried2015	datasets
 fruitfly_data	datasets
-lagData, nodeEst, ModelMatrix, ModelMatrix_standard	mgm-internal
+glmnetRequirements	mgm-internal
+lagData	mgm-internal
 mgm	mgm
 mgmfit	mgm
 mgmsampler	mgmsampler
 mgm_data	datasets
+ModelMatrix	mgm-internal
+ModelMatrix_standard	mgm-internal
 modnw	datasets
 msq_p3	datasets
 msq_p5	datasets
 mvar	mvar
 mvarsampler	mvarsampler
 mvar_data	datasets
+nodeEst	mgm-internal
 plotRes	plotRes
 predict.mgm	predict.mgm
 print.int	print.int

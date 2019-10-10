@@ -32,7 +32,7 @@ row(x, as.factor = FALSE)
 </td></tr>
 <tr valign="top"><td><code>dim</code></td>
 <td>
-<p>a matrix dimension, i.e., <code><a href="integer.html">integer</a></code> vector of
+<p>a matrix dimension, i.e., an integer valued numeric vector of
 length two (with non-negative entries).</p>
 </td></tr>
 <tr valign="top"><td><code>as.factor</code></td>
@@ -79,7 +79,10 @@ dx
 x &lt;- matrix(0, nrow = 5, ncol = 5)
 x[row(x) == col(x)] &lt;- 1
 x
+
+(i34 &lt;- .row(3:4))
+stopifnot(identical(i34, .row(c(3,4)))) # 'dim' maybe "double"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

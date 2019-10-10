@@ -22,7 +22,7 @@ consists of a few unexported functions described further down.
 
 <pre>
 
-rc.settings(ops, ns, args, func, ipck, S3, data, help,
+rc.settings(ops, ns, args, dots, func, ipck, S3, data, help,
             argdb, fuzzy, quotes, files)
 
 rc.status()
@@ -44,7 +44,7 @@ rc.options(...)
 <h3>Arguments</h3>
 
 <table summary="R argblock">
-<tr valign="top"><td><code>ops, ns, args, func, ipck, S3, data, help, argdb, fuzzy, quotes, files</code></td>
+<tr valign="top"><td><code>ops, ns, args, dots, func, ipck, S3, data, help, argdb, fuzzy, quotes, files</code></td>
 <td>
 
 <p>logical, turning some optional completion features on and off.
@@ -57,6 +57,10 @@ rc.options(...)
 <dt><code>ns</code>:</dt><dd><p> Controls namespace related completions. </p>
 </dd>
 <dt><code>args</code>:</dt><dd><p> Enables completion of function arguments. </p>
+</dd>
+<dt><code>dots</code>:</dt><dd><p> If disabled, drops <code>...</code> from list of
+function arguments. Relevant only if <code>args</code> is enabled.
+</p>
 </dd>
 <dt><code>func</code>:</dt><dd><p> Enables detection of functions.  If enabled,
 a customizable extension (<code>"("</code> by default) is appended to
@@ -434,5 +438,5 @@ parentheses) are not evaluated in this manner.  However, this
 
 <p> Deepayan Sarkar, <a href="mailto:deepayan.sarkar@r-project.org">deepayan.sarkar@r-project.org</a> </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>

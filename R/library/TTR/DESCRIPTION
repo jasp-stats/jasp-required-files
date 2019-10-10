@@ -1,7 +1,7 @@
 Package: TTR
 Type: Package
 Title: Technical Trading Rules
-Version: 0.23-4
+Version: 0.23-5
 Author: Joshua Ulrich
 Maintainer: Joshua Ulrich <josh.m.ulrich@gmail.com>
 Imports: xts (>= 0.10-0), zoo, curl
@@ -13,8 +13,8 @@ License: GPL-2
 URL: https://github.com/joshuaulrich/TTR
 BugReports: https://github.com/joshuaulrich/TTR/issues
 NeedsCompilation: yes
-Packaged: 2018-09-20 11:28:00 UTC; josh
+Packaged: 2019-09-22 18:04:34 UTC; josh
 Repository: CRAN
-Date/Publication: 2018-09-20 12:20:03 UTC
-Built: R 3.5.2; x86_64-w64-mingw32; 2019-02-26 01:56:07 UTC; windows
+Date/Publication: 2019-09-23 08:20:06 UTC
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 19:53:30 UTC; windows
 Archs: i386, x64

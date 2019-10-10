@@ -10,6 +10,7 @@ irnbinom	irnorm
 irnorm	irnorm
 irpois	irnorm
 irunif	irnorm
+isample	makeIwrapper
 isplit	isplit
 iter	iter
 iter.data.frame	iter
@@ -18,6 +19,7 @@ iter.function	iter
 iter.iter	iter
 iter.matrix	iter
 iterators	iterators-package
+makeIwrapper	makeIwrapper
 nextElem	nextElem
 nextElem.containeriter	nextElem
 nextElem.funiter	nextElem

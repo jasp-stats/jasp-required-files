@@ -17,7 +17,8 @@
 
 <pre>
 data(..., list = character(), package = NULL, lib.loc = NULL,
-     verbose = getOption("verbose"), envir = .GlobalEnv)
+     verbose = getOption("verbose"), envir = .GlobalEnv,
+     overwrite = TRUE)
 </pre>
 
 
@@ -57,6 +58,11 @@ printed.</p>
 <tr valign="top"><td><code>envir</code></td>
 <td>
 <p>the <a href="../../base/html/environment.html">environment</a> where the data should be loaded.</p>
+</td></tr>
+<tr valign="top"><td><code>overwrite</code></td>
+<td>
+<p>logical: should existing objects of the same name in
+<span class="env">envir</span> be replaced?</p>
 </td></tr>
 </table>
 
@@ -134,25 +140,30 @@ are searched for in the specified library/ies, even if they are
 already loaded from another library.
 </p>
 <p>To just look in the &lsquo;<span class="file">data</span>&rsquo; directory of the current working
-directory, set <code>package = character(0)</code> (and <code>lib.loc =
-    NULL</code>, the default).
+directory, set <code>package = character(0)</code>
+(and <code>lib.loc = NULL</code>, the default).
 </p>
 
 
 <h3>Value</h3>
 
-<p>A character vector of all data sets specified, or information about
-all available data sets in an object of class <code>"packageIQR"</code> if
-none were specified.
+<p>A character vector of all data sets specified (whether found or not),
+or information about all available data sets in an object of class
+<code>"packageIQR"</code> if none were specified.
 </p>
 
 
 <h3>Good practice</h3>
 
+<p>There is no requirement for <code>data(<var>foo</var>)</code> to create an object
+named <code><var>foo</var></code> (nor to create one object), although it much
+reduces confusion if this convention is followed (and it is enforced
+if datasets are lazy-loaded).
+</p>
 <p><code>data()</code> was originally intended to allow users to load datasets
 from packages for use in their examples, and as such it loaded the
 datasets into the workspace <code><a href="../../base/html/environment.html">.GlobalEnv</a></code>.  This avoided
-having large datasets in memory when not in use.  That need has been
+having large datasets in memory when not in use: that need has been
 almost entirely superseded by lazy-loading of datasets.
 </p>
 <p>The ability to specify a dataset by name (without quotes) is a
@@ -163,8 +174,9 @@ character strings (with quotes).
 has the almost always undesirable side-effect of putting an object in
 the user's workspace (and indeed, of replacing any object of that name
 already there).  It would almost always be better to put the object in
-the current evaluation environment by <code>data(..., envir =
-  environment())</code>.  However, two alternatives are usually preferable,
+the current evaluation environment by
+<code>data(..., envir = environment())</code>.
+However, two alternatives are usually preferable,
 both described in the &lsquo;Writing R Extensions&rsquo; manual.
 </p>
 
@@ -186,6 +198,17 @@ it is system data and the second approach should be used.  In the
 unusual case that a package uses a lazy-loaded dataset as a default
 argument to a function, that needs to be specified by <code><a href="../../base/html/ns-dblcolon.html">::</a></code>,
 e.g., <code>survival::survexp.us</code>.
+</p>
+
+
+<h3>Warning</h3>
+
+<p>This function creates objects in the <code>envir</code> environment (by
+default the user's workspace) replacing any which already
+existed. <code>data("foo")</code> can silently create objects other than
+<code>foo</code>: there have been instances in published  packages where it
+created/replaced <code><a href="../../base/html/Random.html">.Random.seed</a></code> and hence change the seed
+for the session.
 </p>
 
 
@@ -225,5 +248,5 @@ ds &lt;- c("USArrests", "VADeaths"); data(list = ds)
 help(USArrests)                # give information on data set 'USArrests'
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.5.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
 </body></html>
