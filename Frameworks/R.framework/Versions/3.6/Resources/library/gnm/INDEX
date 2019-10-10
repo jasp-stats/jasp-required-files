@@ -1,0 +1,71 @@
+Const                   Specify a Constant in a "nonlin" Function
+                        Predictor
+Diag                    Equality of Two or More Factors
+Dref                    Specify a Diagonal Reference Term in a gnm
+                        Model Formula
+Exp                     Specify the Exponential of a Predictor in a gnm
+                        Model Formula
+House2001               Data on twenty roll calls in the US House of
+                        Representatives, 2001
+Inv                     Specify the Reciprocal of a Predictor in a gnm
+                        Model Formula
+MPinv                   Moore-Penrose Pseudoinverse of a Real-valued
+                        Matrix
+Mult                    Specify a Product of Predictors in a gnm Model
+                        Formula
+MultHomog               Specify a Multiplicative Interaction with
+                        Homogeneous Effects in a gnm Model Formula
+Symm                    Symmetric Interaction of Factors
+Topo                    Topological Interaction of Factors
+anova.gnm               Analysis of Deviance for Generalized Nonlinear
+                        Models
+asGnm                   Coerce Linear Model to gnm Object
+backPain                Data on Back Pain Prognosis, from Anderson
+                        (1984)
+barley                  Jenkyn's Data on Leaf-blotch on Barley
+barleyHeights           Heights of Barley Plants
+cautres                 Data on Class, Religion and Vote in France
+checkEstimable          Check Whether One or More Parameter
+                        Combinations in a gnm Model are Identified
+confint.gnm             Compute Confidence Intervals of Parameters in a
+                        Generalized Nonlinear Model
+erikson                 Intergenerational Class Mobility in
+                        England/Wales, France and Sweden
+exitInfo                Print Exit Information for gnm Fit
+expandCategorical       Expand Data Frame by Re-expressing Categorical
+                        Data as Counts
+friend                  Occupation of Respondents and Their Closest
+                        Friend
+getContrasts            Estimated Contrasts and Standard Errors for
+                        Parameters in a gnm Model
+gnm                     Fitting Generalized Nonlinear Models
+gnm-package             Generalized Nonlinear Models
+instances               Specify Multiple Instances of a Nonlinear Term
+                        in a gnm Model Formula
+meanResiduals           Average Residuals within Factor Levels
+mentalHealth            Data on Mental Health and Socioeconomic Status
+model.matrix.gnm        Local Design Matrix for a Generalized Nonlinear
+                        Model
+nonlin.function         Functions to Specify Nonlinear Terms in gnm
+                        Models
+ofInterest              Coefficients of Interest in a Generalized
+                        Nonlinear Model
+parameters              Extract Constrained and Estimated Parameters
+                        from a gnm Object
+pickCoef                Get Indices or Values of Selected Model
+                        Coefficients
+plot.gnm                Plot Diagnostics for a gnm Object
+predict.gnm             Predict Method for Generalized Nonlinear Models
+profile.gnm             Profile Deviance for Parameters in a
+                        Generalized Nonlinear Model
+residSVD                Multiplicative Approximation of Model Residuals
+se.gnm                  Standard Errors of Linear Parameter
+                        Combinations in gnm Models
+summary.gnm             Summarize Generalized Nonlinear Model Fits
+termPredictors          Extract Term Contributions to Predictor
+vcov.gnm                Variance-covariance Matrix for Parameters in a
+                        Generalized Nonlinear Model
+voting                  Data on Social Mobility and the Labour Vote
+wedderburn              Wedderburn Quasi-likelihood Family
+wheat                   Wheat Yields from Mexican Field Trials
+yaish                   Class Mobility by Level of Education in Israel

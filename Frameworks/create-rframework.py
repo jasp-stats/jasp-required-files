@@ -4,7 +4,7 @@ import os
 from subprocess import check_output
 from subprocess import call
 import shutil
-current = "3.5"
+current = "3.6"
 
 def locate_libs(path):
 	

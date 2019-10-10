@@ -1,0 +1,10 @@
+amodule                 Define Augmented and Parameterized Modules
+as.module               Coercion for Modules
+depend                  Declare dependencies of modules
+export                  Export mechanism for modules
+expose                  Expose module contents
+extend                  Extend existing module definitions
+getSearchPath           Get the search path of an environment
+import                  Import mechanism for modules
+module                  Define Modules in R
+use                     Use a module as dependency

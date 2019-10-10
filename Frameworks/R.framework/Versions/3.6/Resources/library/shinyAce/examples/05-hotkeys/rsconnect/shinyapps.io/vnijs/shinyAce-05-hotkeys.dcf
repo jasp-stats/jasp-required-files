@@ -1,0 +1,12 @@
+name: shinyAce-05-hotkeys
+title: shinyAce-05-hotkeys
+username:
+account: vnijs
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1001340
+bundleId: 2181862
+url: https://vnijs.shinyapps.io/shinyAce-05-hotkeys/
+when: 1561618303.97448
+asMultiple: FALSE
+asStatic: FALSE
