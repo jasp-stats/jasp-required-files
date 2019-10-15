@@ -1,3 +1,0 @@
-export(glasso)
-export(glassopath)
-useDynLib(glasso) 

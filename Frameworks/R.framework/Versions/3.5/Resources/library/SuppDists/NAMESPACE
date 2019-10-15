@@ -1,4 +1,0 @@
-useDynLib("SuppDists")
-exportPattern("^[^\\.]")
-importFrom("stats", "quantile", "var")
-

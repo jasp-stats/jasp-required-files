@@ -1,8 +1,0 @@
-"name_old","name_new","class_old","class_new","value_old","value_new","missings","recodes"
-"x5","x5","numeric","numeric",".",".","",""
-"x4","x4","integer","integer","0|1|2|3|4|5|6|7|11|999|.","0|1|2|3|4|5|6|7|11|999|.","",""
-"x3","x3","ordered","ordered","med<lo<hi<.","med<lo<hi<.","",""
-"x2","x2","character","character","a|b|c|d|f|.","a|b|c|d|f|.","",""
-"x1","x1","factor","factor","bobby|cindy|greg|marcia|peter|.","bobby|cindy|greg|marcia|peter|.","",""
-"x7","x7","ordered","ordered","a<b<c<d<f<.","a<b<c<d<f<.","",""
-"x6","x6","integer","integer","1|2|3|4|5|.","1|2|3|4|5|.","",""

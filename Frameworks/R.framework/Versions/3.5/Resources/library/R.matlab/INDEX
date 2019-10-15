@@ -1,7 +1,0 @@
-1. The MATLAB server running in MATLAB
-                        1. The MATLAB server running in MATLAB
-Matlab                  MATLAB client for remote or local MATLAB access
-R.matlab-package        Package R.matlab
-readMat                 Reads a MAT file structure from a connection or
-                        a file
-writeMat                Writes a MAT file structure
