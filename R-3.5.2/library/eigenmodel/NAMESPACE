@@ -1,9 +1,0 @@
-# Export all names
-exportPattern(".")
-
-import(stats)
-import(graphics)
-
-# Methods
-S3method(plot, eigenmodel_post)
-

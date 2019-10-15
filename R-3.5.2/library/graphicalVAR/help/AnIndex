@@ -1,8 +1,0 @@
-graphicalVAR	graphicalVAR
-graphicalVARsim	graphicalVARsim
-mlGraphicalVAR	mlGraphicalVAR
-plot.graphicalVAR	plot
-print.graphicalVAR	S3
-randomGVARmodel	randomGVARmodel
-simMLgvar	simMLgvar
-summary.graphicalVAR	S3

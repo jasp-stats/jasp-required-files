@@ -1,6 +1,0 @@
-importFrom("stats", "coef", "model.matrix", "sd", "vcov")
-importFrom("utils", "capture.output")
-
-export(showData, pickFrom, relimp, relrelimp, R.to.Tcl, Tcl.to.R)
-
-S3method(print, relimp)
