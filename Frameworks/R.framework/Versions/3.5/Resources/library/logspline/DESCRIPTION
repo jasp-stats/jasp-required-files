@@ -1,6 +1,6 @@
 Package: logspline
-Version: 2.1.12
-Date: 2019-02-05
+Version: 2.1.14
+Date: 2019-10-04
 Title: Routines for Logspline Density Estimation
 Author: Charles Kooperberg <clk@fredhutch.org>
 Maintainer: Charles Kooperberg <clk@fredhutch.org>
@@ -12,8 +12,8 @@ Description: Contains routines for logspline density estimation.
 Imports: stats, graphics
 License: Apache License 2.0
 NeedsCompilation: yes
-Packaged: 2019-02-05 20:04:47 UTC; clk
+Packaged: 2019-10-04 17:42:12 UTC; clk
 Repository: CRAN
-Date/Publication: 2019-02-05 22:10:03 UTC
-Built: R 3.5.2; x86_64-apple-darwin15.6.0; 2019-02-06 14:05:35 UTC; unix
+Date/Publication: 2019-10-04 19:10:03 UTC
+Built: R 3.5.2; x86_64-apple-darwin15.6.0; 2019-10-05 04:31:18 UTC; unix
 Archs: logspline.so.dSYM

@@ -371,8 +371,8 @@ Cube<eT>::init
   
   typedef typename T1::elem_type T;
   
-  arma_type_check(( is_complex<eT>::value == false ));   //!< compile-time abort if eT is not std::complex
-  arma_type_check(( is_complex< T>::value == true  ));   //!< compile-time abort if  T is     std::complex
+  arma_type_check(( is_cx<eT>::no  ));   //!< compile-time abort if eT is not std::complex
+  arma_type_check(( is_cx< T>::yes ));   //!< compile-time abort if  T is     std::complex
   
   arma_type_check(( is_same_type< std::complex<T>, eT >::no ));   //!< compile-time abort if types are not compatible
   
@@ -2072,6 +2072,76 @@ Cube<eT>::shed_slices(const uword in_slice1, const uword in_slice2)
 
 
 
+//! remove specified slices
+template<typename eT>
+template<typename T1>
+inline
+void
+Cube<eT>::shed_slices(const Base<uword, T1>& indices)
+  {
+  arma_extra_debug_sigprint();
+  
+  const quasi_unwrap<T1>   U(indices.get_ref());
+  const Mat<uword>& tmp1 = U.M;
+  
+  arma_debug_check( ((tmp1.is_vec() == false) && (tmp1.is_empty() == false)), "Cube::shed_slices(): list of indices must be a vector" );
+  
+  if(tmp1.is_empty()) { return; }
+  
+  const Col<uword> tmp2(const_cast<uword*>(tmp1.memptr()), tmp1.n_elem, false, false);
+  
+  const Col<uword>& slices_to_shed = (tmp2.is_sorted("strictascend") == false)
+                                     ? Col<uword>(unique(tmp2))
+                                     : Col<uword>(const_cast<uword*>(tmp2.memptr()), tmp2.n_elem, false, false);
+  
+  const uword* slices_to_shed_mem = slices_to_shed.memptr();
+  const uword  N                  = slices_to_shed.n_elem;
+  
+  if(arma_config::debug)
+    {
+    for(uword i=0; i<N; ++i)
+      {
+      arma_debug_check( (slices_to_shed_mem[i] >= n_slices), "Cube::shed_slices(): indices out of bounds" );
+      }
+    }
+  
+  Col<uword> tmp3(n_slices);
+  
+  uword* tmp3_mem = tmp3.memptr();
+  
+  uword i     = 0;
+  uword count = 0;
+  
+  for(uword j=0; j < n_slices; ++j)
+    {
+    if(i < N)
+      {
+      if( j != slices_to_shed_mem[i] )
+        {
+        tmp3_mem[count] = j;
+        ++count;
+        }
+      else
+        {
+        ++i;
+        }
+      }
+    else
+      {
+      tmp3_mem[count] = j;
+      ++count;
+      }
+    }
+  
+  const Col<uword> slices_to_keep(tmp3.memptr(), count, false, false);
+  
+  Cube<eT> X = (*this).slices(slices_to_keep);
+  
+  steal_mem(X);
+  }
+
+
+
 template<typename eT>
 inline
 void
@@ -3329,11 +3399,13 @@ Cube<eT>::operator--(int)
 
 //! returns true if all of the elements are finite
 template<typename eT>
-arma_inline
+inline
 arma_warn_unused
 bool
 Cube<eT>::is_finite() const
   {
+  arma_extra_debug_sigprint();
+  
   return arrayops::is_finite( memptr(), n_elem );
   }
 
@@ -3880,6 +3952,20 @@ Cube<eT>::replace(const eT old_val, const eT new_val)
   arma_extra_debug_sigprint();
   
   arrayops::replace(memptr(), n_elem, old_val, new_val);
+  
+  return *this;
+  }
+
+
+
+template<typename eT>
+inline
+const Cube<eT>&
+Cube<eT>::clean(const typename get_pod_type<eT>::result threshold)
+  {
+  arma_extra_debug_sigprint();
+  
+  arrayops::clean(memptr(), n_elem, threshold);
   
   return *this;
   }

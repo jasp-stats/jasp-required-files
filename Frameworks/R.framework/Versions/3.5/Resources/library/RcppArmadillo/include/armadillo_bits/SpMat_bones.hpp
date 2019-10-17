@@ -27,8 +27,9 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   typedef eT                                elem_type;  //!< the type of elements stored in the matrix
   typedef typename get_pod_type<eT>::result  pod_type;  //!< if eT is std::complex<T>, pod_type is T; otherwise pod_type is eT
   
-  static const bool is_row = false;
-  static const bool is_col = false;
+  static const bool is_row  = false;
+  static const bool is_col  = false;
+  static const bool is_xvec = false;
   
   const uword n_rows;    //!< number of rows             (read-only)
   const uword n_cols;    //!< number of columns          (read-only)
@@ -138,7 +139,9 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   template<typename T1> inline SpMat& operator*=(const Op<T1, op_diagmat>& expr);
   template<typename T1> inline SpMat& operator/=(const Op<T1, op_diagmat>& expr);
   template<typename T1> inline SpMat& operator%=(const Op<T1, op_diagmat>& expr);
-  
+
+  //! explicit specification of sparse +/- scalar
+  template<typename T1, typename op_type> inline explicit SpMat(const SpToDOp<T1, op_type>& expr);
   
   //! construction of complex matrix out of two non-complex matrices
   template<typename T1, typename T2>
@@ -186,6 +189,15 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   template<typename T1, typename spop_type> inline SpMat& operator*=(const mtSpOp<eT, T1, spop_type>& X);
   template<typename T1, typename spop_type> inline SpMat& operator%=(const mtSpOp<eT, T1, spop_type>& X);
   template<typename T1, typename spop_type> inline SpMat& operator/=(const mtSpOp<eT, T1, spop_type>& X);
+  
+  // delayed mixed-type binary ops
+  template<typename T1, typename T2, typename spglue_type> inline             SpMat(const mtSpGlue<eT, T1, T2, spglue_type>& X);
+  template<typename T1, typename T2, typename spglue_type> inline SpMat&  operator=(const mtSpGlue<eT, T1, T2, spglue_type>& X);
+  template<typename T1, typename T2, typename spglue_type> inline SpMat& operator+=(const mtSpGlue<eT, T1, T2, spglue_type>& X);
+  template<typename T1, typename T2, typename spglue_type> inline SpMat& operator-=(const mtSpGlue<eT, T1, T2, spglue_type>& X);
+  template<typename T1, typename T2, typename spglue_type> inline SpMat& operator*=(const mtSpGlue<eT, T1, T2, spglue_type>& X);
+  template<typename T1, typename T2, typename spglue_type> inline SpMat& operator%=(const mtSpGlue<eT, T1, T2, spglue_type>& X);
+  template<typename T1, typename T2, typename spglue_type> inline SpMat& operator/=(const mtSpGlue<eT, T1, T2, spglue_type>& X);
   
   
   arma_inline       SpSubview<eT> row(const uword row_num);
@@ -317,6 +329,9 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   inline void  reshape(const uword in_rows, const uword in_cols);
   inline void  reshape(const SizeMat& s);
   
+  inline void  reshape_helper_generic(const uword in_rows, const uword in_cols);  //! internal use only
+  inline void  reshape_helper_intovec();                                          //! internal use only
+  
   arma_deprecated inline void reshape(const uword in_rows, const uword in_cols, const uword dim);  //!< NOTE: don't use this form: it will be removed
   
   template<typename functor> inline const SpMat&  for_each(functor F);
@@ -325,6 +340,8 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   template<typename functor> inline const SpMat& transform(functor F);
   
   inline const SpMat& replace(const eT old_val, const eT new_val);
+  
+  inline const SpMat& clean(const pod_type threshold);
   
   inline const SpMat& zeros();
   inline const SpMat& zeros(const uword in_elem);
@@ -628,12 +645,19 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   
   private:
   
+  inline arma_hot arma_warn_unused const eT* find_value_csc(const uword in_row, const uword in_col) const;
+  
   inline arma_hot arma_warn_unused eT get_value(const uword i                         ) const;
   inline arma_hot arma_warn_unused eT get_value(const uword in_row, const uword in_col) const;
   
   inline arma_hot arma_warn_unused eT get_value_csc(const uword i                         ) const;
   inline arma_hot arma_warn_unused eT get_value_csc(const uword in_row, const uword in_col) const;
   
+  inline arma_hot arma_warn_unused bool try_set_value_csc(const uword in_row, const uword in_col, const eT in_val);
+  inline arma_hot arma_warn_unused bool try_add_value_csc(const uword in_row, const uword in_col, const eT in_val);
+  inline arma_hot arma_warn_unused bool try_sub_value_csc(const uword in_row, const uword in_col, const eT in_val);
+  inline arma_hot arma_warn_unused bool try_mul_value_csc(const uword in_row, const uword in_col, const eT in_val);
+  inline arma_hot arma_warn_unused bool try_div_value_csc(const uword in_row, const uword in_col, const eT in_val);
   
   inline arma_warn_unused eT&  insert_element(const uword in_row, const uword in_col, const eT in_val = eT(0));
   inline                  void delete_element(const uword in_row, const uword in_col);
@@ -643,9 +667,9 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   
   arma_aligned mutable MapMat<eT> cache;
   arma_aligned mutable state_type sync_state;
-  // 0: cache needs to be updated from CSC
-  // 1: CSC needs to be updated from cache
-  // 2: no update required
+  // 0: cache needs to be updated from CSC (ie.   CSC has more recent data)
+  // 1: CSC needs to be updated from cache (ie. cache has more recent data)
+  // 2: no update required                 (ie. CSC and cache contain the same data)
   
   #if defined(ARMA_USE_CXX11)
   arma_aligned mutable std::mutex cache_mutex;
@@ -654,8 +678,10 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   arma_inline void invalidate_cache() const;
   arma_inline void invalidate_csc()   const;
   
-  inline void sync_cache() const;
-  inline void sync_csc()   const;
+  inline void sync_cache()        const;
+  inline void sync_cache_simple() const;
+  inline void sync_csc()          const;
+  inline void sync_csc_simple()   const;
   
   
   friend class SpValProxy< SpMat<eT> >;  // allow SpValProxy to call insert_element() and delete_element()
@@ -664,6 +690,7 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   friend class SpCol<eT>;
   friend class SpMat_MapMat_val<eT>;
   friend class SpSubview_MapMat_val<eT>;
+  friend class spdiagview<eT>;
   
   
   public:

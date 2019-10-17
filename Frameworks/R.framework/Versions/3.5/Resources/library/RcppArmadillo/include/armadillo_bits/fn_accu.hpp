@@ -704,7 +704,7 @@ accu(const eGlueCube<T1,T2,eglue_schur>& expr)
 template<typename T>
 arma_warn_unused
 inline
-const typename arma_scalar_only<T>::result &
+typename arma_scalar_only<T>::result
 accu(const T& x)
   {
   return x;
@@ -835,6 +835,33 @@ accu(const SpGlue<T1,T2,spglue_schur>& expr)
     }
   
   return acc;
+  }
+
+
+
+template<typename T1, typename spop_type>
+arma_warn_unused
+inline
+typename T1::elem_type
+accu(const SpOp<T1, spop_type>& expr)
+  {
+  arma_extra_debug_sigprint();
+  
+  typedef typename T1::elem_type eT;
+  
+  const bool is_vectorise = \
+       (is_same_type<spop_type, spop_vectorise_row>::yes)
+    || (is_same_type<spop_type, spop_vectorise_col>::yes)
+    || (is_same_type<spop_type, spop_vectorise_all>::yes);
+  
+  if(is_vectorise)
+    {
+    return accu(expr.m);
+    }
+  
+  const SpMat<eT> tmp = expr;
+  
+  return accu(tmp);
   }
 
 

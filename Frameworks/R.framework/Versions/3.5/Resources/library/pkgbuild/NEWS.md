@@ -1,3 +1,38 @@
+# pkgbuild 1.0.6
+
+* Support for RTools 40 and custom msys2 toolchains that are explicitly set
+  using the `CC` Makevars (#40).
+
+# pkgbuild 1.0.5
+
+* `check_build_tools()` gains a `quiet` argument, to control when the message
+  is displayed. The message is no longer displayed when `check_build_tools()`
+  is called internally by pkgbuild functions. (#83)
+
+# pkgbuild 1.0.4
+
+* `build()` gains a `clean_doc` argument, to control if the `inst/doc`
+  directory is cleaned before building. (#79, #75)
+
+* `build()` and `pkgbuild_process` now have standard output and error are
+  correctly interleaved, by redirecting the standard error of build process
+  to the standard output (@gaborcsardi, #78).
+
+* `check_build_tools()` now has a more helpful error message which points you
+  towards ways to debug the issue (#68).
+
+* `pkgbuild_process` now do not set custom compiler flags, and it uses
+  the user's `Makevars` file (@gaborcsardi, #76).
+
+* `rtools_path()` now returns `NA` on non-windows systems and also works when
+  `has_rtools()` has not been run previously (#74).
+
+# pkgbuild 1.0.3
+
+* Tests which wrote to the package library are now skipped on CRAN.
+
+* `build()` can now build a tar.gz file directly (#55)
+
 # pkgbuild 1.0.2
 
 * `build()` and `compile_dll()` gain a `register_routines` argument, to
@@ -19,6 +54,8 @@
 * `build()` no longer sets compile flags (#46)
 
 # pkgbuild 1.0.1
+
+* Preliminary support for rtools 4.0 (#40)
 
 * `compile_dll()` now does not supply compiler flags if there is an existing
   user defined Makevars file.

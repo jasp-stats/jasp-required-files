@@ -27,8 +27,9 @@ class Col : public Mat<eT>
   typedef eT                                elem_type;
   typedef typename get_pod_type<eT>::result pod_type;
   
-  static const bool is_col = true;
-  static const bool is_row = false;
+  static const bool is_col  = true;
+  static const bool is_row  = false;
+  static const bool is_xvec = false;
   
   inline          Col();
   inline          Col(const Col<eT>& X);
@@ -84,6 +85,8 @@ class Col : public Mat<eT>
   arma_inline const Op<Col<eT>,op_htrans> ht() const;
   arma_inline const Op<Col<eT>,op_strans> st() const;
   
+  arma_inline const Op<Col<eT>,op_strans> as_row() const;
+  
   arma_inline       subview_col<eT> row(const uword row_num);
   arma_inline const subview_col<eT> row(const uword row_num) const;
   
@@ -123,6 +126,8 @@ class Col : public Mat<eT>
   
   inline void shed_row (const uword row_num);
   inline void shed_rows(const uword in_row1, const uword in_row2);
+  
+  template<typename T1> inline void shed_rows(const Base<uword, T1>& indices);
   
                         inline void insert_rows(const uword row_num, const uword N, const bool set_to_zero = true);
   template<typename T1> inline void insert_rows(const uword row_num, const Base<eT,T1>& X);
@@ -180,8 +185,9 @@ class Col<eT>::fixed : public Col<eT>
   typedef eT                                elem_type;
   typedef typename get_pod_type<eT>::result pod_type;
   
-  static const bool is_col = true;
-  static const bool is_row = false;
+  static const bool is_col  = true;
+  static const bool is_row  = false;
+  static const bool is_xvec = false;
   
   static const uword n_rows;  // value provided below the class definition
   static const uword n_cols;  // value provided below the class definition

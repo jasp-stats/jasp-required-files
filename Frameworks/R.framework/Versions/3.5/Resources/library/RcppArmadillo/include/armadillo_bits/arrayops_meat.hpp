@@ -25,13 +25,20 @@ arma_inline
 void
 arrayops::copy(eT* dest, const eT* src, const uword n_elem)
   {
-  if( (n_elem <= 9) && (is_cx<eT>::no) )
+  if(is_cx<eT>::no)
     {
-    arrayops::copy_small(dest, src, n_elem);
+    if(n_elem <= 9)
+      {
+      arrayops::copy_small(dest, src, n_elem);
+      }
+    else
+      {
+      std::memcpy(dest, src, n_elem*sizeof(eT));
+      }
     }
   else
     {
-    std::memcpy(dest, src, n_elem*sizeof(eT));
+    if(n_elem > 0)  { std::memcpy(dest, src, n_elem*sizeof(eT)); }
     }
   }
 
@@ -102,6 +109,55 @@ arrayops::replace(eT* mem, const uword n_elem, const eT old_val, const eT new_va
       eT& val = mem[i];
       
       val = (val == old_val) ? new_val : val;
+      }
+    }
+  }
+
+
+
+template<typename eT>
+arma_hot
+inline
+void
+arrayops::clean(eT* mem, const uword n_elem, const eT abs_limit, const typename arma_not_cx<eT>::result* junk)
+  {
+  arma_ignore(junk);
+  
+  for(uword i=0; i<n_elem; ++i)
+    {
+    eT& val = mem[i];
+    
+    val = (std::abs(val) <= abs_limit) ? eT(0) : val;
+    }
+  }
+
+
+
+template<typename T>
+arma_hot
+inline
+void
+arrayops::clean(std::complex<T>* mem, const uword n_elem, const T abs_limit)
+  {
+  typedef typename std::complex<T> eT;
+  
+  for(uword i=0; i<n_elem; ++i)
+    {
+    eT& val = mem[i];
+    
+    T val_real = std::real(val);
+    T val_imag = std::imag(val);
+    
+    if(std::abs(val_real) <= abs_limit)
+      {
+      val_imag = (std::abs(val_imag) <= abs_limit) ? T(0) : val_imag;
+      
+      val = std::complex<T>(T(0), val_imag);
+      }
+    else
+    if(std::abs(val_imag) <= abs_limit)
+      {
+      val = std::complex<T>(val_real, T(0));
       }
     }
   }
@@ -549,7 +605,7 @@ arrayops::inplace_set(eT* dest, const eT val, const uword n_elem)
     {
     if( (val == eT(0)) && (std::numeric_limits<eT>::is_integer || (std::numeric_limits<pod_type>::is_iec559 && is_real<pod_type>::value)) )
       {
-      std::memset((void*)dest, 0, sizeof(eT)*n_elem);
+      if(n_elem > 0)  { std::memset((void*)dest, 0, sizeof(eT)*n_elem); }
       }
     else
       {

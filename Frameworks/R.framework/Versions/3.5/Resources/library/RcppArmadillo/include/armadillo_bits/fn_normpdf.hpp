@@ -30,9 +30,9 @@ normpdf_helper(Mat<typename T1::elem_type>& out, const Base<typename T1::elem_ty
   
   if(Proxy<T1>::use_at || Proxy<T2>::use_at || Proxy<T3>::use_at)
     {
-    const unwrap<T1> UX(X_expr.get_ref());
-    const unwrap<T2> UM(M_expr.get_ref());
-    const unwrap<T3> US(S_expr.get_ref());
+    const quasi_unwrap<T1> UX(X_expr.get_ref());
+    const quasi_unwrap<T2> UM(M_expr.get_ref());
+    const quasi_unwrap<T3> US(S_expr.get_ref());
     
     normpdf_helper(out, UX.M, UM.M, US.M);
     
@@ -127,7 +127,7 @@ normpdf(const eT x, const Base<eT, T2>& M_expr, const Base<eT, T3>& S_expr)
   
   Mat<eT> out;
   
-  normpdf_helper(out, x*ones< Mat<eT> >(size(M)), M, S_expr.get_ref());
+  normpdf_helper(out, x*ones< Mat<eT> >(arma::size(M)), M, S_expr.get_ref());
   
   return out;
   }
@@ -148,7 +148,7 @@ normpdf(const Base<typename T1::elem_type, T1>& X_expr)
   
   Mat<eT> out;
   
-  normpdf_helper(out, X, zeros< Mat<eT> >(size(X)), ones< Mat<eT> >(size(X)));
+  normpdf_helper(out, X, zeros< Mat<eT> >(arma::size(X)), ones< Mat<eT> >(arma::size(X)));
   
   return out;
   }
@@ -169,7 +169,7 @@ normpdf(const Base<typename T1::elem_type, T1>& X_expr, const typename T1::elem_
   
   Mat<eT> out;
   
-  normpdf_helper(out, X, mu*ones< Mat<eT> >(size(X)), sigma*ones< Mat<eT> >(size(X)));
+  normpdf_helper(out, X, mu*ones< Mat<eT> >(arma::size(X)), sigma*ones< Mat<eT> >(arma::size(X)));
   
   return out;
   }

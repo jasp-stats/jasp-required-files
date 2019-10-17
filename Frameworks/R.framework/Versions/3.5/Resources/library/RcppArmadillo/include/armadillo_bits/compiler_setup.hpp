@@ -37,34 +37,46 @@
 #define arma_noinline
 #define arma_ignore(variable)  ((void)(variable))
 
-#undef arma_fortran_noprefix
-#undef arma_fortran_prefix
-
-#undef arma_fortran2_noprefix
-#undef arma_fortran2_prefix
+#undef arma_fortran_sans_prefix_B
+#undef arma_fortran_with_prefix_B
  
 #if defined(ARMA_BLAS_UNDERSCORE)
-  #define arma_fortran2_noprefix(function) function##_
-  #define arma_fortran2_prefix(function)   wrapper_##function##_
+  #define arma_fortran_sans_prefix_B(function) function##_
+  
+  #if defined(ARMA_USE_FORTRAN_HIDDEN_ARGS)  
+    #define arma_fortran_with_prefix_B(function) wrapper2_##function##_
+  #else
+    #define arma_fortran_with_prefix_B(function) wrapper_##function##_
+  #endif
 #else
-  #define arma_fortran2_noprefix(function) function
-  #define arma_fortran2_prefix(function)   wrapper_##function
+  #define arma_fortran_sans_prefix_B(function) function
+  
+  #if defined(ARMA_USE_FORTRAN_HIDDEN_ARGS)  
+    #define arma_fortran_with_prefix_B(function) wrapper2_##function
+  #else
+    #define arma_fortran_with_prefix_B(function) wrapper_##function
+  #endif
 #endif
 
+#undef arma_fortran
+#undef arma_wrapper
+
 #if defined(ARMA_USE_WRAPPER)
-  #define arma_fortran(function) arma_fortran2_prefix(function)
+  #define arma_fortran(function) arma_fortran_with_prefix_B(function)
   #define arma_wrapper(function) wrapper_##function
 #else
-  #define arma_fortran(function) arma_fortran2_noprefix(function)
+  #define arma_fortran(function) arma_fortran_sans_prefix_B(function)
   #define arma_wrapper(function) function
 #endif
 
-#define arma_fortran_prefix(function)   arma_fortran2_prefix(function)
-#define arma_fortran_noprefix(function) arma_fortran2_noprefix(function)
+#undef arma_fortran_sans_prefix
+#undef arma_fortran_with_prefix
+
+#define arma_fortran_sans_prefix(function) arma_fortran_sans_prefix_B(function)
+#define arma_fortran_with_prefix(function) arma_fortran_with_prefix_B(function)
 
 #undef  ARMA_INCFILE_WRAP
 #define ARMA_INCFILE_WRAP(x) <x>
-
 
 #if defined(ARMA_USE_CXX11)
   
@@ -132,6 +144,7 @@
   
   #undef  ARMA_USE_EXTERN_CXX11_RNG
   // TODO: thread_local seems to work in Apple clang since Xcode 8 (mid 2016 onwards)
+  // NOTE: https://stackoverflow.com/questions/28094794/why-does-apple-clang-disallow-c11-thread-local-when-official-clang-supports
 #endif
 
 
@@ -155,13 +168,21 @@
 #endif
 
 
-#if (defined(__GNUG__) || defined(__GNUC__)) && (defined(__clang__) || defined(__INTEL_COMPILER) || defined(__NVCC__) || defined(__CUDACC__) || defined(__PGI) || defined(__PATHSCALE__) || defined(__ARMCC_VERSION) || defined(__IBMCPP__))
-  #undef  ARMA_FAKE_GCC
-  #define ARMA_FAKE_GCC
+#if !defined(ARMA_ALLOW_FAKE_GCC)
+  #if (defined(__GNUG__) || defined(__GNUC__)) && (defined(__INTEL_COMPILER) || defined(__NVCC__) || defined(__CUDACC__) || defined(__PGI) || defined(__PATHSCALE__) || defined(__ARMCC_VERSION) || defined(__IBMCPP__))
+    #undef  ARMA_DETECTED_FAKE_GCC
+    #define ARMA_DETECTED_FAKE_GCC
+    
+    #pragma message ("WARNING: this compiler is pretending to be GCC but it may not be fully compatible;")
+    #pragma message ("WARNING: to allow this compiler to use GCC features such as data alignment attributes,")
+    #pragma message ("WARNING: #define ARMA_ALLOW_FAKE_GCC before #include <armadillo>")
+  #endif
 #endif
 
 
-#if defined(__GNUG__) && !defined(ARMA_FAKE_GCC)
+#if defined(__GNUG__) && (!defined(__clang__) && !defined(ARMA_DETECTED_FAKE_GCC))
+  
+  // #pragma message ("using GCC extensions")
   
   #undef  ARMA_GCC_VERSION
   #define ARMA_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
@@ -212,7 +233,7 @@
     #endif
   #endif
   
-  #if !defined(ARMA_USE_CXX11) && !defined(__GXX_EXPERIMENTAL_CXX0X__) && (__cplusplus < 201103L) 
+  #if !defined(ARMA_USE_CXX11) && !defined(__GXX_EXPERIMENTAL_CXX0X__) && (__cplusplus < 201103L) && !defined(ARMA_DONT_USE_TR1)
     #if defined(_GLIBCXX_USE_C99_MATH_TR1) && defined(_GLIBCXX_USE_C99_COMPLEX_TR1)
       #define ARMA_HAVE_TR1
     #endif
@@ -240,13 +261,21 @@
 #endif
 
 
-#if defined(__clang__) && (defined(__INTEL_COMPILER) || defined(__NVCC__) || defined(__CUDACC__) || defined(__PGI) || defined(__PATHSCALE__) || defined(__ARMCC_VERSION) || defined(__IBMCPP__))
-  #undef  ARMA_FAKE_CLANG
-  #define ARMA_FAKE_CLANG
+#if !defined(ARMA_ALLOW_FAKE_CLANG)
+  #if defined(__clang__) && (defined(__INTEL_COMPILER) || defined(__NVCC__) || defined(__CUDACC__) || defined(__PGI) || defined(__PATHSCALE__) || defined(__ARMCC_VERSION) || defined(__IBMCPP__))
+    #undef  ARMA_DETECTED_FAKE_CLANG
+    #define ARMA_DETECTED_FAKE_CLANG
+    
+    #pragma message ("WARNING: this compiler is pretending to be Clang but it may not be fully compatible;")
+    #pragma message ("WARNING: to allow this compiler to use Clang features such as data alignment attributes,")
+    #pragma message ("WARNING: #define ARMA_ALLOW_FAKE_CLANG before #include <armadillo>")
+  #endif
 #endif
 
 
-#if defined(__clang__) && !defined(ARMA_FAKE_CLANG)
+#if defined(__clang__) && !defined(ARMA_DETECTED_FAKE_CLANG)
+  
+  // #pragma message ("using Clang extensions")
   
   #define ARMA_GOOD_COMPILER
   
@@ -471,17 +500,13 @@
 #endif
 
 
-#if ( (defined(_OPENMP) && (_OPENMP < 201107)) && !defined(ARMA_DONT_USE_OPENMP) )
-  // if the compiler has an ancient version of OpenMP and use of OpenMP hasn't been explicitly disabled,
-  // print a warning to ensure there is no confusion about OpenMP support
-  #undef  ARMA_USE_OPENMP
-  #undef  ARMA_PRINT_OPENMP_WARNING
-  #define ARMA_PRINT_OPENMP_WARNING
-#endif
-
-
 #if defined(ARMA_PRINT_OPENMP_WARNING) && !defined(ARMA_DONT_PRINT_OPENMP_WARNING)
   #pragma message ("WARNING: use of OpenMP disabled; compiler support for OpenMP 3.1+ not detected")
+  
+  #if (defined(_OPENMP) && (_OPENMP < 201107))
+    #pragma message ("NOTE: your compiler appears to have an ancient version of OpenMP")
+    #pragma message ("NOTE: consider upgrading to a better compiler")
+  #endif
 #endif
 
 

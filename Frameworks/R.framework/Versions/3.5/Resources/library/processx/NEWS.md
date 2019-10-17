@@ -1,4 +1,59 @@
 
+# processx 3.4.1
+
+* Now `run()` does not create an `ok` variable in the global environment.
+
+# processx 3.4.0
+
+* Processx has now better error messages, in particular, all errors from C
+  code contain the file name and line number, and the system error code
+  and message (where applicable).
+
+* Processx now sets the `.Last.error` variable for every un-caught processx
+  error to the error condition, and also sets `.Last.error.trace` to its
+  stack trace.
+
+* `run()` now prints the last 10 lines of the standard error stream on
+  error, if `echo = FALSE`, and it also prints the exit status of the
+  process.
+
+* `run()` now includes the standard error in the condition signalled on
+  interrupt.
+
+* `process` now supports creating pseudo terminals on Unix systems.
+
+* `conn_create_pipepair()` gets new argument to set the pipes as blocking
+  or non-blocking.
+
+* `process` does not set the inherited extra connections as blocking,
+  and it also does not close them after starting the subprocess.
+  This is now the responsibility of the user. Note that this is a
+  breaking change.
+
+* `run()` now passes extra `...` arguments to `process$new()`.
+
+* `run()` now does not error if the process is killed in a callback.
+
+# processx 3.3.1
+
+* Fix a crash on Windows, when a connection that has a pending read
+  internally is finalized.
+
+# processx 3.3.0
+
+* `process` can now redirect the standard error to the standard output, via
+  specifying `stderr = "2>&1"`. This works both with files and pipes.
+
+* `run()` can now redirect the standard error to the standard output, via
+  the new `stderr_to_stdout` argument.
+
+* The `$kill()` and `$kill_tree()` methods get a `close_connection = TRUE`
+  argument that closes all pipe connections of the process.
+
+* `run()` now always kills the process (and its process tree if
+  `cleanup_tree` is `TRUE`) before exiting. This also closes all
+  pipe connections (#149).
+
 # processx 3.2.1
 
 * processx does not depend on assertthat now, and the crayon package

@@ -546,6 +546,16 @@ Row<eT>::st() const
 
 template<typename eT>
 arma_inline
+const Op<Row<eT>,op_strans>
+Row<eT>::as_col() const
+  {
+  return Op<Row<eT>,op_strans>(*this);
+  }
+
+
+
+template<typename eT>
+arma_inline
 subview_row<eT>
 Row<eT>::col(const uword in_col1)
   {
@@ -916,6 +926,20 @@ Row<eT>::shed_cols(const uword in_col1, const uword in_col2)
     }
   
   Mat<eT>::steal_mem(X);
+  }
+
+
+
+//! remove specified columns
+template<typename eT>
+template<typename T1>
+inline
+void
+Row<eT>::shed_cols(const Base<uword, T1>& indices)
+  {
+  arma_extra_debug_sigprint();
+  
+  Mat<eT>::shed_cols(indices);
   }
 
 
