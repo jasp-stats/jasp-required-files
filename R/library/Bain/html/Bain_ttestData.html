@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Bayesian t test using approximate adjusted fractional Bayes...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Bain_ttestData {Bain}"><tr><td>Bain_ttestData {Bain}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Bayesian t test using approximate adjusted fractional Bayes factors
+</h2>
+
+<h3>Description</h3>
+
+<p>This function computes approximated adjusted fractional Bayes factors one-sample or two-sample t test.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Bain_ttestData(x, y = NULL, nu = 0, type = 1, paired=FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+
+<p>A vector for the sample
+</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+
+<p>A vector for the sample in the second group (optional).
+</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+
+<p>A numeric number for the null value in t test. Default number is nu = 0.
+</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+
+<p>An integer number (1-4) indicating the type of the t test.
+&quot;1&quot; means theta = 0 vs theta != 0.
+&quot;2&quot; means theta = 0 vs theta &gt; 0.
+&quot;3&quot; means theta = 0 vs theta &lt; 0.
+&quot;4&quot; means theta &gt; 0 vs theta &lt; 0.
+&quot;5&quot; means theta = 0 vs theta &gt; 0 vs theta &lt; 0.
+&quot;theta&quot; is the mean parameter of the sample.
+</p>
+</td></tr>
+<tr valign="top"><td><code>paired</code></td>
+<td>
+
+<p>Paired = TRUE for paired t test. Default is paried = FALSE.
+</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+
+<p>Return a list that contains Bayes factor and posterior model probabilities.
+</p>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Xin Gu, Herbert Hoijtink, Joris Mulder
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  #Example 1
+  #One sample t test:
+  #H0: theta=0
+  x&lt;-c(-1,1,2,-1,-0.5)
+  res&lt;-Bain_ttestData(x)
+
+  plot(res)
+  #Results for PMPs are plotted.
+
+  #Other types
+  Bain_ttestData(x,type=2)
+  Bain_ttestData(x,type=3)
+  Bain_ttestData(x,type=4)
+  Bain_ttestData(x,type=5)
+
+
+  #Example2
+  #Two sample t test:
+  #H0: theta1=theta2
+  x&lt;-c(-1,1,2,-1,-0.5)
+  y&lt;-c(0,1,2,0,1)
+  res&lt;-Bain_ttestData(x,y)
+
+  plot(res)
+  #Results for PMPs are plotted.
+
+
+  #Example3
+  #paired t test:
+  #H0: theta1=theta2
+  x&lt;-c(-1,1,2,-1,-0.5)
+  y&lt;-c(0,1,2,0,1)
+  res&lt;-Bain_ttestData(x,y,paired=TRUE)
+
+  plot(res)
+  #Results for PMPs are plotted.
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Bain</em> version 0.1.3 <a href="00Index.html">Index</a>]</div>
+</body></html>

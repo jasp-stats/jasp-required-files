@@ -1,0 +1,17 @@
+amodule	amodule
+as.module	modulecoerce
+as.module.character	modulecoerce
+as.module.module	modulecoerce
+autoTopEncl	module
+depend	depend
+depend.default	depend
+export	export
+expose	expose
+extend	extend
+getSearchPath	utilityFunctions
+getSearchPathContent	utilityFunctions
+getSearchPathDuplicates	utilityFunctions
+getSearchPathNames	utilityFunctions
+import	import
+module	module
+use	use

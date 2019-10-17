@@ -1,0 +1,20 @@
+citHeader("To cite mdscore in publications use:")
+
+citEntry(entry = "Article",
+         title        = "{mdscore}: An {R} Package to Compute Improved Score Tests in Generalized Linear Models",
+         author       = c(person("Antonio Hermes M.", "da Silva-J{\\'u}nior"),
+                          person("Dami{\\~a}o N{\\'o}brega", "da Silva"),
+                          person("Silvia L. P.", "Ferrari")),
+         journal      = "Journal of Statistical Software",
+         year         = "2014",
+         volume       = "61",
+         number       = "2",
+         pages        = "1--16",
+         url          = "http://www.jstatsoft.org/v61/c02/",
+         
+         textVersion  =
+           paste("Antonio Hermes M. da Silva-Junior, Damiao Nobrega da Silva, Silvia L. P. Ferrari (2014).",
+                 "mdscore: An R Package to Compute Improved Score Tests in Generalized Linear Models.",
+                 "Journal of Statistical Software, 61(2), 1-16.",
+                 "URL http://www.jstatsoft.org/v61/c02/.")
+)

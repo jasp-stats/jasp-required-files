@@ -1,0 +1,49 @@
+Package: bridgesampling
+Type: Package
+Title: Bridge Sampling for Marginal Likelihoods and Bayes Factors
+Version: 0.7-2
+Authors@R: c(person(given="Quentin F.", family="Gronau", role=c("aut", "cre"),
+             email="Quentin.F.Gronau@gmail.com",
+             comment=c(ORCID="0000-0001-5510-6943")),
+             person(given="Henrik", family="Singmann", role="aut",
+             comment=c(ORCID="0000-0002-4842-3657")),
+             person(given="Jonathan J.", family="Forster", role="ctb"),
+             person(given="Eric-Jan", family="Wagenmakers", role="ths"),
+             person(family="The JASP Team", role="ctb"),
+             person("Jiqiang", "Guo", role = "ctb"),
+             person("Jonah", "Gabry", role = "ctb"),
+             person("Ben", "Goodrich", role = c("ctb")),
+             person("Kees", "Mulder", role = c("ctb")),
+             person("Perry", "de Valpine", role = c("ctb"))
+             )
+Depends: R (>= 3.0.0)
+Imports: mvnfast, Matrix, Brobdingnag, stringr, coda, parallel, scales,
+        utils, methods
+Suggests: testthat, Rcpp, RcppEigen, R2jags, rjags, runjags, knitr,
+        rmarkdown, R.rsp, BayesFactor, rstan, rstanarm, nimble,
+        MCMCpack
+Description: Provides functions for estimating marginal likelihoods, Bayes
+    factors, posterior model probabilities, and normalizing constants in general,
+    via different versions of bridge sampling (Meng & Wong, 1996, 
+    <http://www3.stat.sinica.edu.tw/statistica/j6n4/j6n43/j6n43.htm>).
+License: GPL (>= 2)
+LazyData: true
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr, R.rsp
+URL: https://github.com/quentingronau/bridgesampling
+NeedsCompilation: no
+Packaged: 2019-06-29 07:53:28 UTC; henrik
+Author: Quentin F. Gronau [aut, cre] (<https://orcid.org/0000-0001-5510-6943>),
+  Henrik Singmann [aut] (<https://orcid.org/0000-0002-4842-3657>),
+  Jonathan J. Forster [ctb],
+  Eric-Jan Wagenmakers [ths],
+  The JASP Team [ctb],
+  Jiqiang Guo [ctb],
+  Jonah Gabry [ctb],
+  Ben Goodrich [ctb],
+  Kees Mulder [ctb],
+  Perry de Valpine [ctb]
+Maintainer: Quentin F. Gronau <Quentin.F.Gronau@gmail.com>
+Repository: CRAN
+Date/Publication: 2019-07-21 22:40:06 UTC
+Built: R 3.5.3; ; 2019-10-06 01:15:59 UTC; windows

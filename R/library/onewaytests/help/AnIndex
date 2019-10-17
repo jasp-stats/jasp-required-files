@@ -1,0 +1,15 @@
+onewaytests-package	onewaytests
+ag.test	ag.test
+aov.test	aov.test
+bf.test	bf.test
+describe	describe
+gplot	gplot
+homog.test	homog.test
+james.test	james.test
+kw.test	kw.test
+nor.test	nor.test
+paircomp	paircomp
+paircomp.default	paircomp
+paircomp.jt	paircomp.jt
+paircomp.owt	paircomp
+welch.test	welch.test

@@ -1,0 +1,32 @@
+%>%                     magrittr forward-pipe operator
++.gg                    add layer
+-.gg                    remove layer
+as.ggedit               Try to coerce a ggplot object into a ggedit
+                        object
+as.gglist               recasts to gglist
+cloneFacet              Clone ggplot facet object
+cloneLayer              Creates an independent copy of a ggplot layer
+                        object
+cloneRoot               clone root of ggplot object
+cloneScales             Clone ggplot2 scales from compiled ggplot
+                        objects
+compare                 compare
+dput.ggedit             Convert ggplot object to a string call
+gg_session              retreive all functions that create ggroto
+                        layers or stats
+gg_vetting              Backcheck what functions created the layers in
+                        a ggplot2 plot object
+ggedit                  Interactive shiny gadget for editing ggplot
+                        layers and themes.
+ggedit_opts             Default and current ggedit options
+gggsave                 gggsave
+is.ggedit               Is the object of class ggedit
+is.gglist               gglist
+layersList              layersList
+pList                   List of plots for ggedit examples
+print.ggedit            Print ggedit objects
+proto_features          ggplot2 layer proto extraction
+remove_geom             Remove a layer from a compiled ggplot2 object.
+rgg                     Remove and replace ggplot2 layers.
+summary.ggedit          Print to console verbose outputs of objects of
+                        class ggedit

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a prior-posterior plot.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PlotPriorAndPosterior {JASPgraphs}"><tr><td>PlotPriorAndPosterior {JASPgraphs}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a prior-posterior plot.</h2>
+
+<h3>Description</h3>
+
+<p>Create a prior-posterior plot.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+PlotPriorAndPosterior(dfLines, dfPoints = NULL, BF01 = NULL,
+  CRI = NULL, median = NULL, xName = NULL, yName = "Density",
+  drawPizzaTxt = !is.null(BF01), drawCRItxt = !is.null(CRI),
+  bfSubscripts = "BF[0][1]", pizzaTxt = pizzaTxtFromBF(bfSubscripts),
+  bty = list(type = "n", ldwX = 0.5, lwdY = 0.5), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dfLines</code></td>
+<td>
+<p>A dataframe with <code>$x</code>, <code>$y</code>, and optionally <code>$g</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dfPoints</code></td>
+<td>
+<p>A dataframe with <code>$x</code>, <code>$y</code>, and optionally <code>$g</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>BF01</code></td>
+<td>
+<p>Numeric, with value of Bayes factor.</p>
+</td></tr>
+<tr valign="top"><td><code>CRI</code></td>
+<td>
+<p>Numeric of length 2, Credible interval of posterior.</p>
+</td></tr>
+<tr valign="top"><td><code>median</code></td>
+<td>
+<p>Numeric, median of posterior.</p>
+</td></tr>
+<tr valign="top"><td><code>xName</code></td>
+<td>
+<p>String or expression, displayed on the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>yName</code></td>
+<td>
+<p>String or expression, displayed on the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>drawPizzaTxt</code></td>
+<td>
+<p>Logical, should there be text above and below the pizza plot?</p>
+</td></tr>
+<tr valign="top"><td><code>drawCRItxt</code></td>
+<td>
+<p>Logical, should the credible interval be displayed in text?</p>
+</td></tr>
+<tr valign="top"><td><code>bfSubscripts</code></td>
+<td>
+<p>String, to be parsed as expression. Indicates what BF type to display.</p>
+</td></tr>
+<tr valign="top"><td><code>pizzaTxt</code></td>
+<td>
+<p>String vector of length 2, text to be drawn above and below pizza plot.</p>
+</td></tr>
+<tr valign="top"><td><code>bty</code></td>
+<td>
+<p>List of three elements. Type specifies the box type, ldwX the width of the x-axis, lwdY the width of the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Unused.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>JASPgraphs</em> version 0.3.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

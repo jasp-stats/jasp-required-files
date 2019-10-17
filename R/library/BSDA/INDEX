@@ -1,0 +1,602 @@
+Abbey                   Daily price returns (in pence) of Abbey
+                        National shares between 7/31/91 and 10/8/91
+Abc                     Three samples to illustrate analysis of
+                        variance
+Abilene                 Crimes reported in Abilene, Texas
+Ability                 Perceived math ability for 13-year olds by
+                        gender
+Abortion                Abortion rate by region of country
+Absent                  Number of absent days for 20 employees
+Achieve                 Math achievement test scores by gender for 25
+                        high school students
+Adsales                 Number of ads versus number of sales for a
+                        retailer of satellite dishes
+Aggress                 Agressive tendency scores for a group of
+                        teenage members of a street gang
+Aid                     Monthly payments per person for families in the
+                        AFDC federal program
+Aids                    Incubation times for 295 patients thought to be
+                        infected with HIV by a blood transfusion
+Airdisasters            Aircraft disasters in five different decades
+Airline                 Percentage of on-time arrivals and number of
+                        complaints for 11 airlines
+Alcohol                 Ages at which 14 female alcoholics began
+                        drinking
+Allergy                 Allergy medicines by adverse events
+Anesthet                Recovery times for anesthetized patients
+Anxiety                 Math test scores versus anxiety scores before
+                        the test
+Apolipop                Level of apolipoprotein B and number of cups of
+                        coffee consumed per day for 15 adult males
+Append                  Median costs of an appendectomy at 20 hospitals
+                        in North Carolina
+Appendec                Median costs of appendectomies at three
+                        different types of North Carolina hospitals
+Aptitude                Aptitude test scores versus productivity in a
+                        factory
+Archaeo                 Radiocarbon ages of observations taken from an
+                        archaeological site
+Arthriti                Time of relief for three treatments of
+                        arthritis
+Artifici                Durations of operation for 15 artificial heart
+                        transplants
+Asprin                  Dissolving time versus level of impurities in
+                        aspirin tablets
+Asthmati                Asthmatic relief index on nine subjects given a
+                        drug and a placebo
+Attorney                Number of convictions reported by U.S.
+                        attorney's offices
+Autogear                Number of defective auto gears produced by two
+                        manufacturers
+Backtoback              Illustrates inferences based on pooled t-test
+                        versus Wilcoxon rank sum test
+Bbsalaries              Baseball salaries for members of five major
+                        league teams
+Bigten                  Graduation rates for student athletes and
+                        nonathletes in the Big Ten Conf.
+Biology                 Test scores on first exam in biology class
+Birth                   Live birth rates in 1990 and 1998 for all
+                        states
+Blackedu                Education level of blacks by gender
+Blood                   Blood pressure of 15 adult males taken by
+                        machine and by an expert
+Board                   Incomes of board members from three different
+                        universities
+Bones                   Bone density measurements of 35 physically
+                        active and 35 non-active women
+Books                   Number of books read and final spelling scores
+                        for 17 third graders
+Bookstor                Prices paid for used books at three different
+                        bookstores
+Brain                   Brain weight versus body weight of 28 animals
+Bumpers                 Repair costs of vehicles crashed into a barrier
+                        at 5 miles per hour
+Bus                     Attendance of bus drivers versus shift
+Bypass                  Median charges for coronary bypass at 17
+                        hospitals in North Carolina
+CIsim                   Confidence Interval Simulation Program
+Cabinets                Estimates of costs of kitchen cabinets by two
+                        suppliers on 20 prospective homes
+Cancer                  Survival times of terminal cancer patients
+                        treated with vitamin C
+Carbon                  Carbon monoxide level measured at three
+                        industrial sites
+Cat                     Reading scores on the California achievement
+                        test for a group of 3rd graders
+Censored                Entry age and survival time of patients with
+                        small cell lung cancer under two different
+                        treatments
+Challeng                Temperatures and O-ring failures for the
+                        launches of the space shuttle Challenger
+Chemist                 Starting salaries of 50 chemistry majors
+Chesapea                Surface salinity measurements taken offshore
+                        from Annapolis, Maryland in 1927
+Chevy                   Insurance injury ratings of Chevrolet vehicles
+                        for 1990 and 1993 models
+Chicken                 Weight gain of chickens fed three different
+                        rations
+Chipavg                 Measurements of the thickness of the oxide
+                        layer of manufactured integrated circuits
+Chips                   Four measurements on a first wafer and four
+                        measurements on a second wafer selected from 30
+                        lots
+Cigar                   Milligrams of tar in 25 cigarettes selected
+                        randomly from 4 different brands
+Cigarett                Effect of mother's smoking on birth weight of
+                        newborn
+Citrus                  Percent of peak bone density of different aged
+                        children
+Clean                   Residual contaminant following the use of three
+                        different cleansing agents
+Coaxial                 Signal loss from three types of coxial cable
+Coffee                  Productivity of workers with and without a
+                        coffee break
+Coins                   Yearly returns on 12 investments
+Combinations            Combinations
+Commute                 Commuting times for selected cities in 1980 and
+                        1990
+Concept                 Tennessee self concept scale scores for a group
+                        of teenage boys
+Concrete                Compressive strength of concrete blocks made by
+                        two different methods
+Corn                    Comparison of the yields of a new variety and a
+                        standard variety of corn planted on 12 plots of
+                        land
+Correlat                Exercise to illustrate correlation
+Counsel                 Scores of 18 volunteers who participated in a
+                        counseling process
+Cpi                     Consumer price index from 1979 to 1998
+Crime                   Violent crime rates for the states in 1983 and
+                        1993
+Darwin                  Charles Darwin's study of cross-fertilized and
+                        self-fertilized plants
+Dealers                 Automobile dealers classified according to type
+                        dealership and service rendered to customers
+Defectiv                Number of defective items produced by 20
+                        employees
+Degree                  Percent of bachelor's degrees awarded women in
+                        1970 versus 1990
+Delay                   Delay times on 20 flights from four major air
+                        carriers
+Depend                  Number of dependent children for 50 families
+Detroit                 Educational levels of a sample of 40 auto
+                        workers in Detroit
+Develop                 Demographic characteristics of developmental
+                        students at 2-year colleges and 4-year colleges
+Devmath                 Test scores for students who failed
+                        developmental mathematics in the fall semester
+                        1995
+Dice                    Outcomes and probabilities of the roll of a
+                        pair of fair dice
+Diesel                  Diesel fuel prices in 1999-2000 in nine regions
+                        of the country
+Diplomat                Parking tickets issued to diplomats
+Disposal                Toxic intensity for manufacturing plants
+                        producing herbicidal preparations
+Dogs                    Rankings of the favorite breeds of dogs
+Domestic                Rates of domestic violence per 1,000 women by
+                        age groups
+Dopamine                Dopamine b-hydroxylase activity of
+                        schizophrenic patients treated with an
+                        antipsychotic drug
+Dowjones                Closing yearend Dow Jones Industrial averages
+                        from 1896 through 2000
+Drink                   Opinion on referendum by view on moral issue of
+                        selling alcoholic beverages
+Drug                    Number of trials to master a task for a group
+                        of 28 subjects assigned to a control and an
+                        experimental group
+Dyslexia                Data on a group of college students diagnosed
+                        with dyslexia
+EDA                     Exploratory Data Anaalysis
+Earthqk                 One hundred year record of worldwide seismic
+                        activity(1770-1869)
+Educat                  Crime rates versus the percent of the
+                        population without a high school degree
+Eggs                    Number of eggs versus amounts of feed
+                        supplement
+Elderly                 Percent of the population over the age of 65
+Energy                  Amount of energy consumed by homes versus their
+                        sizes
+Engineer                Salaries after 10 years for graduates of three
+                        different universities
+Entrance                College entrance exam scores for 24 high school
+                        seniors
+Epaminicompact          Fuel efficiency ratings for compact vehicles in
+                        2001
+Epatwoseater            Fuel efficiency ratings for two-seater vehicles
+                        in 2001
+Executiv                Ages of 25 executives
+Exercise                Weight loss for 30 members of an exercise
+                        program
+Fabric                  Measures of softness of ten different clothing
+                        garments washed with and without a softener
+Faithful                Waiting times between successive eruptions of
+                        the Old Faithful geyser
+Family                  Size of family versus cost per person per week
+                        for groceries
+Ferraro1                Choice of presidental ticket in 1984 by gender
+Ferraro2                Choice of vice presidental candidate in 1984 by
+                        gender
+Fertility               Fertility rates of all 50 states and DC
+Firstchi                Ages of women at the birth of their first child
+Fish                    Length and number of fish caught with small and
+                        large mesh codend
+Fitness                 Number of sit-ups before and after a physical
+                        fitness course
+Florida2000             Florida voter results in the 2000 presidential
+                        election
+Fluid                   Breakdown times of an insulating fluid under
+                        various levels of voltage stress
+Food                    Annual food expenditures for 40 single
+                        households in Ohio
+Framingh                Cholesterol values of 62 subjects in the
+                        Framingham Heart Study
+Freshman                Ages of a random sample of 30 college freshmen
+Funeral                 Cost of funeral by region of country
+Galaxie                 Velocities of 82 galaxies in the Corona
+                        Borealis region
+Gallup                  Results of a Gallup poll on possession of
+                        marijuana as a criminal offense conducted in
+                        1980
+Gasoline                Price of regular unleaded gasoline obtained
+                        from 25 service stations
+German                  Number of errors in copying a German passage
+                        before and after an experimental course in
+                        German
+Golf                    Distances a golf ball can be driven by 20
+                        professional golfers
+Governor                Annual salaries for state governors in 1994 and
+                        1999
+Gpa                     High school GPA versus college GPA
+Grades                  Test grades in a beginning statistics class
+Graduate                Graduation rates for student athletes in the
+                        Southeastern Conf.
+Greenriv                Varve thickness from a sequence through an
+                        Eocene lake deposit in the Rocky Mountains
+Grnriv2                 Thickness of a varved section of the Green
+                        river oil shale deposit near a major lake in
+                        the Rocky Mountains
+Groupabc                Group data to illustrate analysis of variance
+Groups                  An illustration of analysis of variance
+Gym                     Children's age versus number of completed
+                        gymnastic activities
+Habits                  Study habits of students in two matched school
+                        districts
+Haptoglo                Haptoglobin concentration in blood serum of 8
+                        healthy adults
+Hardware                Daily receipts for a small hardware store for
+                        31 working days
+Hardwood                Tensile strength of Kraft paper for different
+                        percentages of hardwood in the batches of pulp
+Heat                    Primary heating sources of homes on indian
+                        reservations versus all households
+Heating                 Fuel efficiency ratings for three types of oil
+                        heaters
+Hodgkin                 Results of treatments for Hodgkin's disease
+Homes                   Median prices of single-family homes in 65
+                        metropolitan statistical areas
+Homework                Number of hours per week spent on homework for
+                        private and public high school students
+Honda                   Miles per gallon for a Honda Civic on 35
+                        different occasions
+Hostile                 Hostility levels of high school students from
+                        rural, suburban, and urban areas
+Housing                 Median home prices for 1984 and 1993 in 37
+                        markets across the U.S.
+Hurrican                Number of storms, hurricanes and El Nino
+                        effects from 1950 through 1995
+Iceberg                 Number of icebergs sighted each month south of
+                        Newfoundland and south of the Grand Banks in
+                        1920
+Income                  Percent change in personal income from 1st to
+                        2nd quarter in 2000
+Independent             Illustrates a comparison problem for
+                        long-tailed distributions
+Indian                  Educational attainment versus per capita income
+                        and poverty rate for American indians living on
+                        reservations
+Indiapol                Average miles per hour for the winners of the
+                        Indianapolis 500 race
+Indy500                 Qualifying miles per hour and number of
+                        previous starts for drivers in 79th
+                        Indianapolis 500 race
+Inflatio                Private pay increase of salaried employees
+                        versus inflation rate
+Inletoil                Inlet oil temperature through a valve
+Inmate                  Type of drug offense by race
+Inspect                 Percent of vehicles passing inspection by type
+                        inspection station
+Insulate                Heat loss through a new insulating medium
+Iqgpa                   GPA versus IQ for 12 individuals
+Irises                  R.A. Fishers famous data on Irises
+Jdpower                 Number of problems reported per 100 cars in
+                        1994 versus 1995s
+Jobsat                  Job satisfaction and stress level for 9 school
+                        teachers
+Kidsmoke                Smoking habits of boys and girls ages 12 to 18
+Kilowatt                Rates per kilowatt-hour for each of the 50
+                        states and DC
+Kinder                  Reading scores for first grade children who
+                        attended kindergarten versus those who did not
+Laminect                Median costs of laminectomies at hospitals
+                        across North Carolina in 1992
+Lead                    Lead levels in children's blood whose parents
+                        worked in a battery factory
+Leader                  Leadership exam scores by age for employees on
+                        an industrial plant
+Lethal                  Survival time of mice injected with an
+                        experimental lethal drug
+Life                    Life expectancy of men and women in U.S.
+Lifespan                Life span of electronic components used in a
+                        spacecraft versus heat
+Ligntmonth              Relationship between damage reports and deaths
+                        caused by lightning
+Lodge                   Measured traffic at three prospective locations
+                        for a motor lodge
+Longtail                Long-tailed distributions to illustrate Kruskal
+                        Wallis test
+Lowabil                 Reading skills of 24 matched low ability
+                        students
+Magnesiu                Magnesium concentration and distances between
+                        samples
+Malpract                Amounts awarded in 17 malpractice cases
+Manager                 Advertised salaries offered general managers of
+                        major corporations in 1995
+Marked                  Percent of marked cars in 65 police departments
+                        in Florida
+Math                    Standardized math test scores for 30 students
+Mathcomp                Standardized math competency for a group of
+                        entering freshmen at a small community college
+Mathpro                 Math proficiency and SAT scores by states
+Maze                    Error scores for four groups of experimental
+                        animals running a maze
+Median                  Illustrates test of equality of medians with
+                        the Kruskal Wallis test
+Mental                  Median mental ages of 16 girls
+Mercury                 Concentration of mercury in 25 lake trout
+Metrent                 Monthly rental costs in metro areas with 1
+                        million or more persons
+Miller                  Miller personality test scores for a group of
+                        college students applying for graduate school
+Miller1                 Twenty scores on the Miller personality test
+Moisture                Moisture content and depth of core sample for
+                        marine muds in eastern Louisiana
+Monoxide                Carbon monoxide emitted by smoke stacks of a
+                        manufacturer and a competitor
+Movie                   Moral attitude scale on 15 subjects before and
+                        after viewing a movie
+Music                   Improvement scores for identical twins taught
+                        music recognition by two techniques
+Name                    Estimated value of a brand name product and the
+                        conpany's revenue
+Nascar                  Efficiency of pit crews for three major NASCAR
+                        teams
+Nervous                 Reaction effects of 4 drugs on 25 subjects with
+                        a nervous disorder
+Newsstand               Daily profits for 20 newsstands
+Nfldraf2                Rating, time in 40-yard dash, and weight of top
+                        defensive linemen in the 1994 NFL draft
+Nfldraft                Rating, time in 40-yard dash, and weight of top
+                        offensive linemen in the 1994 NFL draft
+Nicotine                Nicotine content versus sales for eight major
+                        brands of cigarettes
+Orange                  Price of oranges versus size of the harvest
+Orioles                 Salaries of members of the Baltimore Orioles
+                        baseball team
+Oxytocin                Arterial blood pressure of 11 subjects before
+                        and after receiving oxytocin
+Parented                Education backgrounds of parents of entering
+                        freshmen at a state university
+Patrol                  Years of experience and number of tickets given
+                        by patrolpersons in New York City
+Pearson                 Karl Pearson's data on heights of brothers and
+                        sisters
+Phone                   Length of long-distance phone calls for a small
+                        business firm
+Poison                  Number of poisonings reported to 16 poison
+                        control centers
+Politic                 Political party and gender in a voting district
+Pollutio                Air pollution index for 15 randomly selected
+                        days for a major western city
+Porosity                Porosity measurements on 20 samples of Tensleep
+                        Sandstone, Pennsylvanian from Bighorn Basin in
+                        Wyoming
+Poverty                 Percent poverty and crime rate for selected
+                        cities
+Precinct                Robbery rates versus percent low income in
+                        eight precincts
+Prejudic                Racial prejudice measured on a sample of 25
+                        high school students
+Presiden                Ages at inauguration and death of U.S.
+                        presidents
+Press                   Degree of confidence in the press versus
+                        education level for 20 randomly selected
+                        persons
+Prognost                Klopfer's prognostic rating scale for subjects
+                        receiving behavior modification therapy
+Program                 Effects of four different methods of programmed
+                        learning for statistics students
+Psat                    PSAT scores versus SAT scores
+Psych                   Correct responses for 24 students in a
+                        psychology experiment
+Puerto                  Weekly incomes of a random sample of 50 Puerto
+                        Rican families in Miami
+Quail                   Plasma LDL levels in two groups of quail
+Quality                 Quality control test scores on two
+                        manufacturing processes
+Rainks                  Rainfall in an area of west central Kansas and
+                        four surrounding counties
+Randd                   Research and development expenditures and sales
+                        of a large company
+Rat                     Survival times of 20 rats exposed to high
+                        levels of radiation
+Ratings                 Grade point averages versus teacher's ratings
+Reaction                Threshold reaction time for persons subjected
+                        to emotional stress
+Reading                 Standardized reading scores for 30 fifth
+                        graders
+Readiq                  Reading scores versus IQ scores
+Referend                Opinion on referendum by view on freedom of the
+                        press
+Region                  Pollution index taken in three regions of the
+                        country
+Register                Maintenance cost versus age of cash registers
+                        in a department store
+Rehab                   Rehabilitative potential of 20 prison inmates
+                        as judged by two psychiatrists
+Remedial                Math placement test score for 35 freshmen
+                        females and 42 freshmen males
+Rentals                 Weekly rentals for 45 apartments
+Repair                  Recorded times for repairing 22 automobiles
+                        involved in wrecks
+Retail                  Length of employment versus gross sales for 10
+                        employees of a large retail store
+Ronbrown1               Oceanography data obtained at site 1 by
+                        scientist aboard the ship Ron Brown
+Ronbrown2               Oceanography data obtained at site 2 by
+                        scientist aboard the ship Ron Brown
+Rural                   Social adjustment scores for a rural group and
+                        a city group of children
+SIGN.test               Sign Test
+SRS                     Simple Random Sampling
+Salary                  Starting salaries for 25 new PhD psychologist
+Salinity                Surface-water salinity measurements from
+                        Whitewater Bay, Florida
+Sat                     SAT scores, percent taking exam and state
+                        funding per student by state for 1994, 1995 and
+                        1999
+Saving                  Problem asset ration for savings and loan
+                        companies in California, New York, and Texas
+Scales                  Readings obtained from a 100 pound weight
+                        placed on four brands of bathroom scales
+Schizop2                Exam scores for 17 patients to assess the
+                        learning ability of schizophrenics after taking
+                        a specified does of a tranquilizer
+Schizoph                Standardized exam scores for 13 patients to
+                        investigate the learning ability of
+                        schizophrenics after a specified dose of a
+                        tranquilizer
+Seatbelt                Injury level versus seatbelt usage
+Selfdefe                Self-confidence scores for 9 women before and
+                        after instructions on self-defense
+Senior                  Reaction times of 30 senior citizens applying
+                        for drivers license renewals
+Sentence                Sentences of 41 prisoners convicted of a
+                        homicide offense
+Shkdrug                 Effects of a drug and electroshock therapy on
+                        the ability to solve simple tasks
+Shock                   Effect of experimental shock on time to
+                        complete difficult task
+Shoplift                Sales receipts versus shoplifting losses for a
+                        department store
+Short                   James Short's measurements of the parallax of
+                        the sun
+Shuttle                 Number of people riding shuttle versus number
+                        of automobiles in the downtown area
+Simpson                 Grade point averages of men and women
+                        participating in various sports-an illustration
+                        of Simpson's paradox
+Situp                   Maximum number of situps by participants in an
+                        exercise class
+Skewed                  Illustrates the Wilcoxon Rank Sum test
+Skin                    Survival times of closely and poorly matched
+                        skin grafts on burn patients
+Slc                     Sodium-lithium countertransport activity on 190
+                        individuals from six large English kindred
+Smokyph                 Water pH levels of 75 water samples taken in
+                        the Great Smoky Mountains
+Snore                   Snoring versus heart disease
+Snow                    Concentration of microparticles in snowfields
+                        of Greenland and Antarctica
+Soccer                  Weights of 25 soccer players
+Social                  Median income level for 25 social workers from
+                        North Carolina
+Sophomor                Grade point averages, SAT scores and final
+                        grade in college algebra for 20 sophomores
+South                   Murder rates for 30 cities in the South
+Speed                   Speed reading scores before and after a course
+                        on speed reading
+Spellers                Standardized spelling test scores for two
+                        fourth grade classes
+Spelling                Spelling scores for 9 eighth graders before and
+                        after a 2-week course of instruction
+Sports                  Favorite sport by gender
+Spouse                  Convictions in spouse murder cases by gender
+Stable                  Times of a 2-year old stallion on a one mile
+                        run
+Stamp                   Thicknesses of 1872 Hidalgo stamps issued in
+                        Mexico
+Statclas                Grades for two introductory statistics classes
+Statelaw                Operating expenditures per resident for each of
+                        the state law enforcement agencies
+Statisti                Test scores for two beginning statistics
+                        classes
+Step                    STEP science test scores for a class of
+                        ability-grouped students
+Stress                  Short-term memory test scores on 12 subjects
+                        before and after a stressful situation
+Study                   Number of hours studied per week by a sample of
+                        50 freshmen
+Submarin                Number of German submarines sunk by U.S. Navy
+                        in World War II
+Subway                  Time it takes a subway to travel from the
+                        airport to downtown
+Sunspot                 Wolfer sunspot numbers from 1700 through 2000
+Superbowl               Margin of victory in Superbowls I to XXXV
+Supercar                Top speeds attained by five makes of supercars
+Tablrock                Ozone concentrations at Mt. Mitchell, North
+                        Carolina
+Teacher                 Average teacher's salaries across the states in
+                        the 70s 80s and 90s
+Tenness                 Tennessee self concept scores for 20 gifted
+                        high school students
+Tensile                 Tensile strength of plastic bags from two
+                        production runs
+Test1                   Grades on the first test in a statistics class
+Thermal                 Heat loss of thermal pane windows versus
+                        outside temperature
+Tiaa                    1999-2000 closing prices for TIAA-CREF stocks
+Ticket                  Time to complete an airline ticket reservation
+Toaster                 Consumer Reports (Oct 94) rating of toaster
+                        ovens versus the cost
+Tonsils                 Size of tonsils collected from 1,398 children
+Tort                    The number of torts, average number of months
+                        to process a tort, and county population from
+                        the court files of the nation's largest
+                        counties
+Toxic                   Hazardous waste sites near minority communities
+Track                   National Olympic records for women in several
+                        races
+Track15                 Olympic winning times for the men's 1500-meter
+                        run
+Treatments              Illustrates analysis of variance for three
+                        treatment groups
+Trees                   Number of trees in 20 grids
+Trucks                  Miles per gallon for standard 4-wheel drive
+                        trucks manufactured by Chevrolet, Dodge and
+                        Ford
+Tv                      Percent of students that watch more than 6
+                        hours of TV per day versus national math test
+                        scores
+Twin                    Intelligence test scores for identical twins in
+                        which one twin is given a drug
+Undergrad               Data set describing a sample of undergraduate
+                        students
+Vacation                Number of days of paid holidays and vacation
+                        leave for sample of 35 textile workers
+Vaccine                 Reported serious reactions due to vaccines in
+                        11 southern states
+Vehicle                 Fatality ratings for foreign and domestic
+                        vehicles
+Verbal                  Verbal test scores and number of library books
+                        checked out for 15 eighth graders
+Victoria                Number of sunspots versus mean annual level of
+                        Lake Victoria Nyanza from 1902 to 1921
+Viscosit                Viscosity measurements of a substance on two
+                        different days
+Visual                  Visual acuity of a group of subjects tested
+                        under a specified dose of a drug
+Vocab                   Reading scores before and after vocabulary
+                        training for 14 employees who did not complete
+                        high school
+Wastewat                Volume of injected waste water from Rocky
+                        Mountain Arsenal and number of earthquakes near
+                        Denver
+Weather94               Weather casualties in 1994
+Wheat                   Price of a bushel of wheat versus the national
+                        weekly earnings of production workers
+Windmill                Direct current produced by different wind
+                        velocities
+Window                  Wind leakage for storm windows exposed to a 50
+                        mph wind
+Wins                    Baseball team wins versus seven independent
+                        variables for National league teams in 1990
+Wool                    Strength tests of two types of wool fabric
+Yearsunspot             Monthly sunspot activity from 1974 to 2000
+normarea                Normal Area
+nsize                   Required Sample Size
+ntester                 Normality Tester
+tsum.test               Summarized t-test
+z.test                  Z-test
+zsum.test               Summarized z-test

@@ -1,0 +1,13 @@
+Bain	Bain
+Bain_ancova	Bain_ancova
+Bain_ancova_cm	Bain_ancova_cm
+Bain_anova	Bain_anova
+Bain_anova_cm	Bain_anova_cm
+Bain_regression	Bain_regression
+Bain_regression_cm	Bain_regression_cm
+Bain_ttest	Bain_ttest
+Bain_ttestData	Bain_ttestData
+create_matrices	create_matrices
+plot.Bain	plot.Bain
+print.Bain	print.Bain
+seBeta	seBeta
