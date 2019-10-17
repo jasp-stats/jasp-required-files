@@ -1,0 +1,6 @@
+csdp                    Solve semidefinite program with CSDP
+csdp.control            Pass control parameters to csdp solver.
+readsdpa                Reading and writing semidefinite programs for
+                        SDPA format files.
+simple_triplet_sym_matrix-class
+                        Simple support for sparse matrices
