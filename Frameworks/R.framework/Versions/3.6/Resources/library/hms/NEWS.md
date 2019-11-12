@@ -1,3 +1,13 @@
+# hms 0.5.2
+
+- Work around parsing error that occurs on DST changeover dates (https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16764).
+
+
+# hms 0.5.1.9000
+
+Same as previous version.
+
+
 # hms 0.5.1
 
 - Lossy casts from `character` vectors to `hms` now also trigger a warning if the cast succeeds in the first element of the vector but fails for other elements.

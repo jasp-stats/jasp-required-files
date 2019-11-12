@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.4.1" />
+<meta name="author" content="emmeans package, Version 1.4.2" />
 
 
 <title>Models supported by emmeans</title>
@@ -34,7 +34,7 @@
 
 
 <h1 class="title toc-ignore">Models supported by emmeans</h1>
-<h4 class="author">emmeans package, Version 1.4.1</h4>
+<h4 class="author">emmeans package, Version 1.4.2</h4>
 
 
 
@@ -468,8 +468,8 @@
 <h2>Group L – <code>lmerMod</code> models</h2>
 <!-- @index `lmerMod` models; Kenward-Roger d.f.; Satterthwaite d.f. -->
 <p>There is an optional <code>lmer.df</code> argument that defaults to <code>get_EMM_option(&quot;lmer.df&quot;)</code> (which in turn defaults to <code>&quot;kenward-roger&quot;</code>). The possible values are <code>&quot;kenward-roger&quot;</code>, <code>&quot;satterthwaite&quot;</code>, and <code>&quot;asymptotic&quot;</code> (these are partially matched and case-insensitive). With <code>&quot;kenward-roger&quot;</code>, d.f. are obtained using code from the <strong>pbkrtest</strong> package, if installed. With <code>&quot;satterthwaite&quot;</code>, d.f. are obtained using code from the <strong>lmerTest</strong> package, if installed. With <code>&quot;asymptotic&quot;</code>, or if the needed package is not installed, d.f. are set to <code>Inf</code>. (For backward compatibility, the user may specify <code>mode</code> in lieu of <code>lmer.df</code>.)</p>
-<p>A by-product of the Kenward-Roger method is that the covariance matrix is adjusted using <code>pbkrtest::vcovAdj()</code>. This can require considerable computation; so to avoid that overhead, the user should opt for the Satterthwaite or asymptotic method; or, for backward compatibility, may disable the use of <strong>pbkrtest</strong> via <code>emm_options(disable.pbkrtest = TRUE)</code> (this does not disable the <strong>pbkrtest</strong> package entirely, just its use in <strong>emmeans</strong>). The computation time required depends roughly on the number of observations, <em>N</em>, in the design matrix (because a major part of the computation involves inverting an <em>N</em> x <em>N</em> matrix). Thus, <strong>pbkrtest</strong> is automatically disabled if <em>N</em> exceeds the value of <code>get_emm_option(&quot;pbkrtest.limit&quot;)</code>, for which the factory default is 3000.</p>
-<p>Similarly to the above, the <code>disable.lmerTest</code> and <code>lmerTest.limit</code> options affect whether Satterthwaite methods can be implemented.</p>
+<p>A by-product of the Kenward-Roger method is that the covariance matrix is adjusted using <code>pbkrtest::vcovAdj()</code>. This can require considerable computation; so to avoid that overhead, the user should opt for the Satterthwaite or asymptotic method; or, for backward compatibility, may disable the use of <strong>pbkrtest</strong> via <code>emm_options(disable.pbkrtest = TRUE)</code> (this does not disable the <strong>pbkrtest</strong> package entirely, just its use in <strong>emmeans</strong>). The computation time required depends roughly on the number of observations, <em>N</em>, in the design matrix (because a major part of the computation involves inverting an <em>N</em> x <em>N</em> matrix). Thus, <strong>pbkrtest</strong> is automatically disabled if <em>N</em> exceeds the value of <code>get_emm_option(&quot;pbkrtest.limit&quot;)</code>, for which the factory default is 3000. (The user may also specify <code>pbkrtest.limit</code> or <code>disable.pbkrtest</code> as an argument in the call to <code>emmeans()</code> or <code>ref_grid()</code>)</p>
+<p>Similarly to the above, the <code>disable.lmerTest</code> and <code>lmerTest.limit</code> options or arguments affect whether Satterthwaite methods can be implemented.</p>
 <p>The <code>df</code> argument may be used to specify some other degrees of freedom. Note that if <code>df</code> and <code>method = &quot;kenward-roger&quot;</code> are both specified, the covariance matrix is adjusted but the K-R degrees of freedom are not used.</p>
 <p>Finally, note that a user-specified covariance matrix (via the <code>vcov.</code> argument) will also disable the Kenward-Roger method; in that case, the Satterthwaite method is used in place of Kenward-Roger.</p>
 <p><a href="#quickref">Back to quick reference</a></p>

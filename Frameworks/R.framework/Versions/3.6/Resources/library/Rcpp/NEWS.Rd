@@ -3,6 +3,45 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/Rcpp/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/Rcpp/issues/#1}{##1}}
 
+\section{Changes in Rcpp version 1.0.3 (2019-11-08)}{
+  \itemize{
+    \item Changes in Rcpp API:
+    \itemize{
+      \item Compilation can be sped up by skipping Modules headers via a
+      toggle \code{RCPP_NO_MODULES} (Kevin in \ghpr{995} for \ghit{993}).
+      \item Compilation can be sped up by toggling \code{RCPP_NO_RTTI} which
+      implies \code{RCPP_NO_MODULES} (Dirk in \ghpr{998} fixing \ghit{998}).
+      \item \code{XPtr} tags are now preserved in \code{as<>} (Stephen Wade
+      in \ghpr{1003} fixing \ghit{986}, plus Dirk in \ghpr{1012}).
+      \item A few more temporary allocations are now protected from garbage
+      collection (Romain Francois in \ghpr{1010}, and Dirk in \ghpr{1011}).
+    }
+    \item Changes in Rcpp Modules:
+    \itemize{
+      \item Improved initialization via explicit \code{Rcpp::} prefix
+      (Riccardo Porreca in \ghpr{980}).
+    }
+    \item Changes in Rcpp Deployment:
+    \itemize{
+      \item A unit test for Rcpp Class exposure was updated to not fail under
+      r-devel (Dirk in \ghpr{1008} fixing \ghit{1006}).
+    }
+    \item Changes in Rcpp Documentation:
+    \itemize{
+      \item The \code{Rcpp-modules} vignette received a major review and
+      edit (Riccardo Porreca in \ghpr{982}).
+      \item Minor whitespace alignments and edits were made in three
+      vignettes following the new \pkg{pinp} release (Dirk).
+      \item New badges for DOI and CRAN and BioConductor reverse dependencies
+      have been added to README.md (Dirk).
+      \item Vignettes are now included pre-made (Dirk in \ghpr{1005}
+      addressing \ghit{1004})).
+      \item The Rcpp FAQ has two new entries on 'no modules / no rtti' and
+      exceptions across shared libraries (Dirk in \ghpr{1009}).
+    }
+  }
+}
+
 \section{Changes in Rcpp version 1.0.2 (2019-07-20)}{
   \itemize{
     \item Changes in Rcpp API:
@@ -16,7 +55,7 @@
     \itemize{
       \item The second END wrapper macro also gets \code{UNPROTECT} and
       a variable reference suppressing compiler warnings (Dirk in
-      \ghpr{953}) fixing \ghit{951}).
+      \ghpr{953} fixing \ghit{951}).
       \item Default function arguments are parsed correctly (Pierrick
       Roger in \ghpr{977} fixing \ghit{975})
     }
@@ -34,7 +73,7 @@
     \itemize{
       \item The \code{Rcpp-modules} vignette now covers the
       \code{RCPP_EXPOSED_*} macros, and the \code{Rcpp-extending} vignette
-      references it (Ralf Stubner in \ghpr{959} fixing \ghit{952})
+      references it (Ralf Stubner in \ghpr{959} fixing \ghit{952}).
     }
   }
 }

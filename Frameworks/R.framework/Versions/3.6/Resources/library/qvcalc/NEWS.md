@@ -1,8 +1,18 @@
+# qvcalc 1.0.2
+
+* (To do) Add an aesthetic for `ggplot`, as alternative to `plot.qv()`
+
+# qvcalc 1.0.1
+
+* Added an explicit method for "coxph" objects.
+
+* Removed the `Suggests: pkgdown` dependence, because we no longer use Travis CI to deploy the documentation site.
+
 # qvcalc 1.0.0
 
-* Fixed a minor bug in plot.qv()
+* Fixed a minor bug in `plot.qv()`
 
-* Added an example to the help page for plot.qv, to show how to re-order the points/lines in a call to plot.qv()
+* Added an example to the help page for `plot.qv`, to show how to re-order the points/lines in a call to `plot.qv()`
 
 # qvcalc 0.9-1
 
@@ -14,11 +24,11 @@
 
 # qvcalc 0.9-0
 
-* Minor tweaks to fix the dependencies NOTE on CRAN checks
+* Minor tweaks to fix the dependencies `NOTE` on CRAN checks
 
 # qvcalc 0.8-9
 
-* Corrects an error in the calculation of the relative errors for simple contrasts. The formula used for this now agrees with the definition of relative error that was given in the Biometrika paper. Many thanks to Shaun Killingbeck for spotting the error in version 0.8-8. Also made some small improvements to examples, and cosmetic changes to avoid a NOTE in the latest CRAN checks.
+* Corrects an error in the calculation of the relative errors for simple contrasts. The formula used for this now agrees with the definition of relative error that was given in the Biometrika paper. Many thanks to Shaun Killingbeck for spotting the error in version 0.8-8. Also made some small improvements to examples, and cosmetic changes to avoid a `NOTE` in the latest CRAN checks.
 
 -----
 

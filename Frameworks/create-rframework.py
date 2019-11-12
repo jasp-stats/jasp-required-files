@@ -90,7 +90,8 @@ def change_dep_paths(lib, changes):
 
 	for change in changes:
 	
-		call(["install_name_tool", "-change", change["old"], change["new"], lib])
+		print("skipping install_name_tool")
+		#call(["install_name_tool", "-change", change["old"], change["new"], lib])
 
 
 wd = os.getcwd()
@@ -137,7 +138,8 @@ for new_lib in new_libs:
 
 	lib_base = os.path.basename(new_lib)
 	new_path = "@executable_path/../Frameworks/R.framework/Versions/" + current + "/Resources/lib/" + lib_base
-	call(["install_name_tool", "-id", new_path, new_lib])
+	print("skipping install_name_tool")
+	#call(["install_name_tool", "-id", new_path, new_lib])
 
 	change_dep_paths(new_lib, changes)
 	
@@ -165,7 +167,8 @@ for lib in libs:
 
 	print(new_path)
 
-	call(["install_name_tool", "-id", new_path, lib])
+	print("skipping install_name_tool")
+	#call(["install_name_tool", "-id", new_path, lib])
 
 	change_dep_paths(lib, changes)
 	

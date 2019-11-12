@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.4.1" />
+<meta name="author" content="emmeans package, Version 1.4.2" />
 
 
 <title>Comparisons and contrasts in emmeans</title>
@@ -34,7 +34,7 @@
 
 
 <h1 class="title toc-ignore">Comparisons and contrasts in emmeans</h1>
-<h4 class="author">emmeans package, Version 1.4.1</h4>
+<h4 class="author">emmeans package, Version 1.4.2</h4>
 
 
 
@@ -70,6 +70,33 @@ pairs(pigs.emm.s)</code></pre>
 <!-- @index `adjust`; `summary()`!`adjust`; `summary()`!`infer` -->
 <p>In its out-of-the-box configuration, <code>pairs()</code> sets two defaults for <a href="confidence-intervals.html#summary"><code>summary()</code></a>: <code>adjust = &quot;tukey&quot;</code> (multiplicity adjustment), and <code>infer = c(FALSE, TRUE)</code> (test statistics, not confidence intervals). You may override these, of course, by calling <code>summary()</code> on the result with different values for these.</p>
 <p>In the example above, EMMs for later factor levels are subtracted from those for earlier levels; if you want the comparisons to go in the other direction, use <code>pairs(pigs.emm.s, reverse = TRUE)</code>. Also, in multi-factor situations, you may specify <code>by</code> factor(s) to perform the comparisons separately at the levels of those factors.</p>
+<div id="effect-size" class="section level3">
+<h3>Effect size</h3>
+<!-- @index Effect size; Cohen's *d*; `eff_size()` -->
+<p>Some users desire standardized effect-size measures. Most popular is probably Cohen’s <em>d</em>, which is defined as the observed difference, divided by the population SD; and obviously Cohen effect sizes are close cousins of pairwise differences. They are available via the <code>eff_size()</code> function, where the user must specify the <code>emmGrid</code> object with the means to be compared, the estimated population SD <code>sigma</code>, and its degrees of freedom <code>edf</code>. this is illustrated with the current example:</p>
+<pre class="r"><code>eff_size(pigs.emm.s, sigma = sigma(pigs.lm), edf = 23)</code></pre>
+<pre class="ro"><code>##  contrast    effect.size    SE df lower.CL upper.CL
+##  fish - soy        -2.37 0.577 23    -3.56   -1.175
+##  fish - skim       -3.49 0.698 23    -4.94   -2.051
+##  soy - skim        -1.12 0.490 23    -2.14   -0.112
+## 
+## Results are averaged over the levels of: percent 
+## sigma used for effect sizes: 0.1151 
+## Confidence level used: 0.95</code></pre>
+<p>The confidence intervals shown take into account the error in estimating <code>sigma</code> as well as the error in the differences. Note that the intervals are narrower if we claim that we know <code>sigma</code> perfectly (i.e., infinite degrees of freedom):</p>
+<pre class="r"><code>eff_size(pigs.emm.s, sigma = sigma(pigs.lm), edf = Inf)</code></pre>
+<pre class="ro"><code>##  contrast    effect.size    SE df lower.CL upper.CL
+##  fish - soy        -2.37 0.460 23    -3.32   -1.418
+##  fish - skim       -3.49 0.470 23    -4.47   -2.521
+##  soy - skim        -1.12 0.461 23    -2.08   -0.172
+## 
+## Results are averaged over the levels of: percent 
+## sigma used for effect sizes: 0.1151 
+## Confidence level used: 0.95</code></pre>
+<p>Note that <code>eff_size()</code> expects the object with the means, not the differences. If you want to use the differences, use the <code>method</code> argument to specify that you don’t want to compute pairwise differences again; e.g.,</p>
+<pre class="r"><code>eff_size(pairs(pigs.emm.s), sigma = sigma(pigs.lm), edf = 23, method = &quot;identity&quot;)</code></pre>
+<p>(results are identical to the first effect sizes shown).</p>
+</div>
 <div id="graphical" class="section level3">
 <h3>Graphical comparisons</h3>
 <!-- @index Comparisons!Graphical -->
@@ -164,9 +191,9 @@ org.emml</code></pre>
 ## $contrasts
 ##  contrast estimate   SE df t.ratio p.value
 ##  2 - 1      -0.772 3.78 25 -0.204  0.9997 
-##  3 - 2       6.658 3.78 25  1.763  0.3249 
-##  4 - 3      -5.716 3.78 25 -1.513  0.4681 
-##  5 - 4       4.882 3.78 25  1.293  0.6131 
+##  3 - 2       6.658 3.78 25  1.763  0.3242 
+##  4 - 3      -5.716 3.78 25 -1.513  0.4676 
+##  5 - 4       4.882 3.78 25  1.293  0.6125 
 ##  6 - 5      -1.321 3.78 25 -0.350  0.9965 
 ## 
 ## P value adjustment: mvt method for 5 tests</code></pre>
@@ -222,7 +249,7 @@ org.emml</code></pre>
 <pre class="r"><code>LF &lt;- contrast(pigs.emm.s, 
                list(lambda1 = c(1, 2, 0), lambda2 = c(0, 3, -2)),
                offset = c(-7, 1))</code></pre>
-<pre><code>## Use &#39;contrast(regrid(object), ...)&#39; to obtain contrasts on the response scale</code></pre>
+<pre><code>## Note: Use &#39;contrast(regrid(object), ...)&#39; to obtain contrasts of back-transformed estimates</code></pre>
 <pre class="r"><code>confint(LF, adjust = &quot;bonferroni&quot;)</code></pre>
 <pre class="ro"><code>##  contrast estimate     SE df lower.CL upper.CL
 ##  lambda1      3.73 0.0827 23     3.53     3.93

@@ -1,6 +1,6 @@
 Package: Hmisc
-Version: 4.2-0
-Date: 2019-01-25
+Version: 4.3-0
+Date: 2019-11-07
 Title: Harrell Miscellaneous
 Author: Frank E Harrell Jr <f.harrell@vanderbilt.edu>, with
   contributions from Charles Dupont and many others.
@@ -24,8 +24,8 @@ URL: http://biostat.mc.vanderbilt.edu/Hmisc,
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-01-25 22:28:42 UTC; harrelfe
+Packaged: 2019-11-07 17:16:35 UTC; harrelfe
 Repository: CRAN
-Date/Publication: 2019-01-26 23:20:03 UTC
-Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2019-04-27 05:13:55 UTC; unix
+Date/Publication: 2019-11-07 19:20:02 UTC
+Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2019-11-08 19:40:32 UTC; unix
 Archs: Hmisc.so.dSYM
