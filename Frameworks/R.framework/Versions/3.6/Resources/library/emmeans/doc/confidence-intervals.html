@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.4.1" />
+<meta name="author" content="emmeans package, Version 1.4.2" />
 
 
 <title>Confidence intervals and tests in emmeans</title>
@@ -34,7 +34,7 @@
 
 
 <h1 class="title toc-ignore">Confidence intervals and tests in emmeans</h1>
-<h4 class="author">emmeans package, Version 1.4.1</h4>
+<h4 class="author">emmeans package, Version 1.4.2</h4>
 
 
 
@@ -42,7 +42,7 @@
 <div id="contents" class="section level2">
 <h2>Contents</h2>
 <p>This vignette describes various ways of summarizing <code>emmGrid</code> objects.</p>
-<ol start="2" style="list-style-type: decimal">
+<ol style="list-style-type: decimal">
 <li><a href="#summary"><code>summary()</code>, <code>confint()</code>, and <code>test()</code></a></li>
 <li><a href="#tran">Back-transforming to response scale</a> (See also the <a href="transformations.html">“transformations” vignette</a>)</li>
 <li><a href="#adjust">Multiplicity adjustments</a></li>
@@ -196,14 +196,14 @@ contrast(pigsint.rg, &quot;consec&quot;, simple = &quot;percent&quot;)</code></p
 ## 
 ## source = soy:
 ##  contrast estimate     SE df t.ratio p.value
-##  12 - 9     0.1412 0.0949 17  1.487  0.3594 
+##  12 - 9     0.1412 0.0949 17  1.487  0.3595 
 ##  15 - 12   -0.0102 0.0949 17 -0.108  0.9992 
-##  18 - 15    0.0895 0.1342 17  0.666  0.8570 
+##  18 - 15    0.0895 0.1342 17  0.666  0.8572 
 ## 
 ## source = skim:
 ##  contrast estimate     SE df t.ratio p.value
-##  12 - 9     0.2043 0.0949 17  2.152  0.1183 
-##  15 - 12    0.1398 0.1061 17  1.317  0.4520 
+##  12 - 9     0.2043 0.0949 17  2.152  0.1185 
+##  15 - 12    0.1398 0.1061 17  1.317  0.4519 
 ##  18 - 15    0.1864 0.1424 17  1.309  0.4568 
 ## 
 ## Results are given on the log (not the response) scale. 

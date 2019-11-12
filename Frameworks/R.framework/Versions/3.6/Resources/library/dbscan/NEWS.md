@@ -1,13 +1,21 @@
+# dbscan 1.1-5 (2019-10-22)
+
+## New Features
+* kNN and frNN gained parameter query to query neighbors for points not in the data.
+* sNN gained parameter jp to decide if the shared NN should be counted using the definition by Jarvis and Patrick.
+
+
 # dbscan 1.1-4 (2019-08-05)
+
+## New Features
+* kNNdist gained parameter all to indicate if a matrix with the distance to all 
+  nearest neighbors up to k should be returned.
 
 ## Bugfixes
 * kNNdist now correctly returns the distances to the kth neighbor 
   (reported by zschuster).
 * dbscan: check eps and minPts parameters to avoid undefined results (reported by ArthurPERE).
 
-## New Features
-* kNNdist gained parameter all to indicate if a matrix with the distance to all 
-  nearest neighbors up to k should be returned.
 
 # dbscan 1.1-3 (2018-11-12)
 

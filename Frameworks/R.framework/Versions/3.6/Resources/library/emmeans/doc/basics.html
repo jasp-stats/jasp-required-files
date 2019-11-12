@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.4.1" />
+<meta name="author" content="emmeans package, Version 1.4.2" />
 
 
 <title>Basics of estimated marginal means</title>
@@ -34,7 +34,7 @@
 
 
 <h1 class="title toc-ignore">Basics of estimated marginal means</h1>
-<h4 class="author">emmeans package, Version 1.4.1</h4>
+<h4 class="author">emmeans package, Version 1.4.2</h4>
 
 
 
@@ -115,7 +115,7 @@ cell.means</code></pre>
 <p>Estimated marginal means are based on a <em>model</em> – not directly on data. The basis for them is what we call the <em>reference grid</em> for a given model. To obtain the reference grid, consider all the predictors in the model. Here are the default rules for constructing the reference grid</p>
 <ul>
 <li>For each predictor that is a <em>factor</em>, use its levels (dropping unused ones)</li>
-<li>For each numeric predictor (covariate), use its average</li>
+<li>For each numeric predictor (covariate), use its average.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
 </ul>
 <p>The reference grid is then a regular grid of all combinations of these reference levels.</p>
 <p>As a simple example, consider again the <code>pigs</code> dataset (see <code>help(&quot;fiber&quot;)</code> for details). Examination of residual plots from preliminary models suggests that it is a good idea to work in terms of log concentration.</p>
@@ -194,30 +194,35 @@ pigs.pred1</code></pre>
 </div>
 <div id="altering" class="section level3">
 <h3>Altering the reference grid</h3>
-<!-- @index Reference grids!Altering; `ref_grid()`!`cov.reduce`; 
+<!-- @index Reference grids!Altering; `ref_grid()`!`cov.reduce`; `ref_grid()`!`cov.keep`; 
             `ref_grid()`!`at`; Examples!`mtcars` -->
 <p>It is possible to alter the reference grid. We might, for example, want to define a reference grid for <code>pigs.lm2</code> that is comparable to the one for <code>pigs.lm1</code>.</p>
-<pre class="r"><code>ref_grid(pigs.lm2, cov.reduce = FALSE)</code></pre>
+<pre class="r"><code>ref_grid(pigs.lm2, cov.keep = &quot;percent&quot;)</code></pre>
 <pre class="ro"><code>## &#39;emmGrid&#39; object with variables:
 ##     source = fish, soy, skim
 ##     percent =  9, 12, 15, 18
 ## Transformation: &quot;log&quot;</code></pre>
-<p>Using <code>cov.reduce = FALSE</code> specifies that, instead of using the mean, the reference grid should use all the unique values of each covariate. Be careful with this: it can create quite a mess if there is a covariate that was measured rather than experimentally varied. Another option is to give a function; e.g.,</p>
+<p>Using <code>cov.keep = &quot;percent&quot;</code> specifies that, instead of using the mean, the reference grid should use all the unique values of <code>each covariate</code>“percent”`.</p>
+<p>Another option is to specify a <code>cov.reduce</code> function that is used in place of the mean; e.g.,</p>
 <pre class="r"><code>ref_grid(pigs.lm2, cov.reduce = range)</code></pre>
 <pre class="ro"><code>## &#39;emmGrid&#39; object with variables:
 ##     source = fish, soy, skim
 ##     percent =  9, 18
 ## Transformation: &quot;log&quot;</code></pre>
-<p>Perhaps more common is to use the <code>at</code> argument. Consider this model for the built-in <code>mtcars</code> dataset:</p>
+<p>Another option is to use the <code>at</code> argument. Consider this model for the built-in <code>mtcars</code> dataset:</p>
 <pre class="r"><code>mtcars.lm &lt;- lm(mpg ~ disp * cyl, data = mtcars)
 ref_grid(mtcars.lm)</code></pre>
 <pre class="ro"><code>## &#39;emmGrid&#39; object with variables:
 ##     disp = 230.72
 ##     cyl = 6.1875</code></pre>
 <p>Since both predictors are numeric, the default reference grid has only one point. For purposes of describing the fitted model, you might want to obtain predictions at a grid of points, like this:</p>
-<pre class="r"><code>mtcars.rg &lt;- ref_grid(mtcars.lm, 
-    at = list(disp = c(100, 200, 300), cyl = c(4, 6, 8)))</code></pre>
-<p>… which will create a 3 x 3 grid. (We’ll look at this model again shortly.) Another use of <code>at</code> is to focus on only some of the levels of a factor. Note that <code>at</code> does not need to specify every predictor; those not mentioned in <code>at</code> are handled by <code>cov.reduce</code> or the default methods.</p>
+<pre class="r"><code>mtcars.rg &lt;- ref_grid(mtcars.lm, cov.keep = 3,
+                      at = list(disp = c(100, 200, 300)))
+mtcars.rg</code></pre>
+<pre class="ro"><code>## &#39;emmGrid&#39; object with variables:
+##     disp = 100, 200, 300
+##     cyl = 4, 6, 8</code></pre>
+<p>This illustrates two things: a new use of <code>cov.keep</code> and the <code>at</code> argument. <code>cov.keep = &quot;3&quot;</code> specifies that any covariates having 3 or fewer unique values is treated like a factor (the system default is <code>cov.keep = &quot;2&quot;</code>). The <code>at</code> specification gives three values of <code>disp</code>, overriding the default behavior to use the mean of <code>disp</code>. Another use of <code>at</code> is to focus on only some of the levels of a factor. Note that <code>at</code> does not need to specify every predictor; those not mentioned in <code>at</code> are handled by <code>cov.reduce</code>, <code>cov.keep</code>, or the default methods. Also, covariate values in <code>at</code> need not be values that actually occur in the data, whereas <code>cov.keep</code> will use only values that are achieved.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
 <div id="depcovs" class="section level3">
@@ -451,6 +456,12 @@ class(pigs.emm.s)</code></pre>
 </ul>
 <p><a href="#contents">Back to Contents</a></p>
 <p><a href="vignette-topics.html">Index of all vignette topics</a></p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>In newer versions of <strong>emmeans</strong>, however, covariates having only two distinct values are by default treated as two-level factors, though there is an option to reduce them to their mean.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 

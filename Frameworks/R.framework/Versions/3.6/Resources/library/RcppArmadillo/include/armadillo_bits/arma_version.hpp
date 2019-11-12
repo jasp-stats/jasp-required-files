@@ -20,9 +20,9 @@
 
 
 #define ARMA_VERSION_MAJOR 9
-#define ARMA_VERSION_MINOR 700
-#define ARMA_VERSION_PATCH 2
-#define ARMA_VERSION_NAME  "Gangster Democracy"
+#define ARMA_VERSION_MINOR 800
+#define ARMA_VERSION_PATCH 1
+#define ARMA_VERSION_NAME  "Horizon Scraper"
 
 
 

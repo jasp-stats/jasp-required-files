@@ -59,7 +59,7 @@ predict(ref_grid(pigs.lm2))
 emmeans(pigs.lm1, "percent")
 
 ## ------------------------------------------------------------------------
-ref_grid(pigs.lm2, cov.reduce = FALSE)
+ref_grid(pigs.lm2, cov.keep = "percent")
 
 ## ------------------------------------------------------------------------
 ref_grid(pigs.lm2, cov.reduce = range)
@@ -69,8 +69,9 @@ mtcars.lm <- lm(mpg ~ disp * cyl, data = mtcars)
 ref_grid(mtcars.lm)
 
 ## ------------------------------------------------------------------------
-mtcars.rg <- ref_grid(mtcars.lm, 
-    at = list(disp = c(100, 200, 300), cyl = c(4, 6, 8)))
+mtcars.rg <- ref_grid(mtcars.lm, cov.keep = 3,
+                      at = list(disp = c(100, 200, 300)))
+mtcars.rg
 
 ## ------------------------------------------------------------------------
 mtcars.1 <- lm(mpg ~ factor(cyl) + disp + I(disp^2), data = mtcars)

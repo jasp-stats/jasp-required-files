@@ -3,7 +3,7 @@ importFrom("stats", "coef", "glm", "model.matrix", "residuals",
              "terms", "vcov")
 
 export(qvcalc, worstErrors, indentPrint, qvcalc.default, qvcalc.lm,
-       qvcalc.itempar)
+       qvcalc.coxph, qvcalc.itempar)
 
 S3method(print, qv)
 S3method(summary, qv)
@@ -11,4 +11,5 @@ S3method(plot, qv)
 
 S3method(qvcalc, itempar)
 S3method(qvcalc, lm)
+S3method(qvcalc, coxph)
 S3method(qvcalc, default)

@@ -1,10 +1,25 @@
 
 
 import os
+import sys
 from subprocess import check_output
 from subprocess import call
 import shutil
 current = "3.6"
+
+# Make the changes to the executable path optional
+skip_path_changes = False
+if len(sys.argv) > 2:
+	print("Usage: python " + sys.argv[0] + " [-no_path_change]" )
+elif len(sys.argv) > 1:
+	if sys.argv[1]=="-no_path_change":
+		skip_path_changes = True
+	else:
+		print("Usage: python " + sys.argv[0] + " [-no_path_change]")
+else:
+	print("Use the '-no_path_change' option to disgard executable path changes" )
+print("Skipping executable path changes: ", skip_path_changes)
+
 
 def locate_libs(path):
 	
@@ -89,8 +104,10 @@ def extract_lib_dependencies(libs):
 def change_dep_paths(lib, changes):
 
 	for change in changes:
-	
-		call(["install_name_tool", "-change", change["old"], change["new"], lib])
+		if skip_path_changes:
+			print("skipping install_name_tool")
+		else:
+			call(["install_name_tool", "-change", change["old"], change["new"], lib])
 
 
 wd = os.getcwd()
@@ -137,7 +154,10 @@ for new_lib in new_libs:
 
 	lib_base = os.path.basename(new_lib)
 	new_path = "@executable_path/../Frameworks/R.framework/Versions/" + current + "/Resources/lib/" + lib_base
-	call(["install_name_tool", "-id", new_path, new_lib])
+	if skip_path_changes:
+		print("skipping install_name_tool")
+	else:
+		call(["install_name_tool", "-id", new_path, new_lib])
 
 	change_dep_paths(new_lib, changes)
 	
@@ -165,7 +185,10 @@ for lib in libs:
 
 	print(new_path)
 
-	call(["install_name_tool", "-id", new_path, lib])
+	if skip_path_changes:
+		print("skipping install_name_tool")
+	else:
+		call(["install_name_tool", "-id", new_path, lib])
 
 	change_dep_paths(lib, changes)
 	
