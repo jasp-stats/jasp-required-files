@@ -12,5 +12,5 @@ NeedsCompilation: yes
 Packaged: 2018-10-16 18:33:54 UTC; jpasek
 Repository: CRAN
 Date/Publication: 2018-10-16 22:10:03 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-08 02:11:38 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-11-07 22:16:55 UTC; windows
 Archs: i386, x64

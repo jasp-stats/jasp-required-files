@@ -1,5 +1,5 @@
 73c90587f400050e6d2d177eefc1bd39 *CITATION
-4510ee9ccdec7474c906c3a985cfe600 *DESCRIPTION
+ae78420c78a86012c7e90a5419bb0612 *DESCRIPTION
 b042b9ed7262e2973191fceb98653e31 *INDEX
 6378a6a964ff4db313b47afa25dcc041 *Meta/Rd.rds
 0c84bed8527b66baf4b7494b31ac0ce0 *Meta/data.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 c06933719fbc506a53ba991773e0c103 *Meta/hsearch.rds
 30fc294ad38a885c386936a06e222c1a *Meta/links.rds
 0a4337cf3c7429b7d777f37d167ca89a *Meta/nsInfo.rds
-f5fe551d6a05d528f5bc98d4a1dd3e6d *Meta/package.rds
+9a3d30864f08cc68237ffae65647d9b5 *Meta/package.rds
 6f4694c039528deea0666e5b2c8a4b79 *Meta/vignette.rds
 559ac0624f424a67aee8844691d58994 *NAMESPACE
 5c0b98fd391c9435a141d3d2453228bc *NEWS
@@ -26,12 +26,12 @@ ddde6e9af6699c2d9c11002d12e3049e *doc/clmm2_tutorial.Rnw
 cfd55e8064f0262c37dcff24055a5407 *doc/index.html
 69f754a6b79dee79d1bc55d7b2365c83 *help/AnIndex
 dbfab4c5e82b1f177a328acb3a163864 *help/aliases.rds
-00226d94b103004e2454f0160c6366cf *help/ordinal.rdb
-57d0094c3241599990380c39346354bc *help/ordinal.rdx
-a53e8522436f2db13171a1ed30ff4a90 *help/paths.rds
+0b77e4f67560ebd6c595ce472bff2386 *help/ordinal.rdb
+277a59f1e9919212d35626a02114a580 *help/ordinal.rdx
+5713ab551f5bdc11f8ef3114df0ac418 *help/paths.rds
 4a4e1a6046684e6fdd4039605f8e7be3 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-a8d1c06dbb2542101a54a5826ca89975 *libs/i386/ordinal.dll
+32146a4e53bc33cc1387071cb28ee23a *libs/i386/ordinal.dll
 7f9a4b5160de8905b75814b631dfd7ae *libs/i386/symbols.rds
-b10f74d10c21b0624f49caa66acdda23 *libs/x64/ordinal.dll
+8dd9c856ac3ed3e59921ad46391fe28f *libs/x64/ordinal.dll
 071ba0bb485944d6436bb35e793c1430 *libs/x64/symbols.rds

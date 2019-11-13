@@ -19,4 +19,4 @@ Maintainer: William Revelle <revelle@northwestern.edu>
 Depends: R (>= 2.10)
 Repository: CRAN
 Date/Publication: 2019-05-29 12:40:03 UTC
-Built: R 3.6.1; ; 2019-10-07 19:20:59 UTC; windows
+Built: R 3.6.1; ; 2019-11-07 15:15:24 UTC; windows

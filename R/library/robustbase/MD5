@@ -1,6 +1,6 @@
 e15c8af4649e9d8d1b3b0b830a432b0e *CITATION
 5d05206ddf06ffd03093afc086a6400e *Copyrights
-b5c6f49b5ae3130a89b8f3471d724968 *DESCRIPTION
+1e2f2bd277c780d6de94bb2aa5abc25b *DESCRIPTION
 3359fe9cff996bbe130696abd9b294c5 *INDEX
 43176cc38e0824ec461773cfe0088ac0 *Meta/Rd.rds
 4cfed71e5a6e72e26d344b147d86bce9 *Meta/data.rds
@@ -9,7 +9,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 a891402741874fd7ccb08945281dd105 *Meta/hsearch.rds
 36c677c55678cb2affd106db2184f46a *Meta/links.rds
 036d97203526c60a73d0791ec9cb26c7 *Meta/nsInfo.rds
-986d84cece37dc3cc0c1ac6f936d327a *Meta/package.rds
+9798697f580968578636b68ced80bfaa *Meta/package.rds
 5da7594487a4180260f4897ad8895735 *Meta/vignette.rds
 e4045afeb89e977dce25ae032638a372 *NAMESPACE
 f8796caa4e05ff1bc6d0c286f093ed67 *NEWS.Rd
@@ -40,15 +40,15 @@ faa9ecb70de3e867cb0b0cb8f56f3074 *doc/simulation.init.R
 e571b79e7316389c9251508b0a64775f *external/d1k27.rda
 00ef0ee9f221597581c06411ddb03021 *help/AnIndex
 c50660c005b996834564b748f2fd0792 *help/aliases.rds
-21181b2a29b03baa78ecd22b12c60d64 *help/paths.rds
-214ce22df365e5357835cd050dd8c3ce *help/robustbase.rdb
-6592fa9734d8668fa0c351b2a76cea82 *help/robustbase.rdx
+93327323b8e87a091d4c3854b04582df *help/paths.rds
+f88175a573d57aa5d53f62b67f89e4aa *help/robustbase.rdb
+da28c2c1d35718af832c84cef263af59 *help/robustbase.rdx
 9be68eeea20b315ee3fced6c11e4fe4a *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
 2697fe55d9d2cd8b788e735f21fce763 *include/robustbase.h
-391b3bbf6b147c8dc68c75b16fa23061 *libs/i386/robustbase.dll
+a22f616ac58b4afe8d19762b66b1f587 *libs/i386/robustbase.dll
 d3840296916e1fe15a675ecc4a373c20 *libs/i386/symbols.rds
-05bf99129fa4512e40acd414052aee0b *libs/x64/robustbase.dll
+1131ca1e29ebd2f5bd49d52791a2be12 *libs/x64/robustbase.dll
 4a5499f17eae1170b9f1e1ba0e43c8dd *libs/x64/symbols.rds
 3b7fab3b9da94411bd1d0c034981aa83 *po/en@quot/LC_MESSAGES/R-robustbase.mo
 463fea674a2a6d565904c9ff4a237599 *xtraR/ex-funs.R

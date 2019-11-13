@@ -1,5 +1,5 @@
 cef3d3bf4005317547212fcbbb242ccc *CITATION
-66c4ca9259ea1c13dfb0331e577b91f8 *DESCRIPTION
+a7aa3f01b887ea4234fc640286f79641 *DESCRIPTION
 ff63dd829fd35c40a8b5ed6284295105 *INDEX
 5fae6111e575be807f088a28e71c3c1a *Meta/Rd.rds
 618ab831a83bd60560c66941b8a26fc0 *Meta/data.rds
@@ -8,7 +8,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 bbb15296a38316eb5fa81e248bf5797a *Meta/hsearch.rds
 b6e90d16775c3e8c571e29b490567e46 *Meta/links.rds
 ad0ee5069ebc029e7ee4ea1244b5315b *Meta/nsInfo.rds
-238f1b5f0199e83bd510328fbd4260c0 *Meta/package.rds
+89c8af94da80d64add09999bf68cb3d2 *Meta/package.rds
 096f40e52caeb0f7381aa5503e65a107 *NAMESPACE
 c379579b151fda6a636b5dc453111517 *NEWS.md
 ebf0fc819595d631b8bf280c4b049940 *R/OpenMx
@@ -89,15 +89,15 @@ ed9ee1469a2bd6de0e3fefcc20ba2d86 *demo/UnivariateSaturated_MatrixCov.R
 e7890083246487651f830f84af61d4a4 *demo/mxThreshold.R
 52168875a6d4e1e645611a544c656244 *demo/omxConstrainMLThresholds.R
 03173f2340e955e768e47ef00052649f *help/AnIndex
-61290a0f0ded9040ec44e78e4ddac27e *help/OpenMx.rdb
-fa4fcc7c5b779abd4b5471fc0ffa99b8 *help/OpenMx.rdx
+09e4e6abc8818b55ff4afdcdf26e172d *help/OpenMx.rdb
+cfb5a4d6389452ce9803ebda625a5dc2 *help/OpenMx.rdx
 d9455185ba2433590e7065e8c52f1656 *help/aliases.rds
-d132f92af2075125ebaa455bd9704fd4 *help/paths.rds
+f594aa47b41eee481fdbc93da73af6bf *help/paths.rds
 04c53bfe37ab07b0d2dc9a04a3378892 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-f42858b44b81942dfda777cfa474f866 *libs/i386/OpenMx.dll
+976f9beffc1b39c34aeab6ccbe83b844 *libs/i386/OpenMx.dll
 61a0f6ab15cdc0d73ae2bff47328a4bf *libs/i386/symbols.rds
-a26787467f0d9e3ea805b85a3ec9d7be *libs/x64/OpenMx.dll
+4b3048c68af9618538db659a6a165a26 *libs/x64/OpenMx.dll
 f3b7bca6b0cb3b6d01f818f3d1a09dc1 *libs/x64/symbols.rds
 d7f21c55683df45c86508ea2c4a4ac1f *models/codeRed/fail_on_re-run_entity_already_exists.R
 c164d37fb6e24c0147335454c42929c0 *models/codeRed/umxACE_codeRed.R

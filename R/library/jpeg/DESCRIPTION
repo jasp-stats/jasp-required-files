@@ -1,5 +1,5 @@
 Package: jpeg
-Version: 0.1-8
+Version: 0.1-8.1
 Title: Read and write JPEG images
 Author: Simon Urbanek <Simon.Urbanek@r-project.org>
 Maintainer: Simon Urbanek <Simon.Urbanek@r-project.org>
@@ -8,9 +8,9 @@ Description: This package provides an easy and simple way to read, write and dis
 License: GPL-2 | GPL-3
 SystemRequirements: libjpeg
 URL: http://www.rforge.net/jpeg/
-Packaged: 2014-01-23 19:05:03 UTC; svnuser
+Packaged: 2019-10-24 14:50:27 UTC; hornik
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2014-01-23 20:17:07
-Built: R 3.6.0; x86_64-w64-mingw32; 2019-05-28 20:46:28 UTC; windows
+Date/Publication: 2019-10-24 14:51:52 UTC
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-25 22:53:32 UTC; windows
 Archs: i386, x64

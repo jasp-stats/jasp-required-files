@@ -1,5 +1,5 @@
 49c2291ac7f09d1637fcab7878765298 *CITATION
-fcd0ff4bda57c981de2e97235fa24916 *DESCRIPTION
+7427f4c8916233d09d8e3e75df225966 *DESCRIPTION
 3cad2ef69e0d231dfde1086d293b3a0f *INDEX
 de92624aa89fd4d9fe08ae74acb6a624 *Meta/Rd.rds
 9ff6b883c02e142dfd4bd2e4c50e13e7 *Meta/data.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 011def26d30489a2bd2a0b55a2f9c944 *Meta/hsearch.rds
 7231edc6b119666b29d3a729f943fe3f *Meta/links.rds
 165299328a0b1c880e2261415bb80300 *Meta/nsInfo.rds
-22db8cbe42531467272f7232a46ef4a3 *Meta/package.rds
+54c956868ed7cc8bf22e71c8aebf656f *Meta/package.rds
 c002ce38235a60015355602b2b55f0a6 *Meta/vignette.rds
 9dec5a7e584844ef9fa69fa03834be18 *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/mi
@@ -23,8 +23,8 @@ f0d0be59b38944ccb05c7db05f83919e *data/nlsyV.RData
 010fd612cb5df6ffd87e22761ad79aa9 *doc/mi_vignette.pdf
 b3da9dfca4364bcdf6a7a8d47d48540d *help/AnIndex
 12a741c7527d961c94f70e876af6e617 *help/aliases.rds
-949a02808328be8fdb77d20a959548ec *help/mi.rdb
-82d585832f8e3f36add273471ddb2b5d *help/mi.rdx
-36a564eb6668c1a1cccce98e96b85be8 *help/paths.rds
+6d14a7e6e160f4ab46120a826c0ff488 *help/mi.rdb
+adb98f49ddf579f6929ddb11c99ee5d8 *help/mi.rdx
+49a602c6629268387b3d8e2ac1a352e9 *help/paths.rds
 7f311bdc89b9a2aa8d9a2d64f297a5bf *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

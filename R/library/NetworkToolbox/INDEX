@@ -61,3 +61,4 @@ stable                  Stabilizing Nodes
 strength                Node Strength
 threshold               Threshold Network Estimation Methods
 transitivity            Transitivity
+un.direct               Convert Directed Network to Undirected Network

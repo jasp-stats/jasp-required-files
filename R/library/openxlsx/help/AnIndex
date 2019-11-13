@@ -4,6 +4,7 @@ addStyle	addStyle
 addWorksheet	addWorksheet
 all.equal	all.equal
 all.equal.Workbook	all.equal
+cloneWorksheet	cloneWorksheet
 conditionalFormat	conditionalFormat
 conditionalFormatting	conditionalFormatting
 convertFromExcelRef	convertFromExcelRef
@@ -39,6 +40,8 @@ openXL	openXL
 openxlsx	openxlsx
 pageBreak	pageBreak
 pageSetup	pageSetup
+protectWorkbook	protectWorkbook
+protectWorksheet	protectWorksheet
 read.xlsx	read.xlsx
 readWorkbook	readWorkbook
 removeCellMerge	removeCellMerge

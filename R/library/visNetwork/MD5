@@ -1,4 +1,4 @@
-a4bcbbcfa56a441454e84791810049ca *DESCRIPTION
+6d8d024a7be4914931f53e4d147083ac *DESCRIPTION
 17a271871d771c51bdcbfa416dd02fa0 *INDEX
 33df9c544e24fce34daa94f1763b5283 *LICENSE
 59f59b0e444a86c80b7eac4d514ab9f1 *Meta/Rd.rds
@@ -6,7 +6,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 ffc588b5f170ae8e3da248108081eca0 *Meta/hsearch.rds
 abb437afd241385d1381d80668c877c8 *Meta/links.rds
 d525237796f3813d636faabdfd973616 *Meta/nsInfo.rds
-bf0990c15de98fe9b8aa3361409475d5 *Meta/package.rds
+acc4ce587704fedefec330d1e403de49 *Meta/package.rds
 8c2c09e38e0f6ba63ebcbed0577ee961 *Meta/vignette.rds
 343e52ec4127ff523ba83e83750f7abf *NAMESPACE
 786f6ec2b11c969259e8c8a04de35b6d *NEWS
@@ -71,9 +71,9 @@ c0971404ba43e09c15c241ae78804445 *docjs/network/manipulation.html
 d4a91d439495a0f2c37192ebf15908af *fontAwesome/Font_Awesome_Cheatsheet.pdf
 d21a2445143a811ef70b01fef46e541c *help/AnIndex
 fdc3e4b708d068fad197012cbbe35c5c *help/aliases.rds
-12d7ca5a7c5ea105c7d5c29180b277f0 *help/paths.rds
-810f78c406d140dd3db67fc91ec13c2e *help/visNetwork.rdb
-bfae5aa018f73483e760e4085a72318b *help/visNetwork.rdx
+3c12e60862a34b482b58ad34bac08ec8 *help/paths.rds
+660bf1ef2946e53f7816b4e312218194 *help/visNetwork.rdb
+abf3566f83b5fdbac90fc10e63b1329a *help/visNetwork.rdx
 d152778c1e69c52ec0db223a6c44aef6 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
 c756060c61102fc7f0b7cbe0cf7dbebe *htmlwidgets/lib/css/dataManipulation.css

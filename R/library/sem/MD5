@@ -1,5 +1,5 @@
 7e382b6314a1a9226b7536666a9e78e8 *CHANGES
-6a3f2dfdf276e2ae98f0f35523c65186 *DESCRIPTION
+03cd1ca319601e823640753f2d5448c2 *DESCRIPTION
 9ad81ad3f9c32dfef4133d4bc715ec95 *INDEX
 c6beeb023b8afd3a5e96e1438a329bdb *Meta/Rd.rds
 b1f691c1873bc229120ed8aea5b80e36 *Meta/data.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 45e3b5fee4ede9195ca2f502773044c3 *Meta/hsearch.rds
 f43c58bc7811ee036f41b02d65437da8 *Meta/links.rds
 02bafb5bc6a6e08e329c4b5391012dc4 *Meta/nsInfo.rds
-f65ae076912d82e5db69c82eff31cae6 *Meta/package.rds
+7ecd8e8e8bdcda8626ddcf8a899ca3e0 *Meta/package.rds
 1b0207120de8bf0fd7353e70f4cab744 *NAMESPACE
 d7c76b94f7c4e526c510dbc48a10e3aa *NEWS
 ebf0fc819595d631b8bf280c4b049940 *R/sem
@@ -35,12 +35,12 @@ bfaa1e1feb720bd9c67498932eafd4e6 *etc/model-Thurstone.txt
 52b1d7fd5d57b87ffe394ee66456feef *etc/model-Wheaton-2.txt
 7d246aba1d0c43a81b4479eb6e73811c *help/AnIndex
 d3e08cad115b8fded4e53ef7fec1f484 *help/aliases.rds
-9cd0b2c4e9a1036279389006b03ca36a *help/paths.rds
-25957970c2f2493e9e179b93cea08bce *help/sem.rdb
-9047767e2886e3e481c7462eea92acf4 *help/sem.rdx
+f1a51a79b5f722c2a66f90cdbf00c862 *help/paths.rds
+b8ede892a18fe5945514f294daf5bc2f *help/sem.rdb
+586856b0cb9f4a287d734c54c8593fd0 *help/sem.rdx
 81fcb162b1d9396a1b55f3fe31ad3909 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-f754790e02f83094cccced9b8bfb4e01 *libs/i386/sem.dll
+028ed4d751316d5e35ea715ab22e3ddd *libs/i386/sem.dll
 aaab27116c8d3e74fe56660cc52d83d5 *libs/i386/symbols.rds
-b1c399e46f9a8930a30c3074c05a5520 *libs/x64/sem.dll
+4aa9ad94d8e3fb91cf5ff9ae8aea191c *libs/x64/sem.dll
 dae928b4cc104925c58fea58770b3118 *libs/x64/symbols.rds

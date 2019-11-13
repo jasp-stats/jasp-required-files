@@ -13,7 +13,7 @@
 
 <meta name="author" content="Yihui Xie" />
 
-<meta name="date" content="2019-10-01" />
+<meta name="date" content="2019-11-12" />
 
 <title>An Introduction to xfun</title>
 
@@ -341,7 +341,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore">An Introduction to xfun</h1>
 <h3 class="subtitle">A Collection of Miscellaneous Functions</h3>
 <h4 class="author">Yihui Xie</h4>
-<h4 class="date">2019-10-01</h4>
+<h4 class="date">2019-11-12</h4>
 
 
 <div id="TOC">
@@ -461,7 +461,7 @@ woRld</code></pre>
 </div>
 <div id="loading-and-attaching-packages" class="section level2">
 <h2>Loading and attaching packages</h2>
-<p>Often times I see users attach a series of packages in the beginning of their scripts by repeating <code>library()</code> multiple times. This could be easily vectorized, and the function <code>xfun::pkg_attach()</code> does this job. For example,</p>
+<p>Oftentimes I see users attach a series of packages in the beginning of their scripts by repeating <code>library()</code> multiple times. This could be easily vectorized, and the function <code>xfun::pkg_attach()</code> does this job. For example,</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">library</span>(testit)</a>
 <a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">library</span>(parallel)</a>
 <a class="sourceLine" id="cb43-3" data-line-number="3"><span class="kw">library</span>(tinytex)</a>
@@ -511,17 +511,17 @@ woRld</code></pre>
 </div>
 <div id="print-session-information" class="section level2">
 <h2>Print session information</h2>
-<p>Since I have never been fully satisfied by the output of <code>sessionInfo()</code>, I tweaked it to make it more useful in my use cases. For example, it is rarely useful to print out the names of base R packages, or information about the matrix products / BLAS / LAPACK. Often times I want additional information in the session information, such as the Pandoc version when <strong>rmarkdown</strong> is used. The function <code>session_info()</code> tweaks the output of <code>sessionInfo()</code>, and makes it possible for other packages to append information in the output of <code>session_info()</code>.</p>
+<p>Since I have never been fully satisfied by the output of <code>sessionInfo()</code>, I tweaked it to make it more useful in my use cases. For example, it is rarely useful to print out the names of base R packages, or information about the matrix products / BLAS / LAPACK. Oftentimes I want additional information in the session information, such as the Pandoc version when <strong>rmarkdown</strong> is used. The function <code>session_info()</code> tweaks the output of <code>sessionInfo()</code>, and makes it possible for other packages to append information in the output of <code>session_info()</code>.</p>
 <p>You can choose to print out the versions of only the packages you specify, e.g.,</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">xfun<span class="op">::</span><span class="kw">session_info</span>(<span class="kw">c</span>(<span class="st">&quot;xfun&quot;</span>, <span class="st">&quot;rmarkdown&quot;</span>, <span class="st">&quot;knitr&quot;</span>, <span class="st">&quot;tinytex&quot;</span>), <span class="dt">dependencies =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS Mojave 10.14.6
+## Running under: macOS Catalina 10.15.1
 ## 
 ## Locale: C / en_US.UTF-8 / en_US.UTF-8 / C / en_US.UTF-8 / en_US.UTF-8
 ## 
 ## Package version:
-##   knitr_1.25       rmarkdown_1.15.2 tinytex_0.16     xfun_0.10       
+##   knitr_1.25.4     rmarkdown_1.16.3 tinytex_0.17     xfun_0.11       
 ## 
 ## Pandoc version: 2.3.1</code></pre>
 </div>

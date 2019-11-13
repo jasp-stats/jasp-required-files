@@ -1,5 +1,5 @@
 59b0b852b79e7e1d8ceb0e10d469f9d6 *CITATION
-04e0fade659cbfa4532ec3365a439480 *DESCRIPTION
+80abb2d1015cf74df2a44e050a39df92 *DESCRIPTION
 75f667a5668395752ef2e5e2eed031a6 *INDEX
 aae848b46f9cb7250e8fa3c2b6f39437 *Meta/Rd.rds
 ab6dc18e1e607eac18ff799117f24ee8 *Meta/demo.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 fdf2092b286803b1895d1ebc20cab8d9 *Meta/hsearch.rds
 d123206581c31f92f589dccca7453f94 *Meta/links.rds
 78fb54b6ab4fae6a61ac9846a2f9cf28 *Meta/nsInfo.rds
-c6302d1f3c812d3e0703eac7745eff57 *Meta/package.rds
+20e542bc29ce713f0f84e0823b2d0c89 *Meta/package.rds
 a605fb043102821a27554f1e75983aa5 *Meta/vignette.rds
 597cc18eb0d26a4eebdf9572e2bc1a1a *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/elliptic
@@ -23,8 +23,8 @@ c19b5b2eae027b82f4d43f8c72fd8736 *doc/residuetheorem.R
 0a21d4e631fe861242141a332a17b54d *doc/residuetheorem.pdf
 bb6e5858a61542ed9298134e32e340c3 *help/AnIndex
 5492a92cbf93cbe996808a84f8935b29 *help/aliases.rds
-0b46de31f844fcada19ea4a0b2153083 *help/elliptic.rdb
-7994dbd5d6a530fcb0c45e4dde396b4a *help/elliptic.rdx
-aa5af71212fc090bbf3f7a1c587230c9 *help/paths.rds
+26fd186e18fcc271474e36c6c540ddde *help/elliptic.rdb
+4bbaefa90543bdf035775b3207728e54 *help/elliptic.rdx
+45ed675e487e44fe3fb9478f85f3bd7b *help/paths.rds
 d2fd2e9fcb94e757dadd0a54683214cd *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

@@ -17,6 +17,7 @@ sha1.complex	sha1
 sha1.data.frame	sha1
 sha1.Date	sha1
 sha1.factor	sha1
+sha1.formula	sha1
 sha1.function	sha1
 sha1.integer	sha1
 sha1.list	sha1

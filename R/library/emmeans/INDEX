@@ -7,6 +7,8 @@ as.mcmc.emmGrid         Support for MCMC-based estimation
 auto.noise              Auto Pollution Filter Noise
 contrast                Contrasts and linear functions of EMMs
 contrast-methods        Contrast families
+eff_size                Calculate effect sizes and confidence bounds
+                        thereof
 emm                     Support for 'multcomp::glht'
 emmGrid-class           The 'emmGrid' class
 emm_list                The 'emm_list' class

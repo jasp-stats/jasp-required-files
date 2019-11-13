@@ -1,5 +1,5 @@
 8adc6a30da9d0203a4833da2d4acf667 *CITATION
-b780139a056a840ae220aaba127c82df *DESCRIPTION
+564fd9ecad50e55a98b1cb0e76d17a68 *DESCRIPTION
 d70b710ca2fe48b21b2950a0da142d9e *INDEX
 f066eeac39179b465a9d8d798a3a4077 *Meta/Rd.rds
 97f1b0b79f93a55ac5420ce8d78a9624 *Meta/data.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 83cdb68eb027131d5769ec6d2f046dff *Meta/hsearch.rds
 ca9e13b958c902c0f761d3cab97375d8 *Meta/links.rds
 90f46617966dba47cf09f73ea51fe2df *Meta/nsInfo.rds
-59e181a7fcee13c1cf74a4f5d98ea3f8 *Meta/package.rds
+392cc23908dce96ea99dcc390d4ea72f *Meta/package.rds
 9ec9feb6f4be378d138c2f283a892d0c *Meta/vignette.rds
 20f3cb482ff305f377ad22328fd28f99 *NAMESPACE
 26b3d7fb8fc118557879854d67dd2f32 *NEWS
@@ -37,8 +37,8 @@ a082f5db7af5f24328322a6f7204f904 *doc/Optimalgo.html
 61cb2c3ecae2e66ae327e2b3f583c8f1 *doc/paper2JSS.pdf
 67656c447cc9efb15fa420cb15c22225 *help/AnIndex
 797e1e49af0173c5a40d787a1aa665d5 *help/aliases.rds
-e21745b6c31b666347169096448b0da2 *help/fitdistrplus.rdb
-553236c7e0da6bc891963164b500ff1f *help/fitdistrplus.rdx
-65815da585fd71c1612a1cf03a4ac95e *help/paths.rds
+eef3753cfe123bd3d52a8c53f3592120 *help/fitdistrplus.rdb
+eb219a8b6e62205bf885c951f3e7e589 *help/fitdistrplus.rdx
+2116e2c829de3b2df2fcf007a404174a *help/paths.rds
 5d8c8ae085a0d150a078358ca46c1da6 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

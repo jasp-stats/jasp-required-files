@@ -62,6 +62,10 @@ chr_along	vector-old-ctors
 chr_len	vector-old-ctors
 chr_unserialise_unicode	chr_unserialise_unicode
 cnd	cnd
+cnd_bullets	cnd_message
+cnd_entrace	entrace
+cnd_issue	cnd_message
+cnd_message	cnd_message
 cnd_muffle	cnd_muffle
 cnd_signal	cnd_signal
 cnd_type	cnd_type
@@ -157,6 +161,7 @@ fn_fmls<-	fn_fmls
 fn_fmls_names	fn_fmls
 fn_fmls_names<-	fn_fmls
 fn_fmls_syms	fn_fmls
+format_bullets	cnd_message
 frame_position	frame_position
 friendly_type	friendly_type
 f_env	f_rhs
@@ -454,6 +459,7 @@ syms	sym
 tidy-dots	tidy-dots
 tidyeval-data	tidyeval-data
 trace_back	trace_back
+trace_length	trace_back
 type-predicates	type-predicates
 type_of	type_of
 unbox	box
@@ -476,3 +482,5 @@ with_restarts	with_restarts
 wref_key	wref_key
 wref_value	wref_key
 zap	zap
+{{	quasiquotation
+{{}}	quasiquotation

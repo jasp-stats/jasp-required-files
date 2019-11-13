@@ -1,2 +1,0 @@
-library(ggedit)
-library(shinyAce)

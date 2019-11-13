@@ -17,11 +17,11 @@ Linear Models</h2>
 <h3>Usage</h3>
 
 <pre>
-bas.lm(formula, data, subset, weights, na.action = "na.omit",
-  n.models = NULL, prior = "ZS-null", alpha = NULL,
-  modelprior = beta.binomial(1, 1), initprobs = "Uniform",
-  include.always = ~1, method = "BAS", update = NULL,
-  bestmodel = NULL, prob.local = 0, prob.rw = 0.5,
+bas.lm(formula, data, subset, weights, contrasts = NULL,
+  na.action = "na.omit", n.models = NULL, prior = "ZS-null",
+  alpha = NULL, modelprior = beta.binomial(1, 1),
+  initprobs = "Uniform", include.always = ~1, method = "BAS",
+  update = NULL, bestmodel = NULL, prob.local = 0, prob.rw = 0.5,
   MCMC.iterations = NULL, lambda = NULL, delta = 0.025, thin = 1,
   renormalize = FALSE, force.heredity = TRUE, pivot = FALSE,
   tol = 1e-07, bigmem = FALSE)
@@ -52,6 +52,10 @@ used in the fitting process.</p>
 <p>an optional vector of weights to be used in the fitting
 process. Should be NULL or a numeric vector. If non-NULL, Bayes estimates
 are obtained assuming that Y ~ N(Xb, sigma^2 diag(1/weights)).</p>
+</td></tr>
+<tr valign="top"><td><code>contrasts</code></td>
+<td>
+<p>an optional list. See the contrasts.arg of 'model.matrix.default()'.</p>
 </td></tr>
 <tr valign="top"><td><code>na.action</code></td>
 <td>
@@ -596,5 +600,5 @@ demo(BAS.USCrime)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>BAS</em> version 1.5.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>BAS</em> version 1.5.4 <a href="00Index.html">Index</a>]</div>
 </body></html>

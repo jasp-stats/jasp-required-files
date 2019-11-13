@@ -36,5 +36,5 @@ NeedsCompilation: yes
 Packaged: 2019-09-11 04:12:10 UTC; jcheng
 Repository: CRAN
 Date/Publication: 2019-09-11 05:40:02 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 19:53:30 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-11-07 17:28:36 UTC; windows
 Archs: i386, x64

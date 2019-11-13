@@ -16,5 +16,5 @@ NeedsCompilation: yes
 Packaged: 2018-08-24 18:57:30 UTC; ianfellows
 Repository: CRAN
 Date/Publication: 2018-08-24 19:20:03 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-10-07 16:37:16 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2019-11-07 14:13:55 UTC; windows
 Archs: i386, x64

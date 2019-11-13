@@ -1,5 +1,5 @@
 194b3f7d6c63a4a7d798b55f93f7221a *CITATION
-31365aa35ea2d368f20a48db05709fbd *DESCRIPTION
+269616b8128021c21e49f53b42170f19 *DESCRIPTION
 9b1faf168bba0ac525c75fb7ae82f1e7 *INDEX
 6ff28d277b916a2509091f7a95ef838f *Meta/Rd.rds
 1721cda44da1f2396b139d770af90274 *Meta/data.rds
@@ -8,7 +8,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 cf28b3445a35983876f0750fddc82438 *Meta/hsearch.rds
 d2aac4b4794ac8041b96e51d801cf2a4 *Meta/links.rds
 1ecc1e24390cf2113383bd203feaaff8 *Meta/nsInfo.rds
-ff79e4d0f5e414792d15fefccb9bd3fe *Meta/package.rds
+87b834ab4c5b91f95da77b413221e4f9 *Meta/package.rds
 dc33bb94a44f11db390a8ab5510d1a42 *NAMESPACE
 2fa08bdab7deee0de7bd50eec671f7b4 *NEWS
 ebf0fc819595d631b8bf280c4b049940 *R/ROCR
@@ -20,9 +20,9 @@ e4d3b38035f21f0bd36606cd08b3ded3 *data/ROCR.xval.rda
 abe80443628a3c11d359a0f49d81dad0 *data/datalist
 618e74cf61daf4d6aa7419ebcd886bef *demo/ROCR.R
 5320d7b798ab930fd270c2cdcfdc0322 *help/AnIndex
-74c737532370d1600db9565c43e2c857 *help/ROCR.rdb
-8fe8f5304856582d0145ac944075f6b3 *help/ROCR.rdx
+bb42743ff2e85e3c7b3b1e9c8f9dfaa0 *help/ROCR.rdb
+9a92bba724fd300fc4d7d9caaa2b425c *help/ROCR.rdx
 b669d3aa00bb4f4e869a040d4667c058 *help/aliases.rds
-9d485de987f62569be630cb34adc30cc *help/paths.rds
+acbee498f34a17796780013314a669c5 *help/paths.rds
 6db90f78b75df85c6862050315fcee7b *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

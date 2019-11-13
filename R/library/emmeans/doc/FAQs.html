@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.4.1" />
+<meta name="author" content="emmeans package, Version 1.4.2" />
 
 
 <title>FAQs for emmeans</title>
@@ -34,7 +34,7 @@
 
 
 <h1 class="title toc-ignore">FAQs for emmeans</h1>
-<h4 class="author">emmeans package, Version 1.4.1</h4>
+<h4 class="author">emmeans package, Version 1.4.2</h4>
 
 
 
@@ -111,15 +111,14 @@
 </div>
 <div id="numeric" class="section level2">
 <h2>emmeans() doesn’t work as expected</h2>
-<!-- @index Covariates!`emmeans()` doesn't work -->
+<!-- @index Covariates!`emmeans()` doesn't work; Covariates!`cov.keep; Covariates!`cov.reduce;  -->
 <p>Equivalently, users ask how to get <em>post hoc</em> comparisons when we have covariates rather than factors. Yes, it does work, but you have to tell it the appropriate reference grid.</p>
 <p>But before saying more, I have a question for you: <em>Are you sure your model is meaningful?</em></p>
 <ul>
 <li>If your question concerns <em>only</em> two-level predictors such as <code>sex</code> (coded 1 for female, 2 for male), no problem. The model will produce the same predictions as you’d get if you’d used these as factors.</li>
-<li>If <em>any</em> of the predictors has 3 or more levels, you may have fitted a nonsense model, in which case you need to fit a different model that does make sense before doing any kind of <em>post hoc</em> analysis. For instance, the model contains a covariate <code>brand</code> (coded 1 for Acme, 2 for Ajax, and 3 for Al’s), this model is implying that the difference between Acme and Ajax is exactly equal to the difference between Ajax and Al’s, owing to the fact that a linear trend in <code>brand</code> has been fitted. If you had instead coded 1 for Ajax, 2 for Al’s, and 3 for Acme, the model would produce different fitted values. You need to fit another model using <code>factor(brand)</code> in place of <code>brand</code>.</li>
+<li>If <em>any</em> of the predictors has 3 or more levels, you may have fitted a nonsense model, in which case you need to fit a different model that does make sense before doing any kind of <em>post hoc</em> analysis. For instance, the model contains a covariate <code>brand</code> (coded 1 for Acme, 2 for Ajax, and 3 for Al’s), this model is implying that the difference between Acme and Ajax is exactly equal to the difference between Ajax and Al’s, owing to the fact that a linear trend in <code>brand</code> has been fitted. If you had instead coded 1 for Ajax, 2 for Al’s, and 3 for Acme, the model would produce different fitted values. Ask yourself if it makes sense to have <code>brand = 2.319</code>. If not, you need to fit another model using <code>factor(brand)</code> in place of <code>brand</code>.</li>
 </ul>
-<p>Assuming that issue is settled, you can do something like <code>emmeans(model, &quot;sex&quot;, at = list(sex = 1:2))</code>, to get get separate EMMs for each sex rather than one EMM for the average numeric value of <code>sex</code>.</p>
-<p>An alternative to the <code>at</code> list is to use <code>cov.reduce = FALSE</code>, which specifies that the unique values of covariates are to be used rather than reducing them to their means. However, the specification applies to <em>all</em> covariates, so if you have another one, say <code>age</code>, that has 43 different values in your data, you will have a mess on your hands.</p>
+<p>Assuming that the appropriateness of the model is settled, the current version of <strong>emmeans</strong> automatically casts two-value covariates as factors, but not covariates having higher numbers of unique values. Suppose your model has a covariate <code>dose</code> which was experimentally varied over four levels, but can sensibly be interpreted as a numerical predictor. If you want to include the separate values of <code>dose</code> rather than the mean <code>dose</code>, you can do that using something like <code>emmeans(model, &quot;dose&quot;, at = list(dose = 1:4))</code>, or <code>emmeans(model, &quot;dose&quot;, cov.keep = &quot;dose&quot;)</code>, or <code>emmeans(model, &quot;dose&quot;, cov.keep = &quot;4&quot;)</code>. There are small differences between these. The last one regards any covariate having 4 or fewer unique values as a factor.</p>
 <p>See “altering the reference grid” in the <a href="basics.html#altering">“basics” vignette</a> for more discussion.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>
@@ -151,9 +150,9 @@ emmeans(pg.lm, consec ~ percent)</code></pre>
 ## 
 ## $contrasts
 ##  contrast estimate     SE df t.ratio p.value
-##  12 - 9     0.1796 0.0561 23 3.202   0.0108 
-##  15 - 12    0.0378 0.0582 23 0.650   0.8613 
-##  18 - 15    0.0825 0.0691 23 1.194   0.5200 
+##  12 - 9     0.1796 0.0561 23 3.202   0.0112 
+##  15 - 12    0.0378 0.0582 23 0.650   0.8614 
+##  18 - 15    0.0825 0.0691 23 1.194   0.5201 
 ## 
 ## Results are averaged over the levels of: source 
 ## Results are given on the log (not the response) scale. 

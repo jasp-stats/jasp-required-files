@@ -1,7 +1,32 @@
 ## NEWS for the emmeans package
 
+emmeans 1.4.2
+-------------
+
+  * First argument of `emtrends()` is now `object`, not `model`, to avoid
+    potential mis-matching of the latter with optional `mode` argument
+  * `emtrends()` now uses more robust and efficient code whereby a single
+    reference grid is constructed containing all needed values of `var`. The old
+    version could fail, e.g., in cases where the reference grid involves
+    post-processing. (#145)
+  * Added `scale` argument to `contrast()`
+  * Added new `"identity"` contrast method
+  * New `eff_size()` function for Cohen effect sizes
+  * Expanded capabilities for interaction contrasts (#146)
+  * New `cov.keep` argument in `ref_grid()` for specifying covariates
+    to be treated just like factors (#148). A side effect is that the
+    system default for indicator variables as covariates is to treat
+    them like 2-level factors. *This could change the results obtained from 
+    some analyses using earlier versions*. To replicate old analyses,
+    set `emm_options(cov.keep = character(0))`.
+  * Added merMod-related options as convenience arguments (#150)
+  * Bug fixes: `regrid` ignored offsets with Bayesian models; `emtrends()` did
+    not supply `options` and `misc` arguments to `emm_basis()` (#143)
+
+
 emmeans 1.4.1
 -------------
+
   * Added non-estimability infrastructure for Bayesian models, `stanreg`
     in particular (#114)
   * Added `max.degree` argument in `emtrends()` making it possible to

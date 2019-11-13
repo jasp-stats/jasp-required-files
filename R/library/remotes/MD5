@@ -1,11 +1,11 @@
-022774aca1bedadc8fe13aa5ae3bb8bc *DESCRIPTION
+98868c4010af0836375533e93be1489c *DESCRIPTION
 e078bbda67431e7cc8fd21d986deb376 *INDEX
 32480cbf8b8857822b5135c57ea5d4c9 *Meta/Rd.rds
 a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 1e0300f8806bbfc534b912c3ebad5337 *Meta/hsearch.rds
 18df40b930c20134f366b60320896165 *Meta/links.rds
 50c326366d7d0190f1d11ea696052694 *Meta/nsInfo.rds
-6402c3ca6b2b0d2114f3f4581d7e9921 *Meta/package.rds
+869a1c540fe7929d1a998fbc9ae1894a *Meta/package.rds
 7545755dc2c6af3a2f49db7d48ca231a *Meta/vignette.rds
 89028777410872d6c2f812ad201795df *NAMESPACE
 6f3680d81cca4d0b5183f9cf7b903b7c *NEWS.md
@@ -17,9 +17,9 @@ bfc9a410b5f89e0ceee62858f18aed1d *doc/dependencies.html
 99aa062a1de6c272e92992c455fc9a81 *doc/index.html
 8a4131462a88ecd7eb2a477b9cb9023a *help/AnIndex
 105ec22b050d0c2847fef53151fa2077 *help/aliases.rds
-35a20698e9add97dd33c86f10f4592e0 *help/paths.rds
-57abe4a918dcd8896a703cc18d12c435 *help/remotes.rdb
-0ff332134877c209efe9d38bfc9ae477 *help/remotes.rdx
+d5098901110f2464acf6fea401adebb0 *help/paths.rds
+feb4e0b909aefb812402aa49fe63d50c *help/remotes.rdb
+55f4d48f76e437db6fbc5660f9315dcf *help/remotes.rdx
 29f9c3b0acf424ff3ba2253db7682d6a *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
 2eb154b61a5b02f4c0e79271fce476c7 *install-github.R

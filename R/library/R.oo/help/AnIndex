@@ -178,10 +178,6 @@ finalize.Object	finalize.Object
 forName	Non-documented_objects
 forName,Class-method	forName.Class
 forName.Class	forName.Class
-gc	Non-documented_objects
-gc,Object-method	gc.Object
-gc.default	Non-documented_objects
-gc.Object	gc.Object
 getAuthor	Non-documented_objects
 getAuthor,Package-method	getAuthor.Package
 getAuthor.Package	getAuthor.Package
@@ -489,7 +485,6 @@ Object.detach	detach.Object
 Object.equals	equals.Object
 Object.extend	extend.Object
 Object.finalize	finalize.Object
-Object.gc	gc.Object
 Object.getEnvironment	getEnvironment.Object
 Object.getFieldModifier	getFieldModifiers.Object
 Object.getFieldModifiers	getFieldModifiers.Object

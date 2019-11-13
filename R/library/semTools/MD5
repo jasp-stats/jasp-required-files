@@ -1,5 +1,5 @@
 f3b57cd561033b86ee6213144201bbbe *CITATION
-f4ebbf58a9ac9e7cbae265bc2900fe03 *DESCRIPTION
+b162ae5cc0e389cf1a132b746da95a41 *DESCRIPTION
 9539f108fc4d9dd61f4875d106c9c199 *INDEX
 0ae0fe2a9843761d45e02735dcd7a9ea *Meta/Rd.rds
 1cecd2c1e6c7a5408ac372980c1546a6 *Meta/data.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 c16b93035f006b335e574a5c6ba55926 *Meta/hsearch.rds
 ee4bc8e292c4da690158c75d2cff2556 *Meta/links.rds
 e76bce3b8c6ab35e3ea76f78fdaf0775 *Meta/nsInfo.rds
-a627b99f87223f1830f8f0b8e89f52e2 *Meta/package.rds
+c88b0f6f151ff1435ba7ecf43bae3d57 *Meta/package.rds
 83304581f160f4f3c668b75a79725d47 *Meta/vignette.rds
 ef9455f212b092e1551cb1e331506bfc *NAMESPACE
 c15cd82927b4f621e62a7458fac9c21e *NEWS.md
@@ -22,8 +22,8 @@ fb4d17d5a55376c8557d36cd4c0e2c4b *doc/index.html
 04e3e1f39aebdb666b7f25c15d266533 *doc/partialInvariance.pdf
 0e42aa783685eaf2cae2790ce897e836 *help/AnIndex
 96ccfe69157089237cb1ed179a12156c *help/aliases.rds
-7db961adcb5cb7becad2c8ef00d465cd *help/paths.rds
-62528ae22bd5af582e8a314a2ae8d1d0 *help/semTools.rdb
-ba0c49eabb2f91868f673ed0cb6a1f98 *help/semTools.rdx
+41728619cc99480c2e6fea37a1e99d21 *help/paths.rds
+3e1d5281cff1b194f8dd7a929dd7a746 *help/semTools.rdb
+cadaadb8723376c8533b0ddd8cc7fdc9 *help/semTools.rdx
 0e88cdd419a587121f91e8f560c7fec9 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

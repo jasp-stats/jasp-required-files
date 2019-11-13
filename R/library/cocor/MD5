@@ -1,5 +1,5 @@
 68b46aa121d214c3ff8387a7450f5538 *CITATION
-16e797f713e6a5e267f4986f3ae220e3 *DESCRIPTION
+31b6c226f976ec0ea588285faf3fa473 *DESCRIPTION
 c24584f8ae07f13ac92e834fed3625f0 *INDEX
 7a35dbaddf039b96fd9e7bbb5e3ee478 *Meta/Rd.rds
 3f8a1a70a3f3e6a10fee0808fb190777 *Meta/data.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 9661904573fd62f7d128eb22fef19aa2 *Meta/hsearch.rds
 0f256457bb0911654fb30aeaf2be3e2d *Meta/links.rds
 ac69f117e91c07c9223b021f4052a2a0 *Meta/nsInfo.rds
-115157d467a23df1395fe920ae03e998 *Meta/package.rds
+f265dee1b55d59595f0ed12e88b184b0 *Meta/package.rds
 cb64a706e72f07114cefcd6825e2da6a *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/cocor
 8ea6c0814b8664b9d75e2500573e1f42 *R/cocor.rdb
@@ -16,9 +16,9 @@ fc966ce30d99cadb7a2cf726793cd342 *data/aptitude.rda
 56c11bc256a84517bf28e550282967cc *doc/cocor_vignette.pdf
 d7b2953622d18de017be5266ce7cf13a *help/AnIndex
 10f3d93b8e375f52fb33f43e58e9f62f *help/aliases.rds
-74154f2b257c8652d2b0f768be24ac25 *help/cocor.rdb
-0ad8ae1d8024c39c4d26d01581d48a74 *help/cocor.rdx
-a36a07ca15d9ba0a8e69c0e68d4de834 *help/paths.rds
+83294e9d0a9e6d27fcc6b3f500192e6e *help/cocor.rdb
+5d6bc36a564700021c5f3ff34d5c0a09 *help/cocor.rdx
+c581f15a84c8a528edd4a10f7791e565 *help/paths.rds
 0e6e69ee3d432e84835f9de91b44399f *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
 1a180661ff2ff8f4b3604663c5ec6cb4 *rkward/cocor.pluginmap

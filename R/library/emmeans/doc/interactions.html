@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="emmeans package, Version 1.4.1" />
+<meta name="author" content="emmeans package, Version 1.4.2" />
 
 
 <title>Interaction analysis in emmeans</title>
@@ -34,7 +34,7 @@
 
 
 <h1 class="title toc-ignore">Interaction analysis in emmeans</h1>
-<h4 class="author">emmeans package, Version 1.4.1</h4>
+<h4 class="author">emmeans package, Version 1.4.2</h4>
 
 
 
@@ -148,26 +148,26 @@ anova(noise.lm)</code></pre>
 <p>Ordinarily, when <code>simple</code> is a list (or equal to <code>&quot;each&quot;</code>), a list of contrast sets is returned. However, if the additional argument <code>combine</code> is set to <code>TRUE</code>, they are all combined into one family:</p>
 <pre class="r"><code>contrast(noise.emm, &quot;consec&quot;, simple = &quot;each&quot;, combine = TRUE, adjust = &quot;mvt&quot;)</code></pre>
 <pre class="ro"><code>##  side type  size contrast    estimate   SE df t.ratio p.value
-##  L    Std   .    M - S          15.00 3.12 24   4.811 0.0012 
+##  L    Std   .    M - S          15.00 3.12 24   4.811 0.0013 
 ##  L    Std   .    L - M         -86.67 3.12 24 -27.795 &lt;.0001 
 ##  R    Std   .    M - S          25.00 3.12 24   8.018 &lt;.0001 
 ##  R    Std   .    L - M         -55.00 3.12 24 -17.639 &lt;.0001 
-##  L    Octel .    M - S          -3.33 3.12 24  -1.069 0.9768 
+##  L    Octel .    M - S          -3.33 3.12 24  -1.069 0.9769 
 ##  L    Octel .    L - M         -56.67 3.12 24 -18.174 &lt;.0001 
 ##  R    Octel .    M - S           1.67 3.12 24   0.535 0.9999 
 ##  R    Octel .    L - M         -46.67 3.12 24 -14.967 &lt;.0001 
 ##  .    Std   S    R - L         -18.33 3.12 24  -5.880 0.0001 
 ##  .    Std   M    R - L          -8.33 3.12 24  -2.673 0.1713 
 ##  .    Std   L    R - L          23.33 3.12 24   7.483 &lt;.0001 
-##  .    Octel S    R - L          -5.00 3.12 24  -1.604 0.7750 
+##  .    Octel S    R - L          -5.00 3.12 24  -1.604 0.7749 
 ##  .    Octel M    R - L           0.00 3.12 24   0.000 1.0000 
-##  .    Octel L    R - L          10.00 3.12 24   3.207 0.0564 
-##  L    .     S    Octel - Std   -10.00 3.12 24  -3.207 0.0560 
+##  .    Octel L    R - L          10.00 3.12 24   3.207 0.0568 
+##  L    .     S    Octel - Std   -10.00 3.12 24  -3.207 0.0561 
 ##  L    .     M    Octel - Std   -28.33 3.12 24  -9.087 &lt;.0001 
 ##  L    .     L    Octel - Std     1.67 3.12 24   0.535 0.9999 
 ##  R    .     S    Octel - Std     3.33 3.12 24   1.069 0.9769 
 ##  R    .     M    Octel - Std   -20.00 3.12 24  -6.414 &lt;.0001 
-##  R    .     L    Octel - Std   -11.67 3.12 24  -3.742 0.0166 
+##  R    .     L    Octel - Std   -11.67 3.12 24  -3.742 0.0168 
 ## 
 ## P value adjustment: mvt method for 20 tests</code></pre>
 <p>The dots (<code>.</code>) in this result correspond to which simple effect is being displayed. If we re-run this same call with <code>combine = FALSE</code> or omitted, these twenty comparisons would be displayed in three broad sets of contrasts, each broken down further by combinations of <code>by</code> variables, each separately multiplicity-adjusted (a total of 16 different tables).</p>
@@ -303,35 +303,33 @@ org.add &lt;- lm(cbind(sales1, sales2) ~ price1 + price2 + day + store, data = o
 <p>To summarize and test the results compactly, it makes sense to obtain estimates of a representative trend in each of the left and right panels, and perhaps to compare them. In turn, that can be done by obtaining the slope of the curve (or line) at the average value of <code>price2</code>. The <code>emtrends()</code> function is designed for exactly this kind of purpose. It uses a difference quotient to estimate the slope of a line fitted to a given variable. It works just like <code>emmeans()</code> except for requiring the variable to use in the difference quotient. Using the <code>org.int</code> model:</p>
 <pre class="r"><code>emtrends(org.int, pairwise ~ variety, var = &quot;price1&quot;, mult.name = &quot;variety&quot;)</code></pre>
 <pre class="ro"><code>## $emtrends
-##  variety price1.trend    SE df lower.CL upper.CL
-##  sales1        -0.749 0.171 22   -1.104   -0.394
-##  sales2         0.138 0.214 22   -0.306    0.582
+##  variety price1.trend SE df lower.CL upper.CL
+##  sales1          34.2 41 22    -50.9      119
 ## 
-## Results are averaged over the levels of: day, store 
+## Results are averaged over the levels of: price1, day, store 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
-##  contrast        estimate   SE df t.ratio p.value
-##  sales1 - sales2   -0.887 0.24 22 -3.690  0.0013 
+##  contrast  estimate SE df z.ratio p.value
+##  (nothing)   nonEst NA NA NA      NA     
 ## 
-## Results are averaged over the levels of: day, store</code></pre>
+## Results are averaged over the levels of: price1, day, store</code></pre>
 <p>From this, we can say that, starting with <code>price1</code> and <code>price2</code> both at their average values, we expect <code>sales1</code> to decrease by about .75 per unit increase in <code>price1</code>; meanwhile, there is a suggestion of a slight increase of <code>sales2</code>, but without much statistical evidence. Marginally, the first variety has a 0.89 disadvantage relative to sales of the second variety.</p>
 <p>Other analyses (not shown) with <code>price2</code> set at a higher value will reduce these effects, while setting <code>price2</code> lower will exaggerate all these effects. If the same analysis is done with the quadratic model, the the trends are curved, and so the results will depend somewhat on the setting for <code>price1</code>. The graph above gives an indication of the nature of those changes.</p>
 <p>Similar results hold when we analyze the trends for <code>price2</code>:</p>
 <pre class="r"><code>emtrends(org.int, pairwise ~ variety, var = &quot;price2&quot;, mult.name = &quot;variety&quot;)</code></pre>
 <pre class="ro"><code>## $emtrends
-##  variety price2.trend    SE df lower.CL upper.CL
-##  sales1         0.172 0.102 22  -0.0404    0.384
-##  sales2        -0.745 0.128 22  -1.0099   -0.480
+##  variety price2.trend   SE df lower.CL upper.CL
+##  sales1          24.8 30.8 22      -39     88.7
 ## 
-## Results are averaged over the levels of: day, store 
+## Results are averaged over the levels of: price2, day, store 
 ## Confidence level used: 0.95 
 ## 
 ## $contrasts
-##  contrast        estimate    SE df t.ratio p.value
-##  sales1 - sales2    0.917 0.143 22 6.387   &lt;.0001 
+##  contrast  estimate SE df z.ratio p.value
+##  (nothing)   nonEst NA NA NA      NA     
 ## 
-## Results are averaged over the levels of: day, store</code></pre>
+## Results are averaged over the levels of: price2, day, store</code></pre>
 <p>At the averages, increasing the price of variety 2 has the effect of decreasing sales of variety 2 while slightly increasing sales of variety 1 – a marginal difference of about .92.</p>
 <p><a href="#contents">Back to Contents</a></p>
 </div>

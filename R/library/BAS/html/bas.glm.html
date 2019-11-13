@@ -18,13 +18,13 @@ Generalized Linear Models</h2>
 
 <pre>
 bas.glm(formula, family = binomial(link = "logit"), data, weights,
-  subset, offset, na.action = "na.omit", n.models = NULL,
-  betaprior = CCH(alpha = 0.5, beta = as.numeric(nrow(data)), s = 0),
-  modelprior = beta.binomial(1, 1), initprobs = "Uniform",
-  include.always = ~1, method = "MCMC", update = NULL,
-  bestmodel = NULL, prob.rw = 0.5, MCMC.iterations = NULL,
-  control = glm.control(), laplace = FALSE, renormalize = FALSE,
-  force.heredity = TRUE, bigmem = FALSE)
+  subset, contrasts = NULL, offset, na.action = "na.omit",
+  n.models = NULL, betaprior = CCH(alpha = 0.5, beta =
+  as.numeric(nrow(data)), s = 0), modelprior = beta.binomial(1, 1),
+  initprobs = "Uniform", include.always = ~1, method = "MCMC",
+  update = NULL, bestmodel = NULL, prob.rw = 0.5,
+  MCMC.iterations = NULL, control = glm.control(), laplace = FALSE,
+  renormalize = FALSE, force.heredity = TRUE, bigmem = FALSE)
 </pre>
 
 
@@ -55,6 +55,10 @@ May be missing in which case weights are 1.</p>
 <tr valign="top"><td><code>subset</code></td>
 <td>
 <p>subset of data used in fitting</p>
+</td></tr>
+<tr valign="top"><td><code>contrasts</code></td>
+<td>
+<p>an optional list. See the contrasts.arg of 'model.matrix.default()'.</p>
 </td></tr>
 <tr valign="top"><td><code>offset</code></td>
 <td>
@@ -362,5 +366,5 @@ if(requireNamespace("glmbb", quietly=TRUE)) {
 }
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>BAS</em> version 1.5.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>BAS</em> version 1.5.4 <a href="00Index.html">Index</a>]</div>
 </body></html>

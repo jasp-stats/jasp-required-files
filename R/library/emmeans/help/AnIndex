@@ -25,6 +25,7 @@ contrast.emmGrid	contrast
 del.eff.emmc	emmc-functions
 dunnett.emmc	emmc-functions
 eff.emmc	emmc-functions
+eff_size	eff_size
 emm	glht-support
 emmc-functions	emmc-functions
 emmeans	emmeans
@@ -46,6 +47,7 @@ glht-support	glht-support
 glht.emmGrid	glht-support
 glht.emmlf	glht-support
 hpd.summary	hpd.summary
+identity.emmc	emmc-functions
 joint_tests	joint_tests
 lsm	wrappers
 lsm.options	wrappers

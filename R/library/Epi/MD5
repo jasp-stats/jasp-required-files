@@ -1,5 +1,5 @@
 9bd39178a387f935acc54519109c9f4a *CITATION
-19bfdf3f218a4c34861dbdf7d2ac9648 *DESCRIPTION
+520cf08d1436eb0dbb6b374b8ec4cc3b *DESCRIPTION
 f5233387692ac48e62ef7da2556e1f00 *INDEX
 c6a9f30551313a5e75a7834c8dd1f131 *Meta/Rd.rds
 8b8e4d89ada1cc87b1dab38476517f0c *Meta/data.rds
@@ -7,7 +7,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 da8c0729696549e091c17708c9dae318 *Meta/hsearch.rds
 42b64f997844030f8463f418e2b63792 *Meta/links.rds
 64728220bb9452b10f6d0df8c9391d24 *Meta/nsInfo.rds
-4dd42ddf8184a5e335a33216d0e9f4e6 *Meta/package.rds
+3b04bf8421cbd71d83ac4c96636c1d07 *Meta/package.rds
 151df4a38ece6c3105af915012b186cb *Meta/vignette.rds
 87e418bd7c73d91953978b6a10897da9 *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/Epi
@@ -51,13 +51,13 @@ a3dced3aa14c13322d0b6021853370de *doc/flup.rnw
 8680b734ee604a9961be5ef7d60c3c99 *doc/yll.pdf
 99c06603da2b086a5ba95e243a056b84 *doc/yll.rnw
 7510e193536d5c2d4aca97c185b03f2e *help/AnIndex
-f4463dd6798c329188c9520a1869d4c0 *help/Epi.rdb
-99e1a964feab94ef4e05c30976ee2c5f *help/Epi.rdx
+80c656057b652de33f79baae054f1d39 *help/Epi.rdb
+ca873d18d20a1300c41268fae2a2b2f8 *help/Epi.rdx
 d7766644ddf0cec71858e03dc67b9fd6 *help/aliases.rds
-30928815aff49948c811ca80341bd151 *help/paths.rds
+720b9da2910a02257407bacd1085b496 *help/paths.rds
 d8f7ee3da5988001c89110b3bf153e2f *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
-a5eb05d9f11403ac90262c384b53b892 *libs/i386/Epi.dll
+85a4d065b314874528bd331dc9e7cda5 *libs/i386/Epi.dll
 d1c8149f7b9d2c93c1a686ca11c1895a *libs/i386/symbols.rds
-41f005493fe510c89650ae0ce50fd7d2 *libs/x64/Epi.dll
+b930987ae19399b59d47f6b269c65b85 *libs/x64/Epi.dll
 18ff2e5e704c2a49a45f7937a48db608 *libs/x64/symbols.rds

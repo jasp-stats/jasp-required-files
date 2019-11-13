@@ -1,4 +1,4 @@
-4952b19be0d82f3592600c2ce0c2c45d *DESCRIPTION
+a7d15348a94f3e27480a9c106375a5e5 *DESCRIPTION
 47a0bf28b988124c89c834912518cec3 *INDEX
 3b121bd7f225cf4bdbf09490e589d2c2 *Meta/Rd.rds
 d1f49c34a8f5f5e2b3570962d496cdea *Meta/data.rds
@@ -6,7 +6,7 @@ a4081712be3649fee57cb72b810cc0f9 *Meta/features.rds
 da122210a5bcfb1f1a255c8a8f3cb7ae *Meta/hsearch.rds
 bb8df14e5102c63d8b4e42cca18e3145 *Meta/links.rds
 17bd65398adde9495a57fefd7c8a50a8 *Meta/nsInfo.rds
-25bfeef4e418243a526de3468dc99dcf *Meta/package.rds
+d6b62804b9ed985e6a0472eda7555799 *Meta/package.rds
 1125ef47578160408d5075ac0948abcd *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/fpc
 add5db6ef48e66004408093e1814ce42 *R/fpc.rdb
@@ -14,8 +14,8 @@ add5db6ef48e66004408093e1814ce42 *R/fpc.rdb
 3505e046680bd1f5bb7a8b2d20ef38c4 *data/tonedata.txt.gz
 dfafc8cc4728b8b87749a3a3169cfc4e *help/AnIndex
 fd864c71339468ede86d1684e2341d2d *help/aliases.rds
-27d4148479392f36a1335297786bdbc6 *help/fpc.rdb
-18458534ba1a2a62db4f86fd9aa3137b *help/fpc.rdx
-c93c6824e16e62380e22f9019449f417 *help/paths.rds
+f411cec67a9ab015a1beedaee81fa83a *help/fpc.rdb
+77fa58d562638c49e309de9cc9703a54 *help/fpc.rdx
+ec59c64bfbae25b782e77f4a0fde085b *help/paths.rds
 d49abf2bcaba1ef96a626177ba241eab *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

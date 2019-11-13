@@ -63,6 +63,7 @@ contents	contents
 contents.data.frame	contents
 contents.list	contents
 conTestkw	summary.formula
+convertPdate	Hmisc-internal
 cpower	cpower
 Cs	Cs
 csv.get	csv.get
@@ -511,6 +512,7 @@ Summary.mChoice	mChoice
 summary.mChoice	mChoice
 summary.transcan	transcan
 summaryD	dotchart3
+summaryDp	dotchart3
 summaryM	summaryM
 summaryP	summaryP
 summaryRc	summaryRc
