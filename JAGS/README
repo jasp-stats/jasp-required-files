@@ -1,0 +1,12 @@
+So when adding a new version of JAGS you should probably to something like the following in modules-4:
+
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib basemod.so
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib bugs.so
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib dic.so
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib glm.so
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib lecuyer.so 
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib mix.so
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib msm.so 
+install_name_tool -change /usr/local/lib/libjrmath.0.dylib @executable_path/JAGS/libjrmath.0.dylib libjrmath.0.dylib 
+
+But be sure to use your eyes and brain to make sure nothing is missed. This readme was only written quite a bit after the fact...
