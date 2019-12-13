@@ -1,10 +1,10 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ----ttest_ex1, eval=FALSE-----------------------------------------------
+## ----ttest_ex1, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # collect the data for the boys in the vector x and for the girls in the
@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex2, eval=FALSE-----------------------------------------------
+## ----ttest_ex2, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # collect the data for the boys in the vector x and for the girs in the
@@ -44,7 +44,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex3, eval=FALSE-----------------------------------------------
+## ----ttest_ex3, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # compare the pre with the post measurements
@@ -60,7 +60,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex4, eval=FALSE-----------------------------------------------
+## ----ttest_ex4, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data se
 #  library(bain)
 #  # compare post measurements with the reference value 30
@@ -76,7 +76,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex5, eval=FALSE-----------------------------------------------
+## ----ttest_ex5, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # collect the data for the boys in the vector x and for the girs in the
@@ -106,7 +106,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex6, eval=FALSE-----------------------------------------------
+## ----ttest_ex6, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # make a factor of variable site
@@ -126,7 +126,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex7, eval=FALSE-----------------------------------------------
+## ----ttest_ex7, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data se
 #  library(bain)
 #  # make a factor of variable site
@@ -150,7 +150,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex8, eval=FALSE-----------------------------------------------
+## ----ttest_ex8, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # execute a multiple regression using lm()
@@ -180,7 +180,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex9, eval=FALSE-----------------------------------------------
+## ----ttest_ex9, eval=FALSE----------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # make a factor of variable site
@@ -210,7 +210,7 @@ knitr::opts_chunk$set(
 #  site3>site4",fraction = 3)
 #  print(results3)
 
-## ----ttest_ex10, eval=FALSE----------------------------------------------
+## ----ttest_ex10, eval=FALSE---------------------------------------------------
 #  # Load the bain and lavaan libraries. Visit www.lavaan.org for
 #  # lavaan mini-tutorials, examples, and elaborations
 #  library(bain)
@@ -236,7 +236,7 @@ knitr::opts_chunk$set(
 #  sy <- summary(y, ci = 0.95)
 #  
 
-## ----ttest_ex11, eval=FALSE----------------------------------------------
+## ----ttest_ex11, eval=FALSE---------------------------------------------------
 #  # Load the bain and lavaan libraries. Visit www.lavaan.org for
 #  # lavaan mini-tutorials, examples, and elaborations
 #  library(bain)
@@ -263,7 +263,7 @@ knitr::opts_chunk$set(
 #  y1 <- bain(fit2, hypotheses2, fraction = 1, standardize = TRUE)
 #  sy1 <- summary(y1, ci = 0.99)
 
-## ----ttest_ex12, eval=FALSE----------------------------------------------
+## ----ttest_ex12, eval=FALSE---------------------------------------------------
 #  # Load the bain and lavaan libraries. Visit www.lavaan.org for
 #  # lavaan mini-tutorials, examples, and elaborations
 #  library(bain)
@@ -471,7 +471,7 @@ knitr::opts_chunk$set(
 #  y2 <- bain(fit3, hypotheses32,standardize=TRUE)
 #  
 
-## ----ttest_ex13, eval=FALSE----------------------------------------------
+## ----ttest_ex13, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data se
 #  library(bain)
 #  # make a factor of variable site
@@ -516,7 +516,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex14, eval=FALSE----------------------------------------------
+## ----ttest_ex14, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data se
 #  library(bain)
 #  # make a factor of variable site
@@ -585,7 +585,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results2, ci = 0.95)
 
-## ----ttest_ex15, eval=FALSE----------------------------------------------
+## ----ttest_ex15, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # estimate the means of three repeated measures of number knowledge
@@ -619,7 +619,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex16, eval=FALSE----------------------------------------------
+## ----ttest_ex16, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # make a factor of the variable sex
@@ -665,7 +665,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex17, eval=FALSE----------------------------------------------
+## ----ttest_ex17, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # regression coefficients can only be mutually compared if the
@@ -704,7 +704,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex18, eval=FALSE----------------------------------------------
+## ----ttest_ex18, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # load the numDeriv package which will be used to compute the covariance
@@ -795,7 +795,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex19, eval=FALSE----------------------------------------------
+## ----ttest_ex19, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # load the WRS2 package which renders the trimmed sample mean and
@@ -840,7 +840,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex20, eval=FALSE----------------------------------------------
+## ----ttest_ex20, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data set
 #  library(bain)
 #  # load the mice (multiple imputation of missing data), psych
@@ -911,7 +911,7 @@ knitr::opts_chunk$set(
 #  # compute the effective sample size
 #  # See Hoijtink, Gu, Mulder, and Rosseel (2019) for an explanation.
 #  nucom<-samp-length(estimates)
-#  lam <- (1+1/M)*(1/length(estimates))* tr(covbetween %*% ginv(covariance))
+#  lam <- (1+1/M)*(1/length(estimates))* sum(diag(covbetween %*% ginv(covariance)))
 #  nuold<-(M-1)/(lam^2)
 #  nuobs<-(nucom+1)/(nucom+3)*nucom*(1-lam)
 #  nu<- nuold*nuobs/(nuold+nuobs)
@@ -927,7 +927,7 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex21, eval=FALSE----------------------------------------------
+## ----ttest_ex21, eval=FALSE---------------------------------------------------
 #  # Load the bain and lavaan libraries. Visit www.lavaan.org for
 #  # lavaan mini-tutorials, examples, and elaborations
 #  library(bain)
@@ -992,5 +992,5 @@ knitr::opts_chunk$set(
 #  
 #  # print the results of the bain analysis and obtain the estimates and 95%
 #  # central credibility intervals
-#  sy <- summary(z, ci = 0.95)
+#  sy <- summary(y, ci = 0.95)
 
