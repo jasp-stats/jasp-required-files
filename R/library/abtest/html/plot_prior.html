@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Prior</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot_prior {abtest}"><tr><td>plot_prior {abtest}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Prior</h2>
+
+<h3>Description</h3>
+
+<p>Function for plotting parameter prior distributions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plot_prior(prior_par = list(mu_psi = 0, sigma_psi = 1, mu_beta = 0,
+  sigma_beta = 1), what = "logor", hypothesis = "H1", p1 = 0.5, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>prior_par</code></td>
+<td>
+<p>list with prior parameters. This list needs to contain the
+following elements: <code>mu_psi</code> (prior mean for the normal prior on the
+test-relevant log odds ratio), <code>sigma_psi</code> (prior standard deviation
+for the normal prior on the test-relevant log odds ratio), <code>mu_beta</code>
+(prior mean for the normal prior on the grand mean of the log odds),
+<code>sigma_beta</code> (prior standard deviation for the normal prior on the
+grand mean of the log odds). Each of the elements needs to be a real number
+(the standard deviations need to be positive). The default are standard
+normal priors for both the log odds ratio parameter and the grand mean of
+the log odds parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>character specifying for which quantity the prior should be
+plotted. Either <code>"logor"</code> (i.e., log odds ratio) , <code>"or"</code> (i.e.,
+odds ratio), <code>"p1p2"</code> (i.e., plots the joint distribution of the
+latent &quot;success&quot; probability in the experimental and control condition),
+<code>"p1"</code> (i.e., latent &quot;success&quot; probability in the control condition),
+<code>"p2"</code> (i.e., latent &quot;success&quot; probability in the experimental
+condition), <code>"p2givenp1"</code> (i.e., plots the conditional distribution of
+the latent &quot;success&quot; probability in the experimental condition given a
+&quot;success&quot; probability of <code>p1</code> in the control condition),
+<code>"rrisk"</code> (i.e., relative risk, the ratio of the &quot;success&quot; probability
+in the experimental and the control condition), or <code>"arisk"</code> (i.e.,
+absolute risk, the difference of the &quot;success&quot; probability in the
+experimental and control condition).</p>
+</td></tr>
+<tr valign="top"><td><code>hypothesis</code></td>
+<td>
+<p>character specifying whether to plot a two-sided prior
+(i.e., &quot;H1&quot;), a one-sided prior with lower truncation point (i.e., &quot;H+&quot;),
+or a one-sided prior with upper truncation point (i.e., &quot;H-&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>p1</code></td>
+<td>
+<p>value of the &quot;success&quot; probability in the control condtion. Only
+used when <code>what = "p2givenp1"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments.</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>Internally, the test-relevant prior is always a normal prior on the log
+odds ratio, however, the <code>plot_prior</code> function also allows one to plot
+the implied prior on different quantities.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Quentin F. Gronau
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# prior parameters
+prior_par &lt;- list(mu_psi = 0, sigma_psi = 1,
+                  mu_beta = 0, sigma_beta = 1)
+
+# plot prior
+plot_prior(prior_par = prior_par, what = "logor")
+plot_prior(prior_par = prior_par, what = "or")
+plot_prior(prior_par = prior_par, what = "p1p2")
+plot_prior(prior_par = prior_par, what = "p1")
+plot_prior(prior_par = prior_par, what = "p2")
+plot_prior(prior_par = prior_par, what = "p2givenp1", p1 = 0.3)
+plot_prior(prior_par = prior_par, what = "rrisk")
+plot_prior(prior_par = prior_par, what = "arisk")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>abtest</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

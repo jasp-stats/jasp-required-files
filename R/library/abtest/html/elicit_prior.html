@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Elicit Prior</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for elicit_prior {abtest}"><tr><td>elicit_prior {abtest}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Elicit Prior</h2>
+
+<h3>Description</h3>
+
+<p>Function for eliciting a prior distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+elicit_prior(q, prob, what = "logor", hypothesis = "H1", mu_beta = 0,
+  sigma_beta = 1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>vector with quantiles for the quantity of interest.</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>vector with probabilities corresponding to the quantiles (e.g., for
+the median the corresponding element of <code>prob</code> would need to be .5).</p>
+</td></tr>
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>character specifying for which quantity a prior should be
+elicited. Either <code>"logor"</code> (i.e., log odds ratio) , <code>"or"</code> (i.e.,
+odds ratio), <code>"rrisk"</code> (i.e., relative risk, the ratio of the
+&quot;success&quot; probability in the experimental and the control condition), or
+<code>"arisk"</code> (i.e., absolute risk, the difference of the &quot;success&quot;
+probability in the experimental and control condition).</p>
+</td></tr>
+<tr valign="top"><td><code>hypothesis</code></td>
+<td>
+<p>character specifying whether the provided quantiles
+correspond to a two-sided prior (i.e., &quot;H1&quot;), a one-sided prior with lower
+truncation point (i.e., &quot;H+&quot;), or a one-sided prior with upper truncation
+point (i.e., &quot;H-&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>mu_beta</code></td>
+<td>
+<p>prior mean of the nuisance parameter <i>&beta;</i> (i.e., the
+grand mean of the log odds). The default is 0.</p>
+</td></tr>
+<tr valign="top"><td><code>sigma_beta</code></td>
+<td>
+<p>prior standard deviation of the nuisance parameter
+<i>&beta;</i> (i.e., the grand mean of the log odds). The default is 1.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>It is assumed that the prior on the grand mean of the log odds
+(i.e., <i>&beta;</i>) is not the primary target of prior elicitation and is
+fixed (e.g., to a standard normal prior). The reason is that the grand mean
+nuisance parameter <i>&beta;</i> is not the primary target of inference and
+changes in the prior on this nuisance parameter do not affect the results
+much in most cases (see Kass &amp; Vaidyanathan, 1992). Nevertheless, it should
+be emphasized that the implemented approach allows users to set the prior
+parameters <code>mu_beta</code> and <code>sigma_beta</code> flexibly; the only
+constraint is that this takes place before the prior on the test-relevant
+log odds ratio parameter <i>&psi;</i> is elicited. The <code>elicit_prior</code>
+function allows the user to elicit a prior not only in terms of the log
+odds ratio parameter <i>&psi;</i>, but also in terms of the odds ratio, the
+relative risk (i.e., the ratio of the &quot;success&quot; probability in the
+experimental and the control condition), or the absolute risk (i.e., the
+difference of the &quot;success&quot; probability in the experimental and control
+condition). In case the prior is not elicited for the log odds ratio
+directly, the elicited prior is always translated to the closest
+corresponding normal prior on the log odds ratio. The prior parameters
+<code>mu_psi</code> and <code>sigma_psi</code> are obtained using least squares
+minimization.
+</p>
+
+
+<h3>Value</h3>
+
+<p>list with the elicited prior parameters. Specifically, this list
+consists of: </p>
+ <ul>
+<li><p><code>mu_psi</code> (prior mean for the normal prior
+on the test-relevant log odds ratio). </p>
+</li>
+<li> <p><code>sigma_psi</code> (prior
+standard deviation for the normal prior on the test-relevant log odds
+ratio), </p>
+</li>
+<li> <p><code>mu_beta</code> (prior mean for the normal prior on the grand
+mean of the log odds), </p>
+</li>
+<li> <p><code>sigma_beta</code> (prior standard deviation
+for the normal prior on the grand mean of the log odds).</p>
+</li></ul>
+<p> Note that the
+prior on the grand mean of the log odds is not part of the elicitation and
+is assumed to be fixed by the user (using the arguments <code>mu_beta</code> and
+<code>sigma_beta</code>). Consequently, the returned values for <code>mu_beta</code>
+and <code>sigma_beta</code> simply correspond to the input values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Quentin F. Gronau
+</p>
+
+
+<h3>References</h3>
+
+<p>Kass, R. E., &amp; Vaidyanathan, S. K. (1992). Approximate Bayes
+factors and orthogonal parameters, with application to testing equality of
+two binomial proportions. <em>Journal of the Royal Statistical Society,
+Series B, 54</em>, 129-144. <a href="https://doi.org/10.1111/j.2517-6161.1992.tb01868.x">https://doi.org/10.1111/j.2517-6161.1992.tb01868.x</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The <code><a href="plot_prior.html">plot_prior</a></code> function allows the user to visualize
+the elicited prior distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# elicit prior
+prior_par &lt;- elicit_prior(q = c(0.1, 0.3, 0.5),
+                          prob = c(.025, .5, .975),
+                          what = "arisk")
+print(prior_par)
+
+# plot elicited prior (absolute risk)
+plot_prior(prior_par = prior_par, what = "arisk")
+
+# plot corresponding normal prior on log odds ratio
+plot_prior(prior_par = prior_par, what = "logor")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>abtest</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

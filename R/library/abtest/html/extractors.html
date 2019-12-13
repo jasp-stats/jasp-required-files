@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extraction functions for ab objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for extractors {abtest}"><tr><td>extractors {abtest}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extraction functions for ab objects</h2>
+
+<h3>Description</h3>
+
+<p>Extraction functions for objects returned from the <code><a href="ab_test.html">ab_test</a></code>
+function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+get_bf(x, log = FALSE)
+
+get_prior_prob(x)
+
+get_post_prob(x)
+
+get_post_samples(x, hypothesis = "H1")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>object of class <code>"ab"</code> as returned from <code><a href="ab_test.html">ab_test</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>determines whether the log Bayes factors are returned.</p>
+</td></tr>
+<tr valign="top"><td><code>hypothesis</code></td>
+<td>
+<p>determines for which hypothesis posterior samples are
+returned. Needs to be either &quot;H1&quot;, &quot;H+&quot;, or &quot;H-&quot; (the default is &quot;H1&quot;).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>get_bf</code> returns the Bayes factors in favor of &quot;H1&quot;, &quot;H+&quot;, and
+&quot;H-&quot; (compared to H0). <code>get_prior_prob</code> returns the prior
+probabilities of the hypotheses. <code>get_post_prob</code> returns the posterior
+probabilities of the hypotheses. <code>get_post_samples</code> returns posterior
+samples for the specified hypothesis.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# synthetic data
+data &lt;- list(y1 = 10, n1 = 28, y2 = 14, n2 = 26)
+
+# Bayesian A/B test with default settings
+ab &lt;- ab_test(data = data, posterior = TRUE)
+
+# extract Bayes factors
+get_bf(ab)
+
+# extract prior probabilities
+get_prior_prob(ab)
+
+# extract posterior probabilities
+get_post_prob(ab)
+
+# extract posterior samples for H1
+s &lt;- get_post_samples(ab, hypothesis = "H1")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>abtest</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

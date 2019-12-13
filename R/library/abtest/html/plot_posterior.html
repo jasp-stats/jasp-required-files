@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot Posterior</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for plot_posterior {abtest}"><tr><td>plot_posterior {abtest}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot Posterior</h2>
+
+<h3>Description</h3>
+
+<p>Function for plotting the posterior distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+plot_posterior(x, what = "logor", hypothesis = "H1", ci = 0.95,
+  p1lab = "p1", p2lab = "p2", p1adj = 0.44, p2adj = 0.56, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>object of class <code>"ab"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>character specifying for which quantity the posterior should be
+plotted. Either <code>"logor"</code> (i.e., log odds ratio) , <code>"or"</code> (i.e.,
+odds ratio), <code>"p1p2"</code> (i.e., the marginal posteriors of the latent
+&quot;success&quot; probabilities in the experimental and control condition),
+<code>"rrisk"</code> (i.e., relative risk, the ratio of the &quot;success&quot; probability
+in the experimental and the control condition), or <code>"arisk"</code> (i.e.,
+absolute risk, the difference of the &quot;success&quot; probability in the
+experimental and control condition).</p>
+</td></tr>
+<tr valign="top"><td><code>hypothesis</code></td>
+<td>
+<p>character specifying whether to plot the two-sided
+posterior distribution (i.e., &quot;H1&quot;), the one-sided posterior distribution
+with lower truncation point (i.e., &quot;H+&quot;), or the one-sided posterior
+distribution with upper truncation point (i.e., &quot;H-&quot;).</p>
+</td></tr>
+<tr valign="top"><td><code>ci</code></td>
+<td>
+<p>numeric value specifying the <code>ci</code>% central credible interval.
+The default is 0.95 which yields a 95% central credible interval.</p>
+</td></tr>
+<tr valign="top"><td><code>p1lab</code></td>
+<td>
+<p>determines p1 x-axis label. Only relevant for <code>what =
+"p1p2"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p2lab</code></td>
+<td>
+<p>determines p2 x-axis label. Only relevant for <code>what =
+"p1p2"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p1adj</code></td>
+<td>
+<p>determines p1 x-axis label adjustment. Only relevant for
+<code>what = "p1p2"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p2adj</code></td>
+<td>
+<p>determines p2 x-axis label adjustment. Only relevant for
+<code>what = "p1p2"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The resulting plot displays the posterior density for the quantitiy
+of interest and also displays the corresponding prior density. The values
+of the posterior median and a <code>ci</code>% central credible interval are
+displayed on top of the plot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Quentin F. Gronau
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# synthetic data
+data &lt;- list(y1 = 10, n1 = 28, y2 = 14, n2 = 26)
+
+# Bayesian A/B test with default settings
+ab &lt;- ab_test(data = data, posterior = TRUE)
+
+# plot parameter posterior
+plot_posterior(x = ab, what = "logor")
+plot_posterior(x = ab, what = "or")
+plot_posterior(x = ab, what = "p1p2")
+plot_posterior(x = ab, what = "rrisk")
+plot_posterior(x = ab, what = "arisk")
+
+
+# example of good width and height values for saving to file
+cairo_pdf(file.path(tempdir(), "test_plot.pdf"),
+          width = 530 / 72, height = 400 / 72)
+plot_posterior(ab, what = "p1p2")
+dev.off()
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>abtest</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Prior Cumulative Distribution Function (CDF)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pprior {abtest}"><tr><td>pprior {abtest}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Prior Cumulative Distribution Function (CDF)</h2>
+
+<h3>Description</h3>
+
+<p>Function for evaluating the prior cumulative distribution function (CDF).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+pprior(q, prior_par = list(mu_psi = 0, sigma_psi = 1, mu_beta = 0,
+  sigma_beta = 1), what = "logor", hypothesis = "H1")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>numeric vector with quantiles.</p>
+</td></tr>
+<tr valign="top"><td><code>prior_par</code></td>
+<td>
+<p>list with prior parameters. This list needs to contain the
+following elements: <code>mu_psi</code> (prior mean for the normal prior on the
+test-relevant log odds ratio), <code>sigma_psi</code> (prior standard deviation
+for the normal prior on the test-relevant log odds ratio), <code>mu_beta</code>
+(prior mean for the normal prior on the grand mean of the log odds),
+<code>sigma_beta</code> (prior standard deviation for the normal prior on the
+grand mean of the log odds). Each of the elements needs to be a real number
+(the standard deviations need to be positive). The default are standard
+normal priors for both the log odds ratio parameter and the grand mean of
+the log odds parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>what</code></td>
+<td>
+<p>character specifying for which quantity the prior CDF should be
+evaluated. Either <code>"logor"</code> (i.e., log odds ratio) , <code>"or"</code>
+(i.e., odds ratio), <code>"rrisk"</code> (i.e., relative risk, the ratio of the
+&quot;success&quot; probability in the experimental and the control condition), or
+<code>"arisk"</code> (i.e., absolute risk, the difference of the &quot;success&quot;
+probability in the experimental and control condition).</p>
+</td></tr>
+<tr valign="top"><td><code>hypothesis</code></td>
+<td>
+<p>character specifying whether to evaluate the CDF for a
+two-sided prior (i.e., &quot;H1&quot;), a one-sided prior with lower truncation point
+(i.e., &quot;H+&quot;), or a one-sided prior with upper truncation point (i.e.,
+&quot;H-&quot;).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>numeric vector with the values of the prior CDF.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Internally, the test-relevant prior is always a normal prior on the log
+odds ratio, consequently, if <code>what</code> is not <code>"logor"</code>, the
+implied prior CDF for the quantity is returned.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Quentin F. Gronau
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# prior parameters
+prior_par &lt;- list(mu_psi = 0, sigma_psi = 1,
+                  mu_beta = 0, sigma_beta = 1)
+
+# evaluate prior CDF
+pprior(q = 0.1, prior_par = prior_par, what = "logor")
+pprior(q = 1.1, prior_par = prior_par, what = "or")
+pprior(q = 1.05, prior_par = prior_par, what = "rrisk")
+pprior(q = 0.02, prior_par = prior_par, what = "arisk")
+
+# also works for vectors
+pprior(q = c(-0.1, 0, 0.1, 0.2), prior_par = prior_par, what = "logor")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>abtest</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
