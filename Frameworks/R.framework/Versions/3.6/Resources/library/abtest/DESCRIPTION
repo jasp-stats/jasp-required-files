@@ -8,7 +8,7 @@ Authors@R: c(person(given="Quentin F.", family="Gronau", role=c("aut", "cre"),
              person(given="Eric-Jan", family="Wagenmakers", role="ths"))
 Description: Provides functions for Bayesian A/B testing including prior elicitation
     options based on Kass and Vaidyanathan (1992) <doi:10.1111/j.2517-6161.1992.tb01868.x>.
-License: GPL (>= 2)
+License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.0.0)
@@ -17,13 +17,20 @@ Imports: Rcpp (>= 0.12.14), mvtnorm, sn, VGAM, truncnorm, plotrix,
 LinkingTo: Rcpp
 RoxygenNote: 6.1.1
 Suggests: testthat
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: abtest
+RemoteUsername: quentingronau
+RemoteRef: master
+RemoteSha: 503c50e96768a0134b755747e0421d820cc1a115
+GithubRepo: abtest
+GithubUsername: quentingronau
+GithubRef: master
+GithubSHA1: 503c50e96768a0134b755747e0421d820cc1a115
 NeedsCompilation: yes
-Packaged: 2019-09-10 11:50:22 UTC; quentin
+Packaged: 2019-12-13 14:39:17 UTC; fransmeerhoff
 Author: Quentin F. Gronau [aut, cre],
   Akash Raj [ctb],
   Eric-Jan Wagenmakers [ths]
 Maintainer: Quentin F. Gronau <Quentin.F.Gronau@gmail.com>
-Repository: CRAN
-Date/Publication: 2019-09-10 12:30:02 UTC
-Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2019-09-11 14:10:28 UTC; unix
-Archs: abtest.so.dSYM
+Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2019-12-13 14:39:18 UTC; unix
