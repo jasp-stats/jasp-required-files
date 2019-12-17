@@ -1,0 +1,37 @@
+Package: bstats
+Type: Package
+Title: Bayesian statistics
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Alexander", "Ly", email = "a.ly@jasp-stats.org", 
+    role = c("cre", "aut")),
+    person("Johnny", "van Doorn", email = "j.vandoorn@jasp-stats.org", 
+    role = "aut")
+    )
+Description: Bayes factors for association between paired samples, using one of 
+    Pearson's product moment correlation coefficient, or Kendall's tau. Spearman's rho
+    to be implemented
+Depends: R (>= 3.4.4)
+Imports: hypergeo (>= 1.2-13), purrr (>= 0.2.5), SuppDists (>= 1.1-9.4)
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+URL: http://www.alexander-ly.com/, https://github.com/alexanderlynl/
+BugReports: https://github.com/alexanderlynl/bstats/issues
+RoxygenNote: 6.1.1
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: bstats
+RemoteUsername: AlexanderLyNL
+RemoteRef: master
+RemoteSha: db3a89a03d9a44d6daa86a20576cb22b0b96c458
+GithubRepo: bstats
+GithubUsername: AlexanderLyNL
+GithubRef: master
+GithubSHA1: db3a89a03d9a44d6daa86a20576cb22b0b96c458
+NeedsCompilation: no
+Packaged: 2019-12-17 11:25:26 UTC; Frans Meerhoff
+Author: Alexander Ly [cre, aut],
+  Johnny van Doorn [aut]
+Maintainer: Alexander Ly <a.ly@jasp-stats.org>
+Built: R 3.6.1; ; 2019-12-17 11:25:29 UTC; windows
