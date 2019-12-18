@@ -1,7 +1,7 @@
 Package: bstats
 Type: Package
 Title: Bayesian statistics
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: c(
     person("Alexander", "Ly", email = "a.ly@jasp-stats.org", 
     role = c("cre", "aut")),
@@ -24,14 +24,14 @@ RemoteHost: api.github.com
 RemoteRepo: bstats
 RemoteUsername: AlexanderLyNL
 RemoteRef: master
-RemoteSha: db3a89a03d9a44d6daa86a20576cb22b0b96c458
+RemoteSha: a6fdbea42078b8d275a98dd1e37c113118555b6f
 GithubRepo: bstats
 GithubUsername: AlexanderLyNL
 GithubRef: master
-GithubSHA1: db3a89a03d9a44d6daa86a20576cb22b0b96c458
+GithubSHA1: a6fdbea42078b8d275a98dd1e37c113118555b6f
 NeedsCompilation: no
-Packaged: 2019-12-17 10:47:38 UTC; fransmeerhoff
+Packaged: 2019-12-18 08:08:23 UTC; fransmeerhoff
 Author: Alexander Ly [cre, aut],
   Johnny van Doorn [aut]
 Maintainer: Alexander Ly <a.ly@jasp-stats.org>
-Built: R 3.6.1; ; 2019-12-17 10:47:38 UTC; unix
+Built: R 3.6.1; ; 2019-12-18 08:08:24 UTC; unix
