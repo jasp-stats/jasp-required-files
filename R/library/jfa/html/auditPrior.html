@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a Prior Distribution</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for auditPrior {jfa}"><tr><td>auditPrior {jfa}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a Prior Distribution</h2>
+
+<h3>Description</h3>
+
+<p>This function creates a prior distribution according to the audit risk model. The returned object is of class <code>jfaPrior</code> and can be used with associated <code>print()</code> and <code>plot()</code> methods. <code>jfaPrior</code> objects can be used as input argument for the <code>prior</code> argument in other functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+auditPrior(materiality, confidence = 0.95, method = "arm", ir = 1, cr = 1, 
+           expectedError = 0, likelihood = "binomial", N = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>materiality</code></td>
+<td>
+<p>a value between 0 and 1 representing the materiality of the audit as a fraction of the total size or value.</p>
+</td></tr>
+<tr valign="top"><td><code>confidence</code></td>
+<td>
+<p>the confidence level desired from the confidence bound (on a scale from 0 to 1). Defaults to 0.95, or 95% confidence.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>the method by which the prior distribution is constructed. Currently only supports the <code>arm</code> method, which uses the audit risk model (Derks et al., 2019).</p>
+</td></tr>
+<tr valign="top"><td><code>ir</code></td>
+<td>
+<p>the inherent risk probability from the audit risk model. Defaults to 1 for 100% risk.</p>
+</td></tr>
+<tr valign="top"><td><code>cr</code></td>
+<td>
+<p>the inherent risk probability from the audit risk model. Defaults to 1 for 100% risk.</p>
+</td></tr>
+<tr valign="top"><td><code>expectedError</code></td>
+<td>
+<p>a fraction representing the percentage of expected mistakes in the sample relative to the total size, or a number (&gt;= 1) that represents the number of expected mistakes.</p>
+</td></tr>
+<tr valign="top"><td><code>likelihood</code></td>
+<td>
+<p>can be one of <code>binomial</code>, <code>poisson</code>, or <code>hypergeometric</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+<p>the population size (required for hypergeometric calculations).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>jfaPrior</code> containing:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>the method by which the prior distribution is constructed.</p>
+</td></tr>
+<tr valign="top"><td><code>likelihood</code></td>
+<td>
+<p>the likelihood by which the prior distribution is updated.</p>
+</td></tr>
+<tr valign="top"><td><code>priorD</code></td>
+<td>
+<p>the name of the probability density function of the prior distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>nPrior</code></td>
+<td>
+<p>the prior assumed sample size.</p>
+</td></tr>
+<tr valign="top"><td><code>kPrior</code></td>
+<td>
+<p>the prior assumed sample errors</p>
+</td></tr>
+<tr valign="top"><td><code>aPrior</code></td>
+<td>
+<p>the prior parameter alpha.</p>
+</td></tr>
+<tr valign="top"><td><code>bPrior</code></td>
+<td>
+<p>the prior parameter beta.</p>
+</td></tr>
+<tr valign="top"><td><code>materiality</code></td>
+<td>
+<p>the materiality that was used to construct the prior distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+<p>if specified as input, the population size.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Koen Derks, <a href="mailto:k.derks@nyenrode.nl">k.derks@nyenrode.nl</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Derks, K., de Swart, J., Wagenmakers, E.-J., Wille, J., &amp; Wetzels, R. (2019). JASP for audit: Bayesian tools for the auditing practice.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="planning.html">planning</a></code> <code><a href="sampling.html">sampling</a></code> <code><a href="evaluation.html">evaluation</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(jfa)
+
+# Specify the materiality, confidence, and expected errors:
+materiality   &lt;- 0.05   # 5%
+confidence    &lt;- 0.95   # 95%
+expectedError &lt;- 0.025  # 2.5%
+
+# Specify the inherent risk (ir) and control risk (cr):
+ir &lt;- 1     # 100%
+cr &lt;- 0.6   # 60%
+
+# Create a beta prior distribution according to the Audit Risk Model (arm) 
+# and a binomial likelihood:
+prior &lt;- auditPrior(materiality = materiality, confidence = confidence, 
+                    method = "arm", ir = ir, cr = cr, 
+                    expectedError = expectedError, likelihood = "binomial")
+print(prior)
+
+# jfa prior distribution for arm method:
+#      
+# Prior sample size:     51 
+# Prior errors:          1.27 
+# Prior:                 beta(2.275, 50.725)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

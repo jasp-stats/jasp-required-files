@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Evaluation of Audit Samples using Confidence / Credible...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for evaluation {jfa}"><tr><td>evaluation {jfa}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Evaluation of Audit Samples using Confidence / Credible Bounds</h2>
+
+<h3>Description</h3>
+
+<p>This function takes a sample data frame or summary statistics about an evaluated audit sample and calculates a confidence bound according to a specified method. The returned object is of class <code>jfaEvaluation</code> and can be used with associated <code>print()</code> and <code>plot()</code> methods.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+evaluation(sample = NULL, bookValues = NULL, auditValues = NULL, 
+           confidence = 0.95, nSumstats = NULL, kSumstats = NULL,
+           method = "binomial", materiality = NULL, N = NULL, 
+           prior = FALSE, nPrior = 0, kPrior = 0, 
+           rohrbachDelta = 2.7, momentPoptype = "accounts",
+           populationBookValue = NULL, 
+           csA = 1, csB = 3, csMu = 0.5)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sample</code></td>
+<td>
+<p>a data frame containing at least a column of book values and a column of audit (true) values.</p>
+</td></tr>
+<tr valign="top"><td><code>bookValues</code></td>
+<td>
+<p>the column name for the book values in the sample.</p>
+</td></tr>
+<tr valign="top"><td><code>auditValues</code></td>
+<td>
+<p>the column name for the audit (true) values in the sample.</p>
+</td></tr>
+<tr valign="top"><td><code>confidence</code></td>
+<td>
+<p>the required confidence level for the bound.</p>
+</td></tr>
+<tr valign="top"><td><code>nSumstats</code></td>
+<td>
+<p>the number of observations in the sample. If specified, overrides the <code>sample</code>, <code>bookValues</code> and <code>auditValues</code> arguments and assumes that the data comes from summary statistics specified by <code>nSumstats</code> and <code>kSumstats</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>kSumstats</code></td>
+<td>
+<p>the sum of the errors found in the sample. If specified, overrides the <code>sample</code>, <code>bookValues</code> and <code>auditValues</code> arguments and assumes that the data comes from summary statistics specified by <code>kSumstats</code> and <code>nSumstats</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>can be either one of <code>poisson</code>, <code>binomial</code>, <code>hypergeometric</code>, <code>stringer</code>, <code>stringer-meikle</code>, <code>stringer-lta</code>, <code>stringer-pvz</code>, <code>rohrbach</code>, <code>moment</code>, <code>direct</code>, <code>difference</code>, <code>quotient</code>, or <code>regression</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>materiality</code></td>
+<td>
+<p>if specified, the function also returns the conclusion of the analysis with respect to the materiality. This value must be specified as a fraction of the total value of the population (a value between 0 and 1). The value is discarded when <code>direct</code>, <code>difference</code>, <code>quotient</code>, or <code>regression</code> method is chosen.</p>
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+<p>the total population size.</p>
+</td></tr>
+<tr valign="top"><td><code>prior</code></td>
+<td>
+<p>whether to use a prior distribution when evaluating. Defaults to <code>FALSE</code> for frequentist evaluation. If <code>TRUE</code>, the prior distribution is updated by the specified likelihood. Chooses a conjugate gamma distribution for the Poisson likelihood, a conjugate beta distribution for the binomial likelihood, and a conjugate beta-binomial distribution for the hypergeometric likelihood.</p>
+</td></tr>
+<tr valign="top"><td><code>nPrior</code></td>
+<td>
+<p>the prior parameter <i>&alpha;</i> (number of errors in the assumed prior sample).</p>
+</td></tr>
+<tr valign="top"><td><code>kPrior</code></td>
+<td>
+<p>the prior parameter <i>&beta;</i> (total number of observations in the assumed prior sample).</p>
+</td></tr>
+<tr valign="top"><td><code>rohrbachDelta</code></td>
+<td>
+<p>the value of <i>&Delta;</i> in Rohrbach's augmented variance bound.</p>
+</td></tr>
+<tr valign="top"><td><code>momentPoptype</code></td>
+<td>
+<p>can be either one of <code>accounts</code> or <code>inventory</code>. Options result in different methods for calculating the central moments, for more information see Dworin and Grimlund (1986).</p>
+</td></tr>
+<tr valign="top"><td><code>populationBookValue</code></td>
+<td>
+<p>the total value of the audit population. Required when <code>method</code> is one of <code>direct</code>, <code>difference</code>, <code>quotient</code>, or <code>regression</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>csA</code></td>
+<td>
+<p>if <code>method = "coxsnell"</code>, the <i>&alpha;</i> parameter of the prior distribution on the mean taint. Default is set to 1, as recommended by Cox and Snell (1979).</p>
+</td></tr>
+<tr valign="top"><td><code>csB</code></td>
+<td>
+<p>if <code>method = "coxsnell"</code>, the <i>&beta;</i> parameter of the prior distribution on the mean taint. Default is set to 3, as recommended by Cox and Snell (1979).</p>
+</td></tr>
+<tr valign="top"><td><code>csMu</code></td>
+<td>
+<p>if <code>method = "coxsnell"</code>, the mean of the prior distribution on the mean taint. Default is set to 0.5, as recommended by Cox and Snell (1979).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This section lists the available options for the <code>methods</code> argument.
+</p>
+
+<ul>
+<li><p><code>poisson</code>:          The confidence bound taken from the Poisson distribution. If combined with <code>prior = TRUE</code>, performs Bayesian evaluation using a <em>gamma</em> prior and posterior.
+</p>
+</li>
+<li><p><code>binomial</code>:         The confidence bound taken from the binomial distribution. If combined with <code>prior = TRUE</code>, performs Bayesian evaluation using a <em>beta</em> prior and posterior.
+</p>
+</li>
+<li><p><code>hypergeometric</code>:   The confidence bound taken from the hypergeometric distribution. If combined with <code>prior = TRUE</code>, performs Bayesian evaluation using a <em>beta-binomial</em> prior and posterior.
+</p>
+</li>
+<li><p><code>stringer</code>:         The Stringer bound (Stringer, 1963).
+</p>
+</li>
+<li><p><code>stringer-meikle</code>:  Stringer bound with Meikle's correction for understatements (Meikle, 1972).
+</p>
+</li>
+<li><p><code>stringer-lta</code>:     Stringer bound with LTA correction for understatements (Leslie, Teitlebaum, and Anderson, 1979).
+</p>
+</li>
+<li><p><code>stringer-pvz</code>:     Stringer bound with Pap and van Zuijlen's correction for understatements (Pap and van Zuijlen, 1996).
+</p>
+</li>
+<li><p><code>rohrbach</code>:         Rohrbach's augmented variance bound (Rohrbach, 1993).
+</p>
+</li>
+<li><p><code>moment</code>:           Modified moment bound (Dworin and Grimlund, 1986).
+</p>
+</li>
+<li><p><code>coxsnell</code>:         Cox and Snell bound (Cox and Snell, 1979).
+</p>
+</li>
+<li><p><code>direct</code>:           Confidence interval using the direct method (Touw and Hoogduin, 2011).
+</p>
+</li>
+<li><p><code>difference</code>:       Confidence interval using the difference method (Touw and Hoogduin, 2011).
+</p>
+</li>
+<li><p><code>quotient</code>:         Confidence interval using the quotient method (Touw and Hoogduin, 2011).
+</p>
+</li>
+<li><p><code>regression</code>:       Confidence interval using the regression method (Touw and Hoogduin, 2011).
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>jfaEvaluation</code> containing:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>the sample size.</p>
+</td></tr>
+<tr valign="top"><td><code>k</code></td>
+<td>
+<p>an integer specifying the number of observed errors.</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>a number specifying the sum of observed taints.</p>
+</td></tr>
+<tr valign="top"><td><code>confidence</code></td>
+<td>
+<p>the confidence level of the result.</p>
+</td></tr>
+<tr valign="top"><td><code>popBookvalue</code></td>
+<td>
+<p>if specified as input, the total book value of the population.</p>
+</td></tr>
+<tr valign="top"><td><code>pointEstimate</code></td>
+<td>
+<p>if method is one of <code>direct</code>, <code>difference</code>, <code>quotient</code>, or <code>regression</code>, the value of the point estimate.</p>
+</td></tr>
+<tr valign="top"><td><code>lowerBound</code></td>
+<td>
+<p>if method is one of <code>direct</code>, <code>difference</code>, <code>quotient</code>, or <code>regression</code>, the value of the lower bound of the interval.</p>
+</td></tr>
+<tr valign="top"><td><code>upperBound</code></td>
+<td>
+<p>if method is one of <code>direct</code>, <code>difference</code>, <code>quotient</code>, or <code>regression</code>, the value of the upper bound of the interval.</p>
+</td></tr>
+<tr valign="top"><td><code>confBound</code></td>
+<td>
+<p>the upper confidence bound on the error percentage. </p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>the evaluation method that was used.</p>
+</td></tr>
+<tr valign="top"><td><code>materiality</code></td>
+<td>
+<p>the materiality.</p>
+</td></tr>
+<tr valign="top"><td><code>conclusion</code></td>
+<td>
+<p>if <code>materiality</code> is specified, the conclusion about whether to approve or not approve the population.</p>
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+<p>if specified as input, the population size.</p>
+</td></tr>
+<tr valign="top"><td><code>populationK</code></td>
+<td>
+<p>the assumed total errors in the population. Used for inferences with <code>hypergeometric</code> method.</p>
+</td></tr>
+<tr valign="top"><td><code>prior</code></td>
+<td>
+<p>a logical, indicating whether a prior was used in the analysis.</p>
+</td></tr>
+<tr valign="top"><td><code>nPrior</code></td>
+<td>
+<p>if a prior is specified, the prior assumed sample size.</p>
+</td></tr>
+<tr valign="top"><td><code>kPrior</code></td>
+<td>
+<p>if a prior is specified, the prior assumed sample errors.</p>
+</td></tr>
+<tr valign="top"><td><code>multiplicationFactor</code></td>
+<td>
+<p>if <code>method = "coxsnell"</code>, the multiplication factor for the <em>F</em>-distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>df1</code></td>
+<td>
+<p>if <code>method = "coxsnell"</code>, the df1 for the <em>F</em>-distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>df2</code></td>
+<td>
+<p>if <code>method = "coxsnell"</code>, the df2 for the <em>F</em>-distribution.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Koen Derks, <a href="mailto:k.derks@nyenrode.nl">k.derks@nyenrode.nl</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>Cox, D. and Snell, E. (1979). On sampling and the estimation of rare errors. <em>Biometrika</em>, 66(1), 125-132.
+</p>
+<p>Dworin, L., and Grimlund, R. A. (1986). Dollar-unit sampling: A comparison of the quasi-Bayesian and moment bounds. <em>Accounting Review</em>, 36-57.
+</p>
+<p>Leslie, D. A., Teitlebaum, A. D., &amp; Anderson, R. J. (1979). <em>Dollar-unit sampling: a practical guide for auditors</em>. Copp Clark Pitman; Belmont, Calif.: distributed by Fearon-Pitman.
+</p>
+<p>Meikle, G. R. (1972). <em>Statistical Sampling in an Audit Context: An Audit Technique</em>. Canadian Institute of Chartered Accountants.
+</p>
+<p>Pap, G., and van Zuijlen, M. C. (1996). On the asymptotic behavior of the Stringer bound 1. <em>Statistica Neerlandica</em>, 50(3), 367-389.
+</p>
+<p>Rohrbach, K. J. (1993). Variance augmentation to achieve nominal coverage probability in sampling from audit populations. <em>Auditing</em>, 12(2), 79.
+</p>
+<p>Stringer, K. W. (1963). Practical aspects of statistical sampling in auditing. <em>In Proceedings of the Business and Economic Statistics Section</em> (pp. 405-411). American Statistical Association.
+</p>
+<p>Touw, P., and Hoogduin, L. (2011). <em>Statistiek voor Audit en Controlling</em>. Boom uitgevers Amsterdam.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="auditPrior.html">auditPrior</a></code> <code><a href="planning.html">planning</a></code> <code><a href="sampling.html">sampling</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(jfa)
+set.seed(1)
+
+# Generate some audit data (N = 1000):
+data &lt;- data.frame(ID = sample(1000:100000, size = 1000, replace = FALSE), 
+                   bookValue = runif(n = 1000, min = 700, max = 1000))
+
+# Using monetary unit sampling, draw a random sample from the population.
+s1 &lt;- sampling(population = data, sampleSize = 100, units = "mus", 
+               bookValues = "bookValue", algorithm = "random")
+s1_sample &lt;- s1$sample
+s1_sample$trueValue &lt;- s1_sample$bookValue
+s1_sample$trueValue[2] &lt;- s1_sample$trueValue[2] - 500 # One overstatement is found
+
+# Using summary statistics, calculate the upper confidence bound according
+# to the binomial distribution:
+
+e1 &lt;- evaluation(nSumstats = 100, kSumstats = 1, method = "binomial", 
+                 materiality = 0.05)
+print(e1)
+
+# jfa evaluation results for binomial method:
+#   
+# Materiality:           5% 
+# Confidence:            95% 
+# Upper bound:           4.656% 
+# Sample size:           100 
+# Sample errors:         1 
+# Sum of taints:         1  
+# Conclusion:            Approve population
+
+# Evaluate the raw sample using the stringer bound:
+
+e2 &lt;- evaluation(sample = s1_sample, bookValues = "bookValue", auditValues = "trueValue", 
+                 method = "stringer", materiality = 0.05)
+print(e2)
+
+# jfa evaluation results for stringer method:
+#   
+# Materiality:           5% 
+# Confidence:            95% 
+# Upper bound:           3.952% 
+# Sample size:           100 
+# Sample errors:         1 
+# Sum of taints:         0.587  
+# Conclusion:            Approve population
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.1.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
