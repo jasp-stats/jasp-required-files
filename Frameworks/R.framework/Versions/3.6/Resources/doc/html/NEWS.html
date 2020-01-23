@@ -7,6 +7,7 @@
 
 <h2>R News</h2>
 
+<<<<<<< Updated upstream
 <h3><img src="../help/figures/../../html/Rlogo.svg" class="toplogo" alt="[R logo]" /> CHANGES IN R 3.6.1</h3>
 
 
@@ -1242,6 +1243,8 @@ for now, when encountering &ldquo;non local&rdquo; subclasses of class members.
 
 
 
+=======
+>>>>>>> Stashed changes
 <h3><img src="../help/figures/../../html/Rlogo.svg" class="toplogo" alt="[R logo]" /> CHANGES IN R 3.5.2</h3>
 
 
@@ -1883,7 +1886,11 @@ avoid having the <code>R</code> process killed when macOS over-commits
 memory.
 </p>
 </li>
+<<<<<<< Updated upstream
 <li> <p><code>sum(x)</code> and <code>sum(x1, x2, .., x&lt;N&gt;)</code> with many or
+=======
+<li> <p><code>sum(x)</code> and <code>sum(x1,x2,..,x&lt;N&gt;)</code> with many or
+>>>>>>> Stashed changes
 long logical or integer vectors no longer overflows (and returns
 <code>NA</code> with a warning), but returns <code>double</code> numbers in
 such cases.
@@ -4557,7 +4564,11 @@ variable <span class="env">R_INTERACTIVE_DEVICE</span>.
 </p>
 </li>
 <li><p> On Unix-like platforms which support the <code>getline</code> C
+<<<<<<< Updated upstream
 library function, <code>system(*, intern = TRUE)</code> no longer
+=======
+library function, <code>system(*,intern = TRUE)</code> no longer
+>>>>>>> Stashed changes
 truncates (output) lines longer than 8192 characters, thanks to
 Karl Millar. (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=16544">PR#16544</a>)
 </p>
@@ -4636,7 +4647,11 @@ some similar cases directly rather than as calls to
 </li>
 <li><p> New string utilities <code>startsWith(x, prefix)</code> and
 <code>endsWith(x, suffix)</code>.  Also provide speedups for some
+<<<<<<< Updated upstream
 <code>grepl("^...", *)</code> uses (related to proposals in <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=16490">PR#16490</a>).
+=======
+<code>grepl("^...",*)</code> uses (related to proposals in <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=16490">PR#16490</a>).
+>>>>>>> Stashed changes
 </p>
 </li>
 <li><p> Reference class finalizers run at exit, as well as on
@@ -5080,7 +5095,11 @@ checking.  (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=16853"
 <ul>
 <li> <p><code>format.POSIXlt()</code> behaved incorrectly in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.2.4.
 E.g. the output of
+<<<<<<< Updated upstream
 <code>format(as.POSIXlt(paste0(1940:2000, "-01-01"), tz = "CET"),
+=======
+<code>format(as.POSIXlt(paste0(1940:2000,"-01-01"), tz = "CET"),
+>>>>>>> Stashed changes
 	usetz = TRUE)</code> ended in two <code>"CEST"</code> time formats.
 </p>
 </li></ul>

@@ -1,5 +1,6 @@
 R News
 
+<<<<<<< Updated upstream
 CHANGES IN R 3.6.1:
 
   INSTALLATION on a UNIX-ALIKE:
@@ -861,6 +862,8 @@ CHANGES IN R 3.5.3:
 
     * stopifnot(exprs = T) no longer fails.
 
+=======
+>>>>>>> Stashed changes
 CHANGES IN R 3.5.2:
 
   PACKAGE INSTALLATION:
@@ -1314,7 +1317,11 @@ CHANGES IN R 3.5.0:
       maximum of 16GB and the available physical memory. This is to
       avoid having the R process killed when macOS over-commits memory.
 
+<<<<<<< Updated upstream
     * sum(x) and sum(x1, x2, .., x<N>) with many or long logical or
+=======
+    * sum(x) and sum(x1,x2,..,x<N>) with many or long logical or
+>>>>>>> Stashed changes
       integer vectors no longer overflows (and returns NA with a
       warning), but returns double numbers in such cases.
 
@@ -3151,7 +3158,11 @@ CHANGES IN R 3.3.0:
       R_INTERACTIVE_DEVICE.
 
     * On Unix-like platforms which support the getline C library
+<<<<<<< Updated upstream
       function, system(*, intern = TRUE) no longer truncates (output)
+=======
+      function, system(*,intern = TRUE) no longer truncates (output)
+>>>>>>> Stashed changes
       lines longer than 8192 characters, thanks to Karl Millar.
       (PR#16544)
 
@@ -3208,7 +3219,11 @@ CHANGES IN R 3.3.0:
       by Winston Chang.
 
     * New string utilities startsWith(x, prefix) and endsWith(x,
+<<<<<<< Updated upstream
       suffix).  Also provide speedups for some grepl("^...", *) uses
+=======
+      suffix).  Also provide speedups for some grepl("^...",*) uses
+>>>>>>> Stashed changes
       (related to proposals in PR#16490).
 
     * Reference class finalizers run at exit, as well as on garbage
@@ -3518,7 +3533,11 @@ CHANGES IN R 3.2.5:
   BUG FIXES:
 
     * format.POSIXlt() behaved incorrectly in R 3.2.4.  E.g. the output
+<<<<<<< Updated upstream
       of format(as.POSIXlt(paste0(1940:2000, "-01-01"), tz = "CET"),
+=======
+      of format(as.POSIXlt(paste0(1940:2000,"-01-01"), tz = "CET"),
+>>>>>>> Stashed changes
       usetz = TRUE) ended in two "CEST" time formats.
 
 CHANGES IN R 3.2.4:

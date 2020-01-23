@@ -1,6 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<<<<<<< Updated upstream
 <!-- This manual is for R, version 3.6.1 (2019-07-05).
+=======
+<!-- This manual is for R, version 3.5.2 (2018-12-20).
+>>>>>>> Stashed changes
 
 Copyright (C) 1999-2018 R Core Team
 
@@ -288,7 +292,11 @@ Next: <a href="#R-Internal-Structures" accesskey="n" rel="next">R Internal Struc
 <p>This is a guide to the internal structures of R and coding standards for
 the core team working on R itself.
 </p>
+<<<<<<< Updated upstream
 <p>This manual is for R, version 3.6.1 (2019-07-05).
+=======
+<p>This manual is for R, version 3.5.2 (2018-12-20).
+>>>>>>> Stashed changes
 </p>
 <p>Copyright &copy; 1999&ndash;2018 R Core Team
 </p>
@@ -1566,7 +1574,11 @@ pairlist of the objects to be saved and serializing that single object.
 pairlist or a vector list) and assigns the elements of the object in the
 specified environment.  The header line serves two purposes in R: it
 identifies the serialization format so <code>load</code> can switch to the
+<<<<<<< Updated upstream
 appropriate reader code, and the newline <code>\n</code> allows the detection of files
+=======
+appropriate reader code, and the linefeed allows the detection of files
+>>>>>>> Stashed changes
 which have been subjected to a non-binary transfer which re-mapped line
 endings.  It can also be thought of as a &lsquo;magic number&rsquo; in the sense
 used by the <code>file</code> program (although R save files are not yet
@@ -1682,10 +1694,17 @@ systems are capable of producing UTF-8 strings and this is the nearest
 we have to a universal format.  For those that do not (for example those
 lacking a powerful enough <code>iconv</code>), it is likely that they work in
 Latin-1, the old R assumption. Then the parser can return a
+<<<<<<< Updated upstream
 UTF-8-encoded string if it encounters a &lsquo;<samp>\uxxxx</samp>&rsquo; escape for a
 Unicode point that cannot be represented in the current charset.  (This
 needs MBCS support, and was only enabled<a name="DOCF9" href="#FOOT9"><sup>9</sup></a> on
 Windows.)  This is enabled for all platforms, and a &lsquo;<samp>\uxxxx</samp>&rsquo; or
+=======
+UTF-8-encoded string if it encounters a &lsquo;<samp>\uxxx</samp>&rsquo; escape for a
+Unicode point that cannot be represented in the current charset.  (This
+needs MBCS support, and was only enabled<a name="DOCF9" href="#FOOT9"><sup>9</sup></a> on
+Windows.)  This is enabled for all platforms, and a &lsquo;<samp>\uxxx</samp>&rsquo; or
+>>>>>>> Stashed changes
 &lsquo;<samp>\Uxxxxxxxx</samp>&rsquo; escape ensures that the parsed string will be marked
 as UTF-8.
 </p>
@@ -4073,7 +4092,11 @@ Next: <a href="#Grid-graphics" accesskey="n" rel="next">Grid graphics</a>, Previ
 3.0.0: it was previously implemented in files in <samp>src/main</samp>.
 </p>
 <p>For historical reasons it is largely implemented in two layers.
+<<<<<<< Updated upstream
 Files <samp>plot.c</samp>, <samp>plot3d.c</samp> and <samp>par.c</samp> contain the code
+=======
+Files <samp>plot.c</samp>, <code>plot3d.c</code> and <code>par.c</code> contain the code
+>>>>>>> Stashed changes
 for the around 30 <code>.External</code> calls that implement the basic
 graphics operations.  This code then calls functions with names starting
 with <code>G</code> and declared in header <samp>Rgraphics.h</samp> in file
@@ -4447,8 +4470,13 @@ Default: true.
 <a name="index-_005fR_005fCHECK_005fVIGNETTES_005fNLINES_005f"></a>
 </dt>
 <dd><p>Maximum number of lines to show from the bottom of the output when
+<<<<<<< Updated upstream
 reporting errors in running or re-building vignettes. ( Value <code>0</code>
 means all lines will be shown.)
+=======
+reporting errors in running or re-building vignettes. (As from R
+3.4.0, <code>0</code> means all lines will be shown.)
+>>>>>>> Stashed changes
 Default: 10 for running, 25 for re-building.
 </p></dd>
 <dt><code>_R_CHECK_CODOC_S4_METHODS_</code>
@@ -4561,9 +4589,13 @@ Default: true.
 <dt><code>_R_CHECK_ASCII_DATA_</code>
 <a name="index-_005fR_005fCHECK_005fASCII_005fDATA_005f"></a>
 </dt>
+<<<<<<< Updated upstream
 <dd><p>If true, check data for non-ascii characters.  <em>En route</em>, checks
 that all the datasets can be loaded and that their components can be
 accessed.
+=======
+<dd><p>If true, check data for non-ascii characters.
+>>>>>>> Stashed changes
 Default: true.
 </p></dd>
 <dt><code>_R_CHECK_COMPACT_DATA_</code>
@@ -4613,12 +4645,15 @@ flag to report in units of 1Kb, or reports in a different format &ndash; the
 GNU, macOS and Solaris <code>du</code> commands have been tested).
 Default: true if <code>du</code> is found.
 </p></dd>
+<<<<<<< Updated upstream
 <dt><code>_R_CHECK_PKG_SIZES_THRESHOLD_</code>
 <a name="index-_005fR_005fCHECK_005fPKG_005fSIZES_005fTHRESHOLD_005f"></a>
 </dt>
 <dd><p>Threshold used for <code>_R_CHECK_PKG_SIZES_</code> (in Mb).
 Default: 5
 </p></dd>
+=======
+>>>>>>> Stashed changes
 <dt><code>_R_CHECK_DOC_SIZES_</code>
 <a name="index-_005fR_005fCHECK_005fDOC_005fSIZES_005f"></a>
 </dt>
@@ -4882,7 +4917,11 @@ Default: false (but true for CRAN submission checks).
 <a name="index-_005fR_005fCHECK_005fGCT_005fN_005f"></a>
 </dt>
 <dd><p>Should the <samp>--use-gct</samp> use <code>gctorture2(<var>n</var>)</code> rather than
+<<<<<<< Updated upstream
 <code>gctorture(TRUE)</code>?  Use a positive integer to enable this.
+=======
+<code>gctorture(TRUE)</code>?  Use to a positive integer to enable this.
+>>>>>>> Stashed changes
 Default: <code>0</code>.
 </p>
 </dd>
@@ -4925,7 +4964,11 @@ Default: false.
 </dt>
 <dd><p>If set to a true value, report (apparent) S3 methods exported but not
 registered.
+<<<<<<< Updated upstream
 Default: true.
+=======
+Default: false (but true for CRAN submission checks).
+>>>>>>> Stashed changes
 </p>
 </dd>
 <dt><code>_R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_</code>
@@ -4950,12 +4993,19 @@ Default: 13.
 </dt>
 <dd><p>If set to a true value, report if the entry points to register native
 routines and to suppress dynamic search are not found in a package&rsquo;s
+<<<<<<< Updated upstream
 DLL.  (<strong>NB:</strong> this requires system command <code>nm</code> to be on the
 <code>PATH</code>. On Windows, <code>objdump.exe</code> is first searched for in
 compiler toolchain specified via <code>Makeconf</code> (can be customized by
 environment variable <code>BINPREF</code>). If not found there, it must be on the
 <code>PATH</code>. On Unix this would be normal when using a package with compiled
 code (which are the only ones this checks), but Windows&rsquo; users should check.)
+=======
+DLL.  (<strong>NB:</strong> this requires system commands <code>nm</code> and on
+Windows, <code>objdump.exe</code> to be on the <code>PATH</code>.  This would be
+normal when using a package with compiled code (which are the only ones
+this checks), but Windows&rsquo; users should check.)
+>>>>>>> Stashed changes
 Default: false (but true for CRAN submission checks).
 </p>
 </dd>
@@ -5024,6 +5074,7 @@ message and fail.
 Default: false (but true for CRAN submission checks).
 </p>
 </dd>
+<<<<<<< Updated upstream
 <dt><code>_R_CHECK_PACKAGES_USED_IN_TESTS_USE_SUBDIRS_</code>
 <a name="index-_005fR_005fCHECK_005fPACKAGES_005fUSED_005fIN_005fTESTS_005fUSE_005fSUBDIRS_005f"></a>
 </dt>
@@ -5118,6 +5169,8 @@ be run in a copy of the sources (this will detect missing source files
 and report <code>autoconf</code> warnings).
 Default: false (but true for CRAN submission checks).
 </p></dd>
+=======
+>>>>>>> Stashed changes
 </dl>
 
 <p>CRAN&rsquo;s submission checks use something like
@@ -5148,12 +5201,15 @@ _R_CHECK_COMPILATION_FLAGS_=TRUE
 _R_CHECK_R_DEPENDS_=warn
 _R_CHECK_SERIALIZATION_=TRUE
 _R_CHECK_R_ON_PATH_=TRUE
+<<<<<<< Updated upstream
 _R_CHECK_PACKAGES_USED_IN_TESTS_USE_SUBDIRS_=TRUE
 _R_CHECK_SHLIB_OPENMP_FLAGS_=TRUE
 _R_CHECK_CONNECTIONS_LEFT_OPEN_=TRUE
 _R_CHECK_FUTURE_FILE_TIMESTAMPS_=TRUE
 _R_CHECK_LENGTH_1_LOGIC2_=package:_R_CHECK_PACKAGE_NAME_,abort,verbose
 _R_CHECK_AUTOCONF_=true
+=======
+>>>>>>> Stashed changes
 </pre></div>
 
 <p>These are turned on by <code>R CMD check --as-cran</code>: the incoming
@@ -5210,14 +5266,22 @@ default limit for running one test).
 <dt><code>_R_CHECK_ONE_VIGNETTE_ELAPSED_TIMEOUT_</code>
 <a name="index-_005fR_005fCHECK_005fONE_005fVIGNETTE_005fELAPSED_005fTIMEOUT_005f"></a>
 </dt>
+<<<<<<< Updated upstream
 <dd><p>Limit for running the R code in one vignette, including for
 re-building each vignette separately. 
+=======
+<dd><p>Limit for running the R code in one vignette.
+>>>>>>> Stashed changes
 </p>
 </dd>
 <dt><code>_R_CHECK_BUILD_VIGNETTES_ELAPSED_TIMEOUT_</code>
 <a name="index-_005fR_005fCHECK_005fBUILD_005fVIGNETTES_005fELAPSED_005fTIMEOUT_005f"></a>
 </dt>
+<<<<<<< Updated upstream
 <dd><p>Limit for re-building all vignettes.
+=======
+<dd><p>Limit for re-building (all) vignettes.
+>>>>>>> Stashed changes
 </p>
 </dd>
 <dt><code>_R_CHECK_PKGMAN_ELAPSED_TIMEOUT_</code>
@@ -5267,7 +5331,12 @@ Nevertheless, R is a <acronym>GNU</acronym> project, and the spirit of the
 they are supported on all mainstream R platforms (including Windows
 and macOS).
 
+<<<<<<< Updated upstream
 </li><li> A fixed-form Fortran compiler.
+=======
+</li><li> A FORTRAN 77 compiler (but not Fortran 9x, although it is nowadays
+widely available).
+>>>>>>> Stashed changes
 
 </li><li> A simple <code>make</code>, considering the features of <code>make</code> in
 4.2 <acronym>BSD</acronym> systems as a baseline.
@@ -5586,7 +5655,11 @@ elements.  Now longer vectors are allowed on 64-bit platforms, matrices
 with more elements are supported provided that each of the dimensions is
 no more than 2^31-1.  However, not all applications can be supported.
 </p>
+<<<<<<< Updated upstream
 <p>The main problem is linear algebra done by Fortran code compiled
+=======
+<p>The main problem is linear algebra done by FORTRAN code compiled
+>>>>>>> Stashed changes
 with 32-bit <code>INTEGER</code>.  Although not guaranteed, it seems that all
 the compilers currently used with R on a 64-bit platform allow
 matrices each of whose dimensions is less than 2^31 but with more than
@@ -5675,9 +5748,13 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fALWAYS_005fLOG_005fVIGNETTE_005fOUTPUT_005f"><code>_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fASCII_005fCODE_005f"><code>_R_CHECK_ASCII_CODE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fASCII_005fDATA_005f"><code>_R_CHECK_ASCII_DATA_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<<<<<<< Updated upstream
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fAUTOCONF_005f"><code>_R_CHECK_AUTOCONF_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fBUILD_005fVIGNETTES_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_BUILD_VIGNETTES_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fBUILD_005fVIGNETTES_005fSEPARATELY_005f"><code>_R_CHECK_BUILD_VIGNETTES_SEPARATELY_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+=======
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fBUILD_005fVIGNETTES_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_BUILD_VIGNETTES_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+>>>>>>> Stashed changes
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCLEAN_005fVIGN_005fTEST_005f"><code>_R_CHECK_CLEAN_VIGN_TEST_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCODETOOLS_005fPROFILE_005f"><code>_R_CHECK_CODETOOLS_PROFILE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCODE_005fASSIGN_005fTO_005fGLOBALENV_005f"><code>_R_CHECK_CODE_ASSIGN_TO_GLOBALENV_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5688,7 +5765,10 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCODOC_005fS4_005fMETHODS_005f"><code>_R_CHECK_CODOC_S4_METHODS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCOMPACT_005fDATA_005f"><code>_R_CHECK_COMPACT_DATA_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCOMPILATION_005fFLAGS_005f"><code>_R_CHECK_COMPILATION_FLAGS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<<<<<<< Updated upstream
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCONNECTIONS_005fLEFT_005fOPEN_005f"><code>_R_CHECK_CONNECTIONS_LEFT_OPEN_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+=======
+>>>>>>> Stashed changes
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCRAN_005fINCOMING_005f"><code>_R_CHECK_CRAN_INCOMING_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fCRAN_005fINCOMING_005fREMOTE_005f"><code>_R_CHECK_CRAN_INCOMING_REMOTE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fDEPENDS_005fONLY_005f"><code>_R_CHECK_DEPENDS_ONLY_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5707,12 +5787,18 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fFF_005fCALLS_005f"><code>_R_CHECK_FF_CALLS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fFF_005fDUP_005f"><code>_R_CHECK_FF_DUP_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fFORCE_005fSUGGESTS_005f"><code>_R_CHECK_FORCE_SUGGESTS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<<<<<<< Updated upstream
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fFUTURE_005fFILE_005fTIMESTAMPS_005f"><code>_R_CHECK_FUTURE_FILE_TIMESTAMPS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fGCT_005fN_005f"><code>_R_CHECK_GCT_N_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fINSTALL_005fDEPENDS_005f"><code>_R_CHECK_INSTALL_DEPENDS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fINSTALL_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_INSTALL_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fLENGTH_005f1_005fCONDITION_005f"><code>_R_CHECK_LENGTH_1_CONDITION_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fLENGTH_005f1_005fLOGIC2_005f"><code>_R_CHECK_LENGTH_1_LOGIC2_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+=======
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fGCT_005fN_005f"><code>_R_CHECK_GCT_N_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fINSTALL_005fDEPENDS_005f"><code>_R_CHECK_INSTALL_DEPENDS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fINSTALL_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_INSTALL_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+>>>>>>> Stashed changes
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fLICENSE_005f"><code>_R_CHECK_LICENSE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fLIMIT_005fCORES_005f"><code>_R_CHECK_LIMIT_CORES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fNATIVE_005fROUTINE_005fREGISTRATION_005f"><code>_R_CHECK_NATIVE_ROUTINE_REGISTRATION_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5721,11 +5807,17 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fONE_005fTEST_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_ONE_TEST_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fONE_005fVIGNETTE_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_ONE_VIGNETTE_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fOVERWRITE_005fREGISTERED_005fS3_005fMETHODS_005f"><code>_R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<<<<<<< Updated upstream
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPACKAGES_005fUSED_005fIN_005fTESTS_005fUSE_005fSUBDIRS_005f"><code>_R_CHECK_PACKAGES_USED_IN_TESTS_USE_SUBDIRS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPERMISSIONS_005f"><code>_R_CHECK_PERMISSIONS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPKGMAN_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_PKGMAN_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPKG_005fSIZES_005f"><code>_R_CHECK_PKG_SIZES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPKG_005fSIZES_005fTHRESHOLD_005f"><code>_R_CHECK_PKG_SIZES_THRESHOLD_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+=======
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPERMISSIONS_005f"><code>_R_CHECK_PERMISSIONS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPKGMAN_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_PKGMAN_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPKG_005fSIZES_005f"><code>_R_CHECK_PKG_SIZES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+>>>>>>> Stashed changes
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fPRAGMAS_005f"><code>_R_CHECK_PRAGMAS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fRD_005fCHECKRD_005fMINLEVEL_005f"><code>_R_CHECK_RD_CHECKRD_MINLEVEL_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fRD_005fCONTENTS_005f"><code>_R_CHECK_RD_CONTENTS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5739,7 +5831,10 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fS3_005fMETHODS_005fNOT_005fREGISTERED_005f"><code>_R_CHECK_S3_METHODS_NOT_REGISTERED_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSCREEN_005fDEVICE_005f"><code>_R_CHECK_SCREEN_DEVICE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSERIALIZATION_005f"><code>_R_CHECK_SERIALIZATION_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<<<<<<< Updated upstream
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSHLIB_005fOPENMP_005fFLAGS_005f"><code>_R_CHECK_SHLIB_OPENMP_FLAGS_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+=======
+>>>>>>> Stashed changes
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSKIP_005fARCH_005f"><code>_R_CHECK_SKIP_ARCH_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSKIP_005fEXAMPLES_005fARCH_005f"><code>_R_CHECK_SKIP_EXAMPLES_ARCH_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSKIP_005fTESTS_005fARCH_005f"><code>_R_CHECK_SKIP_TESTS_ARCH_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -5748,7 +5843,10 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSUBDIRS_005fNOCASE_005f"><code>_R_CHECK_SUBDIRS_NOCASE_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSUBDIRS_005fSTRICT_005f"><code>_R_CHECK_SUBDIRS_STRICT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSUGGESTS_005fONLY_005f"><code>_R_CHECK_SUGGESTS_ONLY_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+<<<<<<< Updated upstream
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fSYSTEM_005fCLOCK_005f"><code>_R_CHECK_SYSTEM_CLOCK_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
+=======
+>>>>>>> Stashed changes
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTESTS_005fELAPSED_005fTIMEOUT_005f"><code>_R_CHECK_TESTS_ELAPSED_TIMEOUT_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTESTS_005fNLINES_005f"><code>_R_CHECK_TESTS_NLINES_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-_005fR_005fCHECK_005fTEST_005fTIMING_005fCPU_005fTO_005fELAPSED_005fTHRESHOLD_005f"><code>_R_CHECK_TEST_TIMING_CPU_TO_ELAPSED_THRESHOLD_</code></a>:</td><td>&nbsp;</td><td valign="top"><a href="#Tools">Tools</a></td></tr>
@@ -6112,8 +6210,13 @@ not recommended as it is less future-proof.</p>
 <p>but apparently not on Windows.</p>
 <h3><a name="FOOT15" href="#DOCF15">(15)</a></h3>
 <p>The C code is in files
+<<<<<<< Updated upstream
 <samp>base.c</samp>, <samp>graphics.c</samp>, <samp>par.c</samp>, <samp>plot.c</samp> and
 <samp>plot3d.c</samp> in directory <samp>src/main</samp>.</p>
+=======
+<code>base.c</code>, <code>graphics.c</code>, <code>par.c</code>, <code>plot.c</code> and
+<code>plot3d.c</code> in directory <samp>src/main</samp>.</p>
+>>>>>>> Stashed changes
 <h3><a name="FOOT16" href="#DOCF16">(16)</a></h3>
 <p>although that needs to be
 handled carefully, as for example the <code>circle</code> callback is given a
