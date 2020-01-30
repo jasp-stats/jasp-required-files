@@ -137,8 +137,9 @@ if printLots:
 	print("changes: " + ", ".join(changes))
 
 def installNameToolBase(callList):
-	if skip_path_changes and printLots:
-		print("skipping: "+ " ".join(callList))
+	if skip_path_changes:
+		fi printLots:
+			print("skipping: "+ " ".join(callList))
 	else:
 		if printLots:
 			print('calling: ' + ' '.join(callList))
