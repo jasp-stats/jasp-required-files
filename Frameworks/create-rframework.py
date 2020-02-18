@@ -105,7 +105,10 @@ dependencies 	= extract_lib_dependencies(libs)
 new_libs 		= [ ]
 
 #We initialize changes with a reference to the bundled JAGS dylib
-changes 		= [{ "old": "/usr/local/lib/libjags.4.dylib", "new": "@executable_path/JAGS/libjags.4.dylib"}] 
+changes 		= [
+	{ "old": "/usr/local/lib/libjags.4.dylib", 	"new": "@executable_path/JAGS/libjags.4.dylib"},
+	{ "old": "/usr/lib/libc++abi.dylib",		"new": "@executable_path/../Frameworks/R.framework/Versions/3.6/Resources/lib/libc++abi.1.dylib"},
+	{ "old": "/usr/lib/libc++.1.dylib",			"new": "@executable_path/../Frameworks/R.framework/Versions/3.6/Resources/lib/libc++.1.dylib"}] 
 
 if printLots:
 	print("libs: " + ",\n\t".join(libs))
