@@ -32,6 +32,7 @@ beta.binomial           Beta-Binomial Prior Distribution for Models
 beta.prime              Beta-Prime Prior Distribution for Coefficients
                         in BMA Model
 bodyfat                 Bodyfat Data
+climate                 Climate Data
 coef.bas                Coefficients of a Bayesian Model Average object
 confint.coef.bas        Compute Credible Intervals for BAS regression
                         coefficients from BAS objects
