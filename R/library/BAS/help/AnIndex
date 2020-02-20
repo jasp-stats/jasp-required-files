@@ -18,6 +18,7 @@ bic.prior	IC.prior
 Bodyfat	bodyfat
 bodyfat	bodyfat
 CCH	CCH
+climate	climate
 coef	coef
 coef.bas	coef
 coefficients	coef
