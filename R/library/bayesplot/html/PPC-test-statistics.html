@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: PPC test statistics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-test-statistics {bayesplot}"><tr><td>PPC-test-statistics {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>PPC test statistics</h2>
+
+<h3>Description</h3>
+
+<p>The distribution of a (test) statistic <code>T(yrep)</code>, or a pair of (test)
+statistics, over the simulated datasets in <code>yrep</code>, compared to the
+observed value <code>T(y)</code> computed from the data <code>y</code>. See the
+<strong>Plot Descriptions</strong> and <strong>Details</strong> sections, below, as
+well as <a href="https://github.com/jgabry/bayes-vis-paper#readme">Gabry et al. (2019)</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppc_stat(
+  y,
+  yrep,
+  stat = "mean",
+  ...,
+  binwidth = NULL,
+  breaks = NULL,
+  freq = TRUE
+)
+
+ppc_stat_grouped(
+  y,
+  yrep,
+  group,
+  stat = "mean",
+  ...,
+  facet_args = list(),
+  binwidth = NULL,
+  breaks = NULL,
+  freq = TRUE
+)
+
+ppc_stat_freqpoly_grouped(
+  y,
+  yrep,
+  group,
+  stat = "mean",
+  ...,
+  facet_args = list(),
+  binwidth = NULL,
+  freq = TRUE
+)
+
+ppc_stat_2d(y, yrep, stat = c("mean", "sd"), ..., size = 2.5, alpha = 0.7)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector of observations. See <strong>Details</strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>yrep</code></td>
+<td>
+<p>An <i>S</i> by <i>N</i> matrix of draws from the posterior
+predictive distribution, where <i>S</i> is the size of the posterior sample
+(or subset of the posterior sample used to generate <code>yrep</code>) and <i>N</i> is
+the number of observations (the length of <code>y</code>). The columns of <code>yrep</code>
+should be in the same order as the data points in <code>y</code> for the plots to make
+sense. See <strong>Details</strong> for additional instructions.</p>
+</td></tr>
+<tr valign="top"><td><code>stat</code></td>
+<td>
+<p>A single function or a string naming a function, except for
+<code>ppc_stat_2d()</code> which requires a vector of exactly two functions or
+function names. In all cases the function(s) should take a vector input and
+return a scalar statistic. If specified as a string (or strings) then
+the legend will display function names. If specified as a function (or
+functions) then generic naming is used in the legend.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> to override
+the default binwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> as an
+alternative to <code>binwidth</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+<p>For histograms, <code>freq=TRUE</code> (the default) puts count on the
+y-axis. Setting <code>freq=FALSE</code> puts density on the y-axis. (For many
+plots the y-axis text is off by default. To view the count or density
+labels on the y-axis see the <code><a href="bayesplot-helpers.html">yaxis_text()</a></code> convenience
+function.)</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>A grouping variable (a vector or factor) the same length as
+<code>y</code>. Each value in <code>group</code> is interpreted as the group level
+pertaining to the corresponding value of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>facet_args</code></td>
+<td>
+<p>A named list of arguments (other than <code>facets</code>) passed
+to <code><a href="../../ggplot2/html/facet_wrap.html">ggplot2::facet_wrap()</a></code> or <code><a href="../../ggplot2/html/facet_grid.html">ggplot2::facet_grid()</a></code>
+to control faceting.</p>
+</td></tr>
+<tr valign="top"><td><code>size, alpha</code></td>
+<td>
+<p>Arguments passed to <code><a href="../../ggplot2/html/geom_point.html">ggplot2::geom_point()</a></code> to control the
+appearance of scatterplot points.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For Binomial data, the plots will typically be most useful if
+<code>y</code> and <code>yrep</code> contain the &quot;success&quot; proportions (not discrete
+&quot;success&quot; or &quot;failure&quot; counts).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object that can be further customized using the <strong>ggplot2</strong> package.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>ppc_stat()</code></dt><dd>
+<p>A histogram of the distribution of a test statistic computed by applying
+<code>stat</code> to each dataset (row) in <code>yrep</code>. The value of the statistic in the
+observed data, <code>stat(y)</code>, is overlaid as a vertical line. More details on
+<code>ppc_stat()</code> can be found in Gabry et al. (2019).
+</p>
+</dd>
+<dt><code>ppc_stat_grouped()</code>,<code>ppc_stat_freqpoly_grouped()</code></dt><dd>
+<p>The same as <code>ppc_stat()</code>, but a separate plot is generated for each
+level of a grouping variable. In the case of
+<code>ppc_stat_freqpoly_grouped()</code> the plots are frequency polygons rather
+than histograms. More details on <code>ppc_stat_grouped()</code> can be found in
+Gabry et al. (2019).
+</p>
+</dd>
+<dt><code>ppc_stat_2d()</code></dt><dd>
+<p>A scatterplot showing the joint distribution of two test statistics
+computed over the datasets (rows) in <code>yrep</code>. The value of the
+statistics in the observed data is overlaid as large point.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Gabry, J. , Simpson, D. , Vehtari, A. , Betancourt, M. and
+Gelman, A. (2019), Visualization in Bayesian workflow.
+<em>J. R. Stat. Soc. A</em>, 182: 389-402. doi:10.1111/rssa.12378.
+(<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378">journal version</a>,
+<a href="https://arxiv.org/abs/1709.01449">arXiv preprint</a>,
+<a href="https://github.com/jgabry/bayes-vis-paper">code on GitHub</a>)
+</p>
+<p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari,
+A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis.</em> Chapman &amp; Hall/CRC
+Press, London, third edition. (Ch. 6)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-discrete.html">PPC-discrete</a></code>,
+<code><a href="PPC-distributions.html">PPC-distributions</a></code>,
+<code><a href="PPC-errors.html">PPC-errors</a></code>,
+<code><a href="PPC-intervals.html">PPC-intervals</a></code>,
+<code><a href="PPC-loo.html">PPC-loo</a></code>,
+<code><a href="PPC-overview.html">PPC-overview</a></code>,
+<code><a href="PPC-scatterplots.html">PPC-scatterplots</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+y &lt;- example_y_data()
+yrep &lt;- example_yrep_draws()
+ppc_stat(y, yrep)
+ppc_stat(y, yrep, stat = "sd") + legend_none()
+ppc_stat_2d(y, yrep)
+ppc_stat_2d(y, yrep, stat = c("median", "mean")) + legend_move("bottom")
+
+color_scheme_set("teal")
+group &lt;- example_group_data()
+ppc_stat_grouped(y, yrep, group)
+
+color_scheme_set("mix-red-blue")
+ppc_stat_freqpoly_grouped(y, yrep, group, facet_args = list(nrow = 2))
+
+# use your own function to compute test statistics
+color_scheme_set("brightblue")
+q25 &lt;- function(y) quantile(y, 0.25)
+ppc_stat(y, yrep, stat = "q25") # legend includes function name
+
+# can define the function in the 'stat' argument but then
+# the legend doesn't include a function name
+ppc_stat(y, yrep, stat = function(y) quantile(y, 0.25))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: PPC scatterplots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-scatterplots {bayesplot}"><tr><td>PPC-scatterplots {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>PPC scatterplots</h2>
+
+<h3>Description</h3>
+
+<p>Scatterplots of the observed data <code>y</code> vs. simulated/replicated data
+<code>yrep</code> from the posterior predictive distribution. See the
+<strong>Plot Descriptions</strong> and <strong>Details</strong> sections, below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppc_scatter(y, yrep, ..., size = 2.5, alpha = 0.8)
+
+ppc_scatter_avg(y, yrep, ..., size = 2.5, alpha = 0.8)
+
+ppc_scatter_avg_grouped(y, yrep, group, ..., size = 2.5, alpha = 0.8)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector of observations. See <strong>Details</strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>yrep</code></td>
+<td>
+<p>An <i>S</i> by <i>N</i> matrix of draws from the posterior
+predictive distribution, where <i>S</i> is the size of the posterior sample
+(or subset of the posterior sample used to generate <code>yrep</code>) and <i>N</i> is
+the number of observations (the length of <code>y</code>). The columns of <code>yrep</code>
+should be in the same order as the data points in <code>y</code> for the plots to make
+sense. See <strong>Details</strong> for additional instructions.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>size, alpha</code></td>
+<td>
+<p>Arguments passed to <code><a href="../../ggplot2/html/geom_point.html">ggplot2::geom_point()</a></code> to control the
+appearance of the points.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>A grouping variable (a vector or factor) the same length as
+<code>y</code>. Each value in <code>group</code> is interpreted as the group level
+pertaining to the corresponding value of <code>y</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For Binomial data, the plots will typically be most useful if
+<code>y</code> and <code>yrep</code> contain the &quot;success&quot; proportions (not discrete
+&quot;success&quot; or &quot;failure&quot; counts).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object that can be further customized using the <strong>ggplot2</strong> package.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>ppc_scatter()</code></dt><dd>
+<p>For each dataset (row) in <code>yrep</code> a scatterplot is generated showing <code>y</code>
+against that row of <code>yrep</code>. For this plot <code>yrep</code> should only contain a
+small number of rows.
+</p>
+</dd>
+<dt><code>ppc_scatter_avg()</code></dt><dd>
+<p>A scatterplot of <code>y</code> against the average values of <code>yrep</code>, i.e.,
+the points <code style="white-space: pre;">(mean(yrep[, n]), y[n])</code>, where each <code>yrep[, n]</code> is
+a vector of length equal to the number of posterior draws.
+</p>
+</dd>
+<dt><code>ppc_scatter_avg_grouped()</code></dt><dd>
+<p>The same as <code>ppc_scatter_avg()</code>, but a separate plot is generated for
+each level of a grouping variable.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari,
+A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis.</em> Chapman &amp; Hall/CRC
+Press, London, third edition. (Ch. 6)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-discrete.html">PPC-discrete</a></code>,
+<code><a href="PPC-distributions.html">PPC-distributions</a></code>,
+<code><a href="PPC-errors.html">PPC-errors</a></code>,
+<code><a href="PPC-intervals.html">PPC-intervals</a></code>,
+<code><a href="PPC-loo.html">PPC-loo</a></code>,
+<code><a href="PPC-overview.html">PPC-overview</a></code>,
+<code><a href="PPC-test-statistics.html">PPC-test-statistics</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+y &lt;- example_y_data()
+yrep &lt;- example_yrep_draws()
+p1 &lt;- ppc_scatter_avg(y, yrep)
+p1
+p2 &lt;- ppc_scatter(y, yrep[20:23, ], alpha = 0.5, size = 1.5)
+p2
+
+# give x and y axes the same limits
+lims &lt;- ggplot2::lims(x = c(0, 160), y = c(0, 160))
+p1 + lims
+p2 + lims
+
+group &lt;- example_group_data()
+ppc_scatter_avg_grouped(y, yrep, group, alpha = 0.7) + lims
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

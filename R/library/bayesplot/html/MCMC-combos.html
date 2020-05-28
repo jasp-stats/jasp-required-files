@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Combination plots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for MCMC-combos {bayesplot}"><tr><td>MCMC-combos {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Combination plots</h2>
+
+<h3>Description</h3>
+
+<p>Combination plots
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mcmc_combo(x, combo = c("dens", "trace"), ..., widths = NULL, gg_theme = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A 3-D array, matrix, list of matrices, or data frame of MCMC draws.
+The <a href="MCMC-overview.html">MCMC-overview</a> page provides details on how to specify each these
+allowed inputs. It is also possible to use an object with an
+<code>as.array()</code> method that returns the same kind of 3-D array described on
+the <a href="MCMC-overview.html">MCMC-overview</a> page.</p>
+</td></tr>
+<tr valign="top"><td><code>combo</code></td>
+<td>
+<p>A character vector with at least two elements. Each element of
+<code>combo</code> corresponds to a column in the resulting graphic and should be the
+name of one of the available <a href="MCMC-overview.html">MCMC</a> functions (omitting the
+<code>mcmc_</code> prefix).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Arguments passed to the plotting functions named in <code>combo</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>widths</code></td>
+<td>
+<p>A numeric vector the same length as <code>combo</code> specifying
+relative column widths. For example, if the plot has two columns, then
+<code>widths = c(2, 1)</code> will allocate more space for the first column by a
+factor of 2 (as would <code>widths = c(.3, .15)</code>, etc.). The default,
+<code>NULL</code>, allocates the same horizontal space for each column.</p>
+</td></tr>
+<tr valign="top"><td><code>gg_theme</code></td>
+<td>
+<p>Unlike most of the other <strong>bayesplot</strong> functions,
+<code>mcmc_combo</code> returns a gtable object rather than a ggplot object, and
+so theme objects can't be added directly to the returned plot object. The
+<code>gg_theme</code> argument helps get around this problem by accepting a
+<strong>ggplot2</strong> <a href="../../ggplot2/html/theme.html">theme</a> object that is added to each of the
+plots <em>before</em> combining them into the gtable object that is returned.
+This can be a theme object created by a call to <code><a href="../../ggplot2/html/theme.html">ggplot2::theme()</a></code> or
+one of the <strong>bayesplot</strong> convenience functions, e.g.
+<code><a href="bayesplot-helpers.html">legend_none()</a></code> (see the <strong>Examples</strong> section, below).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A gtable object (the result of calling
+<code><a href="../../gridExtra/html/arrangeGrob.html">gridExtra::arrangeGrob()</a></code>) with <code>length(combo)</code> columns and
+a row for each parameter.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other MCMC: 
+<code><a href="MCMC-diagnostics.html">MCMC-diagnostics</a></code>,
+<code><a href="MCMC-distributions.html">MCMC-distributions</a></code>,
+<code><a href="MCMC-intervals.html">MCMC-intervals</a></code>,
+<code><a href="MCMC-nuts.html">MCMC-nuts</a></code>,
+<code><a href="MCMC-overview.html">MCMC-overview</a></code>,
+<code><a href="MCMC-parcoord.html">MCMC-parcoord</a></code>,
+<code><a href="MCMC-recover.html">MCMC-recover</a></code>,
+<code><a href="MCMC-scatterplots.html">MCMC-scatterplots</a></code>,
+<code><a href="MCMC-traces.html">MCMC-traces</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# some parameter draws to use for demonstration
+x &lt;- example_mcmc_draws()
+dim(x)
+dimnames(x)
+
+mcmc_combo(x, pars = c("alpha", "sigma"))
+mcmc_combo(x, pars = c("alpha", "sigma"), widths = c(1, 2))
+
+
+# change second plot, show log(sigma) instead of sigma,
+# and remove the legends
+color_scheme_set("mix-blue-red")
+mcmc_combo(
+ x,
+ combo = c("dens_overlay", "trace"),
+ pars = c("alpha", "sigma"),
+ transformations = list(sigma = "log"),
+ gg_theme = legend_none()
+)
+
+# same thing but this time also change the entire ggplot theme
+mcmc_combo(
+ x,
+ combo = c("dens_overlay", "trace"),
+ pars = c("alpha", "sigma"),
+ transformations = list(sigma = "log"),
+ gg_theme = ggplot2::theme_gray() + legend_none()
+)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

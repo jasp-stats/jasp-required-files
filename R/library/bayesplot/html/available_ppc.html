@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get or view the names of available plotting functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for available_ppc {bayesplot}"><tr><td>available_ppc {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get or view the names of available plotting functions</h2>
+
+<h3>Description</h3>
+
+<p>Get or view the names of available plotting functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+available_ppc(pattern = NULL, fixed = FALSE, invert = FALSE)
+
+available_mcmc(pattern = NULL, fixed = FALSE, invert = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pattern, fixed, invert</code></td>
+<td>
+<p>Passed to <code><a href="../../base/html/grep.html">base::grep()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A possibly empty character vector of function names with several
+additional attributes (for use by a custom print method). If <code>pattern</code>
+is missing then the returned object contains the names of all available
+plotting functions in the <a href="MCMC-overview.html">MCMC</a> or <a href="PPC-overview.html">PPC</a> module, depending on
+which function is called. If <code>pattern</code> is specified then a subset of
+function names is returned.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+available_mcmc()
+available_mcmc("nuts")
+available_mcmc("rhat|neff")
+available_ppc("grouped")
+available_ppc("grouped", invert = TRUE)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Arrange plots in a grid</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bayesplot_grid {bayesplot}"><tr><td>bayesplot_grid {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Arrange plots in a grid</h2>
+
+<h3>Description</h3>
+
+<p>The <code>bayesplot_grid</code> function makes it simple to juxtapose plots using
+common <i>x</i> and/or <i>y</i> axes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bayesplot_grid(
+  ...,
+  plots = list(),
+  xlim = NULL,
+  ylim = NULL,
+  grid_args = list(),
+  titles = character(),
+  subtitles = character(),
+  legends = TRUE,
+  save_gg_objects = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>One or more ggplot objects.</p>
+</td></tr>
+<tr valign="top"><td><code>plots</code></td>
+<td>
+<p>A list of ggplot objects. Can be used as an alternative to
+specifying plot objects via <code>...</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim, ylim</code></td>
+<td>
+<p>Optionally, numeric vectors of length 2 specifying lower and
+upper limits for the axes that will be shared across all plots.</p>
+</td></tr>
+<tr valign="top"><td><code>grid_args</code></td>
+<td>
+<p>An optional named list of arguments to pass to
+<code><a href="../../gridExtra/html/arrangeGrob.html">gridExtra::arrangeGrob()</a></code> (<code>nrow</code>, <code>ncol</code>,
+<code>widths</code>, etc.).</p>
+</td></tr>
+<tr valign="top"><td><code>titles, subtitles</code></td>
+<td>
+<p>Optional character vectors of plot titles and
+subtitles. If specified, <code>titles</code> and <code>subtitles</code> must must have
+length equal to the number of plots specified.</p>
+</td></tr>
+<tr valign="top"><td><code>legends</code></td>
+<td>
+<p>If any of the plots have legends should they be displayed?
+Defaults to <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>save_gg_objects</code></td>
+<td>
+<p>If <code>TRUE</code>, the default, then the ggplot objects
+specified in <code>...</code> or via the <code>plots</code> argument are saved in a
+list in the <code>"bayesplots"</code> component of the returned object.
+Setting this to <code>FALSE</code> will make the returned object smaller but
+these individual plot objects will not be available.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>"bayesplot_grid"</code> (essentially a gtable object
+from <code><a href="../../gridExtra/html/arrangeGrob.html">gridExtra::arrangeGrob()</a></code>), which has a <code>plot</code> method.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+y &lt;- example_y_data()
+yrep &lt;- example_yrep_draws()
+stats &lt;- c("sd", "median", "max", "min")
+
+color_scheme_set("pink")
+bayesplot_grid(
+ plots = lapply(stats, function(s) ppc_stat(y, yrep, stat = s)),
+ titles = stats,
+ legends = FALSE,
+ grid_args = list(ncol = 1)
+)
+
+## Not run: 
+library(rstanarm)
+mtcars$log_mpg &lt;- log(mtcars$mpg)
+fit1 &lt;- stan_glm(mpg ~ wt, data = mtcars, refresh = 0)
+fit2 &lt;- stan_glm(log_mpg ~ wt, data = mtcars, refresh = 0)
+
+y &lt;- mtcars$mpg
+yrep1 &lt;- posterior_predict(fit1, draws = 50)
+yrep2 &lt;- posterior_predict(fit2, fun = exp, draws = 50)
+
+color_scheme_set("blue")
+ppc1 &lt;- ppc_dens_overlay(y, yrep1)
+ppc1
+ppc1 + yaxis_text()
+
+color_scheme_set("red")
+ppc2 &lt;- ppc_dens_overlay(y, yrep2)
+bayesplot_grid(ppc1, ppc2)
+
+# make sure the plots use the same limits for the axes
+bayesplot_grid(ppc1, ppc2, xlim = c(-5, 60), ylim = c(0, 0.2))
+
+# remove the legends and add text
+bayesplot_grid(ppc1, ppc2, xlim = c(-5, 60), ylim = c(0, 0.2),
+               legends = FALSE, subtitles = rep("Predicted MPG", 2))
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

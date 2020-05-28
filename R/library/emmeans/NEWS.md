@@ -1,5 +1,109 @@
 ## NEWS for the emmeans package
 
+emmeans 1.4.09xxxxxxxxxxxx
+-------------
+
+  * Bug fix and addition of `use_pp` option for `stanreg` objects (#202)
+  * Prettier labels (spaces, not commas) for multiple factors in `contrast`
+
+
+emmeans 1.4.7
+-------------
+
+  * Repairs to `pwpp()` so it plays nice with nonestimable cases
+  * Added `"xplanations"` vignette with additional documentation on
+    methods used. (comparison arrows, for starters)
+  * Touch-ups to `plot()`, especially regarding comparison arrows
+  * Bug fix for `stanreg` models (#196)
+  * Fixed error in `emmeans(obj, "1", by = "something")` (#197)
+  * `eff_size()` now supports `emm_list` objects with a `$contrasts`
+    component, using those contrasts. This helps those who
+    specify `pairwise ~ treatment`.
+  * Labels in `contrast()` for factor combinations with `by` groups 
+    were wacky (#199)
+  * `emtrends()` screwed up with multivariate models (#200).
+  * Added a new argument `calc` to `summary()`. For example,
+    `calc = c(n = ~.wgt.)` will add a column of sample sizes to
+    the summary.
+  
+
+emmeans 1.4.6
+-------------
+
+  * Improvements to `coxph` support for models with strata
+  * `emmeans()` with `specs` of class `list` now passes any `offset` 
+    and `trend` arguments (#179)
+  * Added `plim` argument to `pwpp()` to allow controlling the scale
+  * More documentation on using `params` (#180)
+  * Robustified support for `gls` objects when data are incomplete (#181)
+  * Fixed bug in `joint_tests()` and `test(..., joint = TRUE)` that
+    can occur with nontrivial `@dffun()` slots (#184)
+  * Improved support for Satterthwaite-based methods in `gls` (#185)
+    and renamed `boot-satterthwaite` to `appx-satterthwaite` (#176)
+  * Further repairs to nesting-related code (#186)
+  * Fix `transform` argument in `ref_grid()` so it is same as 
+    in `regrid()` (#188)
+  * Added `pwpm()` function for displaying estimates, pairwise 
+    comparisons, and *P* values in matrix form
+    
+
+emmeans 1.4.5
+-------------
+
+  * Change to `.all.vars()` that addresses #170
+  * Addition of hidden argument `scheffe.rank` in `summary.emmGrid()`
+    to manually specify the desired dimensionality of a Scheffe 
+    adjustment (#171)
+  * Provided for `...` to be included in `options` in calls to
+    `emmeans()` and `contrast()`. This allows passing any `summary()`
+    argument more easily, e.g., 
+    `emmeans(..., type = "response", bias.adjust = TRUE, infer = c(TRUE, TRUE))`
+    (Before, we would have had to wrap this in `summary()`)
+  * Added a `plotit` argument to `plot.emmGrid()` that works similarly to
+    that in `emmip()`.
+  * Removed startup message for behavior change in 1.4.2; it's been long enough.
+  * Fixed bug with `character predictors in `at` (#175)
+  
+  
+
+emmeans 1.4.4
+---------------
+
+  * Fixed bug in `emmeans()` associated with non-factors such as `Date` (#162)
+  * Added `nesting.order` option to `emmip()` (#163)
+  * New `style` argument for `emmip()` allows plotting on a numeric scale
+  * More robust detection of response transformations (#166)
+  * Ensure `pwpp()` has tick marks on P-value axis (#167)
+  * Bug fix for `regrid()` for error when estimates exceed bounds
+  * Bug fix in auto-detecting nesting (#169) to make it less "enthusiastic"
+  * Fixes to formula operations needed because `formula.tools:::as.character.formula`
+    messes me up (thanks to Berwin Turloch, UWA, for alerting me)
+  * Making `dqrg()` more visible in the documentation (because it's often useful)
+  * Added more methods for `emm_list` objects, e.g. `rbind()` and `as.data.frame()`,
+    `as.list()`, and `as.emm_list()`
+  
+  
+
+emmeans 1.4.3.01
+----------------
+
+  * Fixed bug in post-grid support that affects, e.g., the **ggeffects** package (#161)
+  
+
+emmeans 1.4.3
+-------------
+
+  * Added `"bcnPower"` option to `make.tran()` (per `car::bcnPower()`)
+  * Scoping correction for `emmtrends()` (#153)
+  * Allow passing `...` to hook functions (need exposed by #154)
+  * Addition to `regrid()` whereby we can fake any response transformation
+    -- not just `"log"` (again inspired by #154)
+  * Informative message when **pbkrtest** or **lmerTest** is not found
+    (affects `merMod` objects) (#157)
+  * Change in `pwpp()` to make extremely small P values more distinguishable
+  
+
+
 emmeans 1.4.2
 -------------
 

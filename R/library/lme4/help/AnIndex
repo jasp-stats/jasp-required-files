@@ -17,7 +17,6 @@ as.data.frame.thpr	profile-methods
 as.data.frame.VarCorr.merMod	VarCorr
 as.function.merMod	merMod-class
 bootMer	bootMer
-boundary	isSingular
 cake	cake
 cbpp	cbpp
 checkConv	checkConv
@@ -55,6 +54,8 @@ formatVC	utilities
 formula.merMod	merMod-class
 fortify	fortify
 fortify.merMod	fortify
+getData	fortify
+getData.merMod	fortify
 getL	getME
 getL,merMod-method	getME
 getME	getME

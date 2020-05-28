@@ -2,7 +2,7 @@ CLD                     Extract and display information on all pairwise
                         comparisons of estimated marginal means.
 MOats                   Oats data in multivariate form
 add_grouping            Add a grouping factor
-as.emmGrid              Convert to and from 'emmGrid' objects
+as.list.emmGrid         Convert to and from 'emmGrid' objects
 as.mcmc.emmGrid         Support for MCMC-based estimation
 auto.noise              Auto Pollution Filter Noise
 contrast                Contrasts and linear functions of EMMs
@@ -34,6 +34,7 @@ oranges                 Sales of oranges
 pigs                    Effects of dietary protein on free plasma
                         leucine concentration in pigs
 plot.emmGrid            Plot an 'emmGrid' or 'summary_emm' object
+pwpm                    Pairwise P-value matrix (plus other statistics)
 pwpp                    Pairwise P-value plot
 qdrg                    Quick and dirty reference grid
 rbind.emmGrid           Combine or subset 'emmGrid' objects

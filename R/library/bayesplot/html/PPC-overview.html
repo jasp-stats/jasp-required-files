@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Graphical posterior predictive checking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-overview {bayesplot}"><tr><td>PPC-overview {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Graphical posterior predictive checking</h2>
+
+<h3>Description</h3>
+
+<p>The <strong>bayesplot</strong> PPC module provides various plotting functions for creating
+graphical displays comparing observed data to simulated data from the
+posterior (or prior) predictive distribution. See below for a brief
+discussion of the ideas behind posterior predictive checking, a description
+of the structure of this package, and tips on providing an interface to
+<strong>bayesplot</strong> from another package.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The idea behind posterior predictive checking is simple: if a model is a good
+fit then we should be able to use it to generate data that looks a lot like
+the data we observed.
+</p>
+
+
+<h4>Posterior predictive distribution</h4>
+
+<p>To generate the data used for posterior predictive checks we simulate from
+the <em>posterior predictive distribution</em>. The posterior predictive
+distribution is the distribution of the outcome variable implied by a model
+after using the observed data <i>y</i> (a vector of outcome values), and
+typically predictors <i>X</i>, to update our beliefs about the unknown
+parameters <i>&theta;</i> in the model. For each draw of the parameters
+<i>&theta;</i> from the posterior distribution
+<i>p(&theta; | y, X)</i>
+we generate an entire vector of outcomes. The result is
+an <i>S x N</i> matrix of simulations, where <i>S</i> is the the
+size of the posterior sample (number of draws from the posterior
+distribution) and <i>N</i> is the number of data points in <i>y</i>. That is,
+each row of the matrix is an individual &quot;replicated&quot; dataset of <i>N</i>
+observations.
+</p>
+
+
+
+<h4>Notation</h4>
+
+<p>When simulating from the posterior predictive distribution we can use either
+the same values of the predictors <i>X</i> that we used when fitting the model
+or new observations of those predictors. When we use the same values of
+<i>X</i> we denote the resulting simulations by <i>yrep</i> as they
+can be thought of as <em>replications</em> of the outcome <i>y</i> rather than
+predictions for future observations. This corresponds to the notation from
+Gelman et. al. (2013) and is the notation used throughout the documentation
+for this package.
+</p>
+
+
+
+<h4>Graphical posterior predictive checking</h4>
+
+<p>Using the datasets <i>yrep</i> drawn from the posterior predictive
+distribution, the functions in the <strong>bayesplot</strong> package produce various
+graphical displays comparing the observed data <i>y</i> to the replications.
+For a more thorough discussion of posterior predictive checking see
+Chapter 6 of Gelman et. al. (2013).
+</p>
+
+
+
+<h4>Prior predictive checking</h4>
+
+<p>To use <strong>bayesplot</strong> for <em>prior</em> predictive checks you can simply use draws
+from the prior predictive distribution instead of the posterior predictive
+distribution. See Gabry et al. (2019) for more on prior predictive checking
+and when it is reasonable to compare the prior predictive distribution to the
+observed data. If you want to avoid using the observed data for prior
+predictive checks, then the <code>y</code> argument to the PPC plotting functions can be
+used to provide plausible or implausible <code>y</code> values that you want to compare
+to the prior predictive realizations.
+</p>
+
+
+
+<h3>PPC plotting functions</h3>
+
+<p>The plotting functions for prior and
+posterior predictive checking are organized into several categories, each
+with its own documentation:
+</p>
+
+<ul>
+<li> <p><a href="PPC-distributions.html">Distributions</a>: Histograms, kernel density
+estimates, boxplots, and other plots comparing the empirical distribution
+of data <code>y</code> to the distributions of individual simulated datasets (rows)
+in <code>yrep</code>.
+</p>
+</li>
+<li> <p><a href="PPC-test-statistics.html">Statistics</a>: The distribution of a statistic,
+or a pair of statistics, over the simulated datasets (rows) in <code>yrep</code>
+compared to value of the statistic(s) computed from <code>y</code>.
+</p>
+</li>
+<li> <p><a href="PPC-intervals.html">Intervals</a>: Interval estimates of <code>yrep</code> with <code>y</code>
+overlaid. The x-axis variable can be optionally specified by the user
+(e.g. to plot against a predictor variable or over time).
+</p>
+</li>
+<li> <p><a href="PPC-errors.html">Predictive errors</a>: Plots of predictive errors
+(<code>y - yrep</code>) computed from <code>y</code> and each of the simulated datasets (rows)
+in <code>yrep</code>. For binomial models binned error plots are also available.
+</p>
+</li>
+<li> <p><a href="PPC-scatterplots.html">Scatterplots</a>: Scatterplots (and similar
+visualizations) of the data <code>y</code> vs. individual simulated datasets
+(rows) in <code>yrep</code>, or vs. the average value of the distributions of each
+data point (columns) in <code>yrep</code>.
+</p>
+</li>
+<li> <p><a href="PPC-discrete.html">Plots for discrete outcomes</a>: PPC functions that can
+only be used if <code>y</code> and <code>yrep</code> are discrete. For example, rootograms for
+count outcomes and bar plots for ordinal, categorical, and
+multinomial outcomes.
+</p>
+</li>
+<li> <p><a href="PPC-loo.html">LOO predictive checks</a>: PPC functions for predictive checks
+based on (approximate) leave-one-out (LOO) cross-validation.
+</p>
+</li></ul>
+
+
+
+<h3>Providing an interface for predictive checking from another package</h3>
+
+<p>In addition to the various plotting functions, the <strong>bayesplot</strong> package
+provides the S3 generic <code><a href="pp_check.html">pp_check()</a></code>. Authors of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> packages for
+Bayesian inference are encouraged to define <code>pp_check()</code> methods for the
+fitted model objects created by their packages. See the package vignettes for
+more details and a simple example, and see the <strong>rstanarm</strong> and <strong>brms</strong>
+packages for full examples of <code>pp_check()</code> methods.
+</p>
+
+
+<h3>References</h3>
+
+<p>Gabry, J. , Simpson, D. , Vehtari, A. , Betancourt, M. and
+Gelman, A. (2019), Visualization in Bayesian workflow.
+<em>J. R. Stat. Soc. A</em>, 182: 389-402. doi:10.1111/rssa.12378.
+(<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378">journal version</a>,
+<a href="https://arxiv.org/abs/1709.01449">arXiv preprint</a>,
+<a href="https://github.com/jgabry/bayes-vis-paper">code on GitHub</a>)
+</p>
+<p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari,
+A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis.</em> Chapman &amp; Hall/CRC
+Press, London, third edition. (Ch. 6)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-discrete.html">PPC-discrete</a></code>,
+<code><a href="PPC-distributions.html">PPC-distributions</a></code>,
+<code><a href="PPC-errors.html">PPC-errors</a></code>,
+<code><a href="PPC-intervals.html">PPC-intervals</a></code>,
+<code><a href="PPC-loo.html">PPC-loo</a></code>,
+<code><a href="PPC-scatterplots.html">PPC-scatterplots</a></code>,
+<code><a href="PPC-test-statistics.html">PPC-test-statistics</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

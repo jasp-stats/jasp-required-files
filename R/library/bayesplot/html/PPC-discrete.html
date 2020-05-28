@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: PPCs for discrete outcomes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-discrete {bayesplot}"><tr><td>PPC-discrete {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>PPCs for discrete outcomes</h2>
+
+<h3>Description</h3>
+
+<p>Many of the <a href="PPC-overview.html">PPC</a> functions in <strong>bayesplot</strong> can
+be used with discrete data. The small subset of these functions that can
+<em>only</em> be used if <code>y</code> and <code>yrep</code> are discrete are documented
+on this page. Currently these include rootograms for count outcomes and bar
+plots for ordinal, categorical, and multinomial outcomes. See the
+<strong>Plot Descriptions</strong> section below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppc_bars(
+  y,
+  yrep,
+  ...,
+  prob = 0.9,
+  width = 0.9,
+  size = 1,
+  fatten = 3,
+  freq = TRUE
+)
+
+ppc_bars_grouped(
+  y,
+  yrep,
+  group,
+  ...,
+  facet_args = list(),
+  prob = 0.9,
+  width = 0.9,
+  size = 1,
+  fatten = 3,
+  freq = TRUE
+)
+
+ppc_rootogram(
+  y,
+  yrep,
+  style = c("standing", "hanging", "suspended"),
+  ...,
+  prob = 0.9,
+  size = 1
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector of observations. See <strong>Details</strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>yrep</code></td>
+<td>
+<p>An <i>S</i> by <i>N</i> matrix of draws from the posterior
+predictive distribution, where <i>S</i> is the size of the posterior sample
+(or subset of the posterior sample used to generate <code>yrep</code>) and <i>N</i> is
+the number of observations (the length of <code>y</code>). The columns of <code>yrep</code>
+should be in the same order as the data points in <code>y</code> for the plots to make
+sense. See <strong>Details</strong> for additional instructions.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>A value between <code>0</code> and <code>1</code> indicating the desired probability
+mass to include in the <code>yrep</code> intervals. Set <code>prob=0</code> to remove the
+intervals. For <code>ppc_rootogram()</code> these are intervals of the <em>square roots</em>
+of the expected counts.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>For <code>ppc_bars()</code> and <code>ppc_bars_grouped()</code>, passed to
+<code><a href="../../ggplot2/html/geom_bar.html">ggplot2::geom_bar()</a></code> to control the bar width.</p>
+</td></tr>
+<tr valign="top"><td><code>size, fatten</code></td>
+<td>
+<p>For <code>ppc_bars()</code> and <code>ppc_bars_grouped()</code>, <code>size</code> and
+<code>fatten</code> are passed to <code><a href="../../ggplot2/html/geom_pointrange.html">ggplot2::geom_pointrange()</a></code> to control the
+appearance of the <code>yrep</code> points and intervals. For <code>ppc_rootogram()</code> <code>size</code>
+is passed to <code><a href="../../ggplot2/html/geom_line.html">ggplot2::geom_line()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+<p>For <code>ppc_bars()</code> and <code>ppc_bars_grouped()</code>, if <code>TRUE</code> (the
+default) the y-axis will display counts. Setting <code>freq=FALSE</code> will put
+proportions on the y-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>A grouping variable (a vector or factor) the same length as
+<code>y</code>. Each value in <code>group</code> is interpreted as the group level
+pertaining to the corresponding value of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>facet_args</code></td>
+<td>
+<p>An optional list of  arguments (other than <code>facets</code>)
+passed to <code><a href="../../ggplot2/html/facet_wrap.html">ggplot2::facet_wrap()</a></code> to control faceting.</p>
+</td></tr>
+<tr valign="top"><td><code>style</code></td>
+<td>
+<p>For <code>ppc_rootogram</code>, a string specifying the rootogram
+style. The options are <code>"standing"</code>, <code>"hanging"</code>, and
+<code>"suspended"</code>. See the <strong>Plot Descriptions</strong> section, below, for
+details on the different styles.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For all of these plots <code>y</code> and <code>yrep</code> must be integers, although
+they need not be integers in the strict sense of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s
+<a href="../../base/html/integer.html">integer</a> type. For rootogram plots <code>y</code> and <code>yrep</code> must also
+be non-negative.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object that can be further customized using the <strong>ggplot2</strong> package.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>ppc_bars()</code></dt><dd>
+<p>Bar plot of <code>y</code> with <code>yrep</code> medians and uncertainty intervals
+superimposed on the bars.
+</p>
+</dd>
+<dt><code>ppc_bars_grouped()</code></dt><dd>
+<p>Same as <code>ppc_bars()</code> but a separate plot (facet) is generated for each
+level of a grouping variable.
+</p>
+</dd>
+<dt><code>ppc_rootogram()</code></dt><dd>
+<p>Rootograms allow for diagnosing problems in count data models such as
+overdispersion or excess zeros. They consist of a histogram of <code>y</code> with the
+expected counts based on <code>yrep</code> overlaid as a line along with uncertainty
+intervals. The y-axis represents the square roots of the counts to
+approximately adjust for scale differences and thus ease comparison between
+observed and expected counts. Using the <code>style</code> argument, the histogram
+style can be adjusted to focus on different aspects of the data:
+</p>
+
+<ul>
+<li> <p><em>Standing</em>: basic histogram of observed counts with curve
+showing expected counts.
+</p>
+</li>
+<li> <p><em>Hanging</em>: observed counts counts hanging from the curve
+representing expected counts.
+</p>
+</li>
+<li> <p><em>Suspended</em>: histogram of the differences between expected and
+observed counts.
+</p>
+</li></ul>
+
+<p><strong>All of these are plotted on the square root scale</strong>. See Kleiber and
+Zeileis (2016) for advice on interpreting rootograms and selecting among
+the different styles.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Kleiber, C. and Zeileis, A. (2016).
+Visualizing count data regressions using rootograms.
+<em>The American Statistician</em>. 70(3): 296&ndash;303.
+<a href="https://arxiv.org/abs/1605.01311">https://arxiv.org/abs/1605.01311</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-distributions.html">PPC-distributions</a></code>,
+<code><a href="PPC-errors.html">PPC-errors</a></code>,
+<code><a href="PPC-intervals.html">PPC-intervals</a></code>,
+<code><a href="PPC-loo.html">PPC-loo</a></code>,
+<code><a href="PPC-overview.html">PPC-overview</a></code>,
+<code><a href="PPC-scatterplots.html">PPC-scatterplots</a></code>,
+<code><a href="PPC-test-statistics.html">PPC-test-statistics</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(9222017)
+
+# bar plots
+f &lt;- function(N) {
+  sample(1:4, size = N, replace = TRUE, prob = c(0.25, 0.4, 0.1, 0.25))
+}
+y &lt;- f(100)
+yrep &lt;- t(replicate(500, f(100)))
+dim(yrep)
+group &lt;- gl(2, 50, length = 100, labels = c("GroupA", "GroupB"))
+
+color_scheme_set("mix-pink-blue")
+ppc_bars(y, yrep)
+
+# split by group, change interval width, and display proportion
+# instead of count on y-axis
+color_scheme_set("mix-blue-pink")
+ppc_bars_grouped(y, yrep, group, prob = 0.5, freq = FALSE)
+
+# rootograms for counts
+y &lt;- rpois(100, 20)
+yrep &lt;- matrix(rpois(10000, 20), ncol = 100)
+
+color_scheme_set("brightblue")
+ppc_rootogram(y, yrep)
+ppc_rootogram(y, yrep, prob = 0)
+
+ppc_rootogram(y, yrep, style = "hanging", prob = 0.8)
+ppc_rootogram(y, yrep, style = "suspended")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

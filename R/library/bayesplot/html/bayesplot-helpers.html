@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convenience functions for adding or changing plot details</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bayesplot-helpers {bayesplot}"><tr><td>bayesplot-helpers {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convenience functions for adding or changing plot details</h2>
+
+<h3>Description</h3>
+
+<p>Convenience functions for adding to (and changing details of) ggplot objects
+(many of the objects returned by <strong>bayesplot</strong> functions). See the
+<strong>Examples</strong> section, below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+vline_at(v, fun, ..., na.rm = TRUE)
+
+hline_at(v, fun, ..., na.rm = TRUE)
+
+vline_0(..., na.rm = TRUE)
+
+hline_0(..., na.rm = TRUE)
+
+abline_01(..., na.rm = TRUE)
+
+lbub(p, med = TRUE)
+
+legend_move(position = "right")
+
+legend_none()
+
+legend_text(...)
+
+xaxis_title(on = TRUE, ...)
+
+xaxis_text(on = TRUE, ...)
+
+xaxis_ticks(on = TRUE, ...)
+
+yaxis_title(on = TRUE, ...)
+
+yaxis_text(on = TRUE, ...)
+
+yaxis_ticks(on = TRUE, ...)
+
+facet_text(on = TRUE, ...)
+
+facet_bg(on = TRUE, ...)
+
+panel_bg(on = TRUE, ...)
+
+plot_bg(on = TRUE, ...)
+
+grid_lines(color = "gray50", size = 0.2)
+
+overlay_function(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>v</code></td>
+<td>
+<p>Either a numeric vector specifying the value(s) at which to
+draw the vertical or horizontal line(s), or an object of any type to use as
+the first argument to <code>fun</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>A function, or the name of a function, that returns a numeric
+vector.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>For the various <code>vline_</code>, <code>hline_</code>, and <code>abline_</code>
+functions, <code>...</code> is passed to <code><a href="../../ggplot2/html/geom_vline.html">ggplot2::geom_vline()</a></code>,
+<code><a href="../../ggplot2/html/geom_hline.html">ggplot2::geom_hline()</a></code>, and <code><a href="../../ggplot2/html/geom_abline.html">ggplot2::geom_abline()</a></code>,
+respectively, to control the appearance of the line(s).
+</p>
+<p>For functions ending in <code style="white-space: pre;">_bg</code>, <code>...</code> is passed to
+<code><a href="../../ggplot2/html/element_rect.html">ggplot2::element_rect()</a></code>.
+</p>
+<p>For functions ending in <code style="white-space: pre;">_text</code> or <code style="white-space: pre;">_title</code>, <code>...</code> is passed
+to <code><a href="../../ggplot2/html/element_text.html">ggplot2::element_text()</a></code>.
+</p>
+<p>For <code>xaxis_ticks</code> and <code>yaxis_ticks</code>, <code>...</code> is passed to
+<code><a href="../../ggplot2/html/element_line.html">ggplot2::element_line()</a></code>.
+</p>
+<p>For <code>overlay_function</code>, <code>...</code> is passed to
+<code><a href="../../ggplot2/html/stat_function.html">ggplot2::stat_function()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>A logical scalar passed to the appropriate geom (e.g.
+<code><a href="../../ggplot2/html/geom_vline.html">ggplot2::geom_vline()</a></code>). The default is <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>The probability mass (in <code style="white-space: pre;">[0,1]</code>) to include in the interval.</p>
+</td></tr>
+<tr valign="top"><td><code>med</code></td>
+<td>
+<p>Should the median also be included in addition to the lower
+and upper bounds of the interval?</p>
+</td></tr>
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>The position of the legend. Either a numeric vector (of
+length 2) giving the relative coordinates (between 0 and 1) for the legend,
+or a string among <code>"right"</code>, <code>"left"</code>, <code>"top"</code>,
+<code>"bottom"</code>. Using <code>position = "none"</code> is also allowed and is
+equivalent to using <code>legend_none()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>on</code></td>
+<td>
+<p>For functions modifying ggplot <a href="../../ggplot2/html/theme.html">theme</a> elements,
+set <code>on=FALSE</code> to set the element to <code><a href="../../ggplot2/html/element_blank.html">ggplot2::element_blank()</a></code>. For
+example, facet text can be removed by adding <code>facet_text(on=FALSE)</code>, or
+simply <code>facet_text(FALSE)</code> to a ggplot object. If <code>on=TRUE</code> (the default),
+then <code>...</code> can be used to customize the appearance of the theme element.</p>
+</td></tr>
+<tr valign="top"><td><code>color, size</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/element_line.html">ggplot2::element_line()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+
+
+<h4>Add vertical, horizontal, and diagonal lines to plots</h4>
+
+
+<ul>
+<li> <p><code>vline_at()</code> and <code>hline_at()</code> return an object created by either
+<code><a href="../../ggplot2/html/geom_vline.html">ggplot2::geom_vline()</a></code> or <code><a href="../../ggplot2/html/geom_hline.html">ggplot2::geom_hline()</a></code> that can be added to a
+ggplot object to draw a vertical or horizontal line (at one or several
+values). If <code>fun</code> is missing then the lines are drawn at the values in <code>v</code>.
+If <code>fun</code> is specified then the lines are drawn at the values returned by <code>fun(v)</code>.
+</p>
+</li>
+<li> <p><code>vline_0()</code> and <code>hline_0()</code> are wrappers for <code>vline_at()</code> and <code>hline_at()</code>
+with <code>v = 0</code> and <code>fun</code> missing.
+</p>
+</li>
+<li> <p><code>abline_01()</code> is a wrapper for <code><a href="../../ggplot2/html/geom_abline.html">ggplot2::geom_abline()</a></code> with the intercept
+set to <code>0</code> and the slope set to <code>1</code>.
+</p>
+</li>
+<li> <p><code>lbub()</code> returns a <em>function</em> that takes a single argument <code>x</code> and returns
+the lower and upper bounds (<code>lb</code>, <code>ub</code>) of the <code>100*p</code>\
+of <code>x</code>, as well as the median (if <code>med=TRUE</code>).
+</p>
+</li></ul>
+
+
+
+
+<h4>Control appearance of facet strips</h4>
+
+
+<ul>
+<li> <p><code>facet_text()</code> returns ggplot2 theme objects that can be added to an
+existing plot (ggplot object) to format the text in facet strips.
+</p>
+</li>
+<li> <p><code>facet_bg()</code> can be added to a plot to change the background of the facet strips.
+</p>
+</li></ul>
+
+
+
+
+<h4>Move legend, remove legend, or style the legend text</h4>
+
+
+<ul>
+<li> <p><code>legend_move()</code> and <code>legend_none()</code> return a ggplot2 theme object that can
+be added to an existing plot (ggplot object) in order to change the
+position of the legend or remove it.
+</p>
+</li>
+<li> <p><code>legend_text()</code> works much like <code>facet_text()</code> but for the legend.
+</p>
+</li></ul>
+
+
+
+
+<h4>Control appearance of <i>x</i>-axis and <i>y</i>-axis features</h4>
+
+
+<ul>
+<li> <p><code>xaxis_title()</code> and <code>yaxis_title()</code> return a ggplot2 theme object
+that can be added to an existing plot (ggplot object) in order to toggle or
+format the titles displayed on the <code>x</code> or <code>y</code> axis. (To change
+the titles themselves use <code><a href="../../ggplot2/html/labs.html">ggplot2::labs()</a></code>.)
+</p>
+</li>
+<li> <p><code>xaxis_text()</code> and <code>yaxis_text()</code> return a ggplot2 theme object
+that can be added to an existing plot (ggplot object) in order to toggle or
+format the text displayed on the <code>x</code> or <code>y</code> axis (e.g. tick
+labels).
+</p>
+</li>
+<li> <p><code>xaxis_ticks()</code> and <code>yaxis_ticks()</code> return a ggplot2 theme object
+that can be added to an existing plot (ggplot object) to change the
+appearance of the axis tick marks.
+</p>
+</li></ul>
+
+
+
+
+<h4>Customize plot background</h4>
+
+
+<ul>
+<li> <p><code>plot_bg()</code> returns a ggplot2 theme object that can be added to an
+existing plot (ggplot object) to format the background of the <em>entire</em> plot.
+</p>
+</li>
+<li> <p><code>panel_bg()</code> returns a ggplot2 theme object that can be added to an
+existing plot (ggplot object) to format the background of the just the
+plotting area.
+</p>
+</li>
+<li> <p><code>grid_lines()</code> returns a ggplot2 theme object that can be added to
+an existing plot (ggplot object) to add grid lines to the plot background.
+</p>
+</li></ul>
+
+
+
+
+<h4>Superimpose a function on an existing plot</h4>
+
+
+<ul>
+<li> <p><code>overlay_function()</code> is a simple wrapper for <code><a href="../../ggplot2/html/stat_function.html">ggplot2::stat_function()</a></code> but
+with the <code>inherit.aes</code> argument fixed to <code>FALSE</code>. Fixing <code>inherit.aes=FALSE</code>
+will avoid potential errors due to the <code><a href="../../ggplot2/html/aes.html">ggplot2::aes()</a></code>thetic mapping used by
+certain <strong>bayesplot</strong> plotting functions.
+</p>
+</li></ul>
+
+
+
+
+<h3>Value</h3>
+
+<p>A <strong>ggplot2</strong> layer or <code><a href="../../ggplot2/html/theme.html">ggplot2::theme()</a></code> object that can be
+added to existing ggplot objects, like those created by many of the
+<strong>bayesplot</strong> plotting functions. See the <strong>Details</strong> section.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="theme_default.html">theme_default()</a></code> for the default ggplot theme used by
+<strong>bayesplot</strong>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+color_scheme_set("gray")
+x &lt;- example_mcmc_draws(chains = 1)
+dim(x)
+colnames(x)
+
+
+###################################
+### vertical &amp; horizontal lines ###
+###################################
+(p &lt;- mcmc_intervals(x, regex_pars = "beta"))
+
+# vertical line at zero (with some optional styling)
+p + vline_0()
+p + vline_0(size = 0.25, color = "darkgray", linetype = 2)
+
+# vertical line(s) at specified values
+v &lt;- c(-0.5, 0, 0.5)
+p + vline_at(v, linetype = 3, size = 0.25)
+
+my_lines &lt;- vline_at(v, alpha = 0.25, size = 0.75 * c(1, 2, 1),
+                     color = c("maroon", "skyblue", "violet"))
+p + my_lines
+
+
+# add vertical line(s) at computed values
+# (three ways of getting lines at column means)
+color_scheme_set("brightblue")
+p &lt;- mcmc_intervals(x, regex_pars = "beta")
+p + vline_at(x[, 3:4], colMeans)
+p + vline_at(x[, 3:4], "colMeans", color = "darkgray",
+             lty = 2, size = 0.25)
+p + vline_at(x[, 3:4], function(a) apply(a, 2, mean),
+             color = "orange",
+             size = 2, alpha = 0.1)
+
+
+# using the lbub function to get interval lower and upper bounds (lb, ub)
+color_scheme_set("pink")
+parsed &lt;- ggplot2::label_parsed
+p2 &lt;- mcmc_hist(x, pars = "beta[1]", binwidth = 1/20,
+                facet_args = list(labeller = parsed))
+(p2 &lt;- p2 + facet_text(size = 16))
+
+b1 &lt;- x[, "beta[1]"]
+p2 + vline_at(b1, fun = lbub(0.8), color = "gray20",
+              size = 2 * c(1,.5,1), alpha = 0.75)
+p2 + vline_at(b1, lbub(0.8, med = FALSE), color = "gray20",
+              size = 2, alpha = 0.75)
+
+
+##########################
+### format axis titles ###
+##########################
+color_scheme_set("green")
+y &lt;- example_y_data()
+yrep &lt;- example_yrep_draws()
+(p3 &lt;- ppc_stat(y, yrep, stat = "median", binwidth = 1/4))
+
+# turn off the legend, turn on x-axis title
+p3 +
+ legend_none() +
+ xaxis_title(size = 13, family = "sans") +
+ ggplot2::xlab(expression(italic(T(y)) == median(italic(y))))
+
+
+################################
+### format axis &amp; facet text ###
+################################
+color_scheme_set("gray")
+p4 &lt;- mcmc_trace(example_mcmc_draws(), pars = c("alpha", "sigma"))
+
+myfacets &lt;-
+ facet_bg(fill = "gray30", color = NA) +
+ facet_text(face = "bold", color = "skyblue", size = 14)
+p4 + myfacets
+
+
+##########################
+### control tick marks ###
+##########################
+p4 +
+ myfacets +
+ yaxis_text(FALSE) +
+ yaxis_ticks(FALSE) +
+ xaxis_ticks(size = 1, color = "skyblue")
+
+
+##############################
+### change plot background ###
+##############################
+color_scheme_set("blue")
+
+# add grid lines
+ppc_stat(y, yrep) + grid_lines()
+
+# panel_bg vs plot_bg
+ppc_scatter_avg(y, yrep) + panel_bg(fill = "gray90")
+ppc_scatter_avg(y, yrep) + plot_bg(fill = "gray90")
+
+color_scheme_set("yellow")
+p5 &lt;- ppc_scatter_avg(y, yrep, alpha = 1)
+p5 + panel_bg(fill = "gray20") + grid_lines(color = "white")
+
+color_scheme_set("purple")
+ppc_dens_overlay(y, yrep[1:30, ]) +
+ legend_text(size = 14) +
+ legend_move(c(0.75, 0.5)) +
+ plot_bg(fill = "gray90") +
+ panel_bg(color = "black", fill = "gray99", size = 3)
+
+
+
+###############################################
+### superimpose a function on existing plot ###
+###############################################
+# compare posterior of beta[1] to Gaussian with same posterior mean
+# and sd as beta[1]
+x &lt;- example_mcmc_draws(chains = 4)
+dim(x)
+purple_gaussian &lt;-
+  overlay_function(
+    fun = dnorm,
+    args = list(mean(x[,, "beta[1]"]), sd(x[,, "beta[1]"])),
+    color = "purple",
+    size = 2
+  )
+
+color_scheme_set("gray")
+mcmc_hist(x, pars = "beta[1]") + purple_gaussian
+mcmc_dens(x, pars = "beta[1]") + purple_gaussian
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

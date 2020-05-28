@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plots for Markov chain Monte Carlo simulations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for MCMC-overview {bayesplot}"><tr><td>MCMC-overview {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plots for Markov chain Monte Carlo simulations</h2>
+
+<h3>Description</h3>
+
+<p>The <strong>bayesplot</strong> MCMC module provides various plotting functions for
+creating graphical displays of Markov chain Monte Carlo (MCMC) simulations.
+The <strong>MCMC plotting functions</strong> section, below, provides links to the
+documentation for various categories of MCMC plots. Currently the MCMC
+plotting functions accept posterior draws provided in one of the following
+formats:
+</p>
+
+<ul>
+<li> <p><strong>3-D array</strong>: An array with dimensions <code style="white-space: pre;">Iteration, Chain, Parameter</code> in
+that order.
+</p>
+</li>
+<li> <p><strong>list</strong>: A list of matrices, where each matrix corresponds to a Markov
+chain. All of the matrices should have the same number of iterations (rows)
+and parameters (columns), and parameters should have the same names and be in
+the same order.
+</p>
+</li>
+<li> <p><strong>matrix (2-D array)</strong>: A matrix with one column per parameter. If using
+matrix there should only be a single Markov chain or all chains should
+already be merged (stacked).
+</p>
+</li>
+<li> <p><strong>data frame</strong>: There are two types of data frames allowed. Either a data
+frame with one column per parameter (if only a single chain or all chains
+have already been merged), or a data frame with one column per parameter plus
+an additional column <code>"Chain"</code> that contains the chain number (an integer)
+corresponding to each row in the data frame.
+</p>
+</li></ul>
+
+<p><strong>Note</strong>: typically the user should <em>not</em> include warmup iterations
+in the object passed to <strong>bayesplot</strong> plotting functions, although for
+certain plots (e.g. trace plots) it can occasionally be useful to include the
+warmup iterations for diagnostic purposes.
+</p>
+
+
+<h3>MCMC plotting functions</h3>
+
+
+<ul>
+<li> <p><a href="MCMC-distributions.html">Posterior distributions</a>:
+Histograms and kernel density plots of parameter draws, optionally
+showing each Markov chain separately.
+</p>
+</li>
+<li> <p><a href="MCMC-intervals.html">Uncertainty intervals</a>: Uncertainty intervals computed
+from parameter draws.
+</p>
+</li>
+<li> <p><a href="MCMC-traces.html">Trace plots</a>: Times series of parameter draws, optionally
+including HMC/NUTS diagnostic information.
+</p>
+</li>
+<li> <p><a href="MCMC-scatterplots.html">Scatterplots</a>: Scatterplots, heatmaps, and pairs
+plots of parameter draws, optionally including HMC/NUTS diagnostic
+information.
+</p>
+</li>
+<li> <p><a href="MCMC-parcoord.html">Parallel coordinates plots</a>: Parallel coordinates plot
+of MCMC draws (one dimension per parameter), optionally including
+HMC/NUTS diagnostic information.
+</p>
+</li>
+<li> <p><a href="MCMC-combos.html">Combos</a>: Combination plots (e.g. trace plot + histogram).
+</p>
+</li>
+<li> <p><a href="MCMC-diagnostics.html">General MCMC diagnostics</a>: MCMC diagnostic plots
+including R-hat, effective sample size, autocorrelation.
+<a href="MCMC-nuts.html">NUTS diagnostics</a>: Special diagnostic plots for
+the No-U-Turn Sampler.
+</p>
+</li>
+<li> <p><a href="MCMC-recover.html">Comparisons to &quot;true&quot; values</a>: Plots comparing MCMC
+estimates to &quot;true&quot; parameter values (e.g., values used to simulate data).
+</p>
+</li></ul>
+
+
+
+<h3>References</h3>
+
+<p>Gabry, J. , Simpson, D. , Vehtari, A. , Betancourt, M. and
+Gelman, A. (2019), Visualization in Bayesian workflow.
+<em>J. R. Stat. Soc. A</em>, 182: 389-402. doi:10.1111/rssa.12378.
+(<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378">journal version</a>,
+<a href="https://arxiv.org/abs/1709.01449">arXiv preprint</a>,
+<a href="https://github.com/jgabry/bayes-vis-paper">code on GitHub</a>)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other MCMC: 
+<code><a href="MCMC-combos.html">MCMC-combos</a></code>,
+<code><a href="MCMC-diagnostics.html">MCMC-diagnostics</a></code>,
+<code><a href="MCMC-distributions.html">MCMC-distributions</a></code>,
+<code><a href="MCMC-intervals.html">MCMC-intervals</a></code>,
+<code><a href="MCMC-nuts.html">MCMC-nuts</a></code>,
+<code><a href="MCMC-parcoord.html">MCMC-parcoord</a></code>,
+<code><a href="MCMC-recover.html">MCMC-recover</a></code>,
+<code><a href="MCMC-scatterplots.html">MCMC-scatterplots</a></code>,
+<code><a href="MCMC-traces.html">MCMC-traces</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

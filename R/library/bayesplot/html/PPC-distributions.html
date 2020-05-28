@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: PPC distributions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-distributions {bayesplot}"><tr><td>PPC-distributions {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>PPC distributions</h2>
+
+<h3>Description</h3>
+
+<p>Compare the empirical distribution of the data <code>y</code> to the distributions
+of simulated/replicated data <code>yrep</code> from the posterior predictive
+distribution. See the <strong>Plot Descriptions</strong> section, below,
+for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppc_data(y, yrep, group = NULL)
+
+ppc_hist(y, yrep, ..., binwidth = NULL, breaks = NULL, freq = TRUE)
+
+ppc_boxplot(y, yrep, ..., notch = TRUE, size = 0.5, alpha = 1)
+
+ppc_freqpoly(
+  y,
+  yrep,
+  ...,
+  binwidth = NULL,
+  freq = TRUE,
+  size = 0.25,
+  alpha = 1
+)
+
+ppc_freqpoly_grouped(
+  y,
+  yrep,
+  group,
+  ...,
+  binwidth = NULL,
+  freq = TRUE,
+  size = 0.25,
+  alpha = 1
+)
+
+ppc_dens(y, yrep, ..., trim = FALSE, size = 0.5, alpha = 1)
+
+ppc_dens_overlay(
+  y,
+  yrep,
+  ...,
+  size = 0.25,
+  alpha = 0.7,
+  trim = FALSE,
+  bw = "nrd0",
+  adjust = 1,
+  kernel = "gaussian",
+  n_dens = 1024
+)
+
+ppc_ecdf_overlay(
+  y,
+  yrep,
+  ...,
+  discrete = FALSE,
+  pad = TRUE,
+  size = 0.25,
+  alpha = 0.7
+)
+
+ppc_violin_grouped(
+  y,
+  yrep,
+  group,
+  ...,
+  probs = c(0.1, 0.5, 0.9),
+  size = 1,
+  alpha = 1,
+  y_draw = c("violin", "points", "both"),
+  y_size = 1,
+  y_alpha = 1,
+  y_jitter = 0.1
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector of observations. See <strong>Details</strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>yrep</code></td>
+<td>
+<p>An <i>S</i> by <i>N</i> matrix of draws from the posterior
+predictive distribution, where <i>S</i> is the size of the posterior sample
+(or subset of the posterior sample used to generate <code>yrep</code>) and <i>N</i> is
+the number of observations (the length of <code>y</code>). The columns of <code>yrep</code>
+should be in the same order as the data points in <code>y</code> for the plots to make
+sense. See <strong>Details</strong> for additional instructions.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>A grouping variable (a vector or factor) the same length as
+<code>y</code>. Each value in <code>group</code> is interpreted as the group level
+pertaining to the corresponding value of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> to override
+the default binwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> as an
+alternative to <code>binwidth</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+<p>For histograms, <code>freq=TRUE</code> (the default) puts count on the
+y-axis. Setting <code>freq=FALSE</code> puts density on the y-axis. (For many
+plots the y-axis text is off by default. To view the count or density
+labels on the y-axis see the <code><a href="bayesplot-helpers.html">yaxis_text()</a></code> convenience
+function.)</p>
+</td></tr>
+<tr valign="top"><td><code>notch</code></td>
+<td>
+<p>A logical scalar passed to <code><a href="../../ggplot2/html/geom_boxplot.html">ggplot2::geom_boxplot()</a></code>.
+Unlike for <code>geom_boxplot()</code>, the default is <code>notch=TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>size, alpha</code></td>
+<td>
+<p>Passed to the appropriate geom to control the appearance of
+the <code>yrep</code> distributions.</p>
+</td></tr>
+<tr valign="top"><td><code>trim</code></td>
+<td>
+<p>A logical scalar passed to <code><a href="../../ggplot2/html/geom_density.html">ggplot2::geom_density()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>bw, adjust, kernel, n_dens</code></td>
+<td>
+<p>Optional arguments passed to
+<code><a href="../../stats/html/density.html">stats::density()</a></code> to override default kernel density estimation
+parameters. <code>n_dens</code> defaults to <code>1024</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>discrete</code></td>
+<td>
+<p>For <code>ppc_ecdf_overlay()</code>, should the data be treated as
+discrete? The default is <code>FALSE</code>, in which case <code>geom="line"</code> is
+passed to <code><a href="../../ggplot2/html/stat_ecdf.html">ggplot2::stat_ecdf()</a></code>. If <code>discrete</code> is set to
+<code>TRUE</code> then <code>geom="step"</code> is used.</p>
+</td></tr>
+<tr valign="top"><td><code>pad</code></td>
+<td>
+<p>A logical scalar passed to <code><a href="../../ggplot2/html/stat_ecdf.html">ggplot2::stat_ecdf()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>probs</code></td>
+<td>
+<p>A numeric vector passed to <code><a href="../../ggplot2/html/geom_violin.html">ggplot2::geom_violin()</a></code>'s
+<code>draw_quantiles</code> argument to specify at which quantiles to draw
+horizontal lines. Set to <code>NULL</code> to remove the lines.</p>
+</td></tr>
+<tr valign="top"><td><code>y_draw</code></td>
+<td>
+<p>For <code>ppc_violin_grouped()</code>, a string specifying how to draw
+<code>y</code>: <code>"violin"</code> (default), <code>"points"</code> (jittered points), or <code>"both"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>y_jitter, y_size, y_alpha</code></td>
+<td>
+<p>For <code>ppc_violin_grouped()</code>, if <code>y_draw</code> is
+<code>"points"</code> or <code>"both"</code> then <code>y_size</code>, <code>y_alpha</code>, and <code>y_jitter</code> are passed
+to to the <code>size</code>, <code>alpha</code>, and <code>width</code> arguments of <code><a href="../../ggplot2/html/geom_jitter.html">ggplot2::geom_jitter()</a></code>
+to control the appearance of <code>y</code> points. The default of <code>y_jitter=NULL</code>
+will let <strong>ggplot2</strong> determine the amount of jitter.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For Binomial data, the plots will typically be most useful if
+<code>y</code> and <code>yrep</code> contain the &quot;success&quot; proportions (not discrete
+&quot;success&quot; or &quot;failure&quot; counts).
+</p>
+
+
+<h3>Value</h3>
+
+<p>The plotting functions return a ggplot object that can be further
+customized using the <strong>ggplot2</strong> package. The functions with suffix
+<code style="white-space: pre;">_data()</code> return the data that would have been drawn by the plotting
+function.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code style="white-space: pre;">ppc_hist(), ppc_freqpoly(), ppc_dens(), ppc_boxplot()</code></dt><dd>
+<p>A separate histogram, shaded frequency polygon, smoothed kernel density
+estimate, or box and whiskers plot is displayed for <code>y</code> and each
+dataset (row) in <code>yrep</code>. For these plots <code>yrep</code> should therefore
+contain only a small number of rows. See the <strong>Examples</strong> section.
+</p>
+</dd>
+<dt><code>ppc_freqpoly_grouped()</code></dt><dd>
+<p>A separate frequency polygon is plotted for each level of a grouping
+variable for <code>y</code> and each dataset (row) in <code>yrep</code>. For this plot
+<code>yrep</code> should therefore contain only a small number of rows. See the
+<strong>Examples</strong> section.
+</p>
+</dd>
+<dt><code style="white-space: pre;">ppc_dens_overlay(), ppc_ecdf_overlay()</code></dt><dd>
+<p>Kernel density or empirical CDF estimates of each dataset (row) in
+<code>yrep</code> are overlaid, with the distribution of <code>y</code> itself on top
+(and in a darker shade). When using <code>ppc_ecdf_overlay()</code> with discrete
+data, set the <code>discrete</code> argument to <code>TRUE</code> for better results.
+For an example of <code>ppc_dens_overlay()</code> also see Gabry et al. (2019).
+</p>
+</dd>
+<dt><code>ppc_violin_grouped()</code></dt><dd>
+<p>The density estimate of <code>yrep</code> within each level of a grouping
+variable is plotted as a violin with horizontal lines at notable
+quantiles. <code>y</code> is overlaid on the plot either as a violin, points, or
+both, depending on the <code>y_draw</code> argument.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Gabry, J. , Simpson, D. , Vehtari, A. , Betancourt, M. and
+Gelman, A. (2019), Visualization in Bayesian workflow.
+<em>J. R. Stat. Soc. A</em>, 182: 389-402. doi:10.1111/rssa.12378.
+(<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378">journal version</a>,
+<a href="https://arxiv.org/abs/1709.01449">arXiv preprint</a>,
+<a href="https://github.com/jgabry/bayes-vis-paper">code on GitHub</a>)
+</p>
+<p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari,
+A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis.</em> Chapman &amp; Hall/CRC
+Press, London, third edition. (Ch. 6)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-discrete.html">PPC-discrete</a></code>,
+<code><a href="PPC-errors.html">PPC-errors</a></code>,
+<code><a href="PPC-intervals.html">PPC-intervals</a></code>,
+<code><a href="PPC-loo.html">PPC-loo</a></code>,
+<code><a href="PPC-overview.html">PPC-overview</a></code>,
+<code><a href="PPC-scatterplots.html">PPC-scatterplots</a></code>,
+<code><a href="PPC-test-statistics.html">PPC-test-statistics</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+color_scheme_set("brightblue")
+y &lt;- example_y_data()
+yrep &lt;- example_yrep_draws()
+dim(yrep)
+ppc_dens_overlay(y, yrep[1:25, ])
+
+# ppc_ecdf_overlay with continuous data (set discrete=TRUE if discrete data)
+ppc_ecdf_overlay(y, yrep[sample(nrow(yrep), 25), ])
+
+
+# for ppc_hist,dens,freqpoly,boxplot definitely use a subset yrep rows so
+# only a few (instead of nrow(yrep)) histograms are plotted
+ppc_hist(y, yrep[1:8, ])
+
+
+color_scheme_set("red")
+ppc_boxplot(y, yrep[1:8, ])
+
+# wizard hat plot
+color_scheme_set("blue")
+ppc_dens(y, yrep[200:202, ])
+
+
+ppc_freqpoly(y, yrep[1:3,], alpha = 0.1, size = 1, binwidth = 5)
+
+# if groups are different sizes then the 'freq' argument can be useful
+group &lt;- example_group_data()
+ppc_freqpoly_grouped(y, yrep[1:3,], group) + yaxis_text()
+
+ppc_freqpoly_grouped(y, yrep[1:3,], group, freq = FALSE) + yaxis_text()
+
+
+# don't need to only use small number of rows for ppc_violin_grouped
+# (as it pools yrep draws within groups)
+color_scheme_set("gray")
+ppc_violin_grouped(y, yrep, group, size = 1.5)
+
+ppc_violin_grouped(y, yrep, group, alpha = 0)
+
+# change how y is drawn
+ppc_violin_grouped(y, yrep, group, alpha = 0, y_draw = "points", y_size = 1.5)
+ppc_violin_grouped(y, yrep, group, alpha = 0, y_draw = "both",
+                   y_size = 1.5, y_alpha = 0.5, y_jitter = 0.33)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: PPC intervals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-intervals {bayesplot}"><tr><td>PPC-intervals {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>PPC intervals</h2>
+
+<h3>Description</h3>
+
+<p>Medians and central interval estimates of <code>yrep</code> with <code>y</code> overlaid.
+See the <strong>Plot Descriptions</strong> section, below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppc_intervals(
+  y,
+  yrep,
+  x = NULL,
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9,
+  size = 1,
+  fatten = 3
+)
+
+ppc_intervals_grouped(
+  y,
+  yrep,
+  x = NULL,
+  group,
+  ...,
+  facet_args = list(),
+  prob = 0.5,
+  prob_outer = 0.9,
+  size = 1,
+  fatten = 3
+)
+
+ppc_ribbon(
+  y,
+  yrep,
+  x = NULL,
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9,
+  alpha = 0.33,
+  size = 0.25
+)
+
+ppc_ribbon_grouped(
+  y,
+  yrep,
+  x = NULL,
+  group,
+  ...,
+  facet_args = list(),
+  prob = 0.5,
+  prob_outer = 0.9,
+  alpha = 0.33,
+  size = 0.25
+)
+
+ppc_intervals_data(
+  y,
+  yrep,
+  x = NULL,
+  group = NULL,
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9
+)
+
+ppc_ribbon_data(
+  y,
+  yrep,
+  x = NULL,
+  group = NULL,
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector of observations. See <strong>Details</strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>yrep</code></td>
+<td>
+<p>An <i>S</i> by <i>N</i> matrix of draws from the posterior
+predictive distribution, where <i>S</i> is the size of the posterior sample
+(or subset of the posterior sample used to generate <code>yrep</code>) and <i>N</i> is
+the number of observations (the length of <code>y</code>). The columns of <code>yrep</code>
+should be in the same order as the data points in <code>y</code> for the plots to make
+sense. See <strong>Details</strong> for additional instructions.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector the same length as <code>y</code> to use as the x-axis
+variable. For example, <code>x</code> could be a predictor variable from a
+regression model, a time variable for time-series models, etc. If <code>x</code>
+is missing or <code>NULL</code>, then <code>1:length(y)</code> is used for the x-axis.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>prob, prob_outer</code></td>
+<td>
+<p>Values between 0 and 1 indicating the desired
+probability mass to include in the inner and outer intervals. The defaults
+are <code>prob=0.5</code> and <code>prob_outer=0.9</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>A grouping variable (a vector or factor) the same length as
+<code>y</code>. Each value in <code>group</code> is interpreted as the group level
+pertaining to the corresponding value of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>facet_args</code></td>
+<td>
+<p>An optional list of  arguments (other than <code>facets</code>)
+passed to <code><a href="../../ggplot2/html/facet_wrap.html">ggplot2::facet_wrap()</a></code> to control faceting.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha, size, fatten</code></td>
+<td>
+<p>Arguments passed to geoms. For ribbon plots <code>alpha</code>
+and <code>size</code> are passed to <code><a href="../../ggplot2/html/geom_ribbon.html">ggplot2::geom_ribbon()</a></code>. For interval plots
+<code>size</code> and <code>fatten</code> are passed to <code><a href="../../ggplot2/html/geom_pointrange.html">ggplot2::geom_pointrange()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The plotting functions return a ggplot object that can be further
+customized using the <strong>ggplot2</strong> package. The functions with suffix
+<code style="white-space: pre;">_data()</code> return the data that would have been drawn by the plotting
+function.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code style="white-space: pre;">ppc_intervals(), ppc_ribbon()</code></dt><dd>
+<p><code>100*prob</code>\
+value. <code>ppc_intervals()</code> plots intervals as vertical bars with points
+indicating <code>yrep</code> medians and darker points indicating observed
+<code>y</code> values. <code>ppc_ribbon()</code> plots a ribbon of connected intervals
+with a line through the median of <code>yrep</code> and a darker line connecting
+observed <code>y</code> values. In both cases an optional <code>x</code> variable can
+also be specified for the x-axis variable.
+</p>
+<p>Depending on the number of observations and the variability in the
+predictions at different values of <code>x</code>, one or the other of these
+plots may be easier to read than the other.
+</p>
+</dd>
+<dt><code style="white-space: pre;">ppc_intervals_grouped(), ppc_ribbon_grouped()</code></dt><dd>
+<p>Same as <code>ppc_intervals()</code> and <code>ppc_ribbon()</code>, respectively, but a
+separate plot (facet) is generated for each level of a grouping variable.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari,
+A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis.</em> Chapman &amp; Hall/CRC
+Press, London, third edition. (Ch. 6)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-discrete.html">PPC-discrete</a></code>,
+<code><a href="PPC-distributions.html">PPC-distributions</a></code>,
+<code><a href="PPC-errors.html">PPC-errors</a></code>,
+<code><a href="PPC-loo.html">PPC-loo</a></code>,
+<code><a href="PPC-overview.html">PPC-overview</a></code>,
+<code><a href="PPC-scatterplots.html">PPC-scatterplots</a></code>,
+<code><a href="PPC-test-statistics.html">PPC-test-statistics</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+y &lt;- rnorm(50)
+yrep &lt;- matrix(rnorm(5000, 0, 2), ncol = 50)
+
+color_scheme_set("brightblue")
+ppc_ribbon(y, yrep)
+ppc_intervals(y, yrep)
+
+# change x axis to y values (instead of indices) and add x = y line
+ppc_intervals(y, yrep, x = y) + abline_01()
+
+
+color_scheme_set("teal")
+year &lt;- 1950:1999
+ppc_ribbon(y, yrep, x = year, alpha = 0, size = 0.75) + ggplot2::xlab("Year")
+
+color_scheme_set("pink")
+year &lt;- rep(2000:2009, each = 5)
+group &lt;- gl(5, 1, length = 50, labels = LETTERS[1:5])
+ppc_ribbon_grouped(y, yrep, x = year, group) +
+  ggplot2::scale_x_continuous(breaks = pretty)
+
+ppc_ribbon_grouped(
+ y, yrep, x = year, group,
+ facet_args = list(scales = "fixed"),
+ alpha = 1,
+ size = 2
+) +
+ xaxis_text(FALSE) +
+ xaxis_ticks(FALSE) +
+ panel_bg(fill = "gray20")
+
+ppc_dat &lt;- ppc_intervals_data(y, yrep, x = year, prob = 0.5)
+ppc_group_dat &lt;- ppc_intervals_data(y, yrep, x = year, group = group, prob = 0.5)
+
+## Not run: 
+library("rstanarm")
+fit &lt;- stan_glmer(mpg ~ wt + (1|cyl), data = mtcars, refresh = 0)
+yrep &lt;- posterior_predict(fit)
+
+color_scheme_set("purple")
+with(mtcars, ppc_intervals(mpg, yrep, x = wt, prob = 0.5)) +
+ panel_bg(fill="gray90", color = NA) +
+ grid_lines(color = "white")
+
+ppc_intervals_grouped(y = mtcars$mpg, yrep, prob = 0.8,
+                      x = mtcars$wt, group = mtcars$cyl)
+
+
+color_scheme_set("gray")
+ppc_intervals(mtcars$mpg, yrep, prob = 0.5) +
+ ggplot2::scale_x_continuous(
+   labels = rownames(mtcars),
+   breaks = 1:nrow(mtcars)
+ ) +
+ xaxis_text(angle = -70, vjust = 1, hjust = 0)
+
+
+## End(Not run)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

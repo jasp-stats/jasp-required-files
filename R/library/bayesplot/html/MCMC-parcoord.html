@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parallel coordinates plot of MCMC draws</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for MCMC-parcoord {bayesplot}"><tr><td>MCMC-parcoord {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Parallel coordinates plot of MCMC draws</h2>
+
+<h3>Description</h3>
+
+<p>Parallel coordinates plot of MCMC draws (one dimension per parameter).
+See the <strong>Plot Descriptions</strong> section below for details,
+and see <a href="https://github.com/jgabry/bayes-vis-paper#readme">Gabry et al. (2019)</a>
+for more background and a real example.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mcmc_parcoord(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  ...,
+  size = 0.2,
+  alpha = 0.3,
+  np = NULL,
+  np_style = parcoord_style_np()
+)
+
+mcmc_parcoord_data(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  np = NULL
+)
+
+parcoord_style_np(div_color = "red", div_size = 0.2, div_alpha = 0.2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A 3-D array, matrix, list of matrices, or data frame of MCMC draws.
+The <a href="MCMC-overview.html">MCMC-overview</a> page provides details on how to specify each these
+allowed inputs. It is also possible to use an object with an
+<code>as.array()</code> method that returns the same kind of 3-D array described on
+the <a href="MCMC-overview.html">MCMC-overview</a> page.</p>
+</td></tr>
+<tr valign="top"><td><code>pars</code></td>
+<td>
+<p>An optional character vector of parameter names. If neither
+<code>pars</code> nor <code>regex_pars</code> is specified then the default is to use <em>all</em>
+parameters. As of version <code style="white-space: pre;">1.7.0</code>, <strong>bayesplot</strong> also supports 'tidy'
+parameter selection by specifying <code>pars = vars(...)</code>, where <code>...</code> is
+specified the same way as in <a href="../../dplyr/html/select.html">dplyr::select(...)</a> and
+similar functions. Examples of using <code>pars</code> in this way can be found on the
+<a href="tidy-params.html">Tidy parameter selection</a> page.</p>
+</td></tr>
+<tr valign="top"><td><code>regex_pars</code></td>
+<td>
+<p>An optional <a href="../../base/html/grep.html">regular expression</a> to use for
+parameter selection. Can be specified instead of <code>pars</code> or in addition to
+<code>pars</code>. When using <code>pars</code> for tidy parameter selection, the <code>regex_pars</code>
+argument is ignored since <a href="../../tidyselect/html/select_helpers.html">select helpers</a>
+perform a similar function.</p>
+</td></tr>
+<tr valign="top"><td><code>transformations</code></td>
+<td>
+<p>Optionally, transformations to apply to parameters
+before plotting. If <code>transformations</code> is a function or a single string
+naming a function then that function will be used to transform all
+parameters. To apply transformations to particular parameters, the
+<code>transformations</code> argument can be a named list with length equal to
+the number of parameters to be transformed. Currently only univariate
+transformations of scalar parameters can be specified (multivariate
+transformations will be implemented in a future release). If
+<code>transformations</code> is a list, the name of each list element should be a
+parameter name and the content of each list element should be a function
+(or any item to match as a function via <code><a href="../../base/html/match.fun.html">match.fun()</a></code>, e.g. a
+string naming a function). If a function is specified by its name as a
+string (e.g. <code>"log"</code>), then it can be used to construct a new
+parameter label for the appropriate parameter (e.g. <code>"log(sigma)"</code>).
+If a function itself is specified
+(e.g. <code>log</code> or <code>function(x) log(x)</code>)
+then <code>"t"</code> is used in the new parameter label to indicate that the
+parameter is transformed (e.g. <code>"t(sigma)"</code>).
+</p>
+<p>Note: due to partial argument matching <code>transformations</code> can be
+abbreviated for convenience in interactive use (e.g., <code>transform</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>size, alpha</code></td>
+<td>
+<p>Arguments passed on to <code><a href="../../ggplot2/html/geom_line.html">ggplot2::geom_line()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>np</code></td>
+<td>
+<p>For models fit using <a href="MCMC-nuts.html">NUTS</a> (more generally,
+any <a href="https://en.wikipedia.org/wiki/Symplectic_integrator">symplectic integrator</a>),
+an optional data frame providing NUTS diagnostic information. The data
+frame should be the object returned by <code><a href="bayesplot-extractors.html">nuts_params()</a></code> or one with the same
+structure.</p>
+</td></tr>
+<tr valign="top"><td><code>np_style</code></td>
+<td>
+<p>A call to the <code>parcoord_style_np()</code> helper function to
+specify arguments controlling the appearance of superimposed lines
+representing NUTS diagnostics (in this case divergences) if the <code>np</code>
+argument is specified.</p>
+</td></tr>
+<tr valign="top"><td><code>div_color, div_size, div_alpha</code></td>
+<td>
+<p>Optional arguments to the
+<code>parcoord_style_np()</code> helper function that are eventually passed to
+<code><a href="../../ggplot2/html/geom_line.html">ggplot2::geom_line()</a></code> if the <code>np</code> argument is also specified. They control
+the color, size, and transparency specifications for showing divergences in
+the plot. The default values are displayed in the <strong>Usage</strong> section above.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The plotting functions return a ggplot object that can be further
+customized using the <strong>ggplot2</strong> package. The functions with suffix
+<code style="white-space: pre;">_data()</code> return the data that would have been drawn by the plotting
+function.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>mcmc_parcoord()</code></dt><dd>
+<p><a href="https://en.wikipedia.org/wiki/Parallel_coordinates">Parallel coordinates plot</a>
+of MCMC draws. There is one dimension per parameter along the horizontal
+axis and each set of connected line segments represents a single MCMC draw
+(i.e., a vector of length equal to the number of parameters).
+</p>
+<p>The parallel coordinates plot is most useful if the optional HMC/NUTS
+diagnostic information is provided via the <code>np</code> argument. In that
+case divergences are highlighted in the plot. The appearance of the
+divergences can be customized using the <code>np_style</code> argument and the
+<code>parcoord_style_np</code> helper function. This version of the plot is the
+same as the parallel coordinates plot described in Gabry et al. (2019).
+</p>
+<p>When the plotted model parameters are on very different scales the
+<code>transformations</code> argument can be useful. For example, to standardize
+all variables before plotting you could use function <code>(x - mean(x))/sd(x)</code>
+when specifying the <code>transformations</code> argument to
+<code>mcmc_parcoord</code>. See the <strong>Examples</strong> section for how to do this.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Gabry, J. , Simpson, D. , Vehtari, A. , Betancourt, M. and
+Gelman, A. (2019), Visualization in Bayesian workflow.
+<em>J. R. Stat. Soc. A</em>, 182: 389-402. doi:10.1111/rssa.12378.
+(<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378">journal version</a>,
+<a href="https://arxiv.org/abs/1709.01449">arXiv preprint</a>,
+<a href="https://github.com/jgabry/bayes-vis-paper">code on GitHub</a>)
+</p>
+<p>Hartikainen, A. (2017, Aug 23). Concentration of divergences
+(Msg 21). Message posted to The Stan Forums:
+<a href="https://discourse.mc-stan.org/t/concentration-of-divergences/1590/21">https://discourse.mc-stan.org/t/concentration-of-divergences/1590/21</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other MCMC: 
+<code><a href="MCMC-combos.html">MCMC-combos</a></code>,
+<code><a href="MCMC-diagnostics.html">MCMC-diagnostics</a></code>,
+<code><a href="MCMC-distributions.html">MCMC-distributions</a></code>,
+<code><a href="MCMC-intervals.html">MCMC-intervals</a></code>,
+<code><a href="MCMC-nuts.html">MCMC-nuts</a></code>,
+<code><a href="MCMC-overview.html">MCMC-overview</a></code>,
+<code><a href="MCMC-recover.html">MCMC-recover</a></code>,
+<code><a href="MCMC-scatterplots.html">MCMC-scatterplots</a></code>,
+<code><a href="MCMC-traces.html">MCMC-traces</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+color_scheme_set("pink")
+x &lt;- example_mcmc_draws(params = 5)
+mcmc_parcoord(x)
+mcmc_parcoord(x, regex_pars = "beta")
+
+## Not run: 
+# Example using a Stan demo model
+library(rstan)
+fit &lt;- stan_demo("eight_schools")
+draws &lt;- as.array(fit, pars = c("mu", "tau", "theta", "lp__"))
+np &lt;- nuts_params(fit)
+str(np)
+levels(np$Parameter)
+
+color_scheme_set("brightblue")
+mcmc_parcoord(draws, alpha = 0.05)
+mcmc_parcoord(draws, np = np)
+
+# customize appearance of divergences
+color_scheme_set("darkgray")
+div_style &lt;- parcoord_style_np(div_color = "green", div_size = 0.05, div_alpha = 0.4)
+mcmc_parcoord(draws, size = 0.25, alpha = 0.1,
+              np = np, np_style = div_style)
+
+# to use a transformation (e.g., standardizing all the variables can be helpful)
+# specify the 'transformations' argument (though partial argument name
+# matching means we can just use 'trans' or 'transform')
+mcmc_parcoord(
+  draws,
+  transform = function(x) {(x - mean(x)) / sd(x)},
+  size = 0.25,
+  alpha = 0.1,
+  np = np,
+  np_style = div_style
+ )
+
+# mcmc_parcoord_data returns just the data in a conventient form for plotting
+d &lt;- mcmc_parcoord_data(x, np = np)
+head(d)
+tail(d)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

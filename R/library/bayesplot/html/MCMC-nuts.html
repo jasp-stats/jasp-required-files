@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Diagnostic plots for the No-U-Turn-Sampler (NUTS)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for MCMC-nuts {bayesplot}"><tr><td>MCMC-nuts {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Diagnostic plots for the No-U-Turn-Sampler (NUTS)</h2>
+
+<h3>Description</h3>
+
+<p>Diagnostic plots for the No-U-Turn-Sampler (NUTS), the default MCMC algorithm
+used by <a href="https://mc-stan.org">Stan</a>. See the <strong>Plot Descriptions</strong> section,
+below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mcmc_nuts_acceptance(x, lp, chain = NULL, ..., binwidth = NULL)
+
+mcmc_nuts_divergence(x, lp, chain = NULL, ...)
+
+mcmc_nuts_stepsize(x, lp, chain = NULL, ...)
+
+mcmc_nuts_treedepth(x, lp, chain = NULL, ...)
+
+mcmc_nuts_energy(x, ..., binwidth = NULL, alpha = 0.5, merge_chains = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A molten data frame of NUTS sampler parameters, either created by
+<code><a href="bayesplot-extractors.html">nuts_params()</a></code> or in the same form as the object returned by
+<code><a href="bayesplot-extractors.html">nuts_params()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lp</code></td>
+<td>
+<p>A molten data frame of draws of the log-posterior or, more
+commonly, of a quantity equal to the log-posterior up to a constant.
+<code>lp</code> should either be created via <code><a href="bayesplot-extractors.html">log_posterior()</a></code> or be an
+object with the same form as the object returned by
+<code><a href="bayesplot-extractors.html">log_posterior()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>chain</code></td>
+<td>
+<p>A positive integer for selecting a particular chain. The default
+(<code>NULL</code>) is to merge the chains before plotting. If <code>chain = k</code>
+then the plot for chain <code>k</code> is overlaid (in a darker shade but with
+transparency) on top of the plot for all chains. The <code>chain</code> argument
+is not used by <code>mcmc_nuts_energy()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>An optional value passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> to
+override the default binwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>For <code>mcmc_nuts_energy()</code> only, the transparency (alpha) level
+in <code style="white-space: pre;">[0,1]</code> used for the overlaid histogram.</p>
+</td></tr>
+<tr valign="top"><td><code>merge_chains</code></td>
+<td>
+<p>For <code>mcmc_nuts_energy()</code> only, should all chains be
+merged or displayed separately? The default is <code>FALSE</code>, i.e., to show
+the chains separately.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A gtable object (the result of calling
+<code><a href="../../gridExtra/html/arrangeGrob.html">gridExtra::arrangeGrob()</a></code>) created from several ggplot objects,
+except for <code>mcmc_nuts_energy()</code>, which returns a ggplot object.
+</p>
+
+
+<h3>Quick Definitions</h3>
+
+<p>For more details see Stan Development Team (2016) and Betancourt (2017).
+</p>
+
+<ul>
+<li> <p><code>accept_stat__</code>: the average acceptance probabilities of all
+possible samples in the proposed tree.
+</p>
+</li>
+<li> <p><code>divergent__</code>: the number of leapfrog transitions with diverging
+error. Because NUTS terminates at the first divergence this will be either
+0 or 1 for each iteration.
+</p>
+</li>
+<li> <p><code>stepsize__</code>: the step size used by NUTS in its Hamiltonian
+simulation.
+</p>
+</li>
+<li> <p><code>treedepth__</code>: the depth of tree used by NUTS, which is the log
+(base 2) of the number of leapfrog steps taken during the Hamiltonian
+simulation.
+</p>
+</li>
+<li> <p><code>energy__</code>: the value of the Hamiltonian (up to an additive
+constant) at each iteration.
+</p>
+</li></ul>
+
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>mcmc_nuts_acceptance()</code></dt><dd>
+<p>Three plots:
+</p>
+
+<ul>
+<li><p> Histogram of <code>accept_stat__</code> with vertical lines indicating the
+mean (solid line) and median (dashed line).
+</p>
+</li>
+<li><p> Histogram of <code>lp__</code> with vertical
+lines indicating the mean (solid line) and median (dashed line).
+</p>
+</li>
+<li><p> Scatterplot of <code>accept_stat__</code> vs <code>lp__</code>.
+</p>
+</li></ul>
+
+</dd>
+<dt><code>mcmc_nuts_divergence()</code></dt><dd>
+<p>Two plots:
+</p>
+
+<ul>
+<li><p> Violin plots of <code>lp__|divergent__=1</code> and <code>lp__|divergent__=0</code>.
+</p>
+</li>
+<li><p> Violin plots of <code>accept_stat__|divergent__=1</code> and
+<code>accept_stat__|divergent__=0</code>.
+</p>
+</li></ul>
+
+</dd>
+<dt><code>mcmc_nuts_stepsize()</code></dt><dd>
+<p>Two plots:
+</p>
+
+<ul>
+<li><p> Violin plots of <code>lp__</code> by chain ordered by <code>stepsize__</code> value.
+</p>
+</li>
+<li><p> Violin plots of <code>accept_stat__</code> by chain ordered by <code>stepsize__</code> value.
+</p>
+</li></ul>
+
+</dd>
+<dt><code>mcmc_nuts_treedepth()</code></dt><dd>
+<p>Three plots:
+</p>
+
+<ul>
+<li><p> Violin plots of <code>lp__</code> by value of <code>treedepth__</code>.
+</p>
+</li>
+<li><p> Violin plots of <code>accept_stat__</code> by value of <code>treedepth__</code>.
+</p>
+</li>
+<li><p> Histogram of <code>treedepth__</code>.
+</p>
+</li></ul>
+
+</dd>
+<dt><code>mcmc_nuts_energy()</code></dt><dd>
+<p>Overlaid histograms showing <code>energy__</code> vs the change in
+<code>energy__</code>. See Betancourt (2016) for details.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Betancourt, M. (2017). A conceptual introduction to Hamiltonian Monte Carlo.
+<a href="https://arxiv.org/abs/1701.02434">https://arxiv.org/abs/1701.02434</a>
+</p>
+<p>Betancourt, M. and Girolami, M. (2013). Hamiltonian Monte Carlo for
+hierarchical models. <a href="https://arxiv.org/abs/1312.0906">https://arxiv.org/abs/1312.0906</a>
+</p>
+<p>Hoffman, M. D. and Gelman, A. (2014). The No-U-Turn Sampler:
+adaptively setting path lengths in Hamiltonian Monte Carlo.
+<em>Journal of Machine Learning Research</em>. 15:1593&ndash;1623.
+</p>
+<p>Stan Development Team.
+<em>Stan Modeling Language Users Guide and Reference Manual.</em>
+<a href="https://mc-stan.org/users/documentation/">https://mc-stan.org/users/documentation/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul>
+<li><p> The <a href="https://mc-stan.org/bayesplot/articles/visual-mcmc-diagnostics.html">Visual MCMC Diagnostics</a>
+vignette.
+</p>
+</li>
+<li><p> Several other plotting functions are not NUTS-specific but take optional
+extra arguments if the model was fit using NUTS:
+</p>
+
+<ul>
+<li> <p><code><a href="MCMC-traces.html">mcmc_trace()</a></code>: show divergences as tick marks below the
+trace plot.
+</p>
+</li>
+<li> <p><code><a href="MCMC-parcoord.html">mcmc_parcoord()</a></code>: change the color/size/transparency of lines
+corresponding to divergences.
+</p>
+</li>
+<li> <p><code><a href="MCMC-scatterplots.html">mcmc_scatter()</a></code>: change the color/size/shape of points
+corresponding to divergences.
+</p>
+</li>
+<li> <p><code><a href="MCMC-scatterplots.html">mcmc_pairs()</a></code>: change the color/size/shape of points
+corresponding divergences and/or max treedepth saturation.
+</p>
+</li></ul>
+
+</li></ul>
+
+<p>Other MCMC: 
+<code><a href="MCMC-combos.html">MCMC-combos</a></code>,
+<code><a href="MCMC-diagnostics.html">MCMC-diagnostics</a></code>,
+<code><a href="MCMC-distributions.html">MCMC-distributions</a></code>,
+<code><a href="MCMC-intervals.html">MCMC-intervals</a></code>,
+<code><a href="MCMC-overview.html">MCMC-overview</a></code>,
+<code><a href="MCMC-parcoord.html">MCMC-parcoord</a></code>,
+<code><a href="MCMC-recover.html">MCMC-recover</a></code>,
+<code><a href="MCMC-scatterplots.html">MCMC-scatterplots</a></code>,
+<code><a href="MCMC-traces.html">MCMC-traces</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(ggplot2)
+library(rstanarm)
+fit &lt;- stan_glm(mpg ~ wt + am, data = mtcars, iter = 1000, refresh = 0)
+np &lt;- nuts_params(fit)
+lp &lt;- log_posterior(fit)
+
+color_scheme_set("brightblue")
+mcmc_nuts_acceptance(np, lp)
+mcmc_nuts_acceptance(np, lp, chain = 2)
+
+mcmc_nuts_divergence(np, lp)
+mcmc_nuts_stepsize(np, lp)
+mcmc_nuts_treedepth(np, lp)
+
+color_scheme_set("red")
+mcmc_nuts_energy(np)
+mcmc_nuts_energy(np, merge_chains = TRUE, binwidth = .15)
+mcmc_nuts_energy(np) +
+ facet_wrap(~ Chain, nrow = 1) +
+ coord_fixed(ratio = 150) +
+ ggtitle("NUTS Energy Diagnostic")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

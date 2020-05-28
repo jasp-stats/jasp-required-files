@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot interval estimates from MCMC draws</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for MCMC-intervals {bayesplot}"><tr><td>MCMC-intervals {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot interval estimates from MCMC draws</h2>
+
+<h3>Description</h3>
+
+<p>Plot central (quantile-based) posterior interval estimates from MCMC draws.
+See the <strong>Plot Descriptions</strong> section, below, for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mcmc_intervals(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9,
+  point_est = c("median", "mean", "none"),
+  rhat = numeric()
+)
+
+mcmc_areas(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  ...,
+  area_method = c("equal area", "equal height", "scaled height"),
+  prob = 0.5,
+  prob_outer = 1,
+  point_est = c("median", "mean", "none"),
+  rhat = numeric(),
+  bw = NULL,
+  adjust = NULL,
+  kernel = NULL,
+  n_dens = NULL
+)
+
+mcmc_areas_ridges(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  ...,
+  prob_outer = 1,
+  prob = 1,
+  bw = NULL,
+  adjust = NULL,
+  kernel = NULL,
+  n_dens = NULL
+)
+
+mcmc_intervals_data(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9,
+  point_est = c("median", "mean", "none"),
+  rhat = numeric()
+)
+
+mcmc_areas_data(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  ...,
+  prob = 0.5,
+  prob_outer = 1,
+  point_est = c("median", "mean", "none"),
+  rhat = numeric(),
+  bw = NULL,
+  adjust = NULL,
+  kernel = NULL,
+  n_dens = NULL
+)
+
+mcmc_areas_ridges_data(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  transformations = list(),
+  ...,
+  prob_outer = 1,
+  prob = 1,
+  bw = NULL,
+  adjust = NULL,
+  kernel = NULL,
+  n_dens = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A 3-D array, matrix, list of matrices, or data frame of MCMC draws.
+The <a href="MCMC-overview.html">MCMC-overview</a> page provides details on how to specify each these
+allowed inputs. It is also possible to use an object with an
+<code>as.array()</code> method that returns the same kind of 3-D array described on
+the <a href="MCMC-overview.html">MCMC-overview</a> page.</p>
+</td></tr>
+<tr valign="top"><td><code>pars</code></td>
+<td>
+<p>An optional character vector of parameter names. If neither
+<code>pars</code> nor <code>regex_pars</code> is specified then the default is to use <em>all</em>
+parameters. As of version <code style="white-space: pre;">1.7.0</code>, <strong>bayesplot</strong> also supports 'tidy'
+parameter selection by specifying <code>pars = vars(...)</code>, where <code>...</code> is
+specified the same way as in <a href="../../dplyr/html/select.html">dplyr::select(...)</a> and
+similar functions. Examples of using <code>pars</code> in this way can be found on the
+<a href="tidy-params.html">Tidy parameter selection</a> page.</p>
+</td></tr>
+<tr valign="top"><td><code>regex_pars</code></td>
+<td>
+<p>An optional <a href="../../base/html/grep.html">regular expression</a> to use for
+parameter selection. Can be specified instead of <code>pars</code> or in addition to
+<code>pars</code>. When using <code>pars</code> for tidy parameter selection, the <code>regex_pars</code>
+argument is ignored since <a href="../../tidyselect/html/select_helpers.html">select helpers</a>
+perform a similar function.</p>
+</td></tr>
+<tr valign="top"><td><code>transformations</code></td>
+<td>
+<p>Optionally, transformations to apply to parameters
+before plotting. If <code>transformations</code> is a function or a single string
+naming a function then that function will be used to transform all
+parameters. To apply transformations to particular parameters, the
+<code>transformations</code> argument can be a named list with length equal to
+the number of parameters to be transformed. Currently only univariate
+transformations of scalar parameters can be specified (multivariate
+transformations will be implemented in a future release). If
+<code>transformations</code> is a list, the name of each list element should be a
+parameter name and the content of each list element should be a function
+(or any item to match as a function via <code><a href="../../base/html/match.fun.html">match.fun()</a></code>, e.g. a
+string naming a function). If a function is specified by its name as a
+string (e.g. <code>"log"</code>), then it can be used to construct a new
+parameter label for the appropriate parameter (e.g. <code>"log(sigma)"</code>).
+If a function itself is specified
+(e.g. <code>log</code> or <code>function(x) log(x)</code>)
+then <code>"t"</code> is used in the new parameter label to indicate that the
+parameter is transformed (e.g. <code>"t(sigma)"</code>).
+</p>
+<p>Note: due to partial argument matching <code>transformations</code> can be
+abbreviated for convenience in interactive use (e.g., <code>transform</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>The probability mass to include in the inner interval (for
+<code>mcmc_intervals()</code>) or in the shaded region (for <code>mcmc_areas()</code>). The
+default is <code>0.5</code> (50% interval) and <code>1</code> for <code>mcmc_areas_ridges()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>prob_outer</code></td>
+<td>
+<p>The probability mass to include in the outer interval. The
+default is <code>0.9</code> for <code>mcmc_intervals()</code> (90% interval) and
+<code>1</code> for <code>mcmc_areas()</code> and for <code>mcmc_areas_ridges()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>point_est</code></td>
+<td>
+<p>The point estimate to show. Either <code>"median"</code> (the
+default), <code>"mean"</code>, or <code>"none"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rhat</code></td>
+<td>
+<p>An optional numeric vector of R-hat estimates, with one element
+per parameter included in <code>x</code>. If <code>rhat</code> is provided, the intervals/areas
+and point estimates in the resulting plot are colored based on R-hat value.
+See <code><a href="bayesplot-extractors.html">rhat()</a></code> for methods for extracting R-hat estimates.</p>
+</td></tr>
+<tr valign="top"><td><code>area_method</code></td>
+<td>
+<p>How to constrain the areas in <code>mcmc_areas()</code>. The
+default is <code>"equal area"</code>, setting the density curves to have the same
+area. With <code>"equal height"</code>, the curves are scaled so that the highest
+points across the curves are the same height. The method <code>"scaled height"</code> tries a compromise between to the two: the heights from
+<code>"equal height"</code> are scaled using <code>height*sqrt(height)</code></p>
+</td></tr>
+<tr valign="top"><td><code>bw, adjust, kernel, n_dens</code></td>
+<td>
+<p>Optional arguments passed to
+<code><a href="../../stats/html/density.html">stats::density()</a></code> to override default kernel density estimation
+parameters. <code>n_dens</code> defaults to <code>1024</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The plotting functions return a ggplot object that can be further
+customized using the <strong>ggplot2</strong> package. The functions with suffix
+<code style="white-space: pre;">_data()</code> return the data that would have been drawn by the plotting
+function.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>mcmc_intervals()</code></dt><dd>
+<p>Plots of uncertainty intervals computed from posterior draws with all
+chains merged.
+</p>
+</dd>
+<dt><code>mcmc_areas()</code></dt><dd>
+<p>Density plots computed from posterior draws with all chains merged,
+with uncertainty intervals shown as shaded areas under the curves.
+</p>
+</dd>
+<dt><code>mcmc_areas_ridges()</code></dt><dd>
+<p>Density plot, as in <code>mcmc_areas()</code>, but drawn with overlapping
+ridgelines. This plot provides a compact display of (hierarchically)
+related distributions.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>See Also</h3>
+
+<p>Other MCMC: 
+<code><a href="MCMC-combos.html">MCMC-combos</a></code>,
+<code><a href="MCMC-diagnostics.html">MCMC-diagnostics</a></code>,
+<code><a href="MCMC-distributions.html">MCMC-distributions</a></code>,
+<code><a href="MCMC-nuts.html">MCMC-nuts</a></code>,
+<code><a href="MCMC-overview.html">MCMC-overview</a></code>,
+<code><a href="MCMC-parcoord.html">MCMC-parcoord</a></code>,
+<code><a href="MCMC-recover.html">MCMC-recover</a></code>,
+<code><a href="MCMC-scatterplots.html">MCMC-scatterplots</a></code>,
+<code><a href="MCMC-traces.html">MCMC-traces</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+set.seed(9262017)
+# some parameter draws to use for demonstration
+x &lt;- example_mcmc_draws(params = 6)
+dim(x)
+dimnames(x)
+
+color_scheme_set("brightblue")
+mcmc_intervals(x)
+mcmc_intervals(x, pars = c("beta[1]", "beta[2]"))
+mcmc_areas(x, regex_pars = "beta\\[[1-3]\\]",  prob = 0.8) +
+ ggplot2::labs(
+   title = "Posterior distributions",
+   subtitle = "with medians and 80% intervals"
+ )
+
+color_scheme_set("red")
+mcmc_areas(
+   x,
+   pars = c("alpha", "beta[4]"),
+   prob = 2/3,
+   prob_outer = 0.9,
+   point_est = "mean"
+)
+
+# color by rhat value
+color_scheme_set("blue")
+fake_rhat_values &lt;- c(1, 1.07, 1.3, 1.01, 1.15, 1.005)
+mcmc_intervals(x, rhat = fake_rhat_values)
+
+# get the dataframe that is used in the plotting functions
+mcmc_intervals_data(x)
+mcmc_intervals_data(x, rhat = fake_rhat_values)
+mcmc_areas_data(x, pars = "alpha")
+
+color_scheme_set("gray")
+p &lt;- mcmc_areas(x, pars = c("alpha", "beta[4]"), rhat = c(1, 1.1))
+p + legend_move("bottom")
+p + legend_move("none") # or p + legend_none()
+
+# Different area calculations
+b3 &lt;- c("beta[1]", "beta[2]", "beta[3]")
+
+mcmc_areas(x, pars = b3, area_method = "equal area") +
+  ggplot2::labs(
+    title = "Curves have same area",
+    subtitle =
+      "A wide, uncertain interval is spread thin when areas are equal")
+
+mcmc_areas(x, pars = b3, area_method = "equal height") +
+  ggplot2::labs(
+    title = "Curves have same maximum height",
+    subtitle =
+      "Local curvature is clearer but more uncertain curves use more area")
+
+mcmc_areas(x, pars = b3, area_method = "scaled height") +
+  ggplot2::labs(
+    title = "Same maximum heights but heights scaled by square-root",
+    subtitle =
+      "Compromise: Local curvature is accentuated and less area is used")
+
+
+# apply transformations
+mcmc_intervals(
+  x,
+  pars = c("beta[2]", "sigma"),
+  transformations = list("sigma" = "log", "beta[2]" = function(x) x + 3)
+)
+
+# apply same transformation to all selected parameters
+mcmc_intervals(x, regex_pars = "beta", transformations = "exp")
+
+
+## Not run: 
+# example using fitted model from rstanarm package
+library(rstanarm)
+fit &lt;- stan_glm(
+ mpg ~ 0 + wt + factor(cyl),
+ data = mtcars,
+ iter = 500,
+ refresh = 0
+)
+x &lt;- as.matrix(fit)
+
+color_scheme_set("teal")
+mcmc_intervals(x, point_est = "mean", prob = 0.8, prob_outer = 0.95)
+mcmc_areas(x, regex_pars = "cyl", bw = "SJ",
+           rhat = rhat(fit, regex_pars = "cyl"))
+
+## End(Not run)
+
+## Not run: 
+# Example of hierarchically related parameters
+# plotted with ridgelines
+m &lt;- shinystan::eight_schools@posterior_sample
+mcmc_areas_ridges(m, pars = "mu", regex_pars = "theta") +
+ ggplot2::ggtitle("Treatment effect on eight schools (Rubin, 1981)")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

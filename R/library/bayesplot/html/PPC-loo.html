@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: LOO predictive checks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-loo {bayesplot}"><tr><td>PPC-loo {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>LOO predictive checks</h2>
+
+<h3>Description</h3>
+
+<p>Leave-One-Out (LOO) predictive checks. See the <strong>Plot Descriptions</strong> section,
+below, and <a href="https://github.com/jgabry/bayes-vis-paper#readme">Gabry et al. (2019)</a>
+for details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppc_loo_pit_overlay(
+  y,
+  yrep,
+  lw,
+  pit,
+  samples = 100,
+  ...,
+  size = 0.25,
+  alpha = 0.7,
+  trim = FALSE,
+  bw = "nrd0",
+  adjust = 1,
+  kernel = "gaussian",
+  n_dens = 1024
+)
+
+ppc_loo_pit_qq(
+  y,
+  yrep,
+  lw,
+  pit,
+  compare = c("uniform", "normal"),
+  ...,
+  size = 2,
+  alpha = 1
+)
+
+ppc_loo_pit(
+  y,
+  yrep,
+  lw,
+  pit,
+  compare = c("uniform", "normal"),
+  ...,
+  size = 2,
+  alpha = 1
+)
+
+ppc_loo_intervals(
+  y,
+  yrep,
+  psis_object,
+  subset = NULL,
+  intervals = NULL,
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9,
+  size = 1,
+  fatten = 3,
+  order = c("index", "median")
+)
+
+ppc_loo_ribbon(
+  y,
+  yrep,
+  lw,
+  psis_object,
+  subset = NULL,
+  intervals = NULL,
+  ...,
+  prob = 0.5,
+  prob_outer = 0.9,
+  alpha = 0.33,
+  size = 0.25
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector of observations. See <strong>Details</strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>yrep</code></td>
+<td>
+<p>An <i>S</i> by <i>N</i> matrix of draws from the posterior
+predictive distribution, where <i>S</i> is the size of the posterior sample
+(or subset of the posterior sample used to generate <code>yrep</code>) and <i>N</i> is
+the number of observations (the length of <code>y</code>). The columns of <code>yrep</code>
+should be in the same order as the data points in <code>y</code> for the plots to make
+sense. See <strong>Details</strong> for additional instructions.</p>
+</td></tr>
+<tr valign="top"><td><code>lw</code></td>
+<td>
+<p>A matrix of (smoothed) log weights with the same dimensions as
+<code>yrep</code>. See <code><a href="../../loo/html/psis.html">loo::psis()</a></code> and the associated <code>weights()</code> method as well as
+the <strong>Examples</strong> section, below.</p>
+</td></tr>
+<tr valign="top"><td><code>pit</code></td>
+<td>
+<p>For <code>ppc_loo_pit_overlay()</code> and <code>ppc_loo_pit_qq()</code>, optionally a
+vector of precomputed PIT values that can be specified instead of <code>y</code>,
+<code>yrep</code>, and <code>lw</code> (these are all ignored if <code>pit</code> is specified). If not
+specified the PIT values are computed internally before plotting.</p>
+</td></tr>
+<tr valign="top"><td><code>samples</code></td>
+<td>
+<p>For <code>ppc_loo_pit_overlay()</code>, the number of data sets (each
+the same size as <code>y</code>) to simulate from the standard uniform
+distribution. The default is 100. The density estimate of each dataset is
+plotted as a thin line in the plot, with the density estimate of the LOO
+PITs overlaid as a thicker dark line.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha, size, fatten</code></td>
+<td>
+<p>Arguments passed to code geoms to control plot
+aesthetics. For <code>ppc_loo_pit_qq()</code> and <code>ppc_loo_pit_overlay()</code>, <code>size</code> and
+<code>alpha</code> are passed to <code><a href="../../ggplot2/html/geom_point.html">ggplot2::geom_point()</a></code> and
+<code><a href="../../ggplot2/html/geom_density.html">ggplot2::geom_density()</a></code>, respectively. For <code>ppc_loo_intervals()</code>, <code>size</code>
+and <code>fatten</code> are passed to <code><a href="../../ggplot2/html/geom_pointrange.html">ggplot2::geom_pointrange()</a></code>. For
+<code>ppc_loo_ribbon()</code>, <code>alpha</code> and <code>size</code> are passed to
+<code><a href="../../ggplot2/html/geom_ribbon.html">ggplot2::geom_ribbon()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>trim</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/stat_density.html">ggplot2::stat_density()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>bw, adjust, kernel, n_dens</code></td>
+<td>
+<p>Optional arguments passed to
+<code><a href="../../stats/html/density.html">stats::density()</a></code> to override default kernel density estimation
+parameters. <code>n_dens</code> defaults to <code>1024</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>compare</code></td>
+<td>
+<p>For <code>ppc_loo_pit_qq()</code>, a string that can be either
+<code>"uniform"</code> or <code>"normal"</code>. If <code>"uniform"</code> (the default) the Q-Q plot
+compares computed PIT values to the standard uniform distribution. If
+<code>compare="normal"</code>, the Q-Q plot compares standardized PIT values to the
+standard normal distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>psis_object</code></td>
+<td>
+<p>If using <strong>loo</strong> version <code style="white-space: pre;">2.0.0</code> or greater, an
+object returned by the <code>psis()</code> function (or by the <code>loo()</code> function
+with argument <code>save_psis</code> set to <code>TRUE</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>For <code>ppc_loo_intervals()</code> and <code>ppc_loo_ribbon()</code>, an optional
+integer vector indicating which observations in <code>y</code> (and <code>yrep</code>) to
+include. Dropping observations from <code>y</code> and <code>yrep</code> manually before passing
+them to the plotting function will not work because the dimensions will not
+match up with the dimensions of <code>psis_object</code>, but if all of <code>y</code> and <code>yrep</code>
+are passed along with <code>subset</code> then <strong>bayesplot</strong> can do the subsetting
+internally for <code>y</code>, <code>yrep</code> <em>and</em> <code>psis_object</code>. See the <strong>Examples</strong>
+section for a demonstration.</p>
+</td></tr>
+<tr valign="top"><td><code>intervals</code></td>
+<td>
+<p>For <code>ppc_loo_intervals()</code> and <code>ppc_loo_ribbon()</code>,
+optionally a matrix of precomputed LOO predictive intervals
+that can be specified instead of <code>yrep</code> and <code>lw</code> (these are both
+ignored if <code>intervals</code> is specified). If not specified the intervals
+are computed internally before plotting. If specified, <code>intervals</code>
+must be a matrix with number of rows equal to the number of data points and
+five columns in the following order: lower outer interval, lower inner
+interval, median (50%), upper inner interval and upper outer interval
+(column names are ignored).</p>
+</td></tr>
+<tr valign="top"><td><code>prob, prob_outer</code></td>
+<td>
+<p>Values between 0 and 1 indicating the desired
+probability mass to include in the inner and outer intervals. The defaults
+are <code>prob=0.5</code> and <code>prob_outer=0.9</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>For <code>ppc_loo_intervals()</code>, a string indicating how to arrange
+the plotted intervals. The default (<code>"index"</code>) is to plot them in the
+order of the observations. The alternative (<code>"median"</code>) arranges them
+by median value from smallest (left) to largest (right).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object that can be further customized using the <strong>ggplot2</strong> package.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>ppc_loo_pit_overlay()</code>, <code>ppc_loo_pit_qq()</code></dt><dd>
+<p>The calibration of marginal predictions can be assessed using probability
+integral transformation (PIT) checks. LOO improves the check by avoiding the
+double use of data. See the section on marginal predictive checks in Gelman
+et al. (2013, p. 152&ndash;153) and section 5 of Gabry et al. (2019) for an
+example of using <strong>bayesplot</strong> for these checks.
+</p>
+<p>The LOO PIT values are asymptotically uniform (for continuous data) if the
+model is calibrated. The <code>ppc_loo_pit_overlay()</code> function creates a plot
+comparing the density of the LOO PITs (thick line) to the density estimates
+of many simulated data sets from the standard uniform distribution (thin
+lines). See Gabry et al. (2019) for an example of interpreting the shape of
+the miscalibration that can be observed in these plots.
+</p>
+<p>The <code>ppc_loo_pit_qq()</code> function provides an alternative visualization of
+the miscalibration with a quantile-quantile (Q-Q) plot comparing the LOO
+PITs to the standard uniform distribution. Comparing to the uniform is not
+good for extreme probabilities close to 0 and 1, so it can sometimes be
+useful to set the <code>compare</code> argument to <code>"normal"</code>, which will
+produce a Q-Q plot comparing standardized PIT values to the standard normal
+distribution that can help see the (mis)calibration better for the extreme
+values. However, in most cases we have found that the overlaid density plot
+(<code>ppc_loo_pit_overlay()</code>) function will provided a clearer picture of
+calibration problems that the Q-Q plot.
+</p>
+</dd>
+<dt><code>ppc_loo_intervals()</code>, <code>ppc_loo_ribbon()</code></dt><dd>
+<p>Similar to <code><a href="PPC-intervals.html">ppc_intervals()</a></code> and <code><a href="PPC-intervals.html">ppc_ribbon()</a></code> but the intervals are for
+the LOO predictive distribution.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari,
+A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis.</em> Chapman &amp; Hall/CRC
+Press, London, third edition. (p. 152&ndash;153)
+</p>
+<p>Gabry, J. , Simpson, D. , Vehtari, A. , Betancourt, M. and
+Gelman, A. (2019), Visualization in Bayesian workflow.
+<em>J. R. Stat. Soc. A</em>, 182: 389-402. doi:10.1111/rssa.12378.
+(<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/rssa.12378">journal version</a>,
+<a href="https://arxiv.org/abs/1709.01449">arXiv preprint</a>,
+<a href="https://github.com/jgabry/bayes-vis-paper">code on GitHub</a>)
+</p>
+<p>Vehtari, A., Gelman, A., and Gabry, J. (2017). Practical
+Bayesian model evaluation using leave-one-out cross-validation and WAIC.
+<em>Statistics and Computing</em>. 27(5), 1413&ndash;1432.
+doi:10.1007/s11222-016-9696-4. arXiv preprint:
+<a href="https://arxiv.org/abs/1507.04544/">https://arxiv.org/abs/1507.04544/</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-discrete.html">PPC-discrete</a></code>,
+<code><a href="PPC-distributions.html">PPC-distributions</a></code>,
+<code><a href="PPC-errors.html">PPC-errors</a></code>,
+<code><a href="PPC-intervals.html">PPC-intervals</a></code>,
+<code><a href="PPC-overview.html">PPC-overview</a></code>,
+<code><a href="PPC-scatterplots.html">PPC-scatterplots</a></code>,
+<code><a href="PPC-test-statistics.html">PPC-test-statistics</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+library(rstanarm)
+library(loo)
+
+head(radon)
+fit &lt;- stan_lmer(
+  log_radon ~ floor + log_uranium + floor:log_uranium
+               + (1 + floor | county),
+  data = radon,
+  iter = 1000,
+  chains = 2  # ,cores = 2
+ )
+y &lt;- radon$log_radon
+yrep &lt;- posterior_predict(fit)
+
+loo1 &lt;- loo(fit, save_psis = TRUE, cores = 2)
+psis1 &lt;- loo1$psis_object
+lw &lt;- weights(psis1)
+
+# marginal predictive check using LOO probability integral transform
+color_scheme_set("orange")
+ppc_loo_pit_overlay(y, yrep, lw = lw)
+
+ppc_loo_pit_qq(y, yrep, lw = lw)
+ppc_loo_pit_qq(y, yrep, lw = lw, compare = "normal")
+
+
+# loo predictive intervals vs observations
+keep_obs &lt;- 1:50
+ppc_loo_intervals(y, yrep, psis_object = psis1, subset = keep_obs)
+
+color_scheme_set("gray")
+ppc_loo_intervals(y, yrep, psis_object = psis1, subset = keep_obs,
+                  order = "median")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

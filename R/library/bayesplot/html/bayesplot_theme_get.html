@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Get, set, and modify the active *bayesplot* theme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bayesplot_theme_get {bayesplot}"><tr><td>bayesplot_theme_get {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Get, set, and modify the active <strong>bayesplot</strong> theme</h2>
+
+<h3>Description</h3>
+
+<p>These functions are the <strong>bayesplot</strong> equivalent to
+<strong>ggplot2</strong>'s <code><a href="../../ggplot2/html/theme_set.html">ggplot2::theme_set()</a></code> and friends. They set, get, and update
+the active theme but only apply them to <code>bayesplots</code>. The current/active
+theme is automatically applied to every <code>bayesplot</code> you draw.
+</p>
+<p>Use <code>bayesplot_theme_get()</code> to get the current <strong>bayesplot</strong> theme and
+<code>bayesplot_theme_set()</code> to set a new theme. <code>bayesplot_theme_update()</code> and
+<code>bayesplot_theme_replace()</code> are shorthands for changing individual elements.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bayesplot_theme_get()
+
+bayesplot_theme_set(new = theme_default())
+
+bayesplot_theme_update(...)
+
+bayesplot_theme_replace(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>new</code></td>
+<td>
+<p>The new theme (list of theme elements) to use. This is analogous
+to the <code>new</code> argument to <code><a href="../../ggplot2/html/theme_set.html">ggplot2::theme_set()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>A named list of theme settings.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>bayesplot_theme_set()</code> and friends only apply to <code>bayesplots</code>.
+However, <code><a href="../../ggplot2/html/theme_set.html">ggplot2::theme_set()</a></code> can also be used to change the
+<strong>bayesplot</strong> theme. Currently, setting a theme with <code>ggplot2::theme_set()</code>
+(other than the <strong>ggplot2</strong> default <code><a href="../../ggplot2/html/theme_grey.html">ggplot2::theme_grey()</a></code>) will override
+the <strong>bayesplot</strong> theme.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>bayesplot_theme_get()</code> returns the current theme. The other three
+functions (set, update, replace) invisibly return the <em>previous</em> theme
+so it can be saved and easily restored later. This is the same behavior as
+the <strong>ggplot2</strong> versions of these functions.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="theme_default.html">theme_default()</a></code> for the default <strong>bayesplot</strong> theme.
+</p>
+<p><a href="bayesplot-helpers.html">bayesplot-helpers</a> for a variety of convenience functions,
+many of which provide shortcuts for tweaking theme elements after creating
+a plot.
+</p>
+<p><a href="bayesplot-colors.html">bayesplot-colors</a> to set or view the color scheme used
+for plotting.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(ggplot2)
+
+# plot using the current value of bayesplot_theme_get()
+# (the default is bayesplot::theme_default())
+x &lt;- example_mcmc_draws()
+mcmc_hist(x)
+
+# change the bayesplot theme to theme_minimal and save the old theme
+old &lt;- bayesplot_theme_set(theme_minimal())
+mcmc_hist(x)
+
+# change back to the previous theme
+bayesplot_theme_set(old)
+mcmc_hist(x)
+
+# change the default font size and family for bayesplots
+bayesplot_theme_update(text = element_text(size = 16, family = "sans"))
+mcmc_hist(x)
+
+# change back to the default
+bayesplot_theme_set() # same as bayesplot_theme_set(theme_default())
+mcmc_hist(x)
+
+# updating theme elements
+color_scheme_set("brightblue")
+bayesplot_theme_set(theme_dark())
+mcmc_hist(x)
+
+bayesplot_theme_update(panel.background = element_rect(fill = "black"))
+mcmc_hist(x)
+
+# to get the same plot without updating the theme we could also have
+# used the bayeplot convenience function panel_bg()
+bayesplot_theme_set(theme_dark())
+mcmc_hist(x) + panel_bg(fill = "black")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

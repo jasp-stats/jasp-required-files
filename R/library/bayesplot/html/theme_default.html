@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Default *bayesplot* plotting theme</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for theme_default {bayesplot}"><tr><td>theme_default {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Default <strong>bayesplot</strong> plotting theme</h2>
+
+<h3>Description</h3>
+
+<p>The <code><a href="theme_default.html">theme_default()</a></code> function returns the default ggplot
+<a href="../../ggplot2/html/theme.html">theme</a> used by the <strong>bayesplot</strong> plotting functions. See
+<code><a href="bayesplot_theme_get.html">bayesplot_theme_set()</a></code> for details on setting and updating the plotting
+theme.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+theme_default(
+  base_size = getOption("bayesplot.base_size", 12),
+  base_family = getOption("bayesplot.base_family", "serif")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>base_size, base_family</code></td>
+<td>
+<p>Base font size and family (passed to
+<code><a href="../../ggplot2/html/theme_bw.html">ggplot2::theme_bw()</a></code>). It is possible to set <code>"bayesplot.base_size"</code> and
+<code>"bayesplot.base_family"</code> via <code><a href="../../base/html/options.html">options()</a></code> to change the defaults, which are
+<code>12</code> and <code>"serif"</code>, respectively.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A ggplot <a href="../../ggplot2/html/theme.html">theme</a> object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="bayesplot_theme_get.html">bayesplot_theme_set()</a></code> to change the ggplot theme.
+</p>
+<p><a href="bayesplot-colors.html">bayesplot-colors</a> to set or view the color scheme used
+for plotting.
+</p>
+<p><a href="bayesplot-helpers.html">bayesplot-helpers</a> for a variety of convenience functions,
+many of which provide shortcuts for tweaking theme elements after creating
+a plot.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+class(theme_default())
+
+bayesplot_theme_set() # defaults to setting theme_default()
+x &lt;- example_mcmc_draws()
+mcmc_hist(x)
+
+# change the default font size and family for bayesplots
+bayesplot_theme_set(theme_default(base_size = 8, base_family = "sans"))
+mcmc_hist(x)
+mcmc_areas(x, regex_pars = "beta")
+
+# change back
+bayesplot_theme_set()
+mcmc_areas(x, regex_pars = "beta")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

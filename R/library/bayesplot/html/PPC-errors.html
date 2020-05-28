@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: PPC errors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PPC-errors {bayesplot}"><tr><td>PPC-errors {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>PPC errors</h2>
+
+<h3>Description</h3>
+
+<p>Various plots of predictive errors <code>y - yrep</code>. See the
+<strong>Details</strong> and <strong>Plot Descriptions</strong> sections, below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ppc_error_hist(y, yrep, ..., binwidth = NULL, breaks = NULL, freq = TRUE)
+
+ppc_error_hist_grouped(
+  y,
+  yrep,
+  group,
+  ...,
+  binwidth = NULL,
+  breaks = NULL,
+  freq = TRUE
+)
+
+ppc_error_scatter(y, yrep, ..., size = 2.5, alpha = 0.8)
+
+ppc_error_scatter_avg(y, yrep, ..., size = 2.5, alpha = 0.8)
+
+ppc_error_scatter_avg_vs_x(y, yrep, x, ..., size = 2.5, alpha = 0.8)
+
+ppc_error_binned(y, yrep, ..., bins = NULL, size = 1, alpha = 0.25)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>A vector of observations. See <strong>Details</strong>.</p>
+</td></tr>
+<tr valign="top"><td><code>yrep</code></td>
+<td>
+<p>An <i>S</i> by <i>N</i> matrix of draws from the posterior
+predictive distribution, where <i>S</i> is the size of the posterior sample
+(or subset of the posterior sample used to generate <code>yrep</code>) and <i>N</i> is
+the number of observations (the length of <code>y</code>). The columns of <code>yrep</code>
+should be in the same order as the data points in <code>y</code> for the plots to make
+sense. See <strong>Details</strong> for additional instructions.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> to override
+the default binwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> as an
+alternative to <code>binwidth</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>freq</code></td>
+<td>
+<p>For histograms, <code>freq=TRUE</code> (the default) puts count on the
+y-axis. Setting <code>freq=FALSE</code> puts density on the y-axis. (For many
+plots the y-axis text is off by default. To view the count or density
+labels on the y-axis see the <code><a href="bayesplot-helpers.html">yaxis_text()</a></code> convenience
+function.)</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>A grouping variable (a vector or factor) the same length as
+<code>y</code>. Each value in <code>group</code> is interpreted as the group level
+pertaining to the corresponding value of <code>y</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>size, alpha</code></td>
+<td>
+<p>For scatterplots, arguments passed to
+<code><a href="../../ggplot2/html/geom_point.html">ggplot2::geom_point()</a></code> to control the appearance of the points. For the
+binned error plot, arguments controlling the size of the outline and
+opacity of the shaded region indicating the 2-SE bounds.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector the same length as <code>y</code> to use as the x-axis
+variable.</p>
+</td></tr>
+<tr valign="top"><td><code>bins</code></td>
+<td>
+<p>For <code>ppc_error_binned()</code>, the number of bins to use (approximately).</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>All of these functions (aside from the <code style="white-space: pre;">*_scatter_avg</code> functions)
+compute and plot predictive errors for each row of the matrix <code>yrep</code>, so
+it is usually a good idea for <code>yrep</code> to contain only a small number of
+draws (rows). See <strong>Examples</strong>, below.
+</p>
+<p>For binomial and Bernoulli data the <code>ppc_error_binned()</code> function can be used
+to generate binned error plots. Bernoulli data can be input as a vector of 0s
+and 1s, whereas for binomial data <code>y</code> and <code>yrep</code> should contain &quot;success&quot;
+proportions (not counts). See the <strong>Examples</strong> section, below.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A ggplot object that can be further customized using the <strong>ggplot2</strong> package.
+</p>
+
+
+<h3>Plot descriptions</h3>
+
+
+<dl>
+<dt><code>ppc_error_hist()</code></dt><dd>
+<p>A separate histogram is plotted for the predictive errors computed from
+<code>y</code> and each dataset (row) in <code>yrep</code>. For this plot <code>yrep</code>
+should have only a small number of rows.
+</p>
+</dd>
+<dt><code>ppc_error_hist_grouped()</code></dt><dd>
+<p>Like <code>ppc_error_hist()</code>, except errors are computed within levels of a
+grouping variable. The number of histograms is therefore equal to the
+product of the number of rows in <code>yrep</code> and the number of groups
+(unique values of <code>group</code>).
+</p>
+</dd>
+<dt><code>ppc_error_scatter()</code></dt><dd>
+<p>A separate scatterplot is displayed for <code>y</code> vs. the predictive errors
+computed from <code>y</code> and each dataset (row) in <code>yrep</code>. For this
+plot <code>yrep</code> should have only a small number of rows.
+</p>
+</dd>
+<dt><code>ppc_error_scatter_avg()</code></dt><dd>
+<p>A single scatterplot of <code>y</code> vs. the average of the errors computed
+from <code>y</code> and each dataset (row) in <code>yrep</code>. For each individual
+data point <code>y[n]</code> the average error is the average of the
+errors for <code>y[n]</code> computed over the the draws from the posterior
+predictive distribution.
+</p>
+</dd>
+<dt><code>ppc_error_scatter_avg_vs_x()</code></dt><dd>
+<p>Same as <code>ppc_error_scatter_avg()</code>, except the average is plotted on the
+<i>y</i>-axis and a a predictor variable <code>x</code> is plotted on the
+<i>x</i>-axis.
+</p>
+</dd>
+<dt><code>ppc_error_binned()</code></dt><dd>
+<p>Intended for use with binomial data. A separate binned error plot (similar
+to <code>arm::binnedplot()</code>) is generated for each dataset (row) in <code>yrep</code>. For
+this plot <code>y</code> and <code>yrep</code> should contain proportions rather than counts,
+and <code>yrep</code> should have only a small number of rows.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari,
+A., and Rubin, D. B. (2013). <em>Bayesian Data Analysis.</em> Chapman &amp; Hall/CRC
+Press, London, third edition. (Ch. 6)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other PPCs: 
+<code><a href="PPC-discrete.html">PPC-discrete</a></code>,
+<code><a href="PPC-distributions.html">PPC-distributions</a></code>,
+<code><a href="PPC-intervals.html">PPC-intervals</a></code>,
+<code><a href="PPC-loo.html">PPC-loo</a></code>,
+<code><a href="PPC-overview.html">PPC-overview</a></code>,
+<code><a href="PPC-scatterplots.html">PPC-scatterplots</a></code>,
+<code><a href="PPC-test-statistics.html">PPC-test-statistics</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+y &lt;- example_y_data()
+yrep &lt;- example_yrep_draws()
+ppc_error_hist(y, yrep[1:3, ])
+
+# errors within groups
+group &lt;- example_group_data()
+(p1 &lt;- ppc_error_hist_grouped(y, yrep[1:3, ], group))
+p1 + yaxis_text() # defaults to showing counts on y-axis
+
+table(group) # more obs in GroupB, can set freq=FALSE to show density on y-axis
+(p2 &lt;- ppc_error_hist_grouped(y, yrep[1:3, ], group, freq = FALSE))
+p2 + yaxis_text()
+
+
+# scatterplots
+ppc_error_scatter(y, yrep[10:14, ])
+ppc_error_scatter_avg(y, yrep)
+
+x &lt;- example_x_data()
+ppc_error_scatter_avg_vs_x(y, yrep, x)
+
+# ppc_error_binned with binomial model from rstanarm
+## Not run: 
+library(rstanarm)
+example("example_model", package = "rstanarm")
+formula(example_model)
+
+# get observed proportion of "successes"
+y &lt;- example_model$y  # matrix of "success" and "failure" counts
+trials &lt;- rowSums(y)
+y_prop &lt;- y[, 1] / trials  # proportions
+
+# get predicted success proportions
+yrep &lt;- posterior_predict(example_model)
+yrep_prop &lt;- sweep(yrep, 2, trials, "/")
+
+ppc_error_binned(y_prop, yrep_prop[1:6, ])
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>

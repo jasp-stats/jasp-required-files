@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: General MCMC diagnostics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for MCMC-diagnostics {bayesplot}"><tr><td>MCMC-diagnostics {bayesplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>General MCMC diagnostics</h2>
+
+<h3>Description</h3>
+
+<p>Plots of Rhat statistics, ratios of effective sample size to total sample
+size, and autocorrelation of MCMC draws. See the <strong>Plot Descriptions</strong>
+section, below, for details. For models fit using the No-U-Turn-Sampler, see
+also <a href="MCMC-nuts.html">MCMC-nuts</a> for additional MCMC diagnostic plots.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+mcmc_rhat(rhat, ..., size = NULL)
+
+mcmc_rhat_hist(rhat, ..., binwidth = NULL, breaks = NULL)
+
+mcmc_rhat_data(rhat, ...)
+
+mcmc_neff(ratio, ..., size = NULL)
+
+mcmc_neff_hist(ratio, ..., binwidth = NULL, breaks = NULL)
+
+mcmc_neff_data(ratio, ...)
+
+mcmc_acf(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  ...,
+  facet_args = list(),
+  lags = 20,
+  size = NULL
+)
+
+mcmc_acf_bar(
+  x,
+  pars = character(),
+  regex_pars = character(),
+  ...,
+  facet_args = list(),
+  lags = 20
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>rhat</code></td>
+<td>
+<p>A vector of R-hat estimates.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Currently ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>An optional value to override <code><a href="../../ggplot2/html/geom_point.html">ggplot2::geom_point()</a></code>'s
+default size (for <code>mcmc_rhat()</code>, <code>mcmc_neff()</code>) or
+<code><a href="../../ggplot2/html/geom_line.html">ggplot2::geom_line()</a></code>'s default size (for <code>mcmc_acf()</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>binwidth</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> to override
+the default binwidth.</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>Passed to <code><a href="../../ggplot2/html/geom_histogram.html">ggplot2::geom_histogram()</a></code> as an
+alternative to <code>binwidth</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>ratio</code></td>
+<td>
+<p>A vector of <em>ratios</em> of effective sample size estimates to
+total sample size. See <code><a href="bayesplot-extractors.html">neff_ratio()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A 3-D array, matrix, list of matrices, or data frame of MCMC draws.
+The <a href="MCMC-overview.html">MCMC-overview</a> page provides details on how to specify each these
+allowed inputs. It is also possible to use an object with an
+<code>as.array()</code> method that returns the same kind of 3-D array described on
+the <a href="MCMC-overview.html">MCMC-overview</a> page.</p>
+</td></tr>
+<tr valign="top"><td><code>pars</code></td>
+<td>
+<p>An optional character vector of parameter names. If neither
+<code>pars</code> nor <code>regex_pars</code> is specified then the default is to use <em>all</em>
+parameters. As of version <code style="white-space: pre;">1.7.0</code>, <strong>bayesplot</strong> also supports 'tidy'
+parameter selection by specifying <code>pars = vars(...)</code>, where <code>...</code> is
+specified the same way as in <a href="../../dplyr/html/select.html">dplyr::select(...)</a> and
+similar functions. Examples of using <code>pars</code> in this way can be found on the
+<a href="tidy-params.html">Tidy parameter selection</a> page.</p>
+</td></tr>
+<tr valign="top"><td><code>regex_pars</code></td>
+<td>
+<p>An optional <a href="../../base/html/grep.html">regular expression</a> to use for
+parameter selection. Can be specified instead of <code>pars</code> or in addition to
+<code>pars</code>. When using <code>pars</code> for tidy parameter selection, the <code>regex_pars</code>
+argument is ignored since <a href="../../tidyselect/html/select_helpers.html">select helpers</a>
+perform a similar function.</p>
+</td></tr>
+<tr valign="top"><td><code>facet_args</code></td>
+<td>
+<p>A named list of arguments (other than <code>facets</code>) passed
+to <code><a href="../../ggplot2/html/facet_wrap.html">ggplot2::facet_wrap()</a></code> or <code><a href="../../ggplot2/html/facet_grid.html">ggplot2::facet_grid()</a></code>
+to control faceting.</p>
+</td></tr>
+<tr valign="top"><td><code>lags</code></td>
+<td>
+<p>The number of lags to show in the autocorrelation plot.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The plotting functions return a ggplot object that can be further
+customized using the <strong>ggplot2</strong> package. The functions with suffix
+<code style="white-space: pre;">_data()</code> return the data that would have been drawn by the plotting
+function.
+</p>
+
+
+<h3>Plot Descriptions</h3>
+
+
+<dl>
+<dt><code>mcmc_rhat()</code>, <code>mcmc_rhat_hist()</code></dt><dd>
+<p>Rhat values as either points or a histogram. Values are colored using
+different shades (lighter is better). The chosen thresholds are somewhat
+arbitrary, but can be useful guidelines in practice.
+</p>
+
+<ul>
+<li> <p><em>light</em>: below 1.05 (good)
+</p>
+</li>
+<li> <p><em>mid</em>: between 1.05 and 1.1 (ok)
+</p>
+</li>
+<li> <p><em>dark</em>: above 1.1 (too high)
+</p>
+</li></ul>
+
+</dd>
+<dt><code>mcmc_neff()</code>, <code>mcmc_neff_hist()</code></dt><dd>
+<p>Ratios of effective sample size to total sample size as either points or a
+histogram. Values are colored using different shades (lighter is better).
+The chosen thresholds are somewhat arbitrary, but can be useful guidelines
+in practice.
+</p>
+
+<ul>
+<li> <p><em>light</em>: between 0.5 and 1 (high)
+</p>
+</li>
+<li> <p><em>mid</em>: between 0.1 and 0.5 (good)
+</p>
+</li>
+<li> <p><em>dark</em>: below 0.1 (low)
+</p>
+</li></ul>
+
+</dd>
+<dt><code>mcmc_acf()</code>, <code>mcmc_acf_bar()</code></dt><dd>
+<p>Grid of autocorrelation plots by chain and parameter. The <code>lags</code> argument
+gives the maximum number of lags at which to calculate the autocorrelation
+function. <code>mcmc_acf()</code> is a line plot whereas <code>mcmc_acf_bar()</code> is a
+barplot.
+</p>
+</dd>
+</dl>
+
+
+
+<h3>References</h3>
+
+<p>Stan Development Team.
+<em>Stan Modeling Language Users Guide and Reference Manual.</em>
+<a href="https://mc-stan.org/users/documentation/">https://mc-stan.org/users/documentation/</a>
+</p>
+<p>Gelman, A. and Rubin, D. B. (1992). Inference from iterative
+simulation using multiple sequences. <em>Statistical Science</em>. 7(4),
+457&ndash;472.
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul>
+<li><p> The <a href="https://mc-stan.org/bayesplot/articles/visual-mcmc-diagnostics.html">Visual MCMC Diagnostics</a>
+vignette.
+</p>
+</li>
+<li> <p><a href="MCMC-nuts.html">MCMC-nuts</a> for additional MCMC diagnostic plots for models fit
+using the No-U-Turn-Sampler.
+</p>
+</li></ul>
+
+<p>Other MCMC: 
+<code><a href="MCMC-combos.html">MCMC-combos</a></code>,
+<code><a href="MCMC-distributions.html">MCMC-distributions</a></code>,
+<code><a href="MCMC-intervals.html">MCMC-intervals</a></code>,
+<code><a href="MCMC-nuts.html">MCMC-nuts</a></code>,
+<code><a href="MCMC-overview.html">MCMC-overview</a></code>,
+<code><a href="MCMC-parcoord.html">MCMC-parcoord</a></code>,
+<code><a href="MCMC-recover.html">MCMC-recover</a></code>,
+<code><a href="MCMC-scatterplots.html">MCMC-scatterplots</a></code>,
+<code><a href="MCMC-traces.html">MCMC-traces</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# autocorrelation
+x &lt;- example_mcmc_draws()
+dim(x)
+dimnames(x)
+
+color_scheme_set("green")
+mcmc_acf(x, pars = c("alpha", "beta[1]"))
+
+color_scheme_set("pink")
+(p &lt;- mcmc_acf_bar(x, pars = c("alpha", "beta[1]")))
+
+# add horiztonal dashed line at 0.5
+p + hline_at(0.5, linetype = 2, size = 0.15, color = "gray")
+
+
+# fake rhat values to use for demonstration
+rhat &lt;- c(runif(100, 1, 1.15))
+mcmc_rhat_hist(rhat)
+mcmc_rhat(rhat)
+
+# lollipops
+color_scheme_set("purple")
+mcmc_rhat(rhat[1:10], size = 5)
+
+color_scheme_set("blue")
+mcmc_rhat(runif(1000, 1, 1.07))
+mcmc_rhat(runif(1000, 1, 1.3)) + legend_move("top") # add legend above plot
+
+# fake neff ratio values to use for demonstration
+ratio &lt;- c(runif(100, 0, 1))
+mcmc_neff_hist(ratio)
+mcmc_neff(ratio)
+
+## Not run: 
+# Example using rstanarm model (requires rstanarm package)
+library(rstanarm)
+
+# intentionally use small 'iter' so there are some
+# problems with rhat and neff for demonstration
+fit &lt;- stan_glm(mpg ~ ., data = mtcars, iter = 50, refresh = 0)
+rhats &lt;- rhat(fit)
+ratios &lt;- neff_ratio(fit)
+mcmc_rhat(rhats)
+mcmc_neff(ratios, size = 3)
+
+# there's a small enough number of parameters in the
+# model that we can display their names on the y-axis
+mcmc_neff(ratios) + yaxis_text(hjust = 1)
+
+# can also look at autocorrelation
+draws &lt;- as.array(fit)
+mcmc_acf(draws, pars = c("wt", "cyl"), lags = 10)
+
+# increase number of iterations and plots look much better
+fit2 &lt;- update(fit, iter = 500)
+mcmc_rhat(rhat(fit2))
+mcmc_neff(neff_ratio(fit2))
+mcmc_acf(as.array(fit2), pars = c("wt", "cyl"), lags = 10)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>bayesplot</em> version 1.7.2 <a href="00Index.html">Index</a>]</div>
+</body></html>
