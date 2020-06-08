@@ -4,6 +4,7 @@ RoBMA                   Estimate a Robust Bayesian Meta-Analysis
 check_setup             Prints summary of '"RoBMA"' model implied by
                         the specified priors
 diagnostics             Checks a fitted RoBMA object
+is.RoBMA                Reports whether x is a RoBMA object
 plot.RoBMA              Plots a fitted RoBMA object
 plot.RoBMA.prior        Plots a RoBMA.prior object
 print.RoBMA             Prints a fitted RoBMA object

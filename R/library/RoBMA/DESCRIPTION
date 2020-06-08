@@ -42,5 +42,5 @@ Imports: runjags, bridgesampling, rjags, coda, psych, stats, graphics,
         extraDistr, scales, DPQ, Rdpack
 Suggests: ggplot2, rstan, metaBMA, testthat, vdiffr
 RdMacros: Rdpack
-Built: R 3.6.3; x86_64-w64-mingw32; 2020-06-02 12:39:05 UTC; windows
+Built: R 3.6.3; x86_64-w64-mingw32; 2020-06-05 16:48:25 UTC; windows
 Archs: i386, x64

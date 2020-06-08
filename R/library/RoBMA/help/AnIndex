@@ -3,6 +3,7 @@ Anderson2010	Anderson2010
 check_setup	check_setup
 diagnostics	diagnostics
 dwt	weightedt
+is.RoBMA	is.RoBMA
 plot.RoBMA	plot.RoBMA
 plot.RoBMA.prior	plot.RoBMA.prior
 print.RoBMA	print.RoBMA
