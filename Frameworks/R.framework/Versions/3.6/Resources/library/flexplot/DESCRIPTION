@@ -15,4 +15,4 @@ Suggests: jmvcore (>= 0.8.5), vdiffr, knitr, lme4, testthat,
         randomForest
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
-Built: R 3.6.1; ; 2020-01-29 11:23:41 UTC; unix
+Built: R 3.6.1; ; 2020-01-29 11:21:03 UTC; unix
