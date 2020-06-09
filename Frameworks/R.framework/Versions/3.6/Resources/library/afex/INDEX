@@ -24,10 +24,12 @@ mixed                   p-values for fixed effects of mixed-model via
 nice                    Make nice ANOVA table for printing.
 obk.long                O'Brien Kaiser's Repeated-Measures Dataset with
                         Covariate
-round_ps                Helper function which rounds p-values
+round_ps                Helper functions for rounding p-values
 set_sum_contrasts       Set global contrasts
 sk2011.1                Data from Singmann & Klauer (2011, Experiment
                         1)
 sk2011.2                Data from Singmann & Klauer (2011, Experiment
                         2)
+stroop                  Stroop data from Lin et al. (2020, Psych.
+                        Science)
 test_levene             Assumption Tests for ANOVAs

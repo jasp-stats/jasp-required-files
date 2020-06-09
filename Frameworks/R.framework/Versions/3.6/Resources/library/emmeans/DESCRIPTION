@@ -1,8 +1,8 @@
 Package: emmeans
 Type: Package
 Title: Estimated Marginal Means, aka Least-Squares Means
-Version: 1.4.2
-Date: 2019-10-24
+Version: 1.4.7090004
+Date: 2020-06-08
 Authors@R: c(person("Russell", "Lenth", role = c("aut", "cre", "cph"), 
     email = "russell-lenth@uiowa.edu"),
     person("Henrik", "Singmann", role = "ctb"),
@@ -15,7 +15,8 @@ Imports: estimability (>= 1.3), graphics, methods, numDeriv, stats,
 Suggests: bayesplot, biglm, brms, car, coda (>= 0.17), ggplot2,
         lattice, mediation, mgcv, multcomp, multcompView, nlme, ordinal
         (>= 2014.11-12), pbkrtest (>= 0.4-1), lme4, lmerTest (>=
-        2.0.32), MASS, MuMIn, rsm, knitr, rmarkdown, scales, testthat
+        2.0.32), MASS, MuMIn, rsm, knitr, rmarkdown, scales, splines,
+        testthat
 Enhances: CARBayes, coxme, gee, geepack, MCMCglmm, MCMCpack, mice,
         nnet, pscl, rstanarm, sommer, survival
 URL: https://github.com/rvlenth/emmeans
@@ -31,16 +32,25 @@ Description: Obtain estimated marginal means (EMMs) for many linear, generalized
   Statistician 34(4), 216-221 <doi:10.1080/00031305.1980.10483031>.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
+Roxygen: list(old_usage = TRUE)
 VignetteBuilder: knitr
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: emmeans
+RemoteUsername: rvlenth
+RemoteRef: master
+RemoteSha: 1e6ab3e1e9eb47bb8a038221495463992f8dfb60
+GithubRepo: emmeans
+GithubUsername: rvlenth
+GithubRef: master
+GithubSHA1: 1e6ab3e1e9eb47bb8a038221495463992f8dfb60
 NeedsCompilation: no
-Packaged: 2019-10-24 15:19:25 UTC; rlenth
+Packaged: 2020-06-09 08:40:36 UTC; fransmeerhoff
 Author: Russell Lenth [aut, cre, cph],
   Henrik Singmann [ctb],
   Jonathon Love [ctb],
   Paul Buerkner [ctb],
   Maxime Herve [ctb]
 Maintainer: Russell Lenth <russell-lenth@uiowa.edu>
-Repository: CRAN
-Date/Publication: 2019-10-24 16:20:05 UTC
-Built: R 3.6.0; ; 2019-11-05 21:05:05 UTC; unix
+Built: R 3.6.1; ; 2020-06-09 08:40:36 UTC; unix
