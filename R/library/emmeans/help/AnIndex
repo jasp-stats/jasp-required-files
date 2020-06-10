@@ -6,15 +6,16 @@ emmeans-package	emmeans-package
 add_grouping	add_grouping
 as.data.frame.emmGrid	summary.emmGrid
 as.emmGrid	as.emmGrid
+as.emm_list	as.emmGrid
 as.glht	glht-support
 as.glht.emmGrid	glht-support
 as.list.emmGrid	as.emmGrid
 as.mcmc.emmGrid	mcmc-support
 as.mcmc.list.emmGrid	mcmc-support
 auto.noise	auto.noise
-CLD	CLD.emmGrid
-CLD.emmGrid	CLD.emmGrid
-cld.emmGrid	CLD.emmGrid
+CLD	cld.emmGrid
+CLD.emmGrid	cld.emmGrid
+cld.emmGrid	cld.emmGrid
 CLD.emm_list	emm_list-object
 coef.emmGrid	contrast
 confint.emmGrid	summary.emmGrid
@@ -78,6 +79,7 @@ poly.emmc	emmc-functions
 predict.emmGrid	summary.emmGrid
 print.emmGrid	emmGrid-methods
 print.xtable_emm	xtable.emmGrid
+pwpm	pwpm
 pwpp	pwpp
 qdrg	qdrg
 rbind.emmGrid	rbind.emmGrid

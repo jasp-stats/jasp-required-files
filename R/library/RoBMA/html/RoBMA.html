@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Estimate a Robust Bayesian Meta-Analysis</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for RoBMA {RoBMA}"><tr><td>RoBMA {RoBMA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Estimate a Robust Bayesian Meta-Analysis</h2>
+
+<h3>Description</h3>
+
+<p><code>RoBMA</code> is used to estimate a Robust Bayesian
+Meta-Analysis. Either t-statistics (<code>t</code>) and sample sizes of
+the original studies (<code>n</code> or <code>n1</code> and <code>n2</code>), or
+effect sizes (<code>d</code>) and standard errors (<code>se</code>) can be
+used to estimate the model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+RoBMA(
+  t = NULL,
+  d = NULL,
+  r = NULL,
+  y = NULL,
+  se = NULL,
+  n = NULL,
+  n1 = NULL,
+  n2 = NULL,
+  test_type = "two.sample",
+  study_names = NULL,
+  mu_transform = if (!is.null(r)) "cohens_d" else NULL,
+  priors_mu = prior(distribution = "normal", parameters = list(mean = 0, sd = 1)),
+  priors_tau = prior(distribution = "invgamma", parameters = list(shape = 1, scale =
+    0.15)),
+  priors_omega = list(prior(distribution = "two.sided", parameters = list(alpha = c(1,
+    1), steps = c(0.05)), prior_odds = 1/2), prior(distribution = "two.sided", parameters
+    = list(alpha = c(1, 1, 1), steps = c(0.05, 0.1)), prior_odds = 1/2)),
+  priors_mu_null = prior(distribution = "point", parameters = list(location = 0)),
+  priors_tau_null = prior(distribution = "point", parameters = list(location = 0)),
+  priors_omega_null = prior(distribution = "point", parameters = list(location = 1)),
+  chains = 3,
+  iter = 10000,
+  burnin = 5000,
+  thin = 1,
+  control = NULL,
+  save = "all",
+  seed = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>a vector of t-statistics.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>a vector of effect sizes measured as Cohen's d.</p>
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+<p>a vector of effect sizes measured as correlations.</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>a vector of unspecified effect sizes.</p>
+</td></tr>
+<tr valign="top"><td><code>se</code></td>
+<td>
+<p>a vector of standard errors of the effect sizes.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>a vector of overall sample sizes.</p>
+</td></tr>
+<tr valign="top"><td><code>n1</code></td>
+<td>
+<p>a vector of sample sizes for first group.</p>
+</td></tr>
+<tr valign="top"><td><code>n2</code></td>
+<td>
+<p>a vector of sample sizes for second group.</p>
+</td></tr>
+<tr valign="top"><td><code>test_type</code></td>
+<td>
+<p>a type of test used in the original studies. Options
+are <code>"two.sample"</code> (default) and <code>"one.sample"</code>. Only available
+if <code>d</code> is supplied.</p>
+</td></tr>
+<tr valign="top"><td><code>study_names</code></td>
+<td>
+<p>an optional argument with names of the studies.</p>
+</td></tr>
+<tr valign="top"><td><code>mu_transform</code></td>
+<td>
+<p>transformation to be applied to the supplied
+effect sizes before fitting the individual models. Defaults to
+<code>"cohens_d"</code> for correlations (another options <code>"fishers_z"</code>).
+Note that priors are specified on the transformed scale and
+estimates are transformed back (apart from tau).</p>
+</td></tr>
+<tr valign="top"><td><code>priors_mu</code></td>
+<td>
+<p>list of prior distributions for the <code>mu</code> parameter that
+will be treated as belonging to the alternative hypothesis. Defaults to <code>
+prior(distribution = "normal",   parameters = list(mean = 0, sd = 1))</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>priors_tau</code></td>
+<td>
+<p>list of prior distributions for the <code>tau</code> parameter that
+will be treated as belonging to the alternative hypothesis. Defaults to <code>
+prior(distribution = "invgamma", parameters = list(shape = 1, scale = .15))</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>priors_omega</code></td>
+<td>
+<p>list of prior weight functions for the <code>omega</code>
+parameter that will be treated as belonging to the alternative hypothesis.
+Defaults to <code>list(
+prior(distribution = "two.sided", parameters = list(alpha = c(1, 1),     steps = c(.05)),      prior_odds = 1/2),
+prior(distribution = "two.sided", parameters = list(alpha = c(1, 1, 1),  steps = c(.05, .10)), prior_odds = 1/2)
+)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>priors_mu_null</code></td>
+<td>
+<p>list of prior distributions for the <code>mu</code> parameter that
+will be treated as belonging to the null hypothesis. Defaults to point distribution
+with location at 0 (
+<code>prior(distribution = "point", parameters = list(location = 0))</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>priors_tau_null</code></td>
+<td>
+<p>list of prior distributions for the <code>tau</code> parameter that
+will be treated as belonging to the null hypothesis. Defaults to point distribution
+with location at 0 (
+<code>prior(distribution = "point", parameters = list(location = 0))</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>priors_omega_null</code></td>
+<td>
+<p>list of prior weight functions for the <code>omega</code> parameter
+that will be treated as belonging to the null hypothesis. Defaults to point
+distribution with location at 1 (
+<code>prior(distribution = "point", parameters = list(location = 0))</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>chains</code></td>
+<td>
+<p>a number of chains of the MCMC algorithm.</p>
+</td></tr>
+<tr valign="top"><td><code>iter</code></td>
+<td>
+<p>a number of sampling iterations of the MCMC algorithm.
+Defaults to <code>10000</code>, with minimum of <code>4000</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>burnin</code></td>
+<td>
+<p>a number of burnin iterations of the MCMC algorithm.
+Defaults to <code>5000</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>thin</code></td>
+<td>
+<p>a thinning of the chains of the MCMC algorithm. Defaults to
+<code>1</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>control</code></td>
+<td>
+<p>a list of additional arguments for the MCMC algorithm.
+Possible options are:
+</p>
+
+<dl>
+<dt>autofit</dt><dd><p>Whether the models should be refitted until convergence.
+Defaults to <code>TRUE</code></p>
+</dd>
+<dt>max_error</dt><dd><p>The target MCMC error for the autofit function. The
+argument is passed to <a href="../../coda/html/raftery.diag.html">raftery.diag</a> as 'r'. Defaults to
+<code>.01</code>.</p>
+</dd>
+<dt>max_time</dt><dd><p>A string specifying the maximum fitting time in case
+of autofit. Defaults to <code>Inf</code>. Can be specified as a number and
+a unit (Acceptable units include ’seconds’, ’minutes’, ’hours’, ’days’,
+’weeks’, or the first letter(s) of each), i.e. <code>"1hr"</code>.</p>
+</dd>
+<dt>adapt</dt><dd><p>A number of iterations used for MCMC adaptation. Defaults
+to <code>1000</code>.</p>
+</dd>
+<dt>bridge_max_iter</dt><dd><p>Maximum number of iterations for the
+<a href="../../bridgesampling/html/bridge_sampler.html">bridge_sampler</a> function. Defaults to <code>10000</code></p>
+</dd>
+<dt>allow_max_error</dt><dd><p>Maximum allowed MCMC error for a model to be taken
+into consideration. Model will be removed from the ensemble if it fails to
+achieve the set MCMC error. Defaults to <code>NULL</code> - no model will be
+removed based on MCMC error.</p>
+</dd>
+<dt>allow_max_rhat</dt><dd><p>Maximum allowed Rhat for a model to be taken into
+consideration. Model will be removed from the ensemble if it fails to
+achieve the set Rhat. Defaults to <code>NULL</code> - no model will be removed
+based on Rhat.</p>
+</dd>
+<dt>allow_min_ESS</dt><dd><p>Minimum allowed ESS for a model to be taken into
+consideration. Model will be removed from the ensemble if it fails to
+achieve the set ESS. Defaults to <code>NULL</code> - no model will be removed
+based on ESS.</p>
+</dd>
+<dt>allow_inc_theta</dt><dd><p>Whether the diagnostics for theta should be
+included into model removal decision. Defaults to <code>NULL</code> - only
+'mu', 'tau', and 'omega' estimates will be taken into account.</p>
+</dd>
+<dt>balance_prob</dt><dd><p>Whether the prior probability of removed model
+should be redistributed to other models with the same type if possible
+(crossing of effect / heterogeneity / publication bias). Defaults to
+<code>TRUE</code>.</p>
+</dd>
+<dt>silent</dt><dd><p>Whether all fitting messages should be suppressed. Defaults
+to <code>FALSE</code>.</p>
+</dd>
+</dl>
+</td></tr>
+<tr valign="top"><td><code>save</code></td>
+<td>
+<p>whether all models posterior distributions should be kept
+after obtaining a model-averaged result. Defaults to <code>"all"</code> which
+does not remove anything. Set to <code>"min"</code> to significantly reduce
+the size of final object, however, some model diagnostics <code><a href="../../utils/html/PkgUtils.html">check()</a></code> will
+not be available.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>a seed to be set before model fitting, marginal likelihood
+computation, and posterior mixing for exact results reproducibility. Defaults
+to <code>NULL</code> - no seed is set.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The RoBMA function first generates models from combination of the
+provided priors for each of the model parameter. Then, the individual models
+are fitted using <a href="../../runjags/html/autorun.jags.html">autorun.jags</a> function. A marginal likelihood
+is computed using <a href="../../bridgesampling/html/bridge_sampler.html">bridge_sampler</a> function. The individual
+models are then combined into an ensemble using posterior model probabilities.
+</p>
+<p>Generic <code><a href="summary.RoBMA.html">summary.RoBMA()</a></code>, <code><a href="print.RoBMA.html">print.RoBMA()</a></code>, and <code><a href="plot.RoBMA.html">plot.RoBMA()</a></code> functions are
+provided to facilitate manipulation with the ensemble. A visual check of the
+individual model diagnostics can be obtained using the <code><a href="diagnostics.html">diagnostics()</a></code> function.
+The fitted model can be further updated or modified by <code><a href="update.RoBMA.html">update.RoBMA()</a></code> function.
+</p>
+<p>See <code><a href="prior.html">prior()</a></code> for more information about possible prior specifications options.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>RoBMA</code> returns an object of <a href="../../base/html/class.html">class</a> <code>"RoBMA"</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="summary.RoBMA.html">summary.RoBMA()</a></code>, <code><a href="update.RoBMA.html">update.RoBMA()</a></code>, <code><a href="prior.html">prior()</a></code>, <code><a href="check_setup.html">check_setup()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# using the example data from Anderson et al. 2010 and fitting the default model
+# (note that the model can take a while to fit)
+fit &lt;- RoBMA(r = Anderson2010$r, n = Anderson2010$n, study_names = Anderson2010$labels)
+
+# in order to speed up the process, we can reduce the default number of chains, iteration,
+# and disable the autofit functionality (see ?RoBMA for all possible settings)
+fit_faster &lt;- RoBMA(r = Anderson2010$r, n = Anderson2010$n, study_names = Anderson2010$labels,
+chains = 2, iter = 5000, control = list(autofit = FALSE))
+
+# RoBMA function allows to use different prior specifications
+# for example, change the prior for tau to be half normal and specify one-sided selection only
+# on significant p-values (see '?.prior' for all options regarding prior distributions)
+fit1 &lt;- RoBMA(r = Anderson2010$r, n = Anderson2010$n, study_names = Anderson2010$labels,
+              priors_tau = prior("normal",
+                                 parameters = list(mean = 0, sd = 1),
+                                 truncation = list(lower = 0, upper = Inf)),
+              priors_omega = prior("one-sided",
+                                   parameters = list(cuts = c(.05), alpha = c(1, 1))))
+
+# the priors for the null models can be modified or even omited in a similar manner,
+# allowing to test different (non-nill-null) hypotheses
+fit2 &lt;- RoBMA(r = Anderson2010$r, n = Anderson2010$n, study_names = Anderson2010$labels,
+              priors_mu_null  = prior("normal",
+                                 parameters = list(mean = 0, sd = .1),
+                                 truncation = list(lower = -0.1, upper = 0.1)))
+
+# an already fitted RoBMA model can be further updated or modified by using the update function
+# for example, the prior model probabilities can be changed after the fitting by
+# (but see '?update.RoBMA' for other posibilities including refitting or adding more models)
+fit3 &lt;- update(fit2, prior_odds = c(10,1,1,1,1,1,1,1,1,1,1,1))
+
+# we can get a quick overview of the model coefficients just by printing the model
+fit
+
+# a more detailed overview using the summary function (see '?summary.RoBMA' for all options)
+summary(fit)
+
+# results of the models can be visualized using the plot function (see ?plot.RoBMA for all options)
+# for example, the model-averaged mean estimate
+plot(fit, parameter = "mu")
+
+# diagnostics for the individual parameters in individual models can be obtained using diagnostics
+# function (see 'diagnostics' for all options)
+diagnostics(fit, parameter = "mu", type = "chains")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>RoBMA</em> version 0.0.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

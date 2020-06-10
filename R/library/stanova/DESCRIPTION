@@ -1,0 +1,43 @@
+Package: stanova
+Title: Bayesian Models with Categorical Variables
+Version: 0.1-0
+Authors@R: 
+    c(person(given = "Henrik",
+           family = "Singmann",
+           role = c("aut", "cre"),
+           email = "singmann@gmail.com",
+           comment = c(ORCID = "0000-0002-4842-3657")),
+      person("Jonah", "Gabry", role = "ctb"), 
+      person("Ben", "Goodrich", role = "ctb"))
+Description: Improved summary() methods for Bayesian statistical models with 
+    categorical variables with more than two factor levels that interact with 
+    other variables. Instead of the values of the coefficients 
+    (which cannot be interpreted in such cases), output is given per factor 
+    level and represent difference from intercept (i.e., unweighted grand mean).  
+    In addition, appropriate contrasts that have the same marginal effects on 
+    all factor levels are used per default.
+License: GPL (>=2)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
+Imports: rstanarm, emmeans, lme4, coda, rstan, stats
+Suggests: testthat (>= 2.1.0), MEMSS, afex, glmmTMB, bayesplot, tibble,
+        tidybayes, tidyverse
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: stanova
+RemoteUsername: bayesstuff
+RemoteRef: master
+RemoteSha: 2cb08223f957533103612e72055fa7063a1fb5ce
+GithubRepo: stanova
+GithubUsername: bayesstuff
+GithubRef: master
+GithubSHA1: 2cb08223f957533103612e72055fa7063a1fb5ce
+NeedsCompilation: no
+Packaged: 2020-06-09 18:54:43 UTC; Frans Meerhoff
+Author: Henrik Singmann [aut, cre] (<https://orcid.org/0000-0002-4842-3657>),
+  Jonah Gabry [ctb],
+  Ben Goodrich [ctb]
+Maintainer: Henrik Singmann <singmann@gmail.com>
+Built: R 3.6.1; ; 2020-06-09 18:54:44 UTC; windows

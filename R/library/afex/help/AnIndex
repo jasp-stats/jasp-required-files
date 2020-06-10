@@ -20,6 +20,7 @@ emm_basis.afex_aov	afex_aov-methods
 ems	ems
 ez.glm	deprecated
 fhch2010	fhch2010
+fitted.afex_aov	residuals.afex_aov
 interaction_plot	afex_plot
 ks2013.3	ks2013.3
 lmer	reexports
@@ -40,7 +41,9 @@ print.afex_aov	afex_aov-methods
 print.nice_table	nice
 recover_data.afex_aov	afex_aov-methods
 reexports	reexports
+residuals.afex_aov	residuals.afex_aov
 round_ps	round_ps
+round_ps_apa	round_ps
 set_default_contrasts	set_sum_contrasts
 set_deviation_contrasts	set_sum_contrasts
 set_effects_contrasts	set_sum_contrasts
@@ -48,6 +51,7 @@ set_sum_contrasts	set_sum_contrasts
 set_treatment_contrasts	set_sum_contrasts
 sk2011.1	sk2011.1
 sk2011.2	sk2011.2
+stroop	stroop
 summary.afex_aov	afex_aov-methods
 test_levene	test_assumptions
 test_sphericity	test_assumptions
