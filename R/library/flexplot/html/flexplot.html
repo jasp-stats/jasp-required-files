@@ -22,7 +22,9 @@ flexplot(formula, data = NULL, related = F, bins = 3,
   ghost.line = NULL, ghost.reference = NULL, spread = c("quartiles",
   "stdev", "sterr"), jitter = NULL, raw.data = T, sample = Inf,
   prediction = NULL, suppress_smooth = F, alpha = 0.99977,
-  plot.string = F, silent = F, third.eye = NULL)
+  plot.string = F, silent = F, third.eye = NULL,
+  plot.type = c("histogram", "qq", "density", "boxplot", "violin",
+  "line"))
 </pre>
 
 
@@ -112,6 +114,12 @@ Users can export the string, in case they want to modify the ggplot object</p>
 <td>
 <p>Should the &quot;third eye&quot; be employed? The third eye will be implemented shortly.</p>
 </td></tr>
+<tr valign="top"><td><code>plot.type</code></td>
+<td>
+<p>This argument allows the user to control the type of plot used. Flexplot defaults to histograms (for univariate variables)
+but could also do qqplots (using &quot;qq&quot; as the argument) or density plots (using &quot;density&quot;). Also, the user can specify &quot;boxplot&quot; for boxplots and
+&quot;violin&quot; for violin plots.</p>
+</td></tr>
 </table>
 
 
@@ -185,5 +193,5 @@ flexplot(weight.loss~motivation | income + health, data=d, se=FALSE, method="lm"
 ## End(Not run)	
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>flexplot</em> version 0.7.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>flexplot</em> version 0.7.7 <a href="00Index.html">Index</a>]</div>
 </body></html>
