@@ -1,0 +1,43 @@
+Package: Bayesrel
+Type: Package
+Title: Bayesian Reliability Estimation
+Version: 0.6.5
+Author: Julius M. Pfadt and Don van den Bergh
+Maintainer: Julius M. Pfadt <julius.pfadt@gmail.com>
+Description: Functionality for the most common single test reliability estimates is provided:  
+    Coefficient alpha, 'Guttman's' lambda-2/-4/-6, the greatest lower bound and coefficient omega. 
+    The Bayesian estimates are provided with credible intervals. 
+    The frequentist estimates are provided with bootstrapped confidence intervals
+    The method for the Bayesian estimates, except for omega, 
+    is sampling from the posterior inverse 'Wishart' for the covariance matrix based measures. 
+    See 'Murphy' (2007) <https://www.seas.harvard.edu/courses/cs281/papers/murphy-2007.pdf>. 
+    In the case of omega it is 'Gibbs' Sampling from the joint conditional distributions of a single factor model. 
+    See 'Lee' (2007, <doi:10.1002/9780470024737>). 
+    The glb method is adjusted code from the 'Rcsdp' package by 'Hector Corrada Bravo', 
+    <https://CRAN.R-project.org/package=Rcsdp>; 
+    lambda-4 is from 'Benton' (2015) <doi:10.1007/978-3-319-07503-7_19>; 
+    the principal factor analysis for the frequentist omega is from 'Schlegel' (2017) 
+    <https://www.r-bloggers.com/iterated-principal-factor-method-of-factor-analysis-with-r/>; 
+    and the analytic alpha interval is from 'Bonett' and 'Wright' (2015) <doi:10.1002/job.1960>. 
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: LaplacesDemon, Rcsdp, MASS, ggplot2, ggridges, lavaan,
+        plotrix, coda, methods, stats, graphics, Rdpack
+RdMacros: Rdpack
+RoxygenNote: 7.1.0
+Depends: R (>= 2.10)
+Suggests: testthat (>= 2.1.0)
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: bayesrel
+RemoteUsername: juliuspf
+RemoteRef: master
+RemoteSha: ec02d7692ec28ae7f9f2a015e0a692fc52039adf
+GithubRepo: bayesrel
+GithubUsername: juliuspf
+GithubRef: master
+GithubSHA1: ec02d7692ec28ae7f9f2a015e0a692fc52039adf
+NeedsCompilation: no
+Packaged: 2020-06-11 15:03:54 UTC; fransmeerhoff
+Built: R 3.6.1; ; 2020-06-11 15:03:55 UTC; unix
