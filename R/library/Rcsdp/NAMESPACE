@@ -1,8 +1,10 @@
-useDynLib(Rcsdp)
+useDynLib(Rcsdp, .registration = TRUE, .fixes = "C_")
+
 importFrom("methods", "as")
 importFrom("stats", "rnorm")
 
 export("csdp",
+       "csdp_minimal",
        "csdp.control",
        "readsdpa",
        "writesdpa",

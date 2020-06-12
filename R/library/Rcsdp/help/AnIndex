@@ -6,6 +6,7 @@ as.simple_triplet_sym_matrix.matrix	csdp-sparse
 as.vector.simple_triplet_sym_matrix	csdp-sparse
 csdp	csdp
 csdp.control	csdp.control
+csdp_minimal	csdp
 readsdpa	readsdpa
 readsdpa.sol	readsdpa
 simple_triplet_sym_matrix	csdp-sparse

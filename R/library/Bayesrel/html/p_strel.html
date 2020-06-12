@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: prior and posterior probability of estimate being bigger than...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for p_strel {Bayesrel}"><tr><td>p_strel {Bayesrel}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>prior and posterior probability of estimate being bigger than threshold</h2>
+
+<h3>Description</h3>
+
+<p>takes a mcmc posterior sample of any of the single test reliability estimates
+and calculates the prior and posterior probability of the estimate being bigger
+or smaller than an arbitrary value (priors are stored in the package)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+p_strel(x, estimate, low.bound)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A strel output object (list)</p>
+</td></tr>
+<tr valign="top"><td><code>estimate</code></td>
+<td>
+<p>A character string indicating what estimate to plot from the strel output object</p>
+</td></tr>
+<tr valign="top"><td><code>low.bound</code></td>
+<td>
+<p>A number for the threshold to be tested against</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+p_strel(strel(asrm, "lambda2", n.chains = 1), "lambda2", .80)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>Bayesrel</em> version 0.6.5 <a href="00Index.html">Index</a>]</div>
+</body></html>
