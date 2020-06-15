@@ -47,11 +47,11 @@ RemoteHost: api.github.com
 RemoteRepo: RoBMA
 RemoteUsername: FBartos
 RemoteRef: master
-RemoteSha: a5a61e94d88a77eb24ace143e0d05b33b4b20b05
+RemoteSha: 662149c70530510c6a537b0130718a2481aa686d
 GithubRepo: RoBMA
 GithubUsername: FBartos
 GithubRef: master
-GithubSHA1: a5a61e94d88a77eb24ace143e0d05b33b4b20b05
+GithubSHA1: 662149c70530510c6a537b0130718a2481aa686d
 NeedsCompilation: yes
-Packaged: 2020-06-09 07:23:58 UTC; fransmeerhoff
-Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-06-09 07:24:01 UTC; unix
+Packaged: 2020-06-15 21:44:49 UTC; fransmeerhoff
+Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-06-15 21:44:52 UTC; unix
