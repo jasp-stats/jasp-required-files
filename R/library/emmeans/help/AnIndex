@@ -13,9 +13,9 @@ as.list.emmGrid	as.emmGrid
 as.mcmc.emmGrid	mcmc-support
 as.mcmc.list.emmGrid	mcmc-support
 auto.noise	auto.noise
-CLD	cld.emmGrid
-CLD.emmGrid	cld.emmGrid
-cld.emmGrid	cld.emmGrid
+CLD	CLD.emmGrid
+CLD.emmGrid	CLD.emmGrid
+cld.emmGrid	CLD.emmGrid
 CLD.emm_list	emm_list-object
 coef.emmGrid	contrast
 confint.emmGrid	summary.emmGrid
