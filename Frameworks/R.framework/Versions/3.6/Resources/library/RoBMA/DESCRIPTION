@@ -39,7 +39,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 Imports: runjags, bridgesampling, rjags, coda, psych, stats, graphics,
-        extraDistr, scales, DPQ, Rdpack
+        extraDistr, scales, DPQ, callr, Rdpack
 Suggests: ggplot2, rstan, metaBMA, testthat, vdiffr
 RdMacros: Rdpack
 RemoteType: github
@@ -47,11 +47,11 @@ RemoteHost: api.github.com
 RemoteRepo: RoBMA
 RemoteUsername: FBartos
 RemoteRef: master
-RemoteSha: 662149c70530510c6a537b0130718a2481aa686d
+RemoteSha: d830bb0504c10b0736042639e90e1bcfbe060d1c
 GithubRepo: RoBMA
 GithubUsername: FBartos
 GithubRef: master
-GithubSHA1: 662149c70530510c6a537b0130718a2481aa686d
+GithubSHA1: d830bb0504c10b0736042639e90e1bcfbe060d1c
 NeedsCompilation: yes
-Packaged: 2020-06-15 21:44:49 UTC; fransmeerhoff
-Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-06-15 21:44:52 UTC; unix
+Packaged: 2020-06-23 07:04:11 UTC; fransmeerhoff
+Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-06-23 07:04:13 UTC; unix
