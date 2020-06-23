@@ -39,10 +39,10 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 Imports: runjags, bridgesampling, rjags, coda, psych, stats, graphics,
-        extraDistr, scales, DPQ, Rdpack
+        extraDistr, scales, DPQ, callr, Rdpack
 Suggests: ggplot2, rstan, metaBMA, testthat, vdiffr
 RdMacros: Rdpack
 NeedsCompilation: yes
-Packaged: 2020-06-16 07:43:13 UTC; Frantisek
-Built: R 3.6.1; x86_64-w64-mingw32; 2020-06-16 08:24:22 UTC; windows
+Packaged: 2020-06-19 15:06:36 UTC; Frantisek
+Built: R 3.6.1; x86_64-w64-mingw32; 2020-06-23 09:15:37 UTC; windows
 Archs: i386, x64

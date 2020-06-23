@@ -28,7 +28,8 @@ check_setup(
   priors_mu_null = prior(distribution = "point", parameters = list(location = 0)),
   priors_tau_null = prior(distribution = "point", parameters = list(location = 0)),
   priors_omega_null = prior(distribution = "point", parameters = list(location = 1)),
-  models = FALSE
+  models = FALSE,
+  silent = FALSE
 )
 </pre>
 
@@ -80,7 +81,11 @@ distribution with location at 1 (
 </td></tr>
 <tr valign="top"><td><code>models</code></td>
 <td>
-<p>should the models details be printed</p>
+<p>should the models details be printed.</p>
+</td></tr>
+<tr valign="top"><td><code>silent</code></td>
+<td>
+<p>do not print the results.</p>
 </td></tr>
 </table>
 
