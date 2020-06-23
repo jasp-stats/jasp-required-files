@@ -1,7 +1,7 @@
 Package: Bayesrel
 Type: Package
 Title: Bayesian Reliability Estimation
-Version: 0.6.5
+Version: 0.6.5.1
 Author: Julius M. Pfadt and Don van den Bergh
 Maintainer: Julius M. Pfadt <julius.pfadt@gmail.com>
 Description: Functionality for the most common single test reliability estimates is provided:  
@@ -30,14 +30,14 @@ Depends: R (>= 2.10)
 Suggests: testthat (>= 2.1.0)
 RemoteType: github
 RemoteHost: api.github.com
-RemoteRepo: bayesrel
+RemoteRepo: Bayesrel
 RemoteUsername: juliuspf
 RemoteRef: master
-RemoteSha: ec02d7692ec28ae7f9f2a015e0a692fc52039adf
-GithubRepo: bayesrel
+RemoteSha: 39c25d21a118023a5ef46133c94ce8f9b3078f71
+GithubRepo: Bayesrel
 GithubUsername: juliuspf
 GithubRef: master
-GithubSHA1: ec02d7692ec28ae7f9f2a015e0a692fc52039adf
+GithubSHA1: 39c25d21a118023a5ef46133c94ce8f9b3078f71
 NeedsCompilation: no
-Packaged: 2020-06-11 15:03:54 UTC; fransmeerhoff
-Built: R 3.6.1; ; 2020-06-11 15:03:55 UTC; unix
+Packaged: 2020-06-23 07:03:15 UTC; fransmeerhoff
+Built: R 3.6.1; ; 2020-06-23 07:03:16 UTC; unix
