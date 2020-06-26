@@ -3,12 +3,14 @@
 #ifdef STAN_OPENCL
 
 #include <stan/math/opencl/kernel_cl.hpp>
+#include <stan/math/opencl/buffer_types.hpp>
+#include <string>
 
 namespace stan {
 namespace math {
 namespace opencl_kernels {
 // \cond
-static const char* identity_kernel_code = STRINGIFY(
+static const std::string identity_kernel_code = STRINGIFY(
     // \endcond
     /**
      * Makes an identity matrix on the OpenCL device
@@ -37,7 +39,7 @@ static const char* identity_kernel_code = STRINGIFY(
 );
 // \endcond
 // \cond
-static const char* batch_identity_kernel_code = STRINGIFY(
+static const std::string batch_identity_kernel_code = STRINGIFY(
     // \endcond
 
     /**
@@ -89,13 +91,14 @@ static const char* batch_identity_kernel_code = STRINGIFY(
 /**
  * See the docs for \link kernels/identity.hpp identity() \endlink
  */
-const global_range_kernel<cl::Buffer, int, int> identity(
-    "identity", {indexing_helpers, identity_kernel_code});
+const kernel_cl<out_buffer, int, int> identity("identity",
+                                               {indexing_helpers,
+                                                identity_kernel_code});
 
 /**
  * See the docs for \link kernels/identity.hpp batch_identity() \endlink
  */
-const global_range_kernel<cl::Buffer, int, int> batch_identity(
+const kernel_cl<out_buffer, int, int> batch_identity(
     "batch_identity", {indexing_helpers, batch_identity_kernel_code});
 
 }  // namespace opencl_kernels

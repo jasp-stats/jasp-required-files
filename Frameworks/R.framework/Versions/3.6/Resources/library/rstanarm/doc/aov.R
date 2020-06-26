@@ -1,13 +1,10 @@
-params <-
-list(EVAL = FALSE)
-
-## ---- SETTINGS-knitr, include=FALSE--------------------------------------
+## ---- SETTINGS-knitr, include=FALSE-------------------------------------------
 stopifnot(require(knitr))
 opts_chunk$set(
   comment=NA, 
   message = FALSE, 
   warning = FALSE, 
-  eval = params$EVAL,
+  eval = identical(Sys.getenv("NOT_CRAN"), "true"),
   dev = "png",
   dpi = 150,
   fig.asp = 0.618,
@@ -16,21 +13,26 @@ opts_chunk$set(
   fig.align = "center"
 )
 
-## ----aov-weightgain-aov--------------------------------------------------
-#  data("weightgain", package = "HSAUR3")
-#  coef(aov(weightgain ~ source * type, data = weightgain))
+## ---- SETTINGS-gg, include=TRUE-----------------------------------------------
+library(ggplot2)
+library(bayesplot)
+theme_set(bayesplot::theme_default())
 
-## ----aov-weightgain-mcmc, results="hide"---------------------------------
-#  library(rstanarm)
-#  post1 <- stan_aov(weightgain ~ source * type, data = weightgain,
-#                    prior = R2(location = 0.5), adapt_delta = 0.999,
-#                    seed = 12345)
-#  post1
+## ----aov-weightgain-aov-------------------------------------------------------
+data("weightgain", package = "HSAUR3")
+coef(aov(weightgain ~ source * type, data = weightgain))
 
-## ---- echo=FALSE---------------------------------------------------------
-#  print(post1)
+## ----aov-weightgain-mcmc, results="hide"--------------------------------------
+library(rstanarm)
+post1 <- stan_aov(weightgain ~ source * type, data = weightgain, 
+                  prior = R2(location = 0.5), adapt_delta = 0.999,
+                  seed = 12345)
+post1
 
-## ---- aov-weightgain-stan_lmer, eval=FALSE-------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
+print(post1)
+
+## ---- aov-weightgain-stan_lmer, eval=FALSE------------------------------------
 #  post2 <- stan_lmer(weightgain ~ 1 + (1|source) + (1|type) + (1|source:type),
 #                     data = weightgain, prior_intercept = cauchy(),
 #                     prior_covariance = decov(shape = 2, scale = 2),

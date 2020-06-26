@@ -3,12 +3,14 @@
 #ifdef STAN_OPENCL
 
 #include <stan/math/opencl/kernel_cl.hpp>
+#include <stan/math/opencl/buffer_types.hpp>
+#include <string>
 
 namespace stan {
 namespace math {
 namespace opencl_kernels {
 // \cond
-static const char *transpose_kernel_code = STRINGIFY(
+static const std::string transpose_kernel_code = STRINGIFY(
     // \endcond
     /**
      * Takes the transpose of the matrix on the OpenCL device.
@@ -36,7 +38,7 @@ static const char *transpose_kernel_code = STRINGIFY(
 /**
  * See the docs for \link kernels/transpose.hpp transpose() \endlink
  */
-const global_range_kernel<cl::Buffer, cl::Buffer, int, int> transpose(
+const kernel_cl<out_buffer, in_buffer, int, int> transpose(
     "transpose", {indexing_helpers, transpose_kernel_code});
 
 }  // namespace opencl_kernels

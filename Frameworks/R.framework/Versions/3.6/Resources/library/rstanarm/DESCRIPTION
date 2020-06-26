@@ -1,8 +1,8 @@
 Package: rstanarm
 Type: Package
 Title: Bayesian Applied Regression Modeling via Stan
-Version: 2.19.2
-Date: 2019-10-01
+Version: 2.19.3
+Date: 2020-02-10
 Encoding: UTF-8
 Authors@R: c(person("Jonah", "Gabry", email = "jsg2201@columbia.edu", role = "aut"),
              person("Imad", "Ali", role = "ctb"),
@@ -34,20 +34,20 @@ Depends: R (>= 3.4.0), Rcpp (>= 0.12.0), methods
 Imports: bayesplot (>= 1.7.0), ggplot2 (>= 2.2.1), lme4 (>= 1.1-8), loo
         (>= 2.1.0), Matrix (>= 1.2-13), nlme (>= 3.1-124), rstan (>=
         2.19.1), rstantools (>= 2.0.0), shinystan (>= 2.3.0), stats,
-        survival (>= 2.40.1), utils
+        survival (>= 2.40.1), RcppParallel, utils
 Suggests: betareg, data.table (>= 1.10.0), digest, gridExtra, HSAUR3,
         knitr (>= 1.15.1), MASS, mgcv (>= 1.8-13), rmarkdown, roxygen2,
         testthat (>= 1.0.2)
-LinkingTo: StanHeaders (>= 2.19.0), rstan (>= 2.19.1), BH (>= 1.66.0),
-        Rcpp (>= 0.12.0), RcppEigen (>= 0.3.3.3.0)
+LinkingTo: StanHeaders (>= 2.19.0), rstan (>= 2.19.1), BH (>=
+        1.72.0-2), Rcpp (>= 0.12.0), RcppEigen (>= 0.3.3.3.0)
 SystemRequirements: GNU make, pandoc (>= 1.12.3), pandoc-citeproc
 VignetteBuilder: knitr
 LazyData: true
 NeedsCompilation: yes
 URL: https://mc-stan.org/rstanarm/, https://discourse.mc-stan.org
 BugReports: https://github.com/stan-dev/rstanarm/issues
-RoxygenNote: 6.1.1
-Packaged: 2019-10-01 20:20:33 UTC; ben
+RoxygenNote: 7.0.2
+Packaged: 2020-02-11 05:16:41 UTC; ben
 Author: Jonah Gabry [aut],
   Imad Ali [ctb],
   Sam Brilleman [ctb],
@@ -66,6 +66,5 @@ Author: Jonah Gabry [aut],
   Ben Goodrich [cre, aut]
 Maintainer: Ben Goodrich <benjamin.goodrich@columbia.edu>
 Repository: CRAN
-Date/Publication: 2019-10-03 18:00:02 UTC
-Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2019-10-04 13:34:40 UTC; unix
-Archs: rstanarm.so.dSYM
+Date/Publication: 2020-02-11 13:02:44 UTC
+Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-06-26 12:05:38 UTC; unix

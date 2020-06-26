@@ -1,8 +1,8 @@
 #ifndef STAN_MATH_PRIM_MAT_ERR_IS_MAT_FINITE_HPP
 #define STAN_MATH_PRIM_MAT_ERR_IS_MAT_FINITE_HPP
 
-#include <Eigen/Dense>
-#include <boost/math/special_functions/fpclassify.hpp>
+#include <stan/math/prim/meta.hpp>
+#include <stan/math/prim/mat/fun/Eigen.hpp>
 
 namespace stan {
 namespace math {

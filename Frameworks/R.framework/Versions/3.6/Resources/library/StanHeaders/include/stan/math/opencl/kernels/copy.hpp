@@ -3,13 +3,15 @@
 #ifdef STAN_OPENCL
 
 #include <stan/math/opencl/kernel_cl.hpp>
+#include <stan/math/opencl/buffer_types.hpp>
 #include <algorithm>
+#include <string>
 
 namespace stan {
 namespace math {
 namespace opencl_kernels {
 // \cond
-static const char *copy_kernel_code = STRINGIFY(
+static const std::string copy_kernel_code = STRINGIFY(
     // \endcond
     /**
      * Copy one matrix to another
@@ -37,8 +39,9 @@ static const char *copy_kernel_code = STRINGIFY(
 /**
  * See the docs for \link kernels/copy.hpp copy() \endlink
  */
-const global_range_kernel<cl::Buffer, cl::Buffer, int, int> copy(
-    "copy", {indexing_helpers, copy_kernel_code});
+const kernel_cl<in_buffer, out_buffer, int, int> copy("copy",
+                                                      {indexing_helpers,
+                                                       copy_kernel_code});
 
 }  // namespace opencl_kernels
 }  // namespace math

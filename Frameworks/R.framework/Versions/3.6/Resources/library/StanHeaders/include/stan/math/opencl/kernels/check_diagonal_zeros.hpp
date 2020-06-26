@@ -3,12 +3,14 @@
 #ifdef STAN_OPENCL
 
 #include <stan/math/opencl/kernel_cl.hpp>
+#include <stan/math/opencl/buffer_types.hpp>
+#include <string>
 
 namespace stan {
 namespace math {
 namespace opencl_kernels {
 // \cond
-static const char *is_zero_on_diagonal_kernel_code = STRINGIFY(
+static const std::string is_zero_on_diagonal_kernel_code = STRINGIFY(
     // \endcond
     /**
      * Check if the <code>matrix_cl</code> has zeros on the diagonal
@@ -39,9 +41,8 @@ static const char *is_zero_on_diagonal_kernel_code = STRINGIFY(
  * See the docs for \link kernels/check_diagonal_zeros.hpp
  * check_diagonal_zeros() \endlink
  */
-const global_range_kernel<cl::Buffer, cl::Buffer, int, int>
-    check_diagonal_zeros("is_zero_on_diagonal",
-                         {indexing_helpers, is_zero_on_diagonal_kernel_code});
+const kernel_cl<in_buffer, out_buffer, int, int> check_diagonal_zeros(
+    "is_zero_on_diagonal", {indexing_helpers, is_zero_on_diagonal_kernel_code});
 
 }  // namespace opencl_kernels
 }  // namespace math

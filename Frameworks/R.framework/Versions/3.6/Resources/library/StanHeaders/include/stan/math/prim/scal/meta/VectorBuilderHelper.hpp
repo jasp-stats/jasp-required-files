@@ -1,7 +1,6 @@
 #ifndef STAN_MATH_PRIM_SCAL_META_VECTORBUILDER_HELPER_HPP
 #define STAN_MATH_PRIM_SCAL_META_VECTORBUILDER_HELPER_HPP
 
-#include <stan/math/prim/scal/meta/contains_vector.hpp>
 #include <stdexcept>
 
 namespace stan {
@@ -30,7 +29,7 @@ class VectorBuilderHelper {
     throw std::logic_error("used is false. this should never be called");
   }
 
-  typedef T1 type;
+  using type = T1;
 
   inline type& data() {
     throw std::logic_error("used is false. this should never be called");
@@ -46,7 +45,7 @@ class VectorBuilderHelper<T1, true, false> {
   explicit VectorBuilderHelper(size_t /* n */) : x_(0) {}
   T1& operator[](size_t /* i */) { return x_; }
 
-  typedef T1 type;
+  using type = T1;
 
   inline type& data() { return x_; }
 };

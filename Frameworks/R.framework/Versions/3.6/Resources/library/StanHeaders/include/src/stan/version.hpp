@@ -1,6 +1,7 @@
 #ifndef STAN_VERSION_HPP
 #define STAN_VERSION_HPP
 
+#include <stan/math/prim/mat/fun/Eigen.hpp>
 #include <string>
 
 #ifndef STAN_STRING_EXPAND
@@ -12,20 +13,20 @@
 #endif
 
 #define STAN_MAJOR 2
-#define STAN_MINOR 19
-#define STAN_PATCH 1
+#define STAN_MINOR 21
+#define STAN_PATCH 0
 
 namespace stan {
 
-  /** Major version number for Stan package. */
-  const std::string MAJOR_VERSION = STAN_STRING(STAN_MAJOR);
+/** Major version number for Stan package. */
+const std::string MAJOR_VERSION = STAN_STRING(STAN_MAJOR);
 
-  /** Minor version number for Stan package. */
-  const std::string MINOR_VERSION = STAN_STRING(STAN_MINOR);
+/** Minor version number for Stan package. */
+const std::string MINOR_VERSION = STAN_STRING(STAN_MINOR);
 
-  /** Patch version for Stan package. */
-  const std::string PATCH_VERSION = STAN_STRING(STAN_PATCH);
+/** Patch version for Stan package. */
+const std::string PATCH_VERSION = STAN_STRING(STAN_PATCH);
 
-}
+}  // namespace stan
 
 #endif

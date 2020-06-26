@@ -2,8 +2,13 @@
 #define STAN_MATH_OPENCL_ERR_CHECK_NAN_HPP
 #ifdef STAN_OPENCL
 #include <stan/math/opencl/matrix_cl.hpp>
+#include <stan/math/opencl/matrix_cl_view.hpp>
+#include <stan/math/opencl/copy.hpp>
 #include <stan/math/opencl/kernels/check_nan.hpp>
+#include <stan/math/prim/meta.hpp>
 #include <stan/math/prim/scal/err/domain_error.hpp>
+
+#include <vector>
 
 namespace stan {
 namespace math {
@@ -17,23 +22,19 @@ namespace math {
  * @throw <code>std::domain_error</code> if
  *    any element of the matrix is <code>NaN</code>.
  */
+template <typename T, typename = require_floating_point_t<T>>
 inline void check_nan(const char* function, const char* name,
-                      const matrix_cl& y) {
-  if (y.size() == 0)
+                      const matrix_cl<T>& y) {
+  if (y.size() == 0) {
     return;
-
-  cl::CommandQueue cmd_queue = opencl_context.queue();
-  cl::Context& ctx = opencl_context.context();
+  }
   try {
     int nan_flag = 0;
-    cl::Buffer buffer_nan_flag(ctx, CL_MEM_READ_WRITE, sizeof(int));
-    cmd_queue.enqueueWriteBuffer(buffer_nan_flag, CL_TRUE, 0, sizeof(int),
-                                 &nan_flag);
-    opencl_kernels::check_nan(cl::NDRange(y.rows(), y.cols()), y.buffer(),
-                              buffer_nan_flag, y.rows(), y.cols());
-    cmd_queue.enqueueReadBuffer(buffer_nan_flag, CL_TRUE, 0, sizeof(int),
-                                &nan_flag);
-    //  if NaN values were found in the matrix
+    matrix_cl<int> nan_chk(1, 1);
+    nan_chk = to_matrix_cl(nan_flag);
+    opencl_kernels::check_nan(cl::NDRange(y.rows(), y.cols()), y, nan_chk,
+                              y.rows(), y.cols());
+    nan_flag = from_matrix_cl_error_code(nan_chk);
     if (nan_flag) {
       domain_error(function, name, "has NaN values", "");
     }

@@ -1,7 +1,6 @@
 #ifndef STAN_MATH_OPENCL_OPENCL_CONTEXT_HPP
 #define STAN_MATH_OPENCL_OPENCL_CONTEXT_HPP
 #ifdef STAN_OPENCL
-#define __CL_ENABLE_EXCEPTIONS
 
 #define DEVICE_FILTER CL_DEVICE_TYPE_ALL
 #ifndef OPENCL_DEVICE_ID
@@ -11,11 +10,11 @@
 #error OPENCL_PLATFORM_ID_NOT_SET
 #endif
 
-#include <stan/math/prim/arr/err/check_opencl.hpp>
-#include <stan/math/opencl/constants.hpp>
+#include <stan/math/opencl/matrix_cl_view.hpp>
+#include <stan/math/opencl/err/check_opencl.hpp>
 #include <stan/math/prim/scal/err/system_error.hpp>
 
-#include <CL/cl.hpp>
+#include <cl.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -23,6 +22,7 @@
 #include <vector>
 #include <cmath>
 #include <cerrno>
+
 /**
  *  @file stan/math/opencl/opencl_context.hpp
  *  @brief Initialization for OpenCL:
@@ -33,35 +33,7 @@
  */
 namespace stan {
 namespace math {
-namespace opencl {
-/**
- * A helper function to convert an array to a cl::size_t<N>.
- * This implementation throws because cl::size_t<N> for N!=3
- * should throw.
- *
- * @param values the input array to be converted
- * @return the cl::size_t<N> converted from the input array
- */
-template <int N>
-inline cl::size_t<N> to_size_t(const size_t (&values)[N]) {
-  throw std::domain_error("cl::size_t<N> is not supported for N != 3");
-}
 
-/**
- * A template specialization of the helper function
- * to convert an array to a cl::size_t<3>.
- *
- * @param values the input array to be converted
- * @return the cl::size_t<3> converted from the input array
- */
-template <>
-inline cl::size_t<3> to_size_t(const size_t (&values)[3]) {
-  cl::size_t<3> s;
-  for (size_t i = 0; i < 3; i++)
-    s[i] = values[i];
-  return s;
-}
-}  // namespace opencl
 /**
  * The <code>opencl_context_base</code> class represents an OpenCL context
  * in the standard Meyers singleton design pattern.
@@ -119,11 +91,21 @@ class opencl_context_base {
       }
       device_ = devices_[OPENCL_DEVICE_ID];
       // context and queue
-      context_ = cl::Context(device_);
-      command_queue_ = cl::CommandQueue(context_, device_,
-                                        CL_QUEUE_PROFILING_ENABLE, nullptr);
+      cl_command_queue_properties device_properties;
+      device_.getInfo<cl_command_queue_properties>(CL_DEVICE_QUEUE_PROPERTIES,
+                                                   &device_properties);
       device_.getInfo<size_t>(CL_DEVICE_MAX_WORK_GROUP_SIZE,
                               &max_thread_block_size_);
+
+      context_ = cl::Context(device_);
+      if (device_properties & CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE) {
+        command_queue_ = cl::CommandQueue(
+            context_, device_, CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE, nullptr);
+        in_order_ = CL_FALSE;
+      } else {
+        command_queue_ = cl::CommandQueue(context_, device_, 0, nullptr);
+        in_order_ = CL_TRUE;
+      }
       int thread_block_size_sqrt
           = static_cast<int>(sqrt(static_cast<double>(max_thread_block_size_)));
       // Does a compile time check of the maximum allowed
@@ -164,13 +146,14 @@ class opencl_context_base {
   std::string device_name_;          // The name of OpenCL device
   size_t max_thread_block_size_;  // The maximum size of a block of workers on
                                   // the device
-
+  bool in_order_;                 // Whether to use out of order execution.
   // Holds Default parameter values for each Kernel.
-  typedef std::map<const char*, int> map_base_opts;
+  using map_base_opts = std::map<std::string, int>;
   map_base_opts base_opts_
-      = {{"LOWER", static_cast<int>(TriangularViewCL::Lower)},
-         {"UPPER", static_cast<int>(TriangularViewCL::Upper)},
-         {"ENTIRE", static_cast<int>(TriangularViewCL::Entire)},
+      = {{"LOWER", static_cast<int>(matrix_cl_view::Lower)},
+         {"UPPER", static_cast<int>(matrix_cl_view::Upper)},
+         {"ENTIRE", static_cast<int>(matrix_cl_view::Entire)},
+         {"DIAGONAL", static_cast<int>(matrix_cl_view::Diagonal)},
          {"UPPER_TO_LOWER", static_cast<int>(TriangularMapCL::UpperToLower)},
          {"LOWER_TO_UPPER", static_cast<int>(TriangularMapCL::LowerToUpper)},
          {"THREAD_BLOCK_SIZE", 32},
@@ -179,13 +162,24 @@ class opencl_context_base {
          {"LOCAL_SIZE_", 64}};
   // TODO(Steve): Make these tunable during warmup
   struct tuning_struct {
-    // Used in stan/math/opencl/cholesky_decompose
+    // Used in math/opencl/cholesky_decompose
     int cholesky_min_L11_size = 256;
     int cholesky_partition = 4;
     int cholesky_size_worth_transfer = 1250;
     // Used in math/rev/mat/fun/cholesky_decompose
     int cholesky_rev_min_block_size = 512;
     int cholesky_rev_block_partition = 8;
+    // used in math/opencl/multiply
+    int multiply_wgs_per_compute_unit = 5;
+    // used in math/prim/mat/fun/gp_exp_quad_cov
+    double gp_exp_quad_cov_complex = 1'000'000;
+    double gp_exp_quad_cov_simple = 1'250;
+    // used in math/prim/mat/fun/multiply
+    // and math/rev/mat/fun/multiply
+    int multiply_dim_prod_worth_transfer = 2000000;
+    // used in math/prim/mat/fun/mdivide_left_tri
+    // and math/rev/mat/fun/mdivide_left_tri
+    int tri_inverse_size_worth_transfer = 100;
   } tuning_opts_;
 
   static opencl_context_base& getInstance() {
@@ -377,6 +371,13 @@ class opencl_context {
    */
   inline std::vector<cl::Platform> platform() {
     return {opencl_context_base::getInstance().platform_};
+  }
+  /**
+   * Return a bool representing whether the write to the OpenCL device are
+   * blocking
+   */
+  inline bool in_order() {
+    return opencl_context_base::getInstance().in_order_;
   }
 };
 static opencl_context opencl_context;
