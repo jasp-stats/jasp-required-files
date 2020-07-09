@@ -19,12 +19,12 @@ RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: flexplot
 RemoteUsername: dustinfife
-RemoteRef: master
-RemoteSha: 15b5cae2b8d009b8a95c5f1d261e2077f53e8bd9
+RemoteRef: b36b94d585478b352815e8fb1c53d84c21908a5a
+RemoteSha: b36b94d585478b352815e8fb1c53d84c21908a5a
 GithubRepo: flexplot
 GithubUsername: dustinfife
-GithubRef: master
-GithubSHA1: 15b5cae2b8d009b8a95c5f1d261e2077f53e8bd9
+GithubRef: b36b94d585478b352815e8fb1c53d84c21908a5a
+GithubSHA1: b36b94d585478b352815e8fb1c53d84c21908a5a
 NeedsCompilation: no
-Packaged: 2020-06-10 09:09:44 UTC; fransmeerhoff
-Built: R 3.6.1; ; 2020-06-10 09:09:50 UTC; unix
+Packaged: 2020-07-09 18:08:39 UTC; jorisgoosen
+Built: R 3.6.2; ; 2020-07-09 18:08:42 UTC; unix
