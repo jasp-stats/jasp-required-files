@@ -1,0 +1,53 @@
+Package: RoBMA
+Title: Robust Bayesian Meta-Analyses
+Version: 1.0.2
+Maintainer: František Bartoš <f.bartos96@gmail.com>
+Authors@R: c( 
+    person("František", "Bartoš",     role = c("aut", "cre"),
+    email   = "f.bartos96@gmail.com", comment = c(ORCID = "0000-0002-0018-5573")),
+    person("Maximilian", "Maier",     role = "aut",
+    email   = "maximilianmaier0401@gmail.com", comment = c(ORCID = "0000-0002-9873-6096")),
+    person("Eric-Jan", "Wagenmakers", role = "ths",
+    comment = c(ORCID = "0000-0003-1596-1034")),
+    person("Joris", "Goosen",         role = "ctb")
+    )
+Description: A framework for estimating ensembles of meta-analytic models
+    (assuming either presence or absence of the effect, heterogeneity, and
+    publication bias) and using Bayesian model averaging to combine them. The
+    ensembles use Bayes Factors to test for the presence or absence of the
+    individual components (e.g., effect vs. no effect) and model-averages
+    parameter estimates based on posterior model probabilities
+    (Maier, Bartoš & Wagenmakers, 2020, <doi:10.31234/osf.io/u4cns>). The user can
+    define a wide range of non-informative or informative priors for the
+    effect size, heterogeneity, and weight functions. The package provides
+    convenient functions for summary, visualizations, and fit diagnostics.
+URL: https://fbartos.github.io/RoBMA/
+BugReports: https://github.com/FBartos/RoBMA/issues
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.2
+Imports: runjags, bridgesampling, rjags, coda, psych, stats, graphics,
+        extraDistr, scales, DPQ, callr, Rdpack
+Suggests: ggplot2, rstan, metaBMA, testthat, vdiffr, knitr, rmarkdown
+RdMacros: Rdpack
+LinkingTo: BH
+VignetteBuilder: knitr
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: RoBMA
+RemoteUsername: FBartos
+RemoteRef: master
+RemoteSha: fb39d361d2f297db56e0c5c26520c7dec2290403
+GithubRepo: RoBMA
+GithubUsername: FBartos
+GithubRef: master
+GithubSHA1: fb39d361d2f297db56e0c5c26520c7dec2290403
+NeedsCompilation: yes
+Packaged: 2020-07-24 10:11:47 UTC; fransmeerhoff
+Author: František Bartoš [aut, cre] (<https://orcid.org/0000-0002-0018-5573>),
+  Maximilian Maier [aut] (<https://orcid.org/0000-0002-9873-6096>),
+  Eric-Jan Wagenmakers [ths] (<https://orcid.org/0000-0003-1596-1034>),
+  Joris Goosen [ctb]
+Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-07-24 10:11:50 UTC; unix
