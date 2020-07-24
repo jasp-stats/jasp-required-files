@@ -1,3 +1,62 @@
+# remotes 2.2.0
+
+##  New functions and features
+
+* New `system_requirements()` function to query the Public RStudio Package Manager for system requirements for a package (and its dependencies)
+
+* Remotes functions can now install dependencies from additional DESCRIPTION fields, e.g. passing `dependencies = "Config/Needs/website"` will install the dependencies listed in the `Config/Needs/website: ` field in the package's DESCRIPTION.
+  Prefixing fields with `Config/Needs` allows them to pass `R CMD check` without a NOTE, so it is the recommended format for these extra dependencies.
+
+* `install_*()` family of functions now use the default branch in the repository, not the `master` branch (@MyKo101,#508).
+
+## Minor improvements and fixes
+
+* Internal functions `remote_download()`, `remote_metadata()`, `remote_package_name()` and `remote_sha()` are now exported, so 3rd party packages could provide methods for new remote types (#509, #56)
+
+* Internal functions `add_metadata()`, `github_remote()` are now exported. They are mainly for 3rd party extensions and should not be used by most users (#485).
+
+* `install_version()` now keeps searching subsequent repositories for the requested version, rather than failing if the version it finds in an early repository is unsuitable. (#305, @kenahoo)
+
+* `install_version()` now understands specifications like '>= 1.0' or '>= 1.12.0, < 1.14' to install the first version of the package it can find that satisfies the criteria. (#305, @kenahoo)
+
+* `install_version()` now avoids use of `base::url()`, as prior to R 3.6.2 it had a bug when downloading large files (#463)
+
+* `parse_submodules()` internal regular expression is now PCRE 2 compatible (#502, @jan-glx)
+
+* `update_packages()` argument `force` has been deprecated and no longer has any effect (#521)
+
+* Another fix for the mixed binary and source dependency issue, it should hopefully be fully squashed now (#296)
+
+* The upgrade menu is now interruptible in RStudio (#489).
+
+* Internal GitHub functions now correctly handle cases when characters are not representable in the default locale, but are representable in UTF-8 (#492).
+
+# remotes 2.1.1
+
+## Minor improvements and fixes
+
+* Installing mixed binary and source dependencies when the latest versions of
+  some packages do not have binaries yet should now install dependencies in the
+  correct order to prevent load failures (#296)
+
+* `github_error()` now also works when a GitHub (Enterprise) server does not
+  return information about the rate limit (@dpprdan, #396, #413).
+
+* `install_gitlab` passes the `quiet` argument on to `gitlab_pat` (@michaelchirico, #437)
+
+* `remotes` is now resilient against installed packages that declare
+  `RemoteType: standard` but do not include a `RemoteRepos` or `RemotePkgType`
+  field. In such a case, the values for `getOption("repos")` and
+  `getOption("pkgType")` will be used (respectively).
+
+* `install_gitlab()` now installs from repositories in subgroups and with dots 
+  in their name. `subdir` is now an explicit argument instead of implicit in 
+  `repo` (@robertdj, #259, #420).
+
+* `install()` now passes the ellipsis `...` to `install_deps()` (@Neil-Schneider, #411)
+
+* The tests have been updated to work with newer versions of callr and R 4.0
+
 # remotes 2.1.0
 
 ## New features
@@ -47,15 +106,17 @@
 
 * Bioc `remote_sha()` now always returns a character result (#379)
 
-* Fix API call for private repositories in `install_gitlab` 
+* Fix API call for private repositories in `install_gitlab`
   (@aornugent, #359, #363)
 
 * git submodules now work if the submodule file is empty (@muschellij2, #234)
 
+* git submodules now work if the R package is stored in a subfolder (@pommedeterresautee, #233)
+
 * `install_gitlab()` no longer adds the access token twice to the request
   (@aornugent, #363).
 
-* Bitbucket dependencies now actually use the `BITBUCKET_USER` and 
+* Bitbucket dependencies now actually use the `BITBUCKET_USER` and
   `BITBUCKET_PASSWORD` environment variables (@antoine-sachet, #347).
 
 * `parse_deps()` now ignores trailing whitespaces around comparison operators
@@ -120,15 +181,15 @@
   set up proxies, see `?download.file`.
 * Remotes without package names are now unconditionally installed (#246).
 
-* `install_github()` now includes a more informative error message when the 
+* `install_github()` now includes a more informative error message when the
   status code is 404, asking the user to check that they have spelled the
-  repo owner and repo correctly (included in the error message), and that 
+  repo owner and repo correctly (included in the error message), and that
   they have the required permissions to access the repository.
 
-* `install_*` fuctions (via the underlying private `install` function) now set
+* `install_*` functions (via the underlying private `install` function) now set
   `RGL_USE_NULL="TRUE"` in order to avoid errors when running headless
   and installing any package using `rgl` (@jefferis, ##333)
-  
+
 # remotes 2.0.2
 
 * `install_deps()` now installs un-installed remotes packages even when
@@ -184,7 +245,7 @@
 ## New features
 
 * remotes now builds packages by default before installing them. This step
-  uses the pkgbuild package, if avilable. If not, it calls `R CMD build`
+  uses the pkgbuild package, if available. If not, it calls `R CMD build`
   directly.
 
 * New `install_dev()` to install the development version of a CRAN package,
@@ -205,7 +266,7 @@
 * `install_()` functions now pass arguments, including authentication
   information and upgrade down to dependencies (#53, #86, #87).
 
-* `install_()` functions allow the seclection of a subset of packages to
+* `install_()` functions allow the selection of a subset of packages to
   upgrade, in interactive mode, when `upgrade = "ask"`.
 
 * `install_git()` now supports passing credentials, when it is used with
@@ -222,7 +283,7 @@
 
 * remotes now uses the same SHA updating logic for remotes as devtools,
   including checking if the SHA of the remote has changed since the last
-  istallation. (#135)
+  installation. (#135)
 
 * `install_url()` can now install package binaries on windows
   (r-lib/devtools#1765)
@@ -298,7 +359,7 @@
 
 * Check for circular dependencies while installing, #31
 
-* Updated BioConductor repo URLs for newer BioC versions
+* Updated Bioconductor repo URLs for newer BioC versions
 
 # remotes 1.0.0
 
