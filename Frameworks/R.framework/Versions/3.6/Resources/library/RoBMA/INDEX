@@ -1,7 +1,7 @@
 Anderson2010            27 experimental studies from from Anderson et
                         al. (2010) that meet the best practice criteria
 RoBMA                   Estimate a Robust Bayesian Meta-Analysis
-check_setup             Prints summary of '"RoBMA"' model implied by
+check_setup             Prints summary of '"RoBMA"' ensemble implied by
                         the specified priors
 diagnostics             Checks a fitted RoBMA object
 is.RoBMA                Reports whether x is a RoBMA object
@@ -13,4 +13,4 @@ print.summary.RoBMA     Prints summary object for RoBMA method
 prior                   Creates a RoBMA prior
 summary.RoBMA           Summarize fitted RoBMA object
 update.RoBMA            Updates a fitted RoBMA object
-weightedt               The Weighted t Distribution
+weightedt               Weighted t distribution
