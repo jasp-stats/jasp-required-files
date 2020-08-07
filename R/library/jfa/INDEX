@@ -1,5 +1,6 @@
 BuildIt                 BuildIt Construction financial statements
-auditPrior              Create a Prior Distribution
+auditPrior              Create a Prior Distribution with Audit
+                        Information
 evaluation              Evaluation of Audit Samples using Confidence /
                         Credible Bounds
 planning                Frequentist and Bayesian Planning for Audit

@@ -16,8 +16,9 @@
 <h3>Usage</h3>
 
 <pre>
-planning(materiality, confidence = 0.95, expectedError = 0, likelihood = "poisson", 
-         N = NULL, maxSize = 5000, prior = FALSE, kPrior = 0, nPrior = 0)
+planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision = NULL, 
+         likelihood = "poisson", N = NULL, maxSize = 5000, increase = 1, 
+         prior = FALSE, kPrior = 0, nPrior = 0)
 </pre>
 
 
@@ -26,7 +27,7 @@ planning(materiality, confidence = 0.95, expectedError = 0, likelihood = "poisso
 <table summary="R argblock">
 <tr valign="top"><td><code>materiality</code></td>
 <td>
-<p>a value between 0 and 1 representing the materiality of the audit as a fraction of the total size or value.</p>
+<p>a value between 0 and 1 representing the materiality of the audit as a fraction of the total size or value. Can be <code>NULL</code>, but <code>minPrecision</code> should be specified in that case.</p>
 </td></tr>
 <tr valign="top"><td><code>confidence</code></td>
 <td>
@@ -35,6 +36,10 @@ planning(materiality, confidence = 0.95, expectedError = 0, likelihood = "poisso
 <tr valign="top"><td><code>expectedError</code></td>
 <td>
 <p>a fraction representing the percentage of expected mistakes in the sample relative to the total size, or a number (&gt;= 1) that represents the number of expected mistakes.</p>
+</td></tr>
+<tr valign="top"><td><code>minPrecision</code></td>
+<td>
+<p>The minimum precision to be obtained. Can be <code>NULL</code>, but <code>materiality</code> should be specified in that case.</p>
 </td></tr>
 <tr valign="top"><td><code>likelihood</code></td>
 <td>
@@ -47,6 +52,10 @@ planning(materiality, confidence = 0.95, expectedError = 0, likelihood = "poisso
 <tr valign="top"><td><code>maxSize</code></td>
 <td>
 <p>the maximum sample size that is considered for calculations. Defaults to 5000 for efficiency. Increase this value if the sample size cannot be found due to it being too large (e.g., for a low materiality).</p>
+</td></tr>
+<tr valign="top"><td><code>increase</code></td>
+<td>
+<p>the desired increase step for the sample size calculation.</p>
 </td></tr>
 <tr valign="top"><td><code>prior</code></td>
 <td>
@@ -97,7 +106,7 @@ planning(materiality, confidence = 0.95, expectedError = 0, likelihood = "poisso
 <table summary="R valueblock">
 <tr valign="top"><td><code>materiality</code></td>
 <td>
-<p>the value of the specified materiality.</p>
+<p>the value of the specified materiality. Can be <code>NULL</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>confidence</code></td>
 <td>
@@ -122,6 +131,10 @@ planning(materiality, confidence = 0.95, expectedError = 0, likelihood = "poisso
 <tr valign="top"><td><code>errorType</code></td>
 <td>
 <p>whether the expected errors where specified as a percentage or as an integer.</p>
+</td></tr>
+<tr valign="top"><td><code>minPrecision</code></td>
+<td>
+<p>The minimum precision to be obtained. Can be <code>NULL</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>N</code></td>
 <td>
@@ -170,12 +183,21 @@ p1 &lt;- planning(materiality = 0.05, confidence = 0.95, expectedError = 0.025,
                likelihood = "binomial")
 print(p1)
 
-# jfa planning results for binomial likelihood:
-#      
-# Materiality:             5% 
+# ------------------------------------------------------------
+#              jfa Planning Summary (Frequentist)
+# ------------------------------------------------------------     
+# Input:
+# 
 # Confidence:              95% 
+# Materiality:             5% 
+# Minimum precision:       100% 
+# Likelihood:              binomial 
+# Expected sample errors:  6 
+# ------------------------------------------------------------
+# Output:
+# 
 # Sample size:             234 
-# Allowed sample errors:   6
+# ------------------------------------------------------------
 
 # Bayesian planning with uninformed prior:
 
@@ -183,14 +205,22 @@ p2 &lt;- planning(materiality = 0.05, confidence = 0.95, expectedError = 0.025,
                likelihood = "binomial", prior = TRUE)
 print(p2)
 
-# jfa planning results for beta prior with binomial likelihood:
-#      
+# ------------------------------------------------------------
+#              jfa Planning Summary (Bayesian)
+# ------------------------------------------------------------
+# Input:
+# 
+# Confidence:              95%      
 # Materiality:             5% 
-# Confidence:              95% 
-# Sample size:             220 
-# Allowed sample errors:   5.5 
-# Prior parameter alpha:   1 
-# Prior parameter beta:    1
+# Minimum precision:       100% 
+# Likelihood:              binomial 
+# Prior:                   beta(1, 1)
+# Expected sample errors:  5.5
+# ------------------------------------------------------------
+# Output:
+#
+# Sample size:            220
+# ------------------------------------------------------------ 
 
 # Bayesian planning with informed prior:
 
@@ -201,16 +231,24 @@ p3 &lt;- planning(materiality = 0.05, confidence = 0.95, expectedError = 0.025,
                prior = prior)
 print(p3)
 
-# jfa planning results for beta prior with binomial likelihood:
-#      
+# ------------------------------------------------------------
+#              jfa Planning Summary (Bayesian)
+# ------------------------------------------------------------
+# Input:
+# 
+# Confidence:              95%      
 # Materiality:             5% 
-# Confidence:              95% 
-# Sample size:             169 
-# Allowed sample errors:   4.23 
-# Prior parameter alpha:   2.275 
-# Prior parameter beta:    50.725
+# Minimum precision:       100% 
+# Likelihood:              binomial 
+# Prior:                   beta(2.275, 50.725)
+# Expected sample errors:  4.23
+# ------------------------------------------------------------
+# Output:
+#
+# Sample size:            169
+# ------------------------------------------------------------
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.1.0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.2.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

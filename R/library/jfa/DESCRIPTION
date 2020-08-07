@@ -1,6 +1,6 @@
 Package: jfa
 Title: Bayesian and Classical Audit Sampling
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person(given = "Koen",
            family = "Derks",
@@ -11,21 +11,13 @@ Language: en-US
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 Suggests: testthat, knitr, rmarkdown
-RemoteType: github
-RemoteHost: api.github.com
-RemoteRepo: jfa
-RemoteUsername: koenderks
-RemoteRef: master
-RemoteSha: d16fd06b7d19fb5580436991d19552b66fae8df9
-GithubRepo: jfa
-GithubUsername: koenderks
-GithubRef: master
-GithubSHA1: d16fd06b7d19fb5580436991d19552b66fae8df9
 NeedsCompilation: no
-Packaged: 2020-01-07 10:40:10 UTC; Frans Meerhoff
+Packaged: 2020-08-05 08:14:57 UTC; derksk
 Author: Koen Derks [aut, cre]
 Maintainer: Koen Derks <k.derks@nyenrode.nl>
-Built: R 3.6.1; ; 2020-01-07 10:40:11 UTC; windows
+Repository: CRAN
+Date/Publication: 2020-08-05 12:10:03 UTC
+Built: R 3.6.1; ; 2020-08-07 09:55:41 UTC; windows
