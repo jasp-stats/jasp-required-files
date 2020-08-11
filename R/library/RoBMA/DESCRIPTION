@@ -1,6 +1,6 @@
 Package: RoBMA
 Title: Robust Bayesian Meta-Analyses
-Version: 1.0.2
+Version: 1.0.4
 Maintainer: František Bartoš <f.bartos96@gmail.com>
 Authors@R: c( 
     person("František", "Bartoš",     role = c("aut", "cre"),
@@ -26,7 +26,6 @@ BugReports: https://github.com/FBartos/RoBMA/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 Imports: runjags, bridgesampling, rjags, coda, psych, stats, graphics,
         extraDistr, scales, DPQ, callr, Rdpack
@@ -34,21 +33,13 @@ Suggests: ggplot2, rstan, metaBMA, testthat, vdiffr, knitr, rmarkdown
 RdMacros: Rdpack
 LinkingTo: BH
 VignetteBuilder: knitr
-RemoteType: github
-RemoteHost: api.github.com
-RemoteRepo: RoBMA
-RemoteUsername: FBartos
-RemoteRef: master
-RemoteSha: fb39d361d2f297db56e0c5c26520c7dec2290403
-GithubRepo: RoBMA
-GithubUsername: FBartos
-GithubRef: master
-GithubSHA1: fb39d361d2f297db56e0c5c26520c7dec2290403
 NeedsCompilation: yes
-Packaged: 2020-07-24 11:39:15 UTC; Frans Meerhoff
+Packaged: 2020-08-07 06:02:05 UTC; Frantisek
 Author: František Bartoš [aut, cre] (<https://orcid.org/0000-0002-0018-5573>),
   Maximilian Maier [aut] (<https://orcid.org/0000-0002-9873-6096>),
   Eric-Jan Wagenmakers [ths] (<https://orcid.org/0000-0003-1596-1034>),
   Joris Goosen [ctb]
-Built: R 3.6.1; x86_64-w64-mingw32; 2020-07-24 11:39:18 UTC; windows
+Repository: CRAN
+Date/Publication: 2020-08-07 07:50:07 UTC
+Built: R 3.6.3; x86_64-w64-mingw32; 2020-08-10 09:01:44 UTC; windows
 Archs: i386, x64
