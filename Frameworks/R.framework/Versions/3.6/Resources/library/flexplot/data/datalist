@@ -1,4 +1,5 @@
 alcuse
+attractiveness
 authors
 avengers
 birthweight
@@ -9,6 +10,7 @@ diet
 drug_use
 exercise_data
 graduate_income
+income
 job_data
 math
 nsduh
