@@ -17,14 +17,29 @@ Much of the decision-making is automated, which is pretty freaking awesome.
 <h3>Usage</h3>
 
 <pre>
-flexplot(formula, data = NULL, related = F, bins = 3,
-  labels = NULL, breaks = NULL, method = "loess", se = NULL,
-  ghost.line = NULL, ghost.reference = NULL, spread = c("quartiles",
-  "stdev", "sterr"), jitter = NULL, raw.data = T, sample = Inf,
-  prediction = NULL, suppress_smooth = F, alpha = 0.99977,
-  plot.string = F, silent = F, third.eye = NULL,
-  plot.type = c("histogram", "qq", "density", "boxplot", "violin",
-  "line"))
+flexplot(
+  formula,
+  data = NULL,
+  related = F,
+  bins = 3,
+  labels = NULL,
+  breaks = NULL,
+  method = "loess",
+  se = NULL,
+  ghost.line = NULL,
+  ghost.reference = NULL,
+  spread = c("quartiles", "stdev", "sterr"),
+  jitter = NULL,
+  raw.data = T,
+  sample = Inf,
+  prediction = NULL,
+  suppress_smooth = F,
+  alpha = 0.99977,
+  plot.string = F,
+  silent = F,
+  third.eye = NULL,
+  plot.type = c("histogram", "qq", "density", "boxplot", "violin", "line")
+)
 </pre>
 
 
@@ -193,5 +208,5 @@ flexplot(weight.loss~motivation | income + health, data=d, se=FALSE, method="lm"
 ## End(Not run)	
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>flexplot</em> version 0.7.7 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>flexplot</em> version 0.8.0 <a href="00Index.html">Index</a>]</div>
 </body></html>
