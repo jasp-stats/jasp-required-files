@@ -1,6 +1,6 @@
 Package: RoBMA
 Title: Robust Bayesian Meta-Analyses
-Version: 1.0.4
+Version: 1.0.5
 Maintainer: František Bartoš <f.bartos96@gmail.com>
 Authors@R: c( 
     person("František", "Bartoš",     role = c("aut", "cre"),
@@ -14,7 +14,7 @@ Authors@R: c(
 Description: A framework for estimating ensembles of meta-analytic models
     (assuming either presence or absence of the effect, heterogeneity, and
     publication bias) and using Bayesian model averaging to combine them. The
-    ensembles use Bayes Factors to test for the presence or absence of the
+    ensembles use Bayes factors to test for the presence or absence of the
     individual components (e.g., effect vs. no effect) and model-averages
     parameter estimates based on posterior model probabilities
     (Maier, Bartoš & Wagenmakers, 2020, <doi:10.31234/osf.io/u4cns>). The user can
@@ -26,6 +26,7 @@ BugReports: https://github.com/FBartos/RoBMA/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 Imports: runjags, bridgesampling, rjags, coda, psych, stats, graphics,
         extraDistr, scales, DPQ, callr, Rdpack
@@ -33,12 +34,20 @@ Suggests: ggplot2, rstan, metaBMA, testthat, vdiffr, knitr, rmarkdown
 RdMacros: Rdpack
 LinkingTo: BH
 VignetteBuilder: knitr
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: RoBMA
+RemoteUsername: FBartos
+RemoteRef: development
+RemoteSha: 984df69ee1878b12005b9e245a3961d44d3f73ae
+GithubRepo: RoBMA
+GithubUsername: FBartos
+GithubRef: development
+GithubSHA1: 984df69ee1878b12005b9e245a3961d44d3f73ae
 NeedsCompilation: yes
-Packaged: 2020-08-07 06:02:05 UTC; Frantisek
+Packaged: 2020-08-28 08:27:21 UTC; fransmeerhoff
 Author: František Bartoš [aut, cre] (<https://orcid.org/0000-0002-0018-5573>),
   Maximilian Maier [aut] (<https://orcid.org/0000-0002-9873-6096>),
   Eric-Jan Wagenmakers [ths] (<https://orcid.org/0000-0003-1596-1034>),
   Joris Goosen [ctb]
-Repository: CRAN
-Date/Publication: 2020-08-07 07:50:07 UTC
-Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-08-11 14:23:08 UTC; unix
+Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-08-28 08:27:24 UTC; unix
