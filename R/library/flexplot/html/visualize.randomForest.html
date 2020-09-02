@@ -1,23 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualize a fitted model</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Visualize a fitted RandomForest model</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
-<table width="100%" summary="page for visualize.default {flexplot}"><tr><td>visualize.default {flexplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for visualize.RandomForest {flexplot}"><tr><td>visualize.RandomForest {flexplot}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Visualize a fitted model</h2>
+<h2>Visualize a fitted RandomForest model</h2>
 
 <h3>Description</h3>
 
-<p>Visualize a fitted model
+<p>Visualize a RandomForest model
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-## Default S3 method:
-visualize(object, plot = c("all", "residuals", "model"), formula = NULL, ...)
+## S3 method for class 'RandomForest'
+visualize(object, plot = c("all", "residuals", "model"), formula = NULL)
 </pre>
 
 
@@ -26,7 +26,7 @@ visualize(object, plot = c("all", "residuals", "model"), formula = NULL, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>object</code></td>
 <td>
-<p>a model object</p>
+<p>a RandomForest object</p>
 </td></tr>
 <tr valign="top"><td><code>plot</code></td>
 <td>

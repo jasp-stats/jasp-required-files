@@ -52,3 +52,4 @@ visualize.default	visualize.default
 visualize.glmerMod	visualize.glmerMod
 visualize.lm	visualize.lm
 visualize.lmerMod	visualize.lmerMod
+visualize.RandomForest	visualize.randomForest
