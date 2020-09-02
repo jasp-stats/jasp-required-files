@@ -55,6 +55,8 @@ tablesaw.injury         Tablesaw injuries
 third.eye               Visualize flexplot with the "third eye"
 uni.plot                Plot univariate distribution of a variable
 visualize               Visualize a fitted model
+visualize.RandomForest
+                        Visualize a fitted RandomForest model
 visualize.default       Visualize a fitted model
 visualize.glmerMod      Visualize a fitted glmerMod model
 visualize.lm            Visualize a fitted model
