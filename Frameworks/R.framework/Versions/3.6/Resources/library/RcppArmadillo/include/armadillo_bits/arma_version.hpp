@@ -20,9 +20,9 @@
 
 
 #define ARMA_VERSION_MAJOR 9
-#define ARMA_VERSION_MINOR 800
-#define ARMA_VERSION_PATCH 1
-#define ARMA_VERSION_NAME  "Horizon Scraper"
+#define ARMA_VERSION_MINOR 900
+#define ARMA_VERSION_PATCH 3
+#define ARMA_VERSION_NAME  "Nocturnal Misbehaviour"
 
 
 

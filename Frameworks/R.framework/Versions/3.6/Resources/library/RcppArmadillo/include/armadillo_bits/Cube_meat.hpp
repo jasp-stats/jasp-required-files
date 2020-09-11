@@ -199,10 +199,10 @@ Cube<eT>::init_cold()
   {
   arma_extra_debug_sigprint( arma_str::format("n_rows = %d, n_cols = %d, n_slices = %d") % n_rows % n_cols % n_slices );
   
-  #if (defined(ARMA_USE_CXX11) || defined(ARMA_64BIT_WORD))
+  #if defined(ARMA_64BIT_WORD)
     const char* error_message = "Cube::init(): requested size is too large";
   #else
-    const char* error_message = "Cube::init(): requested size is too large; suggest to compile in C++11 mode or enable ARMA_64BIT_WORD";
+    const char* error_message = "Cube::init(): requested size is too large; suggest to compile in C++11 mode and/or enable ARMA_64BIT_WORD";
   #endif
   
   arma_debug_check
@@ -4945,6 +4945,54 @@ uword
 Cube<eT>::size() const
   {
   return n_elem;
+  }
+
+
+
+template<typename eT>
+inline
+eT&
+Cube<eT>::front()
+  {
+  arma_debug_check( (n_elem == 0), "Cube::front(): cube is empty" );
+  
+  return access::rw(mem[0]);
+  }
+
+
+
+template<typename eT>
+inline
+const eT&
+Cube<eT>::front() const
+  {
+  arma_debug_check( (n_elem == 0), "Cube::front(): cube is empty" );
+  
+  return mem[0];
+  }
+
+
+
+template<typename eT>
+inline
+eT&
+Cube<eT>::back()
+  {
+  arma_debug_check( (n_elem == 0), "Cube::back(): cube is empty" );
+  
+  return access::rw(mem[n_elem-1]);
+  }
+
+
+
+template<typename eT>
+inline
+const eT&
+Cube<eT>::back() const
+  {
+  arma_debug_check( (n_elem == 0), "Cube::back(): cube is empty" );
+  
+  return mem[n_elem-1];
   }
 
 

@@ -744,10 +744,10 @@ MapMat<eT>::init_cold()
   
   // ensure that n_elem can hold the result of (n_rows * n_cols)
   
-  #if (defined(ARMA_USE_CXX11) || defined(ARMA_64BIT_WORD))
+  #if defined(ARMA_64BIT_WORD)
     const char* error_message = "MapMat(): requested size is too large";
   #else
-    const char* error_message = "MapMat(): requested size is too large; suggest to compile in C++11 mode or enable ARMA_64BIT_WORD";
+    const char* error_message = "MapMat(): requested size is too large; suggest to compile in C++11 mode and/or enable ARMA_64BIT_WORD";
   #endif
   
   arma_debug_check
@@ -1204,7 +1204,7 @@ SpMat_MapMat_val<eT>::operator=(const eT in_val)
       (*this).set(in_val);
       }
     }
-  #elif defined(ARMA_USE_CXX11)
+  #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
     {
     s_parent.cache_mutex.lock();
     
@@ -1239,7 +1239,7 @@ SpMat_MapMat_val<eT>::operator+=(const eT in_val)
       (*this).add(in_val);
       }
     }
-  #elif defined(ARMA_USE_CXX11)
+  #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
     {
     s_parent.cache_mutex.lock();
     
@@ -1274,7 +1274,7 @@ SpMat_MapMat_val<eT>::operator-=(const eT in_val)
       (*this).sub(in_val);
       }
     }
-  #elif defined(ARMA_USE_CXX11)
+  #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
     {
     s_parent.cache_mutex.lock();
     
@@ -1307,7 +1307,7 @@ SpMat_MapMat_val<eT>::operator*=(const eT in_val)
       (*this).mul(in_val);
       }
     }
-  #elif defined(ARMA_USE_CXX11)
+  #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
     {
     s_parent.cache_mutex.lock();
     
@@ -1340,7 +1340,7 @@ SpMat_MapMat_val<eT>::operator/=(const eT in_val)
       (*this).div(in_val);
       }
     }
-  #elif defined(ARMA_USE_CXX11)
+  #elif (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
     {
     s_parent.cache_mutex.lock();
     

@@ -142,8 +142,8 @@
   // #undef  ARMA_HAVE_POSIX_MEMALIGN
   // NOTE: posix_memalign() is available since macOS 10.6 (late 2009 onwards)
   
-  #undef  ARMA_USE_EXTERN_CXX11_RNG
-  // TODO: thread_local seems to work in Apple clang since Xcode 8 (mid 2016 onwards)
+  // #undef  ARMA_USE_EXTERN_CXX11_RNG
+  // NOTE: thread_local seems to work in Apple clang since Xcode 8 (mid 2016 onwards)
   // NOTE: https://stackoverflow.com/questions/28094794/why-does-apple-clang-disallow-c11-thread-local-when-official-clang-supports
 #endif
 
@@ -187,18 +187,8 @@
   #undef  ARMA_GCC_VERSION
   #define ARMA_GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
   
-  #if (ARMA_GCC_VERSION < 40400)
-    #error "*** newer compiler required ***"
-  #endif
-  
   #if (ARMA_GCC_VERSION < 40800)
-    #undef  ARMA_PRINT_CXX98_WARNING
-    #define ARMA_PRINT_CXX98_WARNING
-  #endif
-  
-  #if ( (ARMA_GCC_VERSION >= 40700) && (ARMA_GCC_VERSION <= 40701) )
-    #error "gcc versions 4.7.0 and 4.7.1 are unsupported; use 4.7.2 or later"
-    // due to http://gcc.gnu.org/bugzilla/show_bug.cgi?id=53549
+    #error "*** newer compiler required; need gcc 4.8 or later ***"
   #endif
   
   #define ARMA_GOOD_COMPILER
@@ -226,21 +216,13 @@
   #undef  ARMA_HAVE_ALIGNED_ATTRIBUTE
   #define ARMA_HAVE_ALIGNED_ATTRIBUTE
   
-  #if defined(ARMA_USE_CXX11)
-    #if (ARMA_GCC_VERSION < 40800)
-      #undef  ARMA_PRINT_CXX11_WARNING
-      #define ARMA_PRINT_CXX11_WARNING
-    #endif
-  #endif
+  #undef  ARMA_HAVE_GCC_ASSUME_ALIGNED
+  #define ARMA_HAVE_GCC_ASSUME_ALIGNED
   
   #if !defined(ARMA_USE_CXX11) && !defined(__GXX_EXPERIMENTAL_CXX0X__) && (__cplusplus < 201103L) && !defined(ARMA_DONT_USE_TR1)
     #if defined(_GLIBCXX_USE_C99_MATH_TR1) && defined(_GLIBCXX_USE_C99_COMPLEX_TR1)
       #define ARMA_HAVE_TR1
     #endif
-  #endif
-  
-  #if (ARMA_GCC_VERSION >= 40700)
-    #define ARMA_HAVE_GCC_ASSUME_ALIGNED
   #endif
   
   // gcc's vectoriser can handle elaborate loops
@@ -354,7 +336,7 @@
     #error "*** newer compiler required ***"
   #endif
   
-  #if (__INTEL_COMPILER < 1300)
+  #if (__INTEL_COMPILER < 1400)
     #error "*** newer compiler required ***"
   #endif
   
@@ -399,7 +381,7 @@
   
   #pragma warning(disable: 4127)  // conditional expression is constant
   #pragma warning(disable: 4180)  // qualifier has no meaning
-  #pragma warning(disable: 4244)  // possible loss of data when converting types
+  #pragma warning(disable: 4244)  // possible loss of data when converting types (see also 4305)
   #pragma warning(disable: 4510)  // default constructor could not be generated
   #pragma warning(disable: 4511)  // copy constructor can't be generated
   #pragma warning(disable: 4512)  // assignment operator can't be generated
@@ -451,12 +433,12 @@
   // http://www.oracle.com/technetwork/server-storage/solarisstudio/training/index-jsp-141991.html
   // http://www.oracle.com/technetwork/server-storage/solarisstudio/documentation/cplusplus-faq-355066.html
   
-  #if (__SUNPRO_CC < 0x5100)
+  #if (__SUNPRO_CC < 0x5130)
     #error "*** newer compiler required ***"
   #endif
   
   #if defined(ARMA_USE_CXX11)
-    #if (__SUNPRO_CC < 0x5130)
+    #if (__SUNPRO_CC < 0x5140)
       #undef  ARMA_PRINT_CXX11_WARNING
       #define ARMA_PRINT_CXX11_WARNING
     #endif
@@ -511,7 +493,7 @@
 
 
 #if defined(ARMA_USE_OPENMP) && !defined(ARMA_USE_CXX11)
-  #if (defined(ARMA_GCC_VERSION) && (ARMA_GCC_VERSION >= 50400)) || (defined(__clang__) && !defined(ARMA_FAKE_CLANG))
+  #if (defined(ARMA_GCC_VERSION) && (ARMA_GCC_VERSION >= 50400)) || (defined(__clang__) && !defined(ARMA_DETECTED_FAKE_CLANG))
     #undef  ARMA_PRINT_OPENMP_CXX11_WARNING
     #define ARMA_PRINT_OPENMP_CXX11_WARNING
   #endif
@@ -526,6 +508,7 @@
 #if defined(ARMA_USE_OPENMP) && defined(ARMA_USE_CXX11)
   #if (defined(ARMA_GCC_VERSION) && (ARMA_GCC_VERSION < 50400))
     // due to https://gcc.gnu.org/bugzilla/show_bug.cgi?id=57580
+    // TODO: gcc 4.9.4 is also fixed, so use a more fine-grained gcc version check?
     #undef ARMA_USE_OPENMP
     #if !defined(ARMA_DONT_PRINT_OPENMP_WARNING)
       #pragma message ("WARNING: use of OpenMP disabled due to compiler bug in gcc <= 5.3")
@@ -544,8 +527,8 @@
 
 // cleanup
 
-#undef ARMA_FAKE_GCC
-#undef ARMA_FAKE_CLANG
+#undef ARMA_DETECTED_FAKE_GCC
+#undef ARMA_DETECTED_FAKE_CLANG
 #undef ARMA_GCC_VERSION
 #undef ARMA_PRINT_CXX98_WARNING
 #undef ARMA_PRINT_CXX11_WARNING

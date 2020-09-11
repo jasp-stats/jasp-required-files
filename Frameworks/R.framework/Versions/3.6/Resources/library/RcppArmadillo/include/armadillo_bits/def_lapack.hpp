@@ -96,6 +96,11 @@
   #define arma_cgeqrf cgeqrf
   #define arma_zgeqrf zgeqrf
   
+  #define arma_sgeqp3 sgeqp3
+  #define arma_dgeqp3 dgeqp3
+  #define arma_cgeqp3 cgeqp3
+  #define arma_zgeqp3 zgeqp3
+  
   #define arma_sorgqr sorgqr
   #define arma_dorgqr dorgqr
   
@@ -325,6 +330,11 @@
   #define arma_cgeqrf CGEQRF
   #define arma_zgeqrf ZGEQRF
   
+  #define arma_sgeqp3 SGEQP3
+  #define arma_dgeqp3 DGEQP3
+  #define arma_cgeqp3 CGEQP3
+  #define arma_zgeqp3 ZGEQP3
+  
   #define arma_sorgqr SORGQR
   #define arma_dorgqr DORGQR
   
@@ -510,10 +520,10 @@ extern "C"
   void arma_fortran(arma_zgetrf)(const blas_int* m, const blas_int* n, blas_cxd* a, const blas_int* lda, blas_int* ipiv, blas_int* info);
   
   // solve system of linear equations using pre-computed LU decomposition
-  void arma_fortran(arma_sgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs,    float* a, const blas_int* lda, const blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
-  void arma_fortran(arma_dgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs,   double* a, const blas_int* lda, const blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
-  void arma_fortran(arma_cgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, blas_cxf* a, const blas_int* lda, const blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
-  void arma_fortran(arma_zgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, blas_cxd* a, const blas_int* lda, const blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
+  void arma_fortran(arma_sgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const    float* a, const blas_int* lda, const blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
+  void arma_fortran(arma_dgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const   double* a, const blas_int* lda, const blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
+  void arma_fortran(arma_cgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const blas_cxf* a, const blas_int* lda, const blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
+  void arma_fortran(arma_zgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const blas_cxd* a, const blas_int* lda, const blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info, const blas_len trans_len);
   
   // matrix inversion (using pre-computed LU decomposition)
   void arma_fortran(arma_sgetri)(const blas_int* n,    float* a, const blas_int* lda, const blas_int* ipiv,    float* work, const blas_int* lwork, blas_int* info);
@@ -597,6 +607,14 @@ extern "C"
   void arma_fortran(arma_cgeqrf)(const blas_int* m, const blas_int* n, blas_cxf* a, const blas_int* lda, blas_cxf* tau, blas_cxf* work, const blas_int* lwork, blas_int* info);
   void arma_fortran(arma_zgeqrf)(const blas_int* m, const blas_int* n, blas_cxd* a, const blas_int* lda, blas_cxd* tau, blas_cxd* work, const blas_int* lwork, blas_int* info);
   
+  // QR decomposition with pivoting (real matrices)
+  void arma_fortran(arma_sgeqp3)(const blas_int* m, const blas_int* n,    float* a, const blas_int* lda, blas_int* jpvt,    float* tau,    float* work, const blas_int* lwork, blas_int* info);
+  void arma_fortran(arma_dgeqp3)(const blas_int* m, const blas_int* n,   double* a, const blas_int* lda, blas_int* jpvt,   double* tau,   double* work, const blas_int* lwork, blas_int* info);
+  
+  // QR decomposition with pivoting (complex matrices)
+  void arma_fortran(arma_cgeqp3)(const blas_int* m, const blas_int* n, blas_cxf* a, const blas_int* lda, blas_int* jpvt, blas_cxf* tau, blas_cxf* work, const blas_int* lwork,  float* rwork, blas_int* info);
+  void arma_fortran(arma_zgeqp3)(const blas_int* m, const blas_int* n, blas_cxd* a, const blas_int* lda, blas_int* jpvt, blas_cxd* tau, blas_cxd* work, const blas_int* lwork, double* rwork, blas_int* info);
+  
   // Q matrix calculation from QR decomposition (real matrices)
   void arma_fortran(arma_sorgqr)(const blas_int* m, const blas_int* n, const blas_int* k,  float* a, const blas_int* lda, const  float* tau,  float* work, const blas_int* lwork, blas_int* info);
   void arma_fortran(arma_dorgqr)(const blas_int* m, const blas_int* n, const blas_int* k, double* a, const blas_int* lda, const double* tau, double* work, const blas_int* lwork, blas_int* info);
@@ -676,10 +694,10 @@ extern "C"
   void arma_fortran(arma_zgbtrf)(const blas_int* m, const blas_int* n, const blas_int* kl, const blas_int* ku, blas_cxd* ab, const blas_int* ldab, blas_int* ipiv, blas_int* info);
   
   // solve system of linear equations using pre-computed LU decomposition (general band matrix)
-  void arma_fortran(arma_sgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs,    float* ab, const blas_int* ldab, blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
-  void arma_fortran(arma_dgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs,   double* ab, const blas_int* ldab, blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
-  void arma_fortran(arma_cgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, blas_cxf* ab, const blas_int* ldab, blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
-  void arma_fortran(arma_zgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, blas_cxd* ab, const blas_int* ldab, blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
+  void arma_fortran(arma_sgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const    float* ab, const blas_int* ldab, const blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
+  void arma_fortran(arma_dgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const   double* ab, const blas_int* ldab, const blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
+  void arma_fortran(arma_cgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const blas_cxf* ab, const blas_int* ldab, const blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
+  void arma_fortran(arma_zgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const blas_cxd* ab, const blas_int* ldab, const blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info, blas_len trans_len);
   
   // solve system of linear equations (general band matrix)
   void arma_fortran(arma_sgbsv)(const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs,    float* ab, const blas_int* ldab, blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info);
@@ -821,10 +839,10 @@ extern "C"
   void arma_fortran(arma_zgetrf)(const blas_int* m, const blas_int* n, blas_cxd* a, const blas_int* lda, blas_int* ipiv, blas_int* info);
   
   // solve system of linear equations using pre-computed LU decomposition
-  void arma_fortran(arma_sgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs,    float* a, const blas_int* lda, const blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info);
-  void arma_fortran(arma_dgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs,   double* a, const blas_int* lda, const blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info);
-  void arma_fortran(arma_cgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, blas_cxf* a, const blas_int* lda, const blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info);
-  void arma_fortran(arma_zgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, blas_cxd* a, const blas_int* lda, const blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_sgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const    float* a, const blas_int* lda, const blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_dgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const   double* a, const blas_int* lda, const blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_cgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const blas_cxf* a, const blas_int* lda, const blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_zgetrs)(const char* trans, const blas_int* n, const blas_int* nrhs, const blas_cxd* a, const blas_int* lda, const blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info);
   
   // matrix inversion (using pre-computed LU decomposition)
   void arma_fortran(arma_sgetri)(const blas_int* n,    float* a, const blas_int* lda, const blas_int* ipiv,    float* work, const blas_int* lwork, blas_int* info);
@@ -908,6 +926,14 @@ extern "C"
   void arma_fortran(arma_cgeqrf)(const blas_int* m, const blas_int* n, blas_cxf* a, const blas_int* lda, blas_cxf* tau, blas_cxf* work, const blas_int* lwork, blas_int* info);
   void arma_fortran(arma_zgeqrf)(const blas_int* m, const blas_int* n, blas_cxd* a, const blas_int* lda, blas_cxd* tau, blas_cxd* work, const blas_int* lwork, blas_int* info);
   
+  // QR decomposition with pivoting (real matrices)
+  void arma_fortran(arma_sgeqp3)(const blas_int* m, const blas_int* n,    float* a, const blas_int* lda, blas_int* jpvt,    float* tau,    float* work, const blas_int* lwork, blas_int* info);
+  void arma_fortran(arma_dgeqp3)(const blas_int* m, const blas_int* n,   double* a, const blas_int* lda, blas_int* jpvt,   double* tau,   double* work, const blas_int* lwork, blas_int* info);
+  
+  // QR decomposition with pivoting (complex matrices)
+  void arma_fortran(arma_cgeqp3)(const blas_int* m, const blas_int* n, blas_cxf* a, const blas_int* lda, blas_int* jpvt, blas_cxf* tau, blas_cxf* work, const blas_int* lwork,  float* rwork, blas_int* info);
+  void arma_fortran(arma_zgeqp3)(const blas_int* m, const blas_int* n, blas_cxd* a, const blas_int* lda, blas_int* jpvt, blas_cxd* tau, blas_cxd* work, const blas_int* lwork, double* rwork, blas_int* info);
+  
   // Q matrix calculation from QR decomposition (real matrices)
   void arma_fortran(arma_sorgqr)(const blas_int* m, const blas_int* n, const blas_int* k,  float* a, const blas_int* lda, const  float* tau,  float* work, const blas_int* lwork, blas_int* info);
   void arma_fortran(arma_dorgqr)(const blas_int* m, const blas_int* n, const blas_int* k, double* a, const blas_int* lda, const double* tau, double* work, const blas_int* lwork, blas_int* info);
@@ -987,10 +1013,10 @@ extern "C"
   void arma_fortran(arma_zgbtrf)(const blas_int* m, const blas_int* n, const blas_int* kl, const blas_int* ku, blas_cxd* ab, const blas_int* ldab, blas_int* ipiv, blas_int* info);
   
   // solve system of linear equations using pre-computed LU decomposition (general band matrix)
-  void arma_fortran(arma_sgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs,    float* ab, const blas_int* ldab, blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info);
-  void arma_fortran(arma_dgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs,   double* ab, const blas_int* ldab, blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info);
-  void arma_fortran(arma_cgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, blas_cxf* ab, const blas_int* ldab, blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info);
-  void arma_fortran(arma_zgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, blas_cxd* ab, const blas_int* ldab, blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_sgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const    float* ab, const blas_int* ldab, const blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_dgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const   double* ab, const blas_int* ldab, const blas_int* ipiv,   double* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_cgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const blas_cxf* ab, const blas_int* ldab, const blas_int* ipiv, blas_cxf* b, const blas_int* ldb, blas_int* info);
+  void arma_fortran(arma_zgbtrs)(const char* trans, const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs, const blas_cxd* ab, const blas_int* ldab, const blas_int* ipiv, blas_cxd* b, const blas_int* ldb, blas_int* info);
   
   // solve system of linear equations (general band matrix)
   void arma_fortran(arma_sgbsv)(const blas_int* n, const blas_int* kl, const blas_int* ku, const blas_int* nrhs,    float* ab, const blas_int* ldab, blas_int* ipiv,    float* b, const blas_int* ldb, blas_int* info);

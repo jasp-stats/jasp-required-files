@@ -56,13 +56,13 @@ op_cond::rcond(const Base<typename T1::elem_type, T1>& X)
   
   if(strip_trimat<T1>::do_trimat)
     {
-    const strip_trimat<T1> T(X.get_ref());
+    const strip_trimat<T1> S(X.get_ref());
     
-    arma_debug_check( (T.M.is_square() == false), "rcond(): matrix must be square sized" );
+    arma_debug_check( (S.M.is_square() == false), "rcond(): matrix must be square sized" );
     
-    const uword layout = (T.do_triu) ? uword(0) : uword(1);
+    const uword layout = (S.do_triu) ? uword(0) : uword(1);
     
-    return auxlib::rcond_trimat(T.M, layout);
+    return auxlib::rcond_trimat(S.M, layout);
     }
   
   Mat<eT> A = X.get_ref();
@@ -81,7 +81,11 @@ op_cond::rcond(const Base<typename T1::elem_type, T1>& X)
     return auxlib::rcond_trimat(A, layout);
     }
   
-  const bool try_sympd = auxlib::crippled_lapack(A) ? false : sympd_helper::guess_sympd(A);
+  #if defined(ARMA_OPTIMISE_SYMPD)
+    const bool try_sympd = auxlib::crippled_lapack(A) ? false : sympd_helper::guess_sympd_anysize(A);
+  #else
+    const bool try_sympd = false;
+  #endif
   
   if(try_sympd)
     {

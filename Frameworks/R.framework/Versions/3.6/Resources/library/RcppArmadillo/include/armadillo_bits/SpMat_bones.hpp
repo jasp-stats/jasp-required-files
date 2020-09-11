@@ -200,17 +200,17 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   template<typename T1, typename T2, typename spglue_type> inline SpMat& operator/=(const mtSpGlue<eT, T1, T2, spglue_type>& X);
   
   
-  arma_inline       SpSubview<eT> row(const uword row_num);
-  arma_inline const SpSubview<eT> row(const uword row_num) const;
+  arma_inline       SpSubview_row<eT> row(const uword row_num);
+  arma_inline const SpSubview_row<eT> row(const uword row_num) const;
   
-  inline            SpSubview<eT> operator()(const uword row_num, const span& col_span);
-  inline      const SpSubview<eT> operator()(const uword row_num, const span& col_span) const;
+  inline            SpSubview_row<eT> operator()(const uword row_num, const span& col_span);
+  inline      const SpSubview_row<eT> operator()(const uword row_num, const span& col_span) const;
   
-  arma_inline       SpSubview<eT> col(const uword col_num);
-  arma_inline const SpSubview<eT> col(const uword col_num) const;
+  arma_inline       SpSubview_col<eT> col(const uword col_num);
+  arma_inline const SpSubview_col<eT> col(const uword col_num) const;
   
-  inline            SpSubview<eT> operator()(const span& row_span, const uword col_num);
-  inline      const SpSubview<eT> operator()(const span& row_span, const uword col_num) const;
+  inline            SpSubview_col<eT> operator()(const span& row_span, const uword col_num);
+  inline      const SpSubview_col<eT> operator()(const span& row_span, const uword col_num) const;
   
   arma_inline       SpSubview<eT> rows(const uword in_row1, const uword in_row2);
   arma_inline const SpSubview<eT> rows(const uword in_row1, const uword in_row2) const;
@@ -382,15 +382,19 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   // TODO: implement auto_detect for sparse matrices
   
   inline arma_cold bool save(const std::string   name, const file_type type = arma_binary, const bool print_status = true) const;
+  inline arma_cold bool save(const csv_name&     spec, const file_type type =   csv_ascii, const bool print_status = true) const;
   inline arma_cold bool save(      std::ostream& os,   const file_type type = arma_binary, const bool print_status = true) const;
   
   inline arma_cold bool load(const std::string   name, const file_type type = arma_binary, const bool print_status = true);
+  inline arma_cold bool load(const csv_name&     spec, const file_type type =   csv_ascii, const bool print_status = true);
   inline arma_cold bool load(      std::istream& is,   const file_type type = arma_binary, const bool print_status = true);
   
   inline arma_cold bool quiet_save(const std::string   name, const file_type type = arma_binary) const;
+  inline arma_cold bool quiet_save(const csv_name&     spec, const file_type type =   csv_ascii) const;
   inline arma_cold bool quiet_save(      std::ostream& os,   const file_type type = arma_binary) const;
   
   inline arma_cold bool quiet_load(const std::string   name, const file_type type = arma_binary);
+  inline arma_cold bool quiet_load(const csv_name&     spec, const file_type type =   csv_ascii);
   inline arma_cold bool quiet_load(      std::istream& is,   const file_type type = arma_binary);
   
   
@@ -599,6 +603,12 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   inline bool  empty() const;
   inline uword size()  const;
   
+  arma_inline arma_warn_unused SpMat_MapMat_val<eT> front();
+  arma_inline arma_warn_unused eT                   front() const;
+  
+  arma_inline arma_warn_unused SpMat_MapMat_val<eT> back();
+  arma_inline arma_warn_unused eT                   back() const;
+  
   // Resize memory.
   // If the new size is larger, the column pointers and new memory still need to be correctly set.
   // If the new size is smaller, the first new_n_nonzero elements will be copied.
@@ -671,7 +681,7 @@ class SpMat : public SpBase< eT, SpMat<eT> >
   // 1: CSC needs to be updated from cache (ie. cache has more recent data)
   // 2: no update required                 (ie. CSC and cache contain the same data)
   
-  #if defined(ARMA_USE_CXX11)
+  #if (defined(ARMA_USE_CXX11) && !defined(ARMA_DONT_USE_CXX11_MUTEX))
   arma_aligned mutable std::mutex cache_mutex;
   #endif
   

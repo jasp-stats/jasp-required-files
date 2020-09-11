@@ -33,7 +33,7 @@ class arrayops
   
   
   template<typename eT>
-  arma_hot inline static void
+  inline static void
   fill_zeros(eT* dest, const uword n_elem);
   
   
@@ -132,6 +132,11 @@ class arrayops
   template<typename eT>
   arma_hot inline static
   void
+  inplace_set_simple(eT* dest, const eT val, const uword n_elem);
+  
+  template<typename eT>
+  arma_hot inline static
+  void
   inplace_set_base(eT* dest, const eT val, const uword n_elem);
   
   template<typename eT>
@@ -196,6 +201,16 @@ class arrayops
   arma_hot inline static
   eT
   product(const eT* src, const uword n_elem);
+  
+  template<typename eT>
+  arma_hot inline static
+  bool
+  is_zero(const eT* mem, const uword n_elem, const eT abs_limit, const typename arma_not_cx<eT>::result* junk = 0);
+  
+  template<typename T>
+  arma_hot inline static
+  bool
+  is_zero(const std::complex<T>* mem, const uword n_elem, const T abs_limit);
   
   template<typename eT>
   arma_hot inline static
