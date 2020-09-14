@@ -1,0 +1,16 @@
+hdi	hdi
+hdi.bugs	hdi
+hdi.data.frame	hdi
+hdi.default	hdi
+hdi.density	hdi
+hdi.function	hdi
+hdi.jagsUI	hdi
+hdi.list	hdi
+hdi.matrix	hdi
+hdi.mcarray	hdi
+hdi.mcmc	hdi
+hdi.mcmc.list	hdi
+hdi.rjags	hdi
+hdi.runjags	hdi
+HDInterval	hdi
+inverseCDF	inverseCDF
