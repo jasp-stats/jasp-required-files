@@ -1,6 +1,6 @@
 Package: jfa
 Title: Bayesian and Classical Audit Sampling
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     person(given = "Koen",
            family = "Derks",
@@ -15,9 +15,9 @@ RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 Suggests: testthat, knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2020-08-05 08:14:57 UTC; derksk
+Packaged: 2020-09-15 12:59:16 UTC; derksk
 Author: Koen Derks [aut, cre]
 Maintainer: Koen Derks <k.derks@nyenrode.nl>
 Repository: CRAN
-Date/Publication: 2020-08-05 12:10:03 UTC
-Built: R 3.6.2; ; 2020-08-06 11:07:41 UTC; unix
+Date/Publication: 2020-09-15 13:20:03 UTC
+Built: R 3.6.2; ; 2020-09-16 12:35:20 UTC; unix
