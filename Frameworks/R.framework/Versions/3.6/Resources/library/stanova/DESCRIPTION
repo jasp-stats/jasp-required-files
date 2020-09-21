@@ -1,6 +1,6 @@
 Package: stanova
 Title: Bayesian Models with Categorical Variables
-Version: 0.1-0
+Version: 0.3-0
 Authors@R: 
     c(person(given = "Henrik",
            family = "Singmann",
@@ -20,24 +20,25 @@ License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
-Imports: rstanarm, emmeans, lme4, coda, rstan, stats
-Suggests: testthat (>= 2.1.0), MEMSS, afex, glmmTMB, bayesplot, tibble,
-        tidybayes, tidyverse
+RoxygenNote: 7.1.1
+Imports: lme4, coda, rstan, stats, MASS
+Suggests: testthat (>= 2.1.0), rstanarm, brms, MEMSS, afex, glmmTMB,
+        bayesplot, tibble, tidybayes, tidyverse
+Depends: emmeans
 RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: stanova
 RemoteUsername: bayesstuff
 RemoteRef: master
-RemoteSha: 2cb08223f957533103612e72055fa7063a1fb5ce
+RemoteSha: 3e5635816fb2e4cda06704778e5bcd382f14717d
 GithubRepo: stanova
 GithubUsername: bayesstuff
 GithubRef: master
-GithubSHA1: 2cb08223f957533103612e72055fa7063a1fb5ce
+GithubSHA1: 3e5635816fb2e4cda06704778e5bcd382f14717d
 NeedsCompilation: no
-Packaged: 2020-06-09 08:28:54 UTC; fransmeerhoff
+Packaged: 2020-09-20 21:51:44 UTC; fransmeerhoff
 Author: Henrik Singmann [aut, cre] (<https://orcid.org/0000-0002-4842-3657>),
   Jonah Gabry [ctb],
   Ben Goodrich [ctb]
 Maintainer: Henrik Singmann <singmann@gmail.com>
-Built: R 3.6.1; ; 2020-06-09 08:28:54 UTC; unix
+Built: R 3.6.1; ; 2020-09-20 21:51:45 UTC; unix
