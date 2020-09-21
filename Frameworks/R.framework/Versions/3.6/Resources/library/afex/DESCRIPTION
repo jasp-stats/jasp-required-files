@@ -7,7 +7,7 @@ Suggests: emmeans (>= 1.4), coin, xtable, parallel, plyr, optimx,
         multcomp, testthat, mlmRev, dplyr, tidyr, dfoptim, Matrix,
         psychTools, ggplot2, MEMSS, effects, carData, ggbeeswarm, nlme,
         cowplot, jtools, ggpubr, ggpol, MASS, glmmTMB, brms, rstanarm,
-        statmod
+        statmod, ggResidpanel
 Imports: pbkrtest (>= 0.4-1), lmerTest (>= 3.0-0), car, reshape2,
         stats, methods, utils
 Description: Convenience functions for analyzing factorial experiments using ANOVA or
@@ -24,7 +24,7 @@ Description: Convenience functions for analyzing factorial experiments using ANO
          type 3 sums of squares as default (imitating commercial statistical software).
 URL: http://afex.singmann.science/, https://github.com/singmann/afex
 BugReports: https://github.com/singmann/afex/issues
-License: GPL (>=2)
+License: GPL (>= 2)
 Encoding: UTF-8
 VignetteBuilder: knitr, R.rsp
 Authors@R: c(person(given="Henrik", family="Singmann", role=c("aut", "cre"),
@@ -41,21 +41,11 @@ Authors@R: c(person(given="Henrik", family="Singmann", role=c("aut", "cre"),
          person(given="Jonathon", family="Love", role=c("ctb")), 
          person(given="Russell", family="Lenth", role=c("ctb")), 
          person(given="Rune", family="Haubo Bojesen Christensen", role=c("ctb")))
-Version: 0.28
-RoxygenNote: 7.1.0
+Version: 0.28-0
+RoxygenNote: 7.1.1
 LazyData: true
-RemoteType: github
-RemoteHost: api.github.com
-RemoteRepo: afex
-RemoteUsername: singmann
-RemoteRef: master
-RemoteSha: 71e22f0020399de1b35189d7c0dd4e5a2729b843
-GithubRepo: afex
-GithubUsername: singmann
-GithubRef: master
-GithubSHA1: 71e22f0020399de1b35189d7c0dd4e5a2729b843
 NeedsCompilation: no
-Packaged: 2020-06-09 08:38:50 UTC; fransmeerhoff
+Packaged: 2020-08-24 09:02:18 UTC; singm
 Author: Henrik Singmann [aut, cre] (<https://orcid.org/0000-0002-4842-3657>),
   Ben Bolker [aut],
   Jake Westfall [aut],
@@ -69,4 +59,6 @@ Author: Henrik Singmann [aut, cre] (<https://orcid.org/0000-0002-4842-3657>),
   Russell Lenth [ctb],
   Rune Haubo Bojesen Christensen [ctb]
 Maintainer: Henrik Singmann <singmann@gmail.com>
-Built: R 3.6.1; ; 2020-06-09 08:38:51 UTC; unix
+Repository: CRAN
+Date/Publication: 2020-09-20 16:40:03 UTC
+Built: R 3.6.1; ; 2020-09-20 23:07:28 UTC; unix
