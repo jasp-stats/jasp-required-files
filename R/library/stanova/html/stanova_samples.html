@@ -105,32 +105,32 @@ if (require("tidybayes") &amp;&amp; require("tidyverse")) {
     group_by(variable) %&gt;%
     median_qi(value) %&gt;%
     ggplot(aes(y = variable, x = value, xmin = .lower, xmax = .upper)) +
-    geom_pointintervalh()
+    geom_pointinterval()
 
   tidy_warp$tension %&gt;%
     ggplot(aes(y = variable, x = value)) +
-    stat_halfeyeh()
+    stat_halfeye()
 
   bind_rows(tidy_warp) %&gt;%
     ggplot(aes(y = variable, x = value)) +
-    stat_halfeyeh() +
+    stat_halfeye() +
     facet_wrap(vars(term), scales = "free")
 
    bind_rows(tidy_warp) %&gt;%
     ggplot(aes(y = variable, x = value)) +
-    stat_intervalh() +
+    stat_interval() +
     facet_wrap(vars(term), scales = "free")
 
    ## marginal means instead of differences from mean:
    stanova_samples(fit_warp, return = "tidybayes", diff_intercept = FALSE) %&gt;%
      bind_rows() %&gt;%
      ggplot(aes(y = variable, x = value)) +
-     stat_halfeyeh() +
+     stat_halfeye() +
      facet_wrap(vars(term), scales = "free")
 }
 
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stanova</em> version 0.1-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stanova</em> version 0.3-0 <a href="00Index.html">Index</a>]</div>
 </body></html>

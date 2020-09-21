@@ -258,10 +258,11 @@ background? Default is <code>TRUE</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>data_geom</code></td>
 <td>
-<p>Geom <code>function</code> used for plotting data in background. 
-The default (missing) uses <code><a href="../../ggplot2/html/geom_point.html">geom_point</a></code> if 
-<code>trace</code> is specified, otherwise 
-<code><a href="../../ggbeeswarm/html/geom_beeswarm.html">geom_beeswarm</a></code>. See examples fo further options.</p>
+<p>Geom <code>function</code> used for plotting data in background.
+The default (missing) uses <code><a href="../../ggplot2/html/geom_point.html">geom_point</a></code> if
+<code>trace</code> is specified, otherwise
+<code><a href="../../ggbeeswarm/html/geom_beeswarm.html">geom_beeswarm</a></code> (a good alternative is
+<code>ggbeeswarm::geom_quasirandom</code>) . See examples fo further options.</p>
 </td></tr>
 <tr valign="top"><td><code>data_alpha</code></td>
 <td>
@@ -404,15 +405,16 @@ shows. The present functions allow plotting of different types of
 confidence intervals (if <code>error_ci = TRUE</code>, the default) or standard 
 errors (if <code>error_ci = FALSE</code>).
 </p>
-<p>A further complication is that readers routinely misinterpret confidence 
-intervals. The most common error is to assume that non-overlapping error 
-bars indicate a significant difference (e.g., Belia et al., 2005). This is 
-rarely the case (see e.g., Cumming &amp; Finch, 2005; Knol et al., 2011; 
-Schenker &amp; Gentleman, 2005). For example, in a fully between-subjects design
-in which the error bars depict 95% confidence intervals and groups are of 
-approximately equal size and have equal variance, even error bars that 
-overlap by as much as 50% still correspond to <em>p</em> &lt; .05. Error bars 
-that are just touching roughly correspond to <em>p</em> = .01.
+<p>A further complication is that readers routinely misinterpret confidence
+intervals. The most common error is to assume that non-overlapping error
+bars indicate a significant difference (e.g., Belia et al., 2005). This is
+often too strong an assumption. (see e.g., Cumming &amp; Finch, 2005; Knol et
+al., 2011; Schenker &amp; Gentleman, 2005). For example, in a fully
+between-subjects design in which the error bars depict 95% confidence
+intervals and groups are of approximately equal size and have equal
+variance, even error bars that overlap by as much as 50% still correspond
+to <em>p</em> &lt; .05. Error bars that are just touching roughly correspond to
+<em>p</em> = .01.
 </p>
 <p>In the case of designs involving repeated-measures factors the usual
 confidence intervals or standard errors (i.e., model-based confidence
@@ -526,6 +528,13 @@ independent-samples or between-subjects factors.
 
 <p>Returns a <span class="pkg">ggplot2</span> plot (i.e., object of class <code>c("gg",
   "ggplot")</code>) unless <code>return = "data"</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Only the DV/response variable can be called <code>y</code>, but no
+factor/variable used for plotting.
 </p>
 
 
@@ -992,5 +1001,5 @@ afex_plot(oats.1, "nitro", data = Oats, id = "Block")
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>afex</em> version 0.28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>afex</em> version 0.28-0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -16,7 +16,14 @@
 <h3>Usage</h3>
 
 <pre>
-stanova(formula, data, model_fun, ..., check_contrasts = "contr.bayes")
+stanova(
+  formula,
+  data,
+  model_fun,
+  ...,
+  check_contrasts = "contr.bayes",
+  pass_contrasts = if (packageVersion("rstanarm") &gt;= "2.21.2") TRUE else FALSE
+)
 </pre>
 
 
@@ -36,22 +43,29 @@ Passed to the <code>rstanarm::stan_</code> function specified in <code>model_fun
 <td>
 <p>character string identifying the <code>rstanarm</code> function that
 should be used for fitting (omitting the <code>stan_</code> prefix) such as <code>"glm"</code> or
-<code>"lmer"</code>.</p>
+<code>"glmer"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>further arguments passed to the <code>rstanarm</code> function used for
 fitting. Typical arguments are <code>prior</code>, <code>prior_intercept</code>, <code>chain</code>, <code>iter</code>,
-or <code>core</code>. Ensure that arguments that cannot be evaluated in the given
-context (e.g., <code>weight</code> arguments to binomial models in which only an
-unquoted column name is passed) are enclosed in <code>quote()</code>.</p>
+or <code>core</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>check_contrasts</code></td>
 <td>
 <p><code>character</code> string (of length 1) denoting a contrast
-function which should be assigned to all <code>character</code> and <code>factor</code> variables
-in the model (as long as the specified contrast is not the global default).
-Default is <a href="contr.bayes.html">contr.bayes</a>. Set to <code>NULL</code> to disable the check.</p>
+function or a contrast function which should be assigned to all <code>character</code>
+and <code>factor</code> variables in the model (as long as the specified contrast is
+not the global default). Default is <a href="contr.bayes.html">contr.bayes</a>. Set to <code>NULL</code> to disable
+the check.</p>
+</td></tr>
+<tr valign="top"><td><code>pass_contrasts</code></td>
+<td>
+<p>If <code>TRUE</code>, assigned (or checked) contrasts are passed
+to the modelling function as a <code>list</code>. If <code>FALSE</code>, assigned contrasts are
+added to the passed <code>data</code> object and this object is passed to the
+modelling function (i.e., <code>FALSE</code> changes the original data and <code>TRUE</code> does
+not).</p>
 </td></tr>
 </table>
 
@@ -60,13 +74,53 @@ Default is <a href="contr.bayes.html">contr.bayes</a>. Set to <code>NULL</code> 
 
 <pre>
 
+
+#################################################################
+##                  Regular Regression Models                  ##
+#################################################################
+
+# ANOVA
 fit_warp &lt;- stanova(breaks ~ wool * tension, data = warpbreaks,
-                    prior = rstanarm::student_t(3, 0, 3, autoscale = FALSE),
+                    prior = rstanarm::student_t(3, 0, 20, autoscale = FALSE),
                     model_fun = "glm",
                     chains = 2, iter = 500)
-summary(fit_warp)
 
-####
+summary(fit_warp) ## difference from intercept
+summary(fit_warp, diff_intercept = FALSE)  ## marginal means
+
+## Not run:  ## for speed reasons
+## binomial model
+### from: ?predict.glm
+## example from Venables and Ripley (2002, pp. 190-2.)
+dfbin &lt;- data.frame(
+  ldose = rep(0:5, 2),
+  numdead = c(1, 4, 9, 13, 18, 20, 0, 2, 6, 10, 12, 16),
+  sex = factor(rep(c("M", "F"), c(6, 6)))
+)
+budworm.lg &lt;- stanova(cbind(numdead, numalive = 20-numdead) ~ sex*ldose,
+                      data = dfbin,
+                      model_fun = "glm",
+                      family = binomial,
+                      chains = 2, iter = 500)
+## note: only sex is categorical, ldose is continuous
+summary(budworm.lg)
+
+
+## negative binomial
+## requires attaching rstanarm
+library("rstanarm")
+fit6a &lt;- stanova(Days ~ Sex/(Age + Eth*Lrn), data = MASS::quine,
+                 model_fun = "glm.nb",
+                 link = "log", prior_aux = exponential(1.5),
+                 chains = 2, iter = 200) # for speed of example only
+summary(fit6a)
+
+
+
+
+##################################################################
+##                     Mixed Effects Models                     ##
+##################################################################
 
 data("Machines", package = "MEMSS")
 
@@ -77,19 +131,29 @@ m_machines &lt;- stanova(score ~ Machine + (Machine|Worker),
                       data=Machines, chains = 2, iter = 500)
 summary(m_machines)
 
-## Not run: 
-## negative binomial
-## requires attaching rstanarm
-library("rstanarm")
-fit6a &lt;- stanova(Days ~ Sex/(Age + Eth*Lrn), data = MASS::quine,
-                 model_fun = "glm.nb",
-                 link = "log", prior_aux = exponential(1.5),
-                 chains = 2, iter = 200) # for speed of example only
-summary(fit6a)
+
+## binomial model
+cbpp &lt;- lme4::cbpp
+cbpp$prob &lt;- with(cbpp, incidence / size)
+example_model &lt;- stanova(prob ~ period + (1|herd),
+                         data = cbpp, family = binomial,
+                         model_fun = "glmer",
+                         weight = size,
+                         chains = 2, cores = 1, seed = 12345, iter = 500)
+summary(example_model)
 
 ## End(Not run)
 
+## poisson model
+data(Salamanders, package = "glmmTMB")
+gm1 &lt;- stanova(count~spp * mined + (1 | site), data = Salamanders,
+               model_fun = "glmer", family = "poisson",
+               chains = 2, cores = 1, seed = 12345, iter = 500)
+summary(gm1)
+
+
+
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stanova</em> version 0.1-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stanova</em> version 0.3-0 <a href="00Index.html">Index</a>]</div>
 </body></html>

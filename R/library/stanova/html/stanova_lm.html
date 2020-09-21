@@ -39,17 +39,16 @@ stanova_glm(formula, data, family, check_contrasts = "contr.bayes", ...)
 <tr valign="top"><td><code>check_contrasts</code></td>
 <td>
 <p><code>character</code> string (of length 1) denoting a contrast
-function which should be assigned to all <code>character</code> and <code>factor</code> variables
-in the model (as long as the specified contrast is not the global default).
-Default is <a href="contr.bayes.html">contr.bayes</a>. Set to <code>NULL</code> to disable the check.</p>
+function or a contrast function which should be assigned to all <code>character</code>
+and <code>factor</code> variables in the model (as long as the specified contrast is
+not the global default). Default is <a href="contr.bayes.html">contr.bayes</a>. Set to <code>NULL</code> to disable
+the check.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>further arguments passed to the <code>rstanarm</code> function used for
 fitting. Typical arguments are <code>prior</code>, <code>prior_intercept</code>, <code>chain</code>, <code>iter</code>,
-or <code>core</code>. Ensure that arguments that cannot be evaluated in the given
-context (e.g., <code>weight</code> arguments to binomial models in which only an
-unquoted column name is passed) are enclosed in <code>quote()</code>.</p>
+or <code>core</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>family</code></td>
 <td>
@@ -72,7 +71,7 @@ are only wrappers around <code><a href="stanova.html">stanova</a></code> setting
 <pre>
 
 fit_warp &lt;- stanova_lm(breaks ~ wool * tension, data = warpbreaks,
-                    prior = rstanarm::student_t(3, 0, 3, autoscale = FALSE),
+                    prior = rstanarm::student_t(3, 0, 20, autoscale = FALSE),
                     chains = 2, iter = 500)
 summary(fit_warp)
 
@@ -91,5 +90,5 @@ budworm.lg &lt;- stanova_glm(cbind(numdead, numalive = 20-numdead) ~ sex*ldose,
 summary(budworm.lg)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stanova</em> version 0.1-0 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stanova</em> version 0.3-0 <a href="00Index.html">Index</a>]</div>
 </body></html>
