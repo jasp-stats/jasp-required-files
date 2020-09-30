@@ -1,7 +1,7 @@
 Package: flexplot
 Type: Package
 Title: Graphically Based Data Analysis Using Flexplot
-Version: 0.8.3.2
+Version: 0.8.8
 Author: Dustin Fife
 Maintainer: Dustin Fife <fife.dustin@gmail.com>
 Description: The ‘flexplot’ suite is a graphically-based set of tools for doing data analysis. flexplot() allows users to specify a formula and the software automatically chooses what sort of graphic to present. Analysis can be paired with visuals using the visualize() function, such that the software will choose an appropriate graphic to match an R model object.
@@ -10,9 +10,8 @@ Encoding: UTF-8
 LazyData: true
 Depends: stats, R (>= 2.10)
 Imports: cowplot, MASS, tibble, withr, dplyr, magrittr, forcats, purrr,
-        plyr, R6, ggplot2
-Suggests: jmvcore (>= 0.8.5), vdiffr, knitr, lme4, testthat,
-        randomForest
+        plyr, R6, lme4, ggplot2
+Suggests: jmvcore (>= 0.8.5), vdiffr, knitr, testthat, randomForest
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 RemoteType: github
@@ -20,11 +19,11 @@ RemoteHost: api.github.com
 RemoteRepo: flexplot
 RemoteUsername: dustinfife
 RemoteRef: development
-RemoteSha: ec54fef0433d1fb670a01d386023c47993b29a02
+RemoteSha: 7a1411d90d052dc9354c509e6d2699f2bfb9cd01
 GithubRepo: flexplot
 GithubUsername: dustinfife
 GithubRef: development
-GithubSHA1: ec54fef0433d1fb670a01d386023c47993b29a02
+GithubSHA1: 7a1411d90d052dc9354c509e6d2699f2bfb9cd01
 NeedsCompilation: no
-Packaged: 2020-09-02 09:57:09 UTC; fransmeerhoff
-Built: R 3.6.1; ; 2020-09-02 09:57:16 UTC; unix
+Packaged: 2020-09-30 08:58:14 UTC; fransmeerhoff
+Built: R 3.6.1; ; 2020-09-30 08:58:16 UTC; unix
