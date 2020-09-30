@@ -18,17 +18,9 @@ a <code><a href="flexplot.html">flexplot</a></code>-like formula as input.
 <h3>Usage</h3>
 
 <pre>
-compare.fits(
-  formula,
-  data,
-  model1,
-  model2 = NULL,
-  return.preds = F,
-  report.se = F,
-  re = F,
-  pred.type = "response",
-  ...
-)
+compare.fits(formula, data, model1, model2 = NULL, return.preds = F,
+  report.se = F, re = F, pred.type = "response", num_points = 50,
+  clusters = 3, ...)
 </pre>
 
 
@@ -67,6 +59,14 @@ compare.fits(
 <td>
 <p>What type of predictions should be outputted? This is mostly for <code>glm</code> models. Defaults to &quot;response.&quot;</p>
 </td></tr>
+<tr valign="top"><td><code>num_points</code></td>
+<td>
+<p>Number of points used for predictions. Larger numbers = slower algorithm, but smoother predictions.</p>
+</td></tr>
+<tr valign="top"><td><code>clusters</code></td>
+<td>
+<p>For visualizing mixed models, this specifies the number of clusters to display</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>Other parameters passed to flexplot</p>
@@ -95,5 +95,5 @@ mod2 = lm(weight.loss~therapy.type * motivation, data=exercise_data)
 compare.fits(weight.loss~therapy.type | motivation, data=exercise_data, mod1, mod2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>flexplot</em> version 0.8.3.2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>flexplot</em> version 0.8.8 <a href="00Index.html">Index</a>]</div>
 </body></html>

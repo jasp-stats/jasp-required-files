@@ -1,6 +1,7 @@
 added.plot              Create an added variable plot
 alcuse                  Alcohol use among youth
 anchor.predictions      Generate Predictions for a Model
+attractiveness          Simulated Dataset About People's Attractiveness
 authors                 Sales of books on Amazon
 avengers                Simulated Statistics on the Final Avengers
                         Battle
@@ -14,6 +15,9 @@ criminal_data           Criminal dataset
 diet                    Diet dataset
 drug_use                Drug use and SES
 estimates               Report Estimates (effect sizes and parameters)
+estimates.RandomForest
+                        Report RandomForest object Estimates (effect
+                        sizes and parameters)
 estimates.default       Output APA style statistical significance from
                         an object
 estimates.glm           Report glm object Estimates (effect sizes and
@@ -29,6 +33,8 @@ geom_jitterd            Jittered density points
 glinmod                 Perform a general linear model
 glinmod_jasp            General Linear Model in JASP
 graduate_income         Graduate income
+icc                     Compute the ICC from a lmer (package lme4)
+                        model
 job_data                Job performance dataset
 linmod_jasp             General Linear Model in JASP
 make.formula            Convert strings to a formula
@@ -44,8 +50,11 @@ position_jitterd        Jitter points based on density to avoid
                         overplotting
 position_jitterdodged   Simultaneously dodge and jitter
 print.estimates         Print estimates Summary
+print.rf_estimates      Print rf_estimates Summary
 relationship_satisfaction
                         Relationship satisfaction dataset
+rsq_change              Compare the improvement in R squared from a
+                        baseline model
 secret_agent            Secret agent dataset
 sensitivity.table       Compute sensitivity/specificity/etc.
 standardized.beta       Compute standardized betas on a linear model

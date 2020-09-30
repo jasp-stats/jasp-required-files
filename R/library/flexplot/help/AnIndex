@@ -1,6 +1,7 @@
 added.plot	added.plot
 alcuse	alcuse
 anchor.predictions	anchor.predictions
+attractiveness	attractiveness
 authors	authors
 avengers	avengers
 bf.bic	bf.bic
@@ -16,6 +17,7 @@ estimates	estimates
 estimates.default	estimates.default
 estimates.glm	estimates.glm
 estimates.lm	estimates.lm
+estimates.RandomForest	estimates.RandomForest
 estimates.zeroinfl	estimates.zeroinfl
 exercise_data	exercise_data
 flexplot	flexplot
@@ -26,6 +28,7 @@ glinmod	glinmod
 glinmod_jasp	glinmod_jasp
 graduate_income	graduate_income
 has_flipped_aes	bidirection
+icc	icc
 job_data	job_data
 linmod_jasp	linmod_jasp
 make.formula	make.formula
@@ -39,7 +42,9 @@ plant_growth	plant_growth
 position_jitterd	position_jitterd
 position_jitterdodged	position_jitterdodged
 print.estimates	print.estimates
+print.rf_estimates	print.rf_estimates
 relationship_satisfaction	relationship_satisfaction
+rsq_change	rsq_change
 secret_agent	secret_agent
 sensitivity.table	sensitivity.table
 standardized.beta	standardized.beta
