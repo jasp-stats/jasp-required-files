@@ -1,7 +1,6 @@
 added.plot	added.plot
 alcuse	alcuse
 anchor.predictions	anchor.predictions
-attractiveness	attractiveness
 authors	authors
 avengers	avengers
 bf.bic	bf.bic
@@ -29,6 +28,7 @@ glinmod_jasp	glinmod_jasp
 graduate_income	graduate_income
 has_flipped_aes	bidirection
 icc	icc
+income	income
 job_data	job_data
 linmod_jasp	linmod_jasp
 make.formula	make.formula
@@ -51,7 +51,6 @@ standardized.beta	standardized.beta
 subsetString	subsetString
 tablesaw.injury	tablesaw.injury
 third.eye	third.eye
-uni.plot	uni.plot
 visualize	visualize
 visualize.default	visualize.default
 visualize.glmerMod	visualize.glmerMod

@@ -1,7 +1,6 @@
 added.plot              Create an added variable plot
 alcuse                  Alcohol use among youth
 anchor.predictions      Generate Predictions for a Model
-attractiveness          Simulated Dataset About People's Attractiveness
 authors                 Sales of books on Amazon
 avengers                Simulated Statistics on the Final Avengers
                         Battle
@@ -35,6 +34,7 @@ glinmod_jasp            General Linear Model in JASP
 graduate_income         Graduate income
 icc                     Compute the ICC from a lmer (package lme4)
                         model
+income                  Simulated Dataset About People's Income
 job_data                Job performance dataset
 linmod_jasp             General Linear Model in JASP
 make.formula            Convert strings to a formula
@@ -62,7 +62,6 @@ standardized.beta       Compute standardized betas on a linear model
 subsetString            Extract only part of a string
 tablesaw.injury         Tablesaw injuries
 third.eye               Visualize flexplot with the "third eye"
-uni.plot                Plot univariate distribution of a variable
 visualize               Visualize a fitted model
 visualize.RandomForest
                         Visualize a fitted RandomForest model
