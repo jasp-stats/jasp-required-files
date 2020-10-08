@@ -1,13 +1,17 @@
 ## version 1.0.5
 ### Fixes:
+- models being fitted automatically until reaching R-hat lower than 1.05 without setting max_rhat and autofit control parameters
 - bug preventing to draw a bivariate plot of mu and tau
 - range for parameter estimates from individual models no containing 0 (or 1 in case of OR measured effect sizes)
 - inability to fit a model with only null mu distributions if correlation or OR measured effect sizes were specified
-- formating of this file
+- ordering of the estimated and observed effects when both of them are requested simultaneously
+- formatting of this file (NEWS.md)
 
 ### Improvements:
 - priors plot: parameter specification, default plotting range, clearer x-axis labels in cases when the parameter is defined on transformed scale
 - parameters plots: probability scale always ends at the same spot as is the last tick on the density scale
+- adding warnings if any of the specified models has Rhat higher than 1.05 or the specified value
+- grouping the same warnings messages together
 
 ## version 1.0.4
 ### Fixes:
