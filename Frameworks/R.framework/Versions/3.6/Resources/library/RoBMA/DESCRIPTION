@@ -39,15 +39,15 @@ RemoteHost: api.github.com
 RemoteRepo: RoBMA
 RemoteUsername: FBartos
 RemoteRef: development
-RemoteSha: 984df69ee1878b12005b9e245a3961d44d3f73ae
+RemoteSha: 7685d4d203a46f259b4cda2c492c8235397c80eb
 GithubRepo: RoBMA
 GithubUsername: FBartos
 GithubRef: development
-GithubSHA1: 984df69ee1878b12005b9e245a3961d44d3f73ae
+GithubSHA1: 7685d4d203a46f259b4cda2c492c8235397c80eb
 NeedsCompilation: yes
-Packaged: 2020-08-28 08:27:21 UTC; fransmeerhoff
+Packaged: 2020-10-08 10:33:15 UTC; fransmeerhoff
 Author: František Bartoš [aut, cre] (<https://orcid.org/0000-0002-0018-5573>),
   Maximilian Maier [aut] (<https://orcid.org/0000-0002-9873-6096>),
   Eric-Jan Wagenmakers [ths] (<https://orcid.org/0000-0003-1596-1034>),
   Joris Goosen [ctb]
-Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-08-28 08:27:24 UTC; unix
+Built: R 3.6.1; x86_64-apple-darwin15.6.0; 2020-10-08 10:33:18 UTC; unix
