@@ -149,11 +149,12 @@ John Wiley \&amp; Sons.
 <h3>Examples</h3>
 
 <pre>
-summary(strel(asrm, estimates = "lambda2", n.chains = 1))
-summary(strel(asrm, estimates = "lambda2", item.dropped = TRUE, n.chains = 1))
+summary(strel(asrm, estimates = "lambda2", n.chains = 2, n.iter = 200, n.boot = 200))
+summary(strel(asrm, estimates = "lambda2", item.dropped = TRUE, n.chains = 2,
+n.iter = 100, n.boot = 200))
 
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Bayesrel</em> version 0.6.5.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Bayesrel</em> version 0.6.5.5 <a href="00Index.html">Index</a>]</div>
 </body></html>
