@@ -1,9 +1,11 @@
 Package: Bayesrel
 Type: Package
 Title: Bayesian Reliability Estimation
-Version: 0.6.5.3
-Author: Julius M. Pfadt and Don van den Bergh
-Maintainer: Julius M. Pfadt <julius.pfadt@gmail.com>
+Version: 0.6.5.5
+Authors@R: c(person("Julius M.", "Pfadt", email = "julius.pfadt@gmail.com",
+                  role = c("aut", "cre")),
+             person("Don", "van den Bergh",
+                  role = c("aut")))
 Description: Functionality for the most common single test reliability estimates is provided:  
     Coefficient alpha, 'Guttman's' lambda-2/-4/-6, the greatest lower bound and coefficient omega. 
     The Bayesian estimates are provided with credible intervals. 
@@ -19,25 +21,30 @@ Description: Functionality for the most common single test reliability estimates
     the principal factor analysis for the frequentist omega is from 'Schlegel' (2017) 
     <https://www.r-bloggers.com/iterated-principal-factor-method-of-factor-analysis-with-r/>; 
     and the analytic alpha interval is from 'Bonett' and 'Wright' (2015) <doi:10.1002/job.1960>. 
+URL: https://github.com/juliuspf/Bayesrel
+BugReports: https://github.com/juliuspf/Bayesrel/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: LaplacesDemon, Rcsdp, MASS, ggplot2, ggridges, lavaan,
         plotrix, coda, methods, stats, graphics, Rdpack
 RdMacros: Rdpack
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Depends: R (>= 2.10)
 Suggests: testthat (>= 2.1.0)
 RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: Bayesrel
 RemoteUsername: juliuspf
-RemoteRef: master
-RemoteSha: 32aebfd270231faded9d62ca419839d06c229456
+RemoteRef: HEAD
+RemoteSha: 8bd009e3360fe8ae8db36bb1b1f640c51ca92e97
 GithubRepo: Bayesrel
 GithubUsername: juliuspf
-GithubRef: master
-GithubSHA1: 32aebfd270231faded9d62ca419839d06c229456
+GithubRef: HEAD
+GithubSHA1: 8bd009e3360fe8ae8db36bb1b1f640c51ca92e97
 NeedsCompilation: no
-Packaged: 2020-07-09 18:10:16 UTC; jorisgoosen
-Built: R 3.6.2; ; 2020-07-09 18:10:16 UTC; unix
+Packaged: 2020-10-08 15:25:17 UTC; fransmeerhoff
+Author: Julius M. Pfadt [aut, cre],
+  Don van den Bergh [aut]
+Maintainer: Julius M. Pfadt <julius.pfadt@gmail.com>
+Built: R 3.6.1; ; 2020-10-08 15:25:17 UTC; unix
