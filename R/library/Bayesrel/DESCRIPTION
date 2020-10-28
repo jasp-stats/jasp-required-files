@@ -1,7 +1,7 @@
 Package: Bayesrel
 Type: Package
 Title: Bayesian Reliability Estimation
-Version: 0.6.5.5
+Version: 0.6.5.6
 Authors@R: c(person("Julius M.", "Pfadt", email = "julius.pfadt@gmail.com",
                   role = c("aut", "cre")),
              person("Don", "van den Bergh",
@@ -26,8 +26,8 @@ BugReports: https://github.com/juliuspf/Bayesrel/issues
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: LaplacesDemon, Rcsdp, MASS, ggplot2, ggridges, lavaan,
-        plotrix, coda, methods, stats, graphics, Rdpack
+Imports: LaplacesDemon, Rcsdp (>= 0.1.57), MASS, ggplot2, ggridges,
+        lavaan, plotrix, coda, methods, stats, graphics, Rdpack
 RdMacros: Rdpack
 RoxygenNote: 7.1.1
 Depends: R (>= 2.10)
@@ -37,14 +37,14 @@ RemoteHost: api.github.com
 RemoteRepo: Bayesrel
 RemoteUsername: juliuspf
 RemoteRef: HEAD
-RemoteSha: 0cd2d48b3cd613260c4f978f2ead7b8fd29ac8eb
+RemoteSha: 1bf94a8f845c8d15c6d9aaf86e3c31d6f1320c97
 GithubRepo: Bayesrel
 GithubUsername: juliuspf
 GithubRef: HEAD
-GithubSHA1: 0cd2d48b3cd613260c4f978f2ead7b8fd29ac8eb
+GithubSHA1: 1bf94a8f845c8d15c6d9aaf86e3c31d6f1320c97
 NeedsCompilation: no
-Packaged: 2020-10-09 10:44:30 UTC; Frans Meerhoff
+Packaged: 2020-10-28 10:30:03 UTC; Frans Meerhoff
 Author: Julius M. Pfadt [aut, cre],
   Don van den Bergh [aut]
 Maintainer: Julius M. Pfadt <julius.pfadt@gmail.com>
-Built: R 3.6.1; ; 2020-10-09 10:44:32 UTC; windows
+Built: R 3.6.1; ; 2020-10-28 10:30:04 UTC; windows
