@@ -1,7 +1,7 @@
 Package: abtest
 Type: Package
 Title: Bayesian A/B Testing
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(person(given="Quentin F.", family="Gronau", role=c("aut", "cre"),
              email="Quentin.F.Gronau@gmail.com"),
              person(given="Akash", family="Raj", role="ctb"),
@@ -12,18 +12,18 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.0.0)
-Imports: Rcpp (>= 0.12.14), mvtnorm, sn, VGAM, truncnorm, plotrix,
+Imports: Rcpp (>= 0.12.14), mvtnorm, sn, qgam, truncnorm, plotrix,
         grDevices, RColorBrewer, Matrix, parallel
 LinkingTo: Rcpp
 RoxygenNote: 6.1.1
 Suggests: testthat
 NeedsCompilation: yes
-Packaged: 2019-09-10 11:50:22 UTC; quentin
+Packaged: 2020-04-23 10:32:56 UTC; quentin
 Author: Quentin F. Gronau [aut, cre],
   Akash Raj [ctb],
   Eric-Jan Wagenmakers [ths]
 Maintainer: Quentin F. Gronau <Quentin.F.Gronau@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-09-10 12:30:02 UTC
-Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2019-09-11 14:10:28 UTC; unix
+Date/Publication: 2020-04-23 13:50:05 UTC
+Built: R 3.6.2; x86_64-apple-darwin15.6.0; 2020-04-24 08:27:42 UTC; unix
 Archs: abtest.so.dSYM
