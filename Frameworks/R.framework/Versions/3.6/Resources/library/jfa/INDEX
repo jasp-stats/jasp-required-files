@@ -1,8 +1,9 @@
 BuildIt                 BuildIt Construction financial statements
-auditPrior              Create a Prior Distribution with Audit
+auditPrior              Create a Prior Distribution with Existing Audit
                         Information
 evaluation              Evaluation of Audit Samples using Confidence /
                         Credible Bounds
 planning                Frequentist and Bayesian Planning for Audit
-                        Samples
-sampling                Sampling from Audit Populations
+                        Sampling
+report                  Generate an Audit Report
+selection               Selecting a Sample from an Audit Population
