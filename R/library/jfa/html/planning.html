@@ -1,34 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Frequentist and Bayesian Planning for Audit Samples</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Frequentist and Bayesian Planning for Audit Sampling</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for planning {jfa}"><tr><td>planning {jfa}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Frequentist and Bayesian Planning for Audit Samples</h2>
+<h2>Frequentist and Bayesian Planning for Audit Sampling</h2>
 
 <h3>Description</h3>
 
 <p>This function calculates the required sample size for an audit, based on the poisson, binomial, or hypergeometric likelihood. A prior can be specified to perform Bayesian planning. The returned object is of class <code>jfaPlanning</code> and can be used with associated <code>print()</code> and <code>plot()</code> methods.
+</p>
+<p>For more details on how to use this function see the package vignette:
+<code>vignette("jfa", package = "jfa")</code>
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision = NULL, 
-         likelihood = "poisson", N = NULL, maxSize = 5000, increase = 1, 
-         prior = FALSE, kPrior = 0, nPrior = 0)
+planning(confidence = 0.95, expectedError = 0, likelihood = "poisson", N = NULL, 
+          materiality = NULL, minPrecision = NULL, 
+          prior = FALSE, kPrior = 0, nPrior = 0,
+          increase = 1, maxSize = 5000)
 </pre>
 
 
 <h3>Arguments</h3>
 
 <table summary="R argblock">
-<tr valign="top"><td><code>materiality</code></td>
-<td>
-<p>a value between 0 and 1 representing the materiality of the audit as a fraction of the total size or value. Can be <code>NULL</code>, but <code>minPrecision</code> should be specified in that case.</p>
-</td></tr>
 <tr valign="top"><td><code>confidence</code></td>
 <td>
 <p>the confidence level desired from the confidence bound (on a scale from 0 to 1). Defaults to 0.95, or 95% confidence.</p>
@@ -36,10 +36,6 @@ planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision 
 <tr valign="top"><td><code>expectedError</code></td>
 <td>
 <p>a fraction representing the percentage of expected mistakes in the sample relative to the total size, or a number (&gt;= 1) that represents the number of expected mistakes.</p>
-</td></tr>
-<tr valign="top"><td><code>minPrecision</code></td>
-<td>
-<p>The minimum precision to be obtained. Can be <code>NULL</code>, but <code>materiality</code> should be specified in that case.</p>
 </td></tr>
 <tr valign="top"><td><code>likelihood</code></td>
 <td>
@@ -49,13 +45,13 @@ planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision 
 <td>
 <p>the population size (required for hypergeometric calculations).</p>
 </td></tr>
-<tr valign="top"><td><code>maxSize</code></td>
+<tr valign="top"><td><code>materiality</code></td>
 <td>
-<p>the maximum sample size that is considered for calculations. Defaults to 5000 for efficiency. Increase this value if the sample size cannot be found due to it being too large (e.g., for a low materiality).</p>
+<p>a value between 0 and 1 representing the materiality of the audit as a fraction of the total size or value. Can be <code>NULL</code>, but <code>minPrecision</code> should be specified in that case.</p>
 </td></tr>
-<tr valign="top"><td><code>increase</code></td>
+<tr valign="top"><td><code>minPrecision</code></td>
 <td>
-<p>the desired increase step for the sample size calculation.</p>
+<p>The minimum precision to be obtained. Can be <code>NULL</code>, but <code>materiality</code> should be specified in that case.</p>
 </td></tr>
 <tr valign="top"><td><code>prior</code></td>
 <td>
@@ -68,6 +64,14 @@ planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision 
 <tr valign="top"><td><code>nPrior</code></td>
 <td>
 <p>the prior parameter <i>&beta;</i> (total number of observations in the assumed prior sample).</p>
+</td></tr>
+<tr valign="top"><td><code>increase</code></td>
+<td>
+<p>the desired increase step for the sample size calculation.</p>
+</td></tr>
+<tr valign="top"><td><code>maxSize</code></td>
+<td>
+<p>the maximum sample size that is considered for calculations. Defaults to 5000 for efficiency. Increase this value if the sample size cannot be found due to it being too large (e.g., for a low materiality).</p>
 </td></tr>
 </table>
 
@@ -104,21 +108,9 @@ planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision 
 <p>An object of class <code>jfaPlanning</code> containing:
 </p>
 <table summary="R valueblock">
-<tr valign="top"><td><code>materiality</code></td>
-<td>
-<p>the value of the specified materiality. Can be <code>NULL</code>.</p>
-</td></tr>
 <tr valign="top"><td><code>confidence</code></td>
 <td>
 <p>the confidence level for the desired population statement.</p>
-</td></tr>
-<tr valign="top"><td><code>sampleSize</code></td>
-<td>
-<p>the resulting sample size.</p>
-</td></tr>
-<tr valign="top"><td><code>expectedSampleError</code></td>
-<td>
-<p>the number of full errors that are allowed to occur in the sample.</p>
 </td></tr>
 <tr valign="top"><td><code>expectedError</code></td>
 <td>
@@ -128,17 +120,37 @@ planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision 
 <td>
 <p>the specified likelihood.</p>
 </td></tr>
-<tr valign="top"><td><code>errorType</code></td>
+<tr valign="top"><td><code>N</code></td>
 <td>
-<p>whether the expected errors where specified as a percentage or as an integer.</p>
+<p>the population size (only returned in case of a hypergeometric likelihood).</p>
+</td></tr>
+<tr valign="top"><td><code>materiality</code></td>
+<td>
+<p>the value of the specified materiality. Can be <code>NULL</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>minPrecision</code></td>
 <td>
 <p>The minimum precision to be obtained. Can be <code>NULL</code>.</p>
 </td></tr>
-<tr valign="top"><td><code>N</code></td>
+<tr valign="top"><td><code>sampleSize</code></td>
 <td>
-<p>the population size (only returned in case of a hypergeometric likelihood).</p>
+<p>the resulting sample size.</p>
+</td></tr>
+<tr valign="top"><td><code>errorType</code></td>
+<td>
+<p>whether the expected errors where specified as a percentage or as an integer.</p>
+</td></tr>
+<tr valign="top"><td><code>expectedSampleError</code></td>
+<td>
+<p>the number of full errors that are allowed to occur in the sample.</p>
+</td></tr>
+<tr valign="top"><td><code>expectedBound</code></td>
+<td>
+<p>a value specifying the expected upper bound if the sample goes according to plan.</p>
+</td></tr>
+<tr valign="top"><td><code>expectedPrecision</code></td>
+<td>
+<p>a value specifying the expected precision if the sample goes according to plan.</p>
 </td></tr>
 <tr valign="top"><td><code>populationK</code></td>
 <td>
@@ -146,7 +158,11 @@ planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision 
 </td></tr>
 <tr valign="top"><td><code>prior</code></td>
 <td>
-<p>a list containing information on the prior parameters.</p>
+<p>an object of class <code>jfaPrior</code> that represents the prior distribution.</p>
+</td></tr>
+<tr valign="top"><td><code>expectedPosterior</code></td>
+<td>
+<p>an object of class <code>jfaPosterior</code> that represents the expected posterior distribution.</p>
 </td></tr>
 </table>
 
@@ -165,7 +181,7 @@ planning(materiality = NULL, confidence = 0.95, expectedError = 0, minPrecision 
 
 <h3>See Also</h3>
 
-<p><code><a href="auditPrior.html">auditPrior</a></code> <code><a href="sampling.html">sampling</a></code> <code><a href="evaluation.html">evaluation</a></code>
+<p><code><a href="auditPrior.html">auditPrior</a></code> <code><a href="selection.html">selection</a></code> <code><a href="evaluation.html">evaluation</a></code>
 </p>
 
 
@@ -179,8 +195,8 @@ library(jfa)
 
 # Frequentist planning with binomial likelihood:
 
-p1 &lt;- planning(materiality = 0.05, confidence = 0.95, expectedError = 0.025, 
-               likelihood = "binomial")
+p1 &lt;- planning(confidence = 0.95, expectedError = 0.025, likelihood = "binomial",
+               materiality = 0.05)
 print(p1)
 
 # ------------------------------------------------------------
@@ -190,44 +206,26 @@ print(p1)
 # 
 # Confidence:              95% 
 # Materiality:             5% 
-# Minimum precision:       100% 
+# Minimum precision:       Not specified 
 # Likelihood:              binomial 
 # Expected sample errors:  6 
 # ------------------------------------------------------------
 # Output:
-# 
+#
 # Sample size:             234 
 # ------------------------------------------------------------
-
-# Bayesian planning with uninformed prior:
-
-p2 &lt;- planning(materiality = 0.05, confidence = 0.95, expectedError = 0.025, 
-               likelihood = "binomial", prior = TRUE)
-print(p2)
-
-# ------------------------------------------------------------
-#              jfa Planning Summary (Bayesian)
-# ------------------------------------------------------------
-# Input:
-# 
-# Confidence:              95%      
-# Materiality:             5% 
-# Minimum precision:       100% 
-# Likelihood:              binomial 
-# Prior:                   beta(1, 1)
-# Expected sample errors:  5.5
-# ------------------------------------------------------------
-# Output:
+# Statistics:
 #
-# Sample size:            220
+# Expected upper bound:    5% 
+# Expected precision:      2.43% 
 # ------------------------------------------------------------ 
 
-# Bayesian planning with informed prior:
+# Bayesian planning with prior:
 
-prior &lt;- auditPrior(materiality = 0.05, confidence = 0.95, cr = 0.6, 
-                    expectedError = 0.025, likelihood = "binomial", method = "arm")
+prior &lt;- auditPrior(confidence = 0.95, likelihood = "binomial", method = "arm", 
+                    expectedError = 0.025, materiality = 0.05, cr = 0.6)
 
-p3 &lt;- planning(materiality = 0.05, confidence = 0.95, expectedError = 0.025,
+p3 &lt;- planning(confidence = 0.95, expectedError = 0.025, materiality = 0.05,
                prior = prior)
 print(p3)
 
@@ -238,17 +236,24 @@ print(p3)
 # 
 # Confidence:              95%      
 # Materiality:             5% 
-# Minimum precision:       100% 
+# Minimum precision:       Not specified 
 # Likelihood:              binomial 
-# Prior:                   beta(2.275, 50.725)
-# Expected sample errors:  4.23
+# Prior distribution:      beta(2.275, 50.725) 
+# Expected sample errors:  4.23 
 # ------------------------------------------------------------
 # Output:
 #
-# Sample size:            169
+# Sample size:             169 
+# Posterior distribution:  beta(6.5, 215.5) 
 # ------------------------------------------------------------
+# Statistics:
+#
+# Expected upper bound:    4.99% 
+# Expected precision:      2.49% 
+# Expected Bayes factor-+: 9.32 
+# ------------------------------------------------------------ 
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.3.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -2,4 +2,5 @@ auditPrior	auditPrior
 BuildIt	BuildIt
 evaluation	evaluation
 planning	planning
-sampling	sampling
+report	report
+selection	selection

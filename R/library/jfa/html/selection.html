@@ -1,24 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sampling from Audit Populations</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Selecting a Sample from an Audit Population</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
-<table width="100%" summary="page for sampling {jfa}"><tr><td>sampling {jfa}</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table width="100%" summary="page for selection {jfa}"><tr><td>selection {jfa}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Sampling from Audit Populations</h2>
+<h2>Selecting a Sample from an Audit Population</h2>
 
 <h3>Description</h3>
 
-<p>This function takes a data frame and performs sampling according to one of three popular algorithms: random sampling, cell sampling, or fixed interval sampling. Sampling is done in combination with one of two sampling units: records or monetary units The returned object is of class <code>jfaSampling</code> and can be used with associated <code>print()</code> and <code>plot()</code> methods.
+<p>This function takes a data frame and performs sampling according to one of three popular algorithms: random sampling, cell sampling, or fixed interval sampling. Sampling is done in combination with one of two sampling units: records or monetary units The returned object is of class <code>jfaSelection</code> and can be used with associated <code>print()</code> and <code>plot()</code> methods. 
+</p>
+<p>For more details on how to use this function see the package vignette:
+<code>vignette("jfa", package = "jfa")</code>
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-sampling(population, sampleSize, bookValues = NULL, units = "records", 
-         algorithm = "random", intervalStartingPoint = 1, ordered = TRUE, 
-         ascending = TRUE, withReplacement = FALSE, seed = 1)
+selection(population, sampleSize, units = "records", algorithm = "random",
+          bookValues = NULL, intervalStartingPoint = 1, ordered = TRUE, 
+          ascending = TRUE, withReplacement = FALSE, seed = 1)
 </pre>
 
 
@@ -33,10 +36,6 @@ sampling(population, sampleSize, bookValues = NULL, units = "records",
 <td>
 <p>the number of observations that need to be selected from the population. Can also be an object of class <code>jfaPlanning</code>.</p>
 </td></tr>
-<tr valign="top"><td><code>bookValues</code></td>
-<td>
-<p>a character specifying the name of the column containing the book values (as in the population data).</p>
-</td></tr>
 <tr valign="top"><td><code>units</code></td>
 <td>
 <p>can be either <code>records</code> (default) for record sampling, or <code>mus</code> for monetary unit sampling.</p>
@@ -44,6 +43,10 @@ sampling(population, sampleSize, bookValues = NULL, units = "records",
 <tr valign="top"><td><code>algorithm</code></td>
 <td>
 <p>can be either one of <code>random</code> (default) for random sampling, <code>cell</code> for cell sampling, or <code>interval</code> for fixed interval sampling.</p>
+</td></tr>
+<tr valign="top"><td><code>bookValues</code></td>
+<td>
+<p>a character specifying the name of the column containing the book values (as in the population data).</p>
 </td></tr>
 <tr valign="top"><td><code>intervalStartingPoint</code></td>
 <td>
@@ -99,7 +102,7 @@ sampling(population, sampleSize, bookValues = NULL, units = "records",
 
 <h3>Value</h3>
 
-<p>An object of class <code>jfaSampling</code> containing:
+<p>An object of class <code>jfaSelection</code> containing:
 </p>
 <table summary="R valueblock">
 <tr valign="top"><td><code>population</code></td>
@@ -110,17 +113,17 @@ sampling(population, sampleSize, bookValues = NULL, units = "records",
 <td>
 <p>a data frame containing the selected observations.</p>
 </td></tr>
-<tr valign="top"><td><code>bookValues</code></td>
+<tr valign="top"><td><code>units</code></td>
 <td>
-<p>if specified, the name of the specified book value column.</p>
+<p>the sampling units that were used for sampling.</p>
 </td></tr>
 <tr valign="top"><td><code>algorithm</code></td>
 <td>
 <p>the algorithm that was used for sampling.</p>
 </td></tr>
-<tr valign="top"><td><code>units</code></td>
+<tr valign="top"><td><code>bookValues</code></td>
 <td>
-<p>the sampling units that were used for sampling.</p>
+<p>if specified, the name of the specified book value column.</p>
 </td></tr>
 </table>
 
@@ -155,8 +158,8 @@ population &lt;- data.frame(ID = sample(1000:100000, size = 1000, replace = FALS
 
 # Draw a custom sample of 100 from the population (via random record sampling):
 
-s1 &lt;- sampling(population = population, sampleSize = 100, algorithm = "random", 
-               units = "records", seed = 1)
+s1 &lt;- selection(population = population, sampleSize = 100, algorithm = "random", 
+                units = "records", seed = 1)
 print(s1)
 
 # ------------------------------------------------------------
@@ -172,8 +175,11 @@ print(s1)
 # Output:
 # 
 # Obtained sample size:    100 
+# ------------------------------------------------------------
+# Statistics:
+#
 # Proportion n/N:          0.1 
-# ------------------------------------------------------------ 
+# ------------------------------------------------------------  
 
 # Use the result from the planning stage in the sampling stage:
 
@@ -181,8 +187,8 @@ p1 &lt;- planning(materiality = 0.05, confidence = 0.95, expectedError = 0.025,
                likelihood = "binomial")
 
 # Draw a sample via random monetary unit sampling:
-s2 &lt;- sampling(population = population, sampleSize = p1, algorithm = "random", 
-               units = "mus", seed = 1, bookValues = "bookValue")
+s2 &lt;- selection(population = population, sampleSize = p1, algorithm = "random", 
+                units = "mus", seed = 1, bookValues = "bookValue")
 print(s2)
 
 # ------------------------------------------------------------
@@ -198,11 +204,14 @@ print(s2)
 # Output:
 #
 # Obtained sample size:    234 
-# Proportion n/N:          0.234 
-# Percentage of value:     23.3% 
 # ------------------------------------------------------------
+# Statistics:
+#
+# Proportion n/N:          0.23 
+# Percentage of value:     23.06% 
+# ------------------------------------------------------------ 
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.3.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,23 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a Prior Distribution with Audit Information</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a Prior Distribution with Existing Audit Information</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for auditPrior {jfa}"><tr><td>auditPrior {jfa}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Create a Prior Distribution with Audit Information</h2>
+<h2>Create a Prior Distribution with Existing Audit Information</h2>
 
 <h3>Description</h3>
 
 <p>This function creates a prior distribution for Bayesian audit sampling according to several methods discussed in Derks et al. (2020). The returned object is of class <code>jfaPrior</code> and can be used with associated <code>print()</code> and <code>plot()</code> methods. <code>jfaPrior</code> objects can be used as input for the <code>prior</code> argument in other functions.
+</p>
+<p>For more details on how to use this function see the package vignette:
+<code>vignette("jfa", package = "jfa")</code>
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1, 
-           cr = 1, expectedError = 0, likelihood = "binomial", N = NULL, 
+auditPrior(confidence = 0.95, likelihood = "binomial", method = "none", 
+           expectedError = 0, N = NULL, materiality = NULL, ir = 1, cr = 1,
            pHmin = NULL, pHplus = NULL, factor = 1, sampleN = 0, sampleK = 0)
 </pre>
 
@@ -25,17 +28,29 @@ auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1,
 <h3>Arguments</h3>
 
 <table summary="R argblock">
-<tr valign="top"><td><code>materiality</code></td>
-<td>
-<p>a value between 0 and 1 representing the materiality of the audit as a fraction of the total size or value. Can be <code>NULL</code> for some methods.</p>
-</td></tr>
 <tr valign="top"><td><code>confidence</code></td>
 <td>
 <p>the confidence level desired from the confidence bound (on a scale from 0 to 1). Defaults to 0.95, or 95% confidence.</p>
 </td></tr>
+<tr valign="top"><td><code>likelihood</code></td>
+<td>
+<p>can be one of <code>binomial</code>, <code>poisson</code>, or <code>hypergeometric</code>. See the Details section for more information.</p>
+</td></tr>
 <tr valign="top"><td><code>method</code></td>
 <td>
-<p>the method by which the prior distribution is constructed. Defaults to the <code>arm</code> method, which uses the audit risk model (Derks et al., 2019). Can be one of <code>none</code>, <code>median</code>, <code>hypotheses</code>, <code>arm</code>, <code>sample</code> or <code>factor</code>. See the Details section for more information.</p>
+<p>the method by which the prior distribution is constructed. Defaults to the <code>none</code> method, which incorporates no prior information. Can be one of <code>none</code>, <code>median</code>, <code>hypotheses</code>, <code>arm</code>, <code>sample</code> or <code>factor</code>. See the Details section for more information.</p>
+</td></tr>
+<tr valign="top"><td><code>expectedError</code></td>
+<td>
+<p>a fraction representing the percentage of expected mistakes in the sample relative to the total size, or a number (&gt;= 1) that represents the number of expected mistakes.</p>
+</td></tr>
+<tr valign="top"><td><code>N</code></td>
+<td>
+<p>the population size (only required when <code>likelihood = 'hypergeometric'</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>materiality</code></td>
+<td>
+<p>a value between 0 and 1 representing the materiality of the audit as a fraction of the total size or value. Can be <code>NULL</code> for some methods.</p>
 </td></tr>
 <tr valign="top"><td><code>ir</code></td>
 <td>
@@ -44,18 +59,6 @@ auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1,
 <tr valign="top"><td><code>cr</code></td>
 <td>
 <p>the inherent risk probability from the audit risk model. Defaults to 1 for 100% risk.</p>
-</td></tr>
-<tr valign="top"><td><code>expectedError</code></td>
-<td>
-<p>a fraction representing the percentage of expected mistakes in the sample relative to the total size, or a number (&gt;= 1) that represents the number of expected mistakes.</p>
-</td></tr>
-<tr valign="top"><td><code>likelihood</code></td>
-<td>
-<p>can be one of <code>binomial</code>, <code>poisson</code>, or <code>hypergeometric</code>. See the Details section for more information.</p>
-</td></tr>
-<tr valign="top"><td><code>N</code></td>
-<td>
-<p>the population size (only required when <code>likelihood = 'hypergeometric'</code>).</p>
 </td></tr>
 <tr valign="top"><td><code>pHmin</code></td>
 <td>
@@ -82,29 +85,6 @@ auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1,
 
 <h3>Details</h3>
 
-<p>This section elaborates on the available methods for constructing a prior distribution.
-</p>
-
-<ul>
-<li><p><code>none</code>:              This method constructs a prior distribution according to the principle of minimum information.
-</p>
-</li>
-<li><p><code>median</code>:            This method constructs a prior distribution so that the prior probabilities of tolerable and intolerable misstatement are equal.
-</p>
-</li>
-<li><p><code>hypotheses</code>:        This method constructs a prior distribution with specified prior probabilities for the hypotheses of tolerable and intolerable misstatement. Requires specification of the <code>pHmin</code> and <code>pHplus</code> arguments.
-</p>
-</li>
-<li><p><code>arm</code>:               This method constructs a prior distribution according to the assessed risks in the audit risk model. Requires specification of the <code>ir</code> and <code>cr</code> arguments.
-</p>
-</li>
-<li><p><code>sample</code>:            This method constructs a prior distribution on the basis of an earlier sample. Requires specification of the <code>sampleN</code> and <code>sampleK</code> arguments.
-</p>
-</li>
-<li><p><code>factor</code>:            This method constructs a prior distribution on the basis of last year's results and a weighting factor. Requires specification of the <code>factor</code>, <code>sampleN</code> and <code>sampleK</code> arguments.
-</p>
-</li></ul>
-
 <p>This section elaborates on the available likelihoods and corresponding prior distributions for the <code>likelihood</code> argument.
 </p>
 
@@ -128,6 +108,29 @@ auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1,
  
 </li></ul>
 
+<p>This section elaborates on the available methods for constructing a prior distribution.
+</p>
+
+<ul>
+<li><p><code>none</code>:              This method constructs a prior distribution according to the principle of minimum information.
+</p>
+</li>
+<li><p><code>median</code>:            This method constructs a prior distribution so that the prior probabilities of tolerable and intolerable misstatement are equal.
+</p>
+</li>
+<li><p><code>hypotheses</code>:        This method constructs a prior distribution with specified prior probabilities for the hypotheses of tolerable and intolerable misstatement. Requires specification of the <code>pHmin</code> and <code>pHplus</code> arguments.
+</p>
+</li>
+<li><p><code>arm</code>:               This method constructs a prior distribution according to the assessed risks in the audit risk model. Requires specification of the <code>ir</code> and <code>cr</code> arguments.
+</p>
+</li>
+<li><p><code>sample</code>:            This method constructs a prior distribution on the basis of an earlier sample. Requires specification of the <code>sampleN</code> and <code>sampleK</code> arguments.
+</p>
+</li>
+<li><p><code>factor</code>:            This method constructs a prior distribution on the basis of last year's results and a weighting factor. Requires specification of the <code>factor</code>, <code>sampleN</code> and <code>sampleK</code> arguments.
+</p>
+</li></ul>
+
 
 
 <h3>Value</h3>
@@ -135,7 +138,7 @@ auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1,
 <p>An object of class <code>jfaPrior</code> containing:
 </p>
 <table summary="R valueblock">
-<tr valign="top"><td><code>method</code></td>
+<tr valign="top"><td><code>confidence</code></td>
 <td>
 <p>the method by which the prior distribution is constructed.</p>
 </td></tr>
@@ -143,49 +146,37 @@ auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1,
 <td>
 <p>the likelihood by which the prior distribution is updated.</p>
 </td></tr>
-<tr valign="top"><td><code>priorD</code></td>
+<tr valign="top"><td><code>method</code></td>
 <td>
-<p>the name of the probability density function of the prior distribution.</p>
+<p>the method by which the prior distribution is constructed.</p>
 </td></tr>
-<tr valign="top"><td><code>nPrior</code></td>
+<tr valign="top"><td><code>expectedError</code></td>
 <td>
-<p>the prior assumed sample size.</p>
-</td></tr>
-<tr valign="top"><td><code>kPrior</code></td>
-<td>
-<p>the prior assumed sample errors</p>
-</td></tr>
-<tr valign="top"><td><code>aPrior</code></td>
-<td>
-<p>the prior parameter alpha.</p>
-</td></tr>
-<tr valign="top"><td><code>bPrior</code></td>
-<td>
-<p>the prior parameter beta.</p>
-</td></tr>
-<tr valign="top"><td><code>materiality</code></td>
-<td>
-<p>the materiality that was used to construct the prior distribution.</p>
+<p>the expected error input.</p>
 </td></tr>
 <tr valign="top"><td><code>N</code></td>
 <td>
 <p>if specified as input, the population size.</p>
 </td></tr>
-<tr valign="top"><td><code>pHmin</code></td>
+<tr valign="top"><td><code>materiality</code></td>
 <td>
-<p>For methods <code>median</code> and <code>hypotheses</code>, the prior probability of the hypothesis <i>&theta; &lt;</i> materiality.</p>
+<p>if specified, the materiality that was used to construct the prior distribution.</p>
 </td></tr>
-<tr valign="top"><td><code>pHmin</code></td>
+<tr valign="top"><td><code>description</code></td>
 <td>
-<p>For methods <code>median</code> and <code>hypotheses</code>, the prior probability of the hypothesis <i>&theta; &gt;</i> materiality.</p>
+<p>a description of the prior distribution, including parameters and the implicit sample.</p>
 </td></tr>
-<tr valign="top"><td><code>sampleN</code></td>
+<tr valign="top"><td><code>statistics</code></td>
 <td>
-<p>For methods <code>sample</code> and <code>factor</code>, the total number of transactions in the earlier sample.</p>
+<p>a list of statistics of the prior distribution, including the mean, mode, median, and upper bound.</p>
 </td></tr>
-<tr valign="top"><td><code>sampleK</code></td>
+<tr valign="top"><td><code>specifics</code></td>
 <td>
-<p>For methods <code>sample</code> and <code>factor</code>, the number of transactions that were misstated in the earlier sample.</p>
+<p>a list of optional specifications of the prior distribution, these depend on the method used.</p>
+</td></tr>
+<tr valign="top"><td><code>hypotheses</code></td>
+<td>
+<p>if a materiality is specified, a list of statistics about the hypotheses including prior probabilities and odds.</p>
 </td></tr>
 </table>
 
@@ -206,7 +197,7 @@ auditPrior(materiality = NULL, confidence = 0.95, method = "arm", ir = 1,
 
 <h3>See Also</h3>
 
-<p><code><a href="planning.html">planning</a></code> <code><a href="sampling.html">sampling</a></code> <code><a href="evaluation.html">evaluation</a></code>
+<p><code><a href="planning.html">planning</a></code> <code><a href="selection.html">selection</a></code> <code><a href="evaluation.html">evaluation</a></code>
 </p>
 
 
@@ -226,28 +217,36 @@ cr &lt;- 0.6   # 60%
 
 # Create a beta prior distribution according to the Audit Risk Model (arm) 
 # and a binomial likelihood:
-prior &lt;- auditPrior(materiality = materiality, confidence = confidence, 
-                    method = "arm", ir = ir, cr = cr, 
-                    expectedError = expectedError, likelihood = "binomial")
+prior &lt;- auditPrior(confidence = confidence, likelihood = "binomial", 
+                    method = "arm", expectedError = expectedError, materiality = materiality, 
+                    ir = ir, cr = cr)
 print(prior)
 
 # ------------------------------------------------------------
 #         jfa Prior Distribution Summary (Bayesian)
 # ------------------------------------------------------------
 # Input:
-# 
+#
 # Confidence:              0.95    
-# Expected sample errors:  0.025       
+# Expected sample errors:  0.02       
 # Likelihood:              binomial 
-# Specifics:               Inherent risk = 1; Internal control risk = 0.6; Detection risk = 0.083 
+# Specifics:               Inherent risk = 1; Internal control risk = 0.6; Detection risk = 0.08 
 # ------------------------------------------------------------
 # Output: 
-# 
+#
 # Prior distribution:      beta(2.275, 50.725) 
 # Implicit sample size:    51 
-# Implicit errors:         1.275 
+# Implicit errors:         1.27 
+# ------------------------------------------------------------
+# Statistics: 
+#
+# Upper bound:             0.1 
+# Precision:               7.1% 
+# Mode:                    0.02 
+# Mean:                    0.04 
+# Median:                  0.04 
 # ------------------------------------------------------------
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.3.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>jfa</em> version 0.5.0 <a href="00Index.html">Index</a>]</div>
 </body></html>
