@@ -20,14 +20,18 @@ the ensemble configuration prior to fitting all of the models.
 <pre>
 check_setup(
   priors_mu = prior(distribution = "normal", parameters = list(mean = 0, sd = 1)),
-  priors_tau = prior(distribution = "invgamma", parameters = list(shape = 1, scale =
-    0.15)),
+  priors_tau = if (likelihood %in% c("t", "normal")) prior(distribution = "invgamma",
+    parameters = list(shape = 1, scale = 0.15)),
   priors_omega = list(prior(distribution = "two.sided", parameters = list(alpha = c(1,
     1), steps = c(0.05)), prior_odds = 1/2), prior(distribution = "two.sided", parameters
     = list(alpha = c(1, 1, 1), steps = c(0.05, 0.1)), prior_odds = 1/2)),
   priors_mu_null = prior(distribution = "point", parameters = list(location = 0)),
-  priors_tau_null = prior(distribution = "point", parameters = list(location = 0)),
+  priors_tau_null = if (likelihood %in% c("t", "normal")) prior(distribution =
+    "point", parameters = list(location = 0)),
   priors_omega_null = prior(distribution = "point", parameters = list(location = 1)),
+  prior_sigma = if (likelihood == "wls") prior(distribution = "invgamma", parameters =
+    list(shape = 1, scale = 1)),
+  likelihood = "t",
   models = FALSE,
   silent = FALSE
 )
@@ -47,7 +51,8 @@ prior(distribution = "normal",   parameters = list(mean = 0, sd = 1))</code>.</p
 <td>
 <p>list of prior distributions for the <code>tau</code> parameter that
 will be treated as belonging to the alternative hypothesis. Defaults to <code>
-prior(distribution = "invgamma", parameters = list(shape = 1, scale = .15))</code>.</p>
+prior(distribution = "invgamma", parameters = list(shape = 1, scale = .15))</code>.
+Only applicable if <code>likelihood</code> is either <code>"t"</code> or <code>"normal"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>priors_omega</code></td>
 <td>
@@ -70,7 +75,8 @@ with location at 0 (
 <p>list of prior distributions for the <code>tau</code> parameter that
 will be treated as belonging to the null hypothesis. Defaults to point distribution
 with location at 0 (
-<code>prior(distribution = "point", parameters = list(location = 0))</code>).</p>
+<code>prior(distribution = "point", parameters = list(location = 0))</code>).
+Only applicable if <code>likelihood</code> is either <code>"t"</code> or <code>"normal"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>priors_omega_null</code></td>
 <td>
@@ -78,6 +84,21 @@ with location at 0 (
 that will be treated as belonging to the null hypothesis. Defaults to point
 distribution with location at 1 (
 <code>prior(distribution = "point", parameters = list(location = 0))</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>prior_sigma</code></td>
+<td>
+<p>a prior distributions for the <code>sigma</code> parameter.
+Defaults to
+<code>prior(distribution = "invgamma", parameters = list(shape = 1, scale = 1))</code>.
+Only applicable if <code>likelihood = "wls"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>likelihood</code></td>
+<td>
+<p>a likelihood that should be used for estimating the
+individual studies. Defaults to 't' which makes use of the test-statistics
+and fit them using a non-central t-distribution, as is usual for selection
+models. Other options use the observed effect sizes with either normal
+distribution likelihood 'normal' or Bayesian weighted least squares 'wls'.</p>
 </td></tr>
 <tr valign="top"><td><code>models</code></td>
 <td>
@@ -95,5 +116,5 @@ distribution with location at 1 (
 <p><code><a href="RoBMA.html">RoBMA()</a></code>, <code><a href="prior.html">prior()</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>RoBMA</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>RoBMA</em> version 1.2.0.900 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -49,12 +49,15 @@ update(
   prior_mu_null = NULL,
   prior_tau_null = NULL,
   prior_omega_null = NULL,
+  prior_sigma = NULL,
   study_names = NULL,
   control = NULL,
   chains = NULL,
   iter = NULL,
   burnin = NULL,
   thin = NULL,
+  parallel = NULL,
+  seed = NULL,
   ...
 )
 </pre>
@@ -110,6 +113,13 @@ will be treated as belonging to the null hypothesis.</p>
 <p>a prior weight function for the <code>omega</code> parameter
 that will be treated as belonging to the null hypothesis.</p>
 </td></tr>
+<tr valign="top"><td><code>prior_sigma</code></td>
+<td>
+<p>a prior distributions for the <code>sigma</code> parameter.
+Defaults to
+<code>prior(distribution = "invgamma", parameters = list(shape = 1, scale = 1))</code>.
+Only applicable if <code>likelihood = "wls"</code>.</p>
+</td></tr>
 <tr valign="top"><td><code>study_names</code></td>
 <td>
 <p>an optional argument with the names of the studies.</p>
@@ -127,6 +137,10 @@ Defaults to <code>FALSE</code></p>
 <dt>max_error</dt><dd><p>The target MCMC error for the autofit function. The
 argument is passed to <a href="../../coda/html/raftery.diag.html">raftery.diag</a> as 'r'. Defaults to
 <code>.01</code>.</p>
+</dd>
+<dt>max_rhat</dt><dd><p>The target Rhat error for the autofit function. The
+argument is passed to <a href="../../runjags/html/add.summary.html">add.summary</a> as 'psrf.target'.
+Defaults to <code>1.05</code>.</p>
 </dd>
 <dt>max_time</dt><dd><p>A string specifying the maximum fitting time in case
 of autofit. Defaults to <code>Inf</code>. Can be specified as a number and
@@ -174,6 +188,10 @@ boost allows to estimate models in difficult cases. Defaults to <code>FALSE</cod
 The R distributions are used as default and boost is used only if they fail.
 Warning: the estimation using boost takes about twice as long.</p>
 </dd>
+<dt>cores</dt><dd><p>Number of cores to bu used fo parallel computation. If
+<code>parallel == TRUE</code>, the default number is equal to number of cores - 1,
+and 1 (no parallel processing otherwise).</p>
+</dd>
 </dl>
 </td></tr>
 <tr valign="top"><td><code>chains</code></td>
@@ -194,6 +212,18 @@ Defaults to <code>5000</code>.</p>
 <td>
 <p>a thinning of the chains of the MCMC algorithm. Defaults to
 <code>1</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>parallel</code></td>
+<td>
+<p>whether the individual models should be fitted in parallel.
+Defaults to <code>FALSE</code>. The <code>cores</code> argument within the <code>control</code>
+list will overwrite the setting if specified to a number higher than 1.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>a seed to be set before model fitting, marginal likelihood
+computation, and posterior mixing for exact results reproducibility. Defaults
+to <code>NULL</code> - no seed is set.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -251,5 +281,5 @@ fit4 &lt;- update(fit3, burnin = 10000)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>RoBMA</em> version 1.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>RoBMA</em> version 1.2.0.900 <a href="00Index.html">Index</a>]</div>
 </body></html>
