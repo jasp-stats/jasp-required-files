@@ -1,6 +1,6 @@
 Package: RoBMA
 Title: Robust Bayesian Meta-Analyses
-Version: 1.2.0.900
+Version: 1.2.0.902
 Maintainer: František Bartoš <f.bartos96@gmail.com>
 Authors@R: c( 
     person("František", "Bartoš",     role = c("aut", "cre"),
@@ -39,17 +39,17 @@ RemoteType: github
 RemoteHost: api.github.com
 RemoteRepo: RoBMA
 RemoteUsername: FBartos
-RemoteRef: development
-RemoteSha: ccb82bf2c2c3e7263f3952bc976a230111f9c217
+RemoteRef: 788f678b02bbfbc619425f67c724abc79c9c28b6
+RemoteSha: 788f678b02bbfbc619425f67c724abc79c9c28b6
 GithubRepo: RoBMA
 GithubUsername: FBartos
-GithubRef: development
-GithubSHA1: ccb82bf2c2c3e7263f3952bc976a230111f9c217
+GithubRef: 788f678b02bbfbc619425f67c724abc79c9c28b6
+GithubSHA1: 788f678b02bbfbc619425f67c724abc79c9c28b6
 NeedsCompilation: yes
-Packaged: 2020-12-02 08:44:50 UTC; Frans Meerhoff
+Packaged: 2020-12-16 14:12:11 UTC; Frans Meerhoff
 Author: František Bartoš [aut, cre] (<https://orcid.org/0000-0002-0018-5573>),
   Maximilian Maier [aut] (<https://orcid.org/0000-0002-9873-6096>),
   Eric-Jan Wagenmakers [ths] (<https://orcid.org/0000-0003-1596-1034>),
   Joris Goosen [ctb]
-Built: R 3.6.1; x86_64-w64-mingw32; 2020-12-02 08:44:52 UTC; windows
+Built: R 3.6.1; x86_64-w64-mingw32; 2020-12-16 14:12:18 UTC; windows
 Archs: i386, x64
