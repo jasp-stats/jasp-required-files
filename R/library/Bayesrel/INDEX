@@ -7,8 +7,4 @@ omega_fit               graphical posterior predictive check for the
                         matrix eigenvalues
 p_strel                 prior and posterior probability of estimate
                         being bigger than threshold
-plot_strel              plot function for an single test reliability
-                        estimate's posterior sample
-plot_strel_id           plots posterior distributions of chosen
-                        estimate and the item-dropped cases in one plot
 strel                   calculate single test reliability estimates
