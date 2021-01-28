@@ -1,8 +1,8 @@
 Package: bain
 Type: Package
-Date: 2019-12-03
+Date: 2020-03-09
 Title: Bayes Factors for Informative Hypotheses
-Version: 0.2.3
+Version: 0.2.4
 Authors@R: c(
     person(c("Xin"), "Gu", role = c("aut"), email = "guxin57@hotmail.com"),
     person(c("Herbert"), "Hoijtink", role = c("aut"), email = "h.hoijtink@uu.nl"),
@@ -25,12 +25,12 @@ Encoding: UTF-8
 LazyData: true
 URL: https://informative-hypotheses.sites.uu.nl/software/bain/
 NeedsCompilation: yes
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Depends: R (>= 3.0.0), stats
 Imports: lavaan
 Suggests: MASS, testthat, knitr, rmarkdown
 VignetteBuilder: knitr
-Packaged: 2019-12-04 13:48:23 UTC; Lissa102
+Packaged: 2020-03-09 12:04:37 UTC; Lissa102
 Author: Xin Gu [aut],
   Herbert Hoijtink [aut],
   Joris Mulder [aut],
@@ -40,6 +40,6 @@ Author: Xin Gu [aut],
   Niels Waller [ctb]
 Maintainer: Caspar J van Lissa <c.j.vanlissa@uu.nl>
 Repository: CRAN
-Date/Publication: 2019-12-04 14:40:05 UTC
-Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2019-12-05 15:35:41 UTC; unix
+Date/Publication: 2020-03-09 12:40:02 UTC
+Built: R 3.6.0; x86_64-apple-darwin15.6.0; 2020-03-10 16:51:10 UTC; unix
 Archs: bain.so.dSYM

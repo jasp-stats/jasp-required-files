@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -13,7 +12,7 @@
 
 <meta name="author" content="Herbert Hoijtink, Caspar van Lissa, Joris Mulder, Marlyne Bosman, Camiel van Zundert, Xin Gu" />
 
-<meta name="date" content="2019-12-04" />
+<meta name="date" content="2020-03-09" />
 
 <title>Introduction to bain</title>
 
@@ -304,7 +303,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Introduction to bain</h1>
 <h4 class="author">Herbert Hoijtink, Caspar van Lissa, Joris Mulder, Marlyne Bosman, Camiel van Zundert, Xin Gu</h4>
-<h4 class="date">2019-12-04</h4>
+<h4 class="date">2020-03-09</h4>
 
 
 
@@ -333,7 +332,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><code>t_test()</code> objects (Student’s t-test, Welch’s t-test, paired samples t-test, one-group t-test, equivalence test). Note that, <code>t_test</code> can be used in the same way as <code>t.test</code>.</li>
 <li><code>lm()</code> objects (ANOVA, ANCOVA, multiple regression).</li>
 <li><code>lavaan</code> objects generated with the <code>sem()</code>, <code>cfa()</code>, and <code>growth</code> functions.</li>
-<li>A named vector containing the estimates resulting from a statistical analysis. Note that, named means that each estimate has to be named such that it can be referred to in hypotheses.</li>
+<li>A named vector containing the estimates resulting from a statistical analysis. Using this option triggers the <code>bain.default()</code> method. Note that, named means that each estimate has to be named such that it can be referred to in hypotheses.</li>
 </ol>
 <p><code>hypothesis</code> A character string containing the informative hypotheses to evaluate (see below the section on “The Specification of Hypotheses”).</p>
 <p><code>fraction = 1</code> A number representing the fraction of information in the data used to construct the prior distribution (see Hoijtink, Mulder, van Lissa, and Gu, 2019): The default value 1 denotes the minimal fraction, 2 denotes twice the minimal fraction, etc.</p>
@@ -715,6 +714,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <ol start="4" style="list-style-type: lower-alpha">
 <li>An example of the Bayesian ANOVA: Sensitivity Analysis</li>
 </ol>
+<p>Note that, most the code below can be replaced by a call to the function <code>bain_sensitivity</code>. See the help file for this function for further instructions (call <code>?bain_sensitivity</code>).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># load the bain package which includes the simulated sesamesim data set</span></a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="kw">library</span>(bain)</a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co"># make a factor of variable site</span></a>
@@ -799,213 +799,33 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb11-24" title="24">y1 &lt;-<span class="st"> </span><span class="kw">bain</span>(fit2, hypotheses2, <span class="dt">fraction =</span> <span class="dv">1</span>, <span class="dt">standardize =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb11-25" title="25">sy1 &lt;-<span class="st"> </span><span class="kw">summary</span>(y1, <span class="dt">ci =</span> <span class="fl">0.99</span>)</a></code></pre></div>
 <ol start="3" style="list-style-type: lower-alpha">
-<li>An example of Bayesian multiple group latent regression. See van Lissa et al. (unpublished) for further elaborations.</li>
+<li>An example of Bayesian multiple group regression. See van Lissa et al. (unpublished) for further elaborations.</li>
 </ol>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Load the bain and lavaan libraries. Visit www.lavaan.org for </span></a>
 <a class="sourceLine" id="cb12-2" title="2"><span class="co"># lavaan mini-tutorials, examples, and elaborations</span></a>
 <a class="sourceLine" id="cb12-3" title="3"><span class="kw">library</span>(bain)</a>
 <a class="sourceLine" id="cb12-4" title="4"><span class="kw">library</span>(lavaan)</a>
 <a class="sourceLine" id="cb12-5" title="5"></a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="co"># Specify the multiple group latent regression model</span></a>
-<a class="sourceLine" id="cb12-7" title="7"></a>
-<a class="sourceLine" id="cb12-8" title="8">model3 &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb12-9" title="9"><span class="st">    A  =~ Ab + Al + Af + An + Ar + Ac </span></a>
-<a class="sourceLine" id="cb12-10" title="10"><span class="st">    B =~ Bb + Bl + Bf + Bn + Br + Bc </span></a>
-<a class="sourceLine" id="cb12-11" title="11"></a>
-<a class="sourceLine" id="cb12-12" title="12"><span class="st">    A ~ B + age + peabody</span></a>
-<a class="sourceLine" id="cb12-13" title="13"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb12-14" title="14"><span class="co"># Assign labels to the groups to be used when formulating</span></a>
-<a class="sourceLine" id="cb12-15" title="15"><span class="co"># hypotheses</span></a>
-<a class="sourceLine" id="cb12-16" title="16">sesamesim<span class="op">$</span>sex &lt;-<span class="st"> </span><span class="kw">factor</span>(sesamesim<span class="op">$</span>sex, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;boy&quot;</span>, <span class="st">&quot;girl&quot;</span>))</a>
-<a class="sourceLine" id="cb12-17" title="17"><span class="co"># Fit the multiple group latent regression model</span></a>
-<a class="sourceLine" id="cb12-18" title="18">fit3 &lt;-<span class="st"> </span><span class="kw">sem</span>(model3, <span class="dt">data =</span> sesamesim, <span class="dt">std.lv =</span> <span class="ot">TRUE</span>, <span class="dt">group =</span> <span class="st">&quot;sex&quot;</span>)</a>
-<a class="sourceLine" id="cb12-19" title="19"><span class="co"># Inspect the parameter names</span></a>
-<a class="sourceLine" id="cb12-20" title="20"><span class="kw">coef</span>(fit3)</a>
-<a class="sourceLine" id="cb12-21" title="21"></a>
-<a class="sourceLine" id="cb12-22" title="22"><span class="co"># Formulate and evaluate two sets of hypotheses</span></a>
-<a class="sourceLine" id="cb12-23" title="23"></a>
-<a class="sourceLine" id="cb12-24" title="24"><span class="co"># Compute the mean of the intercepts in both groups for both factors</span></a>
-<a class="sourceLine" id="cb12-25" title="25">parest &lt;-<span class="st"> </span><span class="kw">parameterEstimates</span>(fit3, <span class="dt">standardize =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb12-26" title="26">ints &lt;-<span class="st"> </span>parest[ parest<span class="op">$</span>op <span class="op">==</span><span class="st"> &quot;~1&quot;</span>, <span class="st">&quot;std.all&quot;</span>]</a>
-<a class="sourceLine" id="cb12-27" title="27">intAboy &lt;-<span class="st"> </span>ints[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]</a>
-<a class="sourceLine" id="cb12-28" title="28">intBboy &lt;-<span class="st"> </span>ints[<span class="dv">7</span><span class="op">:</span><span class="dv">12</span>]</a>
-<a class="sourceLine" id="cb12-29" title="29">intAgirl &lt;-<span class="st"> </span>ints[<span class="dv">17</span><span class="op">:</span><span class="dv">22</span>]</a>
-<a class="sourceLine" id="cb12-30" title="30">intBgirl &lt;-<span class="st"> </span>ints[<span class="dv">23</span><span class="op">:</span><span class="dv">28</span>]</a>
-<a class="sourceLine" id="cb12-31" title="31">iAb &lt;-<span class="st"> </span><span class="kw">mean</span>(intAboy)</a>
-<a class="sourceLine" id="cb12-32" title="32">iBb &lt;-<span class="st"> </span><span class="kw">mean</span>(intBboy)</a>
-<a class="sourceLine" id="cb12-33" title="33">iAg &lt;-<span class="st"> </span><span class="kw">mean</span>(intAgirl)</a>
-<a class="sourceLine" id="cb12-34" title="34">iBg &lt;-<span class="st"> </span><span class="kw">mean</span>(intBgirl)</a>
-<a class="sourceLine" id="cb12-35" title="35"></a>
-<a class="sourceLine" id="cb12-36" title="36"><span class="co"># Print the means so you can include these numbers</span></a>
-<a class="sourceLine" id="cb12-37" title="37"><span class="co"># in the hypotheses in order to make the intercepts</span></a>
-<a class="sourceLine" id="cb12-38" title="38"><span class="co"># comparable between both groups</span></a>
-<a class="sourceLine" id="cb12-39" title="39">iAb</a>
-<a class="sourceLine" id="cb12-40" title="40">iBb</a>
-<a class="sourceLine" id="cb12-41" title="41">iAg</a>
-<a class="sourceLine" id="cb12-42" title="42">iBg</a>
-<a class="sourceLine" id="cb12-43" title="43"></a>
-<a class="sourceLine" id="cb12-44" title="44"><span class="co"># Compute the geometric mean of the loadings in both groups for both factors</span></a>
-<a class="sourceLine" id="cb12-45" title="45">load &lt;-<span class="st"> </span>parest[ parest<span class="op">$</span>op <span class="op">==</span><span class="st"> &quot;=~&quot;</span>, <span class="st">&quot;std.all&quot;</span>]</a>
-<a class="sourceLine" id="cb12-46" title="46">loadAboy &lt;-<span class="st"> </span>load[<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>]</a>
-<a class="sourceLine" id="cb12-47" title="47">loadBboy &lt;-<span class="st"> </span>load[<span class="dv">7</span><span class="op">:</span><span class="dv">12</span>]</a>
-<a class="sourceLine" id="cb12-48" title="48">loadAgirl &lt;-<span class="st"> </span>load[<span class="dv">13</span><span class="op">:</span><span class="dv">18</span>]</a>
-<a class="sourceLine" id="cb12-49" title="49">loadBgirl &lt;-<span class="st"> </span>load[<span class="dv">19</span><span class="op">:</span><span class="dv">24</span>]</a>
-<a class="sourceLine" id="cb12-50" title="50">lAb &lt;-<span class="st"> </span><span class="kw">prod</span>(loadAboy)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb12-51" title="51">lBb &lt;-<span class="st"> </span><span class="kw">prod</span>(loadBboy)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb12-52" title="52">lAg &lt;-<span class="st"> </span><span class="kw">prod</span>(loadAgirl)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb12-53" title="53">lBg &lt;-<span class="st"> </span><span class="kw">prod</span>(loadBgirl)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb12-54" title="54"></a>
-<a class="sourceLine" id="cb12-55" title="55"><span class="co"># Print the inverse geometric means so you can include these numbers</span></a>
-<a class="sourceLine" id="cb12-56" title="56"><span class="co"># in the hypotheses in order to make the slopes comparable</span></a>
-<a class="sourceLine" id="cb12-57" title="57"><span class="co"># between both groups. Note: to specify hypotheses, </span></a>
-<a class="sourceLine" id="cb12-58" title="58"><span class="co"># the * can be used, but the / CANNOT be used.</span></a>
-<a class="sourceLine" id="cb12-59" title="59"><span class="dv">1</span><span class="op">/</span>lAb</a>
-<a class="sourceLine" id="cb12-60" title="60"><span class="dv">1</span><span class="op">/</span>lBb</a>
-<a class="sourceLine" id="cb12-61" title="61"><span class="dv">1</span><span class="op">/</span>lAg</a>
-<a class="sourceLine" id="cb12-62" title="62"><span class="dv">1</span><span class="op">/</span>lBg</a>
-<a class="sourceLine" id="cb12-63" title="63"></a>
-<a class="sourceLine" id="cb12-64" title="64"><span class="co"># Specify and evaluate the two sets of hypotheses</span></a>
-<a class="sourceLine" id="cb12-65" title="65">hypotheses31 &lt;-</a>
-<a class="sourceLine" id="cb12-66" title="66"><span class="st">&quot;1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl&amp;</span></a>
-<a class="sourceLine" id="cb12-67" title="67"><span class="st">1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-68" title="68"><span class="st">1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-69" title="69"><span class="st">1.214269 *A=~An.boy = 1.276502 *A=~An.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-70" title="70"><span class="st">1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-71" title="71"><span class="st">1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-72" title="72"><span class="st">1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-73" title="73"><span class="st">1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-74" title="74"><span class="st">1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-75" title="75"><span class="st">1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-76" title="76"><span class="st">1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-77" title="77"><span class="st">1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-78" title="78"><span class="st">Ab~1.boy -3.20752= Ab~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-79" title="79"><span class="st">Al~1.boy -3.20752= Al~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-80" title="80"><span class="st">Af~1.boy -3.20752= Af~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-81" title="81"><span class="st">An~1.boy -3.20752= An~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-82" title="82"><span class="st">Ar~1.boy -3.20752= Ar~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-83" title="83"><span class="st">Ac~1.boy -3.20752= Ac~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-84" title="84"><span class="st">Bb~1.boy -2.682939= Bb~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-85" title="85"><span class="st">Bl~1.boy -2.682939= Bl~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-86" title="86"><span class="st">Bf~1.boy -2.682939= Bf~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-87" title="87"><span class="st">Bn~1.boy -2.682939= Bn~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-88" title="88"><span class="st">Br~1.boy -2.682939= Br~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-89" title="89"><span class="st">Bc~1.boy -2.682939= Bc~1.girl -2.620678</span></a>
-<a class="sourceLine" id="cb12-90" title="90"><span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb12-91" title="91"><span class="kw">set.seed</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb12-92" title="92">y1 &lt;-<span class="st"> </span><span class="kw">bain</span>(fit3, hypotheses31, <span class="dt">standardize =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb12-93" title="93">sy1 &lt;-<span class="st"> </span><span class="kw">summary</span>(y1, <span class="dt">ci =</span> <span class="fl">0.90</span>)</a>
-<a class="sourceLine" id="cb12-94" title="94"></a>
-<a class="sourceLine" id="cb12-95" title="95">hypotheses32 &lt;-</a>
-<a class="sourceLine" id="cb12-96" title="96"><span class="st">&quot;1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-97" title="97"><span class="st">1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-98" title="98"><span class="st">1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-99" title="99"><span class="st">1.214269 *A=~An.boy = 1.276502 *A=~An.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-100" title="100"><span class="st">1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-101" title="101"><span class="st">1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-102" title="102"><span class="st">1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-103" title="103"><span class="st">1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-104" title="104"><span class="st">1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-105" title="105"><span class="st">1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-106" title="106"><span class="st">1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-107" title="107"><span class="st">1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-108" title="108"><span class="st">Ab~1.boy -3.20752= Ab~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-109" title="109"><span class="st">Al~1.boy -3.20752= Al~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-110" title="110"><span class="st">Af~1.boy -3.20752= Af~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-111" title="111"><span class="st">An~1.boy -3.20752= An~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-112" title="112"><span class="st">Ar~1.boy -3.20752= Ar~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-113" title="113"><span class="st">Ac~1.boy -3.20752= Ac~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-114" title="114"><span class="st">Bb~1.boy -2.682939= Bb~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-115" title="115"><span class="st">Bl~1.boy -2.682939= Bl~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-116" title="116"><span class="st">Bf~1.boy -2.682939= Bf~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-117" title="117"><span class="st">Bn~1.boy -2.682939= Bn~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-118" title="118"><span class="st">Br~1.boy -2.682939= Br~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-119" title="119"><span class="st">Bc~1.boy -2.682939= Bc~1.girl -2.620678 &amp;</span></a>
-<a class="sourceLine" id="cb12-120" title="120"><span class="st">A~age.boy &lt; A~age.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-121" title="121"><span class="st">A~peabody.boy &lt; A~peabody.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-122" title="122"><span class="st">A~B.boy &lt; A~B.girl;</span></a>
-<a class="sourceLine" id="cb12-123" title="123"><span class="st">1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-124" title="124"><span class="st">1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-125" title="125"><span class="st">1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-126" title="126"><span class="st">1.214269 *A=~An.boy = 1.276502 *A=~An.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-127" title="127"><span class="st">1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-128" title="128"><span class="st">1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-129" title="129"><span class="st">1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-130" title="130"><span class="st">1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-131" title="131"><span class="st">1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-132" title="132"><span class="st">1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-133" title="133"><span class="st">1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-134" title="134"><span class="st">1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-135" title="135"><span class="st">Ab~1.boy -3.20752= Ab~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-136" title="136"><span class="st">Al~1.boy -3.20752= Al~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-137" title="137"><span class="st">Af~1.boy -3.20752= Af~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-138" title="138"><span class="st">An~1.boy -3.20752= An~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-139" title="139"><span class="st">Ar~1.boy -3.20752= Ar~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-140" title="140"><span class="st">Ac~1.boy -3.20752= Ac~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-141" title="141"><span class="st">Bb~1.boy -2.682939= Bb~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-142" title="142"><span class="st">Bl~1.boy -2.682939= Bl~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-143" title="143"><span class="st">Bf~1.boy -2.682939= Bf~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-144" title="144"><span class="st">Bn~1.boy -2.682939= Bn~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-145" title="145"><span class="st">Br~1.boy -2.682939= Br~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-146" title="146"><span class="st">Bc~1.boy -2.682939= Bc~1.girl -2.620678 &amp;</span></a>
-<a class="sourceLine" id="cb12-147" title="147"><span class="st">A~age.boy = A~age.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-148" title="148"><span class="st">A~peabody.boy &lt; A~peabody.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-149" title="149"><span class="st">A~B.boy &lt; A~B.girl;</span></a>
-<a class="sourceLine" id="cb12-150" title="150"><span class="st">1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-151" title="151"><span class="st">1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-152" title="152"><span class="st">1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-153" title="153"><span class="st">1.214269 *A=~An.boy = 1.276502 *A=~An.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-154" title="154"><span class="st">1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-155" title="155"><span class="st">1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-156" title="156"><span class="st">1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-157" title="157"><span class="st">1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-158" title="158"><span class="st">1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-159" title="159"><span class="st">1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-160" title="160"><span class="st">1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-161" title="161"><span class="st">1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-162" title="162"><span class="st">Ab~1.boy -3.20752= Ab~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-163" title="163"><span class="st">Al~1.boy -3.20752= Al~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-164" title="164"><span class="st">Af~1.boy -3.20752= Af~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-165" title="165"><span class="st">An~1.boy -3.20752= An~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-166" title="166"><span class="st">Ar~1.boy -3.20752= Ar~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-167" title="167"><span class="st">Ac~1.boy -3.20752= Ac~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-168" title="168"><span class="st">Bb~1.boy -2.682939= Bb~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-169" title="169"><span class="st">Bl~1.boy -2.682939= Bl~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-170" title="170"><span class="st">Bf~1.boy -2.682939= Bf~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-171" title="171"><span class="st">Bn~1.boy -2.682939= Bn~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-172" title="172"><span class="st">Br~1.boy -2.682939= Br~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-173" title="173"><span class="st">Bc~1.boy -2.682939= Bc~1.girl -2.620678 &amp;</span></a>
-<a class="sourceLine" id="cb12-174" title="174"><span class="st">A~age.boy = A~age.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-175" title="175"><span class="st">A~peabody.boy = A~peabody.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-176" title="176"><span class="st">A~B.boy &lt; A~B.girl;</span></a>
-<a class="sourceLine" id="cb12-177" title="177"><span class="st">1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-178" title="178"><span class="st">1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-179" title="179"><span class="st">1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-180" title="180"><span class="st">1.214269 *A=~An.boy = 1.276502 *A=~An.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-181" title="181"><span class="st">1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-182" title="182"><span class="st">1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-183" title="183"><span class="st">1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-184" title="184"><span class="st">1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-185" title="185"><span class="st">1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-186" title="186"><span class="st">1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-187" title="187"><span class="st">1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-188" title="188"><span class="st">1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &amp;</span></a>
-<a class="sourceLine" id="cb12-189" title="189"><span class="st">Ab~1.boy -3.20752= Ab~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-190" title="190"><span class="st">Al~1.boy -3.20752= Al~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-191" title="191"><span class="st">Af~1.boy -3.20752= Af~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-192" title="192"><span class="st">An~1.boy -3.20752= An~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-193" title="193"><span class="st">Ar~1.boy -3.20752= Ar~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-194" title="194"><span class="st">Ac~1.boy -3.20752= Ac~1.girl -3.37765&amp;</span></a>
-<a class="sourceLine" id="cb12-195" title="195"><span class="st">Bb~1.boy -2.682939= Bb~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-196" title="196"><span class="st">Bl~1.boy -2.682939= Bl~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-197" title="197"><span class="st">Bf~1.boy -2.682939= Bf~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-198" title="198"><span class="st">Bn~1.boy -2.682939= Bn~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-199" title="199"><span class="st">Br~1.boy -2.682939= Br~1.girl -2.620678&amp;</span></a>
-<a class="sourceLine" id="cb12-200" title="200"><span class="st">Bc~1.boy -2.682939= Bc~1.girl -2.620678 &amp;</span></a>
-<a class="sourceLine" id="cb12-201" title="201"><span class="st">A~age.boy = A~age.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-202" title="202"><span class="st">A~peabody.boy = A~peabody.girl  &amp;</span></a>
-<a class="sourceLine" id="cb12-203" title="203"><span class="st">A~B.boy = A~B.girl&quot;</span></a>
-<a class="sourceLine" id="cb12-204" title="204"><span class="kw">set.seed</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb12-205" title="205">y2 &lt;-<span class="st"> </span><span class="kw">bain</span>(fit3, hypotheses32,<span class="dt">standardize=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co"># Specify A multiple group regression model</span></a>
+<a class="sourceLine" id="cb12-7" title="7">model3 &lt;-<span class="st"> &#39;</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="st">    postnumb ~ prenumb + peabody </span></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="co"># Assign labels to the groups to be used when formulating</span></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="co"># hypotheses</span></a>
+<a class="sourceLine" id="cb12-12" title="12">sesamesim<span class="op">$</span>sex &lt;-<span class="st"> </span><span class="kw">factor</span>(sesamesim<span class="op">$</span>sex, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;boy&quot;</span>, <span class="st">&quot;girl&quot;</span>))</a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="co"># Fit the multiple group regression model</span></a>
+<a class="sourceLine" id="cb12-14" title="14">fit3 &lt;-<span class="st"> </span><span class="kw">sem</span>(model3, <span class="dt">data =</span> sesamesim, <span class="dt">std.lv =</span> <span class="ot">TRUE</span>, <span class="dt">group =</span> <span class="st">&quot;sex&quot;</span>)</a>
+<a class="sourceLine" id="cb12-15" title="15"><span class="co"># Inspect the parameter names</span></a>
+<a class="sourceLine" id="cb12-16" title="16"><span class="kw">coef</span>(fit3)</a>
+<a class="sourceLine" id="cb12-17" title="17"></a>
+<a class="sourceLine" id="cb12-18" title="18"><span class="co"># Formulate and evaluate the hypotheses</span></a>
+<a class="sourceLine" id="cb12-19" title="19">hypotheses3 &lt;-</a>
+<a class="sourceLine" id="cb12-20" title="20"><span class="st">&quot;postnumb~prenumb.boy = postnumb~prenumb.girl &amp; postnumb~peabody.boy = postnumb~peabody.girl;</span></a>
+<a class="sourceLine" id="cb12-21" title="21"><span class="st"> postnumb~prenumb.boy &lt; postnumb~prenumb.girl &amp; postnumb~peabody.boy &lt; postnumb~peabody.girl</span></a>
+<a class="sourceLine" id="cb12-22" title="22"><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb12-23" title="23"><span class="kw">set.seed</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb12-24" title="24">y1 &lt;-<span class="st"> </span><span class="kw">bain</span>(fit3, hypotheses3, <span class="dt">standardize =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-25" title="25">sy1 &lt;-<span class="st"> </span><span class="kw">summary</span>(y1, <span class="dt">ci =</span> <span class="fl">0.95</span>)</a></code></pre></div>
 <p><strong>4. Examples Using a named vector</strong></p>
 <ol style="list-style-type: lower-alpha">
 <li>An example of the Bayesian ANOVA using a named vector as input for bain</li>
@@ -1473,73 +1293,81 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb20-84" title="84"><span class="co"># obtain the descriptives table</span></a>
 <a class="sourceLine" id="cb20-85" title="85"><span class="kw">summary</span>(results, <span class="dt">ci =</span> <span class="fl">0.95</span>)</a></code></pre></div>
 <ol style="list-style-type: lower-roman">
-<li>An example of Bayesian confirmatory factor analysis with a named vector object. See van Lissa et al. (unpublished) for further elaborations</li>
+<li>An example of Bayesian confirmatory factor analysis with a named vector object. This option uses <code>bain.default()</code>, so the user must manually extract the required information. See van Lissa et al. (unpublished) for further elaborations. First, we fit a structural equation model using <code>lavaan</code>:</li>
 </ol>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># Load the bain and lavaan libraries. Visit www.lavaan.org for </span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="co"># lavaan mini-tutorials, examples, and elaborations</span></a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="kw">library</span>(bain)</a>
-<a class="sourceLine" id="cb21-4" title="4"><span class="kw">library</span>(lavaan)</a>
-<a class="sourceLine" id="cb21-5" title="5"></a>
-<a class="sourceLine" id="cb21-6" title="6"><span class="co"># Specify and fit the confirmatory factor model</span></a>
-<a class="sourceLine" id="cb21-7" title="7">model1 &lt;-<span class="st"> &#39;</span></a>
-<a class="sourceLine" id="cb21-8" title="8"><span class="st">A =~ Ab + Al + Af + An + Ar + Ac</span></a>
-<a class="sourceLine" id="cb21-9" title="9"><span class="st">B =~ Bb + Bl + Bf + Bn + Br + Bc</span></a>
-<a class="sourceLine" id="cb21-10" title="10"><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb21-11" title="11">fit1 &lt;-<span class="st"> </span><span class="kw">sem</span>(model1, <span class="dt">data =</span> sesamesim, <span class="dt">std.lv =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb21-12" title="12"></a>
-<a class="sourceLine" id="cb21-13" title="13"><span class="co"># Obtain the required input for bain:</span></a>
-<a class="sourceLine" id="cb21-14" title="14"></a>
-<a class="sourceLine" id="cb21-15" title="15"><span class="co"># the sample size</span></a>
-<a class="sourceLine" id="cb21-16" title="16">ngroup1 &lt;-<span class="st"> </span><span class="kw">nobs</span>(fit1)</a>
-<a class="sourceLine" id="cb21-17" title="17"></a>
-<a class="sourceLine" id="cb21-18" title="18"><span class="co"># The parameterEstimates() function presents the estimated parameters</span></a>
-<a class="sourceLine" id="cb21-19" title="19"><span class="co"># in a data.frame; the additional argument standardized = TRUE add</span></a>
-<a class="sourceLine" id="cb21-20" title="20"><span class="co"># extra columns with standardized versions of these parameter estimates;</span></a>
-<a class="sourceLine" id="cb21-21" title="21"><span class="co"># for our purposes, we need the &#39;std.all&#39; column, which means that both</span></a>
-<a class="sourceLine" id="cb21-22" title="22"><span class="co"># the observed and the latent variables have been standardized.</span></a>
-<a class="sourceLine" id="cb21-23" title="23"><span class="co">#</span></a>
-<a class="sourceLine" id="cb21-24" title="24"><span class="co"># we capture the output of parameterEstimates() in an object &#39;PE&#39;</span></a>
-<a class="sourceLine" id="cb21-25" title="25">PE1 &lt;-<span class="st"> </span><span class="kw">parameterEstimates</span>(fit1, <span class="dt">standardized =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb21-26" title="26"></a>
-<a class="sourceLine" id="cb21-27" title="27"><span class="co"># We only need the rows that correspond to factor loadings (ie op == &quot;=~&quot;)</span></a>
-<a class="sourceLine" id="cb21-28" title="28"><span class="co"># and the column &quot;std.all&quot;:</span></a>
-<a class="sourceLine" id="cb21-29" title="29">estimate1 &lt;-<span class="st"> </span>PE1[ PE1<span class="op">$</span>op <span class="op">==</span><span class="st"> &quot;=~&quot;</span>, <span class="st">&quot;std.all&quot;</span>]</a>
-<a class="sourceLine" id="cb21-30" title="30"></a>
-<a class="sourceLine" id="cb21-31" title="31"><span class="co"># Assign names to the estimates of the standardized factor loadingts</span></a>
-<a class="sourceLine" id="cb21-32" title="32"><span class="kw">names</span>(estimate1) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ab&quot;</span>, <span class="st">&quot;Al&quot;</span>, <span class="st">&quot;Af&quot;</span>, <span class="st">&quot;An&quot;</span>, <span class="st">&quot;Ar&quot;</span>, <span class="st">&quot;Ac&quot;</span>,</a>
-<a class="sourceLine" id="cb21-33" title="33">                     <span class="st">&quot;Bb&quot;</span>, <span class="st">&quot;Bl&quot;</span>, <span class="st">&quot;Bf&quot;</span>, <span class="st">&quot;Bn&quot;</span>, <span class="st">&quot;Br&quot;</span>, <span class="st">&quot;Bc&quot;</span>)</a>
-<a class="sourceLine" id="cb21-34" title="34"></a>
-<a class="sourceLine" id="cb21-35" title="35"><span class="co"># We will compute the full covariance matrix of standardized parameter</span></a>
-<a class="sourceLine" id="cb21-36" title="36"><span class="co"># estimates, and only extract the part we need: the rows/cols that</span></a>
-<a class="sourceLine" id="cb21-37" title="37"><span class="co"># correspond to the factor loadings</span></a>
-<a class="sourceLine" id="cb21-38" title="38"><span class="co">#</span></a>
-<a class="sourceLine" id="cb21-39" title="39"><span class="co"># to find out which rows/cols we need, we can look at the full parameter</span></a>
-<a class="sourceLine" id="cb21-40" title="40"><span class="co"># table:</span></a>
-<a class="sourceLine" id="cb21-41" title="41">PT1 &lt;-<span class="st"> </span><span class="kw">parTable</span>(fit1)</a>
-<a class="sourceLine" id="cb21-42" title="42"><span class="co"># and extract the parameter numbers (in the &quot;free&quot; column) that correspond</span></a>
-<a class="sourceLine" id="cb21-43" title="43"><span class="co"># to the factor loadings:</span></a>
-<a class="sourceLine" id="cb21-44" title="44">par.idx1 &lt;-<span class="st"> </span>PT1<span class="op">$</span>free[ PT1<span class="op">$</span>op <span class="op">==</span><span class="st"> &quot;=~&quot;</span> ]</a>
-<a class="sourceLine" id="cb21-45" title="45"><span class="co"># Obtain the covariance matrix of the standardized factor loadings</span></a>
-<a class="sourceLine" id="cb21-46" title="46">covariance1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">lavInspect</span>(fit1, <span class="st">&quot;vcov.std.all&quot;</span>)[par.idx1, par.idx1])</a>
-<a class="sourceLine" id="cb21-47" title="47"></a>
-<a class="sourceLine" id="cb21-48" title="48"><span class="co"># Specify the hypotheses using the syntax implementen in bain. Note that</span></a>
-<a class="sourceLine" id="cb21-49" title="49"><span class="co"># the &amp; is used to combine different parts into one hypothesis. Note</span></a>
-<a class="sourceLine" id="cb21-50" title="50"><span class="co"># furthermore, that the ; is used to separate hypotheses</span></a>
-<a class="sourceLine" id="cb21-51" title="51">hypotheses1 &lt;-</a>
-<a class="sourceLine" id="cb21-52" title="52"><span class="st">   &quot; Ab &gt; .6 &amp; Al &gt; .6 &amp; Af &gt; .6 &amp; An &gt; .6 &amp; Ar &gt; .6 &amp; Ac &gt;.6 &amp;</span></a>
-<a class="sourceLine" id="cb21-53" title="53"><span class="st">     Bb &gt; .6 &amp; Bl &gt; .6 &amp; Bf &gt; .6 &amp; Bn &gt; .6 &amp; Br &gt; .6 &amp; Bc &gt;.6&quot;</span></a>
-<a class="sourceLine" id="cb21-54" title="54"></a>
-<a class="sourceLine" id="cb21-55" title="55"><span class="co"># Evaluate the hypotheses using bain, the command used has been explained in</span></a>
-<a class="sourceLine" id="cb21-56" title="56"><span class="co"># the paper. Don&#39;t forget to set the seed first in order to obtain results</span></a>
-<a class="sourceLine" id="cb21-57" title="57"><span class="co"># that can be reproduced exactly.</span></a>
-<a class="sourceLine" id="cb21-58" title="58"><span class="kw">set.seed</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb21-59" title="59">y &lt;-<span class="st"> </span><span class="kw">bain</span>(estimate1, hypotheses1, <span class="dt">n =</span>ngroup1, <span class="dt">Sigma =</span> covariance1,</a>
-<a class="sourceLine" id="cb21-60" title="60">                <span class="dt">group_parameters =</span> <span class="dv">12</span>, <span class="dt">joint_parameters =</span> <span class="dv">0</span>, <span class="dt">fraction =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb21-61" title="61">                <span class="dt">standardize =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb21-62" title="62"></a>
-<a class="sourceLine" id="cb21-63" title="63"><span class="co"># print the results of the bain analysis and obtain the estimates and 95%</span></a>
-<a class="sourceLine" id="cb21-64" title="64"><span class="co"># central credibility intervals</span></a>
-<a class="sourceLine" id="cb21-65" title="65">sy &lt;-<span class="st"> </span><span class="kw">summary</span>(y, <span class="dt">ci =</span> <span class="fl">0.95</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">library</span>(bain)</a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="kw">library</span>(lavaan)</a>
+<a class="sourceLine" id="cb21-3" title="3">model1 &lt;-<span class="st"> &#39;A =~ Ab + Al + Af + An + Ar + Ac </span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="st">           B =~ Bb + Bl + Bf + Bn + Br + Bc&#39;</span></a>
+<a class="sourceLine" id="cb21-5" title="5">fit1 &lt;-<span class="st"> </span><span class="kw">sem</span>(model1, <span class="dt">data =</span> sesamesim, <span class="dt">std.lv =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>We want to specify the following hypotheses:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">hypotheses &lt;-<span class="st"> &quot;(Ab, Al, Af, An, Ar, Ac) &gt;.6 &amp;</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="st">               (Bb, Bl, Bf, Bn, Br, Bc) &gt;.6&quot;</span></a></code></pre></div>
+<p>Next, we extract the required information from the <code>lavaan</code> model object, in the order of the parameter table above:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># Extract standardized parameter estimates (argument x)</span></a>
+<a class="sourceLine" id="cb23-2" title="2">PE1 &lt;-<span class="st"> </span><span class="kw">parameterEstimates</span>(fit1, <span class="dt">standardized =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="co"># Identify which parameter estimates are factor loadings</span></a>
+<a class="sourceLine" id="cb23-4" title="4">loadings &lt;-<span class="st"> </span><span class="kw">which</span>(PE1<span class="op">$</span>op <span class="op">==</span><span class="st"> &quot;=~&quot;</span>)</a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co"># Collect the standardized &quot;std.all&quot; factor loadings &quot;=~&quot;</span></a>
+<a class="sourceLine" id="cb23-6" title="6">estimates &lt;-<span class="st"> </span>PE1<span class="op">$</span>std.all[loadings]</a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co"># Assign names to the standardized factor loadings</span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="kw">names</span>(estimates) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ab&quot;</span>, <span class="st">&quot;Al&quot;</span>, <span class="st">&quot;Af&quot;</span>, <span class="st">&quot;An&quot;</span>, <span class="st">&quot;Ar&quot;</span>, <span class="st">&quot;Ac&quot;</span>, </a>
+<a class="sourceLine" id="cb23-9" title="9">                      <span class="st">&quot;Bb&quot;</span>, <span class="st">&quot;Bl&quot;</span>, <span class="st">&quot;Bf&quot;</span>, <span class="st">&quot;Bn&quot;</span>, <span class="st">&quot;Br&quot;</span>, <span class="st">&quot;Bc&quot;</span>)</a>
+<a class="sourceLine" id="cb23-10" title="10"></a>
+<a class="sourceLine" id="cb23-11" title="11"><span class="co"># Extract sample size (argument n)</span></a>
+<a class="sourceLine" id="cb23-12" title="12">n &lt;-<span class="st"> </span><span class="kw">nobs</span>(fit1)</a>
+<a class="sourceLine" id="cb23-13" title="13"></a>
+<a class="sourceLine" id="cb23-14" title="14"><span class="co"># Extract the standardized model parameter covariance matrix,</span></a>
+<a class="sourceLine" id="cb23-15" title="15"><span class="co"># selecting only the rows and columns for the loadings</span></a>
+<a class="sourceLine" id="cb23-16" title="16">covariance &lt;-<span class="st"> </span><span class="kw">lavInspect</span>(fit1, <span class="st">&quot;vcov.std.all&quot;</span>)[loadings, loadings]</a>
+<a class="sourceLine" id="cb23-17" title="17"></a>
+<a class="sourceLine" id="cb23-18" title="18"><span class="co"># Give the covariance matrix the same names as the estimate</span></a>
+<a class="sourceLine" id="cb23-19" title="19"><span class="kw">dimnames</span>(covariance) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">names</span>(estimates), <span class="kw">names</span>(estimates))</a>
+<a class="sourceLine" id="cb23-20" title="20"></a>
+<a class="sourceLine" id="cb23-21" title="21"><span class="co"># Put the covariance matrix in a list</span></a>
+<a class="sourceLine" id="cb23-22" title="22">covariance &lt;-<span class="st"> </span><span class="kw">list</span>(covariance)</a>
+<a class="sourceLine" id="cb23-23" title="23"></a>
+<a class="sourceLine" id="cb23-24" title="24"><span class="co"># Specify number of group parameters; this simply means that there </span></a>
+<a class="sourceLine" id="cb23-25" title="25"><span class="co"># are 12 parameters in the estimate.</span></a>
+<a class="sourceLine" id="cb23-26" title="26">group_parameters &lt;-<span class="st"> </span><span class="dv">12</span></a>
+<a class="sourceLine" id="cb23-27" title="27"></a>
+<a class="sourceLine" id="cb23-28" title="28"><span class="co"># Then, the number of joint parameters. This is always 0 for evaluations of</span></a>
+<a class="sourceLine" id="cb23-29" title="29"><span class="co"># SEM hypotheses:</span></a>
+<a class="sourceLine" id="cb23-30" title="30">joint_parameters &lt;-<span class="st"> </span><span class="dv">0</span></a></code></pre></div>
+<p>Now, we can evaluate the hypotheses using <code>bain.default()</code>:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">res &lt;-<span class="st"> </span><span class="kw">bain</span>(<span class="dt">x =</span> estimates,</a>
+<a class="sourceLine" id="cb24-2" title="2">            <span class="dt">hypothesis =</span> hypotheses,</a>
+<a class="sourceLine" id="cb24-3" title="3">            <span class="dt">n =</span> n,</a>
+<a class="sourceLine" id="cb24-4" title="4">            <span class="dt">Sigma =</span> covariance,</a>
+<a class="sourceLine" id="cb24-5" title="5">            <span class="dt">group_parameters =</span> group_parameters,</a>
+<a class="sourceLine" id="cb24-6" title="6">            <span class="dt">joint_parameters =</span> joint_parameters)</a>
+<a class="sourceLine" id="cb24-7" title="7">res</a>
+<a class="sourceLine" id="cb24-8" title="8"><span class="co">#&gt; Bayesian informative hypothesis testing for an object of class numeric:</span></a>
+<a class="sourceLine" id="cb24-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb24-10" title="10"><span class="co">#&gt;    Fit   Com   BF.u   BF.c    PMPa  PMPb </span></a>
+<a class="sourceLine" id="cb24-11" title="11"><span class="co">#&gt; H1 0.878 0.009 92.612 753.784 1.000 0.989</span></a>
+<a class="sourceLine" id="cb24-12" title="12"><span class="co">#&gt; Hu                                  0.011</span></a>
+<a class="sourceLine" id="cb24-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb24-14" title="14"><span class="co">#&gt; Hypotheses:</span></a>
+<a class="sourceLine" id="cb24-15" title="15"><span class="co">#&gt;   H1: (Ab,Al,Af,An,Ar,Ac)&gt;.6&amp;(Bb,Bl,Bf,Bn,Br,Bc)&gt;.6</span></a>
+<a class="sourceLine" id="cb24-16" title="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb24-17" title="17"><span class="co">#&gt; Note: BF.u denotes the Bayes factor of the hypothesis at hand versus the unconstrained hypothesis Hu. BF.c denotes the Bayes factor of the hypothesis at hand versus its complement.</span></a></code></pre></div>
+<p>Finally, we print the results of the bain analysis and obtain the estimates and 95% central credibility intervals</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">sres &lt;-<span class="st"> </span><span class="kw">summary</span>(res, <span class="dt">ci =</span> <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb25-2" title="2">sres</a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="co">#&gt;    Parameter   n  Estimate        lb        ub</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="co">#&gt; 1         Ab 240 0.7104508 0.6433340 0.7775677</span></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="co">#&gt; 2         Al 240 0.8114029 0.7632944 0.8595115</span></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="co">#&gt; 3         Af 240 0.8370936 0.7941226 0.8800647</span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="co">#&gt; 4         An 240 0.9061333 0.8769727 0.9352938</span></a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="co">#&gt; 5         Ar 240 0.6980414 0.6287429 0.7673399</span></a>
+<a class="sourceLine" id="cb25-9" title="9"><span class="co">#&gt; 6         Ac 240 0.8731170 0.8374249 0.9088091</span></a>
+<a class="sourceLine" id="cb25-10" title="10"><span class="co">#&gt; 7         Bb 240 0.7658397 0.7076188 0.8240605</span></a>
+<a class="sourceLine" id="cb25-11" title="11"><span class="co">#&gt; 8         Bl 240 0.6476698 0.5687998 0.7265397</span></a>
+<a class="sourceLine" id="cb25-12" title="12"><span class="co">#&gt; 9         Bf 240 0.8101849 0.7604160 0.8599537</span></a>
+<a class="sourceLine" id="cb25-13" title="13"><span class="co">#&gt; 10        Bn 240 0.8878987 0.8531156 0.9226818</span></a>
+<a class="sourceLine" id="cb25-14" title="14"><span class="co">#&gt; 11        Br 240 0.7205677 0.6540778 0.7870576</span></a>
+<a class="sourceLine" id="cb25-15" title="15"><span class="co">#&gt; 12        Bc 240 0.8282004 0.7819303 0.8744705</span></a></code></pre></div>
 </div>
 
 
