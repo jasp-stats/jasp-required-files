@@ -269,207 +269,26 @@ knitr::opts_chunk$set(
 #  library(bain)
 #  library(lavaan)
 #  
-#  # Specify the multiple group latent regression model
-#  
+#  # Specify A multiple group regression model
 #  model3 <- '
-#      A  =~ Ab + Al + Af + An + Ar + Ac
-#      B =~ Bb + Bl + Bf + Bn + Br + Bc
-#  
-#      A ~ B + age + peabody
+#      postnumb ~ prenumb + peabody
 #  '
 #  # Assign labels to the groups to be used when formulating
 #  # hypotheses
 #  sesamesim$sex <- factor(sesamesim$sex, labels = c("boy", "girl"))
-#  # Fit the multiple group latent regression model
+#  # Fit the multiple group regression model
 #  fit3 <- sem(model3, data = sesamesim, std.lv = TRUE, group = "sex")
 #  # Inspect the parameter names
 #  coef(fit3)
 #  
-#  # Formulate and evaluate two sets of hypotheses
-#  
-#  # Compute the mean of the intercepts in both groups for both factors
-#  parest <- parameterEstimates(fit3, standardize = TRUE)
-#  ints <- parest[ parest$op == "~1", "std.all"]
-#  intAboy <- ints[1:6]
-#  intBboy <- ints[7:12]
-#  intAgirl <- ints[17:22]
-#  intBgirl <- ints[23:28]
-#  iAb <- mean(intAboy)
-#  iBb <- mean(intBboy)
-#  iAg <- mean(intAgirl)
-#  iBg <- mean(intBgirl)
-#  
-#  # Print the means so you can include these numbers
-#  # in the hypotheses in order to make the intercepts
-#  # comparable between both groups
-#  iAb
-#  iBb
-#  iAg
-#  iBg
-#  
-#  # Compute the geometric mean of the loadings in both groups for both factors
-#  load <- parest[ parest$op == "=~", "std.all"]
-#  loadAboy <- load[1:6]
-#  loadBboy <- load[7:12]
-#  loadAgirl <- load[13:18]
-#  loadBgirl <- load[19:24]
-#  lAb <- prod(loadAboy)**(1/6)
-#  lBb <- prod(loadBboy)**(1/6)
-#  lAg <- prod(loadAgirl)**(1/6)
-#  lBg <- prod(loadBgirl)**(1/6)
-#  
-#  # Print the inverse geometric means so you can include these numbers
-#  # in the hypotheses in order to make the slopes comparable
-#  # between both groups. Note: to specify hypotheses,
-#  # the * can be used, but the / CANNOT be used.
-#  1/lAb
-#  1/lBb
-#  1/lAg
-#  1/lBg
-#  
-#  # Specify and evaluate the two sets of hypotheses
-#  hypotheses31 <-
-#  "1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl&
-#  1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &
-#  1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &
-#  1.214269 *A=~An.boy = 1.276502 *A=~An.girl &
-#  1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &
-#  1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &
-#  1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &
-#  1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &
-#  1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &
-#  1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &
-#  1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &
-#  1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &
-#  Ab~1.boy -3.20752= Ab~1.girl -3.37765&
-#  Al~1.boy -3.20752= Al~1.girl -3.37765&
-#  Af~1.boy -3.20752= Af~1.girl -3.37765&
-#  An~1.boy -3.20752= An~1.girl -3.37765&
-#  Ar~1.boy -3.20752= Ar~1.girl -3.37765&
-#  Ac~1.boy -3.20752= Ac~1.girl -3.37765&
-#  Bb~1.boy -2.682939= Bb~1.girl -2.620678&
-#  Bl~1.boy -2.682939= Bl~1.girl -2.620678&
-#  Bf~1.boy -2.682939= Bf~1.girl -2.620678&
-#  Bn~1.boy -2.682939= Bn~1.girl -2.620678&
-#  Br~1.boy -2.682939= Br~1.girl -2.620678&
-#  Bc~1.boy -2.682939= Bc~1.girl -2.620678
+#  # Formulate and evaluate the hypotheses
+#  hypotheses3 <-
+#  "postnumb~prenumb.boy = postnumb~prenumb.girl & postnumb~peabody.boy = postnumb~peabody.girl;
+#   postnumb~prenumb.boy < postnumb~prenumb.girl & postnumb~peabody.boy < postnumb~peabody.girl
 #  "
 #  set.seed(100)
-#  y1 <- bain(fit3, hypotheses31, standardize = TRUE)
-#  sy1 <- summary(y1, ci = 0.90)
-#  
-#  hypotheses32 <-
-#  "1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &
-#  1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &
-#  1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &
-#  1.214269 *A=~An.boy = 1.276502 *A=~An.girl &
-#  1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &
-#  1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &
-#  1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &
-#  1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &
-#  1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &
-#  1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &
-#  1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &
-#  1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &
-#  Ab~1.boy -3.20752= Ab~1.girl -3.37765&
-#  Al~1.boy -3.20752= Al~1.girl -3.37765&
-#  Af~1.boy -3.20752= Af~1.girl -3.37765&
-#  An~1.boy -3.20752= An~1.girl -3.37765&
-#  Ar~1.boy -3.20752= Ar~1.girl -3.37765&
-#  Ac~1.boy -3.20752= Ac~1.girl -3.37765&
-#  Bb~1.boy -2.682939= Bb~1.girl -2.620678&
-#  Bl~1.boy -2.682939= Bl~1.girl -2.620678&
-#  Bf~1.boy -2.682939= Bf~1.girl -2.620678&
-#  Bn~1.boy -2.682939= Bn~1.girl -2.620678&
-#  Br~1.boy -2.682939= Br~1.girl -2.620678&
-#  Bc~1.boy -2.682939= Bc~1.girl -2.620678 &
-#  A~age.boy < A~age.girl  &
-#  A~peabody.boy < A~peabody.girl  &
-#  A~B.boy < A~B.girl;
-#  1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &
-#  1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &
-#  1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &
-#  1.214269 *A=~An.boy = 1.276502 *A=~An.girl &
-#  1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &
-#  1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &
-#  1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &
-#  1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &
-#  1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &
-#  1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &
-#  1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &
-#  1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &
-#  Ab~1.boy -3.20752= Ab~1.girl -3.37765&
-#  Al~1.boy -3.20752= Al~1.girl -3.37765&
-#  Af~1.boy -3.20752= Af~1.girl -3.37765&
-#  An~1.boy -3.20752= An~1.girl -3.37765&
-#  Ar~1.boy -3.20752= Ar~1.girl -3.37765&
-#  Ac~1.boy -3.20752= Ac~1.girl -3.37765&
-#  Bb~1.boy -2.682939= Bb~1.girl -2.620678&
-#  Bl~1.boy -2.682939= Bl~1.girl -2.620678&
-#  Bf~1.boy -2.682939= Bf~1.girl -2.620678&
-#  Bn~1.boy -2.682939= Bn~1.girl -2.620678&
-#  Br~1.boy -2.682939= Br~1.girl -2.620678&
-#  Bc~1.boy -2.682939= Bc~1.girl -2.620678 &
-#  A~age.boy = A~age.girl  &
-#  A~peabody.boy < A~peabody.girl  &
-#  A~B.boy < A~B.girl;
-#  1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &
-#  1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &
-#  1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &
-#  1.214269 *A=~An.boy = 1.276502 *A=~An.girl &
-#  1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &
-#  1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &
-#  1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &
-#  1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &
-#  1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &
-#  1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &
-#  1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &
-#  1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &
-#  Ab~1.boy -3.20752= Ab~1.girl -3.37765&
-#  Al~1.boy -3.20752= Al~1.girl -3.37765&
-#  Af~1.boy -3.20752= Af~1.girl -3.37765&
-#  An~1.boy -3.20752= An~1.girl -3.37765&
-#  Ar~1.boy -3.20752= Ar~1.girl -3.37765&
-#  Ac~1.boy -3.20752= Ac~1.girl -3.37765&
-#  Bb~1.boy -2.682939= Bb~1.girl -2.620678&
-#  Bl~1.boy -2.682939= Bl~1.girl -2.620678&
-#  Bf~1.boy -2.682939= Bf~1.girl -2.620678&
-#  Bn~1.boy -2.682939= Bn~1.girl -2.620678&
-#  Br~1.boy -2.682939= Br~1.girl -2.620678&
-#  Bc~1.boy -2.682939= Bc~1.girl -2.620678 &
-#  A~age.boy = A~age.girl  &
-#  A~peabody.boy = A~peabody.girl  &
-#  A~B.boy < A~B.girl;
-#  1.214269 *A=~Ab.boy = 1.276502 *A=~Ab.girl &
-#  1.214269 *A=~Al.boy = 1.276502 *A=~Al.girl &
-#  1.214269 *A=~Af.boy = 1.276502 *A=~Af.girl &
-#  1.214269 *A=~An.boy = 1.276502 *A=~An.girl &
-#  1.214269 *A=~Ar.boy = 1.276502 *A=~Ar.girl &
-#  1.214269 *A=~Ac.boy = 1.276502 *A=~Ac.girl &
-#  1.26346 *B=~Bb.boy = 1.32143 *B=~Bb.girl &
-#  1.26346 *B=~Bl.boy = 1.32143 *B=~Bl.girl &
-#  1.26346 *B=~Bf.boy = 1.32143 *B=~Bf.girl &
-#  1.26346 *B=~Bn.boy = 1.32143 *B=~Bn.girl &
-#  1.26346 *B=~Br.boy = 1.32143 *B=~Br.girl &
-#  1.26346 *B=~Bc.boy = 1.32143 *B=~Bc.girl &
-#  Ab~1.boy -3.20752= Ab~1.girl -3.37765&
-#  Al~1.boy -3.20752= Al~1.girl -3.37765&
-#  Af~1.boy -3.20752= Af~1.girl -3.37765&
-#  An~1.boy -3.20752= An~1.girl -3.37765&
-#  Ar~1.boy -3.20752= Ar~1.girl -3.37765&
-#  Ac~1.boy -3.20752= Ac~1.girl -3.37765&
-#  Bb~1.boy -2.682939= Bb~1.girl -2.620678&
-#  Bl~1.boy -2.682939= Bl~1.girl -2.620678&
-#  Bf~1.boy -2.682939= Bf~1.girl -2.620678&
-#  Bn~1.boy -2.682939= Bn~1.girl -2.620678&
-#  Br~1.boy -2.682939= Br~1.girl -2.620678&
-#  Bc~1.boy -2.682939= Bc~1.girl -2.620678 &
-#  A~age.boy = A~age.girl  &
-#  A~peabody.boy = A~peabody.girl  &
-#  A~B.boy = A~B.girl"
-#  set.seed(100)
-#  y2 <- bain(fit3, hypotheses32,standardize=TRUE)
-#  
+#  y1 <- bain(fit3, hypotheses3, standardize = TRUE)
+#  sy1 <- summary(y1, ci = 0.95)
 
 ## ----ttest_ex13, eval=FALSE---------------------------------------------------
 #  # load the bain package which includes the simulated sesamesim data se
@@ -927,70 +746,59 @@ knitr::opts_chunk$set(
 #  # obtain the descriptives table
 #  summary(results, ci = 0.95)
 
-## ----ttest_ex21, eval=FALSE---------------------------------------------------
-#  # Load the bain and lavaan libraries. Visit www.lavaan.org for
-#  # lavaan mini-tutorials, examples, and elaborations
-#  library(bain)
-#  library(lavaan)
-#  
-#  # Specify and fit the confirmatory factor model
-#  model1 <- '
-#  A =~ Ab + Al + Af + An + Ar + Ac
-#  B =~ Bb + Bl + Bf + Bn + Br + Bc
-#  '
-#  fit1 <- sem(model1, data = sesamesim, std.lv = TRUE)
-#  
-#  # Obtain the required input for bain:
-#  
-#  # the sample size
-#  ngroup1 <- nobs(fit1)
-#  
-#  # The parameterEstimates() function presents the estimated parameters
-#  # in a data.frame; the additional argument standardized = TRUE add
-#  # extra columns with standardized versions of these parameter estimates;
-#  # for our purposes, we need the 'std.all' column, which means that both
-#  # the observed and the latent variables have been standardized.
-#  #
-#  # we capture the output of parameterEstimates() in an object 'PE'
-#  PE1 <- parameterEstimates(fit1, standardized = TRUE)
-#  
-#  # We only need the rows that correspond to factor loadings (ie op == "=~")
-#  # and the column "std.all":
-#  estimate1 <- PE1[ PE1$op == "=~", "std.all"]
-#  
-#  # Assign names to the estimates of the standardized factor loadingts
-#  names(estimate1) <- c("Ab", "Al", "Af", "An", "Ar", "Ac",
-#                       "Bb", "Bl", "Bf", "Bn", "Br", "Bc")
-#  
-#  # We will compute the full covariance matrix of standardized parameter
-#  # estimates, and only extract the part we need: the rows/cols that
-#  # correspond to the factor loadings
-#  #
-#  # to find out which rows/cols we need, we can look at the full parameter
-#  # table:
-#  PT1 <- parTable(fit1)
-#  # and extract the parameter numbers (in the "free" column) that correspond
-#  # to the factor loadings:
-#  par.idx1 <- PT1$free[ PT1$op == "=~" ]
-#  # Obtain the covariance matrix of the standardized factor loadings
-#  covariance1 <- list(lavInspect(fit1, "vcov.std.all")[par.idx1, par.idx1])
-#  
-#  # Specify the hypotheses using the syntax implementen in bain. Note that
-#  # the & is used to combine different parts into one hypothesis. Note
-#  # furthermore, that the ; is used to separate hypotheses
-#  hypotheses1 <-
-#     " Ab > .6 & Al > .6 & Af > .6 & An > .6 & Ar > .6 & Ac >.6 &
-#       Bb > .6 & Bl > .6 & Bf > .6 & Bn > .6 & Br > .6 & Bc >.6"
-#  
-#  # Evaluate the hypotheses using bain, the command used has been explained in
-#  # the paper. Don't forget to set the seed first in order to obtain results
-#  # that can be reproduced exactly.
-#  set.seed(100)
-#  y <- bain(estimate1, hypotheses1, n =ngroup1, Sigma = covariance1,
-#                  group_parameters = 12, joint_parameters = 0, fraction = 1,
-#                  standardize = TRUE)
-#  
-#  # print the results of the bain analysis and obtain the estimates and 95%
-#  # central credibility intervals
-#  sy <- summary(y, ci = 0.95)
+## ---- eval = TRUE, echo = TRUE, results='hide', message=FALSE, warning=FALSE----
+library(bain)
+library(lavaan)
+model1 <- 'A =~ Ab + Al + Af + An + Ar + Ac 
+           B =~ Bb + Bl + Bf + Bn + Br + Bc'
+fit1 <- sem(model1, data = sesamesim, std.lv = TRUE)
+
+## ----eval = TRUE, echo = TRUE-------------------------------------------------
+hypotheses <- "(Ab, Al, Af, An, Ar, Ac) >.6 &
+               (Bb, Bl, Bf, Bn, Br, Bc) >.6"
+
+## -----------------------------------------------------------------------------
+# Extract standardized parameter estimates (argument x)
+PE1 <- parameterEstimates(fit1, standardized = TRUE)
+# Identify which parameter estimates are factor loadings
+loadings <- which(PE1$op == "=~")
+# Collect the standardized "std.all" factor loadings "=~"
+estimates <- PE1$std.all[loadings]
+# Assign names to the standardized factor loadings
+names(estimates) <- c("Ab", "Al", "Af", "An", "Ar", "Ac", 
+                      "Bb", "Bl", "Bf", "Bn", "Br", "Bc")
+
+# Extract sample size (argument n)
+n <- nobs(fit1)
+
+# Extract the standardized model parameter covariance matrix,
+# selecting only the rows and columns for the loadings
+covariance <- lavInspect(fit1, "vcov.std.all")[loadings, loadings]
+
+# Give the covariance matrix the same names as the estimate
+dimnames(covariance) <- list(names(estimates), names(estimates))
+
+# Put the covariance matrix in a list
+covariance <- list(covariance)
+
+# Specify number of group parameters; this simply means that there 
+# are 12 parameters in the estimate.
+group_parameters <- 12
+
+# Then, the number of joint parameters. This is always 0 for evaluations of
+# SEM hypotheses:
+joint_parameters <- 0
+
+## -----------------------------------------------------------------------------
+res <- bain(x = estimates,
+            hypothesis = hypotheses,
+            n = n,
+            Sigma = covariance,
+            group_parameters = group_parameters,
+            joint_parameters = joint_parameters)
+res
+
+## -----------------------------------------------------------------------------
+sres <- summary(res, ci = 0.95)
+sres
 
