@@ -1,8 +1,0 @@
-graphicalVAR            Estimate the graphical VAR model.
-graphicalVARsim         Simulates data from the graphical VAR model
-mlGraphicalVAR          Pooled and individual graphical VAR estimation
-plot.graphicalVAR       Plot method for graphicalVAR objects
-print.graphicalVAR      S3 methods for graphicalVAR objects.
-randomGVARmodel         Simulate a graphical VAR model
-simMLgvar               Generate graphical VAR data of multiple
-                        subjects

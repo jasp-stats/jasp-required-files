@@ -5,7 +5,7 @@ import sys
 from subprocess import check_output
 from subprocess import call
 import shutil
-current = "3.6"
+current = "4.0"
 
 # Make the changes to the executable path optional
 skip_path_changes = False
@@ -106,9 +106,11 @@ new_libs 		= [ ]
 
 #We initialize changes with a reference to the bundled JAGS dylib
 changes 		= [
-	{ "old": "/usr/local/lib/libjags.4.dylib", 	"new": "@executable_path/JAGS/libjags.4.dylib"},
-	{ "old": "/usr/lib/libc++abi.dylib",		"new": "@executable_path/../Frameworks/R.framework/Versions/3.6/Resources/lib/libc++abi.1.dylib"},
-	{ "old": "/usr/lib/libc++.1.dylib",			"new": "@executable_path/../Frameworks/R.framework/Versions/3.6/Resources/lib/libc++.1.dylib"}] 
+	{ "old": "/usr/local/lib/libjags.4.dylib", 	"new": "@executable_path/JAGS/libjags.4.dylib"}
+	#, Are no longer necessary with R 4:
+	#{ "old": "/usr/lib/libc++abi.dylib",		"new": "@executable_path/../Frameworks/R.framework/Versions/"+current+"/Resources/lib/libc++abi.1.dylib"},
+	#{ "old": "/usr/lib/libc++.1.dylib",			"new": "@executable_path/../Frameworks/R.framework/Versions/"+current+"/Resources/lib/libc++.1.dylib"}
+	] 
 #Adding anything here? Be sure to do the same in jasp-desktop/JASP-Engine/otoolstuff.cpp (in branch development and hopefully stable at some point)
 
 

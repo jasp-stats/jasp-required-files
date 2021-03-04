@@ -1,7 +1,0 @@
-contr.bayes             Orthonormal Contrast Matrices for Bayesian
-                        Estimation
-stanova                 Estimate ANOVA-type models with rstanarm
-stanova_brm             Estimate ANOVA-type models with brms
-stanova_lm              Estimate ANOVA-type models with rstanarm
-stanova_lmer            Estimate ANOVA-type mixed models with rstanarm
-stanova_samples         Posterior samples for ANOVA-type models

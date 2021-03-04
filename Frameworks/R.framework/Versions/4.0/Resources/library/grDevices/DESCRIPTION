@@ -1,0 +1,11 @@
+Package: grDevices
+Version: 4.0.5
+Priority: base
+Title: The R Graphics Devices and Support for Colours and Fonts
+Author: R Core Team and contributors worldwide
+Maintainer: R Core Team <R-core@r-project.org>
+Description: Graphics devices and support for base and grid graphics.
+License: Part of R 4.0.5
+Suggests: KernSmooth
+NeedsCompilation: yes
+Built: R 4.0.5; x86_64-apple-darwin17.0; 2021-04-01 02:34:34 UTC; unix

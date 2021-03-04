@@ -1,8 +1,0 @@
-ggExtra                 ggExtra
-ggMarginal              Add marginal density/histogram to ggplot2
-                        scatterplots
-ggMarginalGadget        ggMarginal gadget
-plotCount               Plot count data with ggplot2
-removeGrid              Remove grid lines from ggplot2
-rotateTextX             Rotate x axis labels
-runExample              Run ggExtra example

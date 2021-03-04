@@ -1,4 +1,0 @@
-lisrelMatrix            Extract LISREL matrices from 'lisrel' object.
-lisrelToR-package       Import LISREL output in R.
-print.lisrel            Methods for lisrel objects
-readLisrel              Read LISREL matrices into R

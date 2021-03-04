@@ -1,8 +1,0 @@
-exportPattern("^[[:alpha:]]+")
-exportPattern("%mob%")
-importFrom(MASS,fractions)
-importFrom(MASS,rational)
-
-importFrom("grDevices", "hcl", "hsv", "rgb")
-importFrom("graphics", "abline", "axis", "contour", "image", "plot", "points")
-importFrom("stats", "integrate", "quantile")
