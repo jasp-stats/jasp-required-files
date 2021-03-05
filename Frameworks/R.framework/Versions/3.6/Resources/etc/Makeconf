@@ -73,7 +73,7 @@ LIBINTL=   -Wl,-framework -Wl,CoreFoundation
 LIBM = 
 LIBR0 = -L"$(R_HOME)/lib$(R_ARCH)"
 LIBR1 = -lR
-LIBR = -F/Library/Frameworks/R.framework/.. -framework R
+LIBR = -F$(R_HOME)/../../../.. -framework R
 LIBS =  -lpcre -llzma -lbz2 -lz -licucore -ldl -lm -liconv
 ## needed by R CMD config
 LIBnn = lib

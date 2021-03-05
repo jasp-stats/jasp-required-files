@@ -2,7 +2,7 @@
 # Shell wrapper for R executable.
 
 if test "${JASP_R_HOME}" != ""; then
-	echo  "Switching R_HOME_DIR to JASP_R_HOME found of : " ${JASP_R_HOME}
+	#echo  "Switching R_HOME_DIR to JASP_R_HOME found of : " ${JASP_R_HOME} #uncommented because it breaks ./configure of Bayesrel (and possibly more)
 	R_HOME_DIR=${JASP_R_HOME};
 else
 R_HOME_DIR=/Library/Frameworks/R.framework/Resources
