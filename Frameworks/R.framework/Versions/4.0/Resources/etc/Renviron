@@ -57,3 +57,5 @@ R_LIBS_USER=${R_LIBS_USER-'~/Library/R/4.0/library'}
 ### End: ***
 ## CRAN R ships with qpdf inside so use it unless directed otherwise
 R_QPDF=${R_QPDF-'/Library/Frameworks/R.framework/Resources/bin/qpdf'}
+
+R_MAX_VSIZE=64Gb

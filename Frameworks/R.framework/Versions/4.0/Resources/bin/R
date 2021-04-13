@@ -1,7 +1,13 @@
 #!/bin/sh
 # Shell wrapper for R executable.
 
+if test "${JASP_R_HOME}" != ""; then
+	#echo  "Switching R_HOME_DIR to JASP_R_HOME found of : " ${JASP_R_HOME}
+	R_HOME_DIR=${JASP_R_HOME};
+else
 R_HOME_DIR=/Library/Frameworks/R.framework/Resources
+fi
+
 if test "${R_HOME_DIR}" = "/Library/Frameworks/lib/R"; then
    case "darwin17.0" in
    linux*)
@@ -30,13 +36,16 @@ if test -n "${R_HOME}" && \
    test "${R_HOME}" != "${R_HOME_DIR}"; then
   echo "WARNING: ignoring environment value of R_HOME"
 fi
+
 R_HOME="${R_HOME_DIR}"
 export R_HOME
-R_SHARE_DIR=/Library/Frameworks/R.framework/Resources/share
+
+R_SHARE_DIR=${R_HOME_DIR}/share
+R_INCLUDE_DIR=${R_HOME_DIR}/include
+R_DOC_DIR=${R_HOME_DIR}/doc
+
 export R_SHARE_DIR
-R_INCLUDE_DIR=/Library/Frameworks/R.framework/Resources/include
 export R_INCLUDE_DIR
-R_DOC_DIR=/Library/Frameworks/R.framework/Resources/doc
 export R_DOC_DIR
 
 # Since this script can be called recursively, we allow R_ARCH to
