@@ -87,12 +87,12 @@ e.g. <code>mdata$many &lt;- as.matrix(mydata[,5:53])</code>.
 coxph(Surv(futime, fustat) ~ rx + ridge(age, ecog.ps, theta=1),
 	      ovarian)
 
-lfit0 &lt;- survreg(Surv(time, status) ~1, cancer)
-lfit1 &lt;- survreg(Surv(time, status) ~ age + ridge(ph.ecog, theta=5), cancer)
-lfit2 &lt;- survreg(Surv(time, status) ~ sex + ridge(age, ph.ecog, theta=1), cancer)
-lfit3 &lt;- survreg(Surv(time, status) ~ sex + age + ph.ecog, cancer)
+lfit0 &lt;- survreg(Surv(time, status) ~1, lung)
+lfit1 &lt;- survreg(Surv(time, status) ~ age + ridge(ph.ecog, theta=5), lung)
+lfit2 &lt;- survreg(Surv(time, status) ~ sex + ridge(age, ph.ecog, theta=1), lung)
+lfit3 &lt;- survreg(Surv(time, status) ~ sex + age + ph.ecog, lung)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

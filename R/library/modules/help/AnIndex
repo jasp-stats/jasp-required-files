@@ -13,5 +13,6 @@ getSearchPathContent	utilityFunctions
 getSearchPathDuplicates	utilityFunctions
 getSearchPathNames	utilityFunctions
 import	import
+importDefaultPackages	import
 module	module
 use	use

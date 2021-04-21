@@ -78,7 +78,7 @@ events are outcomes.
 </p>
 
 <ul>
-<li><p>newname = tdc(y, x) A new time dependent covariate
+<li><p>newname = tdc(y, x, init) A new time dependent covariate
 variable will created. 
 The argument <code>y</code> is assumed to be on the
 scale of the start and end time, and each instance describes the
@@ -87,13 +87,16 @@ The second argument <code>x</code> is optional. In the  case where
 <code>x</code> is missing the count variable starts at 0 for each subject
 and becomes 1 at the time of the event.
 If <code>x</code> is present the value of the time dependent covariate
-is initialized to the <code>tdcstart</code> option and is reset to the
+is initialized to value of <code>init</code>, if present, or
+the <code>tdcstart</code> option otherwise, and is updated to the
 value of <code>x</code> at each observation.
 If the option <code>na.rm=TRUE</code> missing values of <code>x</code> are
 first removed, i.e., the update will not create missing values.  
 </p>
-<p>newname = cumtdc(y,x) Similar to tdc, except that the event
-count is accumulated over time for each subject.
+<p>newname = cumtdc(y,x, init) Similar to tdc, except that the event
+count is accumulated over time for each subject.  The variable
+<code>x</code> must be numeric.
+
 </p>
 <p>newname = event(y,x) Mark an event at time y.
 In the usual case that <code>x</code> is missing the new 0/1 variable
@@ -108,6 +111,8 @@ will be similar to the 0/1 status variable of a survival time.
 <p>The function adds three new variables to the output data set: 
 <code>tstart</code>, <code>tstop</code>, and <code>id</code>.  The <code>options</code> argument
 can be used to change these names.
+If, in the first call, the <code>id</code> argument is a simple name, that
+variable name will be used as the default for the <code>idname</code> option.
 If <code>data1</code> contains the <code>tstart</code> variable then that is used as
 the starting point for the created time intervals, otherwise the initial
 interval for each id will begin at 0 by default.
@@ -134,13 +139,16 @@ from call to call allows the user to avoid constantly reentering the
 The tcount variable contains counts of the match types.
 New time values that occur before the first interval for a subject
 are &quot;early&quot;, those after the last interval for a subject are &quot;late&quot;,
-and those that fall into a gap are of type &quot;gap&quot;.
+and those that fall into a gap are of type &quot;gap&quot;. 
 All these are are considered to be outside the specified time frame for the
-given subject.  An event of this type will be discarded.  A
-time-dependent covariate value will be applied to later intervals but
+given subject.  An event of this type will be discarded.
+An observation in <code>data2</code> whose identifier matches no rows in
+<code>data1</code> is of type &quot;missid&quot; and is also discarded.
+A time-dependent covariate value will be applied to later intervals but
 will not generate a new time point in the output.
 </p>
-<p>The most common type will usually be &quot;within&quot;, for those new times that
+<p>The most common type will usually be &quot;within&quot;, corresponding to
+those new times that
 fall inside an existing interval and cause it to be split into two.
 Observations that fall exactly on the edge of an interval but within the
 (min, max] time for a subject are counted
@@ -194,5 +202,5 @@ pbc2 &lt;- tmerge(pbc2, pbcseq, id=id, ascites = tdc(day, ascites),
 fit &lt;- coxph(Surv(tstart, tstop, endpt==2) ~ protime + log(bili), data=pbc2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

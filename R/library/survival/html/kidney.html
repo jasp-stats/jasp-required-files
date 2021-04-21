@@ -21,6 +21,13 @@ observation is removed no evidence remains for a random subject effect.
 </p>
 
 
+<h3>Usage</h3>
+
+<pre>kidney
+data(cancer, package="survival")
+</pre>
+
+
 <h3>Format</h3>
 
 
@@ -83,8 +90,7 @@ kfit &lt;- coxph(Surv(time, status)~ age + sex + disease + frailty(id), kidney)
 kfit0 &lt;- coxph(Surv(time, status)~ age + sex + disease, kidney)
 kfitm1 &lt;- coxph(Surv(time,status) ~ age + sex + disease + 
 		frailty(id, dist='gauss'), kidney)
-
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

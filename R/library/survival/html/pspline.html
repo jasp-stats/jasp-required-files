@@ -141,16 +141,16 @@ JRSSB, volume 60, 271&ndash;293.
 <h3>Examples</h3>
 
 <pre>
-lfit6 &lt;- survreg(Surv(time, status)~pspline(age, df=2), cancer)
-plot(cancer$age, predict(lfit6), xlab='Age', ylab="Spline prediction")
+lfit6 &lt;- survreg(Surv(time, status)~pspline(age, df=2), lung)
+plot(lung$age, predict(lfit6), xlab='Age', ylab="Spline prediction")
 title("Cancer Data")
-fit0 &lt;- coxph(Surv(time, status) ~ ph.ecog + age, cancer)
-fit1 &lt;- coxph(Surv(time, status) ~ ph.ecog + pspline(age,3), cancer)
-fit3 &lt;- coxph(Surv(time, status) ~ ph.ecog + pspline(age,8), cancer)
+fit0 &lt;- coxph(Surv(time, status) ~ ph.ecog + age, lung)
+fit1 &lt;- coxph(Surv(time, status) ~ ph.ecog + pspline(age,3), lung)
+fit3 &lt;- coxph(Surv(time, status) ~ ph.ecog + pspline(age,8), lung)
 fit0
 fit1
 fit3
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

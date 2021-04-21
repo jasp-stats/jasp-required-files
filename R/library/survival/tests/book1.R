@@ -78,6 +78,8 @@ aeq(truth0$mart, fit0$resid[c(2:6,1)])
 aeq(truth0$scho, resid(fit0, 'schoen'))
 aeq(truth0$score, resid(fit0, 'score')[c(3:7,1)])
 sfit <- survfit(fit0, list(x=0))
+aeq(sfit$cumhaz, cumsum(truth0$haz))
+aeq(sfit$surv, exp(-cumsum(truth0$haz)))
 aeq(sfit$std.err^2, c(7/180, 2/9, 2/9, 11/9))
 aeq(resid(fit0, 'score'), c(5/24, NA, 5/12, -1/12, 7/24, -1/24, 5/24))
 
@@ -88,8 +90,9 @@ aeq(fit1$coef, 8/5)
 fit2 <- coxph(Surv(time, status) ~x, test1, method='breslow', iter=2)
 aeq(round(fit2$coef, 6), 1.472724)
 
-fit <- coxph(Surv(time, status) ~x, test1, method='breslow', eps=1e-8)
-aeq(round(fit$coef,7), 1.4752849)
+fit <- coxph(Surv(time, status) ~x, test1, method='breslow', eps=1e-8,
+             nocenter=NULL)
+aeq(fit$coef, log(1.5 + sqrt(33)/2))  # the true solution
 truth <- byhand1(fit$coef, 0)
 aeq(truth$loglik, fit$loglik[2])
 aeq(1/truth$imat, fit$var)
@@ -106,7 +109,6 @@ sfit <- survfit(fit, list(x=0), censor=TRUE)
 aeq(sfit$std.err^2, truth$var) 
 aeq(-log(sfit$surv), (cumsum(truth$haz)))
 
-
 # 
 # Done with the formal test, now print out lots of bits
 #
@@ -114,14 +116,9 @@ resid(fit)
 resid(fit, 'scor')
 resid(fit, 'scho')
 
-predict(fit, type='lp')
-predict(fit, type='risk')
-predict(fit, type='expected')
-predict(fit, type='terms')
 predict(fit, type='lp', se.fit=T)
 predict(fit, type='risk', se.fit=T)
 predict(fit, type='expected', se.fit=T)
 predict(fit, type='terms', se.fit=T)
 
-summary(survfit(fit))
 summary(survfit(fit, list(x=2)))

@@ -112,7 +112,10 @@ value will be in UTF-8 and marked as such (see <code><a href="Encoding.html">Enc
 <p>If <code>use.classes</code> is true (the default), this is really only
 suitable for English, and prior to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.3.0 did not work correctly
 with non-ASCII characters in multibyte locales.  It will warn if used
-with non-ASCII characters (and required to reduce the length).
+with non-ASCII characters (and required to reduce the length).  It is
+unlikely to work well with inputs not in the Unicode Basic Multilingual
+Plane nor on (rare) platforms where wide characters are not encoded in
+Unicode.
 </p>
 <p>As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.3.0 the concept of &lsquo;vowel&rsquo; is extended from
 English vowels by including characters which are accented versions of
@@ -153,5 +156,5 @@ table(nchar(st.ab2))
 cbind(st.abb, st.ab2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

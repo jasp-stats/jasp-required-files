@@ -16,7 +16,8 @@
 <h3>Usage</h3>
 
 <pre>
-dotchart(x, labels = NULL, groups = NULL, gdata = NULL,
+dotchart(x, labels = NULL, groups = NULL, gdata = NULL, offset = 1/8,
+         ann = par("ann"), xaxt = par("xaxt"), frame.plot = TRUE, log = "",
          cex = par("cex"), pt.cex = cex,
          pch = 21, gpch = 21, bg = par("bg"),
          color = par("fg"), gcolor = par("fg"), lcolor = "gray",
@@ -55,6 +56,31 @@ of <code>x</code>.</p>
 <p>data values for the groups.
 This is typically a summary such as the median or mean
 of each group.</p>
+</td></tr>
+<tr valign="top"><td><code>offset</code></td>
+<td>
+<p>offset in inches of <code>ylab</code> and <code>labels</code>; was
+hardwired to 0.4 before <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0.</p>
+</td></tr>
+<tr valign="top"><td><code>ann</code></td>
+<td>
+<p>a <code><a href="../../base/html/logical.html">logical</a></code> value indicating whether the default annotation
+(title and x and y axis labels) should appear on the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>xaxt</code></td>
+<td>
+<p>a string indicating the x-axis style; use <code>"n"</code> to
+suppress and see also <code><a href="par.html">par</a>("xaxt")</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>frame.plot</code></td>
+<td>
+<p>a logical indicating whether a box should be drawn
+around the plot.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>a character string indicating if one or the other axis should
+be logarithmic, see <code><a href="plot.default.html">plot.default</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>cex</code></td>
 <td>
@@ -143,11 +169,13 @@ Monterey, CA: Wadsworth.
 
 <pre>
 dotchart(VADeaths, main = "Death Rates in Virginia - 1940")
+
 op &lt;- par(xaxs = "i")  # 0 -- 100%
-dotchart(t(VADeaths), xlim = c(0,100),
-         main = "Death Rates in Virginia - 1940")
+dotchart(t(VADeaths), xlim = c(0,100), bg = "skyblue",
+         main = "Death Rates in Virginia - 1940", xlab = "rate [ % ]",
+         ylab = "Grouping:  Age  x   Urbanity . Gender")
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

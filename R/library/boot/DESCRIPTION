@@ -1,7 +1,7 @@
 Package: boot
 Priority: recommended
-Version: 1.3-23
-Date: 2019-07-02
+Version: 1.3-27
+Date: 2021-02-12
 Authors@R: c(person("Angelo", "Canty", role = "aut",
 	             email = "cantya@mcmaster.ca"),
              person("Brian", "Ripley", role = c("aut", "trl", "cre"),
@@ -20,9 +20,9 @@ LazyData: yes
 ByteCompile: yes
 License: Unlimited
 NeedsCompilation: no
-Packaged: 2019-07-02 21:00:31 UTC; ripley
+Packaged: 2021-02-12 07:11:34 UTC; ripley
 Author: Angelo Canty [aut],
   Brian Ripley [aut, trl, cre] (author of parallel support)
 Repository: CRAN
-Date/Publication: 2019-07-05 13:41:45 UTC
-Built: R 3.6.1; ; 2019-11-07 12:15:44 UTC; windows
+Date/Publication: 2021-02-12 07:17:51 UTC
+Built: R 4.0.5; ; 2021-03-31 07:59:07 UTC; windows

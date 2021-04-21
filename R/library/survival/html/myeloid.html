@@ -14,6 +14,13 @@ leukemia.
 </p>
 
 
+<h3>Usage</h3>
+
+<pre>myeloid
+data(cancer, package="survival")
+</pre>
+
+
 <h3>Format</h3>
 
 <p>A data frame with 646 observations on the following 9 variables.
@@ -23,6 +30,8 @@ leukemia.
 <dt><code>id</code></dt><dd><p>subject identifier, 1-646</p>
 </dd>
 <dt><code>trt</code></dt><dd><p>treatment arm A or B</p>
+</dd>
+<dt><code>sex</code></dt><dd><p>f=female, m=male</p>
 </dd>
 <dt><code>futime</code></dt><dd><p>time to death or last follow-up</p>
 </dd>
@@ -47,6 +56,14 @@ from that source.
 </p>
 
 
+<h3>References</h3>
+
+<p>Le-Rademacher JG, Peterson RA, Therneau TM, Sanford BL, Stone RM,
+Mandrekar SJ.  Application of multi-state models in cancer clinical trials. 
+Clin Trials. 2018 Oct; 15 (5):489-498
+</p>
+
+
 <h3>Examples</h3>
 
 <pre>
@@ -54,5 +71,5 @@ coxph(Surv(futime, death) ~ trt, data=myeloid)
 # See the mstate vignette for a more complete analysis
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

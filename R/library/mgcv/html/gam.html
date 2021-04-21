@@ -26,7 +26,7 @@ Linear functionals of smooths can also be included in models.
 For an overview of the smooths available see <code><a href="smooth.terms.html">smooth.terms</a></code>. 
 For more on specifying models see <code><a href="gam.models.html">gam.models</a></code>, <code><a href="random.effects.html">random.effects</a></code> and <code><a href="linear.functional.terms.html">linear.functional.terms</a></code>. For more on model selection see <code><a href="gam.selection.html">gam.selection</a></code>. Do read <code><a href="gam.check.html">gam.check</a></code> and <code><a href="choose.k.html">choose.k</a></code>.
 </p>
-<p>See <a href="../../gam/html/gam.html">gam</a> from package <code>gam</code>, for GAMs via the original Hastie and Tibshirani approach (see details for differences to this implementation).
+<p>See package <code>gam</code>, for GAMs via the original Hastie and Tibshirani approach (see details for differences to this implementation).
 </p>
 <p>For very large datasets see <code><a href="bam.html">bam</a></code>, for mixed GAM see <code><a href="gamm.html">gamm</a></code> and <code><a href="random.effects.html">random.effects</a></code>.
 </p>
@@ -41,7 +41,7 @@ gam(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,
     optimizer=c("outer","newton"),control=list(),scale=0,
     select=FALSE,knots=NULL,sp=NULL,min.sp=NULL,H=NULL,gamma=1,
     fit=TRUE,paraPen=NULL,G=NULL,in.out,drop.unused.levels=TRUE,
-    drop.intercept=NULL,...)
+    drop.intercept=NULL,discrete=FALSE,...)
 </pre>
 
 
@@ -211,6 +211,10 @@ involving factor variables you might want to turn this off. Only do so if you kn
 <p>Set to <code>TRUE</code> to force the model to really not have the a constant in the parametric model part,
 even with factor variables present. Can be vector when <code>formula</code> is a list.</p>
 </td></tr>
+<tr valign="top"><td><code>discrete</code></td>
+<td>
+<p>experimental option for setting up models for use with discrete methods employed in <code><a href="bam.html">bam</a></code>. Do not modify.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>further arguments for 
@@ -314,7 +318,7 @@ and the exponential family.
 <p>Details of the default underlying fitting methods are given in Wood (2011
 and 2004). Some alternative methods are discussed in Wood (2000 and 2006). 
 </p>
-<p><code>gam()</code> is not a clone of Trevor Hastie's original (as supplied in S-PLUS or package <a href="../../gam/html/gam.html">gam</a>). The major
+<p><code>gam()</code> is not a clone of Trevor Hastie's original (as supplied in S-PLUS or package <code>gam</code>). The major
 differences are (i) that by default estimation of the
 degree of smoothness of model terms is part of model fitting, (ii) a
 Bayesian approach to variance estimation is employed that makes for easier
@@ -328,7 +332,7 @@ terms can have more than one argument, implying an isotropic smooth and (b) <cod
 provided as an effective means for modelling smooth interactions of any
 number of variables via scale invariant tensor product smooths. Splines on the sphere, Duchon splines 
 and Gaussian Markov Random Fields are also available. (vii) Models beyond the exponential family are available. 
-See <a href="../../gam/html/gam.html">gam</a> from package <code>gam</code>, for GAMs via the original Hastie and Tibshirani approach.
+See package <code>gam</code>, for GAMs via the original Hastie and Tibshirani approach.
 </p>
 
 
@@ -379,7 +383,7 @@ Wahba (e.g. 1990) and Gu (e.g. 2002).
 <p>Wood, S.N., N. Pya and B. Saefken (2016), Smoothing parameter and
 model selection for general smooth models (with discussion).
 Journal of the American Statistical Association 111, 1548-1575
-<a href="http://dx.doi.org/10.1080/01621459.2016.1180986">http://dx.doi.org/10.1080/01621459.2016.1180986</a>
+doi: <a href="https://doi.org/10.1080/01621459.2016.1180986">10.1080/01621459.2016.1180986</a>
 </p>
 <p>Wood, S.N. (2011) Fast stable restricted maximum likelihood 
 and marginal likelihood estimation of semiparametric generalized linear 
@@ -440,7 +444,7 @@ J. Am. Statist.Ass. 81:96-103
 <p>Wood and Augustin (2002) GAMs with integrated model selection using penalized regression splines and applications 
 to environmental modelling. Ecological Modelling 157:157-177
 </p>
-<p><a href="http://www.maths.bris.ac.uk/~sw15190/">http://www.maths.bris.ac.uk/~sw15190/</a>
+<p><a href="https://www.maths.ed.ac.uk/~swood34/">https://www.maths.ed.ac.uk/~swood34/</a>
 </p>
 
 
@@ -650,5 +654,5 @@ detach(eg)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
 </body></html>

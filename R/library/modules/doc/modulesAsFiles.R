@@ -1,10 +1,10 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 code <- "
 import('stats', 'median')
 functionWithDep <- function(x) median(x)
@@ -13,12 +13,12 @@ functionWithDep <- function(x) median(x)
 fileName <- tempfile(fileext = ".R")
 writeLines(code, fileName)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(modules)
 m <- use(fileName)
 m$functionWithDep(1:2)
 
-## ----eval = FALSE--------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  lib <- modules::use("R")
 #  dat <- read.csv("data/some.csv")
 #  
@@ -30,7 +30,7 @@ m$functionWithDep(1:2)
 #  lib$graphics$barplot(dat)
 #  lib$graphics$lineplot(dat)
 
-## ----eval = FALSE--------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  export("clean")
 #  clean <- function(dat) {
 #    # ...
@@ -46,7 +46,7 @@ m$functionWithDep(1:2)
 #    # ...
 #  }
 
-## ----eval = FALSE--------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  import("ggplot2")
 #  export("barplot", "lineplot")
 #  
@@ -62,7 +62,7 @@ m$functionWithDep(1:2)
 #    # ...
 #  }
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 module({
   fun <- function(x) {
     ## A function for illustrating documentation

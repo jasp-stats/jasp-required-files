@@ -5,8 +5,7 @@
 
 <table width="100%" summary="page for residuals.coxph {survival}"><tr><td>residuals.coxph {survival}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>
-Calculate Residuals for a &lsquo;coxph&rsquo; Fit
+<h2>Calculate Residuals for a &lsquo;coxph&rsquo; Fit
 </h2>
 
 <h3>Description</h3>
@@ -23,11 +22,16 @@ Cox proportional hazards model.
 residuals(object,
        type=c("martingale", "deviance", "score", "schoenfeld",
 	      "dfbeta", "dfbetas", "scaledsch","partial"),
-       collapse=FALSE, weighted=FALSE, ...)
+       collapse=FALSE, weighted= (type %in% c("dfbeta", "dfbetas")), ...)
+## S3 method for class 'coxphms'
+residuals(object,
+       type=c("martingale", "score", "schoenfeld",
+	      "dfbeta", "dfbetas", "scaledsch"),
+       collapse=FALSE, weighted= FALSE, ...)
 ## S3 method for class 'coxph.null'
 residuals(object,
        type=c("martingale", "deviance","score","schoenfeld"),
-       collapse=FALSE, weighted=FALSE, ...)
+       collapse=FALSE, weighted= FALSE, ...)
 </pre>
 
 
@@ -47,7 +51,7 @@ Typically this is the output from the <code>coxph</code> function.
 
 <p>character string indicating the type of residual desired.
 Possible values are <code>"martingale"</code>, <code>"deviance"</code>, <code>"score"</code>, <code>"schoenfeld"</code>,
-&quot;dfbeta&quot;', <code>"dfbetas"</code>, and <code>"scaledsch"</code>.
+&quot;dfbeta&quot;', <code>"dfbetas"</code>, <code>"scaledsch"</code> and <code>"partial"</code>.
 Only enough of the string to determine a unique match is required.
 </p>
 </td></tr>
@@ -124,5 +128,5 @@ for survival models&quot;, <em>Biometrika</em>, March 1990.
  mresid &lt;- resid(fit, collapse=heart$id)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

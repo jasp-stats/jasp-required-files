@@ -1,5 +1,5 @@
 Package: mgcv
-Version: 1.8-28
+Version: 1.8-34
 Author: Simon Wood <simon.wood@r-project.org>
 Maintainer: Simon Wood <simon.wood@r-project.org>
 Title: Mixed GAM Computation Vehicle with Automatic Smoothness
@@ -13,15 +13,15 @@ Description: Generalized additive (mixed) models, some of their extensions and
              Includes a gam() function, a wide variety of smoothers, 'JAGS' 
              support and distributions beyond the exponential family. 
 Priority: recommended
-Depends: R (>= 2.14.0), nlme (>= 3.1-64)
+Depends: R (>= 3.6.0), nlme (>= 3.1-64)
 Imports: methods, stats, graphics, Matrix, splines, utils
 Suggests: parallel, survival, MASS
 LazyLoad: yes
 ByteCompile: yes
 License: GPL (>= 2)
 NeedsCompilation: yes
-Packaged: 2019-03-21 08:56:32 UTC; sw283
+Packaged: 2021-02-16 11:38:19 UTC; sw283
 Repository: CRAN
-Date/Publication: 2019-03-21 11:40:07 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-07-05 08:13:08 UTC; windows
+Date/Publication: 2021-02-16 18:50:03 UTC
+Built: R 4.0.5; x86_64-w64-mingw32; 2021-03-31 07:59:52 UTC; windows
 Archs: i386, x64

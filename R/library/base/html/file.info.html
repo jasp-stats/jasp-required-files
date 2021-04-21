@@ -53,6 +53,8 @@ digits summarizing the permissions for the file owner, the owner's
 group and for anyone respectively.  Each digit is the logical
 <em>or</em> of read (4), write (2) and execute/search (1) permissions.
 </p>
+<p>See <a href="files.html">files</a> for how file paths with marked encodings are interpreted.
+</p>
 <p>File modes are probably only useful on NTFS file systems, and it seems
 all three digits refer to the file's owner.
 The execute/search bits are set for directories, and for files based
@@ -148,5 +150,5 @@ finf[difftime(Sys.time(), finf[,"mtime"], units = "days") &gt; 100 , 1:4]
 file.info("no-such-file-exists")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

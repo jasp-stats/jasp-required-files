@@ -52,29 +52,36 @@ a <- b <- 1; c <- -0.1
 y <- a+b*x+c*x^2+rnorm(200, sd=0.05)
 plot(x,y)
 curve(a+b*x+c*x^2, add = TRUE)
+## IGNORE_RDIFF_BEGIN
 nls(y ~ a+b*x+c*I(x^2), start = c(a=1, b=1, c=0.1), algorithm = "port")
 (fm <- nls(y ~ a+b*x+c*I(x^2), start = c(a=1, b=1, c=0.1),
            algorithm = "port", lower = c(0, 0, 0)))
+## IGNORE_RDIFF_END
 if(have_MASS) print(confint(fm))
 
-## weighted nls fit: unsupported < 2.3.0
+## weighted nls fit
 set.seed(123)
 y <- x <- 1:10
 yeps <- y + rnorm(length(y), sd = 0.01)
 wts <- rep(c(1, 2), length = 10); wts[5] <- 0
 fit0 <- lm(yeps ~ x, weights = wts)
+## IGNORE_RDIFF_BEGIN
 summary(fit0, cor = TRUE)
 cf0 <- coef(summary(fit0))[, 1:2]
 fit <- nls(yeps ~ a + b*x, start = list(a = 0.12345, b = 0.54321),
            weights = wts, trace = TRUE)
 summary(fit, cor = TRUE)
+## IGNORE_RDIFF_END
 stopifnot(all.equal(residuals(fit), residuals(fit0), tolerance = 1e-5,
                     check.attributes = FALSE))
 stopifnot(df.residual(fit) == df.residual(fit0))
+stopifnot(all.equal(logLik(fit), logLik(fit0), tolerance = 1e-8))
 cf1 <- coef(summary(fit))[, 1:2]
+## IGNORE_RDIFF_BEGIN
 fit2 <- nls(yeps ~ a + b*x, start = list(a = 0.12345, b = 0.54321),
             weights = wts, trace = TRUE, algorithm = "port")
 summary(fit2, cor = TRUE)
+## IGNORE_RDIFF_END
 cf2 <- coef(summary(fit2))[, 1:2]
 rownames(cf0) <- c("a", "b")
 # expect relative errors ca 2e-08
@@ -82,6 +89,7 @@ stopifnot(all.equal(cf1, cf0, tolerance = 1e-6),
           all.equal(cf1, cf0, tolerance = 1e-6))
 stopifnot(all.equal(residuals(fit2), residuals(fit0), tolerance = 1e5,
                     check.attributes = FALSE))
+stopifnot(all.equal(logLik(fit2), logLik(fit0), tolerance = 1e-8))
 
 
 DNase1 <- subset(DNase, Run == 1)
@@ -229,7 +237,10 @@ test <- function(trace=TRUE)
 	 suppressWarnings(
 	     nls(y ~ myf(x,A,B,n), data=xy)))
 }
-t1 <- test(); t1$with.start
+## IGNORE_RDIFF_BEGIN
+t1 <- test()
+## IGNORE_RDIFF_END
+t1$with.start
 ##__with.start:
 ## failed to find n in 2.2.x
 ## found wrong n in 2.3.x

@@ -13,8 +13,8 @@
 <dl>
 <dt>on Windows,</dt><dd><p>the <code>X11()</code> and <code>x11()</code> functions are
 simple wrappers to <code><a href="windows.html">windows</a>()</code> for historical
-compatibility convenience: Calling <code>x11()</code> or <code>X11()</code> would work in most
-cases to open an interactive graphics device.
+compatibility convenience: Calling <code>x11()</code> or <code>X11()</code>
+would work in most cases to open an interactive graphics device.
 </p>
 <p>In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions before 3.6.0, the Windows version had a shorter
 list of formal arguments.  Consequently, calls to <code>X11(*)</code>
@@ -30,7 +30,7 @@ machines/accounts that have access to an X server.
 </p>
 <p>The <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> function is a wrapper for two devices, one based on Xlib
 (<a href="https://en.wikipedia.org/wiki/Xlib">https://en.wikipedia.org/wiki/Xlib</a>) and one using cairographics
-(<a href="http://www.cairographics.org">http://www.cairographics.org</a>).</p>
+(<a href="https://www.cairographics.org">https://www.cairographics.org</a>).</p>
 </dd>
 </dl>
 
@@ -40,7 +40,7 @@ machines/accounts that have access to an X server.
 
 <pre>
 X11(display = "", width, height, pointsize, gamma, bg, canvas,
-    fonts, family, xpos, ypos, title, type, antialias)
+    fonts, family, xpos, ypos, title, type, antialias, symbolfamily)
 
 X11.options(..., reset = FALSE)
 </pre>
@@ -132,6 +132,14 @@ on macOS, otherwise <code>"Xlib"</code>.</p>
 <p>for cairo types, the type of anti-aliasing (if any)
 to be used.  One of <code>c("default", "none", "gray", "subpixel")</code>.</p>
 </td></tr>
+<tr valign="top"><td><code>symbolfamily</code></td>
+<td>
+<p>for cairo-based devices only:
+a length-one character string that specifies the font family to
+be used as the &quot;symbol&quot; font (e.g., for <a href="plotmath.html">plotmath</a> output).
+The default value is &quot;default&quot;, which means that R will choose
+a default &quot;symbol&quot; font based on the graphics device capabilities.</p>
+</td></tr>
 <tr valign="top"><td><code>reset</code></td>
 <td>
 <p>logical: should the defaults be reset to their defaults?</p>
@@ -194,9 +202,10 @@ every 500ms.
 <p>Which version will be fastest depends on the X11 connection and the
 type of plotting.  You will probably want to use a buffered type
 unless backing store is in use on the X server (which for example it
-always is on macOS displays), as otherwise repainting when the
-window is exposed will be slow.  On slow connections <code>type =
-    "dbcairo"</code> will probably give the best performance.
+always is on the <code>x86_64</code> macOS XQuartz server), as otherwise
+repainting when the window is exposed will be slow.  On slow
+connections <code>type = "dbcairo"</code> will probably give the best
+performance.
 </p>
 <p>Because of known problems with font selection on macOS without
 Pango (for example, the CRAN distribution), <code>type = "cairo"</code> is
@@ -268,11 +277,12 @@ running <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b
 normally allows some tracing of the selection process.
 </p>
 <p>This works best when high-quality scalable fonts are installed,
-usually in Type 1 or TrueType formats: see the &ldquo;R Installation
-and Administration Manual&rdquo; for advice on how to obtain and install
-such fonts.  At present the best rendering (including using kerning)
+usually in Type 1 or TrueType formats: see the
+&lsquo;R Installation and Administration&rsquo; manual for advice on how to
+obtain and install such fonts.
+At present the best rendering (including using kerning)
 will be achieved with TrueType fonts: see
-<a href="http://www.freedesktop.org/software/fontconfig/fontconfig-user.html">http://www.freedesktop.org/software/fontconfig/fontconfig-user.html</a>
+<a href="https://www.freedesktop.org/software/fontconfig/fontconfig-user.html">https://www.freedesktop.org/software/fontconfig/fontconfig-user.html</a>
 for ways to set up your system to prefer them.  The default family
 (<code>"Helvetica"</code>) is likely not to use kerning: alternatives which
 should if you have them installed are <code>"Arial"</code>,
@@ -280,6 +290,12 @@ should if you have them installed are <code>"Arial"</code>,
 <code>"FreeSans"</code>).  For those who prefer fonts with serifs, try
 <code>"Times New Roman"</code>, <code>"DejaVu Serif"</code> and <code>"Liberation
   Serif"</code>.  To match LaTeX text, use something like <code>"CM Roman"</code>.
+</p>
+<p>Fedora systems from version 31 on do not like the default <code>"symbol"</code>
+font family for rendering symbols (e.g., <a href="plotmath.html">plotmath</a>).  For those
+systems, users should specify a different font via
+<code>symbolfamily</code>.  The default can also be changed via
+<code>X11.options</code>. 
 </p>
 
 <p>Problems with incorrect rendering of symbols (e.g., of
@@ -392,7 +408,7 @@ seems most often equivalent to <code>antialias = "gray"</code>.
 <h3>Conventions</h3>
 
 <p>This section describes the implementation of the conventions for
-graphics devices set out in the &ldquo;R Internals Manual&rdquo;.
+graphics devices set out in the &lsquo;R Internals&rsquo; manual.
 </p>
 
 <ul>
@@ -420,6 +436,14 @@ minimum one.
 
 
 
+<h3>Warning</h3>
+
+<p>Support for all the Unix devices is optional, so in packages
+<code>X11()</code>  should be used conditionally after checking
+<code><a href="../../base/html/capabilities.html">capabilities</a>("X11")</code>.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code><a href="Devices.html">Devices</a></code>, <code><a href="x11Fonts.html">X11Fonts</a></code>, <code><a href="savePlot.html">savePlot</a></code>.
@@ -437,5 +461,5 @@ setHook(packageEvent("grDevices", "onLoad"),
 }
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

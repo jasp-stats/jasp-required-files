@@ -99,7 +99,10 @@ cs2CompSymm &lt;- corCompSymm(value = 0.3, form = ~ age | Subject)
 cs1CompSymm &lt;- Initialize(cs1CompSymm, data = Orthodont)
 corMatrix(cs1CompSymm)
 
+## Print/Summary methods for the empty case:
+(cCS &lt;- corCompSymm()) # Uninitialized correlation struc..
+summary(cCS)           #    (ditto)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-140 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-152 <a href="00Index.html">Index</a>]</div>
 </body></html>

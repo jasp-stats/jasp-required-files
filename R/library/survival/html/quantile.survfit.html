@@ -19,10 +19,10 @@ a survfit object.
 <pre>
 ## S3 method for class 'survfit'
 quantile(x, probs = c(0.25, 0.5, 0.75), conf.int = TRUE,
-  tolerance= sqrt(.Machine$double.eps), ...)
+  scale, tolerance= sqrt(.Machine$double.eps), ...)
 ## S3 method for class 'survfitms'
 quantile(x, probs = c(0.25, 0.5, 0.75), conf.int = TRUE,
-  tolerance= sqrt(.Machine$double.eps), ...)
+  scale, tolerance= sqrt(.Machine$double.eps), ...)
 </pre>
 
 
@@ -40,6 +40,11 @@ quantile(x, probs = c(0.25, 0.5, 0.75), conf.int = TRUE,
 <tr valign="top"><td><code>conf.int</code></td>
 <td>
 <p>should lower and upper confidence limits be returned?</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>optional scale factor, e.g., <code>scale=365.25</code> would
+return results in years if the fit object were in days.</p>
 </td></tr>
 <tr valign="top"><td><code>tolerance</code></td>
 <td>
@@ -128,5 +133,5 @@ temp[2,3,]  # quantiles for second level of ph.ecog, age=80
 quantile(csurv[2,3], 1:5/10)  # quantiles of a single curve, same result
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

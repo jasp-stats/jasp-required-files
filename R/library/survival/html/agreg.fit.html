@@ -21,9 +21,9 @@ a model formula.
 
 <pre>
 agreg.fit(x, y, strata, offset, init, control, weights, method,
-rownames, resid=TRUE)
+rownames, resid=TRUE, nocenter=NULL)
 coxph.fit(x, y, strata, offset, init, control, weights, method,
-rownames, resid=TRUE)
+rownames, resid=TRUE, nocenter=NULL)
 </pre>
 
 
@@ -73,6 +73,12 @@ contains the rownames (if any) of the original data.</p>
 <td>
 <p>compute and return residuals.</p>
 </td></tr>
+<tr valign="top"><td><code>nocenter</code></td>
+<td>
+<p>an optional list of values. Any column of the X matrix
+whose values lie strictly within that set will not be recentered.
+Note that the coxph function has (-1, 0, 1) as the default.</p>
+</td></tr>
 </table>
 
 
@@ -102,5 +108,5 @@ the generation of a permutation distribution for instance.
 
 <p><code><a href="coxph.html">coxph</a></code></p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

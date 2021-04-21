@@ -22,7 +22,7 @@ routine is responsible for these things.
 <pre>
 concordancefit(y, x, strata, weights, ymin = NULL, ymax = NULL,
  timewt = c("n", "S", "S/G", "n/G", "n/G2", "I"), cluster, influence =0,
- ranks = FALSE, reverse = FALSE, timefix = TRUE)
+ ranks = FALSE, reverse = FALSE, timefix = TRUE, keepstrata=10)
 </pre>
 
 
@@ -59,6 +59,14 @@ range</p>
 <p>see the help for the
 <code>concordance</code> function</p>
 </td></tr>
+<tr valign="top"><td><code>keepstrata</code></td>
+<td>
+<p>either TRUE, FALSE, or an integer value.
+Computations are always done within stratum, then added. If the
+total number of strata greater than <code>keepstrata</code>, or
+<code>keepstrata=FALSE</code>, those subtotals are not kept in the output.
+</p>
+</td></tr>
 </table>
 
 
@@ -76,5 +84,5 @@ range</p>
 
  <p><code><a href="concordance.html">concordance</a></code></p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

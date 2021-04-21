@@ -20,7 +20,7 @@ Graphical Test of Proportional Hazards
 <pre>
 ## S3 method for class 'cox.zph'
 plot(x, resid=TRUE, se=TRUE, df=4, nsmo=40, var,
-        xlab="Time", ylab, lty=1:2, col=1, lwd=1, ...)
+        xlab="Time", ylab, lty=1:2, col=1, lwd=1, hr=FALSE, ...)
 </pre>
 
 
@@ -68,6 +68,12 @@ zero or a main title.
 <p>This has been superseded by a subscripting method; see the example below. 
 </p>
 </td></tr>
+<tr valign="top"><td><code>hr</code></td>
+<td>
+<p>if TRUE, label the y-axis using the estimated hazard ratio
+rather than the estimated coefficient.  (The plot does not change,
+only the axis label.)</p>
+</td></tr>
 <tr valign="top"><td><code>xlab</code></td>
 <td>
 <p>label for the x-axis of the plot</p>
@@ -110,13 +116,13 @@ second element is used for the confidence interval.</p>
 vfit &lt;- coxph(Surv(time,status) ~ trt + factor(celltype) + 
               karno + age, data=veteran, x=TRUE) 
 temp &lt;- cox.zph(vfit) 
-plot(temp, var=5)      # Look at Karnofsy score, old way of doing plot 
-plot(temp[5])     # New way with subscripting 
+plot(temp, var=3)      # Look at Karnofsy score, old way of doing plot 
+plot(temp[3])     # New way with subscripting 
 abline(0, 0, lty=3) 
 # Add the linear fit as well  
-abline(lm(temp$y[,5] ~ temp$x)$coefficients, lty=4, col=3)  
+abline(lm(temp$y[,3] ~ temp$x)$coefficients, lty=4, col=3)  
 title(main="VA Lung Study") 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

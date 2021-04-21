@@ -1,15 +1,17 @@
 Package: KernSmooth
 Priority: recommended
-Version: 2.23-16
-Date: 2019-10-15
+Version: 2.23-18
+Date: 2020-10-28
 Title: Functions for Kernel Smoothing Supporting Wand & Jones (1995)
 Authors@R: c(person("Matt", "Wand", role = "aut",
 	             email = "Matt.Wand@uts.edu.au"),
 	     person("Cleve", "Moler", role = "ctb",
-	            comment = "LINPACK routines in src"),
+	            comment = "LINPACK routines in src/d*"),
              person("Brian", "Ripley", role = c("trl", "cre", "ctb"),
                     email = "ripley@stats.ox.ac.uk",
 		    comment = "R port and updates"))
+Note: Maintainers are not available to give advice on using a package
+        they did not author.
 Depends: R (>= 2.5.0), stats
 Suggests: MASS
 Description: Functions for kernel smoothing (and density estimation)
@@ -18,12 +20,12 @@ Description: Functions for kernel smoothing (and density estimation)
 License: Unlimited
 ByteCompile: yes
 NeedsCompilation: yes
-Packaged: 2019-10-15 12:12:47 UTC; ripley
+Packaged: 2020-10-28 14:48:25 UTC; ripley
 Author: Matt Wand [aut],
-  Cleve Moler [ctb] (LINPACK routines in src),
+  Cleve Moler [ctb] (LINPACK routines in src/d*),
   Brian Ripley [trl, cre, ctb] (R port and updates)
 Maintainer: Brian Ripley <ripley@stats.ox.ac.uk>
 Repository: CRAN
-Date/Publication: 2019-10-15 12:16:11 UTC
-Built: R 3.6.1; x86_64-w64-mingw32; 2019-11-07 12:17:29 UTC; windows
+Date/Publication: 2020-10-29 08:07:08 UTC
+Built: R 4.0.5; x86_64-w64-mingw32; 2021-03-31 07:59:33 UTC; windows
 Archs: i386, x64

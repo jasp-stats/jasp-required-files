@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2018-06-26 r74934) -- "Unsuffered Consequences"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R Under development (unstable) (2020-06-10 r78681) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -211,7 +211,7 @@ gauss:38      1.0479     0.9543   0.30685    3.5789
 Iterations: 6 outer, 21 Newton-Raphson
      Variance of random effect= 0.5090956 
 Degrees of freedom for terms=  0.5  0.6  1.7 12.3 
-Concordance= 0.796  (se = 0.796 )
+Concordance= 0.796  (se = 0.032 )
 Likelihood ratio test= 117.9  on 15.14 df,   p=<2e-16
 
 > #
@@ -287,7 +287,7 @@ Degrees of freedom for terms=  0.3  0.5 19.7
 Likelihood ratio test=61.2  on 20.5 df, p=6e-06
 n= 76, number of events= 58 
 Warning message:
-In coxpenal.fit(X, Y, strats, offset, init = init, control, weights = weights,  :
+In coxpenal.fit(X, Y, istrat, offset, init = init, control, weights = weights,  :
   Inner loop failed to coverge for iterations 4
 > 
 > coxph(Surv(time, status) ~ age + sex + frailty(id, dist='t', caic=F), kidney)
@@ -308,4 +308,4 @@ n= 76, number of events= 58
 > 
 > proc.time()
    user  system elapsed 
-  1.084   0.064   1.145 
+  0.930   0.067   0.989 

@@ -1,6 +1,6 @@
 Package: callr
 Title: Call R from R
-Version: 3.4.1
+Version: 3.6.0
 Authors@R: c(
     person("Gábor", "Csárdi", role = c("aut", "cre", "cph"),
            email = "csardi.gabor@gmail.com",
@@ -12,22 +12,21 @@ Description: It is sometimes useful to perform a computation in a
     separate R process, without affecting the current R process at all.
     This packages does exactly that.
 License: MIT + file LICENSE
-LazyData: true
-URL: https://github.com/r-lib/callr#readme
+URL: https://callr.r-lib.org, https://github.com/r-lib/callr#readme
 BugReports: https://github.com/r-lib/callr/issues
-RoxygenNote: 7.0.2
-Imports: processx (>= 3.4.0), R6, utils
-Suggests: cliapp, covr, crayon, fansi, pingr, ps, rprojroot, spelling,
-        testthat, tibble, withr
+RoxygenNote: 7.1.1.9001
+Imports: processx (>= 3.5.0), R6, utils
+Suggests: cli, covr, crayon, fansi, pingr, ps, rprojroot, spelling,
+        testthat, tibble, withr (>= 2.3.0)
 Encoding: UTF-8
 Language: en-US
 NeedsCompilation: no
-Packaged: 2020-01-24 12:12:17 UTC; gaborcsardi
+Packaged: 2021-03-26 08:14:50 UTC; gaborcsardi
 Author: Gábor Csárdi [aut, cre, cph] (<https://orcid.org/0000-0001-7098-9676>),
   Winston Chang [aut],
   RStudio [cph, fnd],
   Mango Solutions [cph, fnd]
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-01-24 17:00:11 UTC
-Built: R 3.6.2; ; 2020-01-28 00:36:39 UTC; windows
+Date/Publication: 2021-03-28 06:51:10 UTC
+Built: R 4.0.4; ; 2021-03-31 16:34:48 UTC; windows

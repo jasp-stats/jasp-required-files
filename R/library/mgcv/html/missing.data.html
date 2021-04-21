@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>If there are missing values in the reponse or covariates of a GAM then the default is simply to use only the &lsquo;complete cases&rsquo;. If there are many missing covariates, this can get rather wasteful. One possibility is then to use imputation. Another is to substitute a simple random effects model in which the <code>by</code> variable mechanism is used to set <code>s(x)</code> to zero for any missing <code>x</code>, while a Gaussian random effect is then substituted for the &lsquo;missing&rsquo; s(x). See the example for details of how this works, and <code><a href="gam.models.html">gam.models</a></code>for the necessary background on <code>by</code> variables. 
+<p>If there are missing values in the response or covariates of a GAM then the default is simply to use only the &lsquo;complete cases&rsquo;. If there are many missing covariates, this can get rather wasteful. One possibility is then to use imputation. Another is to substitute a simple random effects model in which the <code>by</code> variable mechanism is used to set <code>s(x)</code> to zero for any missing <code>x</code>, while a Gaussian random effect is then substituted for the &lsquo;missing&rsquo; s(x). See the example for details of how this works, and <code><a href="gam.models.html">gam.models</a></code> for the necessary background on <code>by</code> variables. 
 </p>
 
 
@@ -72,11 +72,11 @@ for (sim in c(1,7)) { ## cycle over uncorrelated and correlated covariates
   ## zero when x0 is non-missing, so that we can set idx0 to any 
   ## existing level for these cases.   
 
-  b &lt;- gam(y~s(x0,by=ordered(!mx0))+s(x1,by=ordered(!mx1))+
+  b &lt;- bam(y~s(x0,by=ordered(!mx0))+s(x1,by=ordered(!mx1))+
              s(x2,by=ordered(!mx2))+s(x3,by=ordered(!mx3))+
              s(idx0,bs="re",by=mx0)+s(idx1,bs="re",by=mx1)+
              s(idx2,bs="re",by=mx2)+s(idx3,bs="re",by=mx3)
-             ,data=dat1,method="REML")
+             ,data=dat1,discrete=TRUE)
 
   for (i in 1:4) plot(b,select=i) ## plot the smooth effects from b
 
@@ -87,5 +87,5 @@ for (sim in c(1,7)) { ## cycle over uncorrelated and correlated covariates
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
 </body></html>

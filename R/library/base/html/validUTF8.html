@@ -39,7 +39,8 @@ validEnc(x)
 </p>
 <p><code>validUTF8</code> ignores any marked encoding (see
 <code><a href="Encoding.html">Encoding</a></code>) and so looks directly if the bytes in each
-string are valid UTF-8.
+string are valid UTF-8.  (For the validity of &lsquo;noncharacters&rsquo;
+see the help for <code><a href="utf8Conversion.html">intToUtf8</a></code>.)
 </p>
 <p><code>validEnc</code> regards character strings as validly encoded unless
 their encodings are marked as UTF-8 or they are unmarked and the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
@@ -89,5 +90,5 @@ all.equal(validEnc(x),
           validEnc(G)) # typically TRUE
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

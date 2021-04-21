@@ -20,7 +20,7 @@ coefficients. The routine can optionally return the matrix by which the model
 coefficients must be pre-multiplied in order to yield the values of the linear predictor at
 the supplied covariate values: this is useful for obtaining credible regions
 for quantities derived from the model (e.g. derivatives of smooths), and for lookup table prediction outside
-<code>R</code> (see example code below).</p>
+<code>R</code>.</p>
 
 
 <h3>Usage</h3>
@@ -81,7 +81,8 @@ outside <code>R</code> (see example code, below). </p>
 <td>
 <p>if <code>type=="terms"</code> or <code>type="iterms"</code> then terms (smooth or parametric) named in this array
 will not be returned. Otherwise any smooth terms named in this array will be set to zero. 
-If <code>NULL</code> then no terms are excluded.</p>
+If <code>NULL</code> then no terms are excluded. To avoid supplying covariate values for excluded terms, set <code>newdata.guaranteed=TRUE</code>,
+but note that this skips all checks of <code>newdata</code>. </p>
 </td></tr>
 <tr valign="top"><td><code>block.size</code></td>
 <td>
@@ -107,14 +108,14 @@ determined from <code>object$na.action</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>cluster</code></td>
 <td>
-<p><code>predict.bam</code> can compute in parallel using <a href="../../parallel/html/parLapply.html">parLapply</a>
+<p><code>predict.bam</code> can compute in parallel using <a href="../../parallel/html/clusterApply.html">parLapply</a>
 from the <code>parallel</code> package, if it is supplied with a cluster on which to do this (a cluster here can be some cores of a 
 single machine). See details and example code for <code><a href="bam.html">bam</a></code>. 
 </p>
 </td></tr>
 <tr valign="top"><td><code>discrete</code></td>
 <td>
-<p>if <code>TRUE</code> then discrete prediction methods used with model fitted by discrete methods. <code>FALSE</code> for regular prediction.</p>
+<p>if <code>TRUE</code> then discrete prediction methods used with model fitted by discrete methods. <code>FALSE</code> for regular prediction. See details.</p>
 </td></tr>
 <tr valign="top"><td><code>n.threads</code></td>
 <td>
@@ -138,11 +139,13 @@ an attribute <code>"para.only"</code> and <code>type=="terms"</code> then only p
 terms of order 1 are returned (i.e. those that <code>termplot</code> can handle).
 </p>
 <p>Note that, in common with other prediction functions, any offset supplied to
-<code><a href="gam.html">gam</a></code> as an argument is always ignored when predicting, unlike
-offsets specified in the gam model formula.
+<code><a href="bam.html">bam</a></code> as an argument is always ignored when predicting, unlike
+offsets specified in the bam model formula.
 </p>
 <p>See the examples in <code><a href="predict.gam.html">predict.gam</a></code> for how to use the <code>lpmatrix</code> for obtaining credible
-regions for quantities derived from the model. 
+regions for quantities derived from the model.
+</p>
+<p>When <code>discrete=TRUE</code> the prediction data in <code>newdata</code> is discretized in the same way as is done when using discrete fitting methods with <code>bam</code>. However the discretization grids are not currently identical to those used during fitting. Instead, discretization is done afresh for the prediction data. This means that if you are predicting for a relatively small set of prediction data, or on a regular grid, then the results may in fact be identical to those obtained without discretization. The disadvantage to this approach is that if you make predictions with a large data frame, and then split it into smaller data frames to make the predictions again, the results may differ slightly, because of slightly different discretization errors.    
 </p>
 
 
@@ -206,5 +209,5 @@ and Hall/CRC Press.
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
 </body></html>

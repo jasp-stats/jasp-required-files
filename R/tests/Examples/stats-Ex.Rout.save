@@ -1,6 +1,6 @@
 
-R version 3.6.0 Patched (2019-06-07 r76692) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R version 4.0.3 Patched (2021-02-03 r79936) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -1650,9 +1650,11 @@ attr(,"gradient")
  [9,]    1 -0.0036328431  2.3469622  6.7835933
 [10,]    1 -0.0006683898  0.5619310  1.6833949
 [11,]    1 -0.0002589123  0.2459116  0.7486834
+> ## IGNORE_RDIFF_BEGIN
 > getInitial(weight ~ SSweibull(Time, Asym, Drop, lrc, pwr), data = Chick.6)
       Asym       Drop        lrc        pwr 
 158.501204 110.997081  -5.993421   2.646141 
+> ## IGNORE_RDIFF_END
 > ## Initial values are in fact the converged values
 > fm1 <- nls(weight ~ SSweibull(Time, Asym, Drop, lrc, pwr), data = Chick.6)
 > summary(fm1)
@@ -2113,16 +2115,6 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > ## following example(glm)
 > ## Don't show: 
 > example(glm, echo = FALSE)
-  treatment outcome counts
-1         1       1     18
-2         1       2     17
-3         1       3     15
-4         2       1     20
-5         2       2     10
-6         2       3     20
-7         3       1     25
-8         3       2     13
-9         3       3     12
 > ## End(Don't show)
 > drop1(glm.D93, test = "Chisq")
 Single term deletions
@@ -2209,7 +2201,7 @@ Aye   Buzz Hum
   Si    13  10
   Yes    6   7
 
-> addmargins(A)
+> (aA <- addmargins(A))
 , , Sea = Black
 
      Bee
@@ -2256,7 +2248,7 @@ Aye   Buzz Hum Sum
   Sum   87  90 177
 
 > ## Don't show: 
-> stopifnot(is.table(addmargins(A)))
+> stopifnot(is.table(aA))
 > ## End(Don't show)
 > ftable(A)
          Sea Black Dead Red White
@@ -2267,7 +2259,7 @@ Si  Buzz         5   10   4    13
     Hum          7    7   7    10
 Yes Buzz         7   10   8     6
     Hum          7    3   7     7
-> ftable(addmargins(A))
+> ftable(aA)
          Sea Black Dead Red White Sum
 Aye Bee                              
 Oui Buzz         7    8   2     7  24
@@ -2284,24 +2276,9 @@ Sum Buzz        19   28  14    26  87
     Sum         37   45  40    55 177
 > 
 > # Non-commutative functions - note differences between resulting tables:
-> ftable(addmargins(A, c(1, 3),
-+        FUN = list(Sum = sum, list(Min = min, Max = max))))
-Margins computed over dimensions
-in the following order:
-1: Aye
-2: Sea
-         Sea Black Dead Red White Min Max
-Aye Bee                                  
-Oui Buzz         7    8   2     7   2   8
-    Hum          4    7  12    12   4  12
-Si  Buzz         5   10   4    13   4  13
-    Hum          7    7   7    10   7  10
-Yes Buzz         7   10   8     6   6  10
-    Hum          7    3   7     7   3   7
-Sum Buzz        19   28  14    26  14  28
-    Hum         18   17  26    29  17  29
-> ftable(addmargins(A, c(3, 1),
-+        FUN = list(list(Min = min, Max = max), Sum = sum)))
+> ftable( addmargins(A, c(3, 1),
++                    FUN = list(list(Min = min, Max = max),
++                               Sum = sum)))
 Margins computed over dimensions
 in the following order:
 1: Sea
@@ -2316,6 +2293,23 @@ Yes Buzz         7   10   8     6   6  10
     Hum          7    3   7     7   3   7
 Sum Buzz        19   28  14    26  12  31
     Hum         18   17  26    29  14  29
+> ftable( addmargins(A, c(1, 3),
++                    FUN = list(Sum = sum,
++                               list(Min = min, Max = max))))
+Margins computed over dimensions
+in the following order:
+1: Aye
+2: Sea
+         Sea Black Dead Red White Min Max
+Aye Bee                                  
+Oui Buzz         7    8   2     7   2   8
+    Hum          4    7  12    12   4  12
+Si  Buzz         5   10   4    13   4  13
+    Hum          7    7   7    10   7  10
+Yes Buzz         7   10   8     6   6  10
+    Hum          7    3   7     7   3   7
+Sum Buzz        19   28  14    26  14  28
+    Hum         18   17  26    29  17  29
 > 
 > # Weird function needed to return the N when computing percentages
 > sqsm <- function(x) sum(x)^2/100
@@ -2579,16 +2573,6 @@ Frequency = 1
 > ## Don't show: 
 > require(utils)
 > example("glm", echo = FALSE)
-  treatment outcome counts
-1         1       1     18
-2         1       2     17
-3         1       3     15
-4         2       1     20
-5         2       2     10
-6         2       3     20
-7         3       1     25
-8         3       2     13
-9         3       3     12
 > ## End(Don't show)
 > anova(glm.D93)
 Analysis of Deviance Table
@@ -3131,18 +3115,125 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > plot(approxfun(x, y, rule = 2:1), 0, 11,
 +      col = "tomato", add = TRUE, lty = 3, lwd = 2)
 > 
+> ### Treatment of 'NA's -- are kept if  na.rm=FALSE :
+> 
+> xn <- 1:4
+> yn <- c(1,NA,3:4)
+> xout <- (1:9)/2
+> ## Default behavior (na.rm = TRUE): NA's omitted; extrapolation gives NA
+> data.frame(approx(xn,yn, xout))
+    x   y
+1 0.5  NA
+2 1.0 1.0
+3 1.5 1.5
+4 2.0 2.0
+5 2.5 2.5
+6 3.0 3.0
+7 3.5 3.5
+8 4.0 4.0
+9 4.5  NA
+> data.frame(approx(xn,yn, xout, rule = 2))# -> *constant* extrapolation
+    x   y
+1 0.5 1.0
+2 1.0 1.0
+3 1.5 1.5
+4 2.0 2.0
+5 2.5 2.5
+6 3.0 3.0
+7 3.5 3.5
+8 4.0 4.0
+9 4.5 4.0
+> ## New (2019-2020)  na.rm = FALSE: NA's are "kept"
+> data.frame(approx(xn,yn, xout, na.rm=FALSE, rule = 2))
+    x   y
+1 0.5 1.0
+2 1.0 1.0
+3 1.5  NA
+4 2.0  NA
+5 2.5  NA
+6 3.0 3.0
+7 3.5 3.5
+8 4.0 4.0
+9 4.5 4.0
+> data.frame(approx(xn,yn, xout, na.rm=FALSE, rule = 2, method="constant"))
+    x  y
+1 0.5  1
+2 1.0  1
+3 1.5  1
+4 2.0 NA
+5 2.5 NA
+6 3.0  3
+7 3.5  3
+8 4.0  4
+9 4.5  4
+> 
+> ## NA's in x[] are not allowed:
+> stopifnot(inherits( try( approx(yn,yn, na.rm=FALSE) ), "try-error"))
+Error in approx(yn, yn, na.rm = FALSE) : 
+  approx(x,y, .., na.rm=FALSE): NA values in x are not allowed
+> 
+> ## Give a nice overview of all possibilities  rule * method * na.rm :
+> ##             -----------------------------  ====   ======   =====
+> ## extrapolations "N":= NA;   "C":= Constant :
+> rules <- list(N=1, C=2, NC=1:2, CN=2:1)
+> methods <- c("constant","linear")
+> ry <- sapply(rules, function(R) {
++        sapply(methods, function(M)
++         sapply(setNames(,c(TRUE,FALSE)), function(na.)
++                  approx(xn, yn, xout=xout, method=M, rule=R, na.rm=na.)$y),
++         simplify="array")
++    }, simplify="array")
+> names(dimnames(ry)) <- c("x = ", "na.rm", "method", "rule")
+> dimnames(ry)[[1]] <- format(xout)
+> ftable(aperm(ry, 4:1)) # --> (4 * 2 * 2) x length(xout)  =  16 x 9 matrix
+                    x =  0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5
+rule method   na.rm                                         
+N    constant TRUE        NA 1.0 1.0 1.0 1.0 3.0 3.0 4.0  NA
+              FALSE       NA 1.0 1.0  NA  NA 3.0 3.0 4.0  NA
+     linear   TRUE        NA 1.0 1.5 2.0 2.5 3.0 3.5 4.0  NA
+              FALSE       NA 1.0  NA  NA  NA 3.0 3.5 4.0  NA
+C    constant TRUE       1.0 1.0 1.0 1.0 1.0 3.0 3.0 4.0 4.0
+              FALSE      1.0 1.0 1.0  NA  NA 3.0 3.0 4.0 4.0
+     linear   TRUE       1.0 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.0
+              FALSE      1.0 1.0  NA  NA  NA 3.0 3.5 4.0 4.0
+NC   constant TRUE        NA 1.0 1.0 1.0 1.0 3.0 3.0 4.0 4.0
+              FALSE       NA 1.0 1.0  NA  NA 3.0 3.0 4.0 4.0
+     linear   TRUE        NA 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.0
+              FALSE       NA 1.0  NA  NA  NA 3.0 3.5 4.0 4.0
+CN   constant TRUE       1.0 1.0 1.0 1.0 1.0 3.0 3.0 4.0  NA
+              FALSE      1.0 1.0 1.0  NA  NA 3.0 3.0 4.0  NA
+     linear   TRUE       1.0 1.0 1.5 2.0 2.5 3.0 3.5 4.0  NA
+              FALSE      1.0 1.0  NA  NA  NA 3.0 3.5 4.0  NA
+> ## Don't show: 
+> stopifnot(exprs = {
++  identical(unname(ry),
++    array(c(NA, 1, 1,   1, 1, 3, 3, 4, NA,      NA, 1,  1, NA, NA, 3, 3, 4, NA,
++            NA, 1, 1.5, 2, 2.5, 3, 3.5, 4, NA,  NA, 1, NA, NA, NA, 3, 3.5, 4, NA,
++             1, 1, 1,   1, 1, 3, 3, 4, 4,        1, 1,  1, NA, NA, 3, 3, 4, 4,
++             1, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4,    1, 1, NA, NA, NA, 3, 3.5, 4, 4,
++            NA, 1, 1,   1, 1, 3, 3, 4, 4,       NA, 1,  1, NA, NA, 3, 3, 4, 4,
++            NA, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4,   NA, 1, NA, NA, NA, 3, 3.5, 4, 4,
++             1, 1, 1,   1, 1, 3, 3, 4, NA,       1, 1,  1, NA, NA, 3, 3, 4, NA,
++             1, 1, 1.5, 2, 2.5, 3, 3.5, 4, NA,   1, 1, NA, NA, NA, 3, 3.5, 4, NA),
++          dim = c(9L, 2L, 2L, 4L)))
++  identical(approxfun(xn,yn, method="constant", rule=2, na.rm=FALSE)(xout),
++             as.vector(ry[,"FALSE", "constant","C"]))
++  identical(approxfun(xn,yn, method="linear", rule=2:1, na.rm=FALSE)(xout),
++             as.vector(ry[,"FALSE", "linear", "CN"]))
++ })
+> ## End(Don't show)
+> 
 > ## Show treatment of 'ties' :
 > 
 > x <- c(2,2:4,4,4,5,5,7,7,7)
 > y <- c(1:6, 5:4, 3:1)
 > (amy <- approx(x, y, xout = x)$y) # warning, can be avoided by specifying 'ties=':
-Warning in regularize.values(x, y, ties, missing(ties)) :
+Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm) :
   collapsing to unique 'x' values
  [1] 1.5 1.5 3.0 5.0 5.0 5.0 4.5 4.5 2.0 2.0 2.0
 > op <- options(warn=2) # warnings would be error
 > stopifnot(identical(amy, approx(x, y, xout = x, ties=mean)$y))
-> options(op) # revert
-> (ay  <- approx(x, y, xout = x, ties = "ordered")$y)
+> (ay <- approx(x, y, xout = x, ties = "ordered")$y)
  [1] 2 2 3 6 6 6 4 4 1 1 1
 > stopifnot(amy == c(1.5,1.5, 3, 5,5,5, 4.5,4.5, 2,2,2),
 +           ay  == c(2, 2,    3, 6,6,6, 4, 4,    1,1,1))
@@ -3150,7 +3241,7 @@ Warning in regularize.values(x, y, ties, missing(ties)) :
  [1] 1 1 3 4 4 4 4 4 1 1 1
 > approx(x, y, xout = x, ties = max)$y
  [1] 2 2 3 6 6 6 5 5 3 3 3
-> 
+> options(op) # revert 'warn'ing level
 > 
 > 
 > 
@@ -3619,6 +3710,28 @@ arima(presidents, c(2, 0, 1))  5 838.1272
 fit3                           5 838.1639
 arima(presidents, c(3, 0, 1))  6 838.8124
 > 
+> ## An example of using the  'fixed'  argument:
+> ## Note that the period of the seasonal component is taken to be
+> ## frequency(presidents), i.e. 4.
+> (fitSfx <- arima(presidents, order=c(2,0,1), seasonal=c(1,0,0),
++                  fixed=c(NA, NA, 0.5, -0.1, 50), transform.pars=FALSE))
+
+Call:
+arima(x = presidents, order = c(2, 0, 1), seasonal = c(1, 0, 0), transform.pars = FALSE, 
+    fixed = c(NA, NA, 0.5, -0.1, 50))
+
+Coefficients:
+         ar1     ar2  ma1  sar1  intercept
+      0.2047  0.6269  0.5  -0.1         50
+s.e.  0.0734  0.0747  0.0   0.0          0
+
+sigma^2 estimated as 84.01:  log likelihood = -416.07,  aic = 838.14
+> ## The partly-fixed & smaller model seems better (as we "knew too much"):
+> AIC(fitSfx, arima(presidents, order=c(2,0,1), seasonal=c(1,0,0)))
+                                                             df      AIC
+fitSfx                                                        3 838.1406
+arima(presidents, order = c(2, 0, 1), seasonal = c(1, 0, 0))  6 839.7095
+> 
 > ## An example of ARIMA forecasting:
 > predict(fit3, 3)
 $pred
@@ -3835,7 +3948,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x47c4218>
+<environment: 0x544b0b0>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4872,7 +4985,7 @@ function (V)
     r[cbind(1L:p, 1L:p)] <- 1
     r
 }
-<bytecode: 0x54cf390>
+<bytecode: 0x61e74d8>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -5401,8 +5514,7 @@ surv(ft, case) ~ a + b * f
 > 
 > x <- c("a name", "another name")
 > try( reformulate(x) ) # -> Error ..... unexpected symbol
-Error in parse(text = s, keep.source = FALSE) : 
-  <text>:1:3: unexpected symbol
+Error in str2lang(termtext) : <text>:1:3: unexpected symbol
 1: a name
       ^
 > ## rather backquote the strings in x :
@@ -6610,11 +6722,12 @@ and	9 plateau levels (y) with summary
 > 
 > ## Advanced: What's inside the function closure?
 > ls(environment(Fn12))
-[1] "f"      "method" "nobs"   "x"      "y"      "yleft"  "yright"
-> ##[1] "f"  "method"  "n"  "x"  "y"  "yleft"  "yright"
+[1] "f"      "method" "na.rm"  "nobs"   "x"      "y"      "yleft"  "yright"
+> ## "f"     "method" "na.rm"  "nobs"   "x"     "y"    "yleft"  "yright"
 > utils::ls.str(environment(Fn12))
 f :  num 0
 method :  int 2
+na.rm :  logi TRUE
 nobs :  int 12
 x :  num [1:8] -2.2 -2 -0.6 0 0.1 0.6 0.8 0.9
 y :  num [1:8] 0.0833 0.1667 0.3333 0.5 0.5833 ...
@@ -7019,7 +7132,7 @@ List of 12
  $ dev.resids:function (y, mu, wt)  
  $ aic       :function (y, n, mu, wt, dev)  
  $ mu.eta    :function (eta)  
- $ initialize:  expression({  if (any(y <= 0))  stop("non-positive values not allowed for the 'gamma' family")  n <- rep.int(1, n| __truncated__
+ $ initialize:  expression({  if (any(y <= 0))  stop("non-positive values not allowed for the 'Gamma' family")  n <- rep.int(1, n| __truncated__
  $ validmu   :function (mu)  
  $ valideta  :function (eta)  
  $ simulate  :function (object, nsim)  
@@ -7496,7 +7609,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x5327750>
+<environment: 0x5f97170>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -7888,7 +8001,7 @@ Crew  Child        0      0
 > counts <- c(18,17,15,20,10,20,25,13,12)
 > outcome <- gl(3,1,9)
 > treatment <- gl(3,3)
-> print(d.AD <- data.frame(treatment, outcome, counts))
+> data.frame(treatment, outcome, counts) # showing data
   treatment outcome counts
 1         1       1     18
 2         1       2     17
@@ -8287,7 +8400,7 @@ Libya          0.53_*
 > ## The 'infl' argument is not needed, but avoids recomputation:
 > rs <- rstandard(lm.SR)
 > iflSR <- influence(lm.SR)
-> identical(rs, rstandard(lm.SR, infl = iflSR))
+> all.equal(rs, rstandard(lm.SR, infl = iflSR), tol = 1e-10)
 [1] TRUE
 > ## to "see" the larger values:
 > 1000 * round(dfbetas(lm.SR, infl = iflSR), 3)
@@ -11630,7 +11743,7 @@ Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
 Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
   cannot compute exact p-value with ties
 
-	Pairwise comparisons using Wilcoxon rank sum test 
+	Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
 
 data:  Ozone and Month 
 
@@ -11663,7 +11776,7 @@ Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
 Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
   cannot compute exact p-value with ties
 
-	Pairwise comparisons using Wilcoxon rank sum test 
+	Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
 
 data:  Ozone and Month 
 
@@ -12190,14 +12303,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x35fbc68>
-<environment: 0x3606218>
+<bytecode: 0x5580280>
+<environment: 0x5588948>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x35fbb18>
-<environment: 0x3606218>
+<bytecode: 0x5580130>
+<environment: 0x5588948>
 
 > 
 > 
@@ -12730,7 +12843,8 @@ Cumulative Proportion  0.4173 0.6498 0.7569
 > ### ** Examples
 > 
 > ## Don't show: 
-> old <- Sys.setlocale("LC_COLLATE", "C")
+> old <- Sys.getlocale("LC_COLLATE")
+>        invisible(Sys.setlocale("LC_COLLATE", "C"))
 > ## End(Don't show)
 > require(utils)
 > 
@@ -12760,11 +12874,11 @@ predict.bs :
 predict.glm :
 	 function (object, newdata = NULL, type = c("link", "response",      "terms"), se.fit = FALSE, dispersion = NULL, terms = NULL,      na.action = na.pass, ...)  NULL 
 Warning: namespace ‘MASS’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
+by .GlobalEnv when processing object ‘<unknown>’
 predict.glmmPQL :
 	 function (object, newdata = NULL, type = c("link", "response"),      level = Q, na.action = na.pass, ...)  NULL 
 Warning: namespace ‘MASS’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
+by .GlobalEnv when processing object ‘<unknown>’
 predict.lda :
 	 function (object, newdata, prior = object$prior, dimen, method = c("plug-in",      "predictive", "debiased"), ...)  NULL 
 predict.lm :
@@ -12772,11 +12886,11 @@ predict.lm :
 predict.loess :
 	 function (object, newdata = NULL, se = FALSE, na.action = na.pass,      ...)  NULL 
 Warning: namespace ‘MASS’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
+by .GlobalEnv when processing object ‘<unknown>’
 predict.lqs :
 	 function (object, newdata, na.action = na.pass, ...)  NULL 
 Warning: namespace ‘MASS’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
+by .GlobalEnv when processing object ‘<unknown>’
 predict.mca :
 	 function (object, newdata, type = c("row", "factor"), ...)  NULL 
 predict.mlm :
@@ -12792,7 +12906,7 @@ predict.ns :
 predict.pbSpline :
 	 function (object, x, nseg = 50, deriv = 0, ...)  NULL 
 Warning: namespace ‘MASS’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
+by .GlobalEnv when processing object ‘<unknown>’
 predict.polr :
 	 function (object, newdata, type = c("class", "probs"), ...)  NULL 
 predict.poly :
@@ -12808,11 +12922,11 @@ predict.prcomp :
 predict.princomp :
 	 function (object, newdata, ...)  NULL 
 Warning: namespace ‘MASS’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
+by .GlobalEnv when processing object ‘<unknown>’
 predict.qda :
 	 function (object, newdata, prior = object$prior, method = c("plug-in",      "predictive", "debiased", "looCV"), ...)  NULL 
 Warning: namespace ‘MASS’ is not available and has been replaced
-by .GlobalEnv when processing object ‘’
+by .GlobalEnv when processing object ‘<unknown>’
 predict.rlm :
 	 function (object, newdata = NULL, scale = NULL, ...)  NULL 
 predict.smooth.spline :
@@ -12821,7 +12935,7 @@ predict.smooth.spline.fit :
 	 function (object, x, deriv = 0, ...)  NULL 
 > ## IGNORE_RDIFF_END
 > ## Don't show: 
-> old <- Sys.setlocale("LC_COLLATE", old)
+> invisible(Sys.setlocale("LC_COLLATE", old))
 > ## End(Don't show)
 > 
 > 
@@ -14302,7 +14416,8 @@ Quade F = 3.8293, num df = 4, denom df = 24, p-value = 0.01519
 > 
 > ### Compare different types
 > quantAll <- function(x, prob, ...)
-+   t(vapply(1:9, function(typ) quantile(x, prob=prob, type = typ, ...), quantile(x, prob, type=1)))
++   t(vapply(1:9, function(typ) quantile(x, prob=prob, type = typ, ...),
++            quantile(x, prob, type=1, ...)))
 > p <- c(0.1, 0.5, 1, 2, 5, 10, 50)/100
 > signif(quantAll(x, p), 4)
         0.1%   0.5%     1%     2%     5%    10%      50%
@@ -14315,6 +14430,10 @@ Quade F = 3.8293, num df = 4, denom df = 24, p-value = 0.01519
  [7,] -2.997 -2.592 -2.424 -2.245 -1.727 -1.339 -0.03473
  [8,] -3.004 -2.595 -2.430 -2.258 -1.731 -1.342 -0.03473
  [9,] -3.004 -2.595 -2.429 -2.257 -1.730 -1.341 -0.03473
+> 
+> ## 0% and 100% are equal to min(), max() for all types:
+> stopifnot(t(quantAll(x, prob=0:1)) == range(x))
+> 
 > ## for complex numbers:
 > z <- complex(re=x, im = -10*x)
 > signif(quantAll(z, p), 4)
@@ -15222,6 +15341,73 @@ nhtemp+   ylab = "Mean annual temperature in New Haven, CT (deg. F)")
 > legend(length(y),max(y), c("data", "lowess(y, f = 0.3)", "runmed(y, 7)"),
 +        xjust = 1, col = col, lty = c(0, 1, 1), pch = c(1,NA,NA))
 > 
+> ## An example with initial NA's - used to fail badly (notably for "Turlach"):
+> x15 <- c(rep(NA, 4), c(9, 9, 4, 22, 6, 1, 7, 5, 2, 8, 3))
+> rS15 <- cbind(Sk.3 = runmed(x15, k = 3, algorithm="S"),
++               Sk.7 = runmed(x15, k = 7, algorithm="S"),
++               Sk.11= runmed(x15, k =11, algorithm="S"))
+> rT15 <- cbind(Tk.3 = runmed(x15, k = 3, algorithm="T", print.level=1),
++               Tk.7 = runmed(x15, k = 7, algorithm="T", print.level=1),
++               Tk.9 = runmed(x15, k = 9, algorithm="T", print.level=1),
++               Tk.11= runmed(x15, k =11, algorithm="T", print.level=1))
+runmed(x, k=3, endrule='median' ( => iend=0), algorithm='Turlach',
+       na.*='+Big_alternate' ( => iNAct=1))
+firstNA = 1.
+R_heapsort(1, 3,..): l=2:
+         j:      0     1     2     3     4     5     6
+ window []:    -2B   -2B  -BIG  +BIG  +BIG   +2B   +2B
+  nrlist[]: -12345     2     1     2     0-12345-12345
+ outlist[]:      4     2     3     2
+runmed(x, k=7, endrule='median' ( => iend=0), algorithm='Turlach',
+       na.*='+Big_alternate' ( => iNAct=1))
+firstNA = 1.
+R_heapsort(1, 7,..): l=4:
+         j:      0     1     2     3     4     5     6     7     8     9    10    11    12    13    14
+ window []:    -2B   -2B   -2B   -2B  -BIG  -BIG     4     9     9  +BIG  +BIG   +2B   +2B   +2B   +2B
+  nrlist[]: -12345     4     2     7     3     1     6     5     4     2     0-12345-12345-12345-12345
+ outlist[]:     10     5     9     4     8     7     6     3
+runmed(x, k=9, endrule='median' ( => iend=0), algorithm='Turlach',
+       na.*='+Big_alternate' ( => iNAct=1))
+firstNA = 1.
+R_heapsort(1, 9,..): l=5:
+         j:      0     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15    16    17    18
+ window []:    -2B   -2B   -2B   -2B   -2B  -BIG  -BIG     4     6     9     9    22  +BIG  +BIG   +2B   +2B   +2B   +2B   +2B
+  nrlist[]: -12345     4     2     7     9     3     1     6     8     5     4     7     2     0-12345-12345-12345-12345-12345
+ outlist[]:     13     6    12     5    10     9     7    11     8     4
+runmed(x, k=11, endrule='median' ( => iend=0), algorithm='Turlach',
+       na.*='+Big_alternate' ( => iNAct=1))
+firstNA = 1.
+R_heapsort(1, 11,..): l=6:
+         j:      0     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22
+ window []:    -2B   -2B   -2B   -2B   -2B   -2B  -BIG  -BIG     1     4     6     7     9     9    22  +BIG  +BIG   +2B   +2B   +2B   +2B   +2B   +2B
+  nrlist[]: -12345     2     4    10     7     9     1     3     9     6     8    10     5     4     7     2     0-12345-12345-12345-12345-12345-12345
+ outlist[]:     16     6    15     7    13    12     9    14    10     8    11     6
+> cbind(x15, rS15, rT15) # result for k=11  maybe a bit surprising ..
+      x15 Sk.3 Sk.7 Sk.11 Tk.3 Tk.7 Tk.9 Tk.11
+ [1,]  NA  NaN  NaN   NaN  NaN  NaN  NaN   NaN
+ [2,]  NA   NA  NaN   NaN   NA  NaN  NaN   NaN
+ [3,]  NA   NA    9     9   NA    9    9     9
+ [4,]  NA    9    9     7    9    9    7     7
+ [5,]   9    9    9     6    9    9    9     6
+ [6,]   9    9    9     7    9    9    6     7
+ [7,]   4    9    6     6    9    6    7     6
+ [8,]  22    6    7     6    6    7    6     6
+ [9,]   6    6    6     6    6    6    6     6
+[10,]   1    6    5     6    6    5    6     6
+[11,]   7    5    6     6    5    6    5     6
+[12,]   5    5    5     6    5    5    5     6
+[13,]   2    5    5     5    5    5    5     5
+[14,]   8    3    3     3    3    3    3     3
+[15,]   3    3    3     3    3    3    3     3
+> Tv <- rT15[-(1:3),]
+> stopifnot(3 <= Tv, Tv <= 9, 5 <= Tv[1:10,])
+> matplot(y = cbind(x15, rT15), type = "b", ylim = c(1,9), pch=1:5, xlab = NA,
++         main = "runmed(x15, k, algo = \"Turlach\")")
+> mtext(paste("x15 <-", deparse(x15)))
+> points(x15, cex=2)
+> legend("bottomleft", legend=c("data", paste("k = ", c(3,7,9,11))),
++        bty="n", col=1:5, lty=1:5, pch=1:5)
+> 
 > 
 > 
 > cleanEx()
@@ -15953,24 +16139,23 @@ GCV: 0.7155391
 > rN. <- sapply(eRules, function(R) runmed(yN, 7, endrule=R))
 > head(rN., 4); tail(rN.) # more NA's too, still not *so* many:
      keep constant median
-[1,]   NA      225    423
-[2,]   NA      225    324
-[3,]  324      225    225
-[4,]  225      225    225
+[1,]   NA      256    392
+[2,]   NA      256    324
+[3,]  324      256    256
+[4,]  256      256    256
       keep constant median
-[36,]  196      196    196
-[37,]   NA       NA     NA
-[38,]   NA       NA     NA
-[39,]  324       NA    324
-[40,]   NA       NA    397
-[41,]  470       NA    470
+[36,]  225      225    225
+[37,]  256      256    256
+[38,]  289      289    289
+[39,]  324      289    289
+[40,]   NA      289    397
+[41,]  470      289    470
 > stopifnot(exprs = {
 +    !anyNA(rN[,2:3])
 +    identical(which(is.na(rN[,"keep"])), c(2L, 40L))
 +    identical(which(is.na(rN.), arr.ind=TRUE, useNames=FALSE),
-+              rbind(cbind(c(1:2,37:38,40L), 1L),
-+                    cbind(37:41, 2L), cbind(37:38, 3L)))
-+    identical(rN.[39:41, "median"], c(324, 397, 470))
++              cbind(c(1:2,40L), 1L))
++    identical(rN.[38:41, "median"], c(289,289, 397, 470))
 + })
 > 
 > 
@@ -16200,7 +16385,7 @@ Median  -0.50 -0.13613265
 Mean    -0.50 -0.08208311
 3rd Qu.  0.75  0.50611122
 Max.     2.00  1.03072752
-> plot(x, y, main = "spline(x,y, ties=list(\"ordered\", mean)  for when x has ties")
+> plot(x, y, main = "spline(x,y, ties=list(\"ordered\", mean))  for when x has ties")
 > lines(sxyo, col="blue")
 > 
 > ## An example of monotone interpolation
@@ -16265,16 +16450,6 @@ Max.     2.00  1.03072752
 > ##-- Continued from '?glm':
 > ## Don't show: 
 > utils::example("glm", echo = FALSE)
-  treatment outcome counts
-1         1       1     18
-2         1       2     17
-3         1       3     15
-4         2       1     20
-5         2       2     10
-6         2       3     20
-7         3       1     25
-8         3       2     13
-9         3       3     12
 > ## End(Don't show)
 > print(ag <- anova(glm.D93))
 Analysis of Deviance Table
@@ -16349,13 +16524,13 @@ Step function with continuity 'f'= 0.2 ,  3 knots at
 > ## look at the internal structure:
 > unclass(sfun0)
 function (v) 
-.approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x3c51598>
-<environment: 0x55adf20>
+.approxfun(x, y, v, method, yleft, yright, f, na.rm)
+<bytecode: 0x49bde58>
+<environment: 0x461a858>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
-[1] "f"      "method" "x"      "y"      "yleft"  "yright"
+[1] "f"      "method" "na.rm"  "x"      "y"      "yleft"  "yright"
 > 
 > x0 <- seq(0.5, 3.5, by = 0.25)
 > rbind(x = x0, f.f0 = sfun0(x0), f.f02 = sfun.2(x0),
@@ -17061,6 +17236,7 @@ sample estimates:
 mean of x mean of y 
      0.75      2.33 
 
+> 
 > ## Formula interface
 > t.test(extra ~ group, data = sleep)
 
@@ -17074,6 +17250,39 @@ alternative hypothesis: true difference in means is not equal to 0
 sample estimates:
 mean in group 1 mean in group 2 
            0.75            2.33 
+
+> 
+> ## Formula interface to one-sample test
+> t.test(extra ~ 1, data = sleep)
+
+	One Sample t-test
+
+data:  extra
+t = 3.413, df = 19, p-value = 0.002918
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 0.5955845 2.4844155
+sample estimates:
+mean of x 
+     1.54 
+
+> 
+> ## Formula interface to paired test
+> ## The sleep data are actually paired, so could have been in wide format:
+> sleep2 <- reshape(sleep, direction = "wide", 
++                   idvar = "ID", timevar = "group")
+> t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2)
+
+	Paired t-test
+
+data:  Pair(extra.1, extra.2)
+t = -4.0621, df = 9, p-value = 0.002833
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -2.4598858 -0.7001142
+sample estimates:
+mean of the differences 
+                  -1.58 
 
 > 
 > 
@@ -18079,7 +18288,7 @@ $rotmat
 > y <- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
 > wilcox.test(x, y, paired = TRUE, alternative = "greater")
 
-	Wilcoxon signed rank test
+	Wilcoxon signed rank exact test
 
 data:  x and y
 V = 40, p-value = 0.01953
@@ -18087,7 +18296,7 @@ alternative hypothesis: true location shift is greater than 0
 
 > wilcox.test(y - x, alternative = "less")    # The same.
 
-	Wilcoxon signed rank test
+	Wilcoxon signed rank exact test
 
 data:  y - x
 V = 5, p-value = 0.01953
@@ -18104,6 +18313,26 @@ alternative hypothesis: true location is less than 0
 
 >                                             # approximation
 > 
+> ## Formula interface to one-sample and paired tests
+> 
+> depression <- data.frame(first = x, second = y, change = y - x)
+> wilcox.test(change ~ 1, data = depression)
+
+	Wilcoxon signed rank exact test
+
+data:  change
+V = 5, p-value = 0.03906
+alternative hypothesis: true location is not equal to 0
+
+> wilcox.test(Pair(first, second) ~ 1, data = depression)
+
+	Wilcoxon signed rank exact test
+
+data:  Pair(first, second)
+V = 40, p-value = 0.03906
+alternative hypothesis: true location shift is not equal to 0
+
+> 
 > ## Two-sample test.
 > ## Hollander & Wolfe (1973), 69f.
 > ## Permeability constants of the human chorioamnion (a placental
@@ -18114,7 +18343,7 @@ alternative hypothesis: true location is less than 0
 > y <- c(1.15, 0.88, 0.90, 0.74, 1.21)
 > wilcox.test(x, y, alternative = "g")        # greater
 
-	Wilcoxon rank sum test
+	Wilcoxon rank sum exact test
 
 data:  x and y
 W = 35, p-value = 0.1272
@@ -18133,7 +18362,7 @@ alternative hypothesis: true location shift is greater than 0
 > 
 > wilcox.test(rnorm(10), rnorm(10, 2), conf.int = TRUE)
 
-	Wilcoxon rank sum test
+	Wilcoxon rank sum exact test
 
 data:  rnorm(10) and rnorm(10, 2)
 W = 7, p-value = 0.0004871
@@ -18159,6 +18388,36 @@ W = 127.5, p-value = 0.0001208
 alternative hypothesis: true location shift is not equal to 0
 
 > 
+> ## accuracy in ties determination via 'digits.rank':
+> wilcox.test( 4:2,      3:1,     paired=TRUE) # Warning:  cannot compute exact p-value with ties
+Warning in wilcox.test.default(4:2, 3:1, paired = TRUE) :
+  cannot compute exact p-value with ties
+
+	Wilcoxon signed rank test with continuity correction
+
+data:  4:2 and 3:1
+V = 6, p-value = 0.1489
+alternative hypothesis: true location shift is not equal to 0
+
+> wilcox.test((4:2)/10, (3:1)/10, paired=TRUE) # no ties => *no* warning
+
+	Wilcoxon signed rank exact test
+
+data:  (4:2)/10 and (3:1)/10
+V = 6, p-value = 0.25
+alternative hypothesis: true location shift is not equal to 0
+
+> wilcox.test((4:2)/10, (3:1)/10, paired=TRUE, digits.rank = 9) # same ties as (4:2, 3:1)
+Warning in wilcox.test.default((4:2)/10, (3:1)/10, paired = TRUE, digits.rank = 9) :
+  cannot compute exact p-value with ties
+
+	Wilcoxon signed rank test with continuity correction
+
+data:  (4:2)/10 and (3:1)/10
+V = 6, p-value = 0.1489
+alternative hypothesis: true location shift is not equal to 0
+
+> 
 > 
 > 
 > cleanEx()
@@ -18168,7 +18427,7 @@ alternative hypothesis: true location shift is not equal to 0
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: window
-> ### Title: Time Windows
+> ### Title: Time (Series) Windows
 > ### Aliases: window window.default window.ts window<- window<-.ts
 > ### Keywords: ts
 > 
@@ -18676,7 +18935,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.411 0.146 3.708 0 0 
+Time elapsed:  13.858 0.43 14.881 0 0 
 > grDevices::dev.off()
 null device 
           1 

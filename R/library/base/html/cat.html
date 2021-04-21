@@ -49,7 +49,9 @@ broken into successive lines.  If <code>FALSE</code> (default), only newlines
 created explicitly by <span class="samp">"\n"</span> are printed.  Otherwise, the
 output is broken into lines with print width equal to the option
 <code>width</code> if <code>fill</code> is <code>TRUE</code>, or the value of
-<code>fill</code> if this is numeric.  Non-positive <code>fill</code> values are
+<code>fill</code> if this is numeric.  Linefeeds are only inserted
+<em>between</em> elements, strings wider than <code>fill</code> are not
+wrapped.  Non-positive <code>fill</code> values are
 ignored, with a warning.</p>
 </td></tr>
 <tr valign="top"><td><code>labels</code></td>
@@ -143,5 +145,5 @@ cat("iteration = ", iter &lt;- iter + 1, "\n")
 cat(paste(letters, 100* 1:26), fill = TRUE, labels = paste0("{", 1:10, "}:"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

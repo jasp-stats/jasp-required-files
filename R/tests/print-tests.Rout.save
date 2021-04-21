@@ -1,6 +1,6 @@
 
-R version 3.6.0 Patched (2019-06-07 r76684) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R version 4.0.3 Patched (2021-01-08 r79820) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -920,6 +920,27 @@ NULL
 
 
 
+> 
+> ## max.print fully obeyed by print and format
+> ## These failed briefly due to bug in r76734
+> o <- options(max.print = 5)
+> 1:10
+[1] 1 2 3 4 5
+ [ reached getOption("max.print") -- omitted 5 entries ]
+> as.numeric(1:10)
+[1] 1 2 3 4 5
+ [ reached getOption("max.print") -- omitted 5 entries ]
+> as.character(1:10)
+[1] "1" "2" "3" "4" "5"
+ [ reached getOption("max.print") -- omitted 5 entries ]
+> as.complex(1:10)
+[1] 1+0i 2+0i 3+0i 4+0i 5+0i
+ [ reached getOption("max.print") -- omitted 5 entries ]
+> as.raw(1:10)
+[1] 01 02 03 04 05
+ [ reached getOption("max.print") -- omitted 5 entries ]
+> options(o)
+> 
 > ## Cleanup
-> rm(print.foo, obj, a, b, c, d)
+> rm(print.foo, obj, a, b, c, d, o)
 > 

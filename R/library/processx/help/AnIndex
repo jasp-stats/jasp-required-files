@@ -18,6 +18,7 @@ conn_write	processx_connections
 conn_write.processx_connection	processx_connections
 curl_fds	curl_fds
 default_pty_options	default_pty_options
+is_valid_fd	processx_connections
 poll	poll
 process	process
 processx_conn_close	processx_connections

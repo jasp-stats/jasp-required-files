@@ -28,9 +28,12 @@ This will be the order in which <code>col</code>, <code>lty</code>, etc are used
 ## S3 method for class 'survfit'
 plot(x, conf.int=, mark.time=FALSE, 
  pch=3, col=1, lty=1, lwd=1, cex=1, log=FALSE, xscale=1, yscale=1,  
- xmax, ymin=0, fun, 
+ xlim, ylim, xmax, fun, 
  xlab="", ylab="", xaxs="r",  conf.times, conf.cap=.005,
- conf.offset=.012, mark, ...)
+ conf.offset=.012,
+ conf.type = c("log", "log-log", "plain", "logit", "arcsin"),
+ mark, noplot="(s0)", cumhaz=FALSE,
+ firstx, ymin, ...)
 </pre>
 
 
@@ -47,8 +50,12 @@ plot(x, conf.int=, mark.time=FALSE,
 <tr valign="top"><td><code>conf.int</code></td>
 <td>
 
-<p>determines whether confidence intervals will be plotted.  The default is to 
-do so if there is only 1 curve, i.e., no strata. 
+<p>determines whether pointwise confidence intervals will be plotted.
+The default is to 
+do so if there is only 1 curve, i.e., no strata, using 95% confidence
+intervals
+Alternatively, this can be a numeric value giving the desired
+confidence level.
 </p>
 </td></tr>
 <tr valign="top"><td><code>mark.time</code></td>
@@ -107,6 +114,13 @@ Alternately, one of the standard character strings &quot;x&quot;, &quot;y&quot;,
 can be given to specific logarithmic horizontal and/or vertical axes.
 </p>
 </td></tr>
+<tr valign="top"><td><code>xscale</code></td>
+<td>
+
+<p>a numeric value used like <code>yscale</code> for labels on the x axis.  
+A value of 365.25 will give labels in years instead of the original days.  
+</p>
+</td></tr>
 <tr valign="top"><td><code>yscale</code></td>
 <td>
 
@@ -118,11 +132,9 @@ changed, not the actual plot coordinates, so that adding a curve with
 will perform as it did without the <code>yscale</code> argument. 
 </p>
 </td></tr>
-<tr valign="top"><td><code>xscale</code></td>
+<tr valign="top"><td><code>xlim,ylim</code></td>
 <td>
-
-<p>a numeric value used like <code>yscale</code> for labels on the x axis.  
-A value of 365.25 will give labels in years instead of the original days.  
+<p>optional limits for the plotting region.
 </p>
 </td></tr>
 <tr valign="top"><td><code>xmax</code></td>
@@ -134,32 +146,25 @@ that unlike using the <code>xlim</code> graphical parameter, warning
 messages about out of bounds points are not generated.
 </p>
 </td></tr>
-<tr valign="top"><td><code>ymin</code></td>
-<td>
-
-<p>lower boundary for y values.  Survival curves are most often drawn in the 
-range of 0-1, even if none of the curves approach zero. 
-The parameter is ignored if the <code>fun</code> argument is present,
-or if it has been set to <code>NA</code>. 
-</p>
-</td></tr>
 <tr valign="top"><td><code>fun</code></td>
 <td>
 
-<p>an arbitrary function defining a transformation of the survival curve. 
+<p>an arbitrary function defining a transformation of the survival
+(or probability in state, or cumulative hazard) curves. 
 For example <code>fun=log</code> is an alternative way to draw a log-survival curve 
 (but with the axis labeled with log(S) values), 
 and <code>fun=sqrt</code> would generate a curve on square root scale. 
-Five often used transformations can be specified with a character 
+Four often used transformations can be specified with a character 
 argument instead: <code>"S"</code> gives the usual survival curve,
 <code>"log"</code> is the same as using the <code>log=T</code> option, 
 <code>"event"</code> or <code>"F"</code> plots the empirical CDF <i>F(t)= 1-S(t)</i>
-(f(y) = 1-y),  
-<code>"cumhaz"</code> plots the cumulative hazard function (f(y) = -log(y)), and 
+(f(y) = 1-y), and
 <code>"cloglog"</code> creates a complimentary log-log survival plot (f(y) = 
 log(-log(y)) along with log scale for the x-axis).
 The terms <code>"identity"</code> and <code>"surv"</code> are
 allowed as synonyms for <code>type="S"</code>.
+The argument <code>"cumhaz"</code> causes the cumulative hazard function
+to be plotted.
 </p>
 </td></tr>
 <tr valign="top"><td><code>xlab</code></td>
@@ -207,25 +212,69 @@ region. If this is a single number then each curve's bars are offset
 by this amount from the prior curve's bars, if it is a vector the values are
 used directly.</p>
 </td></tr>
+<tr valign="top"><td><code>conf.type</code></td>
+<td>
+
+<p>One of <code>"plain"</code>, <code>"log"</code> (the default),
+<code>"log-log"</code> or <code>"logit"</code>.  Only
+enough of the string to uniquely identify it is necessary.
+The first option causes confidence intervals not to be
+generated.  The second causes the standard intervals
+<code>curve +- k *se(curve)</code>, where k is determined from
+<code>conf.int</code>.  The log option calculates intervals based on the
+cumulative hazard or log(survival). The log-log option bases the
+intervals on the log hazard or log(-log(survival)), and the
+logit option on log(survival/(1-survival)). 
+</p>
+</td></tr>
 <tr valign="top"><td><code>mark</code></td>
 <td>
 <p>a historical alias for <code>pch</code></p>
 </td></tr>
+<tr valign="top"><td><code>noplot</code></td>
+<td>
+<p>for multi-state models, curves with this label will not
+be plotted.  (Also see the <code>istate0</code> argument in
+<code>survcheck</code>.)</p>
+</td></tr>
+<tr valign="top"><td><code>cumhaz</code></td>
+<td>
+<p>plot the cumulative hazard rather than the probability
+in state or survival.  Optionally, this can be a numeric vector
+specifying which columns of the <code>cumhaz</code> component to plot.</p>
+</td></tr>
+<tr valign="top"><td><code>ymin</code></td>
+<td>
+<p> this will normally be given as part of the <code>ylim</code>
+argument</p>
+</td></tr>
+<tr valign="top"><td><code>firstx</code></td>
+<td>
+<p>this will normally be given as part of the <code>xlim</code>
+argument.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>for future methods</p>
+<p>other arguments that will be passed forward to the
+underlying plot method, such as xlab or ylab.</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
+<p>If the object contains a cumulative hazard curve, then
+<code>fun='cumhaz'</code> will plot that curve, otherwise it will plot
+-log(S) as an approximation.  Theoretically, S =
+<i>exp(-H)</i> where S is the survival and
+<i>H</i> is the cumulative hazard.  The same relationship
+holds for estimates of S and <i>H</i> only in special cases,
+but the approximation is often close.
+</p>
 <p>When the <code>survfit</code> function creates a multi-state survival curve
 the resulting object also has class &lsquo;survfitms&rsquo;.
-Competing risk curves are a common case.  The only difference in
-the plots is that multi-state defaults to a curve that goes from lower
-left to upper right (starting at 0), where survival curves by default
-start at 1 and go down.  All other options are identical.
+Competing risk curves are a common case.
+In this situation the <code>fun</code> argument is ignored.
 </p>
 <p>When the <code>conf.times</code> argument is used, the confidence bars are
 offset by <code>conf.offset</code> units to avoid overlap.
@@ -253,6 +302,14 @@ and for all subsequent actions such as adding a legend, whereas <code>yscale</co
 affected only the axis label.  This was normalized in version 2-36.4,
 and both parameters now only affect the labeling.
 </p>
+<p>In versions prior to approximately 2.36 a <code>survfit</code> object did
+not contain the cumulative hazard as a separate result, and the use of
+fun=&quot;cumhaz&quot; would plot the approximation -log(surv) to the cumulative
+hazard.  When cumulative hazards were added to the object, the
+<code>cumhaz=TRUE</code> argument to the plotting function was added.
+In version 2.3-8 the use of fun=&quot;cumhaz&quot; became a synonym for
+<code>cumhaz=TRUE</code>.
+</p>
 
 
 <h3>See Also</h3>
@@ -276,5 +333,5 @@ plot(lsurv2, lty=2:3, fun="cumhaz",
 	xlab="Months", ylab="Cumulative Hazard") 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

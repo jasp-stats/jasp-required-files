@@ -123,6 +123,16 @@ when outputting non-printable characters (including backslash).
 (such as <span class="samp">\0</span>) for a nul will result in the string being
 truncated at that point (usually with a warning).
 </p>
+<p>Raw character constants are also available using a syntax similar to
+the one used in C++: <code>r"(...)"</code> with <code>...</code> any character
+sequence, except that it must not contain the closing sequence
+<span class="samp">)"</span>. 
+The delimiter pairs <code>[]</code> and <code>{}</code> can also be
+used, and <code>R</code> can be used in place of <code>r</code>.  For additional
+flexibility, a number of dashes can be placed between the opening quote
+and the opening delimiter, as long as the same number of dashes appear
+between the closing delimiter and the closing quote.
+</p>
 
 
 <h3>Names and Identifiers</h3>
@@ -143,6 +153,17 @@ many circumstances single or double quotes can be used (as a character
 constant will often be converted to a name).  One place where
 backticks may be essential is to delimit variable names in formulae:
 see <code><a href="../../stats/html/formula.html">formula</a></code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Handling of UTF-16 surrogate pairs in <span class="samp">\unnnn\uoooo</span> form is
+platform-dependent: these are better specified by <span class="samp">\U</span>, for
+example <span class="samp">\U1D11E</span> rather than <span class="samp">\uD834\uDD1E</span>.  The
+handling of unpaired values in the surrogate range such as in the
+string <code>"abc\uD834de"</code> is even more platform-dependent and may
+become an error.
 </p>
 
 
@@ -199,7 +220,7 @@ d$`1st column`
 ## Mixing octal and hexadecimal in the same string is OK
 (hw2 &lt;- "\110\x65\154\x6c\157\x20\127\x6f\162\x6c\144\x21")
 
-## \u is also hexadecimal, but supported up to 4 numbers,
+## \u is also hexadecimal, but supports up to 4 digits,
 ## using Unicode specification.  In the previous example,
 ## you can simply replace \x with \u.
 (hw3 &lt;- "\u48\u65\u6c\u6c\u6f\u20\u57\u6f\u72\u6c\u64\u21")
@@ -218,7 +239,7 @@ stopifnot(identical(hw, hw1), identical(hw1, hw2), identical(hw2, hw3))
 ## End(Not run)
 ##   --&gt;   Error: mixing Unicode and octal/hex escapes .....
 
-## \U works like \u, but supports up to eight numbers.
+## \U works like \u, but supports up to six hex digits.
 ## So we can replace \u with \U in the previous example.
 n2 &lt;- "\U0126\U0119\U1114\U022d\U2001\U03e2\U0954\U0f3f\U13d3\U147b\U203c"
 stopifnot(identical(nn, n2))
@@ -228,6 +249,8 @@ stopifnot(identical(nn, n2))
 ## See the R language manual,
 ## https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Literal-constants
 ## and bug 16098 https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16098
+## This character may or not be printable (the platform decides)
+## and if it is, may not have a glyph in the font used.
 "\U1d4d7" # On Windows this gives the incorrect value of "\Ud4d7"
 
 ## nul characters (for terminating strings in C) are not allowed (parse errors)
@@ -236,7 +259,15 @@ stopifnot(identical(nn, n2))
   "foo\u0000bar" # same error
 
 ## End(Not run)
+
+## A Windows path written as a raw string constant:
+r"(c:\Program files\R)"
+
+## More raw strings:
+r"{(\1\2)}"
+r"(use both "double" and 'single' quotes)"
+r"---(\1--)-)---"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

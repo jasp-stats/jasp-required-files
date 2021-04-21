@@ -63,6 +63,7 @@ lazyLoadDBfetch(key, file, compressed, hook)
 
 .maskedMsg(same, pkg, by)
 
+## Only on Windows:
 .fixupGFortranStdout()
 .fixupGFortranStderr()
 </pre>
@@ -73,11 +74,31 @@ lazyLoadDBfetch(key, file, compressed, hook)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>object from which to extract elements.</p>
+<p>an object
+</p>
+
+<dl>
+<dt>for <code>.subset*()</code>:</dt><dd><p>from which to extract elements.</p>
+</dd>
+<dt>for <code>.row_names_info()</code>:</dt><dd><p>with a <code>"row.names"</code> attribute, typically a
+data frame.</p>
+</dd>
+<dt>for <code>.gt</code>, <code>.gtn</code>:</dt><dd><p>typically S3- or S4-classed.</p>
+</dd>
+</dl>
+
 </td></tr>
 <tr valign="top"><td><code>file</code></td>
 <td>
-<p>The full path to the &lsquo;<span class="file">DESCRIPTION</span>&rsquo; file of a package.</p>
+
+<dl>
+<dt>.getRequiredPackages():</dt><dd><p>The full path to the
+&lsquo;<span class="file">DESCRIPTION</span>&rsquo; file of a package.</p>
+</dd>
+<dt>lazyLoadDBfetch():</dt><dd><p>the filepath to a lazyload database.</p>
+</dd>
+</dl>
+
 </td></tr>
 <tr valign="top"><td><code>lib.loc</code></td>
 <td>
@@ -112,11 +133,6 @@ if the package(s) are not found?</p>
 <td>
 <p>name of image file to save or load.</p>
 </td></tr>
-<tr valign="top"><td><code>x</code></td>
-<td>
-<p>an object with a <code>"row.names"</code> attribute, typically a
-data frame.</p>
-</td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
 <p>integer.  Currently <code>type = 0</code> returns the internal
@@ -135,10 +151,6 @@ latter with a negative sign for &lsquo;automatic&rsquo; row names.</p>
 <tr valign="top"><td><code>key</code></td>
 <td>
 <p>the object name in a lazyload database.</p>
-</td></tr>
-<tr valign="top"><td><code>file</code></td>
-<td>
-<p>the filepath to a lazyload database.</p>
 </td></tr>
 <tr valign="top"><td><code>compressed</code></td>
 <td>
@@ -277,7 +289,7 @@ saved environment if possible.
 <code>"Knuth-TAOCP"</code> <a href="Random.html">RNG</a>.
 </p>
 <p><code>.gt</code> and <code>.gtn</code> are callbacks from <code><a href="rank.html">rank</a></code> and
-<code><a href="is.unsorted.html">is.unsorted</a></code> used for S3 classed objects.
+<code><a href="is.unsorted.html">is.unsorted</a></code> used for (S3 or S4) classed objects.
 </p>
 <p><code>.primTrace</code> and <code>.primUntrace</code> are the <a href="Primitive.html">primitive</a>
 functions underlying <code><a href="trace.html">trace</a></code> and <code><a href="trace.html">untrace</a></code>
@@ -302,7 +314,8 @@ and <code><a href="library.html">library</a>()</code> for consistency to produce
 <p>Objects starting <code>.C_</code> and <code>.F_</code> are references to
 registered C and Fortran entry points.
 </p>
-<p><code>.fixupGFortranStdout</code> and <code>.fixupGFortranStderr</code> are helper functions
+<p><b>Only on Windows</b>:<br />
+<code>.fixupGFortranStdout</code> and <code>.fixupGFortranStderr</code> are helper functions
 to enable standard output and standard error units in <code>gfortran</code> when
 executing external code via <code>system</code> and <code>system2</code>. By default, these
 units are disabled by the Windows profile when running inside RGui.
@@ -317,5 +330,5 @@ return <code>invisible()</code>.
 <p><code>testPlatformEquivalence</code> returns <code>TRUE</code> or <code>FALSE</code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

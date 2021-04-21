@@ -23,18 +23,18 @@ concordance(object, ...)
 ## S3 method for class 'formula'
 concordance(object, data, weights, subset, na.action,
   cluster, ymin, ymax, timewt= c("n", "S", "S/G", "n/G", "n/G2", "I"),
-  influence=0, ranks = FALSE, reverse=FALSE, timefix=TRUE, ...)
+  influence=0, ranks = FALSE, reverse=FALSE, timefix=TRUE, keepstrata=10, ...)
 ## S3 method for class 'lm'
 concordance(object, ..., newdata, cluster, ymin, ymax,
-  influence=0, ranks=FALSE, timefix=TRUE)
+  influence=0, ranks=FALSE, timefix=TRUE, keepstrata=10)
 ## S3 method for class 'coxph'
 concordance(object, ..., newdata, cluster, ymin, ymax,
   timewt= c("n", "S", "S/G", "n/G", "n/G2", "I"), influence=0,
-  ranks=FALSE, timefix=FALSE)
+  ranks=FALSE, timefix=FALSE, keepstrata=10)
 ## S3 method for class 'survreg'
 concordance(object, ..., newdata, cluster, ymin, ymax,
   timewt= c("n", "S", "S/G", "n/G", "n/G2", "I"), influence=0,
-  ranks=FALSE, timefix=FALSE)
+  ranks=FALSE, timefix=FALSE, keepstrata=10)
 </pre>
 
 
@@ -134,6 +134,14 @@ survreg methods this issue will have already been addressed in the
 parent routine, so should not be revisited.
 </p>
 </td></tr>
+<tr valign="top"><td><code>keepstrata</code></td>
+<td>
+<p>either TRUE, FALSE, or an integer value.
+Computations are always done within stratum, then added. If the
+total number of strata greater than <code>keepstrata</code>, or
+<code>keepstrata=FALSE</code>, those subtotals are not kept in the output.
+</p>
+</td></tr>
 </table>
 
 
@@ -150,6 +158,12 @@ those which are larger.
 under the receiver operating curve (AUC) for a binary response,
 Harrell's c-statistic when the response is a survival time,
 and (d+1)/2 when y is continuous, where d is Somers' d.
+</p>
+<p>When the number of strata is very large, such as in a conditional
+logistic regression for instance (<code>clogit</code> function), a much
+faster computation is available when the individual strata results
+are not retained.  In the more general case the <code>keepstrata = 10</code>
+default simply keeps the printout managable.
 </p>
 
 
@@ -222,12 +236,12 @@ A weighted mean of the ranks equals Somer's d.</p>
 
 <pre>
 fit1 &lt;- coxph(Surv(ptime, pstat) ~ age + sex + mspike, mgus2)
-concordance(fit1, timewt="n")  # 
+concordance(fit1, timewt="n") 
 
 # logistic regression
 fit2 &lt;- glm(pstat ~ age + sex + mspike, binomial, data= mgus2)
 concordance(fit2)  # equal to the AUC
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

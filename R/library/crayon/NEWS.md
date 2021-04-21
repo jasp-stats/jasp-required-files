@@ -1,7 +1,34 @@
 
+# 1.4.1
+
+* ANSI color support detection works correctly now in older RStudio (#112).
+
+* ANSI color support detection works correctly now on older R versions
+  (#109).
+
+# 1.4.0
+
+* Overhauled and much improved detection of ANSI color support and
+  number of ANSI colors.
+
+* `NO_COLOR` environment variable disables color (#64)
+
+* Now colors are turned on if ANSICON (<https://github.com/adoxa/ansicon>)
+  is active.
+
+* New `hyperlink()` function to add hyperlinks to terminal output.
+  The new `has_hyperlink()` function tests if the current `stdout()`
+  supports this.
+
+* `reset` style now restores previous style for text following it (@brodieG,
+  #35).
+  
+* Warnings are no longer generated when the INSIDE_EMACS environment variable is
+  set but does not include a version number.
+
 # 1.3.4
 
-* Style fucntions convert arguments to character now
+* Style functions convert arguments to character now
 
 * Autodetect RStudio ANSI support
 

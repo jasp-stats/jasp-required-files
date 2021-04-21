@@ -1,9 +1,0 @@
-FacetShare              ggplot extensions
-GeomConfmat             Confusion Matrix
-facet_share             A shared axis for two panels
-geom_arcbar             Create an Arc-Barchart
-geom_bartext            Repelling text for GeomBar.
-geom_boxjitter          A hybrid boxplot.
-geom_circle             Circles with pre-defined radii.
-geom_parliament         Create a Parliament Diagram
-geom_tshighlight        Timeseries highlighting

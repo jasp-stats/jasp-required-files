@@ -13,7 +13,7 @@
 <code>gam</code> objects. For a single fitted <code>gam</code> object, Wald tests of
 the significance of each parametric and smooth term are performed, so interpretation 
 is analogous to <code><a href="../../stats/html/add1.html">drop1</a></code> rather than <code>anova.lm</code> (i.e. it's like type III ANOVA, 
-rather than a sequential type I ANOVA). Otherwise the fitted models are compared using an analysis of deviance table: this latter approach should not be use to test the significance of terms which can be penalized 
+rather than a sequential type I ANOVA). Otherwise the fitted models are compared using an analysis of deviance table or GLRT test: this latter approach should not be use to test the significance of terms which can be penalized 
 to zero. Models to be compared should be fitted to the same data using the same smoothing parameter selection method.
 </p>
 
@@ -48,7 +48,7 @@ print(x, digits = max(3, getOption("digits") - 3),...)
 <tr valign="top"><td><code>test</code></td>
 <td>
 <p>what sort of test to perform for a multi-model call. One of
-<code>"Chisq"</code>, <code>"F"</code> or <code>"Cp"</code>. </p>
+<code>"Chisq"</code>, <code>"F"</code> or <code>"Cp"</code>. Reset to <code>"Chisq"</code> for extended and general families unless <code>NULL</code>. </p>
 </td></tr>
 <tr valign="top"><td><code>freq</code></td>
 <td>
@@ -67,7 +67,7 @@ p-values. See <code><a href="summary.gam.html">summary.gam</a></code> for detail
 <p> If more than one fitted model is provided than <code>anova.glm</code> is
 used, with the difference in model degrees of freedom being taken as the difference 
 in effective degress of freedom (when possible this is a smoothing parameter uncertainty corrected version).
-The p-values resulting from this are only approximate, 
+For extended and general families this is set so that a GLRT test is used.  The p-values resulting from the multi-model case are only approximate, 
 and must be used with care. The approximation is most accurate when the comparison 
 relates to unpenalized terms, or smoothers with a null space of dimension greater than zero.
 (Basically we require that the difference terms could be well approximated by unpenalized 
@@ -154,5 +154,5 @@ b1&lt;-gam(y ~ x0 + s(x1) + s(x2),data=dat)
 anova(b,b1,test="F")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
 </body></html>

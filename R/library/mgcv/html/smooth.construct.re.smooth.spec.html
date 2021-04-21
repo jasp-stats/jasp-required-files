@@ -82,6 +82,9 @@ models with more coefficients than data.
 You should set <code>drop.unused.levels=FALSE</code> in the model fitting function, <code><a href="gam.html">gam</a></code>, <code><a href="bam.html">bam</a></code> 
 or <code><a href="gamm.html">gamm</a></code>, having first ensured that any fixed effect factors do not contain unobserved levels.
 </p>
+<p>The implementation is designed so that supplying random effect factor levels to <code><a href="predict.gam.html">predict.gam</a></code> that were not levels of
+the factor when fitting, will result in the corresponding random effect (or interactions involving it) being set to zero (with zero standard error) for prediction. See <code><a href="random.effects.html">random.effects</a></code> for an example. This is achieved by the <code>Predict.matrix</code> method zeroing any rows of the prediction matrix involving factors that are <code>NA</code>. <code><a href="predict.gam.html">predict.gam</a></code> will set any factor observation to <code>NA</code> if it is a level not present in the fit data. 
+</p>
 
 
 <h3>Value</h3>
@@ -137,5 +140,5 @@ gam.vcomp(b)
 summary(b)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
 </body></html>

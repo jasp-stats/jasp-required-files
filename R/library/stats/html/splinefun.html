@@ -241,7 +241,7 @@ str(spline(x, y, n = 201, ties="ordered")) # all '$y' entries are NaN
 ## The default (ties=mean) is ok, but most efficient to use instead is
 sxyo &lt;- spline(x, y, n = 201, ties= list("ordered", mean))
 sapply(sxyo, summary)# all fine now
-plot(x, y, main = "spline(x,y, ties=list(\"ordered\", mean)  for when x has ties")
+plot(x, y, main = "spline(x,y, ties=list(\"ordered\", mean))  for when x has ties")
 lines(sxyo, col="blue")
 
 ## An example of monotone interpolation
@@ -288,5 +288,5 @@ legend("topright",
 ## here, and both are 'much worse' than the regular fmm spline.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

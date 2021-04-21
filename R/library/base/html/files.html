@@ -110,7 +110,9 @@ this will overwrite an existing element of <code>to</code>.  This is subject
 to the limitations of the OS's corresponding system call (see
 something like <code>man 2 rename</code> on a Unix-alike): in particular
 in the interpretation of &lsquo;file&rsquo;: most platforms will not rename
-files from one file system to another.  (On Windows,
+files from one file system to another.  <strong>NB:</strong> This means that
+renaming a file from a temporary directory to the user's filespace or
+during package installation will often fail.  (On Windows,
 <code>file.rename</code> can rename files but not directories across
 volumes.)  On platforms which allow directories to be renamed,
 typically neither or both of <code>from</code> and <code>to</code> must a
@@ -127,7 +129,7 @@ destination files is skipped unless <code>overwrite = TRUE</code>.  The
 <code>to</code> argument can specify a single existing directory.  If
 <code>copy.mode = TRUE</code> file read/write/execute permissions are copied
 where possible, restricted by &lsquo;<a href="files2.html">umask</a>&rsquo;.  (On Windows this
-applies only to files.) Other security attributes such as ACLs are not
+applies only to files.)  Other security attributes such as ACLs are not
 copied.  On a POSIX filesystem the targets of symbolic links will be
 copied rather than the links themselves, and hard links are copied
 separately.  Using <code>copy.date = TRUE</code> may or may not copy the
@@ -141,6 +143,12 @@ macOS native filesystems support both.  Windows has hard links to
 files on NTFS file systems and concepts related to symbolic links on
 recent versions: see the section below on the Windows version of this
 help page.  What happens on a FAT or SMB-mounted file system is OS-specific.)
+</p>
+<p>File arguments with a marked encoding (see <code><a href="Encoding.html">Encoding</a></code> are
+if possible translated to the native encoding, except on Windows where
+Unicode file operations are used (so marking as UTF-8 can be used to
+access file paths not in the native encoding on suitable file
+systems).
 </p>
 
 
@@ -270,5 +278,5 @@ file.remove("A", "B", "C")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

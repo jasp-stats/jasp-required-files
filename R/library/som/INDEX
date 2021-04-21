@@ -1,8 +1,0 @@
-som-internal             Internal som functions
-filtering                filter data before feeding som algorithm
-normalize                normalize data before feeding som algorithm
-plot.som                 Visualizing a som
-qerror                   quantization accuracy
-som                      Function to train a Self-Organizing Map
-summary.som              summarize a som object
-yeast                    yeast cell cycle

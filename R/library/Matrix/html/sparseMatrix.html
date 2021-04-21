@@ -25,7 +25,8 @@ from locations (and values) of its non-zero entries.
 <pre>
 sparseMatrix(i = ep, j = ep, p, x, dims, dimnames,
              symmetric = FALSE, triangular = FALSE, index1 = TRUE,
-             giveCsparse = TRUE, check = TRUE, use.last.ij = FALSE)
+             repr = "C", giveCsparse = (repr == "C"),
+             check = TRUE, use.last.ij = FALSE)
 </pre>
 
 
@@ -90,12 +91,22 @@ in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></sp
 <code>FALSE</code> the index vectors are 0-based so counting of rows and
 columns starts at 0; this corresponds to the internal representation.</p>
 </td></tr>
+<tr valign="top"><td><code>repr</code></td>
+<td>
+<p><code><a href="../../base/html/character.html">character</a></code> string, one of <code>"C"</code>,
+<code>"T"</code>, or <code>"R"</code>, specifying the sparse <em>repr</em>esentation to
+be used for the result, i.e., one from the super classes
+<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code>, <code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>, or
+<code><a href="RsparseMatrix-class.html">RsparseMatrix</a></code>.</p>
+</td></tr>
 <tr valign="top"><td><code>giveCsparse</code></td>
 <td>
-<p>logical indicating if the result should be a
+<p>(<b>deprecated</b>, replaced with <code>repr</code>):
+logical indicating if the result should be a
 <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> or a
-<code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>.  The default, <code>TRUE</code> is
-very often more efficient subsequently, but not always.</p>
+<code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>, where the default was <code>TRUE</code>,
+and now is determined from <code>repr</code>; very often Csparse matrices are
+more efficient subsequently, but not always.</p>
 </td></tr>
 <tr valign="top"><td><code>check</code></td>
 <td>
@@ -142,8 +153,10 @@ consistency with the definition of the
 <code>"<a href="TsparseMatrix-class.html">TsparseMatrix</a>"</code> class, unless <code>use.last.ij</code>
 is set to true.
 
-By default, when <code>giveCsparse</code> is true, the <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code>
-derived from this triplet form is returned.
+By default, when <code>repr = "C"</code>, the <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code>
+derived from this triplet form is returned, where <code>repr = "R"</code> now
+allows to directly get an <code><a href="RsparseMatrix-class.html">RsparseMatrix</a></code> and
+<code>repr = "T"</code> leaves the result as <code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>.
 </p>
 <p>The reason for returning a <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> object
 instead of the triplet format by default is that the compressed column
@@ -156,7 +169,7 @@ sparse matrix.
 
 <h3>Value</h3>
 
-<p>A sparse matrix, by default (see <code>giveCsparse</code>) in compressed,
+<p>A sparse matrix, by default (from <code>repr = "C"</code>) in compressed,
 column-oriented form, as an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object inheriting from both
 <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> and <code><a href="generalMatrix-class.html">generalMatrix</a></code>.
 </p>
@@ -273,5 +286,5 @@ if(require(SparseM) &amp;&amp; packageVersion("SparseM") &gt;= 0.87 &amp;&amp;
 }
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-17 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
 </body></html>

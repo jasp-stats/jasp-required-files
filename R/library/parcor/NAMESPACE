@@ -1,7 +1,0 @@
-import(Epi)
-import(MASS)
-import(GeneNet)
-import(glmnet)
-import(ppls)
-## and exported functions
-export(adalasso.net,adalasso,Beta2parcor,lm.ridge.univariate,mylars,performance.pcor,pls.net,ridge.cv,ridge.net,sym2vec)

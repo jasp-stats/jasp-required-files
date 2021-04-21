@@ -1,4 +1,9 @@
 
+# 1.1.1
+
+* Fix spurious zero fractions in `pretty_bytes()` when formatting
+  vectors of sizes (#23).
+
 # 1.1.0
 
 * `pretty_dt()`, `pretty_ms()` and `pretty_sec()` now handle `NA` values

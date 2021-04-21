@@ -78,7 +78,9 @@ will be returned. Otherwise any smooth terms not named in this array will be set
 <tr valign="top"><td><code>exclude</code></td>
 <td>
 <p>if <code>type=="terms"</code> or <code>type="iterms"</code> then terms (smooth or parametric) named in this array will not be returned. Otherwise any smooth terms named in this array will be set to zero. 
-If <code>NULL</code> then no terms are excluded. Note that this is the term names as it appears in the model summary, see example.</p>
+If <code>NULL</code> then no terms are excluded. Note that this is the term names as it appears in the model summary, see example.
+You can avoid providing the covariates for the excluded terms by setting <code>newdata.guaranteed=TRUE</code>, which will avoid all
+checks on <code>newdata</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>block.size</code></td>
 <td>
@@ -127,7 +129,7 @@ smoothing parameters is used. </p>
 Bayesian posterior covariance matrix of the parameters <code>Vp</code> in the fitted
 gam object.
 </p>
-<p>When predicting from models with <code>link{linear.functional.terms}</code> then there are two possibilities. If the summation convention is to be used in prediction, as it was in fitting, then <code>newdata</code> should be a list, with named matrix arguments corresponding to any variables that were matrices in fitting. Alternatively one might choose to simply evaluate the constitutent smooths at particular values in which case arguments that were matrices can be replaced by vectors (and <code>newdata</code> can be a dataframe). See <code>link{linear.functional.terms}</code> for example code.
+<p>When predicting from models with <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> then there are two possibilities. If the summation convention is to be used in prediction, as it was in fitting, then <code>newdata</code> should be a list, with named matrix arguments corresponding to any variables that were matrices in fitting. Alternatively one might choose to simply evaluate the constitutent smooths at particular values in which case arguments that were matrices can be replaced by vectors (and <code>newdata</code> can be a dataframe). See <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> for example code.
 </p>
 <p>To facilitate plotting with <code><a href="../../stats/html/termplot.html">termplot</a></code>, if <code>object</code> possesses
 an attribute <code>"para.only"</code> and <code>type=="terms"</code> then only parametric
@@ -212,6 +214,9 @@ b&lt;-gam(y~s(x0)+s(I(x1^2))+s(x2)+offset(x3),data=dat)
 newd &lt;- data.frame(x0=(0:30)/30,x1=(0:30)/30,x2=(0:30)/30,x3=(0:30)/30)
 pred &lt;- predict.gam(b,newd)
 pred0 &lt;- predict(b,newd,exclude="s(x0)") ## prediction excluding a term
+## ...and the same, but without needing to provide x0 prediction data...
+newd1 &lt;- newd;newd1$x0 &lt;- NULL ## remove x0 from `newd1'
+pred1 &lt;- predict(b,newd1,exclude="s(x0)",newdata.guaranteed=TRUE)
 
 #############################################
 ## difference between "terms" and "iterms"
@@ -339,5 +344,5 @@ for (i in 1:4) {  ## plot derivatives and corresponding CIs
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
 </body></html>

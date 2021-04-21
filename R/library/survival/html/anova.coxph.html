@@ -9,7 +9,8 @@
 
 <h3>Description</h3>
 
-<p>Compute an analysis of deviance table for one or more Cox model fits.
+<p>Compute an analysis of deviance table for one or more Cox model fits,
+based on the log partial likelihood.
 </p>
 
 
@@ -43,13 +44,15 @@ other choices result in no test being done.</p>
 <h3>Details</h3>
 
 <p>Specifying a single object gives a sequential analysis of deviance
-table for that fit.  That is, the reductions in the model log-likelihood
+table for that fit.  That is, the reductions in the model
+Cox log-partial-likelihood
 as each term of the formula is added in turn are given in as
 the rows of a table, plus the log-likelihoods themselves.
 A robust variance estimate is normally used in situations where the
 model may be mis-specified, e.g., multiple events per subject.
-In this case a comparison of partial-likelihood values does not make
-sense, and <code>anova</code> will refuse to print results.
+In this case a comparison of likelihood values does not make
+sense (differences no longer have a chi-square distribution),
+and <code>anova</code> will refuse to print results.
 </p>
 <p>If more than one object is specified, the table has a row for the
 degrees of freedom and loglikelihood for each model. For all
@@ -71,7 +74,7 @@ comparing the reduction in loglik for each row.
 
 <h3>Warning</h3>
 
-<p>The comparison between two or more models by <code>anova</code> or
+<p>The comparison between two or more models by <code>anova</code>
 will only be valid if they
 are fitted to the same dataset. This may be a problem if there are
 missing values.</p>
@@ -92,5 +95,5 @@ fit2 &lt;- coxph(Surv(futime, fustat) ~ resid.ds +rx + ecog.ps, data=ovarian)
 anova(fit2,fit)
  </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

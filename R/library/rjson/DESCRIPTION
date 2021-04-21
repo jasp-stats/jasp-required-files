@@ -11,5 +11,5 @@ Repository: CRAN
 Date/Publication: 2018-06-08 17:23:00 UTC
 Packaged: 2018-06-07 22:29:50 UTC; root
 NeedsCompilation: yes
-Built: R 3.6.0; x86_64-w64-mingw32; 2019-05-28 20:48:05 UTC; windows
+Built: R 4.0.3; x86_64-w64-mingw32; 2020-10-15 18:14:45 UTC; windows
 Archs: i386, x64

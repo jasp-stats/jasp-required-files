@@ -74,8 +74,8 @@ Missing values are handled correctly.
 <p>There are four options for handling factors.  The default is to use
 Stata &lsquo;value labels&rsquo; for the factor levels.  With
 <code>convert.factors = "string"</code>, the factor levels are written as
-strings (the name of the value label is taken from the 
-<code>"val.labels"</code> attribute if it exists or the variable name 
+strings (the name of the value label is taken from the
+<code>"val.labels"</code> attribute if it exists or the variable name
 otherwise).  With <code>convert.factors = "numeric"</code> the numeric values
 of the levels are written, or <code>NA</code> if they cannot be coerced to
 numeric.  Finally, <code>convert.factors = "codes"</code> writes the
@@ -91,16 +91,16 @@ name from <code>"val.labels"</code>) then these will be written out as well.
 as the dataset label otherwise the dataset label is <code>"Written by R."</code>.
 </p>
 <p>If the <code>"expansion.table"</code> attribute exists expansion fields are
-written. This attribute should contain a list where each element is 
-string vector of length three. The first vector element contains the 
+written.  This attribute should contain a <code><a href="../../base/html/list.html">list</a></code> where each element is
+<code><a href="../../base/html/character.html">character</a></code> vector of length three.  The first vector element contains the
 name of a variable or &quot;_dta&quot; (meaning the dataset). The second element
 contains the characeristic name. The third contains the associated data.
 </p>
-<p>If the <code>"val.labels"</code> attribute contains a string vector with a
-string label for each variable then this is written as the variable
-labels.  Otherwise the variable names are repeated as variable labels.
+<p>If the <code>"val.labels"</code> attribute contains a <code><a href="../../base/html/character.html">character</a></code> vector with a
+string label for each value then this is written as the value
+labels.  Otherwise the variable names are used. 
 </p>
-<p>If the <code>"var.labels"</code> attribute contains a string vector with a
+<p>If the <code>"var.labels"</code> attribute contains a <code><a href="../../base/html/character.html">character</a></code> vector with a
 string label for each variable then this is written as the variable
 labels.  Otherwise the variable names are repeated as variable labels.
 </p>
@@ -145,7 +145,7 @@ either an object of class <code>POSICct</code> can be passed to Stata with
 <code>315619200</code> should be added and then multiplied by <code>1000</code>
 before passing to <code>write.dta</code> and assigning format <code>%tc</code>.
 Stata's comments on the first route are at
-<a href="http://www.stata.com/manuals13/ddatetime.pdf">http://www.stata.com/manuals13/ddatetime.pdf</a>, but at the time of
+<a href="https://www.stata.com/manuals13/ddatetime.pdf">https://www.stata.com/manuals13/ddatetime.pdf</a>, but at the time of
 writing were wrong: <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> uses POSIX conventions and hence does not count
 leap seconds.
 </p>
@@ -161,8 +161,8 @@ Brian Quistorff.
 <h3>References</h3>
 
 <p>Stata 6.0 Users Manual, Stata 7.0 Programming manual, Stata online
-help (version 8 and later, also <a href="http://www.stata.com/help.cgi?dta_114">http://www.stata.com/help.cgi?dta_114</a>
-and <a href="http://www.stata.com/help.cgi?dta_113">http://www.stata.com/help.cgi?dta_113</a>) describe the file formats.
+help (version 8 and later, also <a href="https://www.stata.com/help.cgi?dta_114">https://www.stata.com/help.cgi?dta_114</a>
+and <a href="https://www.stata.com/help.cgi?dta_113">https://www.stata.com/help.cgi?dta_113</a>) describe the file formats.
 </p>
 
 
@@ -182,5 +182,5 @@ write.dta(swiss, swissfile &lt;- tempfile())
 read.dta(swissfile)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>foreign</em> version 0.8-71 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>foreign</em> version 0.8-81 <a href="00Index.html">Index</a>]</div>
 </body></html>

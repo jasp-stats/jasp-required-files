@@ -62,10 +62,10 @@ coerced to a <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> f
 operations.
 </p>
 <p>Note that all <code>new(.)</code>, <code><a href="spMatrix.html">spMatrix</a></code> and
-<code><a href="sparseMatrix.html">sparseMatrix</a>(*, giveCsparse=FALSE)</code> constructors
-for <code>"TsparseMatrix"</code> classes implicitly add <i>x_k</i>'s that belong to identical
-<i>(i_k, j_k)</i> pairs, see, the example below, or also
-<code>"<a href="dgTMatrix-class.html">dgTMatrix</a>"</code>.
+<code><a href="sparseMatrix.html">sparseMatrix</a>(*, repr="T")</code> constructors
+for <code>"TsparseMatrix"</code> classes implicitly add (i.e., &ldquo;sum up&rdquo;)
+<i>x_k</i>'s that belong to identical <i>(i_k, j_k)</i> pairs, see, the
+example below, or also <code>"<a href="dgTMatrix-class.html">dgTMatrix</a>"</code>.
 </p>
 <p>For convenience, methods for some operations such as <code>%*%</code>
 and <code>crossprod</code> are defined for
@@ -95,5 +95,5 @@ T3 # only 3 non-zero entries, 5 = 1+4 !
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-17 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
 </body></html>

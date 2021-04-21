@@ -254,9 +254,11 @@ mLeft  <- matrix(data = double(0), nrow = 3, ncol = 0)
 mRight <- matrix(data = double(0), nrow = 0, ncol = 4)
 MLeft   <- Matrix(data = double(0), nrow = 3, ncol = 0)
 MRight  <- Matrix(data = double(0), nrow = 0, ncol = 4)
-stopifnot(identical3(class(mLeft), class(mRight), "matrix"))
-stopifnot(class(MLeft) ==  class(MRight),
-          class(MLeft) ==  "dgeMatrix")
+stopifnot(exprs = {
+    class(mLeft) ==  class(mRight)
+    class(MLeft) ==  class(MRight)
+    class(MLeft) == "dgeMatrix"
+})
 
 Qidentical3 <- function(a,b,c) Q.eq(a,b) && Q.eq(b,c)
 Qidentical4 <- function(a,b,c,d) Q.eq(a,b) && Q.eq(b,c) && Q.eq(c,d)
@@ -276,7 +278,7 @@ chkP <- function(mLeft, mRight, MLeft, MRight, cl = class(MLeft)) {
                      MLeft %*% mRight,
                      MLeft %*% MRight),# now ok
 	      m.m == 0, identical(m.m, crossprod(mRight, mRight)),
-	      mm. == 0, identical(mm., tcrossprod(mLeft, mLeft)))
+	      mm. == 0, identical(mm., tcrossprod(mLeft, mLeft)),  allow.logical0 = TRUE)
     stopifnot(ident4(m.m,
 		     crossprod(MRight, MRight),
 		     crossprod(MRight, mRight),

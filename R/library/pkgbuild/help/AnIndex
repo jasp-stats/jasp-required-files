@@ -16,8 +16,10 @@ local_build_tools	has_build_tools
 needs_compile	needs_compile
 pkgbuild_process	pkgbuild_process
 pkg_has_src	pkg_has_src
+pkg_links_to_cpp11	pkg_links_to_rcpp
 pkg_links_to_rcpp	pkg_links_to_rcpp
 rcmd_build_tools	rcmd_build_tools
+rtools_needed	rtools_needed
 rtools_path	has_rtools
 setup_rtools	has_rtools
 without_cache	without_compiler

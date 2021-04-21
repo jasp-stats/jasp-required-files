@@ -43,7 +43,7 @@ data, the first argument is the starting time for the interval.
 <code>TRUE</code>/<code>FALSE</code> (<code>TRUE</code> = death) or 1/2 (2=death). For
 interval censored data, the status indicator is 0=right censored,
 1=event at <code>time</code>, 2=left censored, 3=interval censored.
-For multiple enpoint data the event variable will be a factor,
+For multiple endpoint data the event variable will be a factor,
 whose first level is treated as censoring.
 Although unusual, the event indicator can be omitted, in which case
 all subjects are assumed to have an event.
@@ -191,7 +191,7 @@ convention, e.g., the 1994 <code>lung</code> data set found in the package.
 
 <p><code><a href="coxph.html">coxph</a></code>,  
 <code><a href="survfit.html">survfit</a></code>,  
-<code><a href="survreg.html">survreg</a></code>, <code>link{lung}</code>.   
+<code><a href="survreg.html">survreg</a></code>, <code><a href="lung.html">lung</a></code>.   
 </p>
 
 
@@ -203,5 +203,5 @@ survfit(Surv(time, status) ~ ph.ecog, data=lung)
 Surv(heart$start, heart$stop, heart$event) 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 2.44-1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
 </body></html>

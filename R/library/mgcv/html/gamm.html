@@ -41,8 +41,9 @@ including the smooths.
 <pre>
 gamm(formula,random=NULL,correlation=NULL,family=gaussian(),
 data=list(),weights=NULL,subset=NULL,na.action,knots=NULL,
-control=list(niterEM=0,optimMethod="L-BFGS-B"),
-niterPQL=20,verbosePQL=TRUE,method="ML",drop.unused.levels=TRUE,...)
+control=list(niterEM=0,optimMethod="L-BFGS-B",returnObject=TRUE),
+niterPQL=20,verbosePQL=TRUE,method="ML",drop.unused.levels=TRUE,
+mustart=NULL, etastart=NULL,...)
 </pre>
 
 
@@ -53,10 +54,9 @@ niterPQL=20,verbosePQL=TRUE,method="ML",drop.unused.levels=TRUE,...)
 <tr valign="top"><td><code>formula</code></td>
 <td>
 <p> A GAM formula (see also <code><a href="formula.gam.html">formula.gam</a></code> and <code><a href="gam.models.html">gam.models</a></code>).
-This is like the formula for a <code>glm</code> except that smooth terms (<code><a href="s.html">s</a></code> and <code><a href="te.html">te</a></code>)
-can be added to the right hand side of the
-formula. Note that <code>id</code>s for smooths and fixed smoothing parameters are
-not supported.</p>
+This is like the formula for a <code>glm</code> except that smooth terms (<code><a href="s.html">s</a></code>, <code><a href="te.html">te</a></code> etc.)
+can be added to the right hand side of the formula. Note that <code>id</code>s for smooths and fixed smoothing parameters are not supported. Any offset should be specified in the formula.
+</p>
 </td></tr> 
 <tr valign="top"><td><code>random</code></td>
 <td>
@@ -143,6 +143,14 @@ generalized case (or if the model has an offset), in which case <code>gammPQL</c
 <td>
 <p>by default unused levels are dropped from factors before fitting. For some smooths 
 involving factor variables you might want to turn this off. Only do so if you know what you are doing.</p>
+</td></tr>
+<tr valign="top"><td><code>mustart</code></td>
+<td>
+<p>starting values for mean if PQL used.</p>
+</td></tr>
+<tr valign="top"><td><code>etastart</code></td>
+<td>
+<p>starting values for linear predictor if PQL used (over-rides <code>mustart</code> if supplied).</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -293,7 +301,7 @@ and Hall/CRC Press.
 </p>
 <p>Wang, Y. (1998) Mixed effects smoothing spline analysis of variance. J.R. Statist. Soc. B 60, 159-174
 </p>
-<p><a href="http://www.maths.bris.ac.uk/~sw15190/">http://www.maths.bris.ac.uk/~sw15190/</a>
+<p><a href="https://www.maths.ed.ac.uk/~swood34/">https://www.maths.ed.ac.uk/~swood34/</a>
 </p>
 
 
@@ -453,5 +461,5 @@ par(old.par)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-28 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
 </body></html>

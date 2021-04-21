@@ -86,7 +86,7 @@ dtCMatrix-class         Triangular, (compressed) sparse column matrices
 dtRMatrix-class         Triangular Sparse Compressed Row Matrices
 dtpMatrix-class         Packed Triangular Dense Matrices - "dtpMatrix"
 dtrMatrix-class         Triangular, dense, numeric matrices
-expand                  Expand a Decomposition into Factors
+expand                  Expand a (Matrix) Decomposition into Factors
 expm                    Matrix Exponential
 facmul                  Multiplication by Decomposition Factors
 forceSymmetric          Force a Matrix to 'symmetricMatrix' Without
@@ -119,6 +119,7 @@ lsyMatrix-class         Symmetric Dense Logical Matrices
 ltrMatrix-class         Triangular Dense Logical Matrices
 lu                      (Generalized) Triangular Decomposition of a
                         Matrix
+mat2triplet             Map Matrix to its Triplet Representation
 nMatrix-class           Class "nMatrix" of Non-zero Pattern Matrices
 ndenseMatrix-class      Virtual Class "ndenseMatrix" of Dense Logical
                         Matrices
@@ -166,3 +167,4 @@ uniqTsparse             Unique (Sorted) TsparseMatrix Representations
 unpack                  Representation of Packed and Unpacked (Dense)
                         Matrices
 updown                  Up- and Down-Dating a Cholesky Decomposition
+wrld_1deg               World 1-degree grid contiguity matrix

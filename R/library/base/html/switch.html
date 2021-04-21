@@ -58,14 +58,14 @@ there is a match then that element is evaluated unless it is missing,
 in which case the next non-missing element is evaluated, so for
 example <code>switch("cc", a = 1, cc =, cd =, d = 2)</code> evaluates to
 <code>2</code>.  If there is more than one match, the first matching element
-is used.  In the case of no match, if there is a unnamed element of
+is used.  In the case of no match, if there is an unnamed element of
 <code>...</code> its value is returned.  (If there is more than one such
 argument an error is signaled.)
 </p>
 <p>The first argument is always taken to be <code>EXPR</code>: if it is named
 its name must (partially) match.
 </p>
-<p>A warning is signaled if no alternatives are provides, as this is
+<p>A warning is signaled if no alternatives are provided, as this is
 usually a coding error.
 </p>
 <p>This is implemented as a <a href="Primitive.html">primitive</a> function that only evaluates
@@ -140,5 +140,5 @@ switch(1, invisible(pi), pi)
 switch(2, invisible(pi), pi)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

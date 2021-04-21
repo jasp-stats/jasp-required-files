@@ -1,7 +1,0 @@
-lr.test                 Likelihood ratio test for generalized linear
-                        models
-mdscore                 Modified score test for generalized linear
-                        models
-strength                Impact Strength an Insulating Material
-summary.mdscore         Summary methods for mdscore objects
-wald.test               Wald test for generalized linear models

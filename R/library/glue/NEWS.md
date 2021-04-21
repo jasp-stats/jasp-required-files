@@ -1,8 +1,52 @@
+# glue 1.4.2
+
+* The required version of R is now 3.2 (#189)
+* `glue_sql()` now collapses `DBI::SQL()` elements correctly (#192 @shrektan)
+* The internal `compare()` method gains a `...` argument, for compatibility with testthat 3.0.0
+
+# glue 1.4.1
+
+* Internal changes for compatibility with vctrs 0.3.0 (#187).
+* `glue_sql()` now replaces missing values correctly when collapsing values (#185).
+* `glue_sql()` now always preserves the type of the column even in the presence of missing values (#130)
+
+# glue 1.4.0
+
+* `.envir = NULL` is now supported and is equivalent to passing `.envir = emptyenv()` (#140)
+
+* New `glue_safe()` and `glue_data_safe()` functions, safer versions of
+  `glue()` that do not execute code, only look up values (using `get()`). These
+  alternatives are useful for things like shiny applications where you do not
+  have control of the input for your glue expressions. (#140)
+
+* Fixed memory access issue and memory leaks found by valgrind.
+
+# glue 1.3.2
+
+* glue now implements vctrs methods. This ensures that vectors of glue
+  strings are compatible with tidyverse packages like tidyr
+  (r-lib/tidyselect#170, tidyverse/tidyr#773, @lionel-).
+
+* Fix a LTO type mismatch warning (#146)
+
+* `glue_sql()` now quotes lists of values appropriate to their type, rather
+  than coercing all values to characters (#153)
+
+* `glue_data()` now implicitly coerces `.x` to a list.
+
+* `glue()` gains the `.trim` argument, like `glue_data()`.
+
+* `single_quote()` `double_quote()` and `backtick()` all return `NA` for `NA`
+  inputs (#135).
+
+* Improve `trim()`'s handling of lines containing only indentation (#162, #163, @alandipert)
+
 # glue 1.3.1
 
 ## Features
 
 * `glue()` now has a `+` method to combine strings.
+* `glue_sql()` now collapses zero-length vector into `DBI::SQL("NULL")` (#134 @shrektan).
 
 ## Bugfixes and minor changes
 

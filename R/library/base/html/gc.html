@@ -50,14 +50,14 @@ otherwise only more recently allocated objects may be collected.</p>
 <p>A call of <code>gc</code> causes a garbage collection to take place.
 This will also take place automatically without user intervention, and the
 primary purpose of calling <code>gc</code> is for the report on memory
-usage. For an accurate report <code>full = TRUE</code> should be used.  
+usage.  For an accurate report <code>full = TRUE</code> should be used.
 </p>
 <p>It can be useful to call <code>gc</code> after a large object
 has been removed, as this may prompt <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> to return memory to the
 operating system.
 </p>
 <p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> allocates space for vectors in multiples of 8 bytes: hence the
-report of <code>"Vcells"</code>, a relict of an earlier allocator (that used
+report of <code>"Vcells"</code>, a relic of an earlier allocator (that used
 a vector heap).
 </p>
 <p>When <code>gcinfo(TRUE)</code> is in force, messages are sent to the message
@@ -118,5 +118,5 @@ gc(TRUE)
 gc(reset = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

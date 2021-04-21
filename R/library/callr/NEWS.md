@@ -1,9 +1,50 @@
+# callr 3.6.0
+
+* callr now supports starting an R process with a different architecture,
+  so on Windows 64-bit R can start a 32-bit R background process, and
+  vice-versa (#95).
+
+* callr now handles symbolic arguments properly, and does not evaluate them.
+  E.g. `callr::r(function(x) x, list(quote(foobar)))` works now (#175).
+
+* `callr::r_session` does not leak file descriptors now in the sub-process
+  (#184).
+
+# callr 3.5.1
+
+* `callr::r_session` now handles large messages from the subprocess
+  well (#168).
+
+# callr 3.5.0
+
+* callr can now pass the environment of the function to the subprocess,
+  optionally. This makes it easier to call an internal function of a
+  package in a subprocess. See the `package` argument of `r()`, `r_bg()`,
+  `r_session$run()`, etc. (#147).
+
+# callr 3.4.4
+
+* An `r_session` now exits if the load hook errors. This generates an error
+  if the session is started with `wait = TRUE`. For `wait = FALSE` the
+  first `$read()` operation will return with an error (#162).
+
+# callr 3.4.3
+
+* `default_repos()` now returns a list if `getOption("repos")` is a list,
+  and a vector otherwise, on R 4.x.y as well.
+
+# callr 3.4.2
+
+* Improved error messages. Error messages are now fully printed after
+  an error. In non-interactive sessions, the stack trace is printed as well.
 
 # callr 3.4.1
 
 * callr is now more careful when loading the local `.Rprofile` in the
   subprocess. This fixes issues with packrat and renv that use `.Rprofile`
   for setup (#139).
+
+* callr functions fail early if environment file is missing (#123, @jdblischak)
 
 # callr 3.4.0
 

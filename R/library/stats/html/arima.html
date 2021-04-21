@@ -45,10 +45,10 @@ degree of differencing, and the MA order.</p>
 <td>
 <p>A specification of the seasonal part of the ARIMA
 model, plus the period (which defaults to <code>frequency(x)</code>).
-This should be a list with components <code>order</code> and
-<code>period</code>, but a specification of just a numeric vector of
-length 3 will be turned into a suitable list with the specification
-as the <code>order</code>.</p>
+This may be a list with components <code>order</code> and
+<code>period</code>, or just a numeric vector of length 3 which
+specifies the seasonal <code>order</code>.  In the latter case the
+default period is used.</p>
 </td></tr>
 <tr valign="top"><td><code>xreg</code></td>
 <td>
@@ -72,11 +72,29 @@ stationarity.  Not used for <code>method = "CSS"</code>.  For
 <tr valign="top"><td><code>fixed</code></td>
 <td>
 <p>optional numeric vector of the same length as the total
-number of parameters.  If supplied, only <code>NA</code> entries in
-<code>fixed</code> will be varied.  <code>transform.pars = TRUE</code>
-will be overridden (with a warning) if any AR parameters are fixed.
-It may be wise to set <code>transform.pars = FALSE</code> when fixing
-MA parameters, especially near non-invertibility.
+number of coefficients to be estimated.  It should be of the form
+</p>
+<p style="text-align: center;"><i>(phi_1, ..., phi_p, theta_1, ..., theta_p,Phi_1,..., Phi_P, Theta_1,...,Theta_Q, mu),</i></p>
+
+<p>where <i>phi_i</i> are the AR coefficients,
+<i>theta_i</i> are the MA coefficients,
+<i>Phi_i</i> are the seasonal AR coefficients,
+<i>Theta_i</i> are the seasonal MA coefficients and
+<i>mu</i> is the intercept term.  Note that the <i>mu</i>
+entry is required if and only if <code>include.mean</code> is <code>TRUE</code>.
+In particular it should not be present if the model is an ARIMA
+model with differencing.
+</p>
+<p>The entries of the <code>fixed</code> vector should consist of the
+values at which the user wishes to &ldquo;fix&rdquo; the corresponding
+coefficient, or <code>NA</code> if that coefficient should <em>not</em> be
+fixed, but estimated.
+</p>
+<p>The argument <code>transform.pars</code> will be set to <code>FALSE</code> if any
+AR parameters are fixed.  A warning will be given if <code>transform.pars</code>
+is set to (or left at its default) <code>TRUE</code>.  It may be wise to set
+<code>transform.pars = FALSE</code> even when fixing MA parameters,
+especially at values that cause the model to be nearly non-invertible.
 </p>
 </td></tr>
 <tr valign="top"><td><code>init</code></td>
@@ -134,7 +152,7 @@ AR and/or MA coefficients.  The definition used here has
 Further, if <code>include.mean</code> is true (the default for an ARMA
 model), this formula applies to <i>X - m</i> rather than <i>X</i>.  For
 ARIMA models with differencing, the differenced series follows a
-zero-mean ARMA model. If am <code>xreg</code> term is included, a linear
+zero-mean ARMA model. If an <code>xreg</code> term is included, a linear
 regression (with a constant term if <code>include.mean</code> is true and
 there is no differencing) is fitted with an ARMA model for the error
 term.
@@ -301,8 +319,9 @@ observations.
 <em>Technometrics</em>, <b>22</b>, 389&ndash;395.
 doi: <a href="https://doi.org/10.2307/1268324">10.2307/1268324</a>.
 </p>
-<p>Ripley, B. D. (2002) Time series in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 1.5.0.
-<em>R News</em>, <b>2/2</b>, 2&ndash;7.
+<p>Ripley, B. D. (2002).
+&ldquo;Time series in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 1.5.0&rdquo;.
+<em>R News</em>, <b>2</b>(2), 2&ndash;7.
 <a href="https://www.r-project.org/doc/Rnews/Rnews_2002-2.pdf">https://www.r-project.org/doc/Rnews/Rnews_2002-2.pdf</a>
 </p>
 
@@ -345,9 +364,17 @@ AIC(fit1, arima(presidents, c(2,0,0)),
           arima(presidents, c(2,0,1)), # &lt;- chosen (barely) by AIC
     fit3, arima(presidents, c(3,0,1)))
 
+## An example of using the  'fixed'  argument:
+## Note that the period of the seasonal component is taken to be
+## frequency(presidents), i.e. 4.
+(fitSfx &lt;- arima(presidents, order=c(2,0,1), seasonal=c(1,0,0),
+                 fixed=c(NA, NA, 0.5, -0.1, 50), transform.pars=FALSE))
+## The partly-fixed &amp; smaller model seems better (as we "knew too much"):
+AIC(fitSfx, arima(presidents, order=c(2,0,1), seasonal=c(1,0,0)))
+
 ## An example of ARIMA forecasting:
 predict(fit3, 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

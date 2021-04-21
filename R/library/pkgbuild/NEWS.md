@@ -1,3 +1,23 @@
+# pkgbuild 1.2.0
+
+* pkgbuild is now licensed as MIT (#106)
+* `compile_dll()` gains a `debug` argument for more control over the compile options used (@richfitz, #100)
+* `pkgbuild_process()` and `build()` now use colored compiler diagnostics if supported (#102)
+* Avoid documentation link ambiguity in R 4.1 (#105)
+
+# pkgbuild 1.1.0
+
+* `compile_dll()` now supports automatic cpp11 registration if the package links to cpp11.
+* `rtools_needed` returns correct version instead of "custom" (@burgerga, #97)
+
+# pkgbuild 1.0.8
+
+* Fixes for capability RStudio 1.2. and Rtools 40, R 4.0.0
+
+# pkgbuild 1.0.7
+
+* Additional fixes for Rtools 40
+
 # pkgbuild 1.0.6
 
 * Support for RTools 40 and custom msys2 toolchains that are explicitly set

@@ -6,7 +6,9 @@ dep_types	dep_types
 desc	desc
 description	description
 desc_add_author	desc_add_author
+desc_add_author_gh	desc_add_author_gh
 desc_add_me	desc_add_me
+desc_add_orcid	desc_add_orcid
 desc_add_remotes	desc_add_remotes
 desc_add_role	desc_add_role
 desc_add_to_collate	desc_add_to_collate
@@ -15,6 +17,7 @@ desc_bump_version	desc_bump_version
 desc_change_maintainer	desc_change_maintainer
 desc_clear_remotes	desc_clear_remotes
 desc_clear_urls	desc_clear_urls
+desc_coerce_authors_at_r	desc_coerce_authors_at_r
 desc_del	desc_del
 desc_del_author	desc_del_author
 desc_del_collate	desc_del_collate

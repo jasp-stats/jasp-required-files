@@ -38,7 +38,7 @@ dirname(path)
 
 <h3>Details</h3>
 
-<p>For <code>dirname</code> <a href="path.expand.html">tilde expansion</a> of the path is done.
+<p><a href="path.expand.html">tilde expansion</a> of the path is done except on Windows.
 </p>
 <p>Trailing path separators are removed before dissecting the path,
 and for <code>dirname</code> any trailing file separators are removed
@@ -90,8 +90,8 @@ the path <code>"/"</code> and of returning <code>"."</code> for empty strings.
 
 <pre>
 basename(file.path("","p1","p2","p3", c("file1", "file2")))
-dirname(file.path("","p1","p2","p3","filename"))
+dirname (file.path("","p1","p2","p3", "filename"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
 </body></html>

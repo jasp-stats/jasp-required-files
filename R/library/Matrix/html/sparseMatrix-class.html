@@ -52,7 +52,7 @@ The <code><a href="../../base/html/format.html">format</a></code> method for spa
 <code><a href="printSpMatrix.html">formatSpMatrix</a>()</code> for details such as the extra
 optional arguments.</p>
 </dd>
-<dt>summary</dt><dd><p><code>(object = "sparseMatrix")</code>: Returns
+<dt>summary</dt><dd><p><code>(object = "sparseMatrix", uniqT=FALSE)</code>: Returns
 an object of S3 class <code>"sparseSummary"</code> which is basically a
 <code><a href="../../base/html/data.frame.html">data.frame</a></code> with columns <code>(i,j,x)</code> (or just
 <code>(i,j)</code> for <code><a href="nsparseMatrix-classes.html">nsparseMatrix</a></code> class objects)
@@ -146,5 +146,5 @@ Xt != (X. &lt;- as(f.mis, "sparseMatrix")) # differ only in columns 3:5,17
 stopifnot(all(X.[,i.mis] == 0), all(Xt[,-i.mis] == X.[,-i.mis]))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.2-17 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
 </body></html>
