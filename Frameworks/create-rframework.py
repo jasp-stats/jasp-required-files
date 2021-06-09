@@ -5,7 +5,7 @@ import sys
 from subprocess import check_output
 from subprocess import call
 import shutil
-current = "4.0"
+current = "4.1"
 
 # Make the changes to the executable path optional
 skip_path_changes = False
