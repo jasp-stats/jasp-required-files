@@ -83,8 +83,8 @@ the palette is changed, the new palette applies to all subsequent
 plotting.
 </p>
 <p>The current palette also applies to re-plotting (for example if an
-on-screen device is resized or <code><a href="dev2.html">dev.copy</a></code> or
-<code><a href="recordplot.html">replayPlot</a></code> is used).  The palette is recorded on the
+on-screen device is resized or <code><a href="../../grDevices/help/dev.copy.html">dev.copy</a></code> or
+<code><a href="../../grDevices/help/replayPlot.html">replayPlot</a></code> is used).  The palette is recorded on the
 displaylist at the start of each page and when it is changed.
 </p>
 
@@ -104,13 +104,13 @@ of predefined palettes.
 
 <h3>See Also</h3>
 
-<p><code><a href="colors.html">colors</a></code> for the vector of built-in named colors;
-<code><a href="hsv.html">hsv</a></code>, <code><a href="gray.html">gray</a></code>,
-<code><a href="palettes.html">hcl.colors</a></code>, ... to construct colors.
+<p><code><a href="../../grDevices/help/colors.html">colors</a></code> for the vector of built-in named colors;
+<code><a href="../../grDevices/help/hsv.html">hsv</a></code>, <code><a href="../../grDevices/help/gray.html">gray</a></code>,
+<code><a href="../../grDevices/help/hcl.colors.html">hcl.colors</a></code>, ... to construct colors.
 </p>
-<p><code><a href="adjustcolor.html">adjustcolor</a></code>, e.g., for tweaking existing palettes;
-<code><a href="colorRamp.html">colorRamp</a></code> to interpolate colors, making custom palettes;
-<code><a href="col2rgb.html">col2rgb</a></code> for translating colors to RGB 3-vectors.
+<p><code><a href="../../grDevices/help/adjustcolor.html">adjustcolor</a></code>, e.g., for tweaking existing palettes;
+<code><a href="../../grDevices/help/colorRamp.html">colorRamp</a></code> to interpolate colors, making custom palettes;
+<code><a href="../../grDevices/help/col2rgb.html">col2rgb</a></code> for translating colors to RGB 3-vectors.
 </p>
 
 
@@ -126,7 +126,7 @@ palette()
 
 palette(hcl.colors(8, "viridis"))
 
-(palette(gray(seq(0,.9,len = 25)))) # gray scales; print old palette
+(palette(gray(seq(0,.9,length.out = 25)))) # gray scales; print old palette
 matplot(outer(1:100, 1:30), type = "l", lty = 1,lwd = 2, col = 1:30,
         main = "Gray Scales Palette",
         sub = "palette(gray(seq(0, .9, len=25)))")
@@ -192,5 +192,5 @@ palette.swatch()
 palette.swatch(n = 26) # show full "Alphabet"; recycle most others
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

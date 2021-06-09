@@ -16,9 +16,9 @@
 <h3>Usage</h3>
 
 <pre>
-package_dependencies(packages = NULL, db = NULL,
-        which = c("Depends", "Imports", "LinkingTo"),
-	recursive = FALSE, reverse = FALSE, verbose = getOption("verbose"))
+package_dependencies(packages = NULL, db = NULL, which = "strong",
+	             recursive = FALSE, reverse = FALSE,
+                     verbose = getOption("verbose"))
 </pre>
 
 
@@ -45,13 +45,17 @@ dependencies, a subset of
 <code>c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")</code>.
 Character string <code>"all"</code> is shorthand for that vector,
 character string <code>"most"</code> for the same vector without
-<code>"Enhances"</code>.
+<code>"Enhances"</code>,
+character string <code>"strong"</code> (default) for the first three
+elements of that vector.
 </p>
 </td></tr>
 <tr valign="top"><td><code>recursive</code></td>
 <td>
-<p>logical: should (reverse) dependencies of (reverse)
-dependencies (and so on) be included?</p>
+<p>a logical indicating whether (reverse) dependencies
+of (reverse) dependencies (and so on) should be included, or a
+character vector like <code>which</code> indicating the type of (reverse)
+dependencies to be added recursively.</p>
 </td></tr>
 <tr valign="top"><td><code>reverse</code></td>
 <td>
@@ -79,8 +83,7 @@ as opposed to <code>character(0)</code> entries which indicate no dependencies.
 
 <h3>See Also</h3>
 
-<p><code><a href="dependsOnPkgs.html">dependsOnPkgs</a></code>, and <code><a href="tools-deprecated.html">package.dependencies</a></code> for checking
-dependencies.
+<p><code><a href="../../tools/help/dependsOnPkgs.html">dependsOnPkgs</a></code>.
 </p>
 
 
@@ -96,14 +99,21 @@ dep1 &lt;- package_dependencies(myPkgs, db = pdb) # all arguments at default
 utils::str(dep1, vec.len=10)
 
 system.time( ## reverse dependencies, recursively --- takes much longer:
-deps &lt;- package_dependencies(myPkgs, db = pdb,
-                    which = c("Depends", "Imports", "LinkingTo", "Suggests"),
-                    recursive = TRUE, reverse = TRUE)
+deps &lt;- package_dependencies(myPkgs, db = pdb, which = "most",
+                             recursive = TRUE, reverse = TRUE)
 ) # seen ~ 10 seconds
 
-lengths(deps) # 2015-01-14: all are 7040, but codetools with 7046
+lengths(deps) # 2020-05-03: all are 16053, but codetools with 16057
+
+## install.packages(dependencies = TRUE) installs 'most' dependencies
+## and the strong recursive dependencies of these: these dependencies
+## can be obtained using 'which = "most"' and 'recursive = "strong"'.
+## To illustrate on the the first packages with non-missing Suggests:
+packages &lt;- pdb[head(which(!is.na(pdb[, "Suggests"]))), "Package"]
+package_dependencies(packages, db = pdb,
+                     which = "most", recursive = "strong")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

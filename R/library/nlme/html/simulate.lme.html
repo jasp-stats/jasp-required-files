@@ -32,17 +32,17 @@ simulate(object, nsim = 1, seed = , m2,
 <tr valign="top"><td><code>object</code></td>
 <td>
 
-<p>an object inheriting from class <code>"<a href="lme.html">lme</a>"</code>, representing a fitted
+<p>an object inheriting from class <code>"<a href="../../nlme/help/lme.html">lme</a>"</code>, representing a fitted
 linear mixed-effects model, or a list containing an <code>lme</code> model
 specification.  If given as a list, it should contain
 components <code>fixed</code>, <code>data</code>, and <code>random</code>
-with values suitable for a call to <code><a href="lme.html">lme</a></code>.  This argument
+with values suitable for a call to <code><a href="../../nlme/help/lme.html">lme</a></code>.  This argument
 defines the null model.
 </p>
 </td></tr>
 <tr valign="top"><td><code>m2</code></td>
 <td>
-<p>an <code>"<a href="lme.html">lme</a>"</code> object or a list, like <code>object</code>
+<p>an <code>"<a href="../../nlme/help/lme.html">lme</a>"</code> object or a list, like <code>object</code>
 containing a second lme model specification.  This argument defines
 the alternative model.  If given as a list, only those parts of the
 specification that change between model <code>object</code> and <code>m2</code>
@@ -85,8 +85,8 @@ used to obtain the gradient and the Hessian of the log-likelihood in
 the optimization algorithm in the <code>ms</code> function.  If
 <code>FALSE</code>, the default algorithm in <code>ms</code> for functions that
 do not incorporate gradient and Hessian attributes is used.  Default
-depends on the <code>"<a href="pdMat.html">pdMat</a>"</code> classes used in <code>object</code> and <code>m2</code>:
-if both are standard classes (see <code><a href="pdClasses.html">pdClasses</a></code>) then
+depends on the <code>"<a href="../../nlme/help/pdMat.html">pdMat</a>"</code> classes used in <code>object</code> and <code>m2</code>:
+if both are standard classes (see <code><a href="../../nlme/help/pdClasses.html">pdClasses</a></code>) then
 defaults to <code>TRUE</code>, otherwise defaults to <code>FALSE</code>.
 </p>
 </td></tr>
@@ -120,7 +120,7 @@ the seed that was used for the random number generator.
 
 <h3>See Also</h3>
 
-<p><code><a href="lme.html">lme</a></code>, <code><a href="../../base/html/Random.html">set.seed</a></code></p>
+<p><code><a href="../../nlme/help/lme.html">lme</a></code>, <code><a href="../../base/html/Random.html">set.seed</a></code></p>
 
 
 <h3>Examples</h3>

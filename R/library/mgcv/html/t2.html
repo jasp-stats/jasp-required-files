@@ -9,8 +9,8 @@
 
 <h3>Description</h3>
 
-<p> Alternative to <code><a href="te.html">te</a></code> for defining tensor product smooths
-in a <code><a href="gam.html">gam</a></code> formula. Results in a construction in which the penalties are 
+<p> Alternative to <code><a href="../../mgcv/help/te.html">te</a></code> for defining tensor product smooths
+in a <code><a href="../../mgcv/help/gam.html">gam</a></code> formula. Results in a construction in which the penalties are 
 non-overlapping multiples of identity matrices (with some rows and columns zeroed). 
 The construction, which is due to Fabian Scheipl (<code>mgcv</code> implementation, 2010), is analogous to Smoothing Spline ANOVA 
 (Gu, 2002), but using low rank penalized regression spline marginals. The main advantage of this construction 
@@ -33,7 +33,7 @@ is that it is useable with <code>gamm4</code> from package <code>gamm4</code>.
 <p> a list of variables that are the covariates that this
 smooth is a function of.  Transformations whose form depends on
 the values of the data are best avoided here: e.g. <code>t2(log(x),z)</code>
-is fine, but <code>t2(I(x/sd(x)),z)</code> is not (see <code><a href="predict.gam.html">predict.gam</a></code>).</p>
+is fine, but <code>t2(I(x/sd(x)),z)</code> is not (see <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>).</p>
 </td></tr>
 <tr valign="top"><td><code>k</code></td>
 <td>
@@ -41,7 +41,7 @@ is fine, but <code>t2(I(x/sd(x)),z)</code> is not (see <code><a href="predict.ga
 If not supplied then set to <code>5^d</code>. If supplied as a single number then this 
 basis dimension is used for each basis. If supplied as an array then the elements are
 the dimensions of the component (marginal) bases of the tensor
-product. See <code><a href="choose.k.html">choose.k</a></code> for further information.</p>
+product. See <code><a href="../../mgcv/help/choose.k.html">choose.k</a></code> for further information.</p>
 </td></tr>
 <tr valign="top"><td><code>bs</code></td>
 <td>
@@ -49,9 +49,9 @@ product. See <code><a href="choose.k.html">choose.k</a></code> for further infor
 marginal basis. <code>"cr"</code> for cubic regression spline; <code>"cs"</code> for cubic
 regression spline with shrinkage; <code>"cc"</code> for periodic/cyclic 
 cubic regression spline; <code>"tp"</code> for thin plate regression spline;
-<code>"ts"</code> for t.p.r.s. with extra shrinkage. See <code><a href="smooth.terms.html">smooth.terms</a></code> for details 
+<code>"ts"</code> for t.p.r.s. with extra shrinkage. See <code><a href="../../mgcv/help/smooth.terms.html">smooth.terms</a></code> for details 
 and full list. User defined bases can 
-also be used here (see <code><a href="smooth.construct.html">smooth.construct</a></code> for an example). If only one 
+also be used here (see <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code> for an example). If only one 
 basis code is given then this is used for all bases.</p>
 </td></tr>
 <tr valign="top"><td><code>m</code></td>
@@ -59,7 +59,7 @@ basis code is given then this is used for all bases.</p>
 <p>The order of the spline and its penalty (for smooth classes that use this) for each term. 
 If a single number is given  then it is used for all terms. A vector can be used to 
 supply a different <code>m</code> for each margin. For marginals that take vector <code>m</code> 
-(e.g. <code><a href="smooth.construct.ps.smooth.spec.html">p.spline</a></code> and <code><a href="smooth.construct.ds.smooth.spec.html">Duchon.spline</a></code>), then
+(e.g. <code><a href="../../mgcv/help/p.spline.html">p.spline</a></code> and <code><a href="../../mgcv/help/Duchon.spline.html">Duchon.spline</a></code>), then
 a list can be supplied, with a vector element for each margin. <code>NA</code> autoinitializes. 
 <code>m</code> is ignored by some bases (e.g. <code>"cr"</code>).</p>
 </td></tr>
@@ -76,9 +76,9 @@ resolved by resetting the basis type.</p>
 In the numeric vector case the elements multiply the smooth evaluated at the corresponding 
 covariate values (a &lsquo;varying coefficient model&rsquo; results). 
 In the factor case causes a replicate of the smooth to be produced for
-each factor level. See <code><a href="gam.models.html">gam.models</a></code> for further details. May also be a matrix 
+each factor level. See <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> for further details. May also be a matrix 
 if covariates are matrices: in this case implements linear functional of a smooth 
-(see <code><a href="gam.models.html">gam.models</a></code> and <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> for details).</p>
+(see <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> and <code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code> for details).</p>
 </td></tr>
 <tr valign="top"><td><code>xt</code></td>
 <td>
@@ -99,7 +99,7 @@ used in basis construction).</p>
 <p>any supplied smoothing parameters for this term. Must be an array of the same
 length as the number of penalties for this smooth. Positive or zero elements are taken as fixed 
 smoothing parameters. Negative elements signal auto-initialization. Over-rides values supplied in 
-<code>sp</code> argument to <code><a href="gam.html">gam</a></code>. Ignored by <code>gamm</code>.</p>
+<code>sp</code> argument to <code><a href="../../mgcv/help/gam.html">gam</a></code>. Ignored by <code>gamm</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>full</code></td>
 <td>
@@ -118,7 +118,7 @@ used in the construction of the component. <code>NULL</code> to retain everythin
 <td>
 <p>If not <code>NULL</code>, signals a point constraint: the smooth should pass through zero at the
 point given here (as a vector or list with names corresponding to the smooth names). Never ignored
-if supplied. See <code><a href="identifiability.html">identifiability</a></code>. </p>
+if supplied. See <code><a href="../../mgcv/help/identifiability.html">identifiability</a></code>. </p>
 </td></tr>
 </table>
 
@@ -144,7 +144,7 @@ null space or the range space from each marginal, and from these bases construct
 penalty (unless it happens to be a product entirely of marginal null spaces). The whole basis for the smooth is constructed from 
 all the different product bases that can be constructed in this way. The separately penalized components of the smooth basis each
 have an interpretation in terms of the ANOVA - decomposition of the term. 
-See <code><a href="pen.edf.html">pen.edf</a></code> for some further information.
+See <code><a href="../../mgcv/help/pen.edf.html">pen.edf</a></code> for some further information.
 </p>
 <p>Note that there are two ways to construct the product. When <code>full=FALSE</code> then the null space bases are treated as a whole in each product,
 but when <code>full=TRUE</code> each null space column is treated as a separate null space. The latter results in more penalties, but is the strict 
@@ -176,7 +176,7 @@ to be turned into a basis and penalties by the <code>smooth.construct.tensor.smo
 <table summary="R valueblock">
 <tr valign="top"><td><code>margin</code></td>
 <td>
-<p>A list of <code>smooth.spec</code> objects of the type returned by <code><a href="s.html">s</a></code>, 
+<p>A list of <code>smooth.spec</code> objects of the type returned by <code><a href="../../mgcv/help/s.html">s</a></code>, 
 defining the basis from which the tensor product smooth is constructed.</p>
 </td></tr>
 <tr valign="top"><td><code>term</code></td>
@@ -247,7 +247,7 @@ values (defualt).</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="te.html">te</a></code> <code><a href="s.html">s</a></code>,<code><a href="gam.html">gam</a></code>,<code><a href="gamm.html">gamm</a></code>, 
+<p><code><a href="../../mgcv/help/te.html">te</a></code> <code><a href="../../mgcv/help/s.html">s</a></code>,<code><a href="../../mgcv/help/gam.html">gam</a></code>,<code><a href="../../mgcv/help/gamm.html">gamm</a></code>, 
 </p>
 
 
@@ -314,5 +314,5 @@ pen.edf(b)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

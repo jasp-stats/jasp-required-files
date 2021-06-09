@@ -45,7 +45,7 @@ the methods, an object inheriting from class <code>"ecdf"</code>.</p>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>arguments to be passed to subsequent methods, e.g.,
-<code><a href="plot.stepfun.html">plot.stepfun</a></code> for the <code>plot</code> method.</p>
+<code><a href="../../stats/help/plot.stepfun.html">plot.stepfun</a></code> for the <code>plot</code> method.</p>
 </td></tr>
 <tr valign="top"><td><code>ylab</code></td>
 <td>
@@ -53,7 +53,7 @@ the methods, an object inheriting from class <code>"ecdf"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>verticals</code></td>
 <td>
-<p>see <code><a href="plot.stepfun.html">plot.stepfun</a></code>.</p>
+<p>see <code><a href="../../stats/help/plot.stepfun.html">plot.stepfun</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>col.01line</code></td>
 <td>
@@ -89,20 +89,20 @@ i.e.,
 
 <p>The function <code>plot.ecdf</code> which implements the <code><a href="../../graphics/html/plot.default.html">plot</a></code>
 method for <code>ecdf</code> objects, is implemented via a call to
-<code><a href="plot.stepfun.html">plot.stepfun</a></code>; see its documentation.
+<code><a href="../../stats/help/plot.stepfun.html">plot.stepfun</a></code>; see its documentation.
 </p>
 
 
 <h3>Value</h3>
 
 <p>For <code>ecdf</code>, a function of class <code>"ecdf"</code>, inheriting from the
-<code>"<a href="stepfun.html">stepfun</a>"</code> class, and hence inheriting a
-<code><a href="stepfun.html">knots</a>()</code> method.
+<code>"<a href="../../stats/help/stepfun.html">stepfun</a>"</code> class, and hence inheriting a
+<code><a href="../../stats/help/knots.html">knots</a>()</code> method.
 </p>
 <p>For the <code>summary</code> method, a summary of the knots of <code>object</code>
 with a <code>"header"</code> attribute.
 </p>
-<p>The <code><a href="quantile.html">quantile</a>(obj, ...)</code> method computes the same quantiles as
+<p>The <code><a href="../../stats/help/quantile.html">quantile</a>(obj, ...)</code> method computes the same quantiles as
 <code>quantile(x, ...)</code> would where <code>x</code> is the original sample.
 </p>
 
@@ -126,8 +126,8 @@ did at <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b>
 
 <h3>See Also</h3>
 
-<p><code><a href="stepfun.html">stepfun</a></code>, the more general class of step functions,
-<code><a href="approxfun.html">approxfun</a></code> and <code><a href="splinefun.html">splinefun</a></code>.
+<p><code><a href="../../stats/help/stepfun.html">stepfun</a></code>, the more general class of step functions,
+<code><a href="../../stats/help/approxfun.html">approxfun</a></code> and <code><a href="../../stats/help/splinefun.html">splinefun</a></code>.
 </p>
 
 
@@ -170,7 +170,7 @@ plot(F10)
 plot(F10, verticals = TRUE, do.points = FALSE)
 
 plot(Fn12 , lwd = 2) ; mtext("lwd = 2", adj = 1)
-xx &lt;- unique(sort(c(seq(-3, 2, length = 201), knots(Fn12))))
+xx &lt;- unique(sort(c(seq(-3, 2, length.out = 201), knots(Fn12))))
 lines(xx, Fn12(xx), col = "blue")
 abline(v = knots(Fn12), lty = 2, col = "gray70")
 
@@ -188,5 +188,5 @@ title("via  simple  plot.ecdf(x)", adj = 1)
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

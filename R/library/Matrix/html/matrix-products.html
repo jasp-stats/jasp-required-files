@@ -10,14 +10,14 @@
 <h3>Description</h3>
 
 <p>The basic matrix product, <code>%*%</code> is implemented for all our
-<code><a href="Matrix-class.html">Matrix</a></code> and also for
-<code><a href="sparseVector-class.html">sparseVector</a></code> classes, fully analogously to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s
+<code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> and also for
+<code><a href="../../Matrix/help/sparseVector-class.html">sparseVector</a></code> classes, fully analogously to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s
 base <code>matrix</code> and vector objects.
 </p>
-<p>The functions <code><a href="matrix-products.html">crossprod</a></code> and <code><a href="matrix-products.html">tcrossprod</a></code> are
+<p>The functions <code><a href="../../Matrix/help/crossprod.html">crossprod</a></code> and <code><a href="../../Matrix/help/tcrossprod.html">tcrossprod</a></code> are
 matrix products or &ldquo;cross products&rdquo;, ideally implemented
 efficiently without computing <code><a href="../../base/html/t.html">t</a>(.)</code>'s unnecessarily.
-They also return <code><a href="symmetricMatrix-class.html">symmetricMatrix</a></code> classed
+They also return <code><a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a></code> classed
 matrices when easily detectable, e.g., in <code>crossprod(m)</code>, the one
 argument case.
 </p>
@@ -27,7 +27,7 @@ call <code>x %*% t(x)</code>, and so is <code>tcrossprod(x, y)</code> instead of
 <code>x %*% t(y)</code>.
 </p>
 <p><em>Boolean</em> matrix products are computed via either
-<code><a href="boolean-matprod.html">%&amp;%</a></code> or <code>boolArith = TRUE</code>.
+<code><a href="../../Matrix/help/%25&amp;%25.html">%&amp;%</a></code> or <code>boolArith = TRUE</code>.
 </p>
 
 
@@ -68,12 +68,12 @@ tcrossprod(x, y = NULL, boolArith = NA, ...)
 <td>
 <p><code><a href="../../base/html/logical.html">logical</a></code>, i.e., <code>NA</code>, <code>TRUE</code>,
 or <code>FALSE</code>.  If true the result is (coerced to) a pattern
-matrix, i.e., <code>"<a href="nMatrix-class.html">nMatrix</a>"</code>, unless there are
+matrix, i.e., <code>"<a href="../../Matrix/help/nMatrix-class.html">nMatrix</a>"</code>, unless there are
 <code>NA</code> entries and the result will be a
-<code>"<a href="dMatrix-class.html">lMatrix</a>"</code>.  If false the result is (coerced to)
+<code>"<a href="../../Matrix/help/lMatrix-class.html">lMatrix</a>"</code>.  If false the result is (coerced to)
 numeric.  When <code>NA</code>, currently the default, the
 result is a pattern matrix when <code>x</code> and <code>y</code> are
-<code>"<a href="nsparseMatrix-classes.html">nsparseMatrix</a>"</code> and numeric otherwise.</p>
+<code>"<a href="../../Matrix/help/nsparseMatrix-class.html">nsparseMatrix</a>"</code> and numeric otherwise.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -85,21 +85,21 @@ result is a pattern matrix when <code>x</code> and <code>y</code> are
 <h3>Details</h3>
 
 <p>For some classes in the <code>Matrix</code> package, such as
-<code><a href="dgCMatrix-class.html">dgCMatrix</a></code>, it is much faster to calculate the
+<code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>, it is much faster to calculate the
 cross-product of the transpose directly instead of calculating the
 transpose first and then its cross-product.
 </p>
 <p><code>boolArith = TRUE</code> for regular (&ldquo;non cross&rdquo;) matrix
 products, <code>%*%</code> cannot be specified.  Instead, we provide the
-<code><a href="boolean-matprod.html">%&amp;%</a></code> operator for <em>boolean</em> matrix products.
+<code><a href="../../Matrix/help/%25&amp;%25.html">%&amp;%</a></code> operator for <em>boolean</em> matrix products.
 </p>
 
 
 <h3>Value</h3>
 
-<p>A <code><a href="Matrix-class.html">Matrix</a></code> object, in the one argument case
+<p>A <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> object, in the one argument case
 of an appropriate <em>symmetric</em> matrix class, i.e., inheriting from
-<code><a href="symmetricMatrix-class.html">symmetricMatrix</a></code>.
+<code><a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a></code>.
 </p>
 
 
@@ -115,7 +115,7 @@ combinations, see <code>showMethods("%*%", class = "dgeMatrix")</code>.</p>
 signatures (use <code>showMethods("%*%", class="dtrMatrix")</code>):
 matrix multiplication.  Multiplication of (matching) triangular
 matrices now should remain triangular (in the sense of class
-<a href="triangularMatrix-class.html">triangularMatrix</a>).</p>
+<a href="../../Matrix/help/triangularMatrix-class.html">triangularMatrix</a>).</p>
 </dd>
 <dt>crossprod</dt><dd><p><code>signature(x = "dgeMatrix", y = "dgeMatrix")</code>:
 ditto for several other signatures, use
@@ -143,7 +143,7 @@ may be incomplete and partly missing.  Please report such omissions if
 detected!
 </p>
 <p>Currently, <code>boolArith = TRUE</code> is implemented via
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> coercions which may be quite
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> coercions which may be quite
 inefficient for dense matrices.  Contributions for efficiency
 improvements are welcome.
 </p>
@@ -151,8 +151,8 @@ improvements are welcome.
 
 <h3>See Also</h3>
 
-<p><code><a href="../../base/html/tcrossprod.html">tcrossprod</a></code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s base,
-<code><a href="matrix-products.html">crossprod</a></code> and <code><a href="matrix-products.html">%*%</a></code>.</p>
+<p><code><a href="../../base/help/tcrossprod.html">tcrossprod</a></code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s base,
+<code><a href="../../Matrix/help/crossprod.html">crossprod</a></code> and <code><a href="../../Matrix/help/%25*%25.html">%*%</a></code>.</p>
 
 
 <h3>Examples</h3>
@@ -176,5 +176,5 @@ improvements are welcome.
  tCmm[1:16, 1:30]
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -26,7 +26,10 @@ number of decimal places (default 0).  See &lsquo;Details&rsquo; about
 &ldquo;round to even&rdquo; when rounding off a 5.
 </p>
 <p><code>signif</code> rounds the values in its first argument to the specified
-number of significant digits.
+number of significant digits.   Hence, for <code>numeric</code> <code>x</code>,
+<code>signif(x, dig)</code> is the same as <code>round(x, dig - ceiling(log10(abs(x))))</code>.
+For <code><a href="../../base/help/complex.html">complex</a></code> <code>x</code>, this is not the case, 
+see the &lsquo;Details&rsquo;.
 </p>
 
 
@@ -66,7 +69,7 @@ Negative values are allowed (see &lsquo;Details&rsquo;).</p>
 <h3>Details</h3>
 
 <p>These are generic functions: methods can be defined for them
-individually or via the <code><a href="groupGeneric.html">Math</a></code> group
+individually or via the <code><a href="../../base/help/S3groupGeneric.html">Math</a></code> group
 generic.
 </p>
 <p>Note that for rounding off a 5, the IEC 60559 standard (see also
@@ -118,8 +121,8 @@ normally necessary to use a tolerance.
 fractions are <em>not</em> exactly representable in binary double precision.
 In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0, the algorithm for <code>round(x, d)</code>, for <i>d &gt; 0</i>, has
 been improved to <em>measure</em> and round &ldquo;to nearest even&rdquo;,
-contrary to earlier versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> (or also to <code><a href="sprintf.html">sprintf</a>()</code>
-or <code><a href="format.html">format</a>()</code> based rounding).
+contrary to earlier versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> (or also to <code><a href="../../base/help/sprintf.html">sprintf</a>()</code>
+or <code><a href="../../base/help/format.html">format</a>()</code> based rounding).
 </p>
 
 
@@ -138,8 +141,8 @@ or <code><a href="format.html">format</a>()</code> based rounding).
 
 <h3>See Also</h3>
 
-<p><code><a href="integer.html">as.integer</a></code>.
-Package <a href="https://CRAN.R-project.org/package=round"><span class="pkg">round</span></a>'s <code><a href="../../round/html/roundX.html">roundX</a>()</code> for several
+<p><code><a href="../../base/help/as.integer.html">as.integer</a></code>.
+Package <a href="https://CRAN.R-project.org/package=round"><span class="pkg">round</span></a>'s <code><a href="../../round/help/roundX.html">roundX</a>()</code> for several
 versions or implementations of rounding, including some previous and the
 current <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version (as <code>version = "3d.C"</code>).
 </p>
@@ -162,5 +165,5 @@ round(x2, 3)
 signif(x2, 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -100,7 +100,7 @@ and Its Applications</em>, Wiley (chapter 6).
 
 <h3>See Also</h3>
 
-<p><code><a href="nls.html">nls</a></code>, <code><a href="profile.html">profile</a></code>, <code><a href="plot.profile.nls.html">plot.profile.nls</a></code>
+<p><code><a href="../../stats/help/nls.html">nls</a></code>, <code><a href="../../stats/help/profile.html">profile</a></code>, <code><a href="../../stats/help/plot.profile.nls.html">plot.profile.nls</a></code>
 </p>
 
 
@@ -111,7 +111,7 @@ and Its Applications</em>, Wiley (chapter 6).
 # obtain the fitted object
 fm1 &lt;- nls(demand ~ SSasympOrig(Time, A, lrc), data = BOD)
 # get the profile for the fitted model: default level is too extreme
-pr1 &lt;- profile(fm1, alpha = 0.05)
+pr1 &lt;- profile(fm1, alphamax = 0.05)
 # profiled values for the two parameters
 ## IGNORE_RDIFF_BEGIN
 pr1$A
@@ -121,5 +121,5 @@ pr1$lrc
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

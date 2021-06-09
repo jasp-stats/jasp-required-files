@@ -11,8 +11,8 @@
 
 <p>User friendly construction of a compressed, column-oriented, sparse
 matrix, inheriting from <code><a href="../../base/html/class.html">class</a></code>
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> (or
-<code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code> if <code>giveCsparse</code> is false),
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> (or
+<code><a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a></code> if <code>giveCsparse</code> is false),
 from locations (and values) of its non-zero entries.
 </p>
 <p>This is the recommended user interface rather than direct
@@ -40,7 +40,7 @@ sparseMatrix(i = ep, j = ep, p, x, dims, dimnames,
 entries of the matrix.  Note that for <em>repeated</em> pairs
 <i>(i_k,j_k)</i>, when <code>x</code> is not missing, the corresponding
 <i>x_k</i> are <em>added</em>, in consistency with the definition of
-the <code>"<a href="TsparseMatrix-class.html">TsparseMatrix</a>"</code> class, unless
+the <code>"<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>"</code> class, unless
 <code>use.last.ij</code> is true, in which case only the <em>last</em> of
 the corresponding <i>(i_k, j_k, x_k)</i> triplet is used.</p>
 </td></tr>
@@ -58,7 +58,7 @@ be missing.</p>
 the same length as <code>i</code> / <code>j</code>, or of
 length one where it will be recycled to full length.  If missing,
 the resulting matrix will be a 0/1 patter<b>n</b> matrix, i.e.,
-extending class <code><a href="nsparseMatrix-classes.html">nsparseMatrix</a></code>.
+extending class <code><a href="../../Matrix/help/nsparseMatrix-class.html">nsparseMatrix</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>dims</code></td>
@@ -96,15 +96,15 @@ columns starts at 0; this corresponds to the internal representation.</p>
 <p><code><a href="../../base/html/character.html">character</a></code> string, one of <code>"C"</code>,
 <code>"T"</code>, or <code>"R"</code>, specifying the sparse <em>repr</em>esentation to
 be used for the result, i.e., one from the super classes
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code>, <code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>, or
-<code><a href="RsparseMatrix-class.html">RsparseMatrix</a></code>.</p>
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code>, <code><a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a></code>, or
+<code><a href="../../Matrix/help/RsparseMatrix-class.html">RsparseMatrix</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>giveCsparse</code></td>
 <td>
 <p>(<b>deprecated</b>, replaced with <code>repr</code>):
 logical indicating if the result should be a
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> or a
-<code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>, where the default was <code>TRUE</code>,
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> or a
+<code><a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a></code>, where the default was <code>TRUE</code>,
 and now is determined from <code>repr</code>; very often Csparse matrices are
 more efficient subsequently, but not always.</p>
 </td></tr>
@@ -118,7 +118,7 @@ not set to <code>FALSE</code> unless you know what you're doing!</p>
 <p>logical indicating if in the case of repeated,
 i.e., duplicated pairs <i>(i_k, j_k)</i> only the last one should be
 used.  The default, <code>FALSE</code>, corresponds to the
-<code>"<a href="TsparseMatrix-class.html">TsparseMatrix</a>"</code> definition.</p>
+<code>"<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>"</code> definition.</p>
 </td></tr>
 </table>
 
@@ -141,28 +141,28 @@ or column indices, whichever is missing.  The expanded form of <code>p</code>,
 the (1-based) row or column indices.
 </p>
 <p>You cannot set both <code>singular</code> and <code>triangular</code> to true;
-rather use <code><a href="Diagonal.html">Diagonal</a>()</code> (or its alternatives, see there).
+rather use <code><a href="../../Matrix/help/Diagonal.html">Diagonal</a>()</code> (or its alternatives, see there).
 </p>
 <p>The values of <code>i</code>, <code>j</code>, <code>p</code> and <code>index1</code> are used
 to create 1-based index vectors <code>i</code> and <code>j</code> from which a
-<code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code> is constructed, with numerical
+<code><a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a></code> is constructed, with numerical
 values given by <code>x</code>, if non-missing.  Note that in that case,
 when some pairs <i>(i_k,j_k)</i> are repeated (aka
 &ldquo;duplicated&rdquo;), the corresponding <i>x_k</i> are <em>added</em>, in
 consistency with the definition of the
-<code>"<a href="TsparseMatrix-class.html">TsparseMatrix</a>"</code> class, unless <code>use.last.ij</code>
+<code>"<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>"</code> class, unless <code>use.last.ij</code>
 is set to true.
 
-By default, when <code>repr = "C"</code>, the <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code>
+By default, when <code>repr = "C"</code>, the <code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code>
 derived from this triplet form is returned, where <code>repr = "R"</code> now
-allows to directly get an <code><a href="RsparseMatrix-class.html">RsparseMatrix</a></code> and
-<code>repr = "T"</code> leaves the result as <code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>.
+allows to directly get an <code><a href="../../Matrix/help/RsparseMatrix-class.html">RsparseMatrix</a></code> and
+<code>repr = "T"</code> leaves the result as <code><a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a></code>.
 </p>
-<p>The reason for returning a <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> object
+<p>The reason for returning a <code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> object
 instead of the triplet format by default is that the compressed column
 form is easier to work with when performing matrix operations.  In
 particular, if there are no zeros in <code>x</code> then a
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> is a unique representation of the
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> is a unique representation of the
 sparse matrix.
 </p>
 
@@ -171,7 +171,7 @@ sparse matrix.
 
 <p>A sparse matrix, by default (from <code>repr = "C"</code>) in compressed,
 column-oriented form, as an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object inheriting from both
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> and <code><a href="generalMatrix-class.html">generalMatrix</a></code>.
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> and <code><a href="../../Matrix/help/generalMatrix-class.html">generalMatrix</a></code>.
 </p>
 
 
@@ -186,20 +186,20 @@ to <code>i</code> and <code>j</code>) if you want use the 0-based <code>i</code>
 
 <h3>See Also</h3>
 
-<p><code><a href="Matrix.html">Matrix</a>(*, sparse=TRUE)</code> for the constructor of
+<p><code><a href="../../Matrix/help/Matrix.html">Matrix</a>(*, sparse=TRUE)</code> for the constructor of
 such matrices from a <em>dense</em> matrix.  That is easier in small
 sample, but much less efficient (or impossible) for large matrices,
 where something like <code>sparseMatrix()</code> is needed.
-Further <code><a href="bdiag.html">bdiag</a></code> and <code><a href="Diagonal.html">Diagonal</a></code> for (block-)diagonal and
-<code><a href="bandSparse.html">bandSparse</a></code> for banded sparse matrix constructors.
+Further <code><a href="../../Matrix/help/bdiag.html">bdiag</a></code> and <code><a href="../../Matrix/help/Diagonal.html">Diagonal</a></code> for (block-)diagonal and
+<code><a href="../../Matrix/help/bandSparse.html">bandSparse</a></code> for banded sparse matrix constructors.
 </p>
-<p>Random sparse matrices via <code><a href="rsparsematrix.html">rsparsematrix</a>()</code>.
+<p>Random sparse matrices via <code><a href="../../Matrix/help/rsparsematrix.html">rsparsematrix</a>()</code>.
 </p>
 <p>The standard <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> <code><a href="../../stats/html/xtabs.html">xtabs</a>(*, sparse=TRUE)</code>, for sparse tables
-and <code><a href="sparse.model.matrix.html">sparse.model.matrix</a>()</code> for building sparse model
+and <code><a href="../../Matrix/help/sparse.model.matrix.html">sparse.model.matrix</a>()</code> for building sparse model
 matrices.
 </p>
-<p>Consider <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> and similar class
+<p>Consider <code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> and similar class
 definition help files.
 </p>
 
@@ -286,5 +286,5 @@ if(require(SparseM) &amp;&amp; packageVersion("SparseM") &gt;= 0.87 &amp;&amp;
 }
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

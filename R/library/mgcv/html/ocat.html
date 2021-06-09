@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Family for use with <code><a href="gam.html">gam</a></code> or <code><a href="bam.html">bam</a></code>, implementing regression for ordered categorical data.
+<p>Family for use with <code><a href="../../mgcv/help/gam.html">gam</a></code> or <code><a href="../../mgcv/help/bam.html">bam</a></code>, implementing regression for ordered categorical data.
 A linear predictor provides the expected value of a latent variable following a logistic distribution. The 
 probability of this latent variable lying between certain cut-points provides the probability of the ordered 
 categorical variable being of the corresponding category. The cut-points are estimated along side the model 
@@ -46,7 +46,7 @@ ocat(theta=NULL,link="identity",R=NULL)
 <h3>Details</h3>
 
 <p>Such cumulative threshold models are only identifiable up to an intercept, or one of the cut points. 
-Rather than remove the intercept, <code>ocat</code> simply sets the first cut point to -1. Use <code><a href="predict.gam.html">predict.gam</a></code> with 
+Rather than remove the intercept, <code>ocat</code> simply sets the first cut point to -1. Use <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code> with 
 <code>type="response"</code> to get the predicted probabilities in each category.
 </p>
 
@@ -108,5 +108,5 @@ b$family$getTheta(TRUE) ## the estimated cut points
 predict(b,dat[1:2,],type="response",se=TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

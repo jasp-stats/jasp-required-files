@@ -57,7 +57,7 @@ otherwise it will try to retrieve from the OS a value which if set for
 before any time-zone functions are used: if <span class="env">TZ</span> is being set to
 override the OS setting or if the &lsquo;try&rsquo; does not get this
 right, it should be set before the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> process is started or (probably
-early enough) in file <code><a href="Startup.html">.Rprofile</a></code>).
+early enough) in file <code><a href="../../base/help/.Rprofile.html">.Rprofile</a></code>).
 </p>
 
 
@@ -160,7 +160,7 @@ you may see the current abbreviation(s) used for older times.
 <p>For some time zones abbreviations are like <span class="samp">-03</span> and
 <span class="samp">+0845</span>: this is done when there is no official abbreviation.
 (Negative values are behind (West of) UTC, as for the <code>"%z"</code>
-format for <code><a href="strptime.html">strftime</a></code>.)
+format for <code><a href="../../base/help/strftime.html">strftime</a></code>.)
 </p>
 <p>The function <code>OlsonNames</code> returns the time-zone names known to
 the currently selected Olson/IANA database.  The system-specific
@@ -190,7 +190,7 @@ OSes, e.g. Linux using <code>glibc</code> except in secure modes.
 
 </p>
 <p>Time zones given by name (<em>via</em> environment variable <span class="env">TZ</span>, in
-<code>tz</code> arguments to functions such as <code><a href="as.POSIXlt.html">as.POSIXlt</a></code> and
+<code>tz</code> arguments to functions such as <code><a href="../../base/help/as.POSIXlt.html">as.POSIXlt</a></code> and
 perhaps the system time zone) are loaded from the currently selected
 &lsquo;<span class="file">zoneinfo</span>&rsquo; database.
 </p>
@@ -271,7 +271,7 @@ have the courtesy not to blame <span style="font-family: Courier New, Courier; c
 
 <h3>See Also</h3>
 
-<p><code><a href="Sys.time.html">Sys.time</a></code>, <code><a href="as.POSIXlt.html">as.POSIXlt</a></code>.
+<p><code><a href="../../base/help/Sys.time.html">Sys.time</a></code>, <code><a href="../../base/help/as.POSIXlt.html">as.POSIXlt</a></code>.
 </p>
 <p><a href="https://en.wikipedia.org/wiki/Time_zone">https://en.wikipedia.org/wiki/Time_zone</a> and
 <a href="https://data.iana.org/time-zones/tz-link.html">https://data.iana.org/time-zones/tz-link.html</a>
@@ -298,5 +298,5 @@ table(lengths(Osl))# most are pairs, some triplets
 str(Osl[lengths(Osl) &gt;= 3])# "America" South and North ...
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

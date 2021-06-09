@@ -9,10 +9,10 @@
 
 <h3>Description</h3>
 
-<p>From an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object coercible to <code>"<a href="TsparseMatrix-class.html">TsparseMatrix</a>"</code>,
+<p>From an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object coercible to <code>"<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>"</code>,
 typically a (sparse) matrix, produce its triplet representation which may
 collapse to a &ldquo;Duplet&rdquo; in the case of binary aka pattern, such as
-<code>"<a href="nMatrix-class.html">nMatrix</a>"</code> objects.
+<code>"<a href="../../Matrix/help/nMatrix-class.html">nMatrix</a>"</code> objects.
 </p>
 
 
@@ -28,7 +28,7 @@ mat2triplet(x, uniqT = FALSE)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>any <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object for which <code>as(x, "<a href="TsparseMatrix-class.html">TsparseMatrix</a>")</code>
+<p>any <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object for which <code>as(x, "<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>")</code>
 works; typically a <code><a href="../../base/html/matrix.html">matrix</a></code> of one of the <span class="pkg">Matrix</span>
 package matrices.</p>
 </td></tr>
@@ -36,7 +36,7 @@ package matrices.</p>
 <td>
 <p><code><a href="../../base/html/logical.html">logical</a></code> indicating if the triplet
 representation should be &lsquo;unique&rsquo; in the sense of
-<code><a href="uniqTsparse.html">uniqTsparse</a>()</code>.</p>
+<code><a href="../../Matrix/help/uniqTsparse.html">uniqTsparse</a>()</code>.</p>
 </td></tr>
 </table>
 
@@ -58,11 +58,11 @@ representation should be &lsquo;unique&rsquo; in the sense of
 <td>
 <p>vector of all non-zero entries of <code>x</code>; exists <b>only</b>
 when <code>as(x, "TsparseMatrix")</code> is <b>not</b> a
-<code>"<a href="nsparseMatrix-classes.html">nsparseMatrix</a>"</code>.</p>
+<code>"<a href="../../Matrix/help/nsparseMatrix-class.html">nsparseMatrix</a>"</code>.</p>
 </td></tr>
 </table>
 <p>Note that the <code><a href="../../base/html/order.html">order</a></code> of the entries is determined by the
-coercion to <code>"<a href="TsparseMatrix-class.html">TsparseMatrix</a>"</code> and hence typically
+coercion to <code>"<a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a>"</code> and hence typically
 with increasing <code>j</code> (and increasing <code>i</code> within ties of <code>j</code>).
 </p>
 
@@ -73,17 +73,17 @@ with increasing <code>j</code> (and increasing <code>i</code> within ties of <co
 more predictable substitute for <code><a href="../../base/html/summary.html">summary</a>(&lt;sparseMatrix&gt;)</code>.
 UseRs have wrongly expected the latter to return a data frame with
 columns <code>i</code> and <code>j</code> which however is wrong for a
-<code>"<a href="diagonalMatrix-class.html">diagonalMatrix</a>"</code>.
+<code>"<a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a>"</code>.
 </p>
 
 
 <h3>See Also</h3>
 
 <p>The <code>summary()</code> method for <code>"sparseMatrix"</code>,
-<code><a href="sparseMatrix-class.html">summary,sparseMatrix-method</a></code>.
+<code><a href="../../Matrix/help/summary,sparseMatrix-method.html">summary,sparseMatrix-method</a></code>.
 </p>
 <p><code>mat2triplet()</code> is conceptually the <em>inverse</em> function of
-<code><a href="spMatrix.html">spMatrix</a></code> and (one case of) <code><a href="sparseMatrix.html">sparseMatrix</a></code>.
+<code><a href="../../Matrix/help/spMatrix.html">spMatrix</a></code> and (one case of) <code><a href="../../Matrix/help/sparseMatrix.html">sparseMatrix</a></code>.
 </p>
 
 
@@ -109,5 +109,5 @@ summary(D)
 str(mat2triplet(D))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -34,12 +34,12 @@ dget(file, keep.source = FALSE)
 <tr valign="top"><td><code>file</code></td>
 <td>
 <p>either a character string naming a file or a
-<a href="connections.html">connection</a>. <code>""</code> indicates output to the console.</p>
+<a href="../../base/help/connection.html">connection</a>. <code>""</code> indicates output to the console.</p>
 </td></tr>
 <tr valign="top"><td><code>control</code></td>
 <td>
 <p>character vector indicating deparsing options.
-See <code><a href="deparseOpts.html">.deparseOpts</a></code> for their description.</p>
+See <code><a href="../../base/help/.deparseOpts.html">.deparseOpts</a></code> for their description.</p>
 </td></tr>
 <tr valign="top"><td><code>keep.source</code></td>
 <td>
@@ -59,7 +59,7 @@ Hence scoping information can be lost.
 <p>Deparsing an object is difficult, and not always possible.  With the
 default <code>control</code>, <code>dput()</code> attempts to deparse in a way
 that is readable, but for more complex or unusual objects (see
-<code><a href="dump.html">dump</a></code>), not likely
+<code><a href="../../base/help/dump.html">dump</a></code>), not likely
 to be parsed as identical to the original.  Use <code>control = "all"</code>
 for the most complete deparsing; use <code>control = NULL</code> for the
 simplest deparsing, not even including attributes.
@@ -86,8 +86,8 @@ set <code>options(keep.source = FALSE</code>) when calling <code>source</code>.
 <h3>Note</h3>
 
 <p>This is <b>not</b> a good way to transfer objects between <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> sessions.
-<code><a href="dump.html">dump</a></code> is better, but the functions <code><a href="save.html">save</a></code> and
-<code><a href="readRDS.html">saveRDS</a></code> are designed to be used for transporting <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> data,
+<code><a href="../../base/help/dump.html">dump</a></code> is better, but the functions <code><a href="../../base/help/save.html">save</a></code> and
+<code><a href="../../base/help/saveRDS.html">saveRDS</a></code> are designed to be used for transporting <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> data,
 and will work with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects that <code>dput</code> does not handle correctly
 as well as being much faster.
 </p>
@@ -107,7 +107,7 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="deparse.html">deparse</a></code>, <code><a href="dump.html">dump</a></code>, <code><a href="write.html">write</a></code>.
+<p><code><a href="../../base/help/deparse.html">deparse</a></code>, <code><a href="../../base/help/dump.html">dump</a></code>, <code><a href="../../base/help/write.html">write</a></code>.
 </p>
 
 
@@ -119,7 +119,7 @@ fil &lt;- tempfile()
 dput(base::mean, fil)
 ## ... read it back into 'bar' and confirm it is the same
 bar &lt;- dget(fil)
-stopifnot(all.equal(bar, base::mean))
+stopifnot(all.equal(bar, base::mean, check.environment = FALSE))
 
 ## Create a function with comments
 baz &lt;- function(x) {
@@ -149,5 +149,5 @@ dput(xn, control = "S_compat") # no names
 dput(xn, control = c("keepNA", "keepInteger", "showAttributes"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

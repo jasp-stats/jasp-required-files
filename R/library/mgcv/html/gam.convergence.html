@@ -11,10 +11,10 @@
 
 <p> When fitting GAMs there is a tradeoff between speed of 
 fitting and probability of fit convergence. The fitting methods used 
-by <code><a href="gam.html">gam</a></code> opt for certainty of convergence over speed of
-fit. <code><a href="bam.html">bam</a></code> opts for speed.
+by <code><a href="../../mgcv/help/gam.html">gam</a></code> opt for certainty of convergence over speed of
+fit. <code><a href="../../mgcv/help/bam.html">bam</a></code> opts for speed.
 </p>
-<p><code><a href="gam.html">gam</a></code> uses a nested iteration method (see <code><a href="gam.outer.html">gam.outer</a></code>), in
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> uses a nested iteration method (see <code><a href="../../mgcv/help/gam.outer.html">gam.outer</a></code>), in
 which each trial set of smoothing parameters proposed by an outer Newton algorithm
 require an inner Newton algorithm (penalized iteratively re-weighted least squares, PIRLS)
 to find the corresponding best fit model coefficients. Implicit differentiation is used to
@@ -23,18 +23,18 @@ derivatives of the smoothness selection criterion can be obtained, as required b
 This approach is less expensive than it at first appears, since excellent starting values for the inner
 iteration are available as soon as the smoothing parameters start to converge. See Wood (2011) and Wood, Pya and Saefken (2016).  
 </p>
-<p><code><a href="bam.html">bam</a></code> uses an alternative approach similar to &lsquo;performance iteration&rsquo; or &lsquo;PQL&rsquo;. A single PIRLS iteration is run to find the model coefficients. At each step this requires the estimation of a working penalized linear model. Smoothing parameter selection is applied directly to this working model at each step (as if it were a Gaussian additive model). This approach is more straightforward to code and in principle less costly than the nested approach. However it is not guaranteed to converge, since the smoothness selection criterion is changing at each iteration. It is sometimes possible for the algorithm to cycle around a small set of smoothing parameter, coefficient combinations without ever converging. <code><a href="bam.html">bam</a></code> includes some checks to limit this behaviour, and the further checks in the algorithm used by <code>bam(...,discrete=TRUE)</code> actually guarantee convergence in some cases, but in general guarantees are not possible. See Wood, Goude and Shaw (2015) and  Wood et al. (2017). 
+<p><code><a href="../../mgcv/help/bam.html">bam</a></code> uses an alternative approach similar to &lsquo;performance iteration&rsquo; or &lsquo;PQL&rsquo;. A single PIRLS iteration is run to find the model coefficients. At each step this requires the estimation of a working penalized linear model. Smoothing parameter selection is applied directly to this working model at each step (as if it were a Gaussian additive model). This approach is more straightforward to code and in principle less costly than the nested approach. However it is not guaranteed to converge, since the smoothness selection criterion is changing at each iteration. It is sometimes possible for the algorithm to cycle around a small set of smoothing parameter, coefficient combinations without ever converging. <code><a href="../../mgcv/help/bam.html">bam</a></code> includes some checks to limit this behaviour, and the further checks in the algorithm used by <code>bam(...,discrete=TRUE)</code> actually guarantee convergence in some cases, but in general guarantees are not possible. See Wood, Goude and Shaw (2015) and  Wood et al. (2017). 
 </p>
-<p><code><a href="gam.html">gam</a></code> when used with &lsquo;general&rsquo; families (such as <code><a href="multinom.html">multinom</a></code> or <code>cox.ph</code>) can also use a potentially faster scheme based on the extended Fellner-Schall method (Wood and Fasiolo, 2017). This also operates with a single iteration and is not guaranteed to converge, theoretically. 
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> when used with &lsquo;general&rsquo; families (such as <code><a href="../../mgcv/help/multinom.html">multinom</a></code> or <code>cox.ph</code>) can also use a potentially faster scheme based on the extended Fellner-Schall method (Wood and Fasiolo, 2017). This also operates with a single iteration and is not guaranteed to converge, theoretically. 
 </p>
 <p>There are three things that you can try to speed up GAM fitting. (i) if you have large 
 numbers of smoothing parameters in the generalized case, then try the <code>"bfgs"</code> method 
-option in <code><a href="gam.html">gam</a></code> argument <code>optimizer</code>: this can be faster than the default. (ii) Try using
-<code><a href="bam.html">bam</a></code>
+option in <code><a href="../../mgcv/help/gam.html">gam</a></code> argument <code>optimizer</code>: this can be faster than the default. (ii) Try using
+<code><a href="../../mgcv/help/bam.html">bam</a></code>
 (iii) For large datasets it may be worth changing
-the smoothing basis to use <code>bs="cr"</code> (see <code><a href="s.html">s</a></code> for details)
-for 1-d smooths, and to use <code><a href="te.html">te</a></code> smooths in place of
-<code><a href="s.html">s</a></code> smooths for smooths of more than one variable. This is because
+the smoothing basis to use <code>bs="cr"</code> (see <code><a href="../../mgcv/help/s.html">s</a></code> for details)
+for 1-d smooths, and to use <code><a href="../../mgcv/help/te.html">te</a></code> smooths in place of
+<code><a href="../../mgcv/help/s.html">s</a></code> smooths for smooths of more than one variable. This is because
 the default thin plate regression spline basis <code>"tp"</code> is costly to set up
 for large datasets.
 </p>
@@ -91,5 +91,5 @@ models. Journal of the Royal Statistical Society (B) 73(1):3-36
 and Hall/CRC Press.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

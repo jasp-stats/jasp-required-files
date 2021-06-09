@@ -9,13 +9,13 @@
 
 <h3>Description</h3>
 
-<p>Tweedie families, designed for use with <code><a href="gam.html">gam</a></code> from the <code>mgcv</code> library.
+<p>Tweedie families, designed for use with <code><a href="../../mgcv/help/gam.html">gam</a></code> from the <code>mgcv</code> library.
 Restricted to variance function powers between 1 and 2. A useful alternative to <code><a href="../../stats/html/family.html">quasi</a></code> when a
 full likelihood is desirable. <code>Tweedie</code> is for use with fixed <code>p</code>. <code>tw</code> is for use when <code>p</code>
 is to be estimated during fitting. For fixed <code>p</code> between 1 and 2 the Tweedie is an exponential family 
 distribution with variance given by the mean to the power <code>p</code>.
 </p>
-<p><code>tw</code> is only useable with <code><a href="gam.html">gam</a></code> and <code><a href="bam.html">bam</a></code> but not <code>gamm</code>. <code>Tweedie</code> works with all three.
+<p><code>tw</code> is only useable with <code><a href="../../mgcv/help/gam.html">gam</a></code> and <code><a href="../../mgcv/help/bam.html">bam</a></code> but not <code>gamm</code>. <code>Tweedie</code> works with all three.
 </p>
 
 
@@ -63,7 +63,7 @@ where <code>N</code> has a Poisson distribution. The p=1 case is a generalizatio
 distribution supported on integer multiples of the scale parameter. For 1&lt;p&lt;2 the distribution is supported on the 
 positive reals with a point mass at zero. p=2 is a gamma distribution. As p gets very close to 1 the continuous 
 distribution begins to converge on the discretely supported limit at p=1, and is therefore highly multimodal. 
-See <code><a href="ldTweedie.html">ldTweedie</a></code> for more on this behaviour.
+See <code><a href="../../mgcv/help/ldTweedie.html">ldTweedie</a></code> for more on this behaviour.
 </p>
 <p><code>Tweedie</code> is based partly on the <code><a href="../../stats/html/family.html">poisson</a></code> family, and partly on <code>tweedie</code> from the 
 <code>statmod</code> package. It includes extra components to work with all <code>mgcv</code> GAM fitting methods as well as 
@@ -126,7 +126,7 @@ doi: <a href="https://doi.org/10.1080/01621459.2016.1180986">10.1080/01621459.20
 
 <h3>See Also</h3>
 
-<p><code><a href="ldTweedie.html">ldTweedie</a></code>, <code><a href="rTweedie.html">rTweedie</a></code></p>
+<p><code><a href="../../mgcv/help/ldTweedie.html">ldTweedie</a></code>, <code><a href="../../mgcv/help/rTweedie.html">rTweedie</a></code></p>
 
 
 <h3>Examples</h3>
@@ -161,5 +161,5 @@ print(b2)
 rm(dat)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

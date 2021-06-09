@@ -121,16 +121,16 @@ less than the maximum lag of an AR term.</p>
 <td>
 <p>a string specifying the algorithm to compute the
 state-space initialization of the likelihood; see
-<code><a href="KalmanLike.html">KalmanLike</a></code> for details.   Can be abbreviated.</p>
+<code><a href="../../stats/help/KalmanLike.html">KalmanLike</a></code> for details.   Can be abbreviated.</p>
 </td></tr>
 <tr valign="top"><td><code>optim.method</code></td>
 <td>
 <p>The value passed as the <code>method</code> argument to
-<code><a href="optim.html">optim</a></code>.</p>
+<code><a href="../../stats/help/optim.html">optim</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>optim.control</code></td>
 <td>
-<p>List of control parameters for <code><a href="optim.html">optim</a></code>.</p>
+<p>List of control parameters for <code><a href="../../stats/help/optim.html">optim</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>kappa</code></td>
 <td>
@@ -160,7 +160,7 @@ term.
 <p>The variance matrix of the estimates is found from the Hessian of
 the log-likelihood, and so may only be a rough guide.
 </p>
-<p>Optimization is done by <code><a href="optim.html">optim</a></code>.  It will work
+<p>Optimization is done by <code><a href="../../stats/help/optim.html">optim</a></code>.  It will work
 best if the columns in <code>xreg</code> are roughly scaled to zero mean
 and unit variance, but does attempt to estimate suitable scalings.
 </p>
@@ -174,7 +174,7 @@ and unit variance, but does attempt to estimate suitable scalings.
 <tr valign="top"><td><code>coef</code></td>
 <td>
 <p>a vector of AR, MA and regression coefficients, which can
-be extracted by the <code><a href="coef.html">coef</a></code> method.</p>
+be extracted by the <code><a href="../../stats/help/coef.html">coef</a></code> method.</p>
 </td></tr>
 <tr valign="top"><td><code>sigma2</code></td>
 <td>
@@ -183,7 +183,7 @@ be extracted by the <code><a href="coef.html">coef</a></code> method.</p>
 <tr valign="top"><td><code>var.coef</code></td>
 <td>
 <p>the estimated variance matrix of the coefficients
-<code>coef</code>, which can be extracted by the <code><a href="vcov.html">vcov</a></code> method.</p>
+<code>coef</code>, which can be extracted by the <code><a href="../../stats/help/vcov.html">vcov</a></code> method.</p>
 </td></tr>
 <tr valign="top"><td><code>loglik</code></td>
 <td>
@@ -216,7 +216,7 @@ valid for <code>method = "ML"</code> fits.</p>
 </td></tr>
 <tr valign="top"><td><code>code</code></td>
 <td>
-<p>the convergence value returned by <code><a href="optim.html">optim</a></code>.</p>
+<p>the convergence value returned by <code><a href="../../stats/help/optim.html">optim</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>n.cond</code></td>
 <td>
@@ -225,13 +225,13 @@ valid for <code>method = "ML"</code> fits.</p>
 <tr valign="top"><td><code>nobs</code></td>
 <td>
 <p>the number of &ldquo;used&rdquo; observations for the fitting,
-can also be extracted via <code><a href="nobs.html">nobs</a>()</code> and is used by
-<code><a href="AIC.html">BIC</a></code>.</p>
+can also be extracted via <code><a href="../../stats/help/nobs.html">nobs</a>()</code> and is used by
+<code><a href="../../stats/help/BIC.html">BIC</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>model</code></td>
 <td>
 <p>A list representing the Kalman Filter used in the
-fitting.  See <code><a href="KalmanLike.html">KalmanLike</a></code>.</p>
+fitting.  See <code><a href="../../stats/help/KalmanLike.html">KalmanLike</a></code>.</p>
 </td></tr>
 </table>
 
@@ -246,7 +246,7 @@ differenced process the non-stationary components are given a diffuse
 prior (controlled by <code>kappa</code>).  Observations which are still
 controlled by the diffuse prior (determined by having a Kalman gain of
 at least <code>1e4</code>) are excluded from the likelihood calculations.
-(This gives comparable results to <code><a href="arima0.html">arima0</a></code> in the absence
+(This gives comparable results to <code><a href="../../stats/help/arima0.html">arima0</a></code> in the absence
 of missing values, when the observations excluded are precisely those
 dropped by the differencing.)
 </p>
@@ -283,7 +283,7 @@ roughly scale the regressors to zero mean and unit variance.
 not include a mean in the model.  Further, the convention used by
 <code>arima.mle</code> reverses the signs of the MA coefficients.
 </p>
-<p><code>arima</code> is very similar to <code><a href="arima0.html">arima0</a></code> for
+<p><code>arima</code> is very similar to <code><a href="../../stats/help/arima0.html">arima0</a></code> for
 ARMA models or for differenced models without missing values,
 but handles differenced models with missing values exactly.
 It is somewhat slower than <code>arima0</code>, particularly for seasonally
@@ -328,9 +328,9 @@ doi: <a href="https://doi.org/10.2307/1268324">10.2307/1268324</a>.
 
 <h3>See Also</h3>
 
-<p><code><a href="predict.arima.html">predict.Arima</a></code>, <code><a href="arima.sim.html">arima.sim</a></code> for simulating
-from an ARIMA model, <code><a href="tsdiag.html">tsdiag</a></code>, <code><a href="arima0.html">arima0</a></code>,
-<code><a href="ar.html">ar</a></code>
+<p><code><a href="../../stats/help/predict.Arima.html">predict.Arima</a></code>, <code><a href="../../stats/help/arima.sim.html">arima.sim</a></code> for simulating
+from an ARIMA model, <code><a href="../../stats/help/tsdiag.html">tsdiag</a></code>, <code><a href="../../stats/help/arima0.html">arima0</a></code>,
+<code><a href="../../stats/help/ar.html">ar</a></code>
 </p>
 
 
@@ -376,5 +376,5 @@ AIC(fitSfx, arima(presidents, order=c(2,0,1), seasonal=c(1,0,0)))
 predict(fit3, 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

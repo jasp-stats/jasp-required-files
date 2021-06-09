@@ -1,7 +1,23 @@
+
+# processx 3.5.2
+
+* `run()` now does not truncate stdout and stderr when the output
+  contains multibyte characters (#298, @infotroph).
+
+* processx now compiles with custom compilers that enable OpenMP (#297).
+
+* processx now avoids a race condition when the working directory is
+  changed right after starting a process, potentially before the
+  sub-process is initialized (#300).
+
+* processx now works with non-ASCII path names on non-UTF-8 Unix platforms
+  (#293).
+
+# processx 3.5.1
+
+* Fix a potential failure when polling curl file descriptors on Windows.
+
 # processx 3.5.0
-
-
-# processx development version
 
 * You can now append environment variables to the ones set in the current
   process if you include `"current"` in the value of `env`, in `run()`

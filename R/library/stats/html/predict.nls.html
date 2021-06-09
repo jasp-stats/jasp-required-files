@@ -125,8 +125,8 @@ if it was supplied.
 
 <h3>See Also</h3>
 
-<p>The model fitting function <code><a href="nls.html">nls</a></code>,
-<code><a href="predict.html">predict</a></code>.
+<p>The model fitting function <code><a href="../../stats/help/nls.html">nls</a></code>,
+<code><a href="../../stats/help/predict.html">predict</a></code>.
 </p>
 
 
@@ -143,11 +143,11 @@ opar &lt;- par(las = 1)
 plot(demand ~ Time, data = BOD, col = 4,
      main = "BOD data and fitted first-order curve",
      xlim = c(0,7), ylim = c(0, 20) )
-tt &lt;- seq(0, 8, length = 101)
+tt &lt;- seq(0, 8, length.out = 101)
 lines(tt, predict(fm, list(Time = tt)))
 par(opar)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -8,8 +8,9 @@ export("Adobe_glyphs", "HTMLheader", "Rcmd", "Rd2HTML", "Rd2ex",
        "assertCondition", "assertError", "assertWarning", "bibstyle",
        "buildVignette", "buildVignettes", "charset_to_Unicode",
        "checkDocFiles", "checkDocStyle", "checkFF", "checkMD5sums",
-       "checkNEWS", "checkRd", "checkPoFile", "checkPoFiles",
+       "checkRd", "checkPoFile", "checkPoFiles",
        "checkRdaFiles", "checkReplaceFuns", "checkS3methods",
+       checkRdContents,
        "checkTnF", "checkVignettes", "codoc", "codocClasses",
        "codocData", "compactPDF", "delimMatch", "deparseLatex",
        "dependsOnPkgs", "encoded_text_to_latex", "file_ext",
@@ -27,7 +28,7 @@ export("Adobe_glyphs", "HTMLheader", "Rcmd", "Rd2HTML", "Rd2ex",
        "package_dependencies",
        "package_native_routine_registration_skeleton",
        "parseLatex", "parse_Rd",
-       "pkgVignettes", "pskill", "psnice", "read.00Index", "readNEWS",
+       "pkgVignettes", "pskill", "psnice", "read.00Index",
        "resaveRdaFiles", "showNonASCII", "showNonASCIIfile",
        "startDynamicHelp", "testInstalledBasic",
        "testInstalledPackage", "testInstalledPackages", "texi2dvi",
@@ -62,7 +63,7 @@ S3method("as.character", "Rd")
 
 S3method("as.matrix", "check_url_db")
 
-S3method("format", "check_Rd_contents")
+S3method("format", "checkRdContents")
 S3method("format", "check_Rd_line_widths")
 S3method("format", "check_Rd_metadata")
 S3method("format", "check_Rd_xrefs")
@@ -83,10 +84,12 @@ S3method("format", "check_package_code_startup_functions")
 S3method("format", "check_package_datalist")
 S3method("format", "check_package_datasets")
 S3method("format", "check_package_depends")
+S3method("format", "check_package_description")
 S3method("format", "check_package_description2")
 S3method("format", "check_package_description_encoding")
 S3method("format", "check_package_license")
 S3method("format", "check_packages_used")
+S3method("format", "check_bogus_return")
 S3method("format", "check_so_symbols")
 S3method("format", "check_nonAPI_calls")
 S3method("format", "check_RegSym_calls")
@@ -128,7 +131,7 @@ S3method("print", "undoc", .print.via.format)
 S3method("print", "xgettext")
 S3method("print", "xngettext")
 
-S3method("print", "check_Rd_contents", .print.via.format)
+S3method("print", "checkRdContents", .print.via.format)
 S3method("print", "check_Rd_line_widths", .print.via.format)
 S3method("print", "check_Rd_metadata", .print.via.format)
 S3method("print", "check_Rd_xrefs", .print.via.format)
@@ -159,6 +162,7 @@ S3method("print", "check_package_datasets", .print.via.format)
 S3method("print", "check_package_compact_datasets")
 S3method("print", "check_packages_in_dir")
 S3method("print", "check_packages_used", .print.via.format)
+S3method("print", "check_bogus_return", .print.via.format)
 S3method("print", "check_po_files")
 S3method("print", "check_so_symbols", .print.via.format)
 S3method("print", "check_nonAPI_calls", .print.via.format)

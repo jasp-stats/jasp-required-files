@@ -22,12 +22,12 @@ Sys.info()
 
 <h3>Details</h3>
 
-<p>This uses POSIX or Windows system calls.  Note that OS names might not
+<p>This uses POSIX or Windows system calls.  Note that OS names (<code>sysname</code>) might not
 be what you expect: for example macOS identifies itself as
 <span class="samp">Darwin</span> and Solaris as <span class="samp">SunOS</span>.
 </p>
 <p><code>Sys.info()</code> returns details of the platform <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> is running on,
-whereas <code><a href="Version.html">R.version</a></code> gives details of the platform <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> was
+whereas <code><a href="../../base/help/R.version.html">R.version</a></code> gives details of the platform <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> was
 built on: the <code>release</code> and <code>version</code> may well be different.
 </p>
 
@@ -76,8 +76,17 @@ cannot be ascertained.  This may differ from the real user in
 &lsquo;set-user-ID&rsquo; processes.</p>
 </td></tr>
 </table>
-<p>The last three fields give the same value on Windows.
-</p>
+
+<dl>
+<dt>On Unix-alike platforms: </dt><dd>
+<p>The first five fields come from the <code>uname(2)</code> system call.  The
+login name comes from <code>getlogin(2)</code>, and the user names from
+<code>getpwuid(getuid())</code> and <code>getpwuid(geteuid())</code>.</p>
+</dd>
+<dt>On Windows: </dt><dd><p>The last three fields give the same value.</p>
+</dd>
+</dl>
+
 
 
 <h3>Note</h3>
@@ -104,14 +113,16 @@ on Unix-alikes, provided only the POSIX options <span class="option">-[Ggu][nr]<
 used (and not the many BSD and GNU extensions).  <code>whoami</code> is
 equivalent to <code>id -un</code> (on Solaris, <code>/usr/xpg4/bin/id -un</code>).
 </p>
-<p>Windows may report unexpected versions: see the help for
-<code><a href="../../utils/html/winextras.html">win.version</a></code>.
+<p>Windows may report unexpected versions: there, see the help for
+<code><a href="../../utils/html/winextras.html">win.version</a>()</code>.
+#else
+<code>win.version()</code>.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="Platform.html">.Platform</a></code>, and <code><a href="Version.html">R.version</a></code>.
+<p><code><a href="../../base/help/.Platform.html">.Platform</a></code>, and <code><a href="../../base/help/R.version.html">R.version</a></code>.
 <code><a href="../../utils/html/sessionInfo.html">sessionInfo</a>()</code> gives a synopsis of both your system and
 the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session (and gives the OS version in a human-readable form).
 </p>
@@ -125,5 +136,5 @@ Sys.info()
 Sys.getenv("LOGNAME")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

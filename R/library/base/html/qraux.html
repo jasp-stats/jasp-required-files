@@ -29,7 +29,7 @@ qr.R(qr, complete = FALSE)
 <tr valign="top"><td><code>qr</code></td>
 <td>
 <p>object representing a QR decomposition.  This will
-typically have come from a previous call to <code><a href="qr.html">qr</a></code> or
+typically have come from a previous call to <code><a href="../../base/help/qr.html">qr</a></code> or
 <code><a href="../../stats/html/lsfit.html">lsfit</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>complete</code></td>
@@ -77,8 +77,8 @@ columns.  When <code>Dvec</code> is specified, each column of <b>Q</b> is
 multiplied by the corresponding value in <code>Dvec</code>.
 </p>
 <p>Note that <code>qr.Q(qr, *)</code> is a special case of
-<code><a href="qr.html">qr.qy</a>(qr, y)</code> (with a &ldquo;diagonal&rdquo; <code>y</code>), and
-<code>qr.X(qr, *)</code> is basically <code><a href="qr.html">qr.qy</a>(qr, R)</code> (apart from
+<code><a href="../../base/help/qr.qy.html">qr.qy</a>(qr, y)</code> (with a &ldquo;diagonal&rdquo; <code>y</code>), and
+<code>qr.X(qr, *)</code> is basically <code><a href="../../base/help/qr.qy.html">qr.qy</a>(qr, R)</code> (apart from
 pivoting and <code>dimnames</code> setting).
 </p>
 <p><code>qr.R</code> returns <b>R</b>.  This may be pivoted, e.g., if
@@ -90,8 +90,8 @@ depend on whether <code>complete</code> is <code>TRUE</code> or <code>FALSE</cod
 
 <h3>See Also</h3>
 
-<p><code><a href="qr.html">qr</a></code>,
-<code><a href="qr.html">qr.qy</a></code>.
+<p><code><a href="../../base/help/qr.html">qr</a></code>,
+<code><a href="../../base/help/qr.qy.html">qr.qy</a></code>.
 </p>
 
 
@@ -124,5 +124,5 @@ stopifnot(
  all.equal(x           , qr.Q(a) %*% qr.R(a)[, pivI]))  # TRUE too!
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

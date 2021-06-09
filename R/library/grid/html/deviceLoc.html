@@ -10,15 +10,16 @@
 <h3>Description</h3>
 
 <p>These functions take a pair of unit objects and convert
-them to a pair of device locations (or dimensions) in inches.
+them to a pair of device locations (or dimensions) in inches
+(or native device coordinates).
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-deviceLoc(x, y, valueOnly = FALSE)
-deviceDim(w, h, valueOnly = FALSE)
+deviceLoc(x, y, valueOnly = FALSE, device = FALSE)
+deviceDim(w, h, valueOnly = FALSE, device = FALSE)
 </pre>
 
 
@@ -34,6 +35,11 @@ deviceDim(w, h, valueOnly = FALSE)
 <p> A logical indicating.  If <code>TRUE</code> then
 the function does not return a unit object, but rather only the
 converted numeric values. </p>
+</td></tr>
+<tr valign="top"><td><code>device</code></td>
+<td>
+<p> A logical indicating whether the returned values should
+be in inches or native device units. </p>
 </td></tr>
 </table>
 
@@ -76,7 +82,7 @@ the entire device (i.e., within the context of the root viewport).
 
 <h3>See Also</h3>
 
- <p><code><a href="unit.html">unit</a></code> </p>
+ <p><code><a href="../../grid/help/unit.html">unit</a></code> </p>
 
 
 <h3>Examples</h3>
@@ -112,5 +118,5 @@ upViewport()
 grid.circle(loc$x, loc$y, r=unit(1, "mm"), gp=gpar(fill="black"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grid</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grid</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

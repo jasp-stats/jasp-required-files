@@ -140,17 +140,29 @@ If present the returned curve contains survival after
 
 <h3>Details</h3>
 
-<p>This routine produces survival curves based on a <code>coxph</code>
-model fit.  The <code>ctype</code> option found in
-<code>survfit.formula</code> is not present, it instead follows from the
-choice of the <code>ties</code> option in the <code>coxph</code> call.  Likewise
+<p>This routine produces Pr(state) curves based on a <code>coxph</code>
+model fit. For single state models it produces the single curve for
+S(t) = Pr(remain in initial state at time t), known as the survival
+curve; for multi-state models a matrix giving probabilities for all states.
+The <code>stype</code> argument states the type of estimate, and defaults
+to the exponential of the cumulative hazard, better known as the Breslow
+estimate.  For a multi-state Cox model this involves the exponential
+of a matrix. 
+The argument <code>stype=1</code> uses a non-exponential or &lsquo;direct&rsquo;
+estimate.  For a single endpoint coxph model the code evaluates the
+Kalbfleich-Prentice estimate, and for a multi-state model it uses an
+analog of the Aalen-Johansen estimator.  The latter approach is the
+default in the <code>mstate</code> package.
+</p>
+<p>The <code>ctype</code> option affects the estimated cumulative hazard, and
+if <code>stype=2</code> the estimated P(state) curves as well.  If not
+present it is chosen so as to be concordant with the 
+<code>ties</code> option in the <code>coxph</code> call. (For multistate
+<code>coxphms</code> objects only <code>ctype=1</code> is currently implemented.)
+Likewise
 the choice between a model based and robust variance estimate for the
-curve will mirror the choice made in the <code>coxph</code> call.
-The <code>cluster</code> and <code>influence</code> options are only relevant for
-the robust variance.  A <code>id</code> statment in the original call causes
-subjects that have multiple lines in the original data to be correctly
-identified.  (This calculation needs both the original data and the
-new data.)
+curve will mirror the choice made in the <code>coxph</code> call,
+any clustering is also inherited from the parent model.
 </p>
 <p>If the <code>newdata</code> argument is missing, then a curve is produced
 for a single &quot;pseudo&quot; subject with
@@ -166,7 +178,9 @@ is this a flying pig?  As to interactions assume data with sex coded as 0/1,
 ages ranging from 50 to 80, and a model with age*sex.  The &ldquo;mean&rdquo;
 value for the age:sex interaction term will be about 30, a value
 that does not occur in the data.
-Users are strongly advised to use the newdata argument. 
+Users are strongly advised to use the newdata argument.
+For these reasons predictions from a multistate coxph model require
+the newdata argument.
 </p>
 <p>When the original model contains time-dependent covariates, then the
 path of that covariate through time needs to be specified in order to
@@ -198,7 +212,7 @@ routine does not allow it to be omitted (predictions become too confusing).
 strata(sex) + age:sex; the sex variable is needed for the second term
 of the model.)
 </p>
-<p>See <code><a href="survfit.html">survfit</a></code> for more details about the counts (number of
+<p>See <code><a href="../../survival/help/survfit.html">survfit</a></code> for more details about the counts (number of
 events, number at risk, etc.)
 </p>
 
@@ -250,13 +264,13 @@ model for survival data. <em>Annals of Statistics</em>
 
 <h3>See Also</h3>
 
-<p><code><a href="print.survfit.html">print.survfit</a></code>,  
-<code><a href="plot.survfit.html">plot.survfit</a></code>,  
-<code><a href="lines.survfit.html">lines.survfit</a></code>,   
-<code><a href="coxph.html">coxph</a></code>,  
-<code><a href="Surv.html">Surv</a></code>,  
-<code><a href="strata.html">strata</a></code>.   
+<p><code><a href="../../survival/help/print.survfit.html">print.survfit</a></code>,  
+<code><a href="../../survival/help/plot.survfit.html">plot.survfit</a></code>,  
+<code><a href="../../survival/help/lines.survfit.html">lines.survfit</a></code>,   
+<code><a href="../../survival/help/coxph.html">coxph</a></code>,  
+<code><a href="../../survival/help/Surv.html">Surv</a></code>,  
+<code><a href="../../survival/help/strata.html">strata</a></code>.   
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-11 <a href="00Index.html">Index</a>]</div>
 </body></html>

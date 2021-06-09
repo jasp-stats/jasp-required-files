@@ -44,7 +44,7 @@ components of <code>x</code>?</p>
 <h3>Details</h3>
 
 <p><code>unlist</code> is generic: you can write methods to handle
-specific classes of objects, see <a href="InternalMethods.html">InternalMethods</a>,
+specific classes of objects, see <a href="../../base/help/InternalMethods.html">InternalMethods</a>,
 and note, e.g., <code><a href="../../utils/html/relist.html">relist</a></code> with the <code>unlist</code> method
 for <code>relistable</code> objects.
 </p>
@@ -52,7 +52,7 @@ for <code>relistable</code> objects.
 first level items in <code>x</code>.
 </p>
 <p>Factors are treated specially.  If all non-list elements of <code>x</code>
-are <code><a href="factor.html">factor</a></code> (or ordered factor) objects then the result
+are <code><a href="../../base/help/factor.html">factor</a></code> (or ordered factor) objects then the result
 will be a factor with
 levels the union of the level sets of the elements, in the order the
 levels occur in the level sets of the elements (which means that if
@@ -105,7 +105,7 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="c.html">c</a></code>, <code><a href="list.html">as.list</a></code>, <code><a href="../../utils/html/relist.html">relist</a></code>.
+<p><code><a href="../../base/help/c.html">c</a></code>, <code><a href="../../base/help/as.list.html">as.list</a></code>, <code><a href="../../utils/html/relist.html">relist</a></code>.
 </p>
 
 
@@ -130,5 +130,5 @@ for(x in ll)
   stopifnot(identical(x, unlist(x)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

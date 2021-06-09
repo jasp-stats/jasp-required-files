@@ -26,7 +26,7 @@ file.path(..., fsep = .Platform$file.sep)
 <table summary="R argblock">
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>character vectors.  <a href="LongVectors.html">Long vectors</a> are not supported.</p>
+<p>character vectors.  <a href="../../base/help/Long vectors.html">Long vectors</a> are not supported.</p>
 </td></tr>
 <tr valign="top"><td><code>fsep</code></td>
 <td>
@@ -38,7 +38,7 @@ file.path(..., fsep = .Platform$file.sep)
 <h3>Details</h3>
 
 <p>The implementation is designed to be fast (faster than
-<code><a href="paste.html">paste</a></code>) as this function is used extensively in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> itself.
+<code><a href="../../base/help/paste.html">paste</a></code>) as this function is used extensively in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> itself.
 </p>
 <p>It can also be used for environment paths such as <span class="env">PATH</span> and
 <span class="env">R_LIBS</span> with <code>fsep = .Platform$path.sep</code>.
@@ -53,9 +53,9 @@ them), so a trailing <code>/</code> or <code>\</code> is removed there.
 
 <p>A character vector of the arguments concatenated term-by-term and
 separated by <code>fsep</code> if all arguments have positive length;
-otherwise, an empty character vector (unlike <code><a href="paste.html">paste</a></code>).
+otherwise, an empty character vector (unlike <code><a href="../../base/help/paste.html">paste</a></code>).
 </p>
-<p>An element of the result will be marked (see <code><a href="Encoding.html">Encoding</a></code>) as
+<p>An element of the result will be marked (see <code><a href="../../base/help/Encoding.html">Encoding</a></code>) as
 UTF-8 if run in a UTF-8 locale (when marked inputs are converted to
 UTF-8) or if a component of the result is marked as UTF-8, or as
 Latin-1 in a non-Latin-1 locale.
@@ -71,8 +71,8 @@ Latin-1 in a non-Latin-1 locale.
 
 <h3>See Also</h3>
 
-<p><code><a href="basename.html">basename</a></code>, <code><a href="normalizePath.html">normalizePath</a></code>, <code><a href="path.expand.html">path.expand</a></code>.
+<p><code><a href="../../base/help/basename.html">basename</a></code>, <code><a href="../../base/help/normalizePath.html">normalizePath</a></code>, <code><a href="../../base/help/path.expand.html">path.expand</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

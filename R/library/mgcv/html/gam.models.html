@@ -44,7 +44,7 @@ the constraint is needed or not (see below).
 </p>
 <p>The following sections discuss specifying model structures for <code>gam</code>. 
 Specification of the distribution and link function is done using the <code><a href="../../stats/html/family.html">family</a></code> 
-argument to <code><a href="gam.html">gam</a></code> and works in the same way as for <code><a href="../../stats/html/glm.html">glm</a></code>. 
+argument to <code><a href="../../mgcv/help/gam.html">gam</a></code> and works in the same way as for <code><a href="../../stats/html/glm.html">glm</a></code>. 
 This page therefore concentrates on the model formula for <code>gam</code>.
 </p>
 
@@ -67,8 +67,8 @@ smoothing basis is given a default value as well (the dimension of the
 basis sets an upper limit on the maximum possible degrees of
 freedom for the basis - the limit is typically one less than basis
 dimension). Full details of how to control smooths are given in
-<code><a href="s.html">s</a></code> and <code><a href="te.html">te</a></code>, and further discussion of basis
-dimension choice can be found in <code><a href="choose.k.html">choose.k</a></code>. 
+<code><a href="../../mgcv/help/s.html">s</a></code> and <code><a href="../../mgcv/help/te.html">te</a></code>, and further discussion of basis
+dimension choice can be found in <code><a href="../../mgcv/help/choose.k.html">choose.k</a></code>. 
 For the moment suppose that we would like to change
 the basis of the first smooth to a cubic regression spline basis with
 a dimension of 20, while fixing the second term at 25 degrees of
@@ -78,7 +78,7 @@ freedom. The appropriate formula would be:<br />
 <p>The above assumes that <i>x_4</i> and <i>x_5</i> are naturally on 
 similar scales (e.g. they might be co-ordinates), so that isotropic smoothing 
 is appropriate. If this assumption is false then tensor product smoothing might be 
-better (see <code><a href="te.html">te</a></code>). <br />
+better (see <code><a href="../../mgcv/help/te.html">te</a></code>). <br />
 <code>y ~ x1 + x2 + s(x3) + te(x4,x5)</code><br />
 would generate a tensor product smooth of <i>x_4</i> and <i>x_5</i>. 
 By default this smooth would have basis dimension 25 and use cubic regression spline marginals. 
@@ -100,7 +100,7 @@ and a rank 7 P-spline marginal to create a smooth with basis dimension 42.
 <p style="text-align: center;"><i>
  E(y) = f1(x) + f2(z) + f3(v) + f4(x,z) + f5(z,v) + f6(z,v) + f7(x,z,v)</i></p>
 
-<p>for example. Such models should be set up using <code><a href="te.html">ti</a></code> terms in the model formula. For example: <br />
+<p>for example. Such models should be set up using <code><a href="../../mgcv/help/ti.html">ti</a></code> terms in the model formula. For example: <br />
 <code>y ~ ti(x) + ti(z) + ti(x,z)</code>, or<br />
 <code>y ~ ti(x) + ti(z) + ti(v) + ti(x,z) + ti(x,v) + ti(z,v)+ti(x,z,v)</code>. <br />
 The <code>ti</code> terms produce interactions with the component main effects excluded appropriately. (There is in fact no need to use <code>ti</code> terms for the main effects here, <code>s</code> terms could also be used.)
@@ -116,12 +116,12 @@ make such models identifiable, but the resulting models are much less stable and
 for letting smooths &lsquo;interact&rsquo; with factors or parametric terms. They are also the key to specifying general linear 
 functionals of smooths.
 </p>
-<p>The <code><a href="s.html">s</a></code> and <code><a href="te.html">te</a></code> terms used to specify smooths accept an argument <code>by</code>, 
+<p>The <code><a href="../../mgcv/help/s.html">s</a></code> and <code><a href="../../mgcv/help/te.html">te</a></code> terms used to specify smooths accept an argument <code>by</code>, 
 which is a numeric or factor variable of the same dimension as the covariates of the smooth. 
 If a <code>by</code> variable is numeric, then its <i>ith</i> element multiples the  <i>ith</i>
 row of the model matrix corresponding to the smooth term concerned. 
 </p>
-<p>Factor smooth interactions (see also <code><a href="smooth.construct.fs.smooth.spec.html">factor.smooth.interaction</a></code>).
+<p>Factor smooth interactions (see also <code><a href="../../mgcv/help/factor.smooth.interaction.html">factor.smooth.interaction</a></code>).
 If a <code>by</code> variable is a <code><a href="../../base/html/factor.html">factor</a></code> then it 
 generates an indicator vector for each level 
 of the factor, unless it is an <code><a href="../../base/html/factor.html">ordered</a></code> factor.
@@ -129,7 +129,7 @@ In the non-ordered case, the model matrix for the smooth term is then replicated
 and each copy has its rows multiplied by the corresponding rows of its
 indicator variable. The smoothness penalties are also duplicated for each
 factor level.  In short a different smooth is generated
-for each factor level (the <code>id</code> argument to <code><a href="s.html">s</a></code> and <code><a href="te.html">te</a></code> can be used to force all 
+for each factor level (the <code>id</code> argument to <code><a href="../../mgcv/help/s.html">s</a></code> and <code><a href="../../mgcv/help/te.html">te</a></code> can be used to force all 
 such smooths to have the same smoothing parameter). <code><a href="../../base/html/factor.html">ordered</a></code> <code>by</code> variables are handled in the same 
 way, except that no smooth is generated for the first level of the ordered factor (see <code>b3</code> example below). 
 This is useful for setting up 
@@ -160,7 +160,7 @@ supplies an identifiability constraint explicitly, and that constraint has an at
 <h3>Linking smooths with &lsquo;id&rsquo;</h3>
 
 <p>It is sometimes desirable to insist that different smooth terms have the same degree of smoothness. 
-This can be done by using the <code>id</code> argument to <code><a href="s.html">s</a></code> or <code><a href="te.html">te</a></code> terms. Smooths 
+This can be done by using the <code>id</code> argument to <code><a href="../../mgcv/help/s.html">s</a></code> or <code><a href="../../mgcv/help/te.html">te</a></code> terms. Smooths 
 which share an <code>id</code> will have the same smoothing parameter. Really this only makes sense if the 
 smooths use the same basis functions, and the default behaviour is to force this to happen: all smooths 
 sharing an <code>id</code> have the same basis functions as the first smooth occurring with that <code>id</code>. Note 
@@ -206,23 +206,23 @@ linear predictor is <code>rowSums(L*F)</code> (note that it's element by element
 </p>
 <p>The summation convention applies to <code>te</code> terms as well as <code>s</code> terms. More details and examples 
 are provided in 
-<code><a href="linear.functional.terms.html">linear.functional.terms</a></code>. 
+<code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code>. 
 </p>
 
 
 <h3>Random effects</h3>
 
 <p>Random effects can be added to <code>gam</code> models using <code>s(...,bs="re")</code> terms (see 
-<code><a href="smooth.construct.re.smooth.spec.html">smooth.construct.re.smooth.spec</a></code>), 
-or the <code>paraPen</code> argument to <code><a href="gam.html">gam</a></code> covered below. See <code><a href="gam.vcomp.html">gam.vcomp</a></code>, <code><a href="random.effects.html">random.effects</a></code> and 
-<code><a href="smooth.construct.re.smooth.spec.html">smooth.construct.re.smooth.spec</a></code> for further details. An alternative is to use the approach of <code><a href="gamm.html">gamm</a></code>.
+<code><a href="../../mgcv/help/smooth.construct.re.smooth.spec.html">smooth.construct.re.smooth.spec</a></code>), 
+or the <code>paraPen</code> argument to <code><a href="../../mgcv/help/gam.html">gam</a></code> covered below. See <code><a href="../../mgcv/help/gam.vcomp.html">gam.vcomp</a></code>, <code><a href="../../mgcv/help/random.effects.html">random.effects</a></code> and 
+<code><a href="../../mgcv/help/smooth.construct.re.smooth.spec.html">smooth.construct.re.smooth.spec</a></code> for further details. An alternative is to use the approach of <code><a href="../../mgcv/help/gamm.html">gamm</a></code>.
 </p>
 
 
 <h3>Penalizing the parametric terms</h3>
 
 <p>In case the ability to add smooth classes, smooth identities, <code>by</code> variables and the summation convention are 
-still not sufficient to implement exactly the penalized GLM that you require, <code><a href="gam.html">gam</a></code> also allows you to penalize the 
+still not sufficient to implement exactly the penalized GLM that you require, <code><a href="../../mgcv/help/gam.html">gam</a></code> also allows you to penalize the 
 parametric terms in the model formula. This is mostly useful in 
 allowing one or more matrix terms to be included in the formula, along with a 
 sequence of quadratic penalty matrices for each. 
@@ -249,7 +249,7 @@ Gaussian random effects, then their estimated variance will be the estimated sca
 smoothing parameter, for this penalty. See the &lsquo;rail&rsquo; example below. 
 </p>
 <p>P-values for penalized parametric terms should be treated with caution. If you must have them, then use the option <code>freq=TRUE</code> in 
-<code><a href="anova.gam.html">anova.gam</a></code> and <code><a href="summary.gam.html">summary.gam</a></code>, which will tend to give reasonable results for random effects implemented this way, 
+<code><a href="../../mgcv/help/anova.gam.html">anova.gam</a></code> and <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code>, which will tend to give reasonable results for random effects implemented this way, 
 but not for terms with a rank defficient penalty (or penalties with a wide eigen-spectrum). 
 </p>
 
@@ -407,5 +407,5 @@ plot(bg,pages=1,scheme=1)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -44,8 +44,8 @@ non-compressed input be allowed?</p>
 <td>
 <p>logical. Should the connection be text-oriented? This is
 distinct from the mode of the connection (must always be binary).
-If <code>TRUE</code>, <code><a href="pushBack.html">pushBack</a></code> works on the connection,
-otherwise <code><a href="readBin.html">readBin</a></code> and friends apply.</p>
+If <code>TRUE</code>, <code><a href="../../base/help/pushBack.html">pushBack</a></code> works on the connection,
+otherwise <code><a href="../../base/help/readBin.html">readBin</a></code> and friends apply.</p>
 </td></tr>
 </table>
 
@@ -60,8 +60,8 @@ header is equivalent to reading from the original connection if
 <code>allowNonCompressed</code> is true, otherwise an error.
 </p>
 <p>Compressed output will contain embedded NUL bytes, and so <code>con</code>
-is not permitted to be a <code><a href="textconnections.html">textConnection</a></code> opened with
-<code>open = "w"</code>.  Use a writable <code><a href="rawConnection.html">rawConnection</a></code> to
+is not permitted to be a <code><a href="../../base/help/textConnection.html">textConnection</a></code> opened with
+<code>open = "w"</code>.  Use a writable <code><a href="../../base/help/rawConnection.html">rawConnection</a></code> to
 compress data into a variable.
 </p>
 <p>The original connection becomes unusable: any object pointing to it will
@@ -80,7 +80,7 @@ structure.  It has binary mode.
 
 <h3>See Also</h3>
 
-<p><code><a href="connections.html">gzfile</a></code></p>
+<p><code><a href="../../base/help/gzfile.html">gzfile</a></code></p>
 
 
 <h3>Examples</h3>
@@ -117,5 +117,5 @@ close(zz)
 unlink(zzfil2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -18,7 +18,7 @@ slower than <code>gam</code>, and not quite as numerically robust.
 <p>To use <code>lme4</code> in place of <code>nlme</code> as the underlying fitting engine, 
 see <code>gamm4</code> from package <code>gamm4</code>.
 </p>
-<p>Smooths are specified as in a call to <code><a href="gam.html">gam</a></code> as part of the fixed 
+<p>Smooths are specified as in a call to <code><a href="../../mgcv/help/gam.html">gam</a></code> as part of the fixed 
 effects model formula, but the wiggly components of the smooth are treated as 
 random effects. The random effects structures and correlation structures 
 available for <code>lme</code> are used to specify other random effects and 
@@ -32,7 +32,7 @@ matrix for the coefficients of all the terms in the fixed effects formula,
 including the smooths.
 </p>
 <p>To use this function effectively it helps to be quite familiar with the use of
-<code><a href="gam.html">gam</a></code> and <code><a href="../../nlme/html/lme.html">lme</a></code>.
+<code><a href="../../mgcv/help/gam.html">gam</a></code> and <code><a href="../../nlme/help/lme.html">lme</a></code>.
 </p>
 
 
@@ -53,23 +53,23 @@ mustart=NULL, etastart=NULL,...)
 <table summary="R argblock">
 <tr valign="top"><td><code>formula</code></td>
 <td>
-<p> A GAM formula (see also <code><a href="formula.gam.html">formula.gam</a></code> and <code><a href="gam.models.html">gam.models</a></code>).
-This is like the formula for a <code>glm</code> except that smooth terms (<code><a href="s.html">s</a></code>, <code><a href="te.html">te</a></code> etc.)
+<p> A GAM formula (see also <code><a href="../../mgcv/help/formula.gam.html">formula.gam</a></code> and <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code>).
+This is like the formula for a <code>glm</code> except that smooth terms (<code><a href="../../mgcv/help/s.html">s</a></code>, <code><a href="../../mgcv/help/te.html">te</a></code> etc.)
 can be added to the right hand side of the formula. Note that <code>id</code>s for smooths and fixed smoothing parameters are not supported. Any offset should be specified in the formula.
 </p>
 </td></tr> 
 <tr valign="top"><td><code>random</code></td>
 <td>
 <p>The (optional) random effects structure as specified in a call to 
-<code><a href="../../nlme/html/lme.html">lme</a></code>: only the <code>list</code> form is allowed, to facilitate 
+<code><a href="../../nlme/help/lme.html">lme</a></code>: only the <code>list</code> form is allowed, to facilitate 
 manipulation of the random effects structure within <code>gamm</code> in order to deal
 with smooth terms. See example below.</p>
 </td></tr>
 <tr valign="top"><td><code>correlation</code></td>
 <td>
 <p>An optional <code>corStruct</code> object 
-(see <code><a href="../../nlme/html/corClasses.html">corClasses</a></code>) as used to define correlation 
-structures in <code><a href="../../nlme/html/lme.html">lme</a></code>. Any grouping factors in the formula for
+(see <code><a href="../../nlme/help/corClasses.html">corClasses</a></code>) as used to define correlation 
+structures in <code><a href="../../nlme/help/lme.html">lme</a></code>. Any grouping factors in the formula for
 this object are assumed to be nested within any random effect grouping
 factors, without the need to make this explicit in the formula (this is 
 slightly different to the behaviour of <code>lme</code>). This 
@@ -77,9 +77,9 @@ is a GEE approach to correlation in the generalized case. See examples below.</p
 </td></tr>
 <tr valign="top"><td><code>family</code></td>
 <td>
-<p>A <code>family</code> as used in a call to <code><a href="../../stats/html/glm.html">glm</a></code> or <code><a href="gam.html">gam</a></code>.
+<p>A <code>family</code> as used in a call to <code><a href="../../stats/html/glm.html">glm</a></code> or <code><a href="../../mgcv/help/gam.html">gam</a></code>.
 The default <code>gaussian</code> with identity link causes <code>gamm</code> to fit by a direct call to
-<code><a href="../../nlme/html/lme.html">lme</a></code> provided there is no offset term, otherwise
+<code><a href="../../nlme/help/lme.html">lme</a></code> provided there is no offset term, otherwise
 <code>gammPQL</code> is used.</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
@@ -116,8 +116,8 @@ Different terms can use different numbers of knots, unless they share a covariat
 </td></tr>
 <tr valign="top"><td><code>control</code></td>
 <td>
-<p>A list of fit control parameters for <code><a href="../../nlme/html/lme.html">lme</a></code> to replace the 
-defaults returned by <code><a href="../../nlme/html/lmeControl.html">lmeControl</a></code>. Note the setting 
+<p>A list of fit control parameters for <code><a href="../../nlme/help/lme.html">lme</a></code> to replace the 
+defaults returned by <code><a href="../../nlme/help/lmeControl.html">lmeControl</a></code>. Note the setting 
 for the number of EM iterations used by <code>lme</code>: smooths are set up using custom <code>pdMat</code> classes,
 which are currently not supported by the EM iteration code. If you supply a list of control values,
 it is advisable to include <code>niterEM=0</code>, as well, and only increase from 0
@@ -176,13 +176,13 @@ strictly additive case amounts to using a GEE approach to fitting).
 <p>Some details of how GAMs are represented as mixed models and estimated using
 <code>lme</code> or <code>gammPQL</code> in <code>gamm</code> can be found in Wood (2004 ,2006a,b). In addition <code>gamm</code> obtains a posterior covariance matrix for the parameters of all the fixed effects and the smooth terms. The approach is similar to that described in Lin &amp; Zhang (1999) - the covariance matrix of the data (or pseudodata in the generalized case) implied by the weights, correlation and random effects structure is obtained, based on the estimates of the parameters of these terms and this is used to obtain the posterior covariance matrix of the fixed and smooth effects. 
 </p>
-<p>The bases used to represent smooth terms are the same as those used in <code><a href="gam.html">gam</a></code>, although adaptive
-smoothing bases are not available. Prediction from the returned <code>gam</code> object is straightforward using <code><a href="predict.gam.html">predict.gam</a></code>, but this will set the random effects to zero. If you want to predict with random effects set to their predicted values then you can adapt the prediction code given in the examples below. 
+<p>The bases used to represent smooth terms are the same as those used in <code><a href="../../mgcv/help/gam.html">gam</a></code>, although adaptive
+smoothing bases are not available. Prediction from the returned <code>gam</code> object is straightforward using <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>, but this will set the random effects to zero. If you want to predict with random effects set to their predicted values then you can adapt the prediction code given in the examples below. 
 </p>
 <p>In the event of <code>lme</code> convergence failures, consider
 modifying <code>options(mgcv.vc.logrange)</code>: reducing it helps to remove
 indefiniteness in the likelihood, if that is the problem, but too large a
-reduction can force over or undersmoothing. See <code><a href="notExp2.html">notExp2</a></code> for more
+reduction can force over or undersmoothing. See <code><a href="../../mgcv/help/notExp2.html">notExp2</a></code> for more
 information on this option. Failing that, you can try increasing the
 <code>niterEM</code> option in <code>control</code>: this will perturb the starting values
 used in fitting, but usually to values with lower likelihood! Note that this
@@ -215,7 +215,7 @@ structures may appear to be rather bizarre, because of the manner in which the G
 
 <h3>WARNINGS </h3>
 
-<p><code>gamm</code> has a somewhat different argument list to <code><a href="gam.html">gam</a></code>,
+<p><code>gamm</code> has a somewhat different argument list to <code><a href="../../mgcv/help/gam.html">gam</a></code>,
 <code>gam</code> arguments such as <code>gamma</code> supplied to <code>gamm</code> will
 just be ignored.  
 </p>
@@ -249,13 +249,13 @@ increase the memory available to R in order to use it with large data sets
 those used by the PQL iteration: this makes partial residual plots look odd.
 </p>
 <p>Note that the <code>gam</code> object part of the returned object is not complete in
-the sense of having all the elements defined in <code><a href="gamObject.html">gamObject</a></code> and
+the sense of having all the elements defined in <code><a href="../../mgcv/help/gamObject.html">gamObject</a></code> and
 does not inherit from <code>glm</code>: hence e.g. multi-model <code>anova</code> calls will not work.
 It is also based on the working model when PQL is used.
 </p>
 <p>The parameterization used for the smoothing parameters in <code>gamm</code>, bounds
 them above and below by an effective infinity and effective zero. See
-<code><a href="notExp2.html">notExp2</a></code> for details of how to change this. 
+<code><a href="../../mgcv/help/notExp2.html">notExp2</a></code> for details of how to change this. 
 </p>
 <p>Linked smoothing parameters and adaptive smoothing are not supported.
 </p>
@@ -307,11 +307,11 @@ and Hall/CRC Press.
 
 <h3>See Also</h3>
 
-<p><code><a href="magic.html">magic</a></code> for an alternative for correlated data,
-<code><a href="te.html">te</a></code>, <code><a href="s.html">s</a></code>, 
-<code><a href="predict.gam.html">predict.gam</a></code>,
-<code><a href="plot.gam.html">plot.gam</a></code>, <code><a href="summary.gam.html">summary.gam</a></code>, <code><a href="negbin.html">negbin</a></code>, 
-<code><a href="vis.gam.html">vis.gam</a></code>,<code><a href="pdTens.html">pdTens</a></code>, <code>gamm4</code> (
+<p><code><a href="../../mgcv/help/magic.html">magic</a></code> for an alternative for correlated data,
+<code><a href="../../mgcv/help/te.html">te</a></code>, <code><a href="../../mgcv/help/s.html">s</a></code>, 
+<code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>,
+<code><a href="../../mgcv/help/plot.gam.html">plot.gam</a></code>, <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code>, <code><a href="../../mgcv/help/negbin.html">negbin</a></code>, 
+<code><a href="../../mgcv/help/vis.gam.html">vis.gam</a></code>,<code><a href="../../mgcv/help/pdTens.html">pdTens</a></code>, <code>gamm4</code> (
 <a href="https://cran.r-project.org/package=gamm4">https://cran.r-project.org/package=gamm4</a>)
 </p>
 
@@ -461,5 +461,5 @@ par(old.par)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

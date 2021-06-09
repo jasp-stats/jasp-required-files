@@ -39,7 +39,7 @@ and each column corresponds to a variable. All variables must be numeric.
 Missing values (NAs) are allowed.
 </p>
 <p>In case of a dissimilarity matrix, <code>x</code> is typically the output
-of <code><a href="daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code>.  Also a vector of
+of <code><a href="../../cluster/help/daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code>.  Also a vector of
 length n*(n-1)/2 is allowed (where n is the number of observations),
 and will be interpreted in the same way as the output of the
 above-mentioned functions.  Missing values (NAs) are not allowed.
@@ -141,7 +141,7 @@ of observation <i>i</i> to cluster <i>v</i>.
 <p>The memberships are nonnegative, and for a fixed observation i they sum to 1.
 The particular method <code>fanny</code> stems from chapter 4 of
 Kaufman and Rousseeuw (1990) (see the references in
-<code><a href="daisy.html">daisy</a></code>) and has been extended by Martin Maechler to allow
+<code><a href="../../cluster/help/daisy.html">daisy</a></code>) and has been extended by Martin Maechler to allow
 user specified <code>memb.exp</code>, <code>iniMem.p</code>, <code>maxit</code>,
 <code>tol</code>, etc.
 </p>
@@ -164,22 +164,22 @@ user is advised to chose a smaller <code>memb.exp</code> (<i>=r</i>).
 features: (a) it also accepts a dissimilarity matrix; (b) it is
 more robust to the <code>spherical cluster</code> assumption; (c) it provides
 a novel graphical display, the silhouette plot (see
-<code><a href="plot.partition.html">plot.partition</a></code>).
+<code><a href="../../cluster/help/plot.partition.html">plot.partition</a></code>).
 </p>
 
 
 <h3>Value</h3>
 
 <p>an object of class <code>"fanny"</code> representing the clustering.
-See <code><a href="fanny.object.html">fanny.object</a></code> for details.
+See <code><a href="../../cluster/help/fanny.object.html">fanny.object</a></code> for details.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="agnes.html">agnes</a></code> for background and references;
-<code><a href="fanny.object.html">fanny.object</a></code>, <code><a href="partition.object.html">partition.object</a></code>,
-<code><a href="plot.partition.html">plot.partition</a></code>, <code><a href="daisy.html">daisy</a></code>, <code><a href="../../stats/html/dist.html">dist</a></code>.
+<p><code><a href="../../cluster/help/agnes.html">agnes</a></code> for background and references;
+<code><a href="../../cluster/help/fanny.object.html">fanny.object</a></code>, <code><a href="../../cluster/help/partition.object.html">partition.object</a></code>,
+<code><a href="../../cluster/help/plot.partition.html">plot.partition</a></code>, <code><a href="../../cluster/help/daisy.html">daisy</a></code>, <code><a href="../../stats/html/dist.html">dist</a></code>.
 </p>
 
 
@@ -208,5 +208,5 @@ plot(f4, which = 1)
 plot(fanny(ruspini, 5))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

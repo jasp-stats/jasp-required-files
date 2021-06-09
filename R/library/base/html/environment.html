@@ -44,7 +44,7 @@ env.profile(env)
 <table summary="R argblock">
 <tr valign="top"><td><code>fun</code></td>
 <td>
-<p>a <code><a href="function.html">function</a></code>, a <code><a href="../../stats/html/formula.html">formula</a></code>, or
+<p>a <code><a href="../../base/help/function.html">function</a></code>, a <code><a href="../../stats/html/formula.html">formula</a></code>, or
 <code>NULL</code>, which is the default.</p>
 </td></tr>
 <tr valign="top"><td><code>value</code></td>
@@ -86,12 +86,12 @@ common example is the frame of variables local to a function call; its
 <em>enclosure</em> is the environment where the function was defined
 (unless changed subsequently).  The enclosing environment is
 distinguished from the <em>parent frame</em>: the latter (returned by
-<code><a href="sys.parent.html">parent.frame</a></code>) refers to the environment of the caller of
+<code><a href="../../base/help/parent.frame.html">parent.frame</a></code>) refers to the environment of the caller of
 a function.  Since confusion is so easy, it is best never to use
 &lsquo;parent&rsquo; in connection with an environment (despite the
 presence of the function <code>parent.env</code>).
 </p>
-<p>When <code><a href="get.html">get</a></code> or <code><a href="exists.html">exists</a></code> search an environment
+<p>When <code><a href="../../base/help/get.html">get</a></code> or <code><a href="../../base/help/exists.html">exists</a></code> search an environment
 with the default <code>inherits = TRUE</code>, they look for the variable
 in the frame, then in the enclosing frame, and so on.
 </p>
@@ -116,7 +116,7 @@ in the near future.
 </p>
 <p>The replacement form of <code>environment</code>, <code>is.environment</code>,
 <code>baseenv</code>, <code>emptyenv</code> and <code>globalenv</code> are
-<a href="Primitive.html">primitive</a> functions.
+<a href="../../base/help/primitive.html">primitive</a> functions.
 </p>
 <p>System environments, such as the base, global and empty environments,
 have names as do the package and namespace environments and those
@@ -165,13 +165,13 @@ When <code>env</code> is a non-hashed environment, <code>NULL</code> is returned
 <p>For the performance implications of hashing or not, see
 <a href="https://en.wikipedia.org/wiki/Hash_table">https://en.wikipedia.org/wiki/Hash_table</a>.
 </p>
-<p>The <code>envir</code> argument of <code><a href="eval.html">eval</a></code>, <code><a href="get.html">get</a></code>,
-and <code><a href="exists.html">exists</a></code>.
+<p>The <code>envir</code> argument of <code><a href="../../base/help/eval.html">eval</a></code>, <code><a href="../../base/help/get.html">get</a></code>,
+and <code><a href="../../base/help/exists.html">exists</a></code>.
 </p>
-<p><code><a href="ls.html">ls</a></code> may be used to view the objects in an environment,
+<p><code><a href="../../base/help/ls.html">ls</a></code> may be used to view the objects in an environment,
 and hence <code><a href="../../utils/html/ls_str.html">ls.str</a></code> may be useful for an overview.
 </p>
-<p><code><a href="sys.source.html">sys.source</a></code> can be used to populate an environment.
+<p><code><a href="../../base/help/sys.source.html">sys.source</a></code> can be used to populate an environment.
 </p>
 
 
@@ -202,5 +202,5 @@ eh &lt;- new.env(hash = TRUE, size = NA)
 with(env.profile(eh), stopifnot(size == length(counts)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,35 +1,4 @@
 
-# renv 0.14.0 (UNRELEASED)
-
-* Fixed an issue where chunks with the chunk option `eval=F` would
-  still be scanned for dependencies. (#421)
-  
-* In interactive sessions, `renv::use_python()` will now prompt for
-  the version of Python to be used. Python installations in a set
-  of common locations will be searched. See `?renv::use_python()`
-  for more details.
-
-* Fixed an issue where `renv` would fail to retrieve packages from the
-  archives if the lockfile entry was tagged with a `RemoteSha` field.
-
-* `renv::restore()` will now prefer restoring packages from the repository
-  named in the `Repository` field if available. The name is matched against
-  the repository names set in the R `repos` option, or as encoded in the
-  `renv` lockfile. (#701)
-  
-* `renv` now supports the discovery of dependencies within interpolated strings
-  as used by the `glue` package.
-
-* `RENV_CONFIG_EXTERNAL_LIBRARIES` can now be configured to use multiple
-  library paths, delimited by either `:`, `;`, or `,`. (#700)
-  
-* `renv` gains the configuration option, `exported.functions`, controlling
-  which functions and objects are placed on the R search path when `renv`
-  is attached (e.g. via `library(renv)`). Set this to `NULL` to instruct `renv`
-  not to place any functions on the search path. This helps avoid issues with,
-  for example, `renv::load()` masking `base::load()`. When set, all usages
-  of `renv` APIs must be explicitly qualified with the `renv::` prefix.
-  
 # renv 0.13.2
 
 * `renv::install("user/repo/subdir with spaces")` now works as expected. (#694)

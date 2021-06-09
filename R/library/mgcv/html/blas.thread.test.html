@@ -38,7 +38,7 @@ blas.thread.test(n=1000,nt=4)
 
 <p>While single threaded OpenBLAS 0.2.20 was thread safe, versions 0.3.0-0.3.6 are not, and from version 0.3.7 thread safety of the single threaded OpenBLAS requires making it with the option <code>USE_LOCKING=1</code>. The reference BLAS is thread safe, as are MKL and ATLAS. This routine repeatedly calls the BLAS from multi-threaded code and is sufficient to detect the problem in single threaded OpenBLAS 0.3.x.
 </p>
-<p>A multi-threaded BLAS is often no faster than a single-threaded BLAS, while judicious use of threading in the code calling the BLAS can still deliver a modest speed improvement. For this reason it is often better to use a single threaded BLAS and the codenthreads options to <code><a href="bam.html">bam</a></code> or <code><a href="gam.html">gam</a></code>. For <code>bam(...,discrete=TRUE)</code> using several threads can be a substantial benefit, especially with the reference BLAS.
+<p>A multi-threaded BLAS is often no faster than a single-threaded BLAS, while judicious use of threading in the code calling the BLAS can still deliver a modest speed improvement. For this reason it is often better to use a single threaded BLAS and the codenthreads options to <code><a href="../../mgcv/help/bam.html">bam</a></code> or <code><a href="../../mgcv/help/gam.html">gam</a></code>. For <code>bam(...,discrete=TRUE)</code> using several threads can be a substantial benefit, especially with the reference BLAS.
 </p>
 <p>The MKL BLAS is mutlithreaded by default. Under linux setting environment variable <code>MKL_NUM_THREADS=1</code> before starting R gives single threaded operation. 
 </p>
@@ -48,5 +48,5 @@ blas.thread.test(n=1000,nt=4)
 
 <p> Simon N. Wood <a href="mailto:simon.wood@r-project.org">simon.wood@r-project.org</a></p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

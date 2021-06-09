@@ -46,7 +46,7 @@ currently used with complex matrices <code>a</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>LINPACK</code></td>
 <td>
-<p>logical.  Defunct and ignored with a warning.</p>
+<p>logical.  Defunct and an error.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -67,8 +67,8 @@ made that the column names of <code>a</code> and the row names of <code>b</code>
 are equal.
 </p>
 <p>For back-compatibility <code>a</code> can be a (real) QR decomposition,
-although <code><a href="qr.html">qr.solve</a></code> should be called in that case.
-<code><a href="qr.html">qr.solve</a></code> can handle non-square systems.
+although <code><a href="../../base/help/qr.solve.html">qr.solve</a></code> should be called in that case.
+<code><a href="../../base/help/qr.solve.html">qr.solve</a></code> can handle non-square systems.
 </p>
 <p>Unsuccessful results from the underlying LAPACK code will result in an
 error giving a positive error code: these can only be interpreted by
@@ -100,9 +100,9 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="qr.html">solve.qr</a></code> for the <code>qr</code> method,
-<code><a href="chol2inv.html">chol2inv</a></code> for inverting from the Choleski factor
-<code><a href="backsolve.html">backsolve</a></code>, <code><a href="qr.html">qr.solve</a></code>.
+<p><code><a href="../../base/help/solve.qr.html">solve.qr</a></code> for the <code>qr</code> method,
+<code><a href="../../base/help/chol2inv.html">chol2inv</a></code> for inverting from the Choleski factor
+<code><a href="../../base/help/backsolve.html">backsolve</a></code>, <code><a href="../../base/help/qr.solve.html">qr.solve</a></code>.
 </p>
 
 
@@ -120,5 +120,5 @@ A[] &lt;- as.complex(A)
 try(solve(A))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

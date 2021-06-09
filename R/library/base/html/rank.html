@@ -32,7 +32,7 @@ rank(x, na.last = TRUE,
 </td></tr>
 <tr valign="top"><td><code>na.last</code></td>
 <td>
-<p>for controlling the treatment of <code><a href="NA.html">NA</a></code>s.
+<p>for controlling the treatment of <code><a href="../../base/help/NA.html">NA</a></code>s.
 If <code>TRUE</code>, missing values in the data are put last; if
 <code>FALSE</code>, they are put first; if <code>NA</code>, they are removed; if
 <code>"keep"</code> they are kept with rank <code>NA</code>.</p>
@@ -63,7 +63,7 @@ ranking.
     TRUE</code> and <code>na.last = FALSE</code> they are given distinct ranks in
 the order in which they occur in <code>x</code>.
 </p>
-<p><strong>NB</strong>: <code>rank</code> is not itself generic but <code><a href="xtfrm.html">xtfrm</a></code>
+<p><strong>NB</strong>: <code>rank</code> is not itself generic but <code><a href="../../base/help/xtfrm.html">xtfrm</a></code>
 is, and <code>rank(xtfrm(x), ....)</code> will have the desired result if
 there is a <code>xtfrm</code> method.  Otherwise, <code>rank</code> will make use
 of <code>==</code>, <code>&gt;</code>, <code>is.na</code> and extraction methods for
@@ -91,8 +91,8 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="order.html">order</a></code> and <code><a href="sort.html">sort</a></code>;
-<code><a href="xtfrm.html">xtfrm</a></code>, see above.
+<p><code><a href="../../base/help/order.html">order</a></code> and <code><a href="../../base/help/sort.html">sort</a></code>;
+<code><a href="../../base/help/xtfrm.html">xtfrm</a></code>, see above.
 </p>
 
 
@@ -128,5 +128,5 @@ rx &lt;- sapply(tMeth, function(MM) rank(x, ties.method=MM))
 stopifnot(all(rx[,1] == rx))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -2,7 +2,7 @@
 #
 # ${R_HOME}/tests/Makefile.common
 
-## If you add test scripts here, review  ../src/library/tools/R/testing.R
+## If you add test scripts here, review  ../src/library/tools/R/testing.R <<<<<<<<<<<<
 
 test-src-gct = \
 	eval-etc.R \
@@ -50,13 +50,14 @@ test-src-cond = conditions.R
 
 test-src-reg-1 = array-subset.R \
   reg-tests-1a.R reg-tests-1b.R reg-tests-1c.R reg-tests-1d.R reg-tests-2.R \
-  reg-examples1.R reg-examples2.R reg-packages.R p-qbeta-strict-tst.R \
+  reg-examples1.R reg-examples2.R reg-packages.R p-qbeta-strict-tst.R d-p-q-r-tst-2.R \
   r-strict-tst.R \
   reg-IO.R reg-IO2.R reg-plot.R reg-S4-examples.R reg-BLAS.R
 ## added to in Makefile.win
 test-src-reg-1e =
 test-src-reg = $(test-src-reg-1) $(test-src-reg-1e)
 ## overridden in Makefile if recommended packages are not installed.
+## *-src-reg3 are sloppy (*.Rout may differ from *.Rout.save):
 ## reg-S4 has to be a sloppy test, as output differs if Matrix is absent.
 test-src-reg3 = reg-tests-3.R reg-examples3.R reg-plot-latin1.R reg-S4.R
 
@@ -130,6 +131,14 @@ reg-plot.Rout: reg-plot.R
 	@$(ECHO) "$(ECHO_T) OK" >> $@.log
 	@cat $@.log; rm $@.log
 
+## Using $(R2) (whenever LC_ALL=C is not needed - so LANGUAGE can work)
+reg-translation.Rout: reg-translation.R
+	@rm -f $@ $@.fail $@.log
+	@$(ECHO) $(ECHO_N) "running code in '$<' ...$(ECHO_C)" > $@.log
+	@LANGUAGE=fr $(R2) < $< > $@ 2>&1 || (mv $@ $@.fail && cat $@.log && rm $@.log && exit 1)
+	@$(ECHO) "$(ECHO_T) OK" >> $@.log
+	@cat $@.log; rm $@.log
+
 ## allow this to fail, as it may if the locale does not support Latin-1 chars
 reg-plot-latin1.Rout: reg-plot-latin1.R
 	@rm -f $@ $@.fail
@@ -176,7 +185,7 @@ test-all-basics:
 
 ## if you change this, also edit Makefile.install
 ## The definitions for Standalone are in Makefile.{in,win}.
-all-devel-tests = DateTime Docs IsAs Random Demo Primitive Regexp \
+all-devel-tests = DateTime Docs IsAs Random Demo Primitive Regexp Translation \
     Internet2 CRANtools Segfault Standalone Conditions Packages
 test-all-devel:
 	@for name in $(all-devel-tests); do \
@@ -198,6 +207,8 @@ test-Specific:
 	@$(MK) test-TimeZone
 
 test-Packages:
+	@$(ECHO) "building NEWS database [for news() example]"; \
+	  (cd $(top_builddir)/doc ; $(MK) NEWS.rds; ls -l NEWS.rds )
 	@if test -n "${TEST_MC_CORES}"; then \
 	  $(ECHO) "Using ${TEST_MC_CORES} cores to check packages"; \
 	  $(MK) -j ${TEST_MC_CORES} test-Packages2; \
@@ -279,6 +290,7 @@ test-CRANtools:
 
 test-Large:
 	@$(ECHO) "running tests needing large amounts of processor memory"
+	@$(ECHO) "  (is slow, notably when memory is available)"
 	@$(MK) $(test-out-large) RVAL_IF_DIFF=0
 
 test-Primitive:
@@ -308,6 +320,11 @@ test-Segfault:
 	@$(MK) $(test-out-segfault) RVAL_IF_DIFF=0
 	-@rm -Rf data dumpdata.R ./-package.Rd ./-Ex.R .Rd F.Rd [a-z]*0.Rd Rprof.out Rplots* \
 	    PACKAGES PACKAGES.gz [A-Za-z]*-package.Rd FALSE.* mirrors.html
+
+test-Translation:
+	@$(ECHO) "running tests of translation"
+	@rm -f reg-translation.Rout
+	@$(MK) reg-translation.Rout RVAL_IF_DIFF=0
 
 ## Not run by any other target
 test-UTF-8:

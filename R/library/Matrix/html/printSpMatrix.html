@@ -49,7 +49,7 @@ printSpMatrix2(x, digits = NULL, maxp = max(100L, getOption("max.print")),
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object inheriting from class <code><a href="sparseMatrix-class.html">sparseMatrix</a></code>.</p>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object inheriting from class <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>digits</code></td>
 <td>
@@ -152,8 +152,8 @@ necessary.</p>
 <dt>formatSpMatrix:</dt><dd>
 <p>If <code>x</code> is large, only the first rows making up the
 approximately first <code>maxp</code> entries is used, otherwise all of <code>x</code>.
-<code><a href="formatSparseM.html">.formatSparseSimple</a>()</code> is applied to (a dense version
-of) the matrix.  Then, <code><a href="formatSparseM.html">formatSparseM</a></code> is used, unless
+<code><a href="../../Matrix/help/.formatSparseSimple.html">.formatSparseSimple</a>()</code> is applied to (a dense version
+of) the matrix.  Then, <code><a href="../../Matrix/help/formatSparseM.html">formatSparseM</a></code> is used, unless
 in trivial cases or for sparse matrices without <code>x</code> slot.</p>
 </dd>
 </dl>
@@ -182,11 +182,11 @@ column names, depending on <code>col.names</code> etc, see above.</p>
 
 <h3>See Also</h3>
 
-<p>the virtual class <code><a href="sparseMatrix-class.html">sparseMatrix</a></code> and the
-classes extending it;  maybe <code><a href="sparseMatrix.html">sparseMatrix</a></code> or
-<code><a href="spMatrix.html">spMatrix</a></code> as simple constructors of such matrices.
+<p>the virtual class <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code> and the
+classes extending it;  maybe <code><a href="../../Matrix/help/sparseMatrix.html">sparseMatrix</a></code> or
+<code><a href="../../Matrix/help/spMatrix.html">spMatrix</a></code> as simple constructors of such matrices.
 </p>
-<p>The underlying utilities <code><a href="formatSparseM.html">formatSparseM</a></code> and
+<p>The underlying utilities <code><a href="../../Matrix/help/formatSparseM.html">formatSparseM</a></code> and
 <code>.formatSparseSimple()</code> (on the same page).
 </p>
 
@@ -214,5 +214,5 @@ print(t(X2), zero.print = "-", col.names="substring 2")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

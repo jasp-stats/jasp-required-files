@@ -1,5 +1,5 @@
 
-R version 4.0.3 Patched (2021-01-08 r79820) -- "Bunny-Wunnies Freak Out"
+R Under development (unstable) (2021-04-16 r80178) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -337,7 +337,7 @@ check_EPD: function (obj, show = !hasReal(obj), oNam = deparse(substitute(obj)),
     noLdbl <- (.Machine$sizeof.longdouble <= 8)
     if (!identical(obj, ob2, ignore.environment = TRUE, ignore.bytecode = TRUE, 
         ignore.srcref = TRUE)) {
-        ae <- all.equal(obj, ob2, tolerance = eq.tol)
+        ae <- all.equal(obj, ob2, tolerance = eq.tol, check.environment = FALSE)
         if (is.na(match(oNam, not.identical.ldouble))) {
             ae.txt <- "all.equal(*,*, tol = ..)"
             cat("not identical(*, ignore.env=T),", if (isTRUE(ae)) 
@@ -379,7 +379,7 @@ quote({
     noLdbl <- (.Machine$sizeof.longdouble <= 8)
     if (!identical(obj, ob2, ignore.environment = TRUE, ignore.bytecode = TRUE, 
         ignore.srcref = TRUE)) {
-        ae <- all.equal(obj, ob2, tolerance = eq.tol)
+        ae <- all.equal(obj, ob2, tolerance = eq.tol, check.environment = FALSE)
         if (is.na(match(oNam, not.identical.ldouble))) {
             ae.txt <- "all.equal(*,*, tol = ..)"
             cat("not identical(*, ignore.env=T),", if (isTRUE(ae)) 
@@ -619,5 +619,5 @@ Length  Class   Mode
      0   NULL   NULL 
 > ## at the very end
 > cat('Time elapsed: ', proc.time(), "\n")
-Time elapsed:  3.045 0.189 3.368 0.003 0.003 
+Time elapsed:  1.556 0.11 1.67 0.001 0.004 
 > 

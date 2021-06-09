@@ -42,7 +42,7 @@ storage.mode(x) &lt;- value
 
 <p>Both <code>mode</code> and <code>storage.mode</code> return a character string
 giving the (storage) mode of the object &mdash; often the same &mdash; both
-relying on the output of <code><a href="typeof.html">typeof</a>(x)</code>, see the example
+relying on the output of <code><a href="../../base/help/typeof.html">typeof</a>(x)</code>, see the example
 below.
 </p>
 <p><code>mode(x) &lt;- "newmode"</code> changes the <code>mode</code> of object <code>x</code> to
@@ -53,9 +53,9 @@ below.
 <code>"name"</code>, <code>"symbol"</code> and <code>"function"</code>.  Attributes are
 preserved (but see below).
 </p>
-<p><code>storage.mode(x) &lt;- "newmode"</code> is a more efficient <a href="Primitive.html">primitive</a>
+<p><code>storage.mode(x) &lt;- "newmode"</code> is a more efficient <a href="../../base/help/primitive.html">primitive</a>
 version of <code>mode&lt;-</code>, which works for <code>"newmode"</code> which is
-one of the internal types (see <code><a href="typeof.html">typeof</a></code>), but not for
+one of the internal types (see <code><a href="../../base/help/typeof.html">typeof</a></code>), but not for
 <code>"single"</code>.  Attributes are preserved.
 </p>
 <p>As storage mode <code>"single"</code> is only a pseudo-mode in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>, it will
@@ -66,14 +66,14 @@ which sets the real mode to <code>"double"</code> and the <code>"Csingle"</code>
 attribute to <code>TRUE</code>.  Setting any other mode will remove this
 attribute.
 </p>
-<p>Note (in the examples below) that some <code><a href="call.html">call</a></code>s have mode
+<p>Note (in the examples below) that some <code><a href="../../base/help/call.html">call</a></code>s have mode
 <code>"("</code> which is S compatible.
 </p>
 
 
 <h3>Mode names</h3>
 
-<p>Modes have the same set of names as types (see <code><a href="typeof.html">typeof</a></code>)
+<p>Modes have the same set of names as types (see <code><a href="../../base/help/typeof.html">typeof</a></code>)
 except that
 </p>
 
@@ -105,8 +105,8 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="typeof.html">typeof</a></code> for the R-internal &lsquo;mode&rsquo;,
-<code><a href="../../utils/html/type.convert.html">type.convert</a></code>, <code><a href="attributes.html">attributes</a></code>.
+<p><code><a href="../../base/help/typeof.html">typeof</a></code> for the R-internal &lsquo;mode&rsquo;,
+<code><a href="../../utils/help/type.convert.html">type.convert</a></code>, <code><a href="../../base/help/attributes.html">attributes</a></code>.
 </p>
 
 
@@ -133,5 +133,5 @@ storage.mode(pi)
 rm(pi)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

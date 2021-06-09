@@ -60,7 +60,7 @@ applied (if any): this will always succeed for <code>bzip2</code>
 compression, and will succeed for other forms if there is a suitable
 header.  It will auto-detect the &lsquo;magic&rsquo; header
 (<code>"\x1f\x8b"</code>) added to files by the <code>gzip</code> program (and
-to files written by <code><a href="connections.html">gzfile</a></code>), but <code>memCompress</code> does
+to files written by <code><a href="../../base/help/gzfile.html">gzfile</a></code>), but <code>memCompress</code> does
 not add such a header. (It supports RFC 1950 format, sometimes known
 as &lsquo;zlib&rsquo; format, for compression and decompression and RFC
 1952 for decompression only.)
@@ -96,9 +96,9 @@ will fail if the output would have been too large.
 
 <h3>See Also</h3>
 
-<p><a href="connections.html">connections</a>.
+<p><a href="../../base/help/connections.html">connections</a>.
 </p>
-<p><code><a href="extSoftVersion.html">extSoftVersion</a></code> for the versions of the <code>zlib</code>,
+<p><code><a href="../../base/help/extSoftVersion.html">extSoftVersion</a></code> for the versions of the <code>zlib</code>,
 <code>bzip2</code> and <code>xz</code> libraries in use.
 </p>
 <p><a href="https://en.wikipedia.org/wiki/Data_compression">https://en.wikipedia.org/wiki/Data_compression</a> for background on
@@ -132,5 +132,5 @@ txt3 &lt;- strsplit(memDecompress(txt.xz, asChar = TRUE), "\n")[[1]]
 stopifnot(identical(txt, txt3))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

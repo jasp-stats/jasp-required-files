@@ -43,7 +43,7 @@ panel.3dscatter(x, y, z, rot.mat, distance,
                 xlim.scaled, ylim.scaled, zlim.scaled,
                 zero.scaled,
                 col, col.point, col.line,
-                lty, lwd, cex, pch,
+                lty, lwd, cex, pch, fill,
                 cross, ..., .scale = FALSE, subscripts,
                 identifier = "3dscatter")
 panel.3dwire(x, y, z, rot.mat = diag(4), distance,
@@ -125,7 +125,7 @@ level functions.
 <p>numeric, between 0 and 1, controls amount of perspective. The
 distance of the viewing point from the origin (in the transformed
 coordinate system) is <code>1 / distance</code>. This is described in a
-little more detail in the documentation for <code><a href="cloud.html">cloud</a></code>
+little more detail in the documentation for <code><a href="../../lattice/help/cloud.html">cloud</a></code>
 </p>
 </td></tr>
 <tr valign="top"><td><code>screen</code></td>
@@ -241,10 +241,10 @@ similar to <code>levelplot</code>.  This is ignored if <code>shade=TRUE</code>.
 <td>
 
 <p>deals with specification of colors when <code>drape = TRUE</code> in
-<code><a href="cloud.html">wireframe</a></code>.  <code>at</code> can be a numeric vector,
+<code><a href="../../lattice/help/wireframe.html">wireframe</a></code>.  <code>at</code> can be a numeric vector,
 <code>col.regions</code> a vector of colors, and <code>alpha.regions</code> a
 numeric scalar controlling transparency.  The resulting behaviour is
-similar to <code><a href="levelplot.html">levelplot</a></code>, <code>at</code> giving the breakpoints
+similar to <code><a href="../../lattice/help/levelplot.html">levelplot</a></code>, <code>at</code> giving the breakpoints
 along the z-axis where colors change, and the other two determining
 the colors of the facets that fall in between.
 </p>
@@ -254,7 +254,7 @@ the colors of the facets that fall in between.
 
 <p>4x4 transformation matrix in homogeneous coordinates. This gives the
 rotation matrix combining the <code>screen</code> and <code>R.mat</code>
-arguments to <code><a href="panel.cloud.html">panel.cloud</a></code>
+arguments to <code><a href="../../lattice/help/panel.cloud.html">panel.cloud</a></code>
 </p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
@@ -346,7 +346,7 @@ intensive. This argument controls the trade-off.
 <td>
 <p>colors for different groups</p>
 </td></tr>
-<tr valign="top"><td><code>col, col.point, col.line, lty, lwd, cex, pch, alpha</code></td>
+<tr valign="top"><td><code>col, col.point, col.line, lty, lwd, cex, pch, fill, alpha</code></td>
 <td>
 
 <p>Graphical parameters.  Some other arguments (such as <code>lex</code> for
@@ -401,7 +401,7 @@ defining a rectangular grid. <code>z</code> must be a matrix with
 of groups.
 </p>
 <p><code>panel.3dscatter</code> is the default <code>panel.3d.cloud</code> function.
-It has a <code>type</code> argument similar to <code><a href="panel.xyplot.html">panel.xyplot</a></code>,
+It has a <code>type</code> argument similar to <code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code>,
 and supports grouped displays. It tries to honour depth ordering,
 i.e., points and lines closer to the camera are drawn later,
 overplotting more distant ones. (Of course there is no absolute
@@ -431,7 +431,7 @@ enough to render intersecting surfaces correctly.
 
 <h3>See Also</h3>
 
-<p><code><a href="cloud.html">cloud</a></code>, <code><a href="utilities.3d.html">utilities.3d</a></code></p>
+<p><code><a href="../../lattice/help/cloud.html">cloud</a></code>, <code><a href="../../lattice/help/utilities.3d.html">utilities.3d</a></code></p>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

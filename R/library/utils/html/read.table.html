@@ -25,7 +25,7 @@ read.table(file, header = FALSE, sep = "", quote = "\"'",
            strip.white = FALSE, blank.lines.skip = TRUE,
            comment.char = "#",
            allowEscapes = FALSE, flush = FALSE,
-           stringsAsFactors = default.stringsAsFactors(),
+           stringsAsFactors = FALSE,
            fileEncoding = "", encoding = "unknown", text, skipNul = FALSE)
 
 read.csv(file, header = TRUE, sep = ",", quote = "\"",
@@ -98,7 +98,7 @@ for columns read as character, which is all of them unless
 <tr valign="top"><td><code>numerals</code></td>
 <td>
 <p>string indicating how to convert numbers whose conversion
-to double precision would lose accuracy, see <code><a href="type.convert.html">type.convert</a></code>.
+to double precision would lose accuracy, see <code><a href="../../utils/help/type.convert.html">type.convert</a></code>.
 Can be abbreviated.  (Applies also to complex-number inputs.)</p>
 </td></tr>
 <tr valign="top"><td><code>row.names</code></td>
@@ -156,7 +156,7 @@ the columns.  If unnamed, recycled as necessary.  If named, names
 are matched with unspecified values being taken to be <code>NA</code>.
 </p>
 <p>Possible values are <code>NA</code> (the default, when
-<code><a href="type.convert.html">type.convert</a></code> is used), <code>"NULL"</code> (when the column
+<code><a href="../../utils/help/type.convert.html">type.convert</a></code> is used), <code>"NULL"</code> (when the column
 is skipped), one of the atomic vector classes (logical, integer,
 numeric, complex, character, raw), or <code>"factor"</code>, <code>"Date"</code>
 or <code>"POSIXct"</code>.  Otherwise there needs to be an <code>as</code>
@@ -234,7 +234,7 @@ to factors?  Note that this is overridden by <code>as.is</code> and
 <p>character string: if non-empty declares the
 encoding used on a file (not a connection) so the character data can
 be re-encoded.  See the &lsquo;Encoding&rsquo; section of the help for
-<code><a href="../../base/html/connections.html">file</a></code>, the &lsquo;R Data Import/Export Manual&rsquo; and
+<code><a href="../../base/html/connections.html">file</a></code>, the &lsquo;R Data Import/Export&rsquo; manual and
 &lsquo;Note&rsquo;.
 </p>
 </td></tr>
@@ -272,7 +272,7 @@ within R code.
 <p>This function is the principal means of reading tabular data into <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
 </p>
 <p>Unless <code>colClasses</code> is specified, all columns are read as
-character columns and then converted using <code><a href="type.convert.html">type.convert</a></code>
+character columns and then converted using <code><a href="../../utils/help/type.convert.html">type.convert</a></code>
 to logical, integer, numeric, complex or (depending on <code>as.is</code>)
 factor as appropriate.  Quotes are (by default) interpreted in all
 fields, so a column of values like <code>"42"</code> will result in an
@@ -387,13 +387,13 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 
 <p>The &lsquo;R Data Import/Export&rsquo; manual.
 </p>
-<p><code><a href="../../base/html/scan.html">scan</a></code>, <code><a href="type.convert.html">type.convert</a></code>,
-<code><a href="read.fwf.html">read.fwf</a></code> for reading <em>f</em>ixed <em>w</em>idth
+<p><code><a href="../../base/html/scan.html">scan</a></code>, <code><a href="../../utils/help/type.convert.html">type.convert</a></code>,
+<code><a href="../../utils/help/read.fwf.html">read.fwf</a></code> for reading <em>f</em>ixed <em>w</em>idth
 <em>f</em>ormatted input;
-<code><a href="write.table.html">write.table</a></code>;
+<code><a href="../../utils/help/write.table.html">write.table</a></code>;
 <code><a href="../../base/html/data.frame.html">data.frame</a></code>.
 </p>
-<p><code><a href="count.fields.html">count.fields</a></code> can be useful to determine problems with
+<p><code><a href="../../utils/help/count.fields.html">count.fields</a></code> can be useful to determine problems with
 reading files which result in reports of incorrect record lengths (see
 the &lsquo;Examples&rsquo; below).
 </p>
@@ -427,5 +427,5 @@ a b
 ")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

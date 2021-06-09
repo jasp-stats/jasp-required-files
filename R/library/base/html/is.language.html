@@ -10,8 +10,8 @@
 <h3>Description</h3>
 
 <p><code>is.language</code> returns <code>TRUE</code> if <code>x</code> is a
-variable <code><a href="name.html">name</a></code>, a <code><a href="call.html">call</a></code>, or an
-<code><a href="expression.html">expression</a></code>.
+variable <code><a href="../../base/help/name.html">name</a></code>, a <code><a href="../../base/help/call.html">call</a></code>, or an
+<code><a href="../../base/help/expression.html">expression</a></code>.
 </p>
 
 
@@ -35,13 +35,13 @@ is.language(x)
 <h3>Note</h3>
 
 <p>A <code>name</code> is also known as &lsquo;symbol&rsquo;, from its type
-(<code><a href="typeof.html">typeof</a></code>), see <code><a href="name.html">is.symbol</a></code>.
+(<code><a href="../../base/help/typeof.html">typeof</a></code>), see <code><a href="../../base/help/is.symbol.html">is.symbol</a></code>.
 </p>
-<p>If <code><a href="typeof.html">typeof</a>(x) == "language"</code>, then <code>is.language(x)</code>
+<p>If <code><a href="../../base/help/typeof.html">typeof</a>(x) == "language"</code>, then <code>is.language(x)</code>
 is always true, but the reverse does not hold as expressions or
 names <code>y</code> also fulfill <code>is.language(y)</code>, see the examples.
 </p>
-<p>This is a <a href="Primitive.html">primitive</a> function.
+<p>This is a <a href="../../base/help/primitive.html">primitive</a> function.
 </p>
 
 
@@ -63,5 +63,5 @@ sapply(ll, mode)
 stopifnot(sapply(ll, is.language))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

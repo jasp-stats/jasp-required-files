@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;cli&rsquo; version 2.3.1</h2>
+</div><h2>Documentation for package &lsquo;cli&rsquo; version 2.5.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -45,6 +45,8 @@
 <td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi_align.html">ansi_align</a></td>
 <td>Align an ANSI colored string</td></tr>
+<tr><td style="width: 25%;"><a href="ansi_toupper.html">ansi_chartr</a></td>
+<td>ANSI character translation and case folding</td></tr>
 <tr><td style="width: 25%;"><a href="ansi_columns.html">ansi_columns</a></td>
 <td>Format a character vector in multiple columns</td></tr>
 <tr><td style="width: 25%;"><a href="ansi_has_any.html">ansi_has_any</a></td>
@@ -71,6 +73,10 @@
 <td>Substring(s) of an ANSI colored string</td></tr>
 <tr><td style="width: 25%;"><a href="ansi_substring.html">ansi_substring</a></td>
 <td>Substring(s) of an ANSI colored string</td></tr>
+<tr><td style="width: 25%;"><a href="ansi_toupper.html">ansi_tolower</a></td>
+<td>ANSI character translation and case folding</td></tr>
+<tr><td style="width: 25%;"><a href="ansi_toupper.html">ansi_toupper</a></td>
+<td>ANSI character translation and case folding</td></tr>
 <tr><td style="width: 25%;"><a href="ansi_trimws.html">ansi_trimws</a></td>
 <td>Remove leading and/or trailing whitespace from an ANSI string</td></tr>
 <tr><td style="width: 25%;"><a href="ansi_hide_cursor.html">ansi_with_hidden_cursor</a></td>
@@ -89,6 +95,8 @@
 <tr><td style="width: 25%;"><a href="ansi-styles.html">bg_green</a></td>
 <td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">bg_magenta</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">bg_none</a></td>
 <td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">bg_red</a></td>
 <td>ANSI colored text</td></tr>
@@ -115,6 +123,8 @@
 <td>'cat()' helpers</td></tr>
 <tr><td style="width: 25%;"><a href="cat_line.html">cat_rule</a></td>
 <td>'cat()' helpers</td></tr>
+<tr><td style="width: 25%;"><a href="cli.html">cli</a></td>
+<td>Compose multiple cli functions</td></tr>
 <tr><td style="width: 25%;"><a href="cli_alert.html">cli_alert</a></td>
 <td>CLI alerts</td></tr>
 <tr><td style="width: 25%;"><a href="cli_alert.html">cli_alert_danger</a></td>
@@ -127,8 +137,12 @@
 <td>CLI alerts</td></tr>
 <tr><td style="width: 25%;"><a href="cli_blockquote.html">cli_blockquote</a></td>
 <td>CLI block quote</td></tr>
+<tr><td style="width: 25%;"><a href="cli_bullets.html">cli_bullets</a></td>
+<td>List of items</td></tr>
 <tr><td style="width: 25%;"><a href="cli_code.html">cli_code</a></td>
 <td>A block of code</td></tr>
+<tr><td style="width: 25%;"><a href="cli_debug_doc.html">cli_debug_doc</a></td>
+<td>Debug cli internals</td></tr>
 <tr><td style="width: 25%;"><a href="cli_div.html">cli_div</a></td>
 <td>Generic CLI container</td></tr>
 <tr><td style="width: 25%;"><a href="cli_dl.html">cli_dl</a></td>
@@ -197,6 +211,8 @@
 <td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">col_magenta</a></td>
 <td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">col_none</a></td>
+<td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">col_red</a></td>
 <td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">col_silver</a></td>
@@ -227,6 +243,12 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="faq.html">faq</a></td>
 <td>Frequently Asked Questions</td></tr>
+<tr><td style="width: 25%;"><a href="format_error.html">format_error</a></td>
+<td>Format an error, warning or diagnostic message</td></tr>
+<tr><td style="width: 25%;"><a href="format_error.html">format_message</a></td>
+<td>Format an error, warning or diagnostic message</td></tr>
+<tr><td style="width: 25%;"><a href="format_error.html">format_warning</a></td>
+<td>Format an error, warning or diagnostic message</td></tr>
 </table>
 
 <h2><a name="G">-- G --</a></h2>
@@ -306,6 +328,10 @@
 <table width="100%">
 <tr><td style="width: 25%;"><a href="simple_theme.html">simple_theme</a></td>
 <td>A simple CLI theme</td></tr>
+<tr><td style="width: 25%;"><a href="spark_bar.html">spark_bar</a></td>
+<td>Draw a sparkline bar graph with unicode block characters</td></tr>
+<tr><td style="width: 25%;"><a href="spark_line.html">spark_line</a></td>
+<td>Draw a sparkline line graph with Braille characters.</td></tr>
 <tr><td style="width: 25%;"><a href="start_app.html">start_app</a></td>
 <td>Start, stop, query the default cli application</td></tr>
 <tr><td style="width: 25%;"><a href="start_app.html">stop_app</a></td>
@@ -324,6 +350,26 @@
 <td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">style_italic</a></td>
 <td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_bg_color</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_blurred</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_bold</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_color</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_dim</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_hidden</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_inverse</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_italic</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_strikethrough</a></td>
+<td>ANSI colored text</td></tr>
+<tr><td style="width: 25%;"><a href="ansi-styles.html">style_no_underline</a></td>
+<td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">style_reset</a></td>
 <td>ANSI colored text</td></tr>
 <tr><td style="width: 25%;"><a href="ansi-styles.html">style_strikethrough</a></td>
@@ -337,6 +383,8 @@
 <h2><a name="T">-- T --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="test_that_cli.html">test_that_cli</a></td>
+<td>Test cli output with testthat</td></tr>
 <tr><td style="width: 25%;"><a href="themes.html">themes</a></td>
 <td>CLI themes</td></tr>
 <tr><td style="width: 25%;"><a href="tree.html">tree</a></td>

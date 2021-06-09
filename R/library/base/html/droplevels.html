@@ -10,7 +10,7 @@
 <h3>Description</h3>
 
 <p>The function <code>droplevels</code> is used to drop unused levels from a
-<code><a href="factor.html">factor</a></code> or, more commonly, from factors in a data frame.
+<code><a href="../../base/help/factor.html">factor</a></code> or, more commonly, from factors in a data frame.
 </p>
 
 
@@ -33,7 +33,7 @@ droplevels(x, except, exclude, ...)
 </td></tr>
 <tr valign="top"><td><code>exclude</code></td>
 <td>
-<p>passed to <code><a href="factor.html">factor</a>()</code>; factor levels which
+<p>passed to <code><a href="../../base/help/factor.html">factor</a>()</code>; factor levels which
 should be excluded from the result even if present.  Note that this
 was <em>implicitly</em> <code>NA</code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> &lt;= 3.3.1 which did drop
 <code>NA</code> levels even when present in <code>x</code>, contrary to the
@@ -81,11 +81,11 @@ columns for which this is not wanted.
 
 <h3>See Also</h3>
 
-<p><code><a href="subset.html">subset</a></code> for subsetting data frames.
-<code><a href="factor.html">factor</a></code> for definition of factors.
-<code><a href="drop.html">drop</a></code> for dropping array dimensions.
+<p><code><a href="../../base/help/subset.html">subset</a></code> for subsetting data frames.
+<code><a href="../../base/help/factor.html">factor</a></code> for definition of factors.
+<code><a href="../../base/help/drop.html">drop</a></code> for dropping array dimensions.
 <code><a href="../../stats/html/add1.html">drop1</a></code> for dropping terms from a model.
-<code><a href="Extract.factor.html">[.factor</a></code> for subsetting of factors.
+<code><a href="../../base/help/[.factor.html">[.factor</a></code> for subsetting of factors.
 </p>
 
 
@@ -98,5 +98,5 @@ table(           aq $Month)
 table(droplevels(aq)$Month)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

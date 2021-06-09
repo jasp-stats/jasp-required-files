@@ -24,7 +24,7 @@ dense real matrices.
 <p>where typically all matrices are of size <i>n by n</i>, and
 the matrix <i>P</i> is a permutation matrix, <i>L</i> is lower
 triangular and <i>U</i> is upper triangular (both of class
-<code><a href="dtrMatrix-class.html">dtrMatrix</a></code>).
+<code><a href="../../Matrix/help/dtrMatrix-class.html">dtrMatrix</a></code>).
 </p>
 <p>Note that the <em>dense</em> decomposition is also implemented for
 a <i>m by n</i> matrix <i>A</i>, when <i>m != n</i>.
@@ -40,7 +40,7 @@ and hence not triangular.
 
 <p>Objects can be created by calls of the form <code>new("denseLU", ...)</code>.
 More commonly the objects are created explicitly from calls of the form
-<code><a href="lu.html">lu</a>(mm)</code> where <code>mm</code> is an object that inherits from the
+<code><a href="../../Matrix/help/lu.html">lu</a>(mm)</code> where <code>mm</code> is an object that inherits from the
 <code>"dgeMatrix"</code> class or as a side-effect of other functions applied
 to <code>"dgeMatrix"</code> objects.
 </p>
@@ -49,7 +49,7 @@ to <code>"dgeMatrix"</code> objects.
 <h3>Extends</h3>
 
 <p><code>"LU"</code> directly extends the virtual class
-<code>"<a href="MatrixFactorization-class.html">MatrixFactorization</a>"</code>.
+<code>"<a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a>"</code>.
 </p>
 <p><code>"denseLU"</code> directly extends <code>"LU"</code>.
 </p>
@@ -71,7 +71,7 @@ the rows of the original matrix.  The contents of this vector are
 described in the Lapack manual.</p>
 </dd>
 <dt><code>Dim</code>:</dt><dd><p>the dimension of the original matrix; inherited
-from class <code><a href="MatrixFactorization-class.html">MatrixFactorization</a></code> .</p>
+from class <code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code> .</p>
 </dd>
 </dl>
 
@@ -87,7 +87,7 @@ see also the example below.</p>
 </dd>
 <dt>solve</dt><dd><p><code>signature(a = "denseLU", b = "missing")</code>: Compute
 the inverse of A, <i>A^(-1)</i>, <code>solve(A)</code> using the LU
-decomposition, see also <code><a href="solve-methods.html">solve-methods</a></code>.</p>
+decomposition, see also <code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code>.</p>
 </dd>
 </dl>
 
@@ -95,10 +95,10 @@ decomposition, see also <code><a href="solve-methods.html">solve-methods</a></co
 
 <h3>See Also</h3>
 
-<p>class <code><a href="sparseLU-class.html">sparseLU</a></code> for LU decompositions of
+<p>class <code><a href="../../Matrix/help/sparseLU-class.html">sparseLU</a></code> for LU decompositions of
 <em>sparse</em> matrices;
-further, class <code><a href="dgeMatrix-class.html">dgeMatrix</a></code> and functions <code><a href="lu.html">lu</a></code>,
-<code><a href="expand.html">expand</a></code>.
+further, class <code><a href="../../Matrix/help/dgeMatrix-class.html">dgeMatrix</a></code> and functions <code><a href="../../Matrix/help/lu.html">lu</a></code>,
+<code><a href="../../Matrix/help/expand.html">expand</a></code>.
 </p>
 
 
@@ -117,5 +117,5 @@ stopifnot(all.equal(as(mm, "matrix"),
                     as(m2, "matrix")))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

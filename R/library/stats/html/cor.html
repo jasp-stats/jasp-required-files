@@ -156,7 +156,7 @@ reasons.
 <p>Some people have noted that the code for Kendall's tau is slow for
 very large datasets (many more than 1000 cases).  It rarely makes
 sense to do such a computation, but see function
-<code><a href="../../pcaPP/html/cor.fk.html">cor.fk</a></code> in package <a href="https://CRAN.R-project.org/package=pcaPP"><span class="pkg">pcaPP</span></a>.
+<code><a href="../../pcaPP/help/cor.fk.html">cor.fk</a></code> in package <a href="https://CRAN.R-project.org/package=pcaPP"><span class="pkg">pcaPP</span></a>.
 </p>
 
 
@@ -180,11 +180,11 @@ doi: <a href="https://doi.org/10.1093/biomet/33.3.239">10.1093/biomet/33.3.239</
 
 <h3>See Also</h3>
 
-<p><code><a href="cor.test.html">cor.test</a></code> for confidence intervals (and tests).
+<p><code><a href="../../stats/help/cor.test.html">cor.test</a></code> for confidence intervals (and tests).
 </p>
-<p><code><a href="cov.wt.html">cov.wt</a></code> for <em>weighted</em> covariance computation.
+<p><code><a href="../../stats/help/cov.wt.html">cov.wt</a></code> for <em>weighted</em> covariance computation.
 </p>
-<p><code><a href="sd.html">sd</a></code> for standard deviation (vectors).
+<p><code><a href="../../stats/help/sd.html">sd</a></code> for standard deviation (vectors).
 </p>
 
 
@@ -225,7 +225,7 @@ range(eigen(C1, only.values = TRUE)$values) # 6.19        1921
 
 ## swM := "swiss" with  3 "missing"s :
 swM &lt;- swiss
-colnames(swM) &lt;- abbreviate(colnames(swiss), min=6)
+colnames(swM) &lt;- abbreviate(colnames(swiss), minlength=6)
 swM[1,2] &lt;- swM[7,3] &lt;- swM[25,5] &lt;- NA # create 3 "missing"
 
 ## Consider all 5 "use" cases :
@@ -251,5 +251,5 @@ EV &lt;- function(m) eigen(m, only.values=TRUE)$values
 summary(abs(1 - EV(Rp)/EV(R.)) / abs(1 - EV(Rc)/EV(R.)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

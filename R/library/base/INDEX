@@ -124,7 +124,7 @@ cat                     Concatenate and Print
 cbind                   Combine R Objects by Rows or Columns
 ceiling                 Rounding of Numbers
 char.expand             Expand a String with Respect to a Target Table
-charToRaw               Convert to or from Raw Vectors
+charToRaw               Convert to or from (Bit/Packed) Raw Vectors
 character               Character Vectors
 charmatch               Partial String Matching
 chartr                  Character Translation and Casefolding
@@ -319,6 +319,7 @@ parse                   Parse R Expressions
 paste                   Concatenate Strings
 path.expand             Expand File Paths
 pcre_config             Report Configuration Options for PCRE
+pipeOp                  Forward Pipe Operator
 plot                    Generic X-Y Plotting
 pmatch                  Partial String Matching
 polyroot                Find Zeros of a Real or Complex Polynomial

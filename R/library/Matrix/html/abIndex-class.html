@@ -25,7 +25,7 @@ package maintainers (<code>packageDescription("Matrix")$Maintainer</code>).
 <p>Objects can be created by calls of the form <code>new("abIndex", ...)</code>,
 but more easily and typically either by <code>as(x, "abIndex")</code> where
 <code>x</code> is an integer (valued) vector, or directly by
-<code><a href="abIseq.html">abIseq</a>()</code> and combination <code><a href="../../base/html/c.html">c</a>(...)</code> of such.
+<code><a href="../../Matrix/help/abIseq.html">abIseq</a>()</code> and combination <code><a href="../../base/html/c.html">c</a>(...)</code> of such.
 </p>
 
 
@@ -41,7 +41,7 @@ internal structure of the abIndex object.</p>
 used (i.e., not of length <code>0</code>) only iff the object is <em>not</em>
 compressed, i.e., currently exactly when <code>kind != "rleDiff"</code>.</p>
 </dd>
-<dt><code>rleD</code>:</dt><dd><p>object of class <code>"<a href="rleDiff-class.html">rleDiff</a>"</code>,
+<dt><code>rleD</code>:</dt><dd><p>object of class <code>"<a href="../../Matrix/help/rleDiff-class.html">rleDiff</a>"</code>,
 used for compression via <code><a href="../../base/html/rle.html">rle</a></code>.</p>
 </dd>
 </dl>
@@ -66,7 +66,7 @@ used for compression via <code><a href="../../base/html/rle.html">rle</a></code>
 </dd>
 <dt>Ops</dt><dd><p><code>signature(e1 = "numeric", e2 = "abIndex")</code>: These
 and the following arithmetic and logic operations are
-<b>not yet implemented</b>; see <code><a href="../../methods/html/Ops.html">Ops</a></code> for a
+<b>not yet implemented</b>; see <code><a href="../../methods/help/Ops.html">Ops</a></code> for a
 list of these (S4) group methods.</p>
 </dd>
 <dt>Ops</dt><dd><p><code>signature(e1 = "abIndex", e2 = "abIndex")</code>: ... </p>
@@ -117,5 +117,5 @@ stopifnot(identical(-3:20,
                     as(abIseq1(-3,20), "vector")))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

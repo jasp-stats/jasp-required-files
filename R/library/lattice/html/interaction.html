@@ -108,7 +108,7 @@ to <code>subscripts</code>
 <tr valign="top"><td><code>distribution, groups</code></td>
 <td>
 <p> typical panel arguments of
-<code><a href="panel.qqmath.html">panel.qqmath</a></code>.  These will usually be obtained from
+<code><a href="../../lattice/help/panel.qqmath.html">panel.qqmath</a></code>.  These will usually be obtained from
 <code>panel.args</code>
 </p>
 </td></tr>
@@ -141,7 +141,7 @@ passed to that panel.
 scales.3d</code></td>
 <td>
 
-<p>arguments as passed to <code><a href="panel.cloud.html">panel.cloud</a></code>.  These are
+<p>arguments as passed to <code><a href="../../lattice/help/panel.cloud.html">panel.cloud</a></code>.  These are
 required to recompute the relevant three-dimensional projections in
 <code>panel.identify.cloud</code>.
 </p>
@@ -258,7 +258,7 @@ equivalent viewports in different plots. This only becomes relevant
 when a particular page is occupied by more than one plot.  Defaults
 to the value appropriate for the last <code>"trellis"</code> object
 printed, as determined by the <code>prefix</code> argument in
-<code><a href="print.trellis.html">print.trellis</a></code>.
+<code><a href="../../lattice/help/print.trellis.html">print.trellis</a></code>.
 </p>
 <p>Users should not usually need to supply a value for this argument
 except to interact with an existing plot other than the one plotted
@@ -281,7 +281,7 @@ preserves the setting currently active.
 <td>
 
 <p>integer, which panel to get data from.  See
-<code><a href="panel.number.html">packet.number</a></code> for details on how this is calculated
+<code><a href="../../lattice/help/packet.number.html">packet.number</a></code> for details on how this is calculated
 </p>
 </td></tr>
 <tr valign="top"><td><code>verbose</code></td>
@@ -295,7 +295,7 @@ preserves the setting currently active.
 <code>panel.identify</code>.  For <code>panel.identify</code>, extra arguments
 are treated as graphical parameters and are used for labelling.  For
 <code>trellis.focus</code> and <code>trellis.switchFocus</code>, these are used
-(in combination with <code><a href="lattice.options.html">lattice.options</a></code>) for highlighting
+(in combination with <code><a href="../../lattice/help/lattice.options.html">lattice.options</a></code>) for highlighting
 the chosen viewport if so requested.  Graphical parameters can be
 supplied for <code>panel.link.splom</code>.
 </p>
@@ -313,7 +313,7 @@ function, it is more typical to use it to identify points after
 plotting the whole object, in which case a call to
 <code>trellis.focus</code> first is necessary.
 </p>
-<p><code>panel.link.splom</code> is meant for use with <code><a href="splom.html">splom</a></code>,
+<p><code>panel.link.splom</code> is meant for use with <code><a href="../../lattice/help/splom.html">splom</a></code>,
 and requires a panel to be chosen using <code>trellis.focus</code> before it
 is called.  Clicking on a point causes that and the corresponding
 proections in other pairwise scatter plots to be highlighted.
@@ -321,9 +321,9 @@ proections in other pairwise scatter plots to be highlighted.
 <code>panel.link.splom</code>, retained for back-compatibility.
 </p>
 <p><code>panel.identify.qqmath</code> is a specialized wrapper meant for use
-with the display produced by <code><a href="qqmath.html">qqmath</a></code>.
+with the display produced by <code><a href="../../lattice/help/qqmath.html">qqmath</a></code>.
 <code>panel.identify.qqmath</code> is a specialized wrapper meant for use
-with the display produced by <code><a href="cloud.html">cloud</a></code>.  It would be unusual
+with the display produced by <code><a href="../../lattice/help/cloud.html">cloud</a></code>.  It would be unusual
 to call them except in a context where default panel function
 arguments are available through <code>trellis.panelArgs</code> (see below).
 </p>
@@ -389,7 +389,7 @@ printed, e.g. inside the panel functions or the axis function (but not
 inside the prepanel function).  <code>trellis.panelArgs</code> can also
 retrieve the panel arguments from any <code>"trellis"</code> object.  Note
 that for this usage, one needs to specify the <code>packet.number</code> (as
-described under the <code>panel</code> entry in <code><a href="xyplot.html">xyplot</a></code>) and
+described under the <code>panel</code> entry in <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>) and
 not the position in the layout, because a layout determines the panel
 only <b>after</b> the object has been printed.
 </p>
@@ -429,10 +429,10 @@ was cancelled (by a right click), in which case the return value is
 <p>The viewports created by lattice are accessible to the user through
 <code>trellis.focus</code> as described above.  Functions from the grid
 package can also be used directly.  For example,
-<code><a href="../../grid/html/current.viewport.html">current.vpTree</a></code> can be used to
+<code><a href="../../grid/help/current.viewport.html">current.vpTree</a></code> can be used to
 inspect the current viewport tree and
-<code><a href="../../grid/html/viewports.html">seekViewport</a></code> or
-<code><a href="../../grid/html/viewports.html">downViewport</a></code> can be used to navigate to
+<code><a href="../../grid/help/viewports.html">seekViewport</a></code> or
+<code><a href="../../grid/help/viewports.html">downViewport</a></code> can be used to navigate to
 these viewports.  For such usage, <code>trellis.vpname</code> and
 <code>trellis.grobname</code> provides a portable way to access the
 appropriate viewports and grobs by name.
@@ -450,10 +450,10 @@ interctively.
 
 <h3>See Also</h3>
 
-<p><code><a href="../../graphics/html/identify.html">identify</a></code>, <code><a href="Lattice.html">Lattice</a></code>,
-<code><a href="print.trellis.html">print.trellis</a></code>, <code><a href="panel.number.html">trellis.currentLayout</a></code>,
-<code><a href="../../grid/html/current.viewport.html">current.vpTree</a></code>,
-<code><a href="../../grid/html/viewports.html">viewports</a></code>
+<p><code><a href="../../graphics/html/identify.html">identify</a></code>, <code><a href="../../lattice/help/Lattice.html">Lattice</a></code>,
+<code><a href="../../lattice/help/print.trellis.html">print.trellis</a></code>, <code><a href="../../lattice/help/trellis.currentLayout.html">trellis.currentLayout</a></code>,
+<code><a href="../../grid/help/current.viewport.html">current.vpTree</a></code>,
+<code><a href="../../grid/help/viewports.html">viewports</a></code>
 </p>
 
 
@@ -534,5 +534,5 @@ for (row in 1:nrow(panel.locs))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

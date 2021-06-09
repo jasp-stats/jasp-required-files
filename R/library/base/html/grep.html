@@ -9,10 +9,10 @@
 
 <h3>Description</h3>
 
-<p><code>grep</code>, <code>grepl</code>, <code>regexpr</code>, <code>gregexpr</code> and
-<code>regexec</code> search for matches to argument <code>pattern</code> within
-each element of a character vector: they differ in the format of and
-amount of detail in the results.
+<p><code>grep</code>, <code>grepl</code>, <code>regexpr</code>, <code>gregexpr</code>, 
+<code>regexec</code> and <code>gregexec</code> search for matches to argument
+<code>pattern</code> within each element of a character vector: they differ in
+the format of and amount of detail in the results.
 </p>
 <p><code>sub</code> and <code>gsub</code> perform replacement of the first and all
 matches respectively.
@@ -42,6 +42,9 @@ gregexpr(pattern, text, ignore.case = FALSE, perl = FALSE,
 
 regexec(pattern, text, ignore.case = FALSE, perl = FALSE,
         fixed = FALSE, useBytes = FALSE)
+
+gregexec(pattern, text, ignore.case = FALSE, perl = FALSE,
+        fixed = FALSE, useBytes = FALSE)
 </pre>
 
 
@@ -50,10 +53,10 @@ regexec(pattern, text, ignore.case = FALSE, perl = FALSE,
 <table summary="R argblock">
 <tr valign="top"><td><code>pattern</code></td>
 <td>
-<p>character string containing a <a href="regex.html">regular expression</a>
+<p>character string containing a <a href="../../base/help/regular expression.html">regular expression</a>
 (or character string for <code>fixed = TRUE</code>) to be matched
 in the given character vector.  Coerced by
-<code><a href="character.html">as.character</a></code> to a character string if possible.  If a
+<code><a href="../../base/help/as.character.html">as.character</a></code> to a character string if possible.  If a
 character vector of length 2 or more is supplied, the first element
 is used with a warning.  Missing values are allowed except for
 <code>regexpr</code>, <code>gregexpr</code> and <code>regexec</code>.</p>
@@ -62,7 +65,7 @@ is used with a warning.  Missing values are allowed except for
 <td>
 <p>a character vector where matches are sought, or an
 object which can be coerced by <code>as.character</code> to a character
-vector.  <a href="LongVectors.html">Long vectors</a> are supported.</p>
+vector.  <a href="../../base/help/Long vectors.html">Long vectors</a> are supported.</p>
 </td></tr>
 <tr valign="top"><td><code>ignore.case</code></td>
 <td>
@@ -133,7 +136,7 @@ extended regular expressions (the default).
 </p>
 </li></ol>
 
-<p>See the help pages on <a href="regex.html">regular expression</a> for details of the
+<p>See the help pages on <a href="../../base/help/regular expression.html">regular expression</a> for details of the
 different types of regular expressions.
 </p>
 <p>The two <code>*sub</code> functions differ only in that <code>sub</code> replaces
@@ -142,9 +145,9 @@ replaces all occurrences.  If <code>replacement</code> contains
 backreferences which are not defined in <code>pattern</code> the result is
 undefined (but most often the backreference is taken to be <code>""</code>).
 </p>
-<p>For <code>regexpr</code>, <code>gregexpr</code> and <code>regexec</code> it is an error
-for <code>pattern</code> to be <code>NA</code>, otherwise <code>NA</code> is permitted
-and gives an <code>NA</code> match.
+<p>For <code>regexpr</code>, <code>gregexpr</code>, <code>regexec</code> and <code>gregexec</code>
+it is an error for <code>pattern</code> to be <code>NA</code>, otherwise <code>NA</code>
+is permitted and gives an <code>NA</code> match.
 </p>
 <p>Both <code>grep</code> and <code>grepl</code> take missing values in <code>x</code> as
 not matching a non-missing <code>pattern</code>.
@@ -154,7 +157,7 @@ about invalid inputs and spurious matches in multibyte locales, but
 for <code>regexpr</code> it changes the interpretation of the output.  It
 inhibits the conversion of inputs with marked encodings, and is forced
 if any input is found which is marked as <code>"bytes"</code> (see
-<code><a href="Encoding.html">Encoding</a></code>).
+<code><a href="../../base/help/Encoding.html">Encoding</a></code>).
 </p>
 <p>Caseless matching does not make much sense for bytes in a multibyte
 locale, and you should expect it only to work for ASCII characters if
@@ -176,7 +179,7 @@ property support&rsquo;, which PCRE2 is by default.
 <p><code>grep(value = FALSE)</code> returns a vector of the indices
 of the elements of <code>x</code> that yielded a match (or not, for
 <code>invert = TRUE</code>).  This will be an integer vector unless the input
-is a <em><a href="LongVectors.html">long vector</a></em>, when it will be a double vector.
+is a <em><a href="../../base/help/long vector.html">long vector</a></em>, when it will be a double vector.
 </p>
 <p><code>grep(value = TRUE)</code> returns a character vector containing the
 selected elements of <code>x</code> (after coercion, preserving names but no
@@ -192,7 +195,7 @@ are not substituted will be returned unchanged (including any declared
 encoding).  If <code>useBytes = FALSE</code> a non-ASCII substituted result
 will often be in UTF-8 with a marked encoding (e.g., if there is a
 UTF-8 input, and in a multibyte locale unless <code>fixed = TRUE</code>).
-Such strings can be re-encoded by <code><a href="Encoding.html">enc2native</a></code>.
+Such strings can be re-encoded by <code><a href="../../base/help/enc2native.html">enc2native</a></code>.
 </p>
 <p><code>regexpr</code> returns an integer vector of the same length as
 <code>text</code> giving the starting position of the first match or
@@ -219,6 +222,11 @@ substrings corresponding to parenthesized subexpressions of
 giving the lengths of the matches (or <i>-1</i> for no match).  The
 interpretation of positions and length and the attributes follows
 <code>regexpr</code>.
+</p>
+<p><code>gregexec</code> returns the same as <code>regexec</code>, except that to
+accommodate multiple matches per element of <code>text</code>, the integer
+sequences for each match are made into columns of a matrix, with one
+matrix per element of <code>text</code> with matches.
 </p>
 <p>Where matching failed because of resource limits (especially for
 <code>perl = TRUE</code>) this is regarded as a non-match, usually with a
@@ -254,17 +262,18 @@ the default POSIX 1003.2 mode.
 <p>If you can make use of <code>useBytes = TRUE</code>, the strings will not be
 checked before matching, and the actual matching will be faster.
 Often byte-based matching suffices in a UTF-8 locale since byte
-patterns of one character never match part of another.
+patterns of one character never match part of another.  Character ranges
+may produce unexpected results.
 </p>
 <p>PCRE-based matching by default used to put additional effort into
 &lsquo;studying&rsquo; the compiled pattern when <code>x</code>/<code>text</code> has
 length 10 or more.  That study may use the PCRE JIT compiler on
-platforms where it is available (see <code><a href="pcre_config.html">pcre_config</a></code>). As
+platforms where it is available (see <code><a href="../../base/help/pcre_config.html">pcre_config</a></code>). As
 from PCRE2 (PCRE version &gt;= 10.00 as reported by
-<code><a href="extSoftVersion.html">extSoftVersion</a></code>), there is no study phase, but the
+<code><a href="../../base/help/extSoftVersion.html">extSoftVersion</a></code>), there is no study phase, but the
 patterns are optimized automatically when possible, and PCRE JIT is
 used when enabled.  The details are controlled by
-<code><a href="options.html">options</a></code> <code>PCRE_study</code> and <code>PCRE_use_JIT</code>.
+<code><a href="../../base/help/options.html">options</a></code> <code>PCRE_study</code> and <code>PCRE_use_JIT</code>.
 (Some timing comparisons can be seen by running file
 &lsquo;<span class="file">tests/PCRE.R</span>&rsquo; in the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> sources (and perhaps installed).)
 People working with PCRE and very long strings can adjust the maximum
@@ -316,32 +325,32 @@ Wadsworth &amp; Brooks/Cole (<code>grep</code>)
 
 <h3>See Also</h3>
 
-<p><a href="regex.html">regular expression</a> (aka <code><a href="regex.html">regexp</a></code>) for the details
+<p><a href="../../base/help/regular expression.html">regular expression</a> (aka <code><a href="../../base/help/regexp.html">regexp</a></code>) for the details
 of the pattern specification.
 </p>
-<p><code><a href="regmatches.html">regmatches</a></code> for extracting matched substrings based on
+<p><code><a href="../../base/help/regmatches.html">regmatches</a></code> for extracting matched substrings based on
 the results of <code>regexpr</code>, <code>gregexpr</code> and <code>regexec</code>.
 </p>
 <p><code><a href="../../utils/html/glob2rx.html">glob2rx</a></code> to turn wildcard matches into regular expressions.
 </p>
-<p><code><a href="agrep.html">agrep</a></code> for approximate matching.
+<p><code><a href="../../base/help/agrep.html">agrep</a></code> for approximate matching.
 </p>
-<p><code><a href="charmatch.html">charmatch</a></code>, <code><a href="pmatch.html">pmatch</a></code> for partial matching,
-<code><a href="match.html">match</a></code> for matching to whole strings,
-<code><a href="startsWith.html">startsWith</a></code> for matching of initial parts of strings.
+<p><code><a href="../../base/help/charmatch.html">charmatch</a></code>, <code><a href="../../base/help/pmatch.html">pmatch</a></code> for partial matching,
+<code><a href="../../base/help/match.html">match</a></code> for matching to whole strings,
+<code><a href="../../base/help/startsWith.html">startsWith</a></code> for matching of initial parts of strings.
 </p>
-<p><code><a href="chartr.html">tolower</a></code>, <code><a href="chartr.html">toupper</a></code> and <code><a href="chartr.html">chartr</a></code>
+<p><code><a href="../../base/help/tolower.html">tolower</a></code>, <code><a href="../../base/help/toupper.html">toupper</a></code> and <code><a href="../../base/help/chartr.html">chartr</a></code>
 for character translations.
 </p>
 <p><code><a href="../../utils/html/apropos.html">apropos</a></code> uses regexps and has more examples.
 </p>
-<p><code><a href="grepRaw.html">grepRaw</a></code> for matching raw vectors.
+<p><code><a href="../../base/help/grepRaw.html">grepRaw</a></code> for matching raw vectors.
 </p>
 <p>Options <code>PCRE_limit_recursion</code>, <code>PCRE_study</code> and
 <code>PCRE_use_JIT</code>.
 </p>
-<p><code><a href="extSoftVersion.html">extSoftVersion</a></code> for the versions of regex and PCRE
-libraries in use, <code><a href="pcre_config.html">pcre_config</a></code> for more details for
+<p><code><a href="../../base/help/extSoftVersion.html">extSoftVersion</a></code> for the versions of regex and PCRE
+libraries in use, <code><a href="../../base/help/pcre_config.html">pcre_config</a></code> for more details for
 PCRE.
 </p>
 
@@ -453,13 +462,18 @@ URL_parts &lt;- function(x) {
 }
 URL_parts(x)
 
-## There is no gregexec() yet, but one can emulate it by running
-## regexec() on the regmatches obtained via gregexpr().  E.g.:
+## gregexec() may match multiple times within a single string.
 pattern &lt;- "([[:alpha:]]+)([[:digit:]]+)"
 s &lt;- "Test: A1 BC23 DEF456"
+m &lt;- gregexec(pattern, s)
+m
+regmatches(s, m)
+
+## Before gregexec() was implemented, one could emulate it by running
+## regexec() on the regmatches obtained via gregexpr().  E.g.:
 lapply(regmatches(s, gregexpr(pattern, s)),
        function(e) regmatches(e, regexec(pattern, e)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

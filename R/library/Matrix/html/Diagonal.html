@@ -10,8 +10,8 @@
 <h3>Description</h3>
 
 <p>Create a diagonal matrix object, i.e., an object inheriting from
-<code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code> (or a &ldquo;standard&rdquo;
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> diagonal matrix in cases that is prefered).
+<code><a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a></code> (or a &ldquo;standard&rdquo;
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> diagonal matrix in cases that is prefered).
 </p>
 
 
@@ -44,8 +44,8 @@ missing, <code>length(x)</code> is used.</p>
 <tr valign="top"><td><code>uplo</code></td>
 <td>
 <p>for <code>.symDiagonal</code> (<code>.trDiagonal</code>), the resulting sparse
-<code><a href="symmetricMatrix-class.html">symmetricMatrix</a></code> (or
-<code><a href="triangularMatrix-class.html">triangularMatrix</a></code>) will have slot <code>uplo</code> set
+<code><a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a></code> (or
+<code><a href="../../Matrix/help/triangularMatrix-class.html">triangularMatrix</a></code>) will have slot <code>uplo</code> set
 from this argument, either <code>"U"</code> or <code>"L"</code>.  Only rarely
 will it make sense to change this from the default.</p>
 </td></tr>
@@ -65,9 +65,9 @@ as <code><a href="../../base/html/logical.html">TRUE</a></code>.</p>
 <td>
 <p>string of 1 character, one of <code>c("d","l","n")</code>, to
 choose the storage mode of the result, from classes
-<code><a href="dsparseMatrix-class.html">dsparseMatrix</a></code>,
-<code><a href="lsparseMatrix-classes.html">lsparseMatrix</a></code>, or
-<code><a href="nsparseMatrix-classes.html">nsparseMatrix</a></code>, respectively.</p>
+<code><a href="../../Matrix/help/dsparseMatrix-class.html">dsparseMatrix</a></code>,
+<code><a href="../../Matrix/help/lsparseMatrix-class.html">lsparseMatrix</a></code>, or
+<code><a href="../../Matrix/help/nsparseMatrix-class.html">nsparseMatrix</a></code>, respectively.</p>
 </td></tr>
 <tr valign="top"><td><code>cols</code></td>
 <td>
@@ -81,13 +81,13 @@ equivalent of  <code>Diagonal(n,*)[, cols + 1]</code>.</p>
 <h3>Value</h3>
 
 <p><code>Diagonal()</code> returns an object of class
-<code><a href="ddiMatrix-class.html">ddiMatrix</a></code> or <code><a href="ldiMatrix-class.html">ldiMatrix</a></code>
-(with &ldquo;superclass&rdquo; <code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code>).
+<code><a href="../../Matrix/help/ddiMatrix-class.html">ddiMatrix</a></code> or <code><a href="../../Matrix/help/ldiMatrix-class.html">ldiMatrix</a></code>
+(with &ldquo;superclass&rdquo; <code><a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a></code>).
 </p>
 <p><code>.symDiagonal()</code> returns an object of class
-<code><a href="dsCMatrix-class.html">dsCMatrix</a></code> or <code><a href="lsparseMatrix-classes.html">lsCMatrix</a></code>,
+<code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code> or <code><a href="../../Matrix/help/lsCMatrix-class.html">lsCMatrix</a></code>,
 i.e., a <em>sparse</em> <em>symmetric</em> matrix.  Analogously,
-<code>.triDiagonal</code> gives a sparse <code><a href="triangularMatrix-class.html">triangularMatrix</a></code>.
+<code>.triDiagonal</code> gives a sparse <code><a href="../../Matrix/help/triangularMatrix-class.html">triangularMatrix</a></code>.
 This can be more efficient than <code>Diagonal(n)</code> when the result is combined
 with further symmetric (sparse) matrices, e.g., in <code><a href="../../base/html/kronecker.html">kronecker</a></code>,
 however <em>not</em> for
@@ -95,7 +95,7 @@ matrix multiplications where <code>Diagonal()</code> is clearly preferred.
 </p>
 <p><code>.sparseDiagonal()</code>, the workhorse of <code>.symDiagonal</code> and
 <code>.trDiagonal</code> returns
-a <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> (the resulting class depending
+a <code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> (the resulting class depending
 on <code>shape</code> and <code>kind</code>) representation of <code>Diagonal(n)</code>,
 or, when <code>cols</code> are specified, of <code>Diagonal(n)[, cols+1]</code>.
 </p>
@@ -111,12 +111,12 @@ or, when <code>cols</code> are specified, of <code>Diagonal(n)[, cols+1]</code>.
 <p>the generic function <code><a href="../../base/html/diag.html">diag</a></code> for <em>extraction</em>
 of the diagonal from a matrix works for all &ldquo;Matrices&rdquo;.
 </p>
-<p><code><a href="bandSparse.html">bandSparse</a></code> constructs a <em>banded</em> sparse matrix from
-its non-zero sub-/super - diagonals.  <code><a href="band.html">band</a>(A)</code> returns a
+<p><code><a href="../../Matrix/help/bandSparse.html">bandSparse</a></code> constructs a <em>banded</em> sparse matrix from
+its non-zero sub-/super - diagonals.  <code><a href="../../Matrix/help/band.html">band</a>(A)</code> returns a
 band matrix containing some sub-/super - diagonals of <code>A</code>.
 </p>
-<p><code><a href="Matrix.html">Matrix</a></code> for general matrix construction;
-further, class <code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code>.
+<p><code><a href="../../Matrix/help/Matrix.html">Matrix</a></code> for general matrix construction;
+further, class <code><a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a></code>.
 </p>
 
 
@@ -139,5 +139,5 @@ stopifnot(I4@diag == "U", all(I4 == diag(4)))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

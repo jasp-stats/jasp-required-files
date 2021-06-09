@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>These functions take the output of <code><a href="parse_Rd.html">parse_Rd</a>()</code>, an
+<p>These functions take the output of <code><a href="../../tools/help/parse_Rd.html">parse_Rd</a>()</code>, an
 <code>Rd</code> object, and produce a help page from it.  As they are mainly
 intended for internal use, their interfaces are subject to change.
 </p>
@@ -92,16 +92,16 @@ of the HTML output page.</p>
 <tr valign="top"><td><code>Links, Links2</code></td>
 <td>
 <p><code>NULL</code> or a named (by topics) character vector of
-links, as returned by <code><a href="HTMLlinks.html">findHTMLlinks</a></code>.</p>
+links, as returned by <code><a href="../../tools/help/findHTMLlinks.html">findHTMLlinks</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>options</code></td>
 <td>
 <p>An optional named list of options to pass to
-<code><a href="Rd2txt_options.html">Rd2txt_options</a></code>.</p>
+<code><a href="../../tools/help/Rd2txt_options.html">Rd2txt_options</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p> additional parameters to pass to <code><a href="parse_Rd.html">parse_Rd</a></code> when
+<p> additional parameters to pass to <code><a href="../../tools/help/parse_Rd.html">parse_Rd</a></code> when
 <code>Rd</code> is a filename. </p>
 </td></tr>
 <tr valign="top"><td><code>writeEncoding</code></td>
@@ -129,7 +129,7 @@ out?</p>
 <code><a href="../../utils/html/example.html">example</a></code> and <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> utilities.
 </p>
 <p>Each of the functions accepts a filename for an Rd file, and
-will use <code><a href="parse_Rd.html">parse_Rd</a></code> to parse it before applying the
+will use <code><a href="../../tools/help/parse_Rd.html">parse_Rd</a></code> to parse it before applying the
 conversions or checks.
 </p>
 <p>The difference between arguments <code>Link</code> and <code>Link2</code> is that
@@ -151,9 +151,9 @@ the current locale uses a single-byte encoding (except C).
 usually double-width, which looks wrong with English text.)
 </p>
 <p>Various aspects of formatting by <code>Rd2txt</code> are controlled by the
-<code>options</code> argument, documented with the <code><a href="Rd2txt_options.html">Rd2txt_options</a></code>
+<code>options</code> argument, documented with the <code><a href="../../tools/help/Rd2txt_options.html">Rd2txt_options</a></code>
 function.  Changes made using <code>options</code> are temporary, those
-made with <code><a href="Rd2txt_options.html">Rd2txt_options</a></code> are persistent.
+made with <code><a href="../../tools/help/Rd2txt_options.html">Rd2txt_options</a></code> are persistent.
 </p>
 <p>When <code>fragment = TRUE</code>, the <code>Rd</code> file will be rendered
 with no processing of <code style="white-space: pre;">\Sexpr</code> elements or conditional defines
@@ -206,15 +206,15 @@ page is converted to a readable format).
 
 <ol>
 <li><p> built on
-2021-03-31 at 08:54:19,
+2021-05-18 at 09:45:55,
 </p>
 </li>
 <li><p> installed on
-2021-03-31 at 08:54:19, and
+2021-05-18 at 09:45:55, and
 </p>
 </li>
 <li><p> rendered on
-2021-03-31 at 08:54:39.
+2021-05-18 at 09:46:17.
 </p>
 </li></ol>
 
@@ -233,8 +233,8 @@ page is converted to a readable format).
 
 <h3>See Also</h3>
 
-<p><code><a href="parse_Rd.html">parse_Rd</a></code>, <code><a href="checkRd.html">checkRd</a></code>,
-<code><a href="HTMLlinks.html">findHTMLlinks</a></code>, <code><a href="Rd2txt_options.html">Rd2txt_options</a></code>.
+<p><code><a href="../../tools/help/parse_Rd.html">parse_Rd</a></code>, <code><a href="../../tools/help/checkRd.html">checkRd</a></code>,
+<code><a href="../../tools/help/findHTMLlinks.html">findHTMLlinks</a></code>, <code><a href="../../tools/help/Rd2txt_options.html">Rd2txt_options</a></code>.
 </p>
 
 
@@ -259,5 +259,5 @@ checkRd(Rd) # A stricter test than Rd2HTML uses
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

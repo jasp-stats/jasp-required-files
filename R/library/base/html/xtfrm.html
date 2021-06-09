@@ -34,24 +34,24 @@ xtfrm(x)
 <h3>Details</h3>
 
 <p>This is a special case of ranking, but as a less general function than
-<code><a href="rank.html">rank</a></code> is more suitable to be made generic.  The default
+<code><a href="../../base/help/rank.html">rank</a></code> is more suitable to be made generic.  The default
 method is similar to <code>rank(x, ties.method = "min",
     na.last = "keep")</code>, so <code>NA</code> values are given rank <code>NA</code> and all
 tied values are given equal integer rank.
 </p>
-<p>The <code><a href="factor.html">factor</a></code> method extracts the codes.
+<p>The <code><a href="../../base/help/factor.html">factor</a></code> method extracts the codes.
 
 
 
 
 </p>
 <p>The default method will unclass the object if
-<code><a href="numeric.html">is.numeric</a>(x)</code> is true but otherwise make use of
+<code><a href="../../base/help/is.numeric.html">is.numeric</a>(x)</code> is true but otherwise make use of
 <code>==</code> and <code>&gt;</code> methods for the class of <code>x[i]</code> (for
 integers <code>i</code>), and the <code>is.na</code> method for the class of
 <code>x</code>, but might be rather slow when doing so.
 </p>
-<p>This is an <a href="InternalMethods.html">internal generic</a> <a href="Primitive.html">primitive</a>, so S3 or S4
+<p>This is an <a href="../../base/help/internal generic.html">internal generic</a> <a href="../../base/help/primitive.html">primitive</a>, so S3 or S4
 methods can be written for it.
 </p>
 
@@ -64,8 +64,8 @@ methods can be written for it.
 
 <h3>See Also</h3>
 
-<p><code><a href="rank.html">rank</a></code>, <code><a href="sort.html">sort</a></code>, <code><a href="order.html">order</a></code>.
+<p><code><a href="../../base/help/rank.html">rank</a></code>, <code><a href="../../base/help/sort.html">sort</a></code>, <code><a href="../../base/help/order.html">order</a></code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -59,7 +59,7 @@ attached as an attribute named <code>gradient</code>.
 
 <h3>See Also</h3>
 
-<p><code><a href="nls.html">nls</a></code>, <code><a href="selfStart.html">selfStart</a></code>
+<p><code><a href="../../stats/help/nls.html">nls</a></code>, <code><a href="../../stats/help/selfStart.html">selfStart</a></code>
 </p>
 
 
@@ -83,7 +83,7 @@ stopifnot(all.equal(coef(summary(fm1)), coef(summary(fm2))))
 
 ## Visualize the SSmicmen()  Michaelis-Menton model parametrization :
 
-  xx &lt;- seq(0, 5, len = 101)
+  xx &lt;- seq(0, 5, length.out = 101)
   yy &lt;- 5 * xx/(1+xx)
   stopifnot(all.equal(yy, SSmicmen(xx, Vm = 5, K = 1)))
   require(graphics)
@@ -105,5 +105,5 @@ stopifnot(all.equal(coef(summary(fm1)), coef(summary(fm2))))
   par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

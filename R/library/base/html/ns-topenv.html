@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Finding the top level <code><a href="environment.html">environment</a></code> from an environment
+<p>Finding the top level <code><a href="../../base/help/environment.html">environment</a></code> from an environment
 <code>envir</code> and its enclosing environments.
 </p>
 
@@ -33,7 +33,7 @@ topenv(envir = parent.frame(),
 <td>
 <p>return this environment, if it matches before
 any other criterion is satisfied.  The default, the option
-<span class="samp">topLevelEnvironment</span>, is set by <code><a href="sys.source.html">sys.source</a></code>,
+<span class="samp">topLevelEnvironment</span>, is set by <code><a href="../../base/help/sys.source.html">sys.source</a></code>,
 which treats a specific environment as the top level environment.
 Supplying the argument as <code>NULL</code> or <code>emptyenv()</code> means
 it will never match.</p>
@@ -43,20 +43,20 @@ it will never match.</p>
 
 <h3>Details</h3>
 
-<p><code>topenv</code> returns the first top level <code><a href="environment.html">environment</a></code>
+<p><code>topenv</code> returns the first top level <code><a href="../../base/help/environment.html">environment</a></code>
 found when searching <code>envir</code> and its enclosing environments. If no
-top level environment is found, <code><a href="environment.html">.GlobalEnv</a></code> is returned.  An
+top level environment is found, <code><a href="../../base/help/.GlobalEnv.html">.GlobalEnv</a></code> is returned.  An
 environment is considered top level if it is the internal environment
-of a namespace, a package environment in the <code><a href="search.html">search</a></code>
-path, or <code><a href="environment.html">.GlobalEnv</a></code> .
+of a namespace, a package environment in the <code><a href="../../base/help/search.html">search</a></code>
+path, or <code><a href="../../base/help/.GlobalEnv.html">.GlobalEnv</a></code> .
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="environment.html">environment</a></code>, notably <code>parent.env()</code> on
+<p><code><a href="../../base/help/environment.html">environment</a></code>, notably <code>parent.env()</code> on
 &ldquo;enclosing environments&rdquo;;
-<code><a href="ns-load.html">loadNamespace</a></code> for more on namespaces.
+<code><a href="../../base/help/loadNamespace.html">loadNamespace</a></code> for more on namespaces.
 </p>
 
 
@@ -70,5 +70,5 @@ topenv(environment(lm))# namespace:stats
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

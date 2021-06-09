@@ -26,7 +26,7 @@ strtrim(x, width)
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>a character vector, or an object which can be coerced to a
-character vector by <code><a href="character.html">as.character</a></code>.</p>
+character vector by <code><a href="../../base/help/as.character.html">as.character</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>width</code></td>
 <td>
@@ -42,7 +42,7 @@ font.  What happens with non-printable characters (such as backspace, tab)
 is implementation-dependent and may depend on the locale (e.g., they
 may be included in the count or they may be omitted).
 </p>
-<p>Using this function rather than <code><a href="substr.html">substr</a></code> is important when
+<p>Using this function rather than <code><a href="../../base/help/substr.html">substr</a></code> is important when
 there might be double-width (e.g., Chinese/Japanese/Korean) characters
 in the character vector.
 </p>
@@ -54,7 +54,7 @@ in the character vector.
 as <code>x</code> (after possible coercion).
 </p>
 <p>Elements of the result will have the encoding declared as that of
-the current locale (see <code><a href="Encoding.html">Encoding</a></code>) if the corresponding
+the current locale (see <code><a href="../../base/help/Encoding.html">Encoding</a></code>) if the corresponding
 input had a declared encoding and the current locale is either Latin-1
 or UTF-8.
 </p>
@@ -66,5 +66,5 @@ or UTF-8.
 strtrim(c("abcdef", "abcdef", "abcdef"), c(1,5,10))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

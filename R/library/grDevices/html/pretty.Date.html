@@ -87,10 +87,10 @@ steps &lt;- setNames(,
 x &lt;- as.POSIXct("2002-02-02 02:02")
 lapply(steps,
        function(s) {
-           at &lt;- pretty(seq(x, by = s, length = 2), n = 5)
+           at &lt;- pretty(seq(x, by = s, length.out = 2), n = 5)
            attr(at, "labels")
        })
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -9,13 +9,13 @@
 
 <h3>Description</h3>
 
-<p><code><a href="gam.html">gam</a></code> can use univariate P-splines as proposed by Eilers and Marx (1996), 
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> can use univariate P-splines as proposed by Eilers and Marx (1996), 
 specified via terms like <code>s(x,bs="ps")</code>. These terms use B-spline bases 
 penalized by discrete penalties applied directly to 
 the basis coefficients. Cyclic P-splines are specified by model terms like <code>s(x,bs="cp",...)</code>. 
-These bases can be used in tensor product smooths (see <code><a href="te.html">te</a></code>).
+These bases can be used in tensor product smooths (see <code><a href="../../mgcv/help/te.html">te</a></code>).
 </p>
-<p>The advantage of P-splines is the flexible way that penalty and basis order can be mixed. This often provides a useful way of &lsquo;taming&rsquo; an otherwise poorly behave smooth. However, in regular use, splines with derivative based penalties (e.g. <code>"tp"</code> or <code>"cr"</code> bases) tend to result in slightly better MSE performance, presumably because the good approximation theoretic properties of splines are rather closely connected to the use of derivative penalties.  
+<p>The advantage of P-splines is the flexible way that penalty and basis order can be mixed (but see also <code><a href="../../mgcv/help/d.spline.html">d.spline</a></code>). This often provides a useful way of &lsquo;taming&rsquo; an otherwise poorly behave smooth. However, in regular use, splines with derivative based penalties (e.g. <code>"tp"</code> or <code>"cr"</code> bases) tend to result in slightly better MSE performance, presumably because the good approximation theoretic properties of splines are rather closely connected to the use of derivative penalties. 
 </p>
 
 
@@ -81,7 +81,7 @@ requested derivative of the spline, rather than evaluating it. See examples belo
 
 <h3>Value</h3>
 
-<p> An object of class <code>"pspline.smooth"</code> or <code>"cp.smooth"</code>. See <code><a href="smooth.construct.html">smooth.construct</a></code>, 
+<p> An object of class <code>"pspline.smooth"</code> or <code>"cp.smooth"</code>. See <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>, 
 for the elements that this object will contain.
 </p>
 
@@ -102,7 +102,7 @@ Statistical Science, 11(2):89-121
 
 <h3>See Also</h3>
 
-<p><code><a href="cSplineDes.html">cSplineDes</a></code>, <code><a href="smooth.construct.ad.smooth.spec.html">adaptive.smooth</a></code></p>
+<p><code><a href="../../mgcv/help/cSplineDes.html">cSplineDes</a></code>, <code><a href="../../mgcv/help/adaptive.smooth.html">adaptive.smooth</a></code>, <code><a href="../../mgcv/help/d.spline.html">d.spline</a></code></p>
 
 
 <h3>Examples</h3>
@@ -179,5 +179,5 @@ Statistical Science, 11(2):89-121
   
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

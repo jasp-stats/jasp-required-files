@@ -22,7 +22,7 @@ MatrixFactorization-class
                         Class "MatrixFactorization" of Matrix
                         Factorizations
 RsparseMatrix-class     Class "RsparseMatrix" of Sparse Matrices in
-                        Column-compressed Form
+                        Row-compressed Form
 Schur                   Schur Decomposition of a Matrix
 Schur-class             Class "Schur" of Schur Matrix Factorizations
 SparseM-coerce-methods
@@ -45,8 +45,8 @@ band                    Extract bands of a matrix
 bandSparse              Construct Sparse Banded Matrix from
                         (Sup-/Super-) Diagonals
 bdiag                   Construct a Block Diagonal Matrix
-cBind                   Versions of 'cbind' and 'rbind' recursively
-                        built on cbind2/rbind2
+cBind                   'cbind()' and 'rbind()' recursively built on
+                        cbind2/rbind2
 chol                    Choleski Decomposition - 'Matrix' S4 Generic
                         and Methods
 chol2inv-methods        Inverse from Choleski or QR Decomposition -
@@ -106,7 +106,8 @@ is.na-methods           is.na(), is.infinite() Methods for 'Matrix'
 is.null.DN              Are the Dimnames 'dn' NULL-like ?
 isSymmetric-methods     Methods for Function isSymmetric in Package
                         'Matrix'
-isTriangular            isTriangular() and isDiagonal() Methods
+isTriangular            isTriangular() and isDiagonal() Checking if
+                        Matrix is Triangular or Diagonal
 kronecker-methods       Methods for Function 'kronecker()' in Package
                         'Matrix'
 ldenseMatrix-class      Virtual Class "ldenseMatrix" of Dense Logical

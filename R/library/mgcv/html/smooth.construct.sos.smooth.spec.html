@@ -9,13 +9,13 @@
 
 <h3>Description</h3>
 
-<p><code><a href="gam.html">gam</a></code> can use isotropic smooths on the sphere, via terms like 
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> can use isotropic smooths on the sphere, via terms like 
 <code>s(la,lo,bs="sos",m=2,k=100)</code>. There must be exactly 2 arguments to such a smooth. 
 The first is taken to be latitude (in degrees) and the second longitude (in degrees). 
 <code>m</code> (default 0) is an integer in the range -1 to 4 determining the order of the penalty used. 
 For <code>m&gt;0</code>, <code>(m+2)/2</code> is the penalty order, with <code>m=2</code> equivalent to the usual second 
 derivative penalty. <code>m=0</code> signals to use the 2nd order spline on the sphere, computed by 
-Wendelberger's (1981) method. <code>m = -1</code> results in a <code><a href="smooth.construct.ds.smooth.spec.html">Duchon.spline</a></code> being 
+Wendelberger's (1981) method. <code>m = -1</code> results in a <code><a href="../../mgcv/help/Duchon.spline.html">Duchon.spline</a></code> being 
 used (with m=2 and s=1/2), following an unpublished suggestion of Jean Duchon.
 </p>
 <p><code>k</code> (default 50) is the basis dimension.
@@ -83,7 +83,7 @@ plotting method with <code>scheme</code> decremented by 2.
 <h3>Value</h3>
 
 <p> An object of class <code>"sos.smooth"</code>. In addition to the usual elements of a 
-smooth class documented under <code><a href="smooth.construct.html">smooth.construct</a></code>, this object will contain:
+smooth class documented under <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>, this object will contain:
 </p>
 <table summary="R valueblock">
 <tr valign="top"><td><code>Xu</code></td>
@@ -118,7 +118,7 @@ with help from Grace Wahba (m=0 case) and Jean Duchon (m = -1 case).</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="smooth.construct.ds.smooth.spec.html">Duchon.spline</a></code></p>
+<p><code><a href="../../mgcv/help/Duchon.spline.html">Duchon.spline</a></code></p>
 
 
 <h3>Examples</h3>
@@ -177,5 +177,5 @@ plot(bp,scheme=1,theta=-30,phi=20,pch=19,cex=.5)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

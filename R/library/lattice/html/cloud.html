@@ -140,7 +140,7 @@ default.scales, subset</code></td>
 <td>
 
 <p>These arguments are documented in the help page for
-<code><a href="xyplot.html">xyplot</a></code>.  For the <code>cloud.table</code> method,
+<code><a href="../../lattice/help/xyplot.html">xyplot</a></code>.  For the <code>cloud.table</code> method,
 <code>groups</code> must be a logical indicating whether the last
 dimension should be used as a grouping variable as opposed to a
 conditioning variable.  This is only relevant if the table has more
@@ -150,7 +150,7 @@ than 2 dimensions.
 <tr valign="top"><td><code>type</code></td>
 <td>
 
-<p>type of display in <code>cloud</code> (see <code><a href="panel.cloud.html">panel.3dscatter</a></code>
+<p>type of display in <code>cloud</code> (see <code><a href="../../lattice/help/panel.3dscatter.html">panel.3dscatter</a></code>
 for details).  Defaults to <code>"h"</code> for the <code>matrix</code> method.
 </p>
 </td></tr>
@@ -161,7 +161,7 @@ for details).  Defaults to <code>"h"</code> for the <code>matrix</code> method.
 numeric vector of length 2, giving the relative aspects of the
 y-size/x-size and z-size/x-size of the enclosing cube.  The usual
 role of the <code>aspect</code> argument in determining the aspect ratio
-of the panel (see <code><a href="xyplot.html">xyplot</a></code> for details) is played by
+of the panel (see <code><a href="../../lattice/help/xyplot.html">xyplot</a></code> for details) is played by
 <code>panel.aspect</code>, except that it can only be a numeric value.
 </p>
 <p>For the <code>matrix</code> methods, the default y/x aspect is
@@ -173,20 +173,20 @@ y/x aspect and 1.
 <td>
 
 <p>panel function used to create the display.  See
-<code><a href="panel.cloud.html">panel.cloud</a></code> for (non-trivial) details.
+<code><a href="../../lattice/help/panel.cloud.html">panel.cloud</a></code> for (non-trivial) details.
 </p>
 </td></tr>
 <tr valign="top"><td><code>default.prepanel</code></td>
 <td>
 
-<p>Fallback prepanel function.  See <code><a href="xyplot.html">xyplot</a></code>.
+<p>Fallback prepanel function.  See <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>scales</code></td>
 <td>
 
 <p>a list describing the scales.  As with other high level functions
-(see <code><a href="xyplot.html">xyplot</a></code> for details), this list can contain
+(see <code><a href="../../lattice/help/xyplot.html">xyplot</a></code> for details), this list can contain
 parameters in name=value form.  It can also contain components with
 the special names <code>x</code>, <code>y</code> and <code>z</code>, which can be
 similar lists with axis-specific values overriding the ones
@@ -250,16 +250,16 @@ other high level functions
 <p>logical, whether the wireframe is to be draped in color. If
 <code>TRUE</code>, the height of a facet is used to determine its color in
 a manner similar to the coloring scheme used in
-<code><a href="levelplot.html">levelplot</a></code>.  Otherwise, the background color is used to
+<code><a href="../../lattice/help/levelplot.html">levelplot</a></code>.  Otherwise, the background color is used to
 color the facets.  This argument is ignored if <code>shade = TRUE</code>
-(see <code><a href="panel.cloud.html">panel.3dwire</a></code>).
+(see <code><a href="../../lattice/help/panel.3dwire.html">panel.3dwire</a></code>).
 </p>
 </td></tr>
 <tr valign="top"><td><code>at, col.regions, alpha.regions</code></td>
 <td>
 
 <p>these arguments are analogous to those in
-<code><a href="levelplot.html">levelplot</a></code>. if <code>drape=TRUE</code>, <code>at</code> gives the
+<code><a href="../../lattice/help/levelplot.html">levelplot</a></code>. if <code>drape=TRUE</code>, <code>at</code> gives the
 vector of cutpoints where the colors change, and <code>col.regions</code>
 the vector of colors to be used in that case.  <code>alpha.regions</code>
 determines the alpha-transparency on supporting devices.  These are
@@ -287,7 +287,7 @@ appropriate.  The default for <code>col.regions</code> and
 
 <p>logical indicating whether a color key should be drawn
 alongside, or a list describing such a key.  See
-<code><a href="levelplot.html">levelplot</a></code> for details.
+<code><a href="../../lattice/help/levelplot.html">levelplot</a></code> for details.
 </p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
@@ -299,7 +299,7 @@ the panel function.  In particular, the arguments <code>distance</code>,
 important in determining the 3-D display.  The argument <code>shade</code>
 can be useful for <code>wireframe</code> calls, and controls shading of
 the rendered surface.  These arguments are described in detail in
-the help page for <code><a href="panel.cloud.html">panel.cloud</a></code>.
+the help page for <code><a href="../../lattice/help/panel.cloud.html">panel.cloud</a></code>.
 </p>
 <p>Additionally, an argument called <code>zoom</code> may be specified, which
 should be a numeric scalar to be interpreted as a scale factor by
@@ -330,11 +330,11 @@ drawn by <code>wireframe</code> using the <code>groups</code> argument (although
 this is of limited use because the display is incorrect when the
 surfaces intersect). Specifying <code>groups</code> with <code>cloud</code>
 results in a <code>panel.superpose</code>-like effect (via
-<code><a href="panel.cloud.html">panel.3dscatter</a></code>).
+<code><a href="../../lattice/help/panel.3dscatter.html">panel.3dscatter</a></code>).
 </p>
 <p><code>wireframe</code> can optionally render the surface as being
 illuminated by a light source (no shadows though). Details can be
-found in the help page for <code><a href="panel.cloud.html">panel.3dwire</a></code>. Note that
+found in the help page for <code><a href="../../lattice/help/panel.3dwire.html">panel.3dwire</a></code>. Note that
 although arguments controlling these are actually arguments for the
 panel function, they can be supplied to <code>cloud</code> and
 <code>wireframe</code> directly.
@@ -359,15 +359,15 @@ not supported in this case.
 </p>
 <p>The algorithm for identifying which edges of the bounding box are
 &lsquo;behind&rsquo; the points doesn't work in some extreme
-situations. Also, <code><a href="panel.cloud.html">panel.cloud</a></code> tries to figure out the
+situations. Also, <code><a href="../../lattice/help/panel.cloud.html">panel.cloud</a></code> tries to figure out the
 optimal location of the arrows and axis labels automatically, but can
 fail on occasion (especially when the view is from &lsquo;below&rsquo; the
 data). This can be manually controlled by the <code>scpos</code> argument in
-<code><a href="panel.cloud.html">panel.cloud</a></code>.
+<code><a href="../../lattice/help/panel.cloud.html">panel.cloud</a></code>.
 </p>
 <p>These and all other high level Trellis functions have several other
 arguments in common. These are extensively documented only in the
-help page for <code><a href="xyplot.html">xyplot</a></code>, which should be consulted to learn
+help page for <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>, which should be consulted to learn
 more detailed usage.
 </p>
 
@@ -375,9 +375,9 @@ more detailed usage.
 <h3>Value</h3>
 
 <p>An object of class <code>"trellis"</code>. The
-<code><a href="update.trellis.html">update</a></code> method can be used to
+<code><a href="../help/update.trellis.html">update</a></code> method can be used to
 update components of the object and the
-<code><a href="print.trellis.html">print</a></code> method (usually called by
+<code><a href="../help/print.trellis.html">print</a></code> method (usually called by
 default) will plot it on an appropriate plotting device.
 </p>
 
@@ -410,11 +410,11 @@ Visualization with R</em>, Springer.
 
 <h3>See Also</h3>
 
-<p><code><a href="Lattice.html">Lattice</a></code> for an overview of the package, as well as 
-<code><a href="xyplot.html">xyplot</a></code>, <code><a href="levelplot.html">levelplot</a></code>,
-<code><a href="panel.cloud.html">panel.cloud</a></code>.
+<p><code><a href="../../lattice/help/Lattice.html">Lattice</a></code> for an overview of the package, as well as 
+<code><a href="../../lattice/help/xyplot.html">xyplot</a></code>, <code><a href="../../lattice/help/levelplot.html">levelplot</a></code>,
+<code><a href="../../lattice/help/panel.cloud.html">panel.cloud</a></code>.
 </p>
-<p>For interaction, see <code><a href="interaction.html">panel.identify.cloud</a></code>.
+<p>For interaction, see <code><a href="../../lattice/help/panel.identify.cloud.html">panel.identify.cloud</a></code>.
 </p>
 
 
@@ -467,5 +467,5 @@ print(cloud(Sepal.Length ~ Petal.Length * Petal.Width,
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

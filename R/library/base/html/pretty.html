@@ -32,7 +32,7 @@ pretty(x, n = 5, min.n = n %/% 3,  shrink.sml = 0.75,
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>an object coercible to numeric by <code><a href="numeric.html">as.numeric</a></code>.</p>
+<p>an object coercible to numeric by <code><a href="../../base/help/as.numeric.html">as.numeric</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>n</code></td>
 <td>
@@ -117,13 +117,13 @@ locations in plots, particularly on the log scale.
 <h3>Examples</h3>
 
 <pre>
-pretty(1:15)          # 0  2  4  6  8 10 12 14 16
-pretty(1:15, h = 2)   # 0  5 10 15
-pretty(1:15, n = 4)   # 0  5 10 15
-pretty(1:15 * 2)      # 0  5 10 15 20 25 30
-pretty(1:20)          # 0  5 10 15 20
-pretty(1:20, n = 2)   # 0 10 20
-pretty(1:20, n = 10)  # 0  2  4 ... 20
+pretty(1:15)                    # 0  2  4  6  8 10 12 14 16
+pretty(1:15, high.u.bias = 2)   # 0  5 10 15
+pretty(1:15, n = 4)             # 0  5 10 15
+pretty(1:15 * 2)                # 0  5 10 15 20 25 30
+pretty(1:20)                    # 0  5 10 15 20
+pretty(1:20, n = 2)             # 0 10 20
+pretty(1:20, n = 10)            # 0  2  4 ... 20
 
 for(k in 5:11) {
   cat("k=", k, ": "); print(diff(range(pretty(100 + c(0, pi*10^-k)))))}
@@ -138,11 +138,11 @@ sapply(    add.names(0:20),   pretty, min.n = 4)
 
 pretty(1.234e100)
 pretty(1001.1001)
-pretty(1001.1001, shrink = 0.2)
+pretty(1001.1001, shrink.sml = 0.2)
 for(k in -7:3)
   cat("shrink=", formatC(2^k, width = 9),":",
       formatC(pretty(1001.1001, shrink.sml = 2^k), width = 6),"\n")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

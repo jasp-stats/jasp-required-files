@@ -10,7 +10,7 @@
 <h3>Description</h3>
 
 <p>Computes the Cholesky (aka &ldquo;Choleski&rdquo;) decomposition of a
-sparse, symmetric, positive-definite matrix.  However, typically <code><a href="chol.html">chol</a>()</code>
+sparse, symmetric, positive-definite matrix.  However, typically <code><a href="../../Matrix/help/chol.html">chol</a>()</code>
 should rather be used unless you are interested in the different kinds
 of sparse Cholesky decompositions.
 </p>
@@ -71,22 +71,22 @@ and <code>I</code> is the identity matrix of order <code>ncol(A)</code>.</p>
 
 <p>This is a generic function with special methods for different types
 of matrices.  Use <code><a href="../../methods/html/showMethods.html">showMethods</a>("Cholesky")</code> to list all
-the methods for the <code><a href="Cholesky.html">Cholesky</a></code> generic.
+the methods for the <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code> generic.
 </p>
-<p>The method for class <code><a href="dsCMatrix-class.html">dsCMatrix</a></code> of sparse matrices
+<p>The method for class <code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code> of sparse matrices
 &mdash; the only one available currently &mdash;
 is based on functions from the CHOLMOD library.
 </p>
 <p>Again: If you just want the Cholesky decomposition of a matrix in a
-straightforward way, you should probably rather use <code><a href="chol.html">chol</a>(.)</code>.
+straightforward way, you should probably rather use <code><a href="../../Matrix/help/chol.html">chol</a>(.)</code>.
 </p>
 <p>Note that if <code>perm=TRUE</code> (default), the decomposition is
 </p>
 <p style="text-align: center;"><i>A = P' L~ D L~' P = P' L L' P,</i></p>
 
 <p>where <i>L</i> can be extracted by <code>as(*, "Matrix")</code>, <i>P</i> by
-<code>as(*, "pMatrix")</code> and both by <code><a href="expand.html">expand</a>(*)</code>, see the
-class <code><a href="CHMfactor-class.html">CHMfactor</a></code> documentation.
+<code>as(*, "pMatrix")</code> and both by <code><a href="../../Matrix/help/expand.html">expand</a>(*)</code>, see the
+class <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code> documentation.
 </p>
 <p>Note that consequently, you cannot easily get the &ldquo;traditional&rdquo;
 cholesky factor <i>R</i>, from this decomposition, as
@@ -101,14 +101,14 @@ cholesky factor <i>R</i>, from this decomposition, as
 <h3>Value</h3>
 
 <p>an object inheriting from either
-<code>"<a href="CHMfactor-class.html">CHMsuper</a>"</code>, or
-<code>"<a href="CHMfactor-class.html">CHMsimpl</a>"</code>, depending on the <code>super</code>
-argument; both classes extend <code>"<a href="CHMfactor-class.html">CHMfactor</a>"</code> which
-extends <code>"<a href="MatrixFactorization-class.html">MatrixFactorization</a>"</code>.
+<code>"<a href="../../Matrix/help/CHMsuper-class.html">CHMsuper</a>"</code>, or
+<code>"<a href="../../Matrix/help/CHMsimpl-class.html">CHMsimpl</a>"</code>, depending on the <code>super</code>
+argument; both classes extend <code>"<a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a>"</code> which
+extends <code>"<a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a>"</code>.
 </p>
 <p>In other words, the result of <code>Cholesky()</code> is <em>not</em> a
 matrix, and if you want one, you should probably rather use
-<code><a href="chol.html">chol</a>()</code>, see Details.
+<code><a href="../../Matrix/help/chol.html">chol</a>()</code>, see Details.
 </p>
 
 
@@ -127,14 +127,14 @@ doi: <a href="https://doi.org/10.1145/1391989.1391995">10.1145/1391989.1391995</
 
 <h3>See Also</h3>
 
-<p>Class definitions <code><a href="CHMfactor-class.html">CHMfactor</a></code> and
-<code><a href="dsCMatrix-class.html">dsCMatrix</a></code> and function <code><a href="expand.html">expand</a></code>.
-Note the extra <code><a href="solve-methods.html">solve</a>(*, system = . )</code> options in
-<code><a href="CHMfactor-class.html">CHMfactor</a></code>.
+<p>Class definitions <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code> and
+<code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code> and function <code><a href="../../Matrix/help/expand.html">expand</a></code>.
+Note the extra <code><a href="../../Matrix/help/solve.html">solve</a>(*, system = . )</code> options in
+<code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code>.
 </p>
-<p>Note that <code><a href="chol.html">chol</a>()</code> returns matrices (inheriting from
-<code>"<a href="Matrix-class.html">Matrix</a>"</code>) whereas <code>Cholesky()</code> returns a
-<code>"<a href="CHMfactor-class.html">CHMfactor</a>"</code> object, and hence a typical user
+<p>Note that <code><a href="../../Matrix/help/chol.html">chol</a>()</code> returns matrices (inheriting from
+<code>"<a href="../../Matrix/help/Matrix-class.html">Matrix</a>"</code>) whereas <code>Cholesky()</code> returns a
+<code>"<a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a>"</code> object, and hence a typical user
 will rather use <code>chol(A)</code>.
 </p>
 
@@ -202,5 +202,5 @@ TRUE)
 .SuiteSparse_version()
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

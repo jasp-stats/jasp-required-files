@@ -75,7 +75,7 @@ The mean and variance are <i>E(X) = Var(X) = &lambda;</i>.
 <p>If an element of <code>x</code> is not integer, the result of <code>dpois</code>
 is zero, with a warning.
 <i>p(x)</i> is computed using Loader's algorithm, see the reference in
-<code><a href="Binomial.html">dbinom</a></code>.
+<code><a href="../../stats/help/dbinom.html">dbinom</a></code>.
 </p>
 <p>The quantile is right continuous: <code>qpois(p, lambda)</code> is the smallest
 integer <i>x</i> such that <i>P(X &le; x) &ge; p</i>.
@@ -112,7 +112,7 @@ values are returned since R version 4.0.0.
 <h3>Source</h3>
 
 <p><code>dpois</code> uses C code contributed by Catherine Loader
-(see <code><a href="Binomial.html">dbinom</a></code>).
+(see <code><a href="../../stats/help/dbinom.html">dbinom</a></code>).
 </p>
 <p><code>ppois</code> uses <code>pgamma</code>.
 </p>
@@ -129,11 +129,11 @@ Computer generation of Poisson deviates from modified normal distributions.
 
 <h3>See Also</h3>
 
-<p><a href="Distributions.html">Distributions</a> for other standard distributions, including
-<code><a href="Binomial.html">dbinom</a></code> for the binomial and <code><a href="NegBinomial.html">dnbinom</a></code> for
+<p><a href="../../stats/help/Distributions.html">Distributions</a> for other standard distributions, including
+<code><a href="../../stats/help/dbinom.html">dbinom</a></code> for the binomial and <code><a href="../../stats/help/dnbinom.html">dnbinom</a></code> for
 the negative binomial distribution.
 </p>
-<p><code><a href="poisson.test.html">poisson.test</a></code>.
+<p><code><a href="../../stats/help/poisson.test.html">poisson.test</a></code>.
 </p>
 
 
@@ -160,5 +160,5 @@ stopifnot(identical(dpois(0,0), 1),
 	  identical(qpois(1,0), 0))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

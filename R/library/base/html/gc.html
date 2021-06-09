@@ -97,10 +97,12 @@ to <code>gc(reset = TRUE)</code> (or since <span style="font-family: Courier New
 
 <p>The &lsquo;R Internals&rsquo; manual.
 </p>
-<p><code><a href="Memory.html">Memory</a></code> on <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s memory management,
-and <code><a href="gctorture.html">gctorture</a></code> if you are an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> developer.
+<p><code><a href="../../base/help/Memory.html">Memory</a></code> on <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s memory management,
+and <code><a href="../../base/help/gctorture.html">gctorture</a></code> if you are an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> developer.
 </p>
-<p><code><a href="reg.finalizer.html">reg.finalizer</a></code> for actions to happen at garbage
+<p><code><a href="../../base/help/gc.time.html">gc.time</a>()</code> reports <em>time</em> used for garbage collection.
+</p>
+<p><code><a href="../../base/help/reg.finalizer.html">reg.finalizer</a></code> for actions to happen at garbage
 collection.
 </p>
 
@@ -110,6 +112,7 @@ collection.
 <pre>
 gc() #- do it now
 gcinfo(TRUE) #-- in the future, show when R does it
+##            vvvvv use larger to *show* something
 x &lt;- integer(100000); for(i in 1:18) x &lt;- c(x, i)
 gcinfo(verbose = FALSE) #-- don't show it anymore
 
@@ -118,5 +121,5 @@ gc(TRUE)
 gc(reset = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

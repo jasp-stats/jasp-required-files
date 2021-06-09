@@ -15,7 +15,7 @@ have a penalty matrix made up of a weighted sum of penalty matrices, where the w
 parameters. In the mixed model formulation the penalty matrix is the inverse of the covariance matrix for 
 the random effects of a term, and the smoothing parameters (times a half) are variance parameters to be estimated. 
 It's not possible to transform the problem to make the required random effects covariance matrix look like one of the standard 
-<code>pdMat</code> classes: hence the need for the <code>pdTens</code> class. A <code><a href="notExp2.html">notLog2</a></code> parameterization ensures that 
+<code>pdMat</code> classes: hence the need for the <code>pdTens</code> class. A <code><a href="../../mgcv/help/notLog2.html">notLog2</a></code> parameterization ensures that 
 the parameters are positive. 
 </p>
 <p>These functions (<code>pdTens</code>, <code>pdConstruct.pdTens</code>,
@@ -61,7 +61,7 @@ covariance matrix for these random effects.</p>
 <p> If using this class directly note that it is worthwhile scaling the
 <code>S</code> matrices to be of &lsquo;moderate size&rsquo;, for example by dividing each
 matrix by its largest singular value: this avoids problems with <code>lme</code>
-defaults (<code><a href="smooth.construct.tensor.smooth.spec.html">smooth.construct.tensor.smooth.spec</a></code> does this automatically).  
+defaults (<code><a href="../../mgcv/help/smooth.construct.tensor.smooth.spec.html">smooth.construct.tensor.smooth.spec</a></code> does this automatically).  
 </p>
 <p>This appears to be the minimum set of functions required to implement a new <code>pdMat</code> class. 
 </p>
@@ -98,7 +98,7 @@ column-wise) (<code>pdMatrix</code> always returns a matrix).
 
 <h3>See Also</h3>
 
- <p><code><a href="te.html">te</a></code>  <code><a href="gamm.html">gamm</a></code></p>
+ <p><code><a href="../../mgcv/help/te.html">te</a></code>  <code><a href="../../mgcv/help/gamm.html">gamm</a></code></p>
 
 
 <h3>Examples</h3>
@@ -107,5 +107,5 @@ column-wise) (<code>pdMatrix</code> always returns a matrix).
 # see gamm
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

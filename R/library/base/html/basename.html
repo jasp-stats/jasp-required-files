@@ -38,7 +38,7 @@ dirname(path)
 
 <h3>Details</h3>
 
-<p><a href="path.expand.html">tilde expansion</a> of the path is done except on Windows.
+<p><a href="../../base/help/tilde expansion.html">tilde expansion</a> of the path is done except on Windows.
 </p>
 <p>Trailing path separators are removed before dissecting the path,
 and for <code>dirname</code> any trailing file separators are removed
@@ -54,7 +54,7 @@ input will give a zero-length output with no error.
 <p>Paths not containing any separators are taken to be in the current
 directory, so <code>dirname</code> returns <code>"."</code>.
 </p>
-<p>If an element of <code>path</code> is <code><a href="NA.html">NA</a></code>, so is the result.
+<p>If an element of <code>path</code> is <code><a href="../../base/help/NA.html">NA</a></code>, so is the result.
 </p>
 <p><code>""</code> is not a valid pathname, but is returned unchanged.
 </p>
@@ -82,7 +82,7 @@ the path <code>"/"</code> and of returning <code>"."</code> for empty strings.
 
 <h3>See Also</h3>
 
-<p><code><a href="file.path.html">file.path</a></code>, <code><a href="path.expand.html">path.expand</a></code>.
+<p><code><a href="../../base/help/file.path.html">file.path</a></code>, <code><a href="../../base/help/path.expand.html">path.expand</a></code>.
 </p>
 
 
@@ -93,5 +93,5 @@ basename(file.path("","p1","p2","p3", c("file1", "file2")))
 dirname (file.path("","p1","p2","p3", "filename"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

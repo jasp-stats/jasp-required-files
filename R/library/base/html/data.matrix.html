@@ -35,7 +35,7 @@ factors or numeric or character vectors.</p>
 <td>
 <p>logical indicating if the resulting matrix
 should have character (rather than <code>NULL</code>)
-<code><a href="colnames.html">rownames</a></code>.  The default, <code>NA</code>, uses <code>NULL</code>
+<code><a href="../../base/help/rownames.html">rownames</a></code>.  The default, <code>NA</code>, uses <code>NULL</code>
 rownames if the data frame has &lsquo;automatic&rsquo; row.names or for a
 zero-row data frame.</p>
 </td></tr>
@@ -46,8 +46,8 @@ zero-row data frame.</p>
 
 <p>Logical and factor columns are converted to integers.  Character
 columns are first converted to factors and then to integers. Any other
-column which is not numeric (according to <code><a href="numeric.html">is.numeric</a></code>) is
-converted by <code><a href="numeric.html">as.numeric</a></code> or, for S4 objects,
+column which is not numeric (according to <code><a href="../../base/help/is.numeric.html">is.numeric</a></code>) is
+converted by <code><a href="../../base/help/as.numeric.html">as.numeric</a></code> or, for S4 objects,
 <code><a href="../../methods/html/as.html">as</a>(, "numeric")</code>.  If all columns are integer (after
 conversion) the result is an integer matrix, otherwise a numeric
 (double) matrix.
@@ -61,7 +61,7 @@ numeric matrix of the same dimensions as <code>frame</code>, with dimnames
 taken from the <code>row.names</code> (or <code>NULL</code>, depending on
 <code>rownames.force</code>) and <code>names</code>.
 </p>
-<p>Otherwise, the result of <code><a href="matrix.html">as.matrix</a></code>.
+<p>Otherwise, the result of <code><a href="../../base/help/as.matrix.html">as.matrix</a></code>.
 </p>
 
 
@@ -83,9 +83,9 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="matrix.html">as.matrix</a></code>,
-<code><a href="data.frame.html">data.frame</a></code>,
-<code><a href="matrix.html">matrix</a></code>.
+<p><code><a href="../../base/help/as.matrix.html">as.matrix</a></code>,
+<code><a href="../../base/help/data.frame.html">data.frame</a></code>,
+<code><a href="../../base/help/matrix.html">matrix</a></code>.
 </p>
 
 
@@ -93,11 +93,11 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 
 <pre>
 DF &lt;- data.frame(a = 1:3, b = letters[10:12],
-                 c = seq(as.Date("2004-01-01"), by = "week", len = 3),
+                 c = seq(as.Date("2004-01-01"), by = "week", length.out = 3),
                  stringsAsFactors = TRUE)
 data.matrix(DF[1:2])
 data.matrix(DF)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

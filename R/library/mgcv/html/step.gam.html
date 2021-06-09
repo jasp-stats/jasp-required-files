@@ -28,13 +28,13 @@ is added to the smoothing penalty, so that strong enough penalization will shrin
 coefficients of the smooth to zero. Such smoothers can effectively be penalized out of the 
 model altogether, as part of smoothing parameter estimation. 2 classes
 of these shrinkage smoothers are implemented: <code>"cs"</code> and <code>"ts"</code>, based on 
-cubic regression spline and thin plate regression spline smoothers (see <code><a href="s.html">s</a></code>)  </p>
+cubic regression spline and thin plate regression spline smoothers (see <code><a href="../../mgcv/help/s.html">s</a></code>)  </p>
 </dd>
 <dt>Null space penalization</dt><dd><p>An alternative is to construct an extra penalty for each 
 smooth which penalizes the space of functions of zero wiggliness according to its existing penalties.
 If all the smoothing parameters for such a term tend to infinity then the term is penalized to zero, 
 and is effectively dropped from the model. The advantage of this approach is that it can be 
-implemented automatically for any smooth. The <code>select</code> argument to <code><a href="gam.html">gam</a></code> causes 
+implemented automatically for any smooth. The <code>select</code> argument to <code><a href="../../mgcv/help/gam.html">gam</a></code> causes 
 this latter approach to be used. Unpenalized terms (e.g. <code>s(x,fx=TRUE)</code>) remain unpenalized. </p>
 </dd>
 </dl>
@@ -58,7 +58,7 @@ Computational Statistics and Data Analysis 55,2372-2387
 
 <h3>See Also</h3>
 
-<p><code><a href="gam.selection.html">gam.selection</a></code></p>
+<p><code><a href="../../mgcv/help/gam.selection.html">gam.selection</a></code></p>
 
 
 <h3>Examples</h3>
@@ -97,5 +97,5 @@ plot(b,pages=1)
 detach(dat);rm(dat)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

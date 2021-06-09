@@ -104,7 +104,7 @@ one copy less of <code>x</code>.</p>
 
 
 Setting this to <code>FALSE</code> saves memory (and hence time), but
-disables <code><a href="clusplot.partition.html">clusplot</a>()</code>ing of the result.  Use
+disables <code><a href="../../cluster/help/clusplot.html">clusplot</a>()</code>ing of the result.  Use
 <code>medoids.x = FALSE</code> to save even more memory.</p>
 </td></tr>
 <tr valign="top"><td><code>rngR</code></td>
@@ -117,8 +117,8 @@ also means that each call to <code>clara()</code> returns a different result
 <tr valign="top"><td><code>pamLike</code></td>
 <td>
 <p>logical indicating if the &ldquo;swap&rdquo; phase (see
-<code><a href="pam.html">pam</a></code>, in C code) should use the same algorithm as
-<code><a href="pam.html">pam</a>()</code>.  Note that from Kaufman and Rousseeuw's
+<code><a href="../../cluster/help/pam.html">pam</a></code>, in C code) should use the same algorithm as
+<code><a href="../../cluster/help/pam.html">pam</a>()</code>.  Note that from Kaufman and Rousseeuw's
 description this <em>should</em> have been true always, but as the
 original Fortran code and the subsequent port to C has always
 contained a small one-letter change (a typo according to Martin Maechler)
@@ -148,7 +148,7 @@ sub-datasets of fixed size (<code>sampsize</code>) such that the time and
 storage requirements become linear in <i>n</i> rather than quadratic.
 </p>
 <p>Each sub-dataset is partitioned into <code>k</code> clusters using the same
-algorithm as in <code><a href="pam.html">pam</a></code>.<br />
+algorithm as in <code><a href="../../cluster/help/pam.html">pam</a></code>.<br />
 Once <code>k</code> representative objects have been selected from the
 sub-dataset, each observation of the entire dataset is assigned
 to the nearest medoid.
@@ -174,7 +174,7 @@ named) integer vector specifying the clustering, i.e.,<br />
 
 <p>If <code>cluster.only</code> is false (as by default),
 an object of class <code>"clara"</code> representing the clustering.  See
-<code><a href="clara.object.html">clara.object</a></code> for details.
+<code><a href="../../cluster/help/clara.object.html">clara.object</a></code> for details.
 </p>
 <p>If <code>cluster.only</code> is true, the result is the &quot;clustering&quot;, an
 integer vector of length <i>n</i> with entries from <code>1:k</code>.
@@ -200,19 +200,19 @@ The CPU computing time (again assuming small <code>k</code>) is about
 <i>O(n * p * j^2 * N)</i>, where
 <i>N = \code{samples}</i>.
 </p>
-<p>For &ldquo;small&rdquo; datasets, the function <code><a href="pam.html">pam</a></code> can be used
+<p>For &ldquo;small&rdquo; datasets, the function <code><a href="../../cluster/help/pam.html">pam</a></code> can be used
 directly.  What can be considered <em>small</em>, is really a function
 of available computing power, both memory (RAM) and speed.
 Originally (1990), &ldquo;small&rdquo; meant less than 100 observations;
 in 1997, the authors said <em>&ldquo;small (say with fewer than 200
-observations)&rdquo;</em>; as of 2006, you can use <code><a href="pam.html">pam</a></code> with
+observations)&rdquo;</em>; as of 2006, you can use <code><a href="../../cluster/help/pam.html">pam</a></code> with
 several thousand observations.
 </p>
 
 
 <h3>Author(s)</h3>
 
-<p>Kaufman and Rousseeuw (see <code><a href="agnes.html">agnes</a></code>), originally.
+<p>Kaufman and Rousseeuw (see <code><a href="../../cluster/help/agnes.html">agnes</a></code>), originally.
 Metric <code>"jaccard"</code>: Kamil Kozlowski (<code>@ownedoutcomes.com</code>)
 and Kamil Jadeszko.
 All arguments from <code>trace</code> on, and most <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> documentation and all
@@ -222,9 +222,9 @@ tests by Martin Maechler.
 
 <h3>See Also</h3>
 
-<p><code><a href="agnes.html">agnes</a></code> for background and references;
-<code><a href="clara.object.html">clara.object</a></code>, <code><a href="pam.html">pam</a></code>,
-<code><a href="partition.object.html">partition.object</a></code>, <code><a href="plot.partition.html">plot.partition</a></code>.
+<p><code><a href="../../cluster/help/agnes.html">agnes</a></code> for background and references;
+<code><a href="../../cluster/help/clara.object.html">clara.object</a></code>, <code><a href="../../cluster/help/pam.html">pam</a></code>,
+<code><a href="../../cluster/help/partition.object.html">partition.object</a></code>, <code><a href="../../cluster/help/plot.partition.html">plot.partition</a></code>.
 </p>
 
 
@@ -276,5 +276,5 @@ if(length(iDoubt)) { # (not for all seeds)
 }
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

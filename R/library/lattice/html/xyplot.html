@@ -150,16 +150,16 @@ may also be supplied a formula of the form <code> ~ x | g1 * g2 *
 methods.  The <code>numeric</code> methods are equivalent to a call with
 no left hand side and no conditioning variables in the formula.  For
 <code>barchart</code> and <code>dotplot</code>, non-trivial methods exist for
-tables and arrays, documented at <code><a href="barchart.table.html">barchart.table</a></code>.
+tables and arrays, documented at <code><a href="../../lattice/help/barchart.table.html">barchart.table</a></code>.
 </p>
 <p>The conditioning variables <code>g1, g2, ...</code> must be either
 factors or shingles.  Shingles provide a way of using numeric
 variables for conditioning; see the help page of
-<code><a href="shingles.html">shingle</a></code> for details. Like factors, they have a
+<code><a href="../../lattice/help/shingle.html">shingle</a></code> for details. Like factors, they have a
 <code>"levels"</code> attribute, which is used in producing the
 conditional plots.  If necessary, numeric conditioning variables are
 converted to shingles using the <code>shingle</code> function; however,
-using <code><a href="shingles.html">equal.count</a></code> may be more appropriate in many
+using <code><a href="../../lattice/help/equal.count.html">equal.count</a></code> may be more appropriate in many
 cases.  Character variables are coerced to factors.
 </p>
 
@@ -299,8 +299,8 @@ argument.  The argument may be a function object or a character
 string giving the name of a predefined function.  Each high-level
 function has its own default panel function, named as
 &ldquo;<code>panel.</code>&rdquo; followed by the name of the corresponding
-high-level function (e.g., <code><a href="panel.xyplot.html">panel.xyplot</a></code>,
-<code><a href="panel.barchart.html">panel.barchart</a></code>, etc).
+high-level function (e.g., <code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code>,
+<code><a href="../../lattice/help/panel.barchart.html">panel.barchart</a></code>, etc).
 </p>
 <p>Much of the power of Trellis Graphics comes from the ability to
 define customized panel functions.  A panel function appropriate for
@@ -336,7 +336,7 @@ work in a lattice panel function.
 the <code>groups</code> argument is not <code>NULL</code>.  In that case, the
 panel function should also accept arguments named <code>groups</code> and
 <code>subscripts</code> (see below for details).  A useful panel function
-predefined for use in such cases is <code><a href="panel.superpose.html">panel.superpose</a></code>,
+predefined for use in such cases is <code><a href="../../lattice/help/panel.superpose.html">panel.superpose</a></code>,
 which can be combined with different <code>panel.groups</code> functions
 to determine what is plotted for each group.  See the
 &ldquo;Examples&rdquo; section for an interaction plot constructed in
@@ -368,11 +368,11 @@ grouping variable is created after any effect of <code>subset</code>, in
 which case <code>subscripts</code> may have no relationship with
 corresponding rows in the original data frame.
 </p>
-<p>One can also use functions called <code><a href="panel.number.html">panel.number</a></code> and
-<code><a href="panel.number.html">packet.number</a></code>, representing panel order and packet
+<p>One can also use functions called <code><a href="../../lattice/help/panel.number.html">panel.number</a></code> and
+<code><a href="../../lattice/help/packet.number.html">packet.number</a></code>, representing panel order and packet
 order respectively, inside the panel function (as well as the strip
 function or while interacting with a lattice display using
-<code><a href="interaction.html">trellis.focus</a></code> etc).  Both provide a simple integer
+<code><a href="../../lattice/help/trellis.focus.html">trellis.focus</a></code> etc).  Both provide a simple integer
 index indicating which panel is currently being drawn, but differ in
 how the count is calculated.  The panel number is a simple
 incremental counter that starts with 1 and is incremented each time
@@ -386,11 +386,11 @@ which case <code>packet.number</code> gives the index corresponding to the
 &lsquo;natural&rsquo; ordering of that combination of levels of the
 conditioning variables.
 </p>
-<p><code><a href="panel.xyplot.html">panel.xyplot</a></code> has an argument called <code>type</code> which
+<p><code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code> has an argument called <code>type</code> which
 is worth mentioning here because it is quite frequently used (and as
 mentioned above, can be passed to <code>xyplot</code> directly).  In the
 event that a <code>groups</code> variable is used,
-<code><a href="panel.xyplot.html">panel.xyplot</a></code> calls <code><a href="panel.superpose.html">panel.superpose</a></code>,
+<code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code> calls <code><a href="../../lattice/help/panel.superpose.html">panel.superpose</a></code>,
 arguments of which can also be passed directly to <code>xyplot</code>.
 Panel functions for <code>bwplot</code> and friends should have an
 argument called <code>horizontal</code> to account for the cases when
@@ -413,7 +413,7 @@ a ratio (vertical size/horizontal size) or as a character string.
 In the latter case, legitimate values are <code>"fill"</code> (the
 default) which tries to make the panels as big as possible to fill
 the available space; <code>"xy"</code>, which computes the aspect ratio
-based on the 45 degree banking rule (see <code><a href="banking.html">banking</a></code>); and
+based on the 45 degree banking rule (see <code><a href="../../lattice/help/banking.html">banking</a></code>); and
 <code>"iso"</code> for isometric scales, where the relation between
 physical distance on the device and distance in the data scale are
 forced to be the same for both axes.
@@ -439,19 +439,19 @@ functions can handle grouping.
 </p>
 <p>It is very common to use a key (legend) when a grouping variable is
 specified.  See entries for <code>key</code>, <code>auto.key</code> and
-<code><a href="simpleKey.html">simpleKey</a></code> for how to draw a key.
+<code><a href="../../lattice/help/simpleKey.html">simpleKey</a></code> for how to draw a key.
 </p>
 </td></tr>
 <tr valign="top"><td><code>auto.key</code></td>
 <td>
 
 <p>A logical, or a list containing components to be used as arguments
-to <code><a href="simpleKey.html">simpleKey</a></code>.  <code>auto.key=TRUE</code> is equivalent to
-<code>auto.key=list()</code>, in which case <code><a href="simpleKey.html">simpleKey</a></code> is
+to <code><a href="../../lattice/help/simpleKey.html">simpleKey</a></code>.  <code>auto.key=TRUE</code> is equivalent to
+<code>auto.key=list()</code>, in which case <code><a href="../../lattice/help/simpleKey.html">simpleKey</a></code> is
 called with a set of default arguments (which may depend on the
 relevant high-level function).  Most valid components to the
 <code>key</code> argument can be specified in this manner, as
-<code><a href="simpleKey.html">simpleKey</a></code> will simply add unrecognized arguments to
+<code><a href="../../lattice/help/simpleKey.html">simpleKey</a></code> will simply add unrecognized arguments to
 the list it produces.
 </p>
 <p><code>auto.key</code> is typically used to automatically produce a
@@ -475,10 +475,10 @@ instead as the text labels in the key, and the key is drawn even if
 <code>groups</code> is not specified.
 </p>
 <p>Note that <code>simpleKey</code> uses the default settings (see
-<code><a href="trellis.par.get.html">trellis.par.get</a></code>) to determine the graphical parameters
+<code><a href="../../lattice/help/trellis.par.get.html">trellis.par.get</a></code>) to determine the graphical parameters
 in the key, so the resulting legend will be meaningful only if the
 same settings are used in the plot as well.  The <code>par.settings</code>
-argument, possibly in conjunction with <code><a href="simpleTheme.html">simpleTheme</a></code>,
+argument, possibly in conjunction with <code><a href="../../lattice/help/simpleTheme.html">simpleTheme</a></code>,
 may be useful to temporarily modify the default settings for this
 purpose.
 </p>
@@ -516,7 +516,7 @@ on a per-panel basis otherwise.
 </p>
 <p>The <code>dx</code> and <code>dy</code> components are used for banking
 computations in case <code>aspect</code> is specified as <code>"xy"</code>.  See
-documentation of <code><a href="banking.html">banking</a></code> for details.
+documentation of <code><a href="../../lattice/help/banking.html">banking</a></code> for details.
 </p>
 <p>If <code>xlim</code> or <code>ylim</code> is a character vector (which is
 appropriate when the corresponding variable is a factor), this
@@ -548,7 +548,7 @@ should be returned for the <code>xlim</code> and <code>ylim</code> components.
 <p>A logical flag or function.  If <code>FALSE</code>, strips are not drawn.
 Otherwise, strips are drawn using the <code>strip</code> function, which
 defaults to <code>strip.default</code>.  See documentation of
-<code><a href="strip.default.html">strip.default</a></code> to see the arguments that are available
+<code><a href="../../lattice/help/strip.default.html">strip.default</a></code> to see the arguments that are available
 to the strip function.  This description also applies to the
 <code>strip.left</code> argument (see <code>...</code> below), which can be
 used to draw strips on the left of each panel (useful for wide short
@@ -690,7 +690,7 @@ right/top labels separately.
 <dt><code>lineheight</code></dt><dd>
 <p>Specifies the line height parameter (height of line as a
 multiple of the size of text); relevant for multi-line labels.
-(This is currently ignored for <code><a href="cloud.html">cloud</a></code>.)
+(This is currently ignored for <code><a href="../../lattice/help/cloud.html">cloud</a></code>.)
 </p>
 </dd>
 <dt><code>tck</code></dt><dd>
@@ -777,7 +777,7 @@ work as expected.)
 </dl>
 
 <p>Note that much of the function of <code>scales</code> is accomplished by
-<code>pscales</code> in <code><a href="splom.html">splom</a></code>.
+<code>pscales</code> in <code><a href="../../lattice/help/splom.html">splom</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>subscripts</code></td>
@@ -790,7 +790,7 @@ function accepts an argument named <code>subscripts</code>.  This argument
 is useful if one wants the subscripts to be passed on even if these
 conditions do not hold; a typical example is when one wishes to
 augment a Lattice plot after it has been drawn, e.g., using
-<code><a href="interaction.html">panel.identify</a></code>.
+<code><a href="../../lattice/help/panel.identify.html">panel.identify</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>subset</code></td>
@@ -862,13 +862,13 @@ serves as the (component-wise) fallback prepanel function when the
 <code>prepanel</code> argument is not specified, or does not return all
 necessary components.  The main purpose of this argument is to
 enable the defaults to be overridden through the use of
-<code><a href="lattice.options.html">lattice.options</a></code>.
+<code><a href="../../lattice/help/lattice.options.html">lattice.options</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>lattice.options</code></td>
 <td>
 
-<p>A list that could be supplied to <code><a href="lattice.options.html">lattice.options</a></code>.
+<p>A list that could be supplied to <code><a href="../../lattice/help/lattice.options.html">lattice.options</a></code>.
 These options are applied temporarily for the duration of the call,
 after which the settings revert back to what they were before.  The
 options are retained along with the object and reused during
@@ -926,14 +926,14 @@ different <code>between</code> values for different pages.
 </dd>
 <dt><code>key</code>:</dt><dd>
 <p>A list that defines a legend to be drawn on the plot.  This list
-is used as an argument to the <code><a href="draw.key.html">draw.key</a></code> function,
+is used as an argument to the <code><a href="../../lattice/help/draw.key.html">draw.key</a></code> function,
 which produces a <code>"grob"</code> (grid object) eventually plotted
 by the print method for <code>"trellis"</code> objects.  The structure
 of the legend is constrained in the ways described below.
 </p>
 <p>Although such a list can be and often is created explicitly, it
 is also possible to generate such a list using the
-<code><a href="simpleKey.html">simpleKey</a></code> function; the latter is more convenient
+<code><a href="../../lattice/help/simpleKey.html">simpleKey</a></code> function; the latter is more convenient
 but less flexible.  The <code>auto.key</code> argument can be even
 more convenient for the most common situation where legends are
 used, namely, in conjunction with a grouping variable.  To use
@@ -959,7 +959,7 @@ outside for values outside the unit interval) the key.
 <p><code>x</code> and <code>y</code> should be numbers between 0 and 1, giving
 coordinates with respect to the &ldquo;display area&rdquo;.
 Depending on the value of the <code>"legend.bbox"</code> option (see
-<code><a href="lattice.options.html">lattice.getOption</a></code>), this can be either the full
+<code><a href="../../lattice/help/lattice.getOption.html">lattice.getOption</a></code>), this can be either the full
 figure region (<code>"full"</code>), or just the region that bounds
 the panels and strips (<code>"panel"</code>).
 </p>
@@ -1130,7 +1130,7 @@ background.
 <dt><code>just</code></dt><dd>
 <p>A character or numeric vector of length one or two giving
 horizontal and vertical justification for the placement of
-the legend.  See <code><a href="../../grid/html/grid.layout.html">grid.layout</a></code>
+the legend.  See <code><a href="../../grid/help/grid.layout.html">grid.layout</a></code>
 for more precise details.
 </p>
 </dd>
@@ -1163,7 +1163,7 @@ of components.  Each component must be named one of
 not the others.  This name will be used to determine the
 location for that component, and is similar to the <code>space</code>
 component of <code>key</code>.  If <code>key</code> (or <code>colorkey</code> for
-<code><a href="levelplot.html">levelplot</a></code> and <code><a href="cloud.html">wireframe</a></code>) is
+<code><a href="../../lattice/help/levelplot.html">levelplot</a></code> and <code><a href="../../lattice/help/wireframe.html">wireframe</a></code>) is
 specified, their <code>space</code> component must not conflict with
 the name of any component of <code>legend</code>.
 </p>
@@ -1209,10 +1209,10 @@ it is the first component).  The label can be missing, in which
 case the default will be used (<code>xlab</code> and <code>ylab</code>
 usually have defaults, but <code>main</code> and <code>sub</code> do not).
 Further named arguments are passed on to
-<code><a href="../../grid/html/grid.text.html">textGrob</a></code>; this can include
+<code><a href="../../grid/help/grid.text.html">textGrob</a></code>; this can include
 arguments controlling positioning like <code>just</code> and
 <code>rot</code> as well as graphical parameters such as <code>col</code>
-and <code>font</code> (see <code><a href="../../grid/html/gpar.html">gpar</a></code> for a full
+and <code>font</code> (see <code><a href="../../grid/help/gpar.html">gpar</a></code> for a full
 list).
 </p>
 <p><code>main</code>, <code>sub</code>, <code>xlab</code>, <code>ylab</code>,
@@ -1305,13 +1305,13 @@ can be helpful when developing new Lattice functions.
 <dt><code>xscale.components</code>, <code>yscale.components</code>:</dt><dd>
 <p>Functions that determine axis annotation for the x and y axes
 respectively.  See documentation for
-<code><a href="axis.default.html">xscale.components.default</a></code>, the default values of
+<code><a href="../../lattice/help/xscale.components.default.html">xscale.components.default</a></code>, the default values of
 these arguments, to learn more.
 </p>
 </dd>
 <dt><code>axis</code>:</dt><dd>
 <p>Function responsible for drawing axis annotation.  See
-documentation for <code><a href="axis.default.html">axis.default</a></code>, the default value
+documentation for <code><a href="../../lattice/help/axis.default.html">axis.default</a></code>, the default value
 of this argument, to learn more.
 </p>
 </dd>
@@ -1371,12 +1371,12 @@ directly, it is more typical to use <code>perm.cond</code> and
 <code>index.cond</code> to update an existing <code>"trellis"</code> object,
 thus allowing it to be displayed in a different arrangement
 without re-calculating the data subsets that go into each panel.
-In the <code><a href="update.trellis.html">update.trellis</a></code> method, both can be set to
+In the <code><a href="../../lattice/help/update.trellis.html">update.trellis</a></code> method, both can be set to
 <code>NULL</code>, which reverts these back to their defaults.
 </p>
 </dd>
 <dt><code>par.settings</code>:</dt><dd>
-<p>A list that could be supplied to <code><a href="trellis.par.get.html">trellis.par.set</a></code>.
+<p>A list that could be supplied to <code><a href="../../lattice/help/trellis.par.set.html">trellis.par.set</a></code>.
 When the resulting object is plotted, these options are applied
 temporarily for the duration of the plotting, after which the
 settings revert back to what they were before.  This enables the
@@ -1388,7 +1388,7 @@ treatment of non-graphical options.
 </dd>
 <dt><code>plot.args</code>:</dt><dd>
 <p>A list containing possible arguments to
-<code><a href="print.trellis.html">plot.trellis</a></code>, which will be used by the
+<code><a href="../../lattice/help/plot.trellis.html">plot.trellis</a></code>, which will be used by the
 <code>plot</code> or <code>print</code> methods when drawing the object,
 unless overridden explicitly.  This enables the user to attach
 such arguments to the trellis object itself.  Partial matching
@@ -1439,7 +1439,7 @@ variables are specified, with <code>g1</code> varying fastest, followed by
 depends on the order of the levels (which for factors is usually in
 alphabetical order).  Both of these orders can be modified using the
 <code>index.cond</code> and <code>perm.cond</code> arguments, possibly using the
-<code><a href="update.trellis.html">update</a></code> (and other related)
+<code><a href="../help/update.trellis.html">update</a></code> (and other related)
 method(s).
 </p>
 
@@ -1448,9 +1448,9 @@ method(s).
 
 <p>The high-level functions documented here, as well as other high-level
 Lattice functions, return an object of class <code>"trellis"</code>.  The
-<code><a href="update.trellis.html">update</a></code> method can be used to
+<code><a href="../help/update.trellis.html">update</a></code> method can be used to
 subsequently update components of the object, and the
-<code><a href="print.trellis.html">print</a></code> method (usually called by
+<code><a href="../help/print.trellis.html">print</a></code> method (usually called by
 default) will plot it on an appropriate plotting device.
 </p>
 
@@ -1484,23 +1484,23 @@ with R</em>, Springer.  <a href="http://lmdvr.r-forge.r-project.org/">http://lmd
 
 <h3>See Also</h3>
 
-<p><code><a href="Lattice.html">Lattice</a></code> for an overview of the package, as well as
-<code><a href="barchart.table.html">barchart.table</a></code>,
-<code><a href="print.trellis.html">print.trellis</a></code>,
-<code><a href="shingles.html">shingle</a></code>,
-<code><a href="banking.html">banking</a></code>,
+<p><code><a href="../../lattice/help/Lattice.html">Lattice</a></code> for an overview of the package, as well as
+<code><a href="../../lattice/help/barchart.table.html">barchart.table</a></code>,
+<code><a href="../../lattice/help/print.trellis.html">print.trellis</a></code>,
+<code><a href="../../lattice/help/shingle.html">shingle</a></code>,
+<code><a href="../../lattice/help/banking.html">banking</a></code>,
 <code><a href="../../stats/html/reshape.html">reshape</a></code>,
-<code><a href="panel.xyplot.html">panel.xyplot</a></code>,
-<code><a href="panel.bwplot.html">panel.bwplot</a></code>,
-<code><a href="panel.barchart.html">panel.barchart</a></code>,
-<code><a href="panel.dotplot.html">panel.dotplot</a></code>,
-<code><a href="panel.stripplot.html">panel.stripplot</a></code>,
-<code><a href="panel.superpose.html">panel.superpose</a></code>,
-<code><a href="panel.loess.html">panel.loess</a></code>,
-<code><a href="panel.functions.html">panel.average</a></code>,
-<code><a href="strip.default.html">strip.default</a></code>,
-<code><a href="simpleKey.html">simpleKey</a></code>
-<code><a href="trellis.par.get.html">trellis.par.set</a></code>
+<code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code>,
+<code><a href="../../lattice/help/panel.bwplot.html">panel.bwplot</a></code>,
+<code><a href="../../lattice/help/panel.barchart.html">panel.barchart</a></code>,
+<code><a href="../../lattice/help/panel.dotplot.html">panel.dotplot</a></code>,
+<code><a href="../../lattice/help/panel.stripplot.html">panel.stripplot</a></code>,
+<code><a href="../../lattice/help/panel.superpose.html">panel.superpose</a></code>,
+<code><a href="../../lattice/help/panel.loess.html">panel.loess</a></code>,
+<code><a href="../../lattice/help/panel.average.html">panel.average</a></code>,
+<code><a href="../../lattice/help/strip.default.html">strip.default</a></code>,
+<code><a href="../../lattice/help/simpleKey.html">simpleKey</a></code>
+<code><a href="../../lattice/help/trellis.par.set.html">trellis.par.set</a></code>
 </p>
 
 
@@ -1598,5 +1598,5 @@ bwplot(decrease ~ treatment, OrchardSprays, groups = rowpos,
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

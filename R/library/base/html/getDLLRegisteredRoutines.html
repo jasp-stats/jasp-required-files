@@ -15,8 +15,8 @@ dynamic lookup, error handling when calling native routines,
 and potentially security in the future.
 This function provides a description of each of the
 registered routines in the DLL for the different interfaces,
-i.e. <code><a href="Foreign.html">.C</a></code>, <code><a href="CallExternal.html">.Call</a></code>, <code><a href="Foreign.html">.Fortran</a></code>
-and <code><a href="CallExternal.html">.External</a></code>.
+i.e. <code><a href="../../base/help/.C.html">.C</a></code>, <code><a href="../../base/help/.Call.html">.Call</a></code>, <code><a href="../../base/help/.Fortran.html">.Fortran</a></code>
+and <code><a href="../../base/help/.External.html">.External</a></code>.
 </p>
 
 
@@ -40,9 +40,9 @@ So a file &lsquo;<span class="file">MyPackage/libs/MyPackage.so</span>&rsquo; wo
 <span class="samp">MyPackage</span>.
 </p>
 <p>The <code>DLLInfo</code> objects can be obtained directly
-in calls to <code><a href="dynload.html">dyn.load</a></code> and  <code><a href="library.dynam.html">library.dynam</a></code>,
+in calls to <code><a href="../../base/help/dyn.load.html">dyn.load</a></code> and  <code><a href="../../base/help/library.dynam.html">library.dynam</a></code>,
 or can be found after the DLL has been loaded using
-<code><a href="getLoadedDLLs.html">getLoadedDLLs</a></code>, which returns a list of
+<code><a href="../../base/help/getLoadedDLLs.html">getLoadedDLLs</a></code>, which returns a list of
 <code>DLLInfo</code> objects (index-able by DLL file name).
 </p>
 <p>The <code>DLLInfo</code> approach avoids any ambiguities related to two
@@ -130,8 +130,8 @@ be called with.
 
 <h3>See Also</h3>
 
-<p><code><a href="getLoadedDLLs.html">getLoadedDLLs</a></code>,
-<code><a href="getNativeSymbolInfo.html">getNativeSymbolInfo</a></code> for information on the entry points listed.
+<p><code><a href="../../base/help/getLoadedDLLs.html">getLoadedDLLs</a></code>,
+<code><a href="../../base/help/getNativeSymbolInfo.html">getNativeSymbolInfo</a></code> for information on the entry points listed.
 </p>
 
 
@@ -144,5 +144,5 @@ getDLLRegisteredRoutines(dlls[["base"]])
 getDLLRegisteredRoutines("stats")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

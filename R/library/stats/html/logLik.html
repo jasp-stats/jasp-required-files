@@ -55,15 +55,15 @@ log-likelihood is returned.  Defaults to <code>FALSE</code>.</p>
 <h3>Details</h3>
 
 <p><code>logLik</code> is most commonly used for a model fitted by maximum
-likelihood, and some uses, e.g. by <code><a href="AIC.html">AIC</a></code>, assume
+likelihood, and some uses, e.g. by <code><a href="../../stats/help/AIC.html">AIC</a></code>, assume
 this.  So care is needed where other fit criteria have been used, for
 example REML (the default for <code>"lme"</code>).
 </p>
-<p>For a <code>"glm"</code> fit the <code><a href="family.html">family</a></code> does not have to
+<p>For a <code>"glm"</code> fit the <code><a href="../../stats/help/family.html">family</a></code> does not have to
 specify how to calculate the log-likelihood, so this is based on using
 the family's <code>aic()</code> function to compute the AIC.  For the
-<code><a href="family.html">gaussian</a></code>, <code><a href="family.html">Gamma</a></code> and
-<code><a href="family.html">inverse.gaussian</a></code> families it assumed that the dispersion
+<code><a href="../../stats/help/gaussian.html">gaussian</a></code>, <code><a href="../../stats/help/Gamma.html">Gamma</a></code> and
+<code><a href="../../stats/help/inverse.gaussian.html">inverse.gaussian</a></code> families it assumed that the dispersion
 of the GLM is estimated and has been counted as a parameter in the AIC
 value, and for all other families it is assumed that the dispersion is
 known.  Note that this procedure does not give the maximized
@@ -111,10 +111,10 @@ doi: <a href="https://doi.org/10.2307/2334370">10.2307/2334370</a>.
 
 <h3>See Also</h3>
 
-<p><code><a href="../../nlme/html/logLik.lme.html">logLik.gls</a></code>, <code><a href="../../nlme/html/logLik.lme.html">logLik.lme</a></code>, in
+<p><code><a href="../../nlme/help/logLik.lme.html">logLik.gls</a></code>, <code><a href="../../nlme/help/logLik.lme.html">logLik.lme</a></code>, in
 package <a href="https://CRAN.R-project.org/package=nlme"><span class="pkg">nlme</span></a>, etc.
 </p>
-<p><code><a href="AIC.html">AIC</a></code>
+<p><code><a href="../../stats/help/AIC.html">AIC</a></code>
 </p>
 
 
@@ -137,5 +137,5 @@ logLik(fm1)
 logLik(fm1, REML = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

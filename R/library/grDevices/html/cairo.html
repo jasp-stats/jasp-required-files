@@ -46,7 +46,7 @@ cairo_ps(filename = if(onefile) "Rplots.ps" else "Rplot%03d.ps",
 The page number is substituted if a C integer format is included in
 the character string, as in the default.  (The result must be less
 than <code>PATH_MAX</code> characters long, and may be truncated if not.
-See <code><a href="postscript.html">postscript</a></code> for further details.)  Tilde expansion
+See <code><a href="../../grDevices/help/postscript.html">postscript</a></code> for further details.)  Tilde expansion
 is performed where supported by the platform.</p>
 </td></tr>
 <tr valign="top"><td><code>width</code></td>
@@ -73,7 +73,7 @@ string specify a font family to be searched for in a
 system-dependent way.
 </p>
 <p>On unix-alikes (incl.\ Mac), see
-the &lsquo;Cairo fonts&rsquo; section in the help for <code><a href="x11.html">X11</a></code>.
+the &lsquo;Cairo fonts&rsquo; section in the help for <code><a href="../../grDevices/help/X11.html">X11</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>bg</code></td>
@@ -96,7 +96,7 @@ the cairo implementation but was commonly 300.</p>
 <td>
 
 <p>a length-one character string that specifies the font family to
-be used as the &quot;symbol&quot; font (e.g., for <a href="plotmath.html">plotmath</a> output).</p>
+be used as the &quot;symbol&quot; font (e.g., for <a href="../../grDevices/help/plotmath.html">plotmath</a> output).</p>
 </td></tr>
 </table>
 
@@ -109,7 +109,7 @@ is SVG version 1.1 for <code>onefile = FALSE</code> (the default), otherwise
 SVG 1.2.  (Few SVG viewers are capable of displaying multi-page SVG
 files.)
 </p>
-<p>Note that unlike <code><a href="postscript.html">postscript</a></code> and <code><a href="pdf.html">pdf</a></code>,
+<p>Note that unlike <code><a href="../../grDevices/help/postscript.html">postscript</a></code> and <code><a href="../../grDevices/help/pdf.html">pdf</a></code>,
 <code>cairo_pdf</code> and <code>cairo_ps</code> sometimes record <em>bitmaps</em>
 and not vector graphics.  On the other hand, they can
 (on suitable platforms) include a much wider range of UTF-8 glyphs,
@@ -197,11 +197,11 @@ distributed as part of the X11 system and hence that (for example, on
 
 <h3>See Also</h3>
 
-<p><code><a href="Devices.html">Devices</a></code>, <code><a href="dev2.html">dev.print</a></code>, <code><a href="pdf.html">pdf</a></code>,
-<code><a href="postscript.html">postscript</a></code>
+<p><code><a href="../../grDevices/help/Devices.html">Devices</a></code>, <code><a href="../../grDevices/help/dev.print.html">dev.print</a></code>, <code><a href="../../grDevices/help/pdf.html">pdf</a></code>,
+<code><a href="../../grDevices/help/postscript.html">postscript</a></code>
 </p>
 <p><code><a href="../../base/html/capabilities.html">capabilities</a></code> to see if cairo is supported.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

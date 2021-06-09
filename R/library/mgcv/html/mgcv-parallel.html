@@ -12,14 +12,14 @@
 
 <p><code>mgcv</code> can make some use of multiple cores or a cluster.
 </p>
-<p><code><a href="bam.html">bam</a></code> can use an openMP based parallelization approach alongside discretisation of covariates to achieve substantial speed ups. This is selected using the <code>discrete=TRUE</code> option to <code>bam</code>, withthe number of threads controlled via the <code>nthreads</code> argument. This is the approach that scales best. See example below.
+<p><code><a href="../../mgcv/help/bam.html">bam</a></code> can use an openMP based parallelization approach alongside discretisation of covariates to achieve substantial speed ups. This is selected using the <code>discrete=TRUE</code> option to <code>bam</code>, withthe number of threads controlled via the <code>nthreads</code> argument. This is the approach that scales best. See example below.
 </p>
-<p>Alternatively, function <code><a href="bam.html">bam</a></code> can use the facilities provided in the <a href="../../parallel/html/parallel-package.html">parallel</a> package. See examples below. Note that most multi-core machines are memory bandwidth limited, so parallel speed up tends to be rather variable. 
+<p>Alternatively, function <code><a href="../../mgcv/help/bam.html">bam</a></code> can use the facilities provided in the <a href="../../parallel/help/parallel-package.html">parallel</a> package. See examples below. Note that most multi-core machines are memory bandwidth limited, so parallel speed up tends to be rather variable. 
 </p>
-<p>Function <code><a href="gam.html">gam</a></code> can use parallel threads on a (shared memory) multi-core 
-machine via <code>openMP</code> (where this is supported). To do this, set the desired number of threads by setting <code>nthreads</code> to the number of cores to use, in the <code>control</code> argument of <code><a href="gam.html">gam</a></code>. Note that, for the most part, only the dominant <i>O(np^2)</i> steps are parallelized (n is number of data, p number of parameters). For additive Gaussian models estimated by GCV, the speed up can be disappointing as these employ an <i>O(p^3)</i> SVD step that can also have substantial cost in practice. 
+<p>Function <code><a href="../../mgcv/help/gam.html">gam</a></code> can use parallel threads on a (shared memory) multi-core 
+machine via <code>openMP</code> (where this is supported). To do this, set the desired number of threads by setting <code>nthreads</code> to the number of cores to use, in the <code>control</code> argument of <code><a href="../../mgcv/help/gam.html">gam</a></code>. Note that, for the most part, only the dominant <i>O(np^2)</i> steps are parallelized (n is number of data, p number of parameters). For additive Gaussian models estimated by GCV, the speed up can be disappointing as these employ an <i>O(p^3)</i> SVD step that can also have substantial cost in practice. 
 </p>
-<p><code><a href="magic.html">magic</a></code> can also use multiple cores, but the same comments apply as for the GCV Gaussian additive model. 
+<p><code><a href="../../mgcv/help/magic.html">magic</a></code> can also use multiple cores, but the same comments apply as for the GCV Gaussian additive model. 
 </p>
 <p>If <code>control$nthreads</code> is set to more than the number of cores detected, then only the number of detected cores is used. Note that using virtual cores usually gives very little speed up, and can even slow computations slightly. For example, many Intel processors reporting 4 cores actually have 2 physical cores, each with 2 virtual cores, so using 2 threads gives a marked increase in speed, while using 4 threads makes little extra difference. 
 </p>
@@ -41,7 +41,7 @@ machine via <code>openMP</code> (where this is supported). To do this, set the d
 
 <h3>References</h3>
 
-<p><a href="https://computing.llnl.gov/tutorials/openMP/">https://computing.llnl.gov/tutorials/openMP/</a>
+<p><a href="https://hpc.llnl.gov/openmp-tutorial">https://hpc.llnl.gov/openmp-tutorial</a>
 </p>
 
 
@@ -91,5 +91,5 @@ system.time(b4 &lt;- bam(y ~ s(x0,bs=bs,k=7)+s(x1,bs=bs,k=7)+s(x2,bs=bs,k=k)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -185,6 +185,22 @@ The obvious side effect is output to the terminal.
 </p>
 
 
+<h3>Note</h3>
+
+<p>See the extensive annotated &lsquo;Examples&rsquo; below.
+</p>
+<p>The default method tries to &ldquo;work always&rdquo;, but needs to make some
+assumptions for the case when <code>object</code> has a <code><a href="../../base/html/class.html">class</a></code> but
+no own <code>str()</code> method which is <em>the typical</em> case: There it
+relies on <code>"<a href="../../base/html/Extract.html">[</a>"</code> and <code>"<a href="../../base/html/Extract.html">[[</a>"</code> subsetting methods to
+be compatible with <code><a href="../../base/html/length.html">length</a>()</code>.  When this is not the case, or
+when <code>is.list(object)</code> is <code>TRUE</code>, but <code>length(object)</code>
+differs from <code>length(<a href="../../base/html/class.html">unclass</a>(object))</code> it treats it as
+&ldquo;irregular&rdquo; and reports the contents of <code>unclass(object)</code>
+as &ldquo;hidden list&rdquo;.
+</p>
+
+
 <h3>Author(s)</h3>
 
 <p>Martin Maechler <a href="mailto:maechler@stat.math.ethz.ch">maechler@stat.math.ethz.ch</a> since 1990.
@@ -193,7 +209,7 @@ The obvious side effect is output to the terminal.
 
 <h3>See Also</h3>
 
-<p><code><a href="ls_str.html">ls.str</a></code> for <em>listing</em> objects with their structure;
+<p><code><a href="../../utils/help/ls.str.html">ls.str</a></code> for <em>listing</em> objects with their structure;
 <code><a href="../../base/html/summary.html">summary</a></code>, <code><a href="../../base/html/args.html">args</a></code>.
 </p>
 
@@ -277,5 +293,5 @@ str(fit)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

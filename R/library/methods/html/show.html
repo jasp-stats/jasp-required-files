@@ -11,7 +11,7 @@
 
 <p>Display the object, by printing, plotting or whatever suits its
 class.  This function exists to be specialized by methods.  The
-default method calls <code><a href="methodUtilities.html">showDefault</a></code>.
+default method calls <code><a href="../../methods/help/showDefault.html">showDefault</a></code>.
 </p>
 <p>Formal methods for <code>show</code> will
 usually be invoked for automatic printing (see the details).
@@ -38,7 +38,7 @@ show(object)
 <h3>Details</h3>
 
 <p>Objects from an S4 class (a class defined by a call to
-<code><a href="setClass.html">setClass</a></code>) will be displayed automatically is if by a
+<code><a href="../../methods/help/setClass.html">setClass</a></code>) will be displayed automatically is if by a
 call to <code>show</code>.  S4 objects that occur as attributes of S3
 objects will also be displayed in this form; conversely, S3 objects
 encountered as slots in S4 objects will be printed using the S3
@@ -47,8 +47,8 @@ convention, as if by a call to <code><a href="../../base/html/print.html">print<
 <p>Methods defined for <code>show</code> will only be inherited  by simple
 inheritance, since otherwise the method would not receive the
 complete, original object, with misleading results.  See the
-<code>simpleInheritanceOnly</code> argument to <code><a href="setGeneric.html">setGeneric</a></code> and
-the discussion in <code><a href="setIs.html">setIs</a></code> for the general concept.
+<code>simpleInheritanceOnly</code> argument to <code><a href="../../methods/help/setGeneric.html">setGeneric</a></code> and
+the discussion in <code><a href="../../methods/help/setIs.html">setIs</a></code> for the general concept.
 </p>
 
 
@@ -60,7 +60,7 @@ the discussion in <code><a href="setIs.html">setIs</a></code> for the general co
 
 <h3>See Also</h3>
 
-<p><code><a href="showMethods.html">showMethods</a></code> prints all the methods for one or more
+<p><code><a href="../../methods/help/showMethods.html">showMethods</a></code> prints all the methods for one or more
 functions.
 </p>
 
@@ -104,5 +104,5 @@ y   169   196   225   256   289   324   361   400
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

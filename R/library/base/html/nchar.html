@@ -12,7 +12,7 @@
 <p><code>nchar</code> takes a character vector as an argument and
 returns a vector whose elements contain the sizes of
 the corresponding elements of <code>x</code>. Internally, it is a generic,
-for which methods can be defined (see <a href="InternalMethods.html">InternalMethods</a>).
+for which methods can be defined (see <a href="../../base/help/InternalMethods.html">InternalMethods</a>).
 </p>
 <p><code>nzchar</code> is a fast way to find out if elements of a character
 vector are non-empty strings.
@@ -50,7 +50,7 @@ throwing an error)?</p>
 <tr valign="top"><td><code>keepNA</code></td>
 <td>
 <p>logical: should <code>NA</code> be returned when
-<code>x</code> is <code><a href="NA.html">NA</a></code>?  If false, <code>nchar()</code> returns
+<code>x</code> is <code><a href="../../base/help/NA.html">NA</a></code>?  If false, <code>nchar()</code> returns
 <code>2</code>, as that is the number of printing characters used when
 strings are written to output, and <code>nzchar()</code> is <code>TRUE</code>.  The
 default for <code>nchar()</code>, <code>NA</code>, means to use <code>keepNA = TRUE</code>
@@ -71,7 +71,7 @@ three ways (corresponding to the <code>type</code> argument):
 </dd>
 <dt><code>chars</code></dt><dd><p>The number of characters.</p>
 </dd>
-<dt><code>width</code></dt><dd><p>The number of columns <code><a href="cat.html">cat</a></code> will use to
+<dt><code>width</code></dt><dd><p>The number of columns <code><a href="../../base/help/cat.html">cat</a></code> will use to
 print the string in a monospaced font.  The same as <code>chars</code>
 if this cannot be calculated.</p>
 </dd>
@@ -83,22 +83,24 @@ locales (but note how <code>type</code> determines the default for
 multibyte character sequences, e.g. in UTF-8 locales.
 </p>
 <p>The internal equivalent of the default method of
-<code><a href="character.html">as.character</a></code> is performed on <code>x</code> (so there is no
+<code><a href="../../base/help/as.character.html">as.character</a></code> is performed on <code>x</code> (so there is no
 method dispatch).  If you want to operate on non-vector objects
-passing them through <code><a href="deparse.html">deparse</a></code> first will be required.
+passing them through <code><a href="../../base/help/deparse.html">deparse</a></code> first will be required.
 </p>
 
 
 <h3>Value</h3>
 
 <p>For <code>nchar</code>, an integer vector giving the sizes of each element.
-For missing values (i.e., <code>NA</code>, i.e., <code><a href="NA.html">NA_character_</a></code>),
-<code>nchar()</code> returns <code><a href="NA.html">NA_integer_</a></code> if <code>keepNA</code> is
+For missing values (i.e., <code>NA</code>, i.e., <code><a href="../../base/help/NA_character_.html">NA_character_</a></code>),
+<code>nchar()</code> returns <code><a href="../../base/help/NA_integer_.html">NA_integer_</a></code> if <code>keepNA</code> is
 true, and <code>2</code>, the number of printing characters, if false.
 </p>
 <p><code>type = "width"</code> gives (an approximation to) the number of
 columns used in printing each element in a terminal font, taking into
 account double-width, zero-width and &lsquo;composing&rsquo; characters.
+The approximation is likely to be poor when there are unassigned or
+non-printing characters.
 </p>
 <p>If <code>allowNA = TRUE</code> and an element is detected as invalid in a
 multi-byte character set such as UTF-8, its number of characters and
@@ -107,7 +109,7 @@ be non-negative, so <code>!is.na(nchar(x, "chars", TRUE))</code> is a test
 of validity.
 </p>
 <p>A character string marked with <code>"bytes"</code> encoding (see
-<code><a href="Encoding.html">Encoding</a></code>) has a number of bytes, but neither a known
+<code><a href="../../base/help/Encoding.html">Encoding</a></code>) has a number of bytes, but neither a known
 number of characters nor a width, so the latter two types are
 <code>NA</code> if <code>allowNA = TRUE</code>, otherwise an error.
 </p>
@@ -124,7 +126,7 @@ default) and <code>NA</code> otherwise.
 
 <p>This does <strong>not</strong> by default give the number of characters that
 will be used to <code>print()</code> the string.  Use
-<code><a href="encodeString.html">encodeString</a></code> to find that.
+<code><a href="../../base/help/encodeString.html">encodeString</a></code> to find that.
 This is particularly important on Windows when <span class="samp">\uxxxx</span>
 sequences have been used to enter Unicode characters not representable
 in the current encoding.  Thus <code>nchar("\u2642")</code> is <code>1</code>,
@@ -175,7 +177,7 @@ Wadsworth &amp; Brooks/Cole.
 <h3>See Also</h3>
 
 <p><code><a href="../../graphics/html/strwidth.html">strwidth</a></code> giving width of strings for plotting;
-<code><a href="paste.html">paste</a></code>, <code><a href="substr.html">substr</a></code>, <code><a href="strsplit.html">strsplit</a></code>
+<code><a href="../../base/help/paste.html">paste</a></code>, <code><a href="../../base/help/substr.html">substr</a></code>, <code><a href="../../base/help/strsplit.html">strsplit</a></code>
 </p>
 
 
@@ -213,5 +215,5 @@ stopifnot(apply(ncT, 1, function(.) length(unique(.))) == 1,
           apply(ncF, 1, function(.) length(unique(.))) == 1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

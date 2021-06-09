@@ -61,7 +61,7 @@ values and analogously for the last ones making the smoothed ends
 <dt><code>"median"</code></dt><dd><p>the default, smooths the ends by using
 symmetrical medians of subsequently smaller bandwidth, but for
 the very first and last value where Tukey's robust end-point
-rule is applied, see <code><a href="smoothEnds.html">smoothEnds</a></code>.</p>
+rule is applied, see <code><a href="../../stats/help/smoothEnds.html">smoothEnds</a></code>.</p>
 </dd>
 </dl>
 
@@ -130,7 +130,7 @@ considerably faster for small <i>k</i> or <i>n</i>.</p>
 </dd>
 </dl>
 
-<p>Note that, both algorithms (and the <code><a href="smoothEnds.html">smoothEnds</a>()</code> utility)
+<p>Note that, both algorithms (and the <code><a href="../../stats/help/smoothEnds.html">smoothEnds</a>()</code> utility)
 now &ldquo;work&rdquo; also when <code>x</code> contains non-finite entries
 (<i>+/-</i><code><a href="../../base/html/is.finite.html">Inf</a></code>, <code><a href="../../base/html/is.finite.html">NaN</a></code>, and
 <code><a href="../../base/html/NA.html">NA</a></code>):
@@ -186,9 +186,9 @@ Report, Dep. Statistics, Stanford U., Project Orion 003.
 
 <h3>See Also</h3>
 
-<p><code><a href="smoothEnds.html">smoothEnds</a></code> which implements Tukey's end point rule and
+<p><code><a href="../../stats/help/smoothEnds.html">smoothEnds</a></code> which implements Tukey's end point rule and
 is called by default from <code>runmed(*, endrule = "median")</code>.
-<code><a href="smooth.html">smooth</a></code> uses running
+<code><a href="../../stats/help/smooth.html">smooth</a></code> uses running
 medians of 3 for its compound smoothers.
 </p>
 
@@ -250,5 +250,5 @@ legend("bottomleft", legend=c("data", paste("k = ", c(3,7,9,11))),
        bty="n", col=1:5, lty=1:5, pch=1:5)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

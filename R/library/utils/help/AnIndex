@@ -44,6 +44,7 @@ build	PkgUtils
 c.person	person
 capture.output	capture.output
 changedFiles	changedFiles
+charClass	charClass
 check	PkgUtils
 checkCRAN	mirrorAdmin
 choose.dir	choose.dir
@@ -247,6 +248,8 @@ RShowDoc	RShowDoc
 RSiteSearch	RSiteSearch
 rtags	rtags
 Rtangle	Rtangle
+RtangleFinish	SweaveUtils
+RtangleRuncode	SweaveUtils
 RtangleSetup	Rtangle
 RtangleWritedoc	SweaveUtils
 RweaveChunkPrefix	SweaveUtils

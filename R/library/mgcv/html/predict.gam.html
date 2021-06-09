@@ -129,14 +129,14 @@ smoothing parameters is used. </p>
 Bayesian posterior covariance matrix of the parameters <code>Vp</code> in the fitted
 gam object.
 </p>
-<p>When predicting from models with <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> then there are two possibilities. If the summation convention is to be used in prediction, as it was in fitting, then <code>newdata</code> should be a list, with named matrix arguments corresponding to any variables that were matrices in fitting. Alternatively one might choose to simply evaluate the constitutent smooths at particular values in which case arguments that were matrices can be replaced by vectors (and <code>newdata</code> can be a dataframe). See <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> for example code.
+<p>When predicting from models with <code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code> then there are two possibilities. If the summation convention is to be used in prediction, as it was in fitting, then <code>newdata</code> should be a list, with named matrix arguments corresponding to any variables that were matrices in fitting. Alternatively one might choose to simply evaluate the constitutent smooths at particular values in which case arguments that were matrices can be replaced by vectors (and <code>newdata</code> can be a dataframe). See <code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code> for example code.
 </p>
 <p>To facilitate plotting with <code><a href="../../stats/html/termplot.html">termplot</a></code>, if <code>object</code> possesses
 an attribute <code>"para.only"</code> and <code>type=="terms"</code> then only parametric
 terms of order 1 are returned (i.e. those that <code>termplot</code> can handle).
 </p>
 <p>Note that, in common with other prediction functions, any offset supplied to
-<code><a href="gam.html">gam</a></code> as an argument is always ignored when predicting, unlike
+<code><a href="../../mgcv/help/gam.html">gam</a></code> as an argument is always ignored when predicting, unlike
 offsets specified in the gam model formula.
 </p>
 <p>See the examples for how to use the <code>lpmatrix</code> for obtaining credible
@@ -198,7 +198,7 @@ and Hall/CRC Press.
 
 <h3>See Also</h3>
 
-  <p><code><a href="gam.html">gam</a></code>, <code><a href="gamm.html">gamm</a></code>, <code><a href="plot.gam.html">plot.gam</a></code></p>
+  <p><code><a href="../../mgcv/help/gam.html">gam</a></code>, <code><a href="../../mgcv/help/gamm.html">gamm</a></code>, <code><a href="../../mgcv/help/plot.gam.html">plot.gam</a></code></p>
 
 
 <h3>Examples</h3>
@@ -344,5 +344,5 @@ for (i in 1:4) {  ## plot derivatives and corresponding CIs
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

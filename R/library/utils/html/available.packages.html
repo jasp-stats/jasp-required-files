@@ -41,14 +41,14 @@ e.g., because you burned only the &lsquo;<span class="file">contrib</span>&rsquo
 <tr valign="top"><td><code>method</code></td>
 <td>
 
-<p>download method, see <code><a href="download.file.html">download.file</a></code>.
+<p>download method, see <code><a href="../../utils/help/download.file.html">download.file</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
 
 <p>character string, indicate which type of packages: see
-<code><a href="install.packages.html">install.packages</a></code>.
+<code><a href="../../utils/help/install.packages.html">install.packages</a></code>.
 </p>
 <p>If <code>type = "both"</code> this will use the source repository.
 </p>
@@ -88,7 +88,7 @@ will be ignored. See &lsquo;Details&rsquo;.
 </td></tr>
 <tr valign="top"><td><code>quiet</code></td>
 <td>
-<p>logical, passed to <code><a href="download.file.html">download.file</a>()</code>; change
+<p>logical, passed to <code><a href="../../utils/help/download.file.html">download.file</a>()</code>; change
 only if you know what you are doing.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
@@ -96,7 +96,7 @@ only if you know what you are doing.</p>
 
 <p>allow additional arguments to be passed from callers (which might be
 arguments to future versions of this function).  Currently these are
-all passed to <code><a href="download.file.html">download.file</a>()</code>.
+all passed to <code><a href="../../utils/help/download.file.html">download.file</a>()</code>.
 </p>
 </td></tr>
 </table>
@@ -202,14 +202,14 @@ specified using the <code>fields</code> argument.
 <code>"License"</code>, <code>"License_is_FOSS"</code>,
 <code>"License_restricts_use"</code>, <code>"Archs"</code>, <code>"MD5sum"</code> and
 <code>"NeedsCompilation"</code> are reported for use by the filters and
-package management tools, including <code><a href="install.packages.html">install.packages</a></code>.
+package management tools, including <code><a href="../../utils/help/install.packages.html">install.packages</a></code>.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="install.packages.html">install.packages</a></code>, <code><a href="download.packages.html">download.packages</a></code>,
-<code><a href="contrib.url.html">contrib.url</a></code>.
+<p><code><a href="../../utils/help/install.packages.html">install.packages</a></code>, <code><a href="../../utils/help/download.packages.html">download.packages</a></code>,
+<code><a href="../../utils/help/contrib.url.html">contrib.url</a></code>.
 </p>
 <p>The &lsquo;R Installation and Administration&rsquo; manual for how to
 set up a repository.
@@ -219,6 +219,18 @@ set up a repository.
 <h3>Examples</h3>
 
 <pre>## Not run: 
+## Count package licenses
+db &lt;- available.packages(filters = "duplicates")
+table(db[,"License"])
+
+## Use custom filter function to only keep recommended packages
+## which do not require compilation
+available.packages(filters = list(
+  add = TRUE,
+  function (db) db[db[,"Priority"] %in% "recommended" &amp;
+                   db[,"NeedsCompilation"] == "no", ]
+))
+
 ## Restrict install.packages() (etc) to known-to-be-FOSS packages
 options(available_packages_filters =
   c("R_version", "OS_type", "subarch", "duplicates", "license/FOSS"))
@@ -226,11 +238,11 @@ options(available_packages_filters =
 options(available_packages_filters = list(add = TRUE, "license/FOSS"))
 
 ## Give priority to released versions on CRAN, rather than development
-## versions on Omegahat, R-Forge etc.
+## versions on R-Forge etc.
 options(available_packages_filters =
      c("R_version", "OS_type", "subarch", "CRAN", "duplicates"))
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

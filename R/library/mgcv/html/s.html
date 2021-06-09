@@ -28,7 +28,7 @@ smooth - it exists purely to help set up a model using spline based smooths.
 <p> a list of variables that are the covariates that this
 smooth is a function of. Transformations whose form depends on
 the values of the data are best avoided here: e.g. <code>s(log(x))</code>
-is fine, but <code>s(I(x/sd(x)))</code> is not (see <code><a href="predict.gam.html">predict.gam</a></code>).</p>
+is fine, but <code>s(I(x/sd(x)))</code> is not (see <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>).</p>
 </td></tr>
 <tr valign="top"><td><code>k</code></td>
 <td>
@@ -36,8 +36,8 @@ is fine, but <code>s(I(x/sd(x)))</code> is not (see <code><a href="predict.gam.h
 The default depends on the number of variables that the smooth is a
 function of. <code>k</code> should not be less than the dimension of the
 null space of the penalty for the term (see
-<code><a href="null.space.dimension.html">null.space.dimension</a></code>), but will be reset if
-it is. See <code><a href="choose.k.html">choose.k</a></code> for further information.</p>
+<code><a href="../../mgcv/help/null.space.dimension.html">null.space.dimension</a></code>), but will be reset if
+it is. See <code><a href="../../mgcv/help/choose.k.html">choose.k</a></code> for further information.</p>
 </td></tr>
 <tr valign="top"><td><code>fx</code></td>
 <td>
@@ -48,7 +48,7 @@ spline (<code>TRUE</code>) or a penalized regression spline (<code>FALSE</code>)
 <td>
 <p>a two letter character string indicating the (penalized) smoothing basis to use.
 (eg <code>"tp"</code> for thin plate regression spline, <code>"cr"</code> for cubic regression spline).
-see <code><a href="smooth.terms.html">smooth.terms</a></code> for an over view of what is available.
+see <code><a href="../../mgcv/help/smooth.terms.html">smooth.terms</a></code> for an over view of what is available.
 </p>
 </td></tr>
 <tr valign="top"><td><code>m</code></td>
@@ -68,15 +68,16 @@ resulting smooth is not usually subject to a centering constraint (so the <code>
 not be added as an additional main effect). 
 In the factor <code>by</code> variable case a replicate of the smooth is produced for
 each factor level (these smooths will be centered, so the factor usually needs to be added as 
-a main effect as well). See <code><a href="gam.models.html">gam.models</a></code> for further details. A <code>by</code> variable may also be a matrix 
+a main effect as well). See <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> for further details. A <code>by</code> variable may also be a matrix 
 if covariates are matrices: in this case implements linear functional of a smooth 
-(see <code><a href="gam.models.html">gam.models</a></code> and <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> for details).
+(see <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> and <code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code> for details).
 </p>
 </td></tr>
 <tr valign="top"><td><code>xt</code></td>
 <td>
 <p>Any extra information required to set up a particular basis. Used
-e.g. to set large data set handling behaviour for <code>"tp"</code> basis.</p>
+e.g. to set large data set handling behaviour for <code>"tp"</code> basis. If <code>xt$sumConv</code>
+exists and is <code>FALSE</code> then the summation convention for matrix arguments is turned off. </p>
 </td></tr>
 <tr valign="top"><td><code>id</code></td>
 <td>
@@ -92,13 +93,13 @@ at each factor level to have the same smoothing parameter.</p>
 <p>any supplied smoothing parameters for this term. Must be an array of the same
 length as the number of penalties for this smooth. Positive or zero elements are taken as fixed 
 smoothing parameters. Negative elements signal auto-initialization. Over-rides values supplied in 
-<code>sp</code> argument to <code><a href="gam.html">gam</a></code>. Ignored by <code>gamm</code>.</p>
+<code>sp</code> argument to <code><a href="../../mgcv/help/gam.html">gam</a></code>. Ignored by <code>gamm</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>pc</code></td>
 <td>
 <p>If not <code>NULL</code>, signals a point constraint: the smooth should pass through zero at the
 point given here (as a vector or list with names corresponding to the smooth names). Never ignored
-if supplied. See <code><a href="identifiability.html">identifiability</a></code>. </p>
+if supplied. See <code><a href="../../mgcv/help/identifiability.html">identifiability</a></code>. </p>
 </td></tr>
 </table>
 
@@ -107,7 +108,7 @@ if supplied. See <code><a href="identifiability.html">identifiability</a></code>
 
 <p>The function does not evaluate the variable arguments. To use this function to specify use of
 your own smooths, note the relationships between the inputs and the output object and see the example
-in <code><a href="smooth.construct.html">smooth.construct</a></code>.
+in <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>.
 </p>
 
 
@@ -188,7 +189,7 @@ and Hall/CRC Press.
 
 <h3>See Also</h3>
 
- <p><code><a href="te.html">te</a></code>, <code><a href="gam.html">gam</a></code>, <code><a href="gamm.html">gamm</a></code></p>
+ <p><code><a href="../../mgcv/help/te.html">te</a></code>, <code><a href="../../mgcv/help/gam.html">gam</a></code>, <code><a href="../../mgcv/help/gamm.html">gamm</a></code></p>
 
 
 <h3>Examples</h3>
@@ -212,5 +213,5 @@ b&lt;-gam(y~fac+s(x1,by=fac)+x2)
 plot(b,pages=1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

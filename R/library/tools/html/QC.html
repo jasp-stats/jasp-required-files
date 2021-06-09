@@ -17,10 +17,11 @@ and documentation, notably on R packages.
 <h3>Usage</h3>
 
 <pre>
-checkDocFiles(package, dir, lib.loc = NULL)
-checkDocStyle(package, dir, lib.loc = NULL)
+checkDocFiles   (package, dir, lib.loc = NULL, chkInternal = FALSE)
+checkDocStyle   (package, dir, lib.loc = NULL)
 checkReplaceFuns(package, dir, lib.loc = NULL)
-checkS3methods(package, dir, lib.loc = NULL)
+checkS3methods  (package, dir, lib.loc = NULL)
+checkRdContents (package, dir, lib.loc = NULL, chkInternal = FALSE)
 
 langElts
 nonS3methods(package)
@@ -37,7 +38,7 @@ nonS3methods(package)
 <tr valign="top"><td><code>dir</code></td>
 <td>
 <p>a character string specifying the path to a package's root
-source directory.  This should contain the subdirectories &lsquo;<span class="file">R</span>&rsquo;
+source (or <em>installed</em> in some cases) directory.  This should contain the subdirectories &lsquo;<span class="file">R</span>&rsquo;
 (for R code) and &lsquo;<span class="file">man</span>&rsquo; with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> documentation sources (in Rd
 format).  Only used if <code>package</code> is not given.</p>
 </td></tr>
@@ -47,6 +48,11 @@ format).  Only used if <code>package</code> is not given.</p>
 or <code>NULL</code>.  The default value of <code>NULL</code> corresponds to all
 libraries currently known.  The specified library trees are used to
 search for <code>package</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>chkInternal</code></td>
+<td>
+<p>logical indicating if Rd files marked with keyword
+<code>internal</code> should be checked as well.</p>
 </td></tr>
 </table>
 
@@ -93,6 +99,9 @@ added in R 1.9.0 by splitting the former <span class="pkg">base</span>, and, if 
 installed package is tested, also in the loaded namespaces/packages
 listed in the package's &lsquo;<span class="file">DESCRIPTION</span>&rsquo; Depends field.
 </p>
+<p><code>checkRdContents()</code> checks Rd content, e.g., whether arguments of
+functions in the usage section have non empty descriptions.
+</p>
 <p><code>nonS3methods(package)</code> returns a <code><a href="../../base/html/character.html">character</a></code> vector with
 the names of the functions in <code>package</code> which &lsquo;look&rsquo; like
 S3 methods, but are not.  Using <code>package = NULL</code> returns all
@@ -118,5 +127,5 @@ There are <code>print</code> methods for nicely displaying the information
 contained in such objects.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

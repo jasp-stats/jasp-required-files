@@ -54,7 +54,7 @@ to return to the <span style="font-family: Courier New, Courier; color: #666666;
 <td>
 <p>character string or <code>NULL</code>.  If it is a character
 string, set the method of discrete uniform generation (used in 
-<code><a href="sample.html">sample</a></code>, for instance).  Use <code>"default"</code> to return to 
+<code><a href="../../base/help/sample.html">sample</a></code>, for instance).  Use <code>"default"</code> to return to 
 the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> default.  <code>NULL</code> makes no change.</p>
 </td></tr>
 <tr valign="top"><td><code>seed</code></td>
@@ -173,7 +173,7 @@ basis for the multiple streams used in package <span class="pkg">parallel</span>
 </p>
 </dd>
 <dt><code>"user-supplied"</code>:</dt><dd>
-<p>Use a user-supplied generator.  See <code><a href="Random-user.html">Random.user</a></code> for
+<p>Use a user-supplied generator.  See <code><a href="../../base/help/Random.user.html">Random.user</a></code> for
 details.
 </p>
 </dd>
@@ -193,7 +193,7 @@ and when <code>kind</code> is changed.
 </p>
 <p><code>sample.kind</code> can be <code>"Rounding"</code> or <code>"Rejection"</code>,
 or partial matches to these.  The former was the default in versions
-prior to 3.6.0:  it made <code><a href="sample.html">sample</a></code> noticeably non-uniform
+prior to 3.6.0:  it made <code><a href="../../base/help/sample.html">sample</a></code> noticeably non-uniform
 on large populations, and should only be used for reproduction of old
 results.  See <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=17494">PR#17494</a> for a discussion. 
 </p>
@@ -218,7 +218,7 @@ workspace has been restored): if no generator has been used it selects
 
 <h3>Value</h3>
 
-<p><code>.Random.seed</code> is an <code><a href="integer.html">integer</a></code> vector whose first
+<p><code>.Random.seed</code> is an <code><a href="../../base/help/integer.html">integer</a></code> vector whose first
 element <em>codes</em> the kind of RNG and normal generator. The lowest
 two decimal digits are in <code>0:(k-1)</code>
 where <code>k</code> is the number of available RNGs.  The hundreds
@@ -353,7 +353,7 @@ doi: <a href="https://doi.org/10.2307/2347988">10.2307/2347988</a>.
 
 <h3>See Also</h3>
 
-<p><code><a href="sample.html">sample</a></code> for random sampling with and without replacement.
+<p><code><a href="../../base/help/sample.html">sample</a></code> for random sampling with and without replacement.
 </p>
 <p><a href="../../stats/html/Distributions.html">Distributions</a> for functions for random-variate generation from
 standard distributions.
@@ -413,5 +413,5 @@ sum(duplicated(runif(1e6))) # around 110 for default generator
 qbirthday(1 - 1e-6, classes = 2e9) # 235,000
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

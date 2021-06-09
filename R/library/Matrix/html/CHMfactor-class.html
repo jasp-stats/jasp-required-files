@@ -41,22 +41,22 @@ update(object, parent, mult = 0, ...)
 <tr valign="top"><td><code>x,object,a</code></td>
 <td>
 <p>a <code>"CHMfactor"</code> object (almost always the result
-of <code><a href="Cholesky.html">Cholesky</a>()</code>).</p>
+of <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a>()</code>).</p>
 </td></tr>
 <tr valign="top"><td><code>parent</code></td>
 <td>
-<p>a <code>"<a href="dsCMatrix-class.html">dsCMatrix</a>"</code> or
-<code>"<a href="dgCMatrix-class.html">dgCMatrix</a>"</code> matrix object with the same nonzero
+<p>a <code>"<a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a>"</code> or
+<code>"<a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a>"</code> matrix object with the same nonzero
 pattern as the matrix that generated <code>object</code>.  If <code>parent</code>
-is symmetric, of class <code>"<a href="dsCMatrix-class.html">dsCMatrix</a>"</code>, then
+is symmetric, of class <code>"<a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a>"</code>, then
 <code>object</code> should be a decomposition of a matrix with the same
 nonzero pattern as <code>parent</code>.  If <code>parent</code> is not symmetric then <code>object</code>
 should be the decomposition of a matrix with the same nonzero
 pattern as <code>tcrossprod(parent)</code>.
 </p>
-<p>Since Matrix version 1.0-8, other <code>"<a href="sparseMatrix-class.html">sparseMatrix</a>"</code> matrices are
-coerced to <code><a href="dsparseMatrix-class.html">dsparseMatrix</a></code> and
-<code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code> if needed.</p>
+<p>Since Matrix version 1.0-8, other <code>"<a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a>"</code> matrices are
+coerced to <code><a href="../../Matrix/help/dsparseMatrix-class.html">dsparseMatrix</a></code> and
+<code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code> if needed.</p>
 </td></tr>
 <tr valign="top"><td><code>mult</code></td>
 <td>
@@ -75,9 +75,9 @@ identity matrix is (implicitly) added to <code>parent</code> or
 <h3>Objects from the Class</h3>
 
 <p>Objects can be created by calls of the form <code>new("dCHMsuper", ...)</code>
-but are more commonly created via <code><a href="Cholesky.html">Cholesky</a>()</code>,
-applied to  <code><a href="dsCMatrix-class.html">dsCMatrix</a></code> or
-<code><a href="lsparseMatrix-classes.html">lsCMatrix</a></code> objects.
+but are more commonly created via <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a>()</code>,
+applied to  <code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code> or
+<code><a href="../../Matrix/help/lsCMatrix-class.html">lsCMatrix</a></code> objects.
 </p>
 <p>For an introduction, it may be helpful to look at the <code>expand()</code>
 method and examples below.
@@ -153,7 +153,7 @@ permutation, and <code>L</code>, the lower triangular Cholesky factor.
 The original positive-definite matrix <i>A</i> corresponds to the product
 <i>A = P'LL'P</i>.  Because of fill-in during the decomposition the
 product may apparently have more non-zeros than the original
-matrix, even after applying <code><a href="drop0.html">drop0</a></code> to it.  However,
+matrix, even after applying <code><a href="../../Matrix/help/drop0.html">drop0</a></code> to it.  However,
 the extra &quot;non-zeros&quot; should be very small in magnitude.</p>
 </dd>
 <dt>image</dt><dd><p><code>signature(x = "CHMfactor"):</code> Plot the image of the
@@ -177,7 +177,7 @@ Similarly, for all system codes <b>but</b> <code>"P"</code> and <code>"Pt"</code
 where, e.g., <code>x &lt;- solve(a, b, system="P")</code> is equivalent to
 <code>x &lt;- P %*% b</code>.
 </p>
-<p>See also <code><a href="solve-methods.html">solve-methods</a></code>.
+<p>See also <code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code>.
 </p>
 </dd>
 <dt>determinant</dt><dd><p><code>signature(x = "CHMfactor", logarithm =
@@ -195,9 +195,9 @@ positive-definite matrix that was decomposed.</p>
 <dt>update</dt><dd><p><code>signature(object = "CHMfactor"), parent</code>.  The
 <code><a href="../../stats/html/update.html">update</a></code> method requires an additional argument
 <code>parent</code>, which is <em>either</em> a
-<code>"<a href="dsCMatrix-class.html">dsCMatrix</a>"</code> object, say <i>A</i>, (with the
+<code>"<a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a>"</code> object, say <i>A</i>, (with the
 same structure of nonzeros as the matrix that was decomposed to
-produce <code>object</code>) or a general <code>"<a href="dgCMatrix-class.html">dgCMatrix</a>"</code>,
+produce <code>object</code>) or a general <code>"<a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a>"</code>,
 say <i>M</i>, where <i>A := M M'</i> (<code>== tcrossprod(parent)</code>)
 is used for <i>A</i>.
 Further it provides an optional argument <code>mult</code>, a numeric
@@ -216,8 +216,8 @@ would be the preferred approach in such cases.</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="Cholesky.html">Cholesky</a></code>, also for examples;
-class <code><a href="dgCMatrix-class.html">dgCMatrix</a></code>.
+<p><code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code>, also for examples;
+class <code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>.
 </p>
 
 
@@ -251,5 +251,5 @@ stopifnot(all.equal(u1,u2, tol=1e-14))
    ##        -------------
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -29,7 +29,7 @@ created from it.</p>
 <dt><code>Dim</code>:</dt><dd><p>matrix dimension, and</p>
 </dd>
 <dt><code>Dimnames</code>:</dt><dd><p>the <code><a href="../../base/html/dimnames.html">dimnames</a></code>, a
-<code><a href="../../base/html/list.html">list</a></code>, see the <code><a href="Matrix-class.html">Matrix</a></code> class
+<code><a href="../../base/html/list.html">list</a></code>, see the <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> class
 description.  Typically <code>list(NULL,NULL)</code> for diagonal matrices.</p>
 </dd>
 </dl>
@@ -38,7 +38,7 @@ description.  Typically <code>list(NULL,NULL)</code> for diagonal matrices.</p>
 
 <h3>Extends</h3>
 
-<p>Class <code>"<a href="sparseMatrix-class.html">sparseMatrix</a>"</code>, directly.
+<p>Class <code>"<a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a>"</code>, directly.
 </p>
 
 
@@ -71,7 +71,7 @@ ensure efficient methods for diagonal matrices.
 </p>
 <dl>
 <dt>solve</dt><dd><p><code>signature(a = "diagonalMatrix", b, ...)</code>: is
-trivially implemented, of course; see also <code><a href="solve-methods.html">solve-methods</a></code>.</p>
+trivially implemented, of course; see also <code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code>.</p>
 </dd>
 <dt>which</dt><dd><p><code>signature(x = "nMatrix")</code>, semantically
 equivalent to <span class="pkg">base</span> function <code><a href="../../base/html/which.html">which</a>(x, arr.ind)</code>.</p>
@@ -87,7 +87,7 @@ group have a few dozen explicit method definitions, in order to
 keep the results <em>diagonal</em> in many cases, including the following:</p>
 </dd>
 <dt>/</dt><dd><p><code>signature(e1 = "ddiMatrix", e2="denseMatrix")</code>:
-the result is from class <code><a href="ddiMatrix-class.html">ddiMatrix</a></code> which is
+the result is from class <code><a href="../../Matrix/help/ddiMatrix-class.html">ddiMatrix</a></code> which is
 typically very desirable.  Note that when <code>e2</code> contains
 off-diagonal zeros or <code><a href="../../base/html/NA.html">NA</a></code>s, we implicitly use <i>0 / x = 0</i>, hence
 differing from traditional <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> arithmetic (where <i>0/0 |-&gt; NaN</i>), in order to preserve sparsity.</p>
@@ -103,9 +103,9 @@ appropriate <code><a href="../../base/html/print.html">print</a></code> method.<
 
 <h3>See Also</h3>
 
-<p><code><a href="Diagonal.html">Diagonal</a>()</code> as constructor of these matrices, and
-<code><a href="isTriangular.html">isDiagonal</a></code>.
-<code><a href="ddiMatrix-class.html">ddiMatrix</a></code> and <code><a href="ldiMatrix-class.html">ldiMatrix</a></code> are
+<p><code><a href="../../Matrix/help/Diagonal.html">Diagonal</a>()</code> as constructor of these matrices, and
+<code><a href="../../Matrix/help/isDiagonal.html">isDiagonal</a></code>.
+<code><a href="../../Matrix/help/ddiMatrix-class.html">ddiMatrix</a></code> and <code><a href="../../Matrix/help/ldiMatrix-class.html">ldiMatrix</a></code> are
 &ldquo;actual&rdquo; classes extending <code>"diagonalMatrix"</code>.
 </p>
 
@@ -130,5 +130,5 @@ rbind2(cbind2(I5, D5),
        cbind2(D5, I5))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

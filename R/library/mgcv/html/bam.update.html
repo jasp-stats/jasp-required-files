@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p> Gaussian with identity link models fitted by <code><a href="bam.html">bam</a></code> can be efficiently updated as new data becomes available,
+<p> Gaussian with identity link models fitted by <code><a href="../../mgcv/help/bam.html">bam</a></code> can be efficiently updated as new data becomes available,
 by simply updating the QR decomposition on which estimation is based, and re-optimizing the smoothing parameters, starting
 from the previous estimates. This routine implements this.
 </p>
@@ -28,7 +28,7 @@ bam.update(b,data,chunk.size=10000)
 <table summary="R argblock">
 <tr valign="top"><td><code>b</code></td>
 <td>
-<p> A <code>gam</code> object fitted by <code><a href="bam.html">bam</a></code> and representing a strictly additive model 
+<p> A <code>gam</code> object fitted by <code><a href="../../mgcv/help/bam.html">bam</a></code> and representing a strictly additive model 
 (i.e. <code>gaussian</code> errors, <code>identity</code> link).</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
@@ -49,7 +49,7 @@ original fit was weighted and a <code>AR.start</code> column if <code>AR.start</
 account of the new data. The orthogonal factor multiplied by the response vector is also updated. Given these updates the model 
 and smoothing parameters can be re-estimated, as if the whole dataset (original and the new data) had been fitted in one go. The 
 function will use the same AR1 model for the residuals as that employed in the original model fit (see <code>rho</code> parameter 
-of <code><a href="bam.html">bam</a></code>).
+of <code><a href="../../mgcv/help/bam.html">bam</a></code>).
 </p>
 <p>Note that there may be small numerical differences in fit between fitting the data all at once, and fitting in 
 stages by updating, if the smoothing bases used have any of their details set with reference 
@@ -60,7 +60,7 @@ to the data (e.g. default knot locations).
 <h3>Value</h3>
 
  
-<p>An object of class <code>"gam"</code> as described in <code><a href="gamObject.html">gamObject</a></code>.
+<p>An object of class <code>"gam"</code> as described in <code><a href="../../mgcv/help/gamObject.html">gamObject</a></code>.
 </p>
 
 
@@ -84,7 +84,7 @@ to the data (e.g. default knot locations).
 
 <h3>See Also</h3>
 
-<p><code><a href="mgcv-package.html">mgcv-package</a></code>, <code><a href="bam.html">bam</a></code>
+<p><code><a href="../../mgcv/help/mgcv-package.html">mgcv-package</a></code>, <code><a href="../../mgcv/help/bam.html">bam</a></code>
 </p>
 
 
@@ -131,5 +131,5 @@ summary(b1);summary(b2);summary(b3)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

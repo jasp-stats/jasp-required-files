@@ -32,7 +32,7 @@ clusplot(x, main = NULL, dist = NULL, ...)
 <td>
 <p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object, here, specifically an object of class
 <code>"partition"</code>, e.g. created by one of the functions
-<code><a href="pam.html">pam</a></code>, <code><a href="clara.html">clara</a></code>, or <code><a href="fanny.html">fanny</a></code>.</p>
+<code><a href="../../cluster/help/pam.html">pam</a></code>, <code><a href="../../cluster/help/clara.html">clara</a></code>, or <code><a href="../../cluster/help/fanny.html">fanny</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>main</code></td>
 <td>
@@ -42,14 +42,14 @@ is constructed, using <code>x$call</code>.</p>
 <tr valign="top"><td><code>dist</code></td>
 <td>
 <p>when <code>x</code> does not have a <code>diss</code> nor a
-<code>data</code> component, e.g., for <code><a href="pam.html">pam</a>(dist(*),
+<code>data</code> component, e.g., for <code><a href="../../cluster/help/pam.html">pam</a>(dist(*),
       keep.diss=FALSE)</code>, <code>dist</code> must specify the dissimilarity for the
 clusplot.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>optional arguments passed to methods, notably the
-<code><a href="clusplot.default.html">clusplot.default</a></code> method (except for the <code>diss</code>
+<code><a href="../../cluster/help/clusplot.default.html">clusplot.default</a></code> method (except for the <code>diss</code>
 one) may also be supplied to this function.  Many graphical parameters
 (see <code><a href="../../graphics/html/par.html">par</a></code>) may also be supplied as arguments here.</p>
 </td></tr>
@@ -58,17 +58,17 @@ one) may also be supplied to this function.  Many graphical parameters
 
 <h3>Details</h3>
 
-<p>The <code>clusplot.partition()</code> method relies on <code><a href="clusplot.default.html">clusplot.default</a></code>.
+<p>The <code>clusplot.partition()</code> method relies on <code><a href="../../cluster/help/clusplot.default.html">clusplot.default</a></code>.
 </p>
 <p>If the clustering algorithms <code>pam</code>, <code>fanny</code> and <code>clara</code>
 are applied to a data matrix of observations-by-variables then a
 clusplot of the resulting clustering can always be drawn.  When the
 data matrix contains missing values and the clustering is performed
-with <code><a href="pam.html">pam</a></code> or <code><a href="fanny.html">fanny</a></code>, the dissimilarity
+with <code><a href="../../cluster/help/pam.html">pam</a></code> or <code><a href="../../cluster/help/fanny.html">fanny</a></code>, the dissimilarity
 matrix will be given as input to <code>clusplot</code>.  When the clustering
-algorithm <code><a href="clara.html">clara</a></code> was applied to a data matrix with NAs
+algorithm <code><a href="../../cluster/help/clara.html">clara</a></code> was applied to a data matrix with NAs
 then clusplot will replace the missing values as described in
-<code><a href="clusplot.default.html">clusplot.default</a></code>, because a dissimilarity matrix is not
+<code><a href="../../cluster/help/clusplot.default.html">clusplot.default</a></code>, because a dissimilarity matrix is not
 available.
 </p>
 
@@ -77,7 +77,7 @@ available.
 
 <p>For the <code>partition</code> (and <code>default</code>) method: An invisible
 list with components <code>Distances</code> and <code>Shading</code>, as for
-<code><a href="clusplot.default.html">clusplot.default</a></code>, see there.
+<code><a href="../../cluster/help/clusplot.default.html">clusplot.default</a></code>, see there.
 </p>
 
 
@@ -89,11 +89,11 @@ list with components <code>Distances</code> and <code>Shading</code>, as for
 
 <h3>See Also</h3>
 
-<p><code><a href="clusplot.default.html">clusplot.default</a></code> for references;
-<code><a href="partition.object.html">partition.object</a></code>, <code><a href="pam.html">pam</a></code>,
-<code><a href="pam.object.html">pam.object</a></code>, <code><a href="clara.html">clara</a></code>,
-<code><a href="clara.object.html">clara.object</a></code>, <code><a href="fanny.html">fanny</a></code>,
-<code><a href="fanny.object.html">fanny.object</a></code>, <code><a href="../../graphics/html/par.html">par</a></code>.
+<p><code><a href="../../cluster/help/clusplot.default.html">clusplot.default</a></code> for references;
+<code><a href="../../cluster/help/partition.object.html">partition.object</a></code>, <code><a href="../../cluster/help/pam.html">pam</a></code>,
+<code><a href="../../cluster/help/pam.object.html">pam.object</a></code>, <code><a href="../../cluster/help/clara.html">clara</a></code>,
+<code><a href="../../cluster/help/clara.object.html">clara.object</a></code>, <code><a href="../../cluster/help/fanny.html">fanny</a></code>,
+<code><a href="../../cluster/help/fanny.object.html">fanny.object</a></code>, <code><a href="../../graphics/html/par.html">par</a></code>.
 </p>
 
 
@@ -110,5 +110,5 @@ x4 &lt;- cbind(x, rnorm(25), rnorm(25))
 clusplot(pam(x4, 2))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

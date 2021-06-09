@@ -1,3 +1,8 @@
+# textshaping 0.3.4
+
+* Prepare textshaping for UCRT support
+* Address upstream changes in cpp11
+
 # textshaping 0.3.3
 
 * Support static linking on macOS (#17, @jeroen)

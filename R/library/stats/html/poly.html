@@ -132,7 +132,7 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="contrast.html">contr.poly</a></code>.
+<p><code><a href="../../stats/help/contr.poly.html">contr.poly</a></code>.
 </p>
 <p><code><a href="../../datasets/html/cars.html">cars</a></code> for an example of polynomial regression.
 </p>
@@ -149,15 +149,15 @@ zapsmall(poly(seq(4, 6, 0.5), 3, coefs = attr(z, "coefs")))
  zm &lt;- zapsmall(polym (    1:4, c(1, 4:6),  degree = 3)) # or just poly():
 (z1 &lt;- zapsmall(poly(cbind(1:4, c(1, 4:6)), degree = 3)))
 ## they are the same :
-stopifnot(all.equal(zm, z1, tol = 1e-15))
+stopifnot(all.equal(zm, z1, tolerance = 1e-15))
 
 ## poly(&lt;matrix&gt;, df) --- used to fail till July 14 (vive la France!), 2017:
 m2 &lt;- cbind(1:4, c(1, 4:6))
 pm2 &lt;- zapsmall(poly(m2, 3)) # "unnamed degree = 3"
-stopifnot(all.equal(pm2, zm, tol = 1e-15))
+stopifnot(all.equal(pm2, zm, tolerance = 1e-15))
 
 options(od)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -19,6 +19,7 @@ checkPoFile	checkPoFiles
 checkPoFiles	checkPoFiles
 checkRd	checkRd
 checkRdaFiles	checkRdaFiles
+checkRdContents	QC
 checkReplaceFuns	QC
 checkS3methods	QC
 checkTnF	checkTnF
@@ -74,6 +75,7 @@ pkgVignettes	buildVignettes
 print.checkDocFiles	QC
 print.checkDocStyle	QC
 print.checkFF	checkFF
+print.checkRdContents	QC
 print.checkReplaceFuns	QC
 print.checkS3methods	QC
 print.checkTnF	checkTnF

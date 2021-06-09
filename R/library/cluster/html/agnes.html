@@ -36,7 +36,7 @@ and each column corresponds to a variable. All variables must be numeric.
 Missing values (NAs) are allowed.
 </p>
 <p>In case of a dissimilarity matrix, <code>x</code> is typically the output of
-<code><a href="daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code>.
+<code><a href="../../cluster/help/daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code>.
 Also a vector with length n*(n-1)/2 is allowed (where n is the number
 of observations), and will be interpreted in the same way as the
 output of the above-mentioned functions. Missing values (NAs) are not
@@ -121,10 +121,10 @@ anything; higher values print increasingly more.</p>
 <p><code>agnes</code> is fully described in chapter 5 of Kaufman and Rousseeuw (1990).
 Compared to other agglomerative clustering methods such as <code>hclust</code>,
 <code>agnes</code> has the following features: (a) it yields the
-agglomerative coefficient (see <code><a href="agnes.object.html">agnes.object</a></code>)
+agglomerative coefficient (see <code><a href="../../cluster/help/agnes.object.html">agnes.object</a></code>)
 which measures the amount of clustering structure found; and (b)
 apart from the usual tree it also provides the banner, a novel
-graphical display (see <code><a href="plot.agnes.html">plot.agnes</a></code>).
+graphical display (see <code><a href="../../cluster/help/plot.agnes.html">plot.agnes</a></code>).
 </p>
 <p>The <code>agnes</code>-algorithm constructs a hierarchy of clusterings.<br />
 At first, each observation is a small cluster by itself.  Clusters are
@@ -214,7 +214,7 @@ agglomerative hierarchical clustering strategy.
 <h3>Value</h3>
 
 <p>an object of class <code>"agnes"</code> (which extends <code>"twins"</code>)
-representing the clustering.  See <code><a href="agnes.object.html">agnes.object</a></code> for
+representing the clustering.  See <code><a href="../../cluster/help/agnes.object.html">agnes.object</a></code> for
 details, and methods applicable.
 </p>
 
@@ -227,12 +227,12 @@ observations that are similar to each other.
 
 <dl>
 <dt>Hierarchical methods</dt><dd><p>like
-<code>agnes</code>, <code><a href="diana.html">diana</a></code>, and <code><a href="mona.html">mona</a></code>
+<code>agnes</code>, <code><a href="../../cluster/help/diana.html">diana</a></code>, and <code><a href="../../cluster/help/mona.html">mona</a></code>
 construct a hierarchy of clusterings, with the number of clusters
 ranging from one to the number of observations.</p>
 </dd>
 <dt>Partitioning methods</dt><dd><p>like
-<code><a href="pam.html">pam</a></code>, <code><a href="clara.html">clara</a></code>, and <code><a href="fanny.html">fanny</a></code>
+<code><a href="../../cluster/help/pam.html">pam</a></code>, <code><a href="../../cluster/help/clara.html">clara</a></code>, and <code><a href="../../cluster/help/fanny.html">fanny</a></code>
 require that the number of clusters be given by the user.</p>
 </dd>
 </dl>
@@ -274,9 +274,9 @@ Two Approaches to Beta-Flexible Clustering.
 
 <h3>See Also</h3>
 
-<p><code><a href="agnes.object.html">agnes.object</a></code>, <code><a href="daisy.html">daisy</a></code>, <code><a href="diana.html">diana</a></code>,
-<code><a href="../../stats/html/dist.html">dist</a></code>, <code><a href="../../stats/html/hclust.html">hclust</a></code>, <code><a href="plot.agnes.html">plot.agnes</a></code>,
-<code><a href="twins.object.html">twins.object</a></code>.
+<p><code><a href="../../cluster/help/agnes.object.html">agnes.object</a></code>, <code><a href="../../cluster/help/daisy.html">daisy</a></code>, <code><a href="../../cluster/help/diana.html">diana</a></code>,
+<code><a href="../../stats/html/dist.html">dist</a></code>, <code><a href="../../stats/html/hclust.html">hclust</a></code>, <code><a href="../../cluster/help/plot.agnes.html">plot.agnes</a></code>,
+<code><a href="../../cluster/help/twins.object.html">twins.object</a></code>.
 </p>
 
 
@@ -338,5 +338,5 @@ aa.ga.0 &lt;- agnes(animals, method = "gaverage", par.method = 0)
 stopifnot(all.equal(aa.ga.0[iC], aa.a[iC]))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

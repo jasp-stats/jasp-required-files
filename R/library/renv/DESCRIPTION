@@ -1,7 +1,7 @@
 Package: renv
 Type: Package
 Title: Project Environments
-Version: 0.13.2-16
+Version: 0.13.2
 Authors@R: c(
     person("Kevin", "Ushey", role = c("aut", "cre"), email = "kevin@rstudio.com"),
     person("RStudio", role = c("cph"))
@@ -19,9 +19,12 @@ Suggests: R6, BiocManager, cli, covr, devtools, knitr, packrat,
         yaml
 Encoding: UTF-8
 RoxygenNote: 7.1.1
-Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2021-03-30 05:56:42 UTC; kevin
 Author: Kevin Ushey [aut, cre],
   RStudio [cph]
 Maintainer: Kevin Ushey <kevin@rstudio.com>
-Built: R 4.0.5; ; 2021-04-14 16:34:03 UTC; windows
+Repository: CRAN
+Date/Publication: 2021-03-30 09:50:06 UTC
+Built: R 4.1.0; ; 2021-06-01 03:25:35 UTC; windows

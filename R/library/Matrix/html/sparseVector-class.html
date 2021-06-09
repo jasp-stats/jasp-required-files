@@ -74,13 +74,13 @@ This is the same as <code>as(x, "vector")</code>.</p>
 <dt>coerce</dt><dd><p><code>signature(from = "sparseVector", to = "sparseMatrix")</code>, and</p>
 </dd>
 <dt>coerce</dt><dd><p><code>signature(from = "sparseMatrix", to = "sparseVector")</code>,
-etc: coercions to and from sparse matrices (<code><a href="sparseMatrix-class.html">sparseMatrix</a></code>) are
+etc: coercions to and from sparse matrices (<code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>) are
 provided and work analogously as in standard <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>, i.e., a vector is
 coerced to a 1-column matrix.</p>
 </dd>
 <dt>dim&lt;-</dt><dd><p><code>signature(x = "sparseVector", value = "integer")</code>
 coerces a sparse vector to a sparse Matrix, i.e., an object
-inheriting from <code><a href="sparseMatrix-class.html">sparseMatrix</a></code>, of the
+inheriting from <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>, of the
 appropriate dimension.</p>
 </dd>
 <dt>head</dt><dd><p><code>signature(x = "sparseVector")</code>: as with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s
@@ -92,7 +92,7 @@ more efficient, see the example.</p>
 <code><a href="../../utils/html/head.html">head</a></code>, see above.</p>
 </dd>
 <dt>toeplitz</dt><dd><p><code>signature(x = "sparseVector")</code>: as
-<code><a href="../../stats/html/toeplitz.html">toeplitz</a>(x)</code>, produce the <i>n \times n</i>
+<code><a href="../../stats/help/toeplitz.html">toeplitz</a>(x)</code>, produce the <i>n \times n</i>
 Toeplitz matrix from <code>x</code>, where <code>n = length(x)</code>.</p>
 </dd>
 <dt>rep</dt><dd><p><code>signature(x = "sparseVector")</code> repeat <code>x</code>,
@@ -137,7 +137,7 @@ examples.
 
 <h3>See Also</h3>
 
-<p><code><a href="sparseVector.html">sparseVector</a>()</code> for friendly construction of sparse
+<p><code><a href="../../Matrix/help/sparseVector.html">sparseVector</a>()</code> for friendly construction of sparse
 vectors (apart from <code>as(*, "sparseVector")</code>).
 </p>
 
@@ -224,5 +224,5 @@ stopifnot(
 )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -10,7 +10,7 @@
 <h3>Description</h3>
 
 <p>The <code>gevlss</code> family implements Generalized Extreme Value location scale additive models in which the location, scale and shape parameters depend on additive smooth predictors. Usable 
-only with <code><a href="gam.html">gam</a></code>, the linear predictors are specified via a list of formulae.
+only with <code><a href="../../mgcv/help/gam.html">gam</a></code>, the linear predictors are specified via a list of formulae.
 </p>
 
 
@@ -33,7 +33,7 @@ gevlss(link=list("identity","identity","logit"))
 
 <h3>Details</h3>
 
-<p>Used with <code><a href="gam.html">gam</a></code> to fit Generalized Extreme Value location scale and shape models. <code>gam</code> is called with a list containing 3 formulae: the first specifies the response on the left hand side and the structure of the linear predictor for the location parameter on the right hand side. The second is one sided, specifying the linear predictor for the log scale parameter on the right hand side. The third is one sided specifying the linear predictor for the shape parameter.
+<p>Used with <code><a href="../../mgcv/help/gam.html">gam</a></code> to fit Generalized Extreme Value location scale and shape models. <code>gam</code> is called with a list containing 3 formulae: the first specifies the response on the left hand side and the structure of the linear predictor for the location parameter on the right hand side. The second is one sided, specifying the linear predictor for the log scale parameter on the right hand side. The third is one sided specifying the linear predictor for the shape parameter.
 </p>
 <p>Link functions <code>"identity"</code> and <code>"log"</code> are available for the location (mu) parameter. There is no choice of link for the log scale parameter (<i>rho = log sigma</i>). The shape parameter (xi) defaults to a modified logit link restricting its range to (-1,.5), the upper limit is required to ensure finite variance, while the lower limit ensures consistency of the MLE (Smith, 1985).
 </p>
@@ -43,7 +43,7 @@ gevlss(link=list("identity","identity","logit"))
 </p>
 <p>The derivative system code for this family is mostly auto-generated, and the family is still somewhat experimental.
 </p>
-<p>The GEV distribution is rather challenging numerically, and for small datasets or poorly fitting models imporoved numerical robustness may be obtained by using the extended Fellner-Schall method of Wood and Fasiolo (2017) for smoothing parameter estimation. See examples.
+<p>The GEV distribution is rather challenging numerically, and for small datasets or poorly fitting models improved numerical robustness may be obtained by using the extended Fellner-Schall method of Wood and Fasiolo (2017) for smoothing parameter estimation. See examples.
 </p>
 
 
@@ -116,5 +116,5 @@ plot(fv,residuals(b,"response"))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -22,19 +22,19 @@ storage versions.
 
 <p>Objects can be created by calls of the form <code>new("Cholesky",
     ...)</code> or <code>new("BunchKaufman", ...)</code>, etc,
-or rather by calls of the form <code><a href="chol.html">chol</a>(pm)</code> or
-<code><a href="BunchKaufman-methods.html">BunchKaufman</a>(pm)</code> where <code>pm</code> inherits from
-the <code>"<a href="dpoMatrix-class.html">dpoMatrix</a>"</code> or <code>"<a href="dsyMatrix-class.html">dsyMatrix</a>"</code>
+or rather by calls of the form <code><a href="../../Matrix/help/chol.html">chol</a>(pm)</code> or
+<code><a href="../../Matrix/help/BunchKaufman.html">BunchKaufman</a>(pm)</code> where <code>pm</code> inherits from
+the <code>"<a href="../../Matrix/help/dpoMatrix-class.html">dpoMatrix</a>"</code> or <code>"<a href="../../Matrix/help/dsyMatrix-class.html">dsyMatrix</a>"</code>
 class or as a side-effect of other functions
-applied to <code>"dpoMatrix"</code> objects (see <code><a href="dpoMatrix-class.html">dpoMatrix</a></code>).
+applied to <code>"dpoMatrix"</code> objects (see <code><a href="../../Matrix/help/dpoMatrix-class.html">dpoMatrix</a></code>).
 </p>
 
 
 <h3>Slots</h3>
 
 <p>A Cholesky decomposition extends class
-<code><a href="MatrixFactorization-class.html">MatrixFactorization</a></code> but is basically a triangular
-matrix extending the <code>"<a href="dtrMatrix-class.html">dtrMatrix</a>"</code> class.
+<code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code> but is basically a triangular
+matrix extending the <code>"<a href="../../Matrix/help/dtrMatrix-class.html">dtrMatrix</a>"</code> class.
 </p>
 
 <dl>
@@ -78,11 +78,11 @@ There are currently no further explicit methods defined with class
 
 <ol>
 <li><p> Objects of class <code>"Cholesky"</code> typically stem from
-<code><a href="chol.html">chol</a>(D)</code>, applied to a <em>dense</em> matrix <code>D</code>.
+<code><a href="../../Matrix/help/chol.html">chol</a>(D)</code>, applied to a <em>dense</em> matrix <code>D</code>.
 </p>
-<p>On the other hand, the <em>function</em> <code><a href="Cholesky.html">Cholesky</a>(S)</code>
+<p>On the other hand, the <em>function</em> <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a>(S)</code>
 applies to a <em>sparse</em> matrix <code>S</code>, and results in objects
-inheriting from class <code><a href="CHMfactor-class.html">CHMfactor</a></code>.
+inheriting from class <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code>.
 </p>
 </li>
 <li><p> For traditional matrices <code>m</code>, <code>chol(m)</code> is a
@@ -93,11 +93,11 @@ the <code>"Cholesky"</code> and <code>"BunchKaufman"</code> classes (and their
 </p>
 <p>Consequently, <code><a href="../../base/html/det.html">determinant</a>(R)</code> for <code>R &lt;- chol(A)</code>
 returns the determinant of <code>R</code>, not of <code>A</code>.  This is in
-contrast to class <code><a href="CHMfactor-class.html">CHMfactor</a></code> objects <code>C</code>, where
+contrast to class <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code> objects <code>C</code>, where
 <code>determinant(C)</code> gives the determinant of the <em>original</em>
 matrix <code>A</code>, for <code>C &lt;- Cholesky(A)</code>, see also the
 <code>determinant</code> method documentation on the class
-<code><a href="CHMfactor-class.html">CHMfactor</a></code> page.
+<code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code> page.
 </p>
 </li></ol>
 
@@ -105,11 +105,11 @@ matrix <code>A</code>, for <code>C &lt;- Cholesky(A)</code>, see also the
 
 <h3>See Also</h3>
 
-<p>Classes <code><a href="dtrMatrix-class.html">dtrMatrix</a></code>, <code><a href="dpoMatrix-class.html">dpoMatrix</a></code>;
-function <code><a href="chol.html">chol</a></code>.
+<p>Classes <code><a href="../../Matrix/help/dtrMatrix-class.html">dtrMatrix</a></code>, <code><a href="../../Matrix/help/dpoMatrix-class.html">dpoMatrix</a></code>;
+function <code><a href="../../Matrix/help/chol.html">chol</a></code>.
 </p>
-<p>Function <code><a href="Cholesky.html">Cholesky</a></code> resulting in class
-<code><a href="CHMfactor-class.html">CHMfactor</a></code> objects, <em>not</em> class &quot;Cholesky&quot;
+<p>Function <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code> resulting in class
+<code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code> objects, <em>not</em> class &quot;Cholesky&quot;
 ones, see the section &lsquo;Note&rsquo;.
 </p>
 
@@ -128,5 +128,5 @@ stopifnot(all.equal(as(crossprod(ch), "matrix"),
                     as(pm, "matrix"), tolerance=1e-14))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -35,7 +35,7 @@ gam.side(sm,Xp,tol=.Machine$double.eps^.5,with.pen=FALSE)
 <tr valign="top"><td><code>sm</code></td>
 <td>
 <p> A list of smooth objects as returned by
-<code><a href="smooth.construct.html">smooth.construct</a></code>.</p>
+<code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>Xp</code></td>
 <td>
@@ -56,7 +56,7 @@ Doing so will lead to fewer constraints.</p>
 <h3>Details</h3>
 
 <p> Models such as  <code>y~s(x)+s(z)+s(x,z)</code> can be estimated by
-<code><a href="gam.html">gam</a></code>, but require identifiability constraints to be applied, to
+<code><a href="../../mgcv/help/gam.html">gam</a></code>, but require identifiability constraints to be applied, to
 make them identifiable. This routine does this, effectively setting redundant parameters
 to zero. When the redundancy is between smooths of lower and higher numbers
 of variables, the constraint is always applied to the smooth of the higher
@@ -64,7 +64,7 @@ number of variables.
 </p>
 <p>Dependent smooths are identified symbolically, but which constraints are 
 needed to ensure identifiability of these smooths is determined numerically, using
-<code><a href="fixDependence.html">fixDependence</a></code>. This makes the routine rather general, and not
+<code><a href="../../mgcv/help/fixDependence.html">fixDependence</a></code>. This makes the routine rather general, and not
 dependent on any particular basis.
 </p>
 <p><code>Xp</code> is used to check whether there is a constant term in the model (or 
@@ -100,7 +100,7 @@ further constraint.
 
 <h3>See Also</h3>
 
-<p><code><a href="te.html">ti</a></code>, <code><a href="gam.models.html">gam.models</a></code></p>
+<p><code><a href="../../mgcv/help/ti.html">ti</a></code>, <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code></p>
 
 
 <h3>Examples</h3>
@@ -141,5 +141,5 @@ par(old.par)
 rm(dat)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

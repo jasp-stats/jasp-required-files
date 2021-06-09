@@ -20,7 +20,7 @@
 ## A copy of the GNU General Public License is available at
 ## https://www.R-project.org/Licenses/
 
-revision='$Revision: 79389 $'
+revision='$Revision: 79388 $'
 version=`set - ${revision}; echo ${2}`
 version="R configuration information retrieval script: ${R_VERSION} (r${version})
 
@@ -55,7 +55,6 @@ Variables:
   CPPFLAGS      C/C++ preprocessor flags, e.g. -I<dir> if you have
 		headers in a nonstandard directory <dir>
   CXX           default compiler command for C++ code
-  CXXCPP        C++ preprocessor (deprecated)
   CXXFLAGS      compiler flags for CXX
   CXXPICFLAGS   special flags for compiling C++ code to be included in a
 		shared library
@@ -287,7 +286,7 @@ ok_ld_vars="LDFLAGS"
 ok_shlib_vars="SHLIB_CFLAGS SHLIB_CXXFLAGS SHLIB_CXXLD SHLIB_CXXLDFLAGS SHLIB_CXX11LD SHLIB_CXX11LDFLAGS SHLIB_CXX14LD SHLIB_CXX14LDFLAGS SHLIB_CXX17LD SHLIB_CXX17LDFLAGS SHLIB_CXX20LD SHLIB_CXX20LDFLAGS SHLIB_EXT SHLIB_FFLAGS SHLIB_LD SHLIB_LDFLAGS"
 ok_tcltk_vars="TCLTK_CPPFLAGS TCLTK_LIBS"
 ok_other_vars="BLAS_LIBS LAPACK_LIBS MAKE LIBnn AR NM RANLIB LTO LTO_FC LTO_LD"
-deprecated_vars="CPP CXXCPP"
+defunct_vars="CPP CXXCPP"
 if test "${R_OSTYPE}" = "windows"; then
   ok_win_vars="LOCAL_SOFT COMPILED_BY OBJDUMP"
 fi
@@ -300,10 +299,9 @@ if test "${all}" = "yes"; then
 	   ${ok_other_vars} ${ok_win_vars}; do
     eval "${query} VAR=${v}"
   done
-  echo "## The following variables are deprecated"
-  for v in ${deprecated_vars}; do
-    eval "${query} VAR=${v}"
-  done
+  echo
+  echo "## The following variables are defunct"
+  echo ${defunct_vars}
   exit 0
 fi
 
@@ -320,11 +318,11 @@ for v in ${ok_c_vars} ${ok_cxx_vars} ${ok_dylib_vars} ${ok_ftn_vars} \
   fi
 done
 
-for v in ${deprecated_vars}; do
+for v in ${defunct_vars}; do
   if test "${var}" = "${v}"; then
     var_ok=yes
-    1>&2 echo "'config' variable '${v}' is deprecated"
-    break
+    1>&2 echo "'config' variable '${v}' is defunct"
+    exit 2
   fi
 done
 

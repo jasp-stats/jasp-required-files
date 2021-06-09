@@ -31,9 +31,9 @@ write.dcf(x, file = "", append = FALSE, useBytes = FALSE,
 <table summary="R argblock">
 <tr valign="top"><td><code>file</code></td>
 <td>
-<p>either a character string naming a file or a <a href="connections.html">connection</a>.
+<p>either a character string naming a file or a <a href="../../base/help/connection.html">connection</a>.
 <code>""</code> indicates output to the console.  For <code>read.dcf</code> this
-can name a compressed file (see <code><a href="connections.html">gzfile</a></code>).</p>
+can name a compressed file (see <code><a href="../../base/help/gzfile.html">gzfile</a></code>).</p>
 </td></tr>
 <tr valign="top"><td><code>fields</code></td>
 <td>
@@ -54,7 +54,7 @@ which whitespace should be kept as is, or <code>NULL</code> (default)
 indicating that there are no such fields.  Coerced to character if
 possible.  For fields where whitespace is not to be kept as is,
 <code>read.dcf</code> removes leading and trailing whitespace, and
-<code>write.dcf</code> folds using <code><a href="strwrap.html">strwrap</a></code>.
+<code>write.dcf</code> folds using <code><a href="../../base/help/strwrap.html">strwrap</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
@@ -69,7 +69,7 @@ file.  If <code>FALSE</code>, any existing file of the name is destroyed.</p>
 </td></tr>
 <tr valign="top"><td><code>useBytes</code></td>
 <td>
-<p>logical to be passed to <code><a href="writeLines.html">writeLines</a>()</code>,
+<p>logical to be passed to <code><a href="../../base/help/writeLines.html">writeLines</a>()</code>,
 see there: &ldquo;for expert use&rdquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>indent</code></td>
@@ -198,5 +198,5 @@ close(con)
 utils::str(y)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

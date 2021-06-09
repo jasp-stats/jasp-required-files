@@ -55,9 +55,8 @@ activeBindingFunction(sym, env)
 
 <h3>Details</h3>
 
-<p>The function <code>lockEnvironment</code> locks its environment argument,
-which must be a normal environment (not base).  (Locking the base
-environment and namespace may be supported later.)  Locking the
+<p>The function <code>lockEnvironment</code> locks its environment argument.
+Locking the
 environment prevents adding or removing variable bindings from the
 environment.  Changing the value of a variable is still possible unless
 the binding has been locked.  The namespace environments of packages
@@ -76,7 +75,7 @@ things like C variables linked to <span style="font-family: Courier New, Courier
 databases, and is used to implement <code><a href="../../methods/html/refClass.html">setRefClass</a></code>.  It may
 also be useful for making thread-safe versions of some system globals.
 Currently active bindings are not preserved during package installation,
-but they can be created in <code><a href="ns-hooks.html">.onLoad</a></code>.
+but they can be created in <code><a href="../../base/help/.onLoad.html">.onLoad</a></code>.
 </p>
 
 
@@ -135,5 +134,5 @@ fred &lt;- 2
 fred
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

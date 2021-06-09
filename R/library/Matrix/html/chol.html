@@ -31,7 +31,7 @@ chol(x, pivot = FALSE, cache = TRUE, ...)
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>a (sparse or dense) square matrix, here inheriting from class
-<code><a href="Matrix-class.html">Matrix</a></code>; if <code>x</code> is not positive definite,
+<code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>; if <code>x</code> is not positive definite,
 an error is signalled.</p>
 </td></tr>
 <tr valign="top"><td><code>pivot</code></td>
@@ -61,17 +61,17 @@ available for some sparse matrices.</p>
 the examples.
 </p>
 <p>However, this should not be considered part of the API and made
-use of.  Rather consider <code><a href="Cholesky.html">Cholesky</a>()</code> in such situations,
+use of.  Rather consider <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a>()</code> in such situations,
 since <code>chol(x, pivot=TRUE)</code> uses the same algorithm (but not the
-same return value!) as <code><a href="Cholesky.html">Cholesky</a>(x, LDL=FALSE)</code> and
+same return value!) as <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a>(x, LDL=FALSE)</code> and
 <code>chol(x)</code> corresponds to
-<code><a href="Cholesky.html">Cholesky</a>(x, perm=FALSE, LDL=FALSE)</code>.
+<code><a href="../../Matrix/help/Cholesky.html">Cholesky</a>(x, perm=FALSE, LDL=FALSE)</code>.
 </p>
 
 
 <h3>Value</h3>
 
-<p>a matrix of class <code><a href="Cholesky-class.html">Cholesky</a></code>,
+<p>a matrix of class <code><a href="../../Matrix/help/Cholesky-class.html">Cholesky</a></code>,
 i.e., upper triangular: <i>R</i> such that <i>R'R = x</i> (if
 <code>pivot=FALSE</code>) <em>or</em> <i>P' R'R P = x</i> (if
 <code>pivot=TRUE</code> and <i>P</i> is the corresponding permutation matrix).
@@ -86,7 +86,7 @@ mentioning here:
 
 <dl>
 <dt>chol</dt><dd><p><code>signature(x = "dgeMatrix")</code>: works via
-<code>"dpoMatrix"</code>, see class <code><a href="dpoMatrix-class.html">dpoMatrix</a></code>.</p>
+<code>"dpoMatrix"</code>, see class <code><a href="../../Matrix/help/dpoMatrix-class.html">dpoMatrix</a></code>.</p>
 </dd>
 <dt>chol</dt><dd><p><code>signature(x = "dpoMatrix")</code>:
 Returns (and stores) the Cholesky decomposition of <code>x</code>, via
@@ -121,8 +121,8 @@ An approximate minimal degree ordering algorithm,
 
 <h3>See Also</h3>
 
-<p>The default from <span class="pkg">base</span>, <code><a href="../../base/html/chol.html">chol</a></code>; for more
-flexibility (but not returning a matrix!) <code><a href="Cholesky.html">Cholesky</a></code>.
+<p>The default from <span class="pkg">base</span>, <code><a href="../../base/help/chol.html">chol</a></code>; for more
+flexibility (but not returning a matrix!) <code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code>.
 </p>
 
 
@@ -168,5 +168,5 @@ stopifnot(identical(t(L1), c2),
          )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

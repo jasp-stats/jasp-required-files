@@ -35,6 +35,7 @@ $<-.data.frame	Extract.data.frame
 ...	dots
 ...elt	dots
 ...length	dots
+...names	dots
 ..1	dots
 ..2	dots
 ..deparseOpts	deparseOpts
@@ -223,6 +224,7 @@ all.equal.environment	all.equal
 all.equal.envRefClass	all.equal
 all.equal.factor	all.equal
 all.equal.formula	all.equal
+all.equal.function	all.equal
 all.equal.language	all.equal
 all.equal.list	all.equal
 all.equal.numeric	all.equal
@@ -434,6 +436,7 @@ c	c
 c.Date	Dates
 c.default	c
 c.difftime	difftime
+c.factor	factor
 c.noquote	noquote
 c.numeric_version	numeric_version
 c.POSIXct	DateTimeClasses
@@ -563,6 +566,7 @@ dir	list.files
 dir.create	files2
 dir.exists	files2
 dirname	basename
+DISPLAY	EnvVar
 DLLInfo	getLoadedDLLs
 DLLInfoList	getLoadedDLLs
 DLLpath	dynload
@@ -589,6 +593,7 @@ dyn.load	dynload
 dyn.unload	dynload
 dynGet	get
 eapply	eapply
+EDITOR	EnvVar
 eigen	eigen
 else	Control
 emptyenv	environment
@@ -721,6 +726,7 @@ getwd	getwd
 gl	gl
 globalCallingHandlers	conditions
 globalenv	environment
+gregexec	grep
 gregexpr	grep
 grep	grep
 grepl	grep
@@ -816,6 +822,7 @@ is.symbol	name
 is.table	table
 is.unsorted	is.unsorted
 is.vector	vector
+isa	class
 isatty	showConnections
 isBaseNamespace	ns-internal
 isdebugged	debug
@@ -1017,6 +1024,8 @@ nullfile	showConnections
 numeric	numeric
 NumericConstants	NumericConstants
 numeric_version	numeric_version
+numToBits	rawConversion
+numToInts	rawConversion
 nzchar	nchar
 objects	ls
 octmode	octmode
@@ -1049,6 +1058,7 @@ packageNotFoundError	find.package
 packageStartupMessage	message
 package_version	numeric_version
 packBits	rawConversion
+PAGER	EnvVar
 pairlist	list
 Paren	Paren
 parent.env	environment
@@ -1065,6 +1075,7 @@ pcre_config	pcre_config
 pentagamma	base-defunct
 pi	Constants
 pipe	connections
+pipeOp	pipeOp
 Platform	base-defunct
 plot	plot
 pmatch	pmatch
@@ -1207,6 +1218,7 @@ Renviron	Startup
 Renviron.site	Startup
 rep	rep
 rep.Date	rep
+rep.difftime	difftime
 rep.factor	rep
 rep.int	rep
 rep.numeric_version	numeric_version
@@ -1280,6 +1292,7 @@ R_PAPERSIZE	EnvVar
 R_PCRE_JIT_STACK_MAXSIZE	EnvVar
 R_PDFVIEWER	EnvVar
 R_PLATFORM	EnvVar
+R_PRINTCMD	EnvVar
 R_PROFILE	Startup
 R_PROFILE_USER	Startup
 R_RD4PDF	EnvVar
@@ -1607,6 +1620,7 @@ xor	Logic
 xpdrows.data.frame	dataframeHelpers
 xtfrm	xtfrm
 xtfrm.AsIs	xtfrm
+xtfrm.data.frame	xtfrm
 xtfrm.Date	xtfrm
 xtfrm.default	xtfrm
 xtfrm.difftime	xtfrm
@@ -1637,6 +1651,7 @@ zapsmall	zapsmall
 [<-	Extract
 [<-.data.frame	Extract.data.frame
 [<-.Date	Dates
+[<-.difftime	difftime
 [<-.factor	Extract.factor
 [<-.numeric_version	numeric_version
 [<-.POSIXct	DateTimeClasses
@@ -1659,5 +1674,6 @@ zapsmall	zapsmall
 |	Logic
 |.hexmode	hexmode
 |.octmode	octmode
+|>	pipeOp
 ||	Logic
 ~	tilde

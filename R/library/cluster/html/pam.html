@@ -46,7 +46,7 @@ variables must be numeric.  Missing values (<code><a href="../../base/html/NA.ht
 least one case not missing.
 </p>
 <p>In case of a dissimilarity matrix, <code>x</code> is typically the output
-of <code><a href="daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code>.  Also a vector of
+of <code><a href="../../cluster/help/daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code>.  Also a vector of
 length n*(n-1)/2 is allowed (where n is the number of observations),
 and will be interpreted in the same way as the output of the
 above-mentioned functions. Missing values (<code><a href="../../base/html/NA.html">NA</a></code>s) are
@@ -153,9 +153,9 @@ dissimilarity matrix; (b) it is more robust because it minimizes a sum
 of dissimilarities instead of a sum of squared euclidean distances;
 (c) it provides a novel graphical display, the silhouette plot (see
 <code>plot.partition</code>) (d) it allows to select the number of clusters
-using <code>mean(<a href="silhouette.html">silhouette</a>(pr)[, "sil_width"])</code> on the result
+using <code>mean(<a href="../../cluster/help/silhouette.html">silhouette</a>(pr)[, "sil_width"])</code> on the result
 <code>pr &lt;- pam(..)</code>, or directly its component
-<code>pr$silinfo$avg.width</code>, see also <code><a href="pam.object.html">pam.object</a></code>.
+<code>pr$silinfo$avg.width</code>, see also <code><a href="../../cluster/help/pam.object.html">pam.object</a></code>.
 </p>
 <p>When <code>cluster.only</code> is true, the result is simply a (possibly
 named) integer vector specifying the clustering, i.e.,<br />
@@ -236,7 +236,7 @@ similar result quality.
 <h3>Value</h3>
 
 <p>an object of class <code>"pam"</code> representing the clustering.  See
-<code>?<a href="pam.object.html">pam.object</a></code> for details.
+<code>?<a href="../../cluster/help/pam.object.html">pam.object</a></code> for details.
 </p>
 
 
@@ -244,7 +244,7 @@ similar result quality.
 
 <p>For large datasets, <code>pam</code> may need too much memory or too much
 computation time since both are <i>O(n^2)</i>.  Then,
-<code><a href="clara.html">clara</a>()</code> is preferable, see its documentation.
+<code><a href="../../cluster/help/clara.html">clara</a>()</code> is preferable, see its documentation.
 </p>
 <p>There is hard limit currently, <i>n &lt;= 65536</i>, at
 <i>2^{16}</i> because for larger <i>n</i>, <i>n(n-1)/2</i> is larger than
@@ -291,9 +291,9 @@ Preprint, to appear in Information Systems (<a href="https://arxiv.org/abs/2008.
 
 <h3>See Also</h3>
 
-<p><code><a href="agnes.html">agnes</a></code> for background and references;
-<code><a href="pam.object.html">pam.object</a></code>, <code><a href="clara.html">clara</a></code>, <code><a href="daisy.html">daisy</a></code>,
-<code><a href="partition.object.html">partition.object</a></code>, <code><a href="plot.partition.html">plot.partition</a></code>,
+<p><code><a href="../../cluster/help/agnes.html">agnes</a></code> for background and references;
+<code><a href="../../cluster/help/pam.object.html">pam.object</a></code>, <code><a href="../../cluster/help/clara.html">clara</a></code>, <code><a href="../../cluster/help/daisy.html">daisy</a></code>,
+<code><a href="../../cluster/help/partition.object.html">partition.object</a></code>, <code><a href="../../cluster/help/plot.partition.html">plot.partition</a></code>,
 <code><a href="../../stats/html/dist.html">dist</a></code>.
 </p>
 
@@ -327,5 +327,5 @@ data(ruspini)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

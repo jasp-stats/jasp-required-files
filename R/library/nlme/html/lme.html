@@ -14,7 +14,7 @@ formulation described in Laird and Ware (1982) but allowing for nested
 random effects. The within-group errors are allowed to be correlated
 and/or have unequal variances.
 </p>
-<p>The methods <code><a href="lme.lmList.html">lme.lmList</a></code> and <code><a href="lme.groupedData.html">lme.groupedData</a></code>
+<p>The methods <code><a href="../../nlme/help/lme.lmList.html">lme.lmList</a></code> and <code><a href="../../nlme/help/lme.groupedData.html">lme.groupedData</a></code>
 are documented separately.
 </p>
 
@@ -43,8 +43,8 @@ a fitted linear mixed-effects model.</p>
 <p>a two-sided linear formula object describing the
 fixed-effects part of the model, with the response on the left of a
 <code>~</code> operator and the terms, separated by <code>+</code> operators, on
-the right, an <code>"<a href="lmList.html">lmList</a>"</code> object, or a
-<code>"<a href="groupedData.html">groupedData</a>"</code> object.
+the right, an <code>"<a href="../../nlme/help/lmList.html">lmList</a>"</code> object, or a
+<code>"<a href="../../nlme/help/groupedData.html">groupedData</a>"</code> object.
 </p>
 <p>There is limited support for formulae such as <code>resp ~ 1</code> and
 <code>resp ~ 0</code>, and less prior to version <span class="samp">3.1-112</span>.
@@ -74,34 +74,34 @@ grouping; (ii) a list of one-sided formulas of the form
 <code>~ x1 + ... + xn | g</code>, with possibly different random effects models
 for each grouping level. The order of nesting will be assumed the
 same as the order of the elements in the list; (iii) a one-sided
-formula of the form <code>~ x1 + ... + xn</code>, or a <code><a href="pdMat.html">pdMat</a></code> object with
+formula of the form <code>~ x1 + ... + xn</code>, or a <code><a href="../../nlme/help/pdMat.html">pdMat</a></code> object with
 a formula (i.e. a non-<code>NULL</code> value for <code>formula(object)</code>),
-or a list of such formulas or <code><a href="pdMat.html">pdMat</a></code> objects. In this case, the
+or a list of such formulas or <code><a href="../../nlme/help/pdMat.html">pdMat</a></code> objects. In this case, the
 grouping structure formula will be derived from the data used to
 fit the linear mixed-effects model, which should inherit from class
-<code>"<a href="groupedData.html">groupedData</a>"</code>; (iv) a named list of formulas or <code><a href="pdMat.html">pdMat</a></code>
+<code>"<a href="../../nlme/help/groupedData.html">groupedData</a>"</code>; (iv) a named list of formulas or <code><a href="../../nlme/help/pdMat.html">pdMat</a></code>
 objects as in (iii), with the grouping factors as names. The order of
 nesting will be assumed the same as the order of the order of the
-elements in the list; (v) an <code><a href="reStruct.html">reStruct</a></code> object. See the
+elements in the list; (v) an <code><a href="../../nlme/help/reStruct.html">reStruct</a></code> object. See the
 documentation on <code>pdClasses</code> for a description of the available
-<code><a href="pdMat.html">pdMat</a></code> classes. Defaults to a formula consisting of the right
+<code><a href="../../nlme/help/pdMat.html">pdMat</a></code> classes. Defaults to a formula consisting of the right
 hand side of <code>fixed</code>.</p>
 </td></tr>  
 <tr valign="top"><td><code>correlation</code></td>
 <td>
-<p>an optional <code><a href="corClasses.html">corStruct</a></code> object describing the
+<p>an optional <code><a href="../../nlme/help/corStruct.html">corStruct</a></code> object describing the
 within-group correlation structure. See the documentation of
-<code><a href="corClasses.html">corClasses</a></code> for a description of the available <code>corStruct</code>
+<code><a href="../../nlme/help/corClasses.html">corClasses</a></code> for a description of the available <code>corStruct</code>
 classes. Defaults to <code>NULL</code>,
 corresponding to no within-group correlations.</p>
 </td></tr>
 <tr valign="top"><td><code>weights</code></td>
 <td>
-<p>an optional <code><a href="varFunc.html">varFunc</a></code> object or one-sided formula
+<p>an optional <code><a href="../../nlme/help/varFunc.html">varFunc</a></code> object or one-sided formula
 describing the within-group heteroscedasticity structure. If given as
-a formula, it is used as the argument to <code><a href="varFixed.html">varFixed</a></code>,
+a formula, it is used as the argument to <code><a href="../../nlme/help/varFixed.html">varFixed</a></code>,
 corresponding to fixed variance weights. See the documentation on
-<code><a href="varClasses.html">varClasses</a></code> for a description of the available <code><a href="varFunc.html">varFunc</a></code>
+<code><a href="../../nlme/help/varClasses.html">varClasses</a></code> for a description of the available <code><a href="../../nlme/help/varFunc.html">varFunc</a></code>
 classes. Defaults to <code>NULL</code>, corresponding to homoscedastic
 within-group errors.</p>
 </td></tr> 
@@ -129,7 +129,7 @@ incomplete observations.</p>
 <tr valign="top"><td><code>control</code></td>
 <td>
 <p>a list of control values for the estimation algorithm to
-replace the default values returned by the function <code><a href="lmeControl.html">lmeControl</a></code>.
+replace the default values returned by the function <code><a href="../../nlme/help/lmeControl.html">lmeControl</a></code>.
 Defaults to an empty list.</p>
 </td></tr>
 <tr valign="top"><td><code>contrasts</code></td>
@@ -159,10 +159,10 @@ arguments.  None are used in this method.</p>
 <p>An object of class <code>"lme"</code> representing the linear mixed-effects
 model fit. Generic functions such as <code>print</code>, <code>plot</code> and
 <code>summary</code> have methods to show the results of the fit. See
-<code><a href="lmeObject.html">lmeObject</a></code> for the components of the fit. The functions
+<code><a href="../../nlme/help/lmeObject.html">lmeObject</a></code> for the components of the fit. The functions
 <code><a href="../../stats/html/residuals.html">resid</a></code>, <code><a href="../../stats/html/coef.html">coef</a></code>, <code><a href="../../stats/html/fitted.values.html">fitted</a></code>,
-<code><a href="fixed.effects.html">fixed.effects</a></code>, and
-<code><a href="random.effects.html">random.effects</a></code>  can be used to extract some of its components.
+<code><a href="../../nlme/help/fixed.effects.html">fixed.effects</a></code>, and
+<code><a href="../../nlme/help/random.effects.html">random.effects</a></code>  can be used to extract some of its components.
 </p>
 
 
@@ -222,23 +222,23 @@ S&quot;, 4th Edition, Springer-Verlag.
 
 <h3>See Also</h3>
 
-<p><code><a href="corClasses.html">corClasses</a></code>,
-<code><a href="lme.lmList.html">lme.lmList</a></code>,
-<code><a href="lme.groupedData.html">lme.groupedData</a></code>,
-<code><a href="lmeControl.html">lmeControl</a></code>,
-<code><a href="lmeObject.html">lmeObject</a></code>,
-<code><a href="lmeStruct.html">lmeStruct</a></code>,
-<code><a href="lmList.html">lmList</a></code>,
-<code><a href="pdClasses.html">pdClasses</a></code>,
-<code><a href="plot.lme.html">plot.lme</a></code>,
-<code><a href="predict.lme.html">predict.lme</a></code>,
-<code><a href="qqnorm.lme.html">qqnorm.lme</a></code>,
-<code><a href="residuals.lme.html">residuals.lme</a></code>,
-<code><a href="reStruct.html">reStruct</a></code>,
-<code><a href="simulate.lme.html">simulate.lme</a></code>,
-<code><a href="summary.lme.html">summary.lme</a></code>,
-<code><a href="varClasses.html">varClasses</a></code>, 
-<code><a href="varFunc.html">varFunc</a></code>
+<p><code><a href="../../nlme/help/corClasses.html">corClasses</a></code>,
+<code><a href="../../nlme/help/lme.lmList.html">lme.lmList</a></code>,
+<code><a href="../../nlme/help/lme.groupedData.html">lme.groupedData</a></code>,
+<code><a href="../../nlme/help/lmeControl.html">lmeControl</a></code>,
+<code><a href="../../nlme/help/lmeObject.html">lmeObject</a></code>,
+<code><a href="../../nlme/help/lmeStruct.html">lmeStruct</a></code>,
+<code><a href="../../nlme/help/lmList.html">lmList</a></code>,
+<code><a href="../../nlme/help/pdClasses.html">pdClasses</a></code>,
+<code><a href="../../nlme/help/plot.lme.html">plot.lme</a></code>,
+<code><a href="../../nlme/help/predict.lme.html">predict.lme</a></code>,
+<code><a href="../../nlme/help/qqnorm.lme.html">qqnorm.lme</a></code>,
+<code><a href="../../nlme/help/residuals.lme.html">residuals.lme</a></code>,
+<code><a href="../../nlme/help/reStruct.html">reStruct</a></code>,
+<code><a href="../../nlme/help/simulate.lme.html">simulate.lme</a></code>,
+<code><a href="../../nlme/help/summary.lme.html">summary.lme</a></code>,
+<code><a href="../../nlme/help/varClasses.html">varClasses</a></code>, 
+<code><a href="../../nlme/help/varFunc.html">varFunc</a></code>
 </p>
 
 

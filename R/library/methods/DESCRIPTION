@@ -1,15 +1,16 @@
 Package: methods
-Version: 4.0.5
+Version: 4.1.0
 Priority: base
 Imports: utils, stats
 Title: Formal Methods and Classes
 Author: R Core Team
-Maintainer: R Core Team <R-core@r-project.org>
+Maintainer: R Core Team <do-use-Contact-address@r-project.org>
+Contact: R-help mailing list <r-help@r-project.org>
 Description: Formally defined methods and classes for R objects,
   plus other programming tools, as described in the reference.
 References: John M. Chambers (2008) ``Software for Data Analysis:
         Programming with R''; Springer NY.
-License: Part of R 4.0.5
+License: Part of R 4.1.0
 Suggests: codetools
 NeedsCompilation: yes
-Built: R 4.0.5; x86_64-w64-mingw32; 2021-03-31 07:53:30 UTC; windows
+Built: R 4.1.0; x86_64-w64-mingw32; 2021-05-18 08:45:03 UTC; windows

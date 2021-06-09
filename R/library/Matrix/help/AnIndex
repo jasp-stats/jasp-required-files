@@ -389,7 +389,7 @@ cbind2,ddiMatrix,matrix-method	diagonalMatrix-class
 cbind2,denseMatrix,denseMatrix-method	denseMatrix-class
 cbind2,denseMatrix,matrix-method	denseMatrix-class
 cbind2,denseMatrix,numeric-method	denseMatrix-class
-cbind2,denseMatrix,sparseMatrix-method	sparseMatrix-class
+cbind2,denseMatrix,sparseMatrix-method	cBind
 cbind2,diagonalMatrix,sparseMatrix-method	diagonalMatrix-class
 cbind2,ldiMatrix,atomicVector-method	diagonalMatrix-class
 cbind2,ldiMatrix,matrix-method	diagonalMatrix-class
@@ -405,7 +405,7 @@ cbind2,matrix,sparseMatrix-method	sparseMatrix-class
 cbind2,NULL,Matrix-method	Matrix-class
 cbind2,numeric,denseMatrix-method	denseMatrix-class
 cbind2,numeric,sparseMatrix-method	sparseMatrix-class
-cbind2,sparseMatrix,denseMatrix-method	sparseMatrix-class
+cbind2,sparseMatrix,denseMatrix-method	cBind
 cbind2,sparseMatrix,diagonalMatrix-method	diagonalMatrix-class
 cbind2,sparseMatrix,matrix-method	sparseMatrix-class
 cbind2,sparseMatrix,numeric-method	sparseMatrix-class
@@ -479,6 +479,7 @@ coerce,ddiMatrix,ddenseMatrix-method	diagonalMatrix-class
 coerce,ddiMatrix,dgCMatrix-method	dgCMatrix-class
 coerce,ddiMatrix,dgeMatrix-method	diagonalMatrix-class
 coerce,ddiMatrix,dsparseMatrix-method	diagonalMatrix-class
+coerce,ddiMatrix,dtCMatrix-method	dtCMatrix-class
 coerce,ddiMatrix,matrix-method	diagonalMatrix-class
 coerce,ddiMatrix,symmetricMatrix-method	diagonalMatrix-class
 coerce,ddiMatrix,triangularMatrix-method	diagonalMatrix-class
@@ -1669,7 +1670,7 @@ rbind2,ddiMatrix,matrix-method	diagonalMatrix-class
 rbind2,denseMatrix,denseMatrix-method	denseMatrix-class
 rbind2,denseMatrix,matrix-method	denseMatrix-class
 rbind2,denseMatrix,numeric-method	denseMatrix-class
-rbind2,denseMatrix,sparseMatrix-method	sparseMatrix-class
+rbind2,denseMatrix,sparseMatrix-method	cBind
 rbind2,diagonalMatrix,sparseMatrix-method	diagonalMatrix-class
 rbind2,indMatrix,indMatrix-method	indMatrix-class
 rbind2,ldiMatrix,atomicVector-method	diagonalMatrix-class
@@ -1686,7 +1687,7 @@ rbind2,matrix,sparseMatrix-method	sparseMatrix-class
 rbind2,NULL,Matrix-method	Matrix-class
 rbind2,numeric,denseMatrix-method	denseMatrix-class
 rbind2,numeric,sparseMatrix-method	sparseMatrix-class
-rbind2,sparseMatrix,denseMatrix-method	sparseMatrix-class
+rbind2,sparseMatrix,denseMatrix-method	cBind
 rbind2,sparseMatrix,diagonalMatrix-method	diagonalMatrix-class
 rbind2,sparseMatrix,matrix-method	sparseMatrix-class
 rbind2,sparseMatrix,numeric-method	sparseMatrix-class
@@ -2167,6 +2168,8 @@ zsparseVector-class	sparseVector-class
 [,Matrix,matrix,missing,missing-method	Xtrct-methods
 [,Matrix,missing,index,missing-method	Xtrct-methods
 [,Matrix,missing,missing,ANY-method	Xtrct-methods
+[,Matrix,missing,missing,logical-method	Xtrct-methods
+[,Matrix,missing,missing,missing-method	Xtrct-methods
 [,sparseMatrix,index,index,logical-method	Xtrct-methods
 [,sparseMatrix,index,missing,logical-method	Xtrct-methods
 [,sparseMatrix,missing,index,logical-method	Xtrct-methods

@@ -70,11 +70,11 @@ than compute them directly from the coefficients.
 stratum, in which case the standard errors are computed in the lowest
 stratum and adjusted for efficiencies and comparisons between
 strata. (See the comments in the note in the help for
-<code><a href="aov.html">aov</a></code> about using orthogonal contrasts.)  Such standard
+<code><a href="../../stats/help/aov.html">aov</a></code> about using orthogonal contrasts.)  Such standard
 errors are often conservative.
 </p>
 <p>Suitable matrices for use with <code>coef</code> can be found by
-calling <code><a href="contrasts.html">contrasts</a></code> and indexing the columns by a factor.
+calling <code><a href="../../stats/help/contrasts.html">contrasts</a></code> and indexing the columns by a factor.
 </p>
 
 
@@ -86,7 +86,7 @@ calling <code><a href="contrasts.html">contrasts</a></code> and indexing the col
 
 <h3>See Also</h3>
 
-<p><code><a href="contrasts.html">contrasts</a></code>, <code><a href="model.tables.html">model.tables</a></code>
+<p><code><a href="../../stats/help/contrasts.html">contrasts</a></code>, <code><a href="../../stats/help/model.tables.html">model.tables</a></code>
 </p>
 
 
@@ -163,5 +163,5 @@ fit2 &lt;- lme(Yield ~ A + B*C, random = ~1 | Block, data = aovdat)
 summary(fit2)$tTable # same estimates, similar (but smaller) se's.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

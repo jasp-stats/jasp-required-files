@@ -9,10 +9,10 @@
 
 <h3>Description</h3>
 
-<p>Detach a database, i.e., remove it from the <code><a href="search.html">search</a>()</code>
+<p>Detach a database, i.e., remove it from the <code><a href="../../base/help/search.html">search</a>()</code>
 path of available <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects.  Usually this is either a
-<code><a href="data.frame.html">data.frame</a></code> which has been <code><a href="attach.html">attach</a></code>ed or a
-package which was attached by <code><a href="library.html">library</a></code>.
+<code><a href="../../base/help/data.frame.html">data.frame</a></code> which has been <code><a href="../../base/help/attach.html">attach</a></code>ed or a
+package which was attached by <code><a href="../../base/help/library.html">library</a></code>.
 </p>
 
 
@@ -38,7 +38,7 @@ character vector.  If a number is supplied this is taken as <code>pos</code>.
 <tr valign="top"><td><code>pos</code></td>
 <td>
 
-<p>Index position in <code><a href="search.html">search</a>()</code> of the database to
+<p>Index position in <code><a href="../../base/help/search.html">search</a>()</code> of the database to
 detach.  When <code>name</code> is a number, <code>pos = name</code>
 is used.
 </p>
@@ -49,7 +49,7 @@ is used.
 unload the namespace when a package is being detached.  If the
 package has a namespace and <code>unload</code> is <code>TRUE</code>, then
 <code>detach</code> will attempt to unload the namespace <em>via</em>
-<code><a href="ns-load.html">unloadNamespace</a></code>: if the namespace is imported by
+<code><a href="../../base/help/unloadNamespace.html">unloadNamespace</a></code>: if the namespace is imported by
 another namespace or <code>unload</code> is <code>FALSE</code>, no unloading
 will occur.
 </p>
@@ -76,12 +76,12 @@ quoted name of an item on the search list such as <code>package:tools</code>.
 <p>If a package has a namespace, detaching it does not by default unload
 the namespace (and may not even with <code>unload = TRUE</code>), and
 detaching will not in general unload any dynamically loaded compiled
-code (DLLs); see <code><a href="getLoadedDLLs.html">getLoadedDLLs</a></code> and
-<code><a href="library.dynam.html">library.dynam.unload</a></code>.  Further, registered S3 methods
+code (DLLs); see <code><a href="../../base/help/getLoadedDLLs.html">getLoadedDLLs</a></code> and
+<code><a href="../../base/help/library.dynam.unload.html">library.dynam.unload</a></code>.  Further, registered S3 methods
 from the namespace will not be removed, and because S3 methods are
 not tagged to their source on registration, it is in general not
 possible to safely un-register the methods associated with a given
-package. If you use <code><a href="library.html">library</a></code> on a package whose
+package. If you use <code><a href="../../base/help/library.html">library</a></code> on a package whose
 namespace is loaded, it attaches the exports of the already loaded
 namespace.  So detaching and re-attaching a package may not refresh
 some or all components of the package, and is inadvisable. The most
@@ -91,9 +91,9 @@ reliable way to completely detach a package is to restart <span style="font-fami
 
 <h3>Value</h3>
 
-<p>The return value is <a href="invisible.html">invisible</a>.  It is <code>NULL</code> when a
+<p>The return value is <a href="../../base/help/invisible.html">invisible</a>.  It is <code>NULL</code> when a
 package is detached, otherwise the environment which was returned by
-<code><a href="attach.html">attach</a></code> when the object was attached (incorporating any
+<code><a href="../../base/help/attach.html">attach</a></code> when the object was attached (incorporating any
 changes since it was attached).
 </p>
 
@@ -103,10 +103,10 @@ changes since it was attached).
 <p><code>detach()</code> without an argument removes the first item on the
 search path after the workspace.  It is all too easy to call it too
 many or too few times, or to not notice that the search path has
-changed since an <code><a href="attach.html">attach</a></code> call.
+changed since an <code><a href="../../base/help/attach.html">attach</a></code> call.
 </p>
 <p>Use of <code>attach</code>/<code>detach</code> is best avoided in functions (see
-the help for <code><a href="attach.html">attach</a></code>) and in interactive use and scripts
+the help for <code><a href="../../base/help/attach.html">attach</a></code>) and in interactive use and scripts
 it is prudent to detach by name.
 </p>
 
@@ -134,9 +134,9 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="attach.html">attach</a></code>, <code><a href="library.html">library</a></code>, <code><a href="search.html">search</a></code>,
-<code><a href="ls.html">objects</a></code>, <code><a href="ns-load.html">unloadNamespace</a></code>,
-<code><a href="library.dynam.html">library.dynam.unload</a></code> .
+<p><code><a href="../../base/help/attach.html">attach</a></code>, <code><a href="../../base/help/library.html">library</a></code>, <code><a href="../../base/help/search.html">search</a></code>,
+<code><a href="../../base/help/objects.html">objects</a></code>, <code><a href="../../base/help/unloadNamespace.html">unloadNamespace</a></code>,
+<code><a href="../../base/help/library.dynam.unload.html">library.dynam.unload</a></code> .
 </p>
 
 
@@ -167,5 +167,5 @@ attach_and_detach &lt;- function(db, pos = 2)
 attach_and_detach(women, pos = 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

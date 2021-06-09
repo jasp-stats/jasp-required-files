@@ -144,6 +144,15 @@ use XDR: where large amounts of data are to be transferred and
 all the nodes are little-endian, communication may be
 substantially faster if this is set to false.</p>
 </dd>
+<dt><code>setup_strategy</code></dt><dd><p>Character.  If <code>"parallel"</code> (default)
+workers will be started in parallel during cluster setup when this is
+possible, which is now for homogeneous <code>"PSOCK"</code> clusters with
+all workers started automatically (<code>manual = FALSE</code>) on the local
+machine.  Workers will be started sequentially on other clusters, on
+all clusters with <code>setup_strategy = "sequential"</code> and on <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6.0
+and older.  This option is for expert use only (e.g.  debugging) and
+may be removed in future versions of R.</p>
+</dd>
 </dl>
 
 <p>Function <code>makeForkCluster</code> creates a socket cluster by forking
@@ -153,7 +162,7 @@ substantially faster if this is set to false.</p>
 <code>"FORK"</code> cluster with GUI front-ends  or multi-threaded libraries.
 </p>
 <p>It is good practice to shut down the workers by calling
-<code><a href="makeCluster.html">stopCluster</a></code>: however the workers will terminate
+<code><a href="../../parallel/help/stopCluster.html">stopCluster</a></code>: however the workers will terminate
 themselves once the socket on which they are listening for commands
 becomes unavailable, which it should if the master <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session is
 completed (or its process dies).
@@ -203,5 +212,5 @@ single multi-core host, the default settings are the appropriate ones.
 <p>Derived from the <a href="https://CRAN.R-project.org/package=snow"><span class="pkg">snow</span></a> package.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>parallel</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>parallel</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -61,7 +61,7 @@ outside the <em>inner</em> knots, see the <code>x</code> argument.</p>
 <tr valign="top"><td><code>sparse</code></td>
 <td>
 <p>logical indicating if the result should inherit from class
-<code>"<a href="../../Matrix/html/sparseMatrix-class.html">sparseMatrix</a>"</code> (from package <a href="https://CRAN.R-project.org/package=Matrix"><span class="pkg">Matrix</span></a>).</p>
+<code>"<a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a>"</code> (from package <a href="https://CRAN.R-project.org/package=Matrix"><span class="pkg">Matrix</span></a>).</p>
 </td></tr>
 </table>
 
@@ -98,7 +98,7 @@ function.
 <pre>
 require(graphics)
 splineDesign(knots = 1:10, x = 4:7)
-splineDesign(knots = 1:10, x = 4:7, deriv = 1)
+splineDesign(knots = 1:10, x = 4:7, derivs = 1)
 ## visualize band structure
 Matrix::drop0(zapsmall(6*splineDesign(knots = 1:40, x = 4:37, sparse = TRUE)))
 
@@ -115,5 +115,5 @@ lines(x, rowSums(bb), col = "gray", lwd = 2)
 matlines(x, bb, ylim = c(0,1), lty = 1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>splines</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>splines</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

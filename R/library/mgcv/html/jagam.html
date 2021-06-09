@@ -30,9 +30,9 @@ sim2jam(sam,pregam,edf.type=2,burnin=0)
 <table summary="R argblock">
 <tr valign="top"><td><code>formula</code></td>
 <td>
-<p> A GAM formula (see <code><a href="formula.gam.html">formula.gam</a></code> and also <code><a href="gam.models.html">gam.models</a></code>). 
-This is exactly like the formula for a GLM except that smooth terms,  <code><a href="s.html">s</a></code>, <code><a href="te.html">te</a></code>, <code><a href="te.html">ti</a></code> 
-and <code><a href="t2.html">t2</a></code> can be added to the right hand side to specify that the linear predictor depends on smooth functions of predictors (or linear functionals of these).
+<p> A GAM formula (see <code><a href="../../mgcv/help/formula.gam.html">formula.gam</a></code> and also <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code>). 
+This is exactly like the formula for a GLM except that smooth terms,  <code><a href="../../mgcv/help/s.html">s</a></code>, <code><a href="../../mgcv/help/te.html">te</a></code>, <code><a href="../../mgcv/help/ti.html">ti</a></code> 
+and <code><a href="../../mgcv/help/t2.html">t2</a></code> can be added to the right hand side to specify that the linear predictor depends on smooth functions of predictors (or linear functionals of these).
 </p>
 </td></tr> 
 <tr valign="top"><td><code>family</code></td>
@@ -76,7 +76,7 @@ included in <code>formula</code>: this conforms to the behaviour of
 <tr valign="top"><td><code>control</code></td>
 <td>
 <p>A list of fit control parameters to replace defaults returned by 
-<code><a href="gam.control.html">gam.control</a></code>. Any control parameters not supplied stay at their default values. 
+<code><a href="../../mgcv/help/gam.control.html">gam.control</a></code>. Any control parameters not supplied stay at their default values. 
 little effect on <code>jagam</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>knots</code></td>
@@ -84,7 +84,7 @@ little effect on <code>jagam</code>.</p>
 <p>this is an optional list containing user specified knot values to be used for basis construction. 
 For most bases the user simply supplies the knots to be used, which must match up with the <code>k</code> value
 supplied (note that the number of knots is not always just <code>k</code>). 
-See <code><a href="smooth.construct.tp.smooth.spec.html">tprs</a></code> for what happens in the <code>"tp"/"ts"</code> case. 
+See <code><a href="../../mgcv/help/tprs.html">tprs</a></code> for what happens in the <code>"tp"/"ts"</code> case. 
 Different terms can use different numbers of knots, unless they share a covariate.
 </p>
 </td></tr>
@@ -145,7 +145,7 @@ smoothing parameters). May also contain field <code>mu</code> containing monitor
 </p>
 <p>The final technical issue for model setup is the setting of initial conditions for the coefficients and smoothing parameters. The approach taken is to take the default initial smoothing parameter values used elsewhere by <code>mgcv</code>, and to take a single PIRLS fitting step with these smoothing parameters in order to obtain starting values for the smooth coefficients. In the setting of fully conjugate updating the initial values of the coefficients are not critical, and good results are obtained without supplying them. But in the usual setting in which slice sampling is required for at least some of the updates then very poor results can sometimes be obtained without initial values, as the sampler simply fails to find the region of the posterior mode. 
 </p>
-<p>The <code>sim2jam</code> function takes the partial <code>gam</code> object (<code>pregam</code>) from <code>jagam</code> along with simulation output in standard <code>rjags</code> form and creates a reduced version of a <code>gam</code> object, suitable for plotting and prediction of the model's smooth components. <code>sim2gam</code> computes effective degrees of freedom for each smooth, but it should be noted that there are several possibilites for doing this in the context of a model with a complex random effects structure. The simplest approach (<code>edf.type=0</code>) is to compute the degrees of freedom that the smooth would have had if it had been part of an unweighted Gaussian additive model. One might choose to use this option if the model has been modified so that the response distribution and/or link are not those that were specified to <code>jagam</code>. The second option is (<code>edf.type=1</code>) uses the edf that would have been computed by <code><a href="gam.html">gam</a></code> had it produced these estimates - in the context in which the JAGS model modifications have all been about modifying the random effects structure, this is equivalent to simply setting all the random effects to zero for the effective degrees of freedom calculation. The default option (<code>edf.type=2</code>) is to base the EDF on the sample covariance matrix, <code>Vp</code>, of the model coefficients. If the simulation output (<code>sim</code>) includes a <code>mu</code> field, then this will be used to form the weight matrix <code>W</code> in <code>XWX = t(X)%*%W%*%X</code>, where the EDF is computed from <code>rowSums(Vp*XWX)*scale</code>. If <code>mu</code> is not supplied then it is estimated from the the model matrix <code>X</code> and the mean of the simulated coefficients, but the resulting <code>W</code> may not be strictly comaptible with the <code>Vp</code> matrix in this case. In the situation in which the fitted model is very different in structure from the regression model of the template produced by <code>jagam</code> then the default option may make no sense, and indeed it may be best to use option 0.
+<p>The <code>sim2jam</code> function takes the partial <code>gam</code> object (<code>pregam</code>) from <code>jagam</code> along with simulation output in standard <code>rjags</code> form and creates a reduced version of a <code>gam</code> object, suitable for plotting and prediction of the model's smooth components. <code>sim2gam</code> computes effective degrees of freedom for each smooth, but it should be noted that there are several possibilites for doing this in the context of a model with a complex random effects structure. The simplest approach (<code>edf.type=0</code>) is to compute the degrees of freedom that the smooth would have had if it had been part of an unweighted Gaussian additive model. One might choose to use this option if the model has been modified so that the response distribution and/or link are not those that were specified to <code>jagam</code>. The second option is (<code>edf.type=1</code>) uses the edf that would have been computed by <code><a href="../../mgcv/help/gam.html">gam</a></code> had it produced these estimates - in the context in which the JAGS model modifications have all been about modifying the random effects structure, this is equivalent to simply setting all the random effects to zero for the effective degrees of freedom calculation. The default option (<code>edf.type=2</code>) is to base the EDF on the sample covariance matrix, <code>Vp</code>, of the model coefficients. If the simulation output (<code>sim</code>) includes a <code>mu</code> field, then this will be used to form the weight matrix <code>W</code> in <code>XWX = t(X)%*%W%*%X</code>, where the EDF is computed from <code>rowSums(Vp*XWX)*scale</code>. If <code>mu</code> is not supplied then it is estimated from the the model matrix <code>X</code> and the mean of the simulated coefficients, but the resulting <code>W</code> may not be strictly comaptible with the <code>Vp</code> matrix in this case. In the situation in which the fitted model is very different in structure from the regression model of the template produced by <code>jagam</code> then the default option may make no sense, and indeed it may be best to use option 0.
 </p>
 
 
@@ -168,7 +168,7 @@ smoothing parameters). May also contain field <code>mu</code> containing monitor
 <p>initialization data for smooth coefficients and smoothing parameters.</p>
 </td></tr>
 </table>
-<p>For <code>sim2jam</code> an object of class <code>"jam"</code>: a partial version of an <code>mgcv</code> <code><a href="gamObject.html">gamObject</a></code>, suitable for 
+<p>For <code>sim2jam</code> an object of class <code>"jam"</code>: a partial version of an <code>mgcv</code> <code><a href="../../mgcv/help/gamObject.html">gamObject</a></code>, suitable for 
 plotting and predicting.
 </p>
 
@@ -202,7 +202,7 @@ Computational Statistics &amp; Data Analysis 55(7): 2372-2387
 
 <h3>See Also</h3>
 
-<p><code><a href="gam.html">gam</a></code>, <code><a href="gamm.html">gamm</a></code>, <code><a href="bam.html">bam</a></code>
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code>, <code><a href="../../mgcv/help/gamm.html">gamm</a></code>, <code><a href="../../mgcv/help/bam.html">bam</a></code>
 </p>
 
 
@@ -286,5 +286,5 @@ fv &lt;- predict(jam,newdata=pd)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

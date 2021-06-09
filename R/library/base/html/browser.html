@@ -56,8 +56,8 @@ current expression and allows access to the <span style="font-family: Courier Ne
 allow helper programs (e.g., external debuggers) to insert specific
 values here, so that the specific call to browser (perhaps its location
 in a source file) can be identified and special processing can be
-achieved.  The values can be retrieved by calling <code><a href="browserText.html">browserText</a></code>
-and <code><a href="browserText.html">browserCondition</a></code>.
+achieved.  The values can be retrieved by calling <code><a href="../../base/help/browserText.html">browserText</a></code>
+and <code><a href="../../base/help/browserCondition.html">browserCondition</a></code>.
 </p>
 <p>The purpose of the <code>expr</code> argument is to allow for the illusion
 of conditional debugging. It is an illusion, because execution is
@@ -107,7 +107,7 @@ return to the top-level prompt.</p>
 
 <p>Leading and trailing whitespace is ignored, except for an empty line.
 Handling of empty lines depends on the <code>"browserNLdisabled"</code> 
-<a href="options.html">option</a>; if it is <code>TRUE</code>, empty lines are ignored.  
+<a href="../../base/help/options.html">option</a>; if it is <code>TRUE</code>, empty lines are ignored.  
 If not, an empty line is the same as <code>n</code> (or <code>s</code>, if it was used 
 most recently).
 </p>
@@ -119,11 +119,11 @@ to look at an object with a name such as <code>n</code>, print it
 explicitly, or use autoprint via <code>(n)</code>.
 </p>
 <p>The number of lines printed for the deparsed call can be limited by
-setting <code><a href="options.html">options</a>(deparse.max.lines)</code>.
+setting <code><a href="../../base/help/options.html">options</a>(deparse.max.lines)</code>.
 </p>
 <p>The browser prompt is of the form <code>Browse[<var>n</var>]&gt;</code>: here
 <code>var{n}</code> indicates the &lsquo;browser level&rsquo;.  The browser can
-be called when browsing (and often is when <code><a href="debug.html">debug</a></code> is in
+be called when browsing (and often is when <code><a href="../../base/help/debug.html">debug</a></code> is in
 use), and each recursive call increases the number.  (The actual
 number is the number of &lsquo;contexts&rsquo; on the context stack: this
 is usually <code>2</code> for the outer level of browsing and <code>1</code> when
@@ -148,10 +148,10 @@ Springer.
 
 <h3>See Also</h3>
 
-<p><code><a href="debug.html">debug</a></code>, and
-<code><a href="traceback.html">traceback</a></code> for the stack on error.
-<code><a href="browserText.html">browserText</a></code> for how to retrieve the text and condition.
+<p><code><a href="../../base/help/debug.html">debug</a></code>, and
+<code><a href="../../base/help/traceback.html">traceback</a></code> for the stack on error.
+<code><a href="../../base/help/browserText.html">browserText</a></code> for how to retrieve the text and condition.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

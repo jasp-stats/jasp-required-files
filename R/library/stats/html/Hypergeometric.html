@@ -126,7 +126,7 @@ arguments are used.
 <h3>Source</h3>
 
 <p><code>dhyper</code> computes via binomial probabilities, using code
-contributed by Catherine Loader (see <code><a href="Binomial.html">dbinom</a></code>).
+contributed by Catherine Loader (see <code><a href="../../stats/help/dbinom.html">dbinom</a></code>).
 </p>
 <p><code>phyper</code> is based on calculating <code>dhyper</code> and
 <code>phyper(...)/dhyper(...)</code> (as a summation), based on ideas of Ian
@@ -153,7 +153,7 @@ Second Edition. New York: Wiley.
 
 <h3>See Also</h3>
 
-<p><a href="Distributions.html">Distributions</a> for other standard distributions.
+<p><a href="../../stats/help/Distributions.html">Distributions</a> for other standard distributions.
 </p>
 
 
@@ -168,5 +168,5 @@ all(phyper(x, m, n, k) == cumsum(dhyper(x, m, n, k)))  # FALSE
 signif(phyper(x, m, n, k) - cumsum(dhyper(x, m, n, k)), digits = 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

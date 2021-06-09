@@ -11,7 +11,7 @@
 
 <p>The <span class="pkg">Matrix</span> package provides methods for the QR decomposition
 of special classes of matrices.  There is a generic function which uses
-<code><a href="../../base/html/qr.html">qr</a></code> as default, but methods defined in this package
+<code><a href="../../base/help/qr.html">qr</a></code> as default, but methods defined in this package
 can take extra arguments.  In particular there is an option for
 determining a fill-reducing permutation of the columns of a sparse,
 rectangular matrix.
@@ -68,7 +68,7 @@ propagated to the result.</p>
 <dl>
 <dt>x = &quot;dgCMatrix&quot;</dt><dd><p>QR decomposition of a general sparse
 double-precision matrix with <code>nrow(x) &gt;= ncol(x)</code>.  Returns
-an object of class <code>"<a href="sparseQR-class.html">sparseQR</a>"</code>.</p>
+an object of class <code>"<a href="../../Matrix/help/sparseQR-class.html">sparseQR</a>"</code>.</p>
 </dd>
 <dt>x = &quot;sparseMatrix&quot;</dt><dd><p>works via <code>"dgCMatrix"</code>.</p>
 </dd>
@@ -78,9 +78,9 @@ an object of class <code>"<a href="sparseQR-class.html">sparseQR</a>"</code>.</p
 
 <h3>See Also</h3>
 
-<p><code><a href="../../base/html/qr.html">qr</a></code>; then, the class documentations,
-mainly <code><a href="sparseQR-class.html">sparseQR</a></code>, and also
-<code><a href="dgCMatrix-class.html">dgCMatrix</a></code>.
+<p><code><a href="../../base/help/qr.html">qr</a></code>; then, the class documentations,
+mainly <code><a href="../../Matrix/help/sparseQR-class.html">sparseQR</a></code>, and also
+<code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>.
 </p>
 
 
@@ -115,19 +115,18 @@ cf &lt;- c(int=6, b1=-3, c1=-2, c2=-1)
 doExtras &lt;- interactive() || nzchar(Sys.getenv("R_MATRIX_CHECK_EXTRA")) ||
     identical("true", unname(Sys.getenv("R_PKG_CHECKING_doExtras")))
 tolE &lt;- if(doExtras) 1e-15 else 1e-13
-stopifnot(
-    all.equal(qr.coef(qxr,  y),   cf, tol=tolE)
-  , getRversion() &lt;= "3.4.1" ||
-    all.equal(qr.coef(qxrLA,y),   cf, tol=tolE)
-  , all.equal(qr.coef(qxr,  Y), m(cf), tol=tolE)
-  , all.equal(  qcfXy,    cf, tol=tolE)
-  , all.equal(m(qcfXY), m(cf), tol=tolE)
-  , all.equal(y, qr.fitted(qxr, y), tol=2*tolE)
-  , all.equal(y, qr.fitted(qXr, y), tol=2*tolE)
-  , all.equal(m(qr.fitted(qXr, Y)), qr.fitted(qxr, Y), tol=tolE)
-  , all.equal(  qr.resid (qXr, y),  qr.resid (qxr, y), tol=tolE)
-  , all.equal(m(qr.resid (qXr, Y)), qr.resid (qxr, Y), tol=tolE)
-)
+stopifnot(exprs = {
+  all.equal(qr.coef(qxr,  y),   cf,  tol=tolE)
+  all.equal(qr.coef(qxrLA,y),   cf,  tol=tolE)
+  all.equal(qr.coef(qxr,  Y), m(cf), tol=tolE)
+  all.equal(  qcfXy,    cf, tol=tolE)
+  all.equal(m(qcfXY), m(cf), tol=tolE)
+  all.equal(y, qr.fitted(qxr, y), tol=2*tolE)
+  all.equal(y, qr.fitted(qXr, y), tol=2*tolE)
+  all.equal(m(qr.fitted(qXr, Y)), qr.fitted(qxr, Y), tol=tolE)
+  all.equal(  qr.resid (qXr, y),  qr.resid (qxr, y), tol=tolE)
+  all.equal(m(qr.resid (qXr, Y)), qr.resid (qxr, Y), tol=tolE)
+})
 
 ##----- rank-deficient ("singular") case ------------------------------------
 
@@ -153,5 +152,5 @@ qr.coef(qX, Y)
 rm(m)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -11,11 +11,11 @@
 
 <p>The <code>cox.ph</code> family implements the Cox Proportional Hazards model with Peto's 
 correction for ties, optional stratification, and estimation by penalized partial likelihood maximization, for use with 
-<code><a href="gam.html">gam</a></code>. In the model formula, event time is the response. Under stratification the response has two columns: time
+<code><a href="../../mgcv/help/gam.html">gam</a></code>. In the model formula, event time is the response. Under stratification the response has two columns: time
 and a numeric index for stratum.  The <code>weights</code> vector provides 
 the censoring information (0 for censoring, 1 for event). <code>cox.ph</code> deals with the case in which each subject has
 one event/censoring time and one row of covariate values. When each subject has several time dependent
-covariates see <code><a href="coxpht.html">cox.pht</a></code>. 
+covariates see <code><a href="../../mgcv/help/cox.pht.html">cox.pht</a></code>. 
 </p>
 <p>See example below for conditional logistic regression.
 </p>
@@ -40,7 +40,7 @@ cox.ph(link="identity")
 
 <h3>Details</h3>
 
-<p>Used with <code><a href="gam.html">gam</a></code> to fit Cox Proportional Hazards models to survival data. The model formula will 
+<p>Used with <code><a href="../../mgcv/help/gam.html">gam</a></code> to fit Cox Proportional Hazards models to survival data. The model formula will 
 have event/censoring times on the left hand side and the linear predictor specification on the right hand side. Censoring
 information is provided by the <code>weights</code> argument to <code>gam</code>, with 1 indicating an event and 0 indicating 
 censoring.
@@ -61,7 +61,7 @@ estimation of residuals, the cumulative baseline hazard, survival function and a
 </p>
 <p>The percentage deviance explained reported for Cox PH models is based on the sum of squares of the deviance residuals, as the model deviance, and the sum of squares of the deviance residuals when the covariate effects are set to zero, as the null deviance. The same baseline hazard estimate is used for both.
 </p>
-<p>This family deals efficiently with the case in which each subject has one event/censoring time and one row of covariate values. For studies in which there are multiple time varying covariate measures for each subject then the equivalent Poisson model should be fitted to suitable pseudodata using <code>bam(...,discrete=TRUE)</code>. See <code><a href="coxpht.html">cox.pht</a></code>.
+<p>This family deals efficiently with the case in which each subject has one event/censoring time and one row of covariate values. For studies in which there are multiple time varying covariate measures for each subject then the equivalent Poisson model should be fitted to suitable pseudodata using <code>bam(...,discrete=TRUE)</code>. See <code><a href="../../mgcv/help/cox.pht.html">cox.pht</a></code>.
 </p>
 
 
@@ -87,7 +87,7 @@ doi: <a href="https://doi.org/10.1080/01621459.2016.1180986">10.1080/01621459.20
 
 <h3>See Also</h3>
 
-<p><code><a href="coxpht.html">cox.pht</a></code></p>
+<p><code><a href="../../mgcv/help/cox.pht.html">cox.pht</a></code></p>
 
 
 <h3>Examples</h3>
@@ -237,5 +237,5 @@ ms &lt;- clogit(case ~ spontaneous + induced + strata(stratum), data=infert,
 summary(mg)$p.table[1:2,]; ms
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

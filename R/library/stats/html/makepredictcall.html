@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>A utility to help <code><a href="model.frame.html">model.frame.default</a></code> create the right
+<p>A utility to help <code><a href="../../stats/help/model.frame.default.html">model.frame.default</a></code> create the right
 matrices when predicting from models with terms like (univariate)
 <code>poly</code> or <code>ns</code>.
 </p>
@@ -65,7 +65,7 @@ the terms.
 
 <h3>See Also</h3>
 
-<p><code><a href="model.frame.html">model.frame</a></code>, <code><a href="poly.html">poly</a></code>, <code><a href="../../base/html/scale.html">scale</a></code>;
+<p><code><a href="../../stats/help/model.frame.html">model.frame</a></code>, <code><a href="../../stats/help/poly.html">poly</a></code>, <code><a href="../../base/html/scale.html">scale</a></code>;
 <code><a href="../../splines/html/bs.html">bs</a></code> and <code><a href="../../splines/html/ns.html">ns</a></code> in package <span class="pkg">splines</span>.
 </p>
 <p><code><a href="../../datasets/html/cars.html">cars</a></code> for an example of prediction from a polynomial fit.
@@ -80,7 +80,7 @@ require(graphics)
 ## using poly: this did not work in R &lt; 1.5.0
 fm &lt;- lm(weight ~ poly(height, 2), data = women)
 plot(women, xlab = "Height (in)", ylab = "Weight (lb)")
-ht &lt;- seq(57, 73, len = 200)
+ht &lt;- seq(57, 73, length.out = 200)
 nD &lt;- data.frame(height = ht)
 pfm &lt;- predict(fm, nD)
 lines(ht, pfm)
@@ -92,5 +92,5 @@ stopifnot(all.equal(pfm, pf2)) ## was off (rel.diff. 0.0766) in R &lt;= 3.5.0
 ## see bs and ns for spline examples.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

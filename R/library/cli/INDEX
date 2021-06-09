@@ -13,13 +13,17 @@ ansi_strtrim            Truncate an ANSI string
 ansi_strwrap            Wrap an ANSI styled string to a certain width
 ansi_substr             Substring(s) of an ANSI colored string
 ansi_substring          Substring(s) of an ANSI colored string
+ansi_toupper            ANSI character translation and case folding
 ansi_trimws             Remove leading and/or trailing whitespace from
                         an ANSI string
 builtin_theme           The built-in CLI theme
 cat_line                'cat()' helpers
+cli                     Compose multiple cli functions
 cli_alert               CLI alerts
 cli_blockquote          CLI block quote
+cli_bullets             List of items
 cli_code                A block of code
+cli_debug_doc           Debug cli internals
 cli_div                 Generic CLI container
 cli_dl                  Definition list
 cli_end                 Close a CLI container
@@ -48,6 +52,7 @@ console_width           Determine the width of the console
 containers              CLI containers
 demo_spinners           Show a demo of some (by default all) spinners
 faq                     Frequently Asked Questions
+format_error            Format an error, warning or diagnostic message
 get_spinner             Character vector to put a spinner on the screen
 inline-markup           CLI inline markup
 is_ansi_tty             Detect if a stream support ANSI escape
@@ -65,9 +70,14 @@ pluralization           CLI pluralization
 pluralize               String templating with pluralization
 rule                    Make a rule with one or two text labels
 simple_theme            A simple CLI theme
+spark_bar               Draw a sparkline bar graph with unicode block
+                        characters
+spark_line              Draw a sparkline line graph with Braille
+                        characters.
 start_app               Start, stop, query the default cli application
 style_hyperlink         Terminal Hyperlinks
 symbol                  Various handy symbols to use in a command line
                         UI
+test_that_cli           Test cli output with testthat
 themes                  CLI themes
 tree                    Draw a tree

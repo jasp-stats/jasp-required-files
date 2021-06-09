@@ -23,7 +23,7 @@ in triplet format.
 
 <p>Objects can be created by calls of the form <code>new("dtCMatrix",
     ...)</code> or calls of the form  <code>new("dtTMatrix", ...)</code>, but more
-typically automatically via <code><a href="Matrix.html">Matrix</a>()</code> or coercion such as
+typically automatically via <code><a href="../../Matrix/help/Matrix.html">Matrix</a>()</code> or coercion such as
 <code>as(x, "triangularMatrix")</code>, or <code>as(x, "dtCMatrix")</code>.
 </p>
 
@@ -37,11 +37,11 @@ either &quot;U&quot;, for upper triangular, and &quot;L&quot;, for lower triangu
 </dd>
 <dt><code>diag</code>:</dt><dd><p>Object of class <code>"character"</code>. Must be
 either <code>"U"</code>, for unit triangular (diagonal is all ones), or
-<code>"N"</code>; see <code><a href="triangularMatrix-class.html">triangularMatrix</a></code>.</p>
+<code>"N"</code>; see <code><a href="../../Matrix/help/triangularMatrix-class.html">triangularMatrix</a></code>.</p>
 </dd>
 <dt><code>p</code>:</dt><dd><p>(only present in <code>"dtCMatrix"</code>:) an
 <code><a href="../../base/html/integer.html">integer</a></code> vector for providing pointers, one for each
-column, see the detailed description in <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code>.</p>
+column, see the detailed description in <code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code>.</p>
 </dd>
 <dt><code>i</code>:</dt><dd><p>Object of class <code>"integer"</code> of length nnzero
 (number of non-zero elements).  These are the row numbers for
@@ -57,7 +57,7 @@ elements of the matrix.</p>
 </dd>
 <dt><code>Dim</code>,<code>Dimnames</code>:</dt><dd><p>The dimension (a length-2
 <code>"integer"</code>) and corresponding names (or <code>NULL</code>),
-inherited from the <code><a href="Matrix-class.html">Matrix</a></code>, see there.</p>
+inherited from the <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>, see there.</p>
 </dd>
 </dl>
 
@@ -88,7 +88,7 @@ Class <code>"dMatrix"</code>, <code>"sparseMatrix"</code>, and more by class
 </dd>
 <dt>solve</dt><dd><p><code>signature(a = "dtCMatrix", b = "....")</code>:
 sparse triangular solve (aka &ldquo;backsolve&rdquo; or
-&ldquo;forwardsolve&rdquo;), see <code><a href="solve-methods.html">solve-methods</a></code>.</p>
+&ldquo;forwardsolve&rdquo;), see <code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code>.</p>
 </dd>
 <dt>t</dt><dd><p><code>signature(x = "dtCMatrix")</code>: returns the transpose of
 <code>x</code></p>
@@ -102,8 +102,8 @@ sparse triangular solve (aka &ldquo;backsolve&rdquo; or
 
 <h3>See Also</h3>
 
-<p>Classes <code><a href="dgCMatrix-class.html">dgCMatrix</a></code>, <code><a href="dgTMatrix-class.html">dgTMatrix</a></code>,
-<code><a href="dgeMatrix-class.html">dgeMatrix</a></code>, and <code><a href="dtrMatrix-class.html">dtrMatrix</a></code>.
+<p>Classes <code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>, <code><a href="../../Matrix/help/dgTMatrix-class.html">dgTMatrix</a></code>,
+<code><a href="../../Matrix/help/dgeMatrix-class.html">dgeMatrix</a></code>, and <code><a href="../../Matrix/help/dtrMatrix-class.html">dtrMatrix</a></code>.
 </p>
 
 
@@ -149,5 +149,5 @@ stopifnot(
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

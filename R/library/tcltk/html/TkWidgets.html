@@ -68,7 +68,7 @@ ttktreeview(parent, ...)
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>handled via <code><a href="TclInterface.html">.Tcl.args</a></code>.</p>
+<p>handled via <code><a href="../../tcltk/help/.Tcl.args.html">.Tcl.args</a></code>.</p>
 </td></tr>
 </table>
 
@@ -89,8 +89,8 @@ full.  Please refer to the Tcl/Tk documentation.
 
 <h3>See Also</h3>
 
-<p><code><a href="TclInterface.html">TclInterface</a></code>, <code><a href="TkCommands.html">TkCommands</a></code>,
-<code><a href="TkWidgetcmds.html">TkWidgetcmds</a></code></p>
+<p><code><a href="../../tcltk/help/TclInterface.html">TclInterface</a></code>, <code><a href="../../tcltk/help/TkCommands.html">TkCommands</a></code>,
+<code><a href="../../tcltk/help/TkWidgetcmds.html">TkWidgetcmds</a></code></p>
 
 
 <h3>Examples</h3>
@@ -115,14 +115,16 @@ tkdestroy(tt)
 if(as.character(tcl("info", "tclversion")) &gt;= "8.5") {
   # make use of themed widgets
   # list themes
-  as.character(tcl("ttk::style", "theme", "names"))
-  # select a theme -- here pre-XP windows
-  tcl("ttk::style", "theme", "use", "winnative")
+  themes &lt;- as.character(tcl("ttk::style", "theme", "names"))
+  themes
+  # select a theme -- for pre-XP windows
+  #   tcl("ttk::style", "theme", "use", "winnative")
+  tcl("ttk::style", "theme", "use", themes[1])
 } else {
   # use Tk 8.0 widgets
 }
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>tcltk</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tcltk</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

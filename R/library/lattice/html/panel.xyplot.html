@@ -52,14 +52,14 @@ of each of the components.
 <p>The behaviour if any of the first six are included in <code>type</code> is
 similar to the effect of <code>type</code> in <code><a href="../../graphics/html/plot.default.html">plot</a></code> (type
 <code>"b"</code> is actually the same as <code>"o"</code>).  <code>"r"</code> adds a
-linear regression line (same as <code><a href="panel.functions.html">panel.lmline</a></code>, except
+linear regression line (same as <code><a href="../../lattice/help/panel.lmline.html">panel.lmline</a></code>, except
 for default graphical parameters). <code>"smooth"</code> adds a loess fit
-(same as <code><a href="panel.loess.html">panel.loess</a></code>).  <code>"spline"</code> adds a cubic
-smoothing spline fit (same as <code><a href="panel.spline.html">panel.spline</a></code>).
-<code>"g"</code> adds a reference grid using <code><a href="panel.functions.html">panel.grid</a></code> in
+(same as <code><a href="../../lattice/help/panel.loess.html">panel.loess</a></code>).  <code>"spline"</code> adds a cubic
+smoothing spline fit (same as <code><a href="../../lattice/help/panel.spline.html">panel.spline</a></code>).
+<code>"g"</code> adds a reference grid using <code><a href="../../lattice/help/panel.grid.html">panel.grid</a></code> in
 the background (but using the <code>grid</code> argument is now the
 preferred way to do so).  <code>"a"</code> has the effect of calling
-<code><a href="panel.functions.html">panel.average</a></code>, which can be useful for creating
+<code><a href="../../lattice/help/panel.average.html">panel.average</a></code>, which can be useful for creating
 interaction plots.  The effect of several of these specifications
 depend on the value of <code>horizontal</code>.
 </p>
@@ -74,14 +74,14 @@ in <code>plot</code>.  For the latter behavior, use <code>type = "s"</code> with
 <tr valign="top"><td><code>groups</code></td>
 <td>
 <p> an optional grouping variable.  If present,
-<code><a href="panel.superpose.html">panel.superpose</a></code> will be used instead to display each
+<code><a href="../../lattice/help/panel.superpose.html">panel.superpose</a></code> will be used instead to display each
 subgroup </p>
 </td></tr>
 <tr valign="top"><td><code>col, col.line, col.symbol</code></td>
 <td>
 
 <p>default colours are obtained from <code>plot.symbol</code> and
-<code>plot.line</code> using <code><a href="trellis.par.get.html">trellis.par.get</a></code>.
+<code>plot.line</code> using <code><a href="../../lattice/help/trellis.par.get.html">trellis.par.get</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>font, fontface, fontfamily</code></td>
@@ -124,7 +124,7 @@ other <code>type</code> values (which are all data-dependent).  Using the
 <code>grid</code> argument also allows more flexibility.
 </p>
 <p>Most generally, <code>grid</code> can be a list of arguments to be
-supplied to <code><a href="panel.functions.html">panel.grid</a></code>, which is called with those
+supplied to <code><a href="../../lattice/help/panel.grid.html">panel.grid</a></code>, which is called with those
 arguments.  Three shortcuts are available:
 </p>
 
@@ -144,7 +144,7 @@ arguments.  Three shortcuts are available:
 <td>
 
 <p>A numeric vector or list, specifying arguments arguments for
-<code><a href="panel.functions.html">panel.abline</a></code>, which is called with those arguments.
+<code><a href="../../lattice/help/panel.abline.html">panel.abline</a></code>, which is called with those arguments.
 If specified as a (possibly named) numeric vector, <code>abline</code> is
 coerced to a list.  This allows arguments of the form <code>abline =
     c(0, 1)</code>, which adds the diagonal line, or <code>abline = c(h = 0, v
@@ -152,7 +152,7 @@ coerced to a list.  This allows arguments of the form <code>abline =
 for finer control; e.g., <code>abline = list(h = 0, v = 0, col =
       "grey")</code>.
 </p>
-<p>For more flexibility, use <code><a href="panel.functions.html">panel.abline</a></code> directly.
+<p>For more flexibility, use <code><a href="../../lattice/help/panel.abline.html">panel.abline</a></code> directly.
 </p>
 </td></tr>
 <tr valign="top"><td><code>jitter.x, jitter.y</code></td>
@@ -181,7 +181,7 @@ modifications possible via the type argument. <code>panel.qq</code> draws a
 45 degree line before calling <code>panel.xyplot</code>.
 </p>
 <p>Note that most of the arguments controlling the display can be
-supplied directly to the high-level (e.g. <code><a href="xyplot.html">xyplot</a></code>) call.
+supplied directly to the high-level (e.g. <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>) call.
 </p>
 
 
@@ -192,9 +192,9 @@ supplied directly to the high-level (e.g. <code><a href="xyplot.html">xyplot</a>
 
 <h3>See Also</h3>
 
-<p><code><a href="panel.superpose.html">panel.superpose</a></code>,
-<code><a href="xyplot.html">xyplot</a></code>,
-<code><a href="splom.html">splom</a></code>
+<p><code><a href="../../lattice/help/panel.superpose.html">panel.superpose</a></code>,
+<code><a href="../../lattice/help/xyplot.html">xyplot</a></code>,
+<code><a href="../../lattice/help/splom.html">splom</a></code>
 </p>
 
 
@@ -236,5 +236,5 @@ xyplot(y ~ x | gl(1, length(types)),
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

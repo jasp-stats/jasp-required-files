@@ -18,7 +18,7 @@ which depend on this one, and (optionally) so on recursively.
 
 <pre>
 dependsOnPkgs(pkgs,
-              dependencies = c("Depends", "Imports", "LinkingTo"),
+              dependencies = "strong",
               recursive = TRUE, lib.loc = NULL,
               installed =
               utils::installed.packages(lib.loc, fields = "Enhances"))
@@ -37,8 +37,11 @@ dependsOnPkgs(pkgs,
 <p>a character vector listing the types of
 dependencies, a subset of
 <code>c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")</code>.
-Character string <code>"all"</code> is shorthand for that vector, and
-<code>"most"</code> currently shorthand for these apart from <code>"Enhances"</code>.</p>
+Character string <code>"all"</code> is shorthand for that vector,
+character string <code>"most"</code> for the same vector without
+<code>"Enhances"</code>,
+character string <code>"strong"</code> (default) for the first three
+elements of that vector.</p>
 </td></tr>
 <tr valign="top"><td><code>recursive</code></td>
 <td>
@@ -64,13 +67,21 @@ for all known trees (see <code><a href="../../base/html/libPaths.html">.libPaths
 </p>
 
 
+<h3>See Also</h3>
+
+<p><code><a href="../../tools/help/package_dependencies.html">package_dependencies</a>()</code> to get the regular
+(&ldquo;forward&rdquo;) dependencies of a package.
+</p>
+
+
 <h3>Examples</h3>
 
 <pre>
+
 ## there are few dependencies in a vanilla R installation:
 ## lattice may not be installed
 dependsOnPkgs("lattice")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

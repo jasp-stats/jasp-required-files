@@ -128,7 +128,7 @@ values of <code>ncp</code> very near zero.
 
 <ul>
 <li><p> The central <code>dbeta</code> is based on a binomial probability, using code
-contributed by Catherine Loader (see <code><a href="Binomial.html">dbinom</a></code>) if either
+contributed by Catherine Loader (see <code><a href="../../stats/help/dbinom.html">dbinom</a></code>) if either
 shape parameter is larger than one, otherwise directly from the definition.
 The non-central case is based on the derivation as a Poisson
 mixture of betas (Johnson <em>et al</em>, 1995, pp. 502&ndash;3).
@@ -205,7 +205,7 @@ chapter 25. Wiley, New York.
 
 <h3>See Also</h3>
 
-<p><a href="Distributions.html">Distributions</a> for other standard distributions.
+<p><a href="../../stats/help/Distributions.html">Distributions</a> for other standard distributions.
 </p>
 <p><code><a href="../../base/html/Special.html">beta</a></code> for the Beta function.
 </p>
@@ -214,7 +214,7 @@ chapter 25. Wiley, New York.
 <h3>Examples</h3>
 
 <pre>
-x &lt;- seq(0, 1, length = 21)
+x &lt;- seq(0, 1, length.out = 21)
 dbeta(x, 1, 1)
 pbeta(x, 1, 1)
 
@@ -224,7 +224,7 @@ pl.beta &lt;- function(a,b, asp = if(isLim) 1, ylim = if(isLim) c(0,1.1)) {
     eps &lt;- 1e-10
     x &lt;- c(0, eps, (1:7)/16, 1/2+c(-eps,0,eps), (9:15)/16, 1-eps, 1)
   } else {
-    x &lt;- seq(0, 1, length = 1025)
+    x &lt;- seq(0, 1, length.out = 1025)
   }
   fx &lt;- cbind(dbeta(x, a,b), pbeta(x, a,b), qbeta(x, a,b))
   f &lt;- fx; f[fx == Inf] &lt;- 1e100
@@ -253,5 +253,5 @@ pl.beta(3, 0)
 pl.beta(Inf, Inf)# point mass at 1/2
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

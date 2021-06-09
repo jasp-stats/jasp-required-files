@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Methods for function <code><a href="solve-methods.html">solve</a></code> to solve a linear system of
+<p>Methods for function <code><a href="../../Matrix/help/solve.html">solve</a></code> to solve a linear system of
 equations, or equivalently, solve for <i>X</i> in
 </p>
 <p style="text-align: center;"><i>A X = B</i></p>
@@ -21,7 +21,7 @@ is </p>
 			X &lt;- solve(A,B)
   </pre>
 <p>In <code>solve(a,b)</code> in the <span class="pkg">Matrix</span> package, <code>a</code> may also
-be a <code><a href="MatrixFactorization-class.html">MatrixFactorization</a></code> instead of directly a matrix.
+be a <code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code> instead of directly a matrix.
 </p>
 
 
@@ -57,7 +57,7 @@ of the linear system <i>Ax = b</i>.</p>
 </td></tr>
 <tr valign="top"><td><code>system</code></td>
 <td>
-<p>only if <code>a</code> is a <code><a href="CHMfactor-class.html">CHMfactor</a></code>:
+<p>only if <code>a</code> is a <code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code>:
 character string indicating the kind of linear system to be
 solved, see below.  Note that the default, <code>"A"</code>, does
 <em>not</em> solve the triangular system (but <code>"L"</code> does).</p>
@@ -65,8 +65,8 @@ solved, see below.  Note that the default, <code>"A"</code>, does
 <tr valign="top"><td><code>sparse</code></td>
 <td>
 <p>only when <code>a</code> is a
-<code><a href="sparseMatrix-class.html">sparseMatrix</a></code>, i.e., typically a
-<code><a href="dgCMatrix-class.html">dgCMatrix</a></code>: logical specifying if the result
+<code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>, i.e., typically a
+<code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code>: logical specifying if the result
 should be a (formally) sparse matrix.</p>
 </td></tr></table>
 
@@ -89,13 +89,13 @@ should be a (formally) sparse matrix.</p>
 
 <dl>
 <dt><code>signature(a = "ANY", b = "ANY")</code></dt><dd><p>is simply the
-<span class="pkg">base</span> package's S3 generic <code><a href="solve-methods.html">solve</a></code>.</p>
+<span class="pkg">base</span> package's S3 generic <code><a href="../../Matrix/help/solve.html">solve</a></code>.</p>
 </dd>
 </dl>
 
 <dl>
 <dt><code>signature(a = "CHMfactor", b = "...."), system= *</code></dt><dd><p>The
-<code>solve</code> methods for a <code>"<a href="CHMfactor-class.html">CHMfactor</a>"</code> object
+<code>solve</code> methods for a <code>"<a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a>"</code> object
 take an optional third argument <code>system</code> whose value can be
 one of the character strings <code>"A"</code>, <code>"LDLt"</code>, <code>"LD"</code>,
 <code>"DLt"</code>, <code>"L"</code>, <code>"Lt"</code>, <code>"D"</code>, <code>"P"</code> or
@@ -107,7 +107,7 @@ default,  <code>"A"</code>, is to solve <i>Ax = b</i> for <i>x</i> where
 <b>but</b> <code>"P"</code> and <code>"Pt"</code> where, e.g., <code>x &lt;-
 	solve(a, b,system="P")</code> is equivalent to <code>x &lt;- P %*% b</code>.
 </p>
-<p>If <code>b</code> is a <code><a href="sparseMatrix-class.html">sparseMatrix</a></code>, <code>system</code>
+<p>If <code>b</code> is a <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>, <code>system</code>
 is used as above the corresponding sparse CHOLMOD algorithm is called.
 </p>
 </dd>
@@ -125,13 +125,13 @@ methods, see below.</p>
 <dl>
 <dt><code>signature(a = "dgCMatrix", b = "ddenseMatrix")</code></dt><dd><p>with extra
 argument list <code>( sparse = FALSE, tol = .Machine$double.eps ) </code>:
-Uses the sparse <code><a href="lu.html">lu</a>(a)</code> decomposition (which is cached
+Uses the sparse <code><a href="../../Matrix/help/lu.html">lu</a>(a)</code> decomposition (which is cached
 in <code>a</code>'s <code>factor</code> slot).
 By default, <code>sparse=FALSE</code>, returns a
-<code><a href="denseMatrix-class.html">denseMatrix</a></code>, since <i>U^{-1} L^{-1} B</i> may
+<code><a href="../../Matrix/help/denseMatrix-class.html">denseMatrix</a></code>, since <i>U^{-1} L^{-1} B</i> may
 not be sparse at all, even when <i>L</i> and <i>U</i> are.
 </p>
-<p>If <code>sparse=TRUE</code>, returns a <code><a href="sparseMatrix-class.html">sparseMatrix</a></code>
+<p>If <code>sparse=TRUE</code>, returns a <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>
 (which may not be very sparse at all, even if <code>a</code> <em>was</em> sparse).
 </p>
 </dd>
@@ -140,10 +140,10 @@ not be sparse at all, even when <i>L</i> and <i>U</i> are.
 <dt><code>signature(a = "dgCMatrix", b = "missing")</code></dt><dd><p>with extra
 argument list <code>( sparse=FALSE, tol = .Machine$double.eps ) </code>:
 Checks if <code>a</code> is symmetric, and in that case, coerces it to
-<code>"<a href="symmetricMatrix-class.html">symmetricMatrix</a>"</code>, and then computes a
+<code>"<a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a>"</code>, and then computes a
 <em>sparse</em> solution via sparse Cholesky factorization,
 independently of the <code>sparse</code> argument.  If <code>a</code> is not
-symmetric, the sparse <code><a href="lu.html">lu</a></code> decomposition is used
+symmetric, the sparse <code><a href="../../Matrix/help/lu.html">lu</a></code> decomposition is used
 and the result will be sparse or dense, depending on the
 <code>sparse</code> argument, exactly as for the above (<code>b =
 	"ddenseMatrix"</code>) case.
@@ -182,8 +182,8 @@ as for the &ldquo;general&rdquo; matrices of class <code>"dgCMatrix"</code>.</p>
 <dt><code>signature(a = "dtCMatrix", b = "dgeMatrix")</code></dt><dd><p>, etc
 sparse triangular solve, in traditional S/<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> also known as
 <code><a href="../../base/html/backsolve.html">backsolve</a></code>, or <code><a href="../../base/html/backsolve.html">forwardsolve</a></code>.
-<code>solve(a,b)</code> is a <code><a href="sparseMatrix-class.html">sparseMatrix</a></code> if
-<code>b</code> is, and hence a <code><a href="denseMatrix-class.html">denseMatrix</a></code>
+<code>solve(a,b)</code> is a <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code> if
+<code>b</code> is, and hence a <code><a href="../../Matrix/help/denseMatrix-class.html">denseMatrix</a></code>
 otherwise.
 </p>
 </dd>
@@ -204,7 +204,7 @@ similar <code>b</code>, including <code>"missing"</code>, and
 <p>simply uses <code><a href="../../base/html/qr.html">qr.coef</a>(a, b)</code>.</p>
 </dd>
 <dt><code>signature(a = "pMatrix", b = ".....")</code></dt><dd>
-<p>these methods typically use <code><a href="matrix-products.html">crossprod</a>(a,b)</code>, as
+<p>these methods typically use <code><a href="../../Matrix/help/crossprod.html">crossprod</a>(a,b)</code>, as
 the inverse of a permutation matrix is the same as its transpose.</p>
 </dd>
 <dt><code>signature(a = "TsparseMatrix", b = "ANY")</code></dt><dd>
@@ -216,9 +216,9 @@ the inverse of a permutation matrix is the same as its transpose.</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="solve-methods.html">solve</a></code>, <code><a href="lu.html">lu</a></code>, and class documentations
-<code><a href="CHMfactor-class.html">CHMfactor</a></code>, <code><a href="sparseLU-class.html">sparseLU</a></code>, and
-<code><a href="MatrixFactorization-class.html">MatrixFactorization</a></code>.
+<p><code><a href="../../Matrix/help/solve.html">solve</a></code>, <code><a href="../../Matrix/help/lu.html">lu</a></code>, and class documentations
+<code><a href="../../Matrix/help/CHMfactor-class.html">CHMfactor</a></code>, <code><a href="../../Matrix/help/sparseLU-class.html">sparseLU</a></code>, and
+<code><a href="../../Matrix/help/MatrixFactorization-class.html">MatrixFactorization</a></code>.
 </p>
 
 
@@ -255,5 +255,5 @@ stopifnot( all.equal(as(I0, "diagonalMatrix"), Diagonal(n)),
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

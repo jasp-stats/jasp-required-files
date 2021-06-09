@@ -9,14 +9,14 @@
 
 <h3>Description</h3>
 
-<p><code><a href="gam.html">gam</a></code> can use univariate penalized cubic regression spline smooths, specified via terms like
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> can use univariate penalized cubic regression spline smooths, specified via terms like
 <code>s(x,bs="cr")</code>. <code>s(x,bs="cs")</code> specifies a penalized cubic regression spline which has had its penalty modified 
 to shrink towards zero at high enough smoothing parameters (as the smoothing parameter goes to infinity a normal cubic spline tends to a 
 straight line.) <code>s(x,bs="cc")</code> specifies a cyclic penalized cubic regression spline smooth.
 </p>
 <p>&lsquo;Cardinal&rsquo; spline bases are used: Wood (2017) sections 5.3.1 and 5.3.2 gives full details. These bases have 
 very low setup costs. For a given basis dimension, <code>k</code>, they typically perform a little less well 
-then thin plate regression splines, but a little better than p-splines. See <code><a href="te.html">te</a></code> to use these bases in tensor product smooths of several variables.
+then thin plate regression splines, but a little better than p-splines. See <code><a href="../../mgcv/help/te.html">te</a></code> to use these bases in tensor product smooths of several variables.
 </p>
 <p>Default <code>k</code> is 10. 
 </p>
@@ -60,8 +60,8 @@ Can be <code>NULL</code>. See details.</p>
 <h3>Details</h3>
 
  
-<p>The constructor is not normally called directly, but is rather used internally by <code><a href="gam.html">gam</a></code>. 
-To use for basis setup it is recommended to use <code><a href="smooth.construct.html">smooth.construct2</a></code>.  
+<p>The constructor is not normally called directly, but is rather used internally by <code><a href="../../mgcv/help/gam.html">gam</a></code>. 
+To use for basis setup it is recommended to use <code><a href="../../mgcv/help/smooth.construct2.html">smooth.construct2</a></code>.  
 </p>
 <p>If they are not supplied then the knots  of the spline are placed evenly
 throughout the covariate values to which the term refers:  For
@@ -92,7 +92,7 @@ subject to the condition that second derivatives go to zero at the first and las
 <h3>Value</h3>
 
 <p> An object of class <code>"cr.smooth"</code> <code>"cs.smooth"</code> or <code>"cyclic.smooth"</code>.
-In addition to the usual elements of a smooth class documented under <code><a href="smooth.construct.html">smooth.construct</a></code>, 
+In addition to the usual elements of a smooth class documented under <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>, 
 this object will contain:
 </p>
 <table summary="R valueblock">
@@ -151,5 +151,5 @@ and Hall/CRC Press.
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

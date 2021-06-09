@@ -30,7 +30,7 @@ plot(x, ask = FALSE, which.plots = NULL,
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>an object of class <code>"partition"</code>, typically created by the
-functions <code><a href="pam.html">pam</a></code>, <code><a href="clara.html">clara</a></code>, or <code><a href="fanny.html">fanny</a></code>.</p>
+functions <code><a href="../../cluster/help/pam.html">pam</a></code>, <code><a href="../../cluster/help/clara.html">clara</a></code>, or <code><a href="../../cluster/help/fanny.html">fanny</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>ask</code></td>
 <td>
@@ -62,13 +62,13 @@ from the partition object <code>x</code>, but can be specified explicitly.</p>
 <tr valign="top"><td><code>dist</code></td>
 <td>
 <p>when <code>x</code> does not have a <code>diss</code> component as for
-<code><a href="pam.html">pam</a>(*, keep.diss=FALSE)</code>, <code>dist</code> must be the
+<code><a href="../../cluster/help/pam.html">pam</a>(*, keep.diss=FALSE)</code>, <code>dist</code> must be the
 dissimilarity if a clusplot is desired.</p>
 </td></tr>
 <tr valign="top"><td><code>stand,lines,shade,color,labels,plotchar,span,xlim,ylim,main, ...</code></td>
 <td>
 
-<p>All optional arguments available for the <code><a href="clusplot.default.html">clusplot.default</a></code>
+<p>All optional arguments available for the <code><a href="../../cluster/help/clusplot.default.html">clusplot.default</a></code>
 function (except for the <code>diss</code> one) and graphical parameters
 (see <code><a href="../../graphics/html/par.html">par</a></code>) may also be supplied as arguments to this function.</p>
 </td></tr>
@@ -85,14 +85,14 @@ call <code>par(ask= TRUE)</code> before invoking the plot command.
 </p>
 <p>The <em>clusplot</em> of a cluster partition consists of a two-dimensional
 representation of the observations, in which the clusters are
-indicated by ellipses (see <code><a href="clusplot.partition.html">clusplot.partition</a></code> for more
+indicated by ellipses (see <code><a href="../../cluster/help/clusplot.partition.html">clusplot.partition</a></code> for more
 details).
 </p>
 <p>The <em>silhouette plot</em> of a nonhierarchical clustering is fully
 described in Rousseeuw (1987) and in chapter 2 of Kaufman and
 Rousseeuw (1990).
 For each observation i, a bar is drawn, representing its silhouette
-width s(i), see <code><a href="silhouette.html">silhouette</a></code> for details.
+width s(i), see <code><a href="../../cluster/help/silhouette.html">silhouette</a></code> for details.
 Observations are grouped per cluster, starting with cluster 1 at the
 top.  Observations with a large s(i) (almost 1) are very well
 clustered, a small s(i) (around 0) means that the observation lies
@@ -121,7 +121,7 @@ number of observations is less than <code>nmax.lab</code> (40, by default),
 for readability.  Moreover, observation labels are truncated to
 maximally <code>max.strlen</code> (5) characters.  <br />
 For more flexibility, use <code>plot(silhouette(x), ...)</code>, see
-<code><a href="silhouette.html">plot.silhouette</a></code>.
+<code><a href="../../cluster/help/plot.silhouette.html">plot.silhouette</a></code>.
 </p>
 
 
@@ -131,17 +131,17 @@ For more flexibility, use <code>plot(silhouette(x), ...)</code>, see
 Silhouettes: A graphical aid to the interpretation and validation of
 cluster analysis. <em>J. Comput. Appl. Math.</em>, <b>20</b>, 53&ndash;65.
 </p>
-<p>Further, the references in <code><a href="plot.agnes.html">plot.agnes</a></code>.
+<p>Further, the references in <code><a href="../../cluster/help/plot.agnes.html">plot.agnes</a></code>.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="partition.object.html">partition.object</a></code>, <code><a href="clusplot.partition.html">clusplot.partition</a></code>,
-<code><a href="clusplot.default.html">clusplot.default</a></code>, <code><a href="pam.html">pam</a></code>,
-<code><a href="pam.object.html">pam.object</a></code>, <code><a href="clara.html">clara</a></code>,
-<code><a href="clara.object.html">clara.object</a></code>, <code><a href="fanny.html">fanny</a></code>,
-<code><a href="fanny.object.html">fanny.object</a></code>, <code><a href="../../graphics/html/par.html">par</a></code>.
+<p><code><a href="../../cluster/help/partition.object.html">partition.object</a></code>, <code><a href="../../cluster/help/clusplot.partition.html">clusplot.partition</a></code>,
+<code><a href="../../cluster/help/clusplot.default.html">clusplot.default</a></code>, <code><a href="../../cluster/help/pam.html">pam</a></code>,
+<code><a href="../../cluster/help/pam.object.html">pam.object</a></code>, <code><a href="../../cluster/help/clara.html">clara</a></code>,
+<code><a href="../../cluster/help/clara.object.html">clara.object</a></code>, <code><a href="../../cluster/help/fanny.html">fanny</a></code>,
+<code><a href="../../cluster/help/fanny.object.html">fanny.object</a></code>, <code><a href="../../graphics/html/par.html">par</a></code>.
 </p>
 
 
@@ -160,5 +160,5 @@ cx$data # is NULL
 plot(cx, data = xclara)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

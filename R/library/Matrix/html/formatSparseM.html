@@ -15,7 +15,7 @@ methods for sparse matrices and can be applied as well to standard <span style="
 matrices.  Note that <em>all</em> arguments but the first are optional.
 </p>
 <p><code>formatSparseM()</code> is the main &ldquo;workhorse&rdquo; of
-<code><a href="printSpMatrix.html">formatSpMatrix</a></code>, the <code>format</code> method for sparse
+<code><a href="../../Matrix/help/formatSpMatrix.html">formatSpMatrix</a></code>, the <code>format</code> method for sparse
 matrices.
 </p>
 <p><code>.formatSparseSimple()</code> is a simple helper function, also dealing
@@ -41,7 +41,7 @@ formatSparseM(x, zero.print = ".", align = c("fancy", "right"),
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object inheriting from class <code><a href="sparseMatrix-class.html">sparseMatrix</a></code>.</p>
+<p>an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object inheriting from class <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>zero.print</code></td>
 <td>
@@ -53,7 +53,7 @@ almost like <code>print()</code>ing of non-sparse matrices.</p>
 <tr valign="top"><td><code>align</code></td>
 <td>
 <p>a string specifying how the <code>zero.print</code> codes
-should be aligned, see <code><a href="printSpMatrix.html">formatSpMatrix</a></code>.</p>
+should be aligned, see <code><a href="../../Matrix/help/formatSpMatrix.html">formatSpMatrix</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>m</code></td>
 <td>
@@ -88,7 +88,7 @@ with strings such as <code>"0.00"</code> for the zeros.</p>
 </td></tr>
 <tr valign="top"><td><code>col.names, note.dropping.colnames</code></td>
 <td>
-<p>see <code><a href="printSpMatrix.html">formatSpMatrix</a></code>.</p>
+<p>see <code><a href="../../Matrix/help/formatSpMatrix.html">formatSpMatrix</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>dn</code></td>
 <td>
@@ -114,9 +114,9 @@ really large (really) sparse matrices!
 
 <h3>See Also</h3>
 
-<p><code><a href="printSpMatrix.html">formatSpMatrix</a></code> which calls <code>formatSparseM()</code> and is
+<p><code><a href="../../Matrix/help/formatSpMatrix.html">formatSpMatrix</a></code> which calls <code>formatSparseM()</code> and is
 the <code><a href="../../base/html/format.html">format</a></code> method for sparse matrices.<br />
-<code><a href="printSpMatrix.html">printSpMatrix</a></code> which is used by the (typically
+<code><a href="../../Matrix/help/printSpMatrix.html">printSpMatrix</a></code> which is used by the (typically
 implicitly called) <code><a href="../../methods/html/show.html">show</a></code> and <code><a href="../../base/html/print.html">print</a></code> methods
 for sparse matrices.
 </p>
@@ -139,5 +139,5 @@ stopifnot(f2 == fm   |   m == 0, dim(f2) == dim(m),
          (f2 == ".") == (m == 0))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

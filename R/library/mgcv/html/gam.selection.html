@@ -29,7 +29,7 @@ Alternatively REML of maximum likelihood (ML) may be used for smoothness
 selection, by viewing the smooth components as random effects (in this case the variance component for each 
 smooth random effect will be given by the scale parameter divided by the smoothing parameter &mdash; for 
 smooths with multiple penalties, there will be multiple variance components). 
-The <code>method</code> argument to <code><a href="gam.html">gam</a></code> selects the smoothness selection criterion.
+The <code>method</code> argument to <code><a href="../../mgcv/help/gam.html">gam</a></code> selects the smoothness selection criterion.
 </p>
 <p>Automatic smoothness selection is unlikely to be successful with few data, particularly with
 multiple terms to be selected. In addition GCV and UBRE/AIC score can occasionally
@@ -41,9 +41,9 @@ most common form of local minimum, but is usually avoidable by avoiding
 extreme smoothing parameters as starting values in optimization, and by
 avoiding big jumps in smoothing parameters while optimizing. Never the less, if you are
 suspicious of smoothing parameter estimates, try changing fit method (see
-<code><a href="gam.html">gam</a></code> arguments <code>method</code> and <code>optimizer</code>) and see if the estimates change, or try changing
-some or all of the smoothing parameters &lsquo;manually&rsquo; (argument <code>sp</code> of <code><a href="gam.html">gam</a></code>,
-or <code>sp</code> arguments to <code><a href="s.html">s</a></code> or <code><a href="te.html">te</a></code>). 
+<code><a href="../../mgcv/help/gam.html">gam</a></code> arguments <code>method</code> and <code>optimizer</code>) and see if the estimates change, or try changing
+some or all of the smoothing parameters &lsquo;manually&rsquo; (argument <code>sp</code> of <code><a href="../../mgcv/help/gam.html">gam</a></code>,
+or <code>sp</code> arguments to <code><a href="../../mgcv/help/s.html">s</a></code> or <code><a href="../../mgcv/help/te.html">te</a></code>). 
 </p>
 <p>REML and ML are less prone to local minima than the other criteria, and may therefore be preferable.
 </p>
@@ -75,7 +75,7 @@ additional penalty for each smooth, which penalizes only functions in the null s
 original penalty (the &lsquo;completely smooth&rsquo; functions). Hence, if all the smoothing parameters 
 for a term tend to infinity, the term will be selected out of the model. This latter approach 
 is more expensive computationally, but has the advantage that it can be applied automatically 
-to any smooth term. The <code>select</code> argument to <code><a href="gam.html">gam</a></code> turns on this method.
+to any smooth term. The <code>select</code> argument to <code><a href="../../mgcv/help/gam.html">gam</a></code> turns on this method.
 </p>
 <p>In fact, as implemented, both approaches operate by eigen-decomposiong the original penalty matrix. 
 A new penalty is created on the null space: it is the matrix with the same eigenvectors as the
@@ -166,7 +166,7 @@ models. Journal of the Royal Statistical Society (B) 73(1):3-36
 
 <h3>See Also</h3>
 
-<p><code><a href="gam.html">gam</a></code>, <code><a href="step.gam.html">step.gam</a></code></p>
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code>, <code><a href="../../mgcv/help/step.gam.html">step.gam</a></code></p>
 
 
 <h3>Examples</h3>
@@ -184,5 +184,5 @@ summary(b)
 plot(b,pages=1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

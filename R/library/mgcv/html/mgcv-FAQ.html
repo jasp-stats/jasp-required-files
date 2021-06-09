@@ -17,8 +17,8 @@
 
 <ol>
 <li> <p><b>How can I compare gamm models?</b> In the identity link normal errors case, then AIC and hypotheis 
-testing based methods are fine. Otherwise it is best to work out a strategy based on the <code><a href="summary.gam.html">summary.gam</a></code> 
-Alternatively, simple random effects can be fitted with <code><a href="gam.html">gam</a></code>, which makes comparison straightforward. 
+testing based methods are fine. Otherwise it is best to work out a strategy based on the <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code> 
+Alternatively, simple random effects can be fitted with <code><a href="../../mgcv/help/gam.html">gam</a></code>, which makes comparison straightforward. 
 Package <code>gamm4</code> is an alternative, which allows AIC type model selection for generalized models.
 </p>
 </li>
@@ -27,7 +27,7 @@ of semi-parametric modelling: the idea is that we estimate the form of the funct
 without assuming that it has a particular simple functional form. Of course for practical computation
 the functions do have underlying mathematical representations, but they are not very helpful, when written 
 down. If you do need the functional forms then see chapter 5 of Wood (2017). However for most purposes it 
-is better to use <code><a href="predict.gam.html">predict.gam</a></code> to evaluate the function for whatever argument values you need. 
+is better to use <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code> to evaluate the function for whatever argument values you need. 
 If derivatives are required then the simplest approach is to use finite differencing (which also allows 
 SEs etc to be calculated).
 </p>
@@ -35,7 +35,7 @@ SEs etc to be calculated).
 <li> <p><b>Some of my smooths are estimated to be straight lines and their confidence intervals vanish at some point in the middle. What is wrong?</b> Nothing. Smooths are subject to sum-to-zero identifiability constraints. If a smooth is estimated to be a straight line then it consequently has one degree of freedom, and there is no choice about where it passes through zero &mdash; so the CI must vanish at that point. 
 </p>
 </li>
-<li> <p><b>How do I test whether a smooth is significantly different from a straight line</b>. See <code><a href="smooth.construct.tp.smooth.spec.html">tprs</a></code> and the example therein.
+<li> <p><b>How do I test whether a smooth is significantly different from a straight line</b>. See <code><a href="../../mgcv/help/tprs.html">tprs</a></code> and the example therein.
 </p>
 </li>
 <li> <p><b>An example from an mgcv helpfile gives an error - is this a bug?</b> It might be, but first please check that the version of mgcv you have loaded into R corresponds to the version from which the helpfile came. Many such problems are caused by trying to run code only supported in a later mgcv version in an earlier version. Another possibility is that you have an object loaded whose name clashes with an mgcv function (for example you are trying to use the mgcv <code>multinom</code> function, but have another object called <code>multinom</code> loaded.)
@@ -45,7 +45,7 @@ SEs etc to be calculated).
 REML estimation of smoothing parameters in versions 1.5, some changes had to be made to the syntax. In particular the 
 function <code>gam.method</code> no longer exists. The smoothness selection method (GCV, REML etc) is now controlled by the
 <code>method</code> argument to <code>gam</code> while the optimizer is selected using the <code>optimizer</code> argument. 
-See <code><a href="gam.html">gam</a></code> for details.
+See <code><a href="../../mgcv/help/gam.html">gam</a></code> for details.
 </p>
 </li>
 <li> <p><b>Why is a model object saved under a previous mgcv version not usable with the current mgcv version?</b> 
@@ -104,5 +104,5 @@ and Hall/CRC Press.
 and Hall/CRC Press.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

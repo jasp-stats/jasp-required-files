@@ -59,7 +59,7 @@ found</p>
 <td>
 <p>which terms to plot (default <code>NULL</code> means all
 terms); a vector passed to
-<code><a href="predict.html">predict</a>(.., type = "terms", terms = *)</code>.</p>
+<code><a href="../../stats/help/predict.html">predict</a>(.., type = "terms", terms = *)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>se</code></td>
 <td>
@@ -145,13 +145,13 @@ obtained from <code>smooth-panel.smooth</code>.</p>
 <h3>Details</h3>
 
 <p>The <code>model</code> object must have a <code>predict</code> method that accepts
-<code>type = "terms"</code>, e.g., <code><a href="glm.html">glm</a></code> in the <span class="pkg">stats</span> package,
-<code><a href="../../survival/html/coxph.html">coxph</a></code> and <code><a href="../../survival/html/survreg.html">survreg</a></code> in
+<code>type = "terms"</code>, e.g., <code><a href="../../stats/help/glm.html">glm</a></code> in the <span class="pkg">stats</span> package,
+<code><a href="../../survival/help/coxph.html">coxph</a></code> and <code><a href="../../survival/help/survreg.html">survreg</a></code> in
 the <a href="https://CRAN.R-project.org/package=survival"><span class="pkg">survival</span></a> package.
 </p>
 <p>For the <code>partial.resid = TRUE</code> option <code>model</code> must have a
-<code><a href="residuals.html">residuals</a></code> method that accepts <code>type = "partial"</code>,
-which <code><a href="lm.html">lm</a></code> and <code><a href="glm.html">glm</a></code> do.
+<code><a href="../../stats/help/residuals.html">residuals</a></code> method that accepts <code>type = "partial"</code>,
+which <code><a href="../../stats/help/lm.html">lm</a></code> and <code><a href="../../stats/help/glm.html">glm</a></code> do.
 </p>
 <p>The <code>data</code> argument should rarely be needed, but in some cases
 <code>termplot</code> may be unable to reconstruct the original data
@@ -181,8 +181,8 @@ containing one instance of each level.  The list has attribute
 
 <h3>See Also</h3>
 
-<p>For (generalized) linear models, <code><a href="plot.lm.html">plot.lm</a></code> and
-<code><a href="predict.glm.html">predict.glm</a></code>.</p>
+<p>For (generalized) linear models, <code><a href="../../stats/help/plot.lm.html">plot.lm</a></code> and
+<code><a href="../../stats/help/predict.glm.html">predict.glm</a></code>.</p>
 
 
 <h3>Examples</h3>
@@ -214,5 +214,5 @@ termplot(hills.lm, transform.x = TRUE,
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -11,7 +11,7 @@
 
 <p>Computes confidence intervals for one or more parameters in a fitted
 model.  There is a default and a method for objects inheriting from class
-<code>"<a href="lm.html">lm</a>"</code>.
+<code>"<a href="../../stats/help/lm.html">lm</a>"</code>.
 </p>
 
 
@@ -49,8 +49,8 @@ names.  If missing, all parameters are considered.</p>
 <h3>Details</h3>
 
 <p><code>confint</code> is a generic function.  The default method assumes
-normality, and needs suitable <code><a href="coef.html">coef</a></code> and
-<code><a href="vcov.html">vcov</a></code> methods to be available.  The default method can be
+normality, and needs suitable <code><a href="../../stats/help/coef.html">coef</a></code> and
+<code><a href="../../stats/help/vcov.html">vcov</a></code> methods to be available.  The default method can be
 called directly for comparison with other methods.
 </p>
 <p>For objects of class <code>"lm"</code> the direct formulae based on <i>t</i>
@@ -74,8 +74,8 @@ limits for each parameter. These will be labelled as (1-level)/2 and
 
 <h3>See Also</h3>
 
-<p><code><a href="../../MASS/html/confint.html">confint.glm</a></code> and
-<code><a href="../../MASS/html/confint.html">confint.nls</a></code> in package <a href="https://CRAN.R-project.org/package=MASS"><span class="pkg">MASS</span></a>.
+<p><code><a href="../../MASS/help/confint.html">confint.glm</a></code> and
+<code><a href="../../MASS/help/confint.html">confint.nls</a></code> in package <a href="https://CRAN.R-project.org/package=MASS"><span class="pkg">MASS</span></a>.
 </p>
 
 
@@ -94,5 +94,5 @@ confint(glm.D93) # needs MASS to be installed
 confint.default(glm.D93)  # based on asymptotic normality
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

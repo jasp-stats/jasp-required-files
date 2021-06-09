@@ -32,14 +32,14 @@ The crossproduct of an index matrix <i>M</i> with itself is a diagonal
 matrix with the number of entries in each column of <i>M</i> on the
 diagonal, i.e., <i>M'M=</i><code>Diagonal(x=table(M@perm))</code>.
 </p>
-<p>Permutation matrices (of class <code><a href="pMatrix-class.html">pMatrix</a></code>) are special
+<p>Permutation matrices (of class <code><a href="../../Matrix/help/pMatrix-class.html">pMatrix</a></code>) are special
 cases of index matrices: They are square, of dimension, say, <i>n * n</i>, and their index vectors contain exactly all of <code>1:n</code>.
 </p>
 <p>While &ldquo;row-indexing&rdquo; (of more than one row <em>or</em> using
 <code>drop=FALSE</code>) stays within the <code>"indMatrix"</code> class, all
 other subsetting/indexing operations (&ldquo;column-indexing&rdquo;,
 including, <code><a href="../../base/html/diag.html">diag</a></code>) on <code>"indMatrix"</code> objects treats
-them as nonzero-pattern matrices (<code>"<a href="nsparseMatrix-classes.html">ngTMatrix</a>"</code>
+them as nonzero-pattern matrices (<code>"<a href="../../Matrix/help/ngTMatrix-class.html">ngTMatrix</a>"</code>
 specifically), such that non-matrix subsetting results in
 <code><a href="../../base/html/logical.html">logical</a></code> vectors.
 Sub-assignment (<code>M[i,j] &lt;- v</code>) is not sensible and hence an error
@@ -77,8 +77,8 @@ corresponding <code>Dim</code> element.</p>
 
 <h3>Extends</h3>
 
-<p>Class <code>"<a href="sparseMatrix-class.html">sparseMatrix</a>"</code> and
-<code>"<a href="generalMatrix-class.html">generalMatrix</a>"</code>, directly.
+<p>Class <code>"<a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a>"</code> and
+<code>"<a href="../../Matrix/help/generalMatrix-class.html">generalMatrix</a>"</code>, directly.
 </p>
 
 
@@ -110,11 +110,11 @@ coercion to a traditional FALSE/TRUE <code><a href="../../base/html/matrix.html"
 <code><a href="../../base/html/mode.html">mode</a></code> <code>logical</code>.</p>
 </dd>
 <dt>coerce</dt><dd><p><code>signature(from = "indMatrix", to = "ngTMatrix")</code>:
-coercion to sparse logical matrix of class <code><a href="nsparseMatrix-classes.html">ngTMatrix</a></code>.</p>
+coercion to sparse logical matrix of class <code><a href="../../Matrix/help/ngTMatrix-class.html">ngTMatrix</a></code>.</p>
 </dd>
 <dt>t</dt><dd><p><code>signature(x = "indMatrix")</code>: return the transpose of
 the index matrix (which is no longer an <code>indMatrix</code>,
-but of class <code><a href="nsparseMatrix-classes.html">ngTMatrix</a></code>.</p>
+but of class <code><a href="../../Matrix/help/ngTMatrix-class.html">ngTMatrix</a></code>.</p>
 </dd>
 <dt>colSums, colMeans, rowSums, rowMeans</dt><dd><p><code>signature(x = "indMatrix")</code>:
 return the column or row sums or means.</p>
@@ -134,9 +134,9 @@ the index matrix of the interaction of the two.</p>
 <h3>Author(s)</h3>
 
 <p>Fabian Scheipl, Uni Muenchen, building on existing
-<code>"<a href="pMatrix-class.html">pMatrix</a>"</code>, after a nice hike's conversation with
+<code>"<a href="../../Matrix/help/pMatrix-class.html">pMatrix</a>"</code>, after a nice hike's conversation with
 Martin Maechler; diverse tweaks by the latter.
-The <code><a href="matrix-products.html">crossprod</a>(x,y)</code> and <code><a href="../../base/html/kronecker.html">kronecker</a>(x,y)</code>
+The <code><a href="../../Matrix/help/crossprod.html">crossprod</a>(x,y)</code> and <code><a href="../../base/html/kronecker.html">kronecker</a>(x,y)</code>
 methods when both arguments are <code>"indMatrix"</code> have been made
 considerably faster thanks to a suggestion by Boris Vaillant.
 </p>
@@ -144,9 +144,9 @@ considerably faster thanks to a suggestion by Boris Vaillant.
 
 <h3>See Also</h3>
 
-<p>The permutation matrices <code><a href="pMatrix-class.html">pMatrix</a></code> are special
+<p>The permutation matrices <code><a href="../../Matrix/help/pMatrix-class.html">pMatrix</a></code> are special
 index matrices.  The &ldquo;pattern&rdquo; matrices,
-<code><a href="nMatrix-class.html">nMatrix</a></code> and its subclasses.
+<code><a href="../../Matrix/help/nMatrix-class.html">nMatrix</a></code> and its subclasses.
 </p>
 
 
@@ -186,11 +186,11 @@ s10[1:4, ]  # preserves "indMatrix"-class
 
 I1 &lt;- as(c(5:1,6:4,7:3), "indMatrix")
 I2 &lt;- as(7:1, "pMatrix")
-(I12 &lt;- suppressWarnings(rBind(I1, I2)))
+(I12 &lt;- rbind(I1, I2))
 stopifnot(is(I12, "indMatrix"),
-          if(getRversion() &gt;= "3.2.0") identical(I12, rbind(I1, I2)) else TRUE,
+          identical(I12, rbind(I1, I2)),
 	  colSums(I12) == c(2L,2:4,4:2))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

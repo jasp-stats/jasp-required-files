@@ -71,7 +71,7 @@ except when there are very many distinct values of <code>group</code> and
 new implementation using hashing that is much faster for large matrices.
 </p>
 <p>To sum over all the rows of a matrix (i.e., a single <code>group</code>) use
-<code><a href="colSums.html">colSums</a></code>, which should be even faster.
+<code><a href="../../base/help/colSums.html">colSums</a></code>, which should be even faster.
 </p>
 <p>For integer arguments, over/underflow in forming the sum results in
 <code>NA</code>.
@@ -87,7 +87,7 @@ unique value of <code>group</code>.
 
 <h3>See Also</h3>
 
-<p><code><a href="tapply.html">tapply</a></code>, <code><a href="../../stats/html/aggregate.html">aggregate</a></code>, <code><a href="colSums.html">rowSums</a></code>
+<p><code><a href="../../base/help/tapply.html">tapply</a></code>, <code><a href="../../stats/html/aggregate.html">aggregate</a></code>, <code><a href="../../base/help/rowSums.html">rowSums</a></code>
 </p>
 
 
@@ -105,5 +105,5 @@ t(sapply(split(as.data.frame(x), group), colSums))
 aggregate(x, list(group), sum)[-1]
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

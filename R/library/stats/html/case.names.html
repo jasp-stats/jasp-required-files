@@ -54,7 +54,7 @@ variable.names(object, full = FALSE, ...)
 
 <h3>See Also</h3>
 
-<p><code><a href="lm.html">lm</a></code>; further, <code><a href="../../base/html/allnames.html">all.names</a></code>,
+<p><code><a href="../../stats/help/lm.html">lm</a></code>; further, <code><a href="../../base/html/allnames.html">all.names</a></code>,
 <code><a href="../../base/html/allnames.html">all.vars</a></code> for functions with a similar name but only slightly
 related purpose.
 </p>
@@ -68,12 +68,12 @@ y &lt;-  setNames(x + (x/4 - 2)^3 + rnorm(20, sd = 3),
                paste("O", x, sep = "."))
 ww &lt;- rep(1, 20); ww[13] &lt;- 0
 summary(lmxy &lt;- lm(y ~ x + I(x^2)+I(x^3) + I((x-10)^2), weights = ww),
-        cor = TRUE)
+        correlation = TRUE)
 variable.names(lmxy)
 variable.names(lmxy, full = TRUE)  # includes the last
 case.names(lmxy)
 case.names(lmxy, full = TRUE)      # includes the 0-weight case
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

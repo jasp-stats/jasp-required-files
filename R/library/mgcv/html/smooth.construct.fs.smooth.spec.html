@@ -9,11 +9,11 @@
 
 <h3>Description</h3>
 
-<p>Simple factor smooth interactions, which are efficient when used with <code><a href="gamm.html">gamm</a></code>.
+<p>Simple factor smooth interactions, which are efficient when used with <code><a href="../../mgcv/help/gamm.html">gamm</a></code>.
 This smooth class allows a separate smooth for each level of a factor, with the same smoothing parameter for all 
 smooths. It is an alternative to using factor <code>by</code> variables.
 </p>
-<p>See the discussion of <code>by</code> variables in <code><a href="gam.models.html">gam.models</a></code> for more general alternatives 
+<p>See the discussion of <code>by</code> variables in <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> for more general alternatives 
 for factor smooth interactions (including interactions of tensor product smooths with factors).
 </p>
 
@@ -52,16 +52,16 @@ with names corresponding to <code>object$term</code>.</p>
 
 <h3>Details</h3>
 
-<p>This class produces a smooth for each level of a single factor variable. Within a <code><a href="gam.html">gam</a></code> 
+<p>This class produces a smooth for each level of a single factor variable. Within a <code><a href="../../mgcv/help/gam.html">gam</a></code> 
 formula this is done with something like <code>s(x,fac,bs="fs")</code>, which is almost equivalent to <code>s(x,by=fac,id=1)</code> 
 (with the <code>gam</code> argument <code>select=TRUE</code>). The terms are fully penalized, with separate penalties on each null 
 space component: for this reason they are not centred (no sum-to-zero constraint).
 </p>
-<p>The class is particularly useful for use with <code><a href="gamm.html">gamm</a></code>, where estimation efficiently exploits 
+<p>The class is particularly useful for use with <code><a href="../../mgcv/help/gamm.html">gamm</a></code>, where estimation efficiently exploits 
 the nesting of the smooth within the factor. Note however that: i) <code>gamm</code> only allows one conditioning 
 factor for smooths, so <code>s(x)+s(z,fac,bs="fs")+s(v,fac,bs="fs")</code> is OK, but <code>s(x)+s(z,fac1,bs="fs")+s(v,fac2,bs="fs")</code>
 is not; ii) all aditional random effects and correlation structures will be treated as nested within the factor
-of the smooth factor interaction. To facilitate this the constructor is called from <code><a href="gamm.html">gamm</a></code> with an attribute
+of the smooth factor interaction. To facilitate this the constructor is called from <code><a href="../../mgcv/help/gamm.html">gamm</a></code> with an attribute
 <code>"gamm"</code> attached to the smooth specification object. The result differs from that resulting from the case where this is
 not done. 
 </p>
@@ -74,7 +74,7 @@ be supplied in the <code>xt</code> argument of <code>s</code> (e.g. <code>s(x,fa
 <code>s(x,fac,bs="fs",xt=list(bs="cr")</code>). The <code>k</code> argument to <code>s(...,bs="fs")</code> refers to the basis dimension to 
 use for each level of the factor variable.
 </p>
-<p>Note one computational bottleneck: currently <code><a href="gamm.html">gamm</a></code> (or <code>gamm4</code>) will produce the full posterior covariance matrix for the 
+<p>Note one computational bottleneck: currently <code><a href="../../mgcv/help/gamm.html">gamm</a></code> (or <code>gamm4</code>) will produce the full posterior covariance matrix for the 
 smooths, including the smooths at each level of the factor. This matrix can get large and computationally costly if there 
 are more than a few hundred levels of the factor. Even at one or two hundred levels, care should be taken to keep 
 down <code>k</code>. 
@@ -96,7 +96,7 @@ down <code>k</code>.
 
 <h3>See Also</h3>
 
-<p><code><a href="gam.models.html">gam.models</a></code>, <code><a href="gamm.html">gamm</a></code></p>
+<p><code><a href="../../mgcv/help/gam.models.html">gam.models</a></code>, <code><a href="../../mgcv/help/gamm.html">gamm</a></code></p>
 
 
 <h3>Examples</h3>
@@ -133,5 +133,5 @@ summary(bm$gam)
 ## ... is exactly equivalent. 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

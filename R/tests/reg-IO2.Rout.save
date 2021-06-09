@@ -1,5 +1,5 @@
 
-R version 4.0.3 Patched (2021-01-08 r79820) -- "Bunny-Wunnies Freak Out"
+R Under development (unstable) (2021-04-16 r80178) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -147,7 +147,7 @@ Error in read.table("foo6", header = TRUE, fill = TRUE) :
 > unlink("foo7")
 > 
 > # should be logical
-> type.convert(character(0))
+> type.convert(character(0), as.is=FALSE)
 logical(0)
 > 
 > # test of comments in data files

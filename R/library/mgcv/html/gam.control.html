@@ -14,7 +14,7 @@ control of the numerical options for fitting a GAM.
 Typically users will want to modify the defaults if model fitting fails to
 converge, or if the warnings are generated which suggest a 
 loss of numerical stability during fitting.  To change the default
-choise of fitting method, see <code><a href="gam.html">gam</a></code> arguments <code>method</code> and <code>optimizer</code>.
+choise of fitting method, see <code><a href="../../mgcv/help/gam.html">gam</a></code> arguments <code>method</code> and <code>optimizer</code>.
 </p>
 
 
@@ -56,7 +56,7 @@ In such circumstances it is possible to apply a ridge regression penalty to the 
 <tr valign="top"><td><code>epsilon</code></td>
 <td>
 <p>This is used for judging conversion of the GLM IRLS loop in
-<code><a href="gam.fit.html">gam.fit</a></code> or <code><a href="gam.fit3.html">gam.fit3</a></code>.</p>
+<code><a href="../../mgcv/help/gam.fit.html">gam.fit</a></code> or <code><a href="../../mgcv/help/gam.fit3.html">gam.fit3</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>maxit</code></td>
 <td>
@@ -104,14 +104,14 @@ initialize outer iteration.</p>
 <tr valign="top"><td><code>idLinksBases</code></td>
 <td>
 <p>If smooth terms have their smoothing parameters linked via 
-the <code>id</code> mechanism (see <code><a href="s.html">s</a></code>), should they also have the same 
+the <code>id</code> mechanism (see <code><a href="../../mgcv/help/s.html">s</a></code>), should they also have the same 
 bases. Set this to <code>FALSE</code> only if you are sure you know what you are doing 
 (you should almost surely set <code>scalePenalty</code> to <code>FALSE</code> as well in this 
 case).</p>
 </td></tr>
 <tr valign="top"><td><code>scalePenalty</code></td>
 <td>
-<p><code><a href="gamm.html">gamm</a></code> is somewhat sensitive to the absolute scaling 
+<p><code><a href="../../mgcv/help/gamm.html">gamm</a></code> is somewhat sensitive to the absolute scaling 
 of the penalty matrices of a smooth relative to its model matrix. This option rescales 
 the penalty matrices to accomodate this problem. Probably should be set to <code>FALSE</code> 
 if you are linking smoothing parameters but have set <code>idLinkBases</code> to <code>FALSE</code>.</p>
@@ -135,7 +135,7 @@ do so. </p>
 <tr valign="top"><td><code>scale.est</code></td>
 <td>
 <p>How to estimate the scale parameter for exponential family models estimated
-by outer iteration. See <code><a href="gam.scale.html">gam.scale</a></code>.</p>
+by outer iteration. See <code><a href="../../mgcv/help/gam.scale.html">gam.scale</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>edge.correct</code></td>
 <td>
@@ -198,7 +198,7 @@ generalized additive models. J. Amer. Statist. Ass.99:673-686.
 
 <h3>See Also</h3>
 
-<p><code><a href="gam.html">gam</a></code>, <code><a href="gam.fit.html">gam.fit</a></code>, <code><a href="../../stats/html/glm.control.html">glm.control</a></code> </p>
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code>, <code><a href="../../mgcv/help/gam.fit.html">gam.fit</a></code>, <code><a href="../../stats/html/glm.control.html">glm.control</a></code> </p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

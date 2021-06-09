@@ -146,8 +146,8 @@ more advanced customisations.
 
 <h3>See Also</h3>
 
-<p><code><a href="grid.grob.html">grob</a></code>
-<code><a href="viewport.html">viewport</a></code>
+<p><code><a href="../../grid/help/grob.html">grob</a></code>
+<code><a href="../../grid/help/viewport.html">viewport</a></code>
 </p>
 
 
@@ -162,25 +162,25 @@ sampleGTree &lt;- gTree(name="parent",
                                        children=vpList(viewport(name="vp2"))))
 grid.ls(sampleGTree)
 # Show viewports too
-grid.ls(sampleGTree, view=TRUE)
+grid.ls(sampleGTree, viewports=TRUE)
 # Only show viewports
-grid.ls(sampleGTree, view=TRUE, grob=FALSE)
+grid.ls(sampleGTree, viewports=TRUE, grobs=FALSE)
 # Alternate displays
 # nested listing, custom indent
-grid.ls(sampleGTree, view=TRUE, print=nestedListing, gindent="--")
+grid.ls(sampleGTree, viewports=TRUE, print=nestedListing, gindent="--")
 # path listing
-grid.ls(sampleGTree, view=TRUE, print=pathListing)
+grid.ls(sampleGTree, viewports=TRUE, print=pathListing)
 # path listing, without grobs aligned
-grid.ls(sampleGTree, view=TRUE, print=pathListing, gAlign=FALSE)
+grid.ls(sampleGTree, viewports=TRUE, print=pathListing, gAlign=FALSE)
 # grob path listing
-grid.ls(sampleGTree, view=TRUE, print=grobPathListing)
+grid.ls(sampleGTree, viewports=TRUE, print=grobPathListing)
 # path listing, grobs only
 grid.ls(sampleGTree, print=pathListing)
 # path listing, viewports only
-grid.ls(sampleGTree, view=TRUE, grob=FALSE, print=pathListing)
+grid.ls(sampleGTree, viewports=TRUE, grobs=FALSE, print=pathListing)
 # raw flat listing
-str(grid.ls(sampleGTree, view=TRUE, print=FALSE))
+str(grid.ls(sampleGTree, viewports=TRUE, print=FALSE))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grid</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grid</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

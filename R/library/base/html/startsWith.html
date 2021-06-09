@@ -28,12 +28,12 @@ startsWith(x, prefix)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>vector of <code><a href="character.html">character</a></code> string whose &ldquo;starts&rdquo;
+<p>vector of <code><a href="../../base/help/character.html">character</a></code> string whose &ldquo;starts&rdquo;
 are considered.</p>
 </td></tr>
 <tr valign="top"><td><code>prefix, suffix</code></td>
 <td>
-<p><code><a href="character.html">character</a></code> vector (often of length one).</p>
+<p><code><a href="../../base/help/character.html">character</a></code> vector (often of length one).</p>
 </td></tr>
 </table>
 
@@ -58,7 +58,7 @@ optimized in a UTF-8 or 8-byte locale if that is an ASCII string.
 
 <h3>Value</h3>
 
-<p>A <code><a href="logical.html">logical</a></code> vector, of &ldquo;common length&rdquo; of <code>x</code>
+<p>A <code><a href="../../base/help/logical.html">logical</a></code> vector, of &ldquo;common length&rdquo; of <code>x</code>
 and <code>prefix</code> (or <code>suffix</code>), i.e., of the longer of the two
 lengths unless one of them is zero when the result is
 also of zero length.  A shorter input is recycled to the output length.
@@ -67,8 +67,8 @@ also of zero length.  A shorter input is recycled to the output length.
 
 <h3>See Also</h3>
 
-<p><code><a href="grep.html">grepl</a></code>, <code><a href="substr.html">substring</a></code>; the partial string
-matching functions <code><a href="charmatch.html">charmatch</a></code> and <code><a href="pmatch.html">pmatch</a></code>
+<p><code><a href="../../base/help/grepl.html">grepl</a></code>, <code><a href="../../base/help/substring.html">substring</a></code>; the partial string
+matching functions <code><a href="../../base/help/charmatch.html">charmatch</a></code> and <code><a href="../../base/help/pmatch.html">pmatch</a></code>
 solve a different task.
 </p>
 
@@ -96,5 +96,5 @@ cbind(startsWith(x, "a"),
       grepl("^a", x))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -14,7 +14,7 @@ formal classes.  Most of them are rarely suitable to be called
 directly.
 </p>
 <p>Others are somewhat experimental and/or partially implemented only. Do
-refer to <code><a href="setClass.html">setClass</a></code> for normal code development.
+refer to <code><a href="../../methods/help/setClass.html">setClass</a></code> for normal code development.
 </p>
 
 
@@ -241,7 +241,7 @@ classes.
 <p>If <code>complete</code> is <code>TRUE</code>, include the indirect
 information about extensions.
 </p>
-<p>It is the utility called from <code><a href="show.html">show</a>(<a href="getClass.html">getClass</a>(.))</code>,
+<p>It is the utility called from <code><a href="../../methods/help/show.html">show</a>(<a href="../../methods/help/getClass.html">getClass</a>(.))</code>,
 and the user should typically use <code>getClass(.)</code> for looking
 at class definitions.
 </p>
@@ -249,7 +249,7 @@ at class definitions.
 <dt><code>showExtends</code>:</dt><dd>
 <p>Print the elements of the list of extensions; for <code>printTo = FALSE</code>,
 returns a list with components <code>what</code> and <code>how</code>; this is
-used e.g., by <code><a href="promptClass.html">promptClass</a>()</code>.
+used e.g., by <code><a href="../../methods/help/promptClass.html">promptClass</a>()</code>.
 </p>
 </dd>
 <dt><code>possibleExtends</code>:</dt><dd>
@@ -257,7 +257,7 @@ used e.g., by <code><a href="promptClass.html">promptClass</a>()</code>.
 directly or indirectly.
 </p>
 <p>This can be either a logical value or an object of class
-<code><a href="SClassExtension-class.html">SClassExtension</a></code> containing various
+<code><a href="../../methods/help/SClassExtension-class.html">SClassExtension</a></code> containing various
 functions to test and/or coerce the relationship.
 </p>
 </dd>
@@ -270,8 +270,8 @@ and, if appropriate, the package from which the class came.
 <p>Returns the environment, typically a namespace, in which the
 <code>Class</code> has been defined.  <code>Class</code> should typically be
 the result of <code><a href="../../base/html/class.html">class</a>()</code> (and hence contain a
-<code>"package"</code> attribute) or <code><a href="getClass.html">getClass</a></code> (or
-<code><a href="getClass.html">getClassDef</a></code>).
+<code>"package"</code> attribute) or <code><a href="../../methods/help/getClass.html">getClass</a></code> (or
+<code><a href="../../methods/help/getClassDef.html">getClassDef</a></code>).
 </p>
 </dd>
 <dt><code>completeExtends</code>:</dt><dd>
@@ -298,7 +298,7 @@ class information.
 <dt><code>metaNameUndo</code></dt><dd>
 <p>As its name implies, this function undoes the
 name-mangling used to produce meta-data object names, and
-returns a object of class <code><a href="ObjectsWithPackage-class.html">ObjectsWithPackage</a></code>.
+returns a object of class <code><a href="../../methods/help/ObjectsWithPackage-class.html">ObjectsWithPackage</a></code>.
 </p>
 </dd>
 <dt><code>requireMethods</code>:</dt><dd>
@@ -381,5 +381,5 @@ stopifnot(TRUE
 if(get4) detach("package:stats4")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

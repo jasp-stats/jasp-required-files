@@ -40,7 +40,7 @@ of the name.</p>
 </td></tr>
 <tr valign="top"><td><code>check</code></td>
 <td>
-<p><code><a href="logical.html">logical</a></code> indicating if <code>tmpdir()</code>
+<p><code><a href="../../base/help/logical.html">logical</a></code> indicating if <code>tmpdir()</code>
 should be checked and recreated if no longer valid.</p>
 </td></tr>
 </table>
@@ -87,7 +87,7 @@ is created before the interpreter is started.
 </p>
 <p>On a Unix-alike, the value will be an absolute path (unless
 <code>tmpdir</code> is set to a relative path), but it need not be canonical
-(see <code><a href="normalizePath.html">normalizePath</a></code>) and on macOS it often is not.  
+(see <code><a href="../../base/help/normalizePath.html">normalizePath</a></code>) and on macOS it often is not.  
 </p>
 
 
@@ -111,8 +111,8 @@ Windows) a version derived from the source code of GNU <code>glibc</code>.
 <p>It will be of the form &lsquo;<span class="file">RtmpXXXXXX</span>&rsquo; where the last 6 characters
 are replaced in a platform-specific way.  POSIX only requires that the
 replacements be ASCII, which allows <code>.</code> (so the value may appear
-to have a file extension) and <a href="regex.html">regexp</a> metacharacters such as
-<code>+</code>.  Most commonly the replacements are from the <a href="regex.html">regexp</a>
+to have a file extension) and <a href="../../base/help/regexp.html">regexp</a> metacharacters such as
+<code>+</code>.  Most commonly the replacements are from the <a href="../../base/help/regexp.html">regexp</a>
 pattern <code>[A-Za-z0-9]</code>, but <code>.</code> <em>has</em> been seen.
 </p>
 
@@ -127,7 +127,7 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="unlink.html">unlink</a></code> for deleting files.</p>
+<p><code><a href="../../base/help/unlink.html">unlink</a></code> for deleting files.</p>
 
 
 <h3>Examples</h3>
@@ -151,5 +151,5 @@ if(exists("I'm brave") &amp;&amp; `I'm brave` &amp;&amp;
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

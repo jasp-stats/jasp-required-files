@@ -374,7 +374,7 @@ processes are newly created <span style="font-family: Courier New, Courier; colo
 to arrange to set up the environment it needs: often a good way to do
 that is to make use of lexical scoping since when <code>statistic</code> is
 sent to the worker processes its enclosing environment is also sent.
-(E.g. see the example for <code><a href="jack.after.boot.html">jack.after.boot</a></code> where
+(E.g. see the example for <code><a href="../../boot/help/jack.after.boot.html">jack.after.boot</a></code> where
 ancillary functions are nested inside the <code>statistic</code> function.)
 <code>parallel = "snow"</code> is primarily intended to be used on
 multi-core Windows machine where <code>parallel = "multicore"</code> is not
@@ -385,8 +385,8 @@ master process, but not if <code>simple = TRUE</code> nor <code>sim =
   "parametric"</code>.  In those cases (or where <code>statistic</code> itself uses
 random numbers), more care is needed if the results need to be
 reproducible.  Resampling is done in the worker processes by
-<code><a href="censboot.html">censboot</a>(sim = "wierd")</code> and by most of the schemes in
-<code><a href="tsboot.html">tsboot</a></code> (the exceptions being <code>sim == "fixed"</code> and
+<code><a href="../../boot/help/censboot.html">censboot</a>(sim = "wierd")</code> and by most of the schemes in
+<code><a href="../../boot/help/tsboot.html">tsboot</a></code> (the exceptions being <code>sim == "fixed"</code> and
 <code>sim == "geom"</code> with the default <code>ran.gen</code>).
 </p>
 <p>Where random-number generation is done in the worker processes, the
@@ -446,10 +446,10 @@ John Wiley &amp; Sons.
 
 <h3>See Also</h3>
 
-<p><code><a href="boot.array.html">boot.array</a></code>, <code><a href="boot.ci.html">boot.ci</a></code>,
-<code><a href="censboot.html">censboot</a></code>, <code><a href="empinf.html">empinf</a></code>,
-<code><a href="jack.after.boot.html">jack.after.boot</a></code>, <code><a href="tilt.boot.html">tilt.boot</a></code>,
-<code><a href="tsboot.html">tsboot</a></code>.
+<p><code><a href="../../boot/help/boot.array.html">boot.array</a></code>, <code><a href="../../boot/help/boot.ci.html">boot.ci</a></code>,
+<code><a href="../../boot/help/censboot.html">censboot</a></code>, <code><a href="../../boot/help/empinf.html">empinf</a></code>,
+<code><a href="../../boot/help/jack.after.boot.html">jack.after.boot</a></code>, <code><a href="../../boot/help/tilt.boot.html">tilt.boot</a></code>,
+<code><a href="../../boot/help/tsboot.html">tsboot</a></code>.
 </p>
 
 
@@ -544,5 +544,5 @@ sum(abs(air.boot$t[,2]-1) &gt; abs(air.boot$t0[2]-1))/(1+air.boot$R)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>boot</em> version 1.3-27 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>boot</em> version 1.3-28 <a href="00Index.html">Index</a>]</div>
 </body></html>

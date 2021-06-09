@@ -43,12 +43,12 @@ which a method has been defined.</p>
 </td></tr>
 <tr valign="top"><td><code>make.names</code></td>
 <td>
-<p><code><a href="logical.html">logical</a></code>, i.e., one of <code>FALSE, NA, TRUE</code>,
+<p><code><a href="../../base/help/logical.html">logical</a></code>, i.e., one of <code>FALSE, NA, TRUE</code>,
 indicating what should happen if the specified row names, i.e.,
 <code>value</code>, are invalid, e.g., duplicated or <code>NA</code>.  The default
 (is back compatible), <code>FALSE</code>, will signal an error, where
 <code>NA</code> will &ldquo;automatic&rdquo; row names and <code>TRUE</code> will call
-<code><a href="make.names.html">make.names</a>(value, unique=TRUE)</code> for constructing valid
+<code><a href="../../base/help/make.names.html">make.names</a>(value, unique=TRUE)</code> for constructing valid
 names.</p>
 </td></tr>
 <tr valign="top"><td><code>value</code></td>
@@ -89,15 +89,15 @@ you need to retrieve an integer-valued set of row names.)
 
 <h3>Note</h3>
 
-<p><code>row.names</code> is similar to <code><a href="colnames.html">rownames</a></code> for arrays, and
+<p><code>row.names</code> is similar to <code><a href="../../base/help/rownames.html">rownames</a></code> for arrays, and
 it has a method that calls <code>rownames</code> for an array argument.
 </p>
 <p>Row names of the form <code>1:n</code> for <code>n &gt; 2</code> are stored
 internally in a compact form, which might be seen from C code or by
 deparsing but never via <code>row.names</code> or
-<code><a href="attr.html">attr</a>(x, "row.names")</code>.  Additionally, some names of this
+<code><a href="../../base/help/attr.html">attr</a>(x, "row.names")</code>.  Additionally, some names of this
 sort are marked as &lsquo;automatic&rsquo; and handled differently by
-<code><a href="matrix.html">as.matrix</a></code> and <code><a href="data.matrix.html">data.matrix</a></code> (and potentially
+<code><a href="../../base/help/as.matrix.html">as.matrix</a></code> and <code><a href="../../base/help/data.matrix.html">data.matrix</a></code> (and potentially
 other functions).  (All zero-row data frames are regarded as having
 automatic row names.)
 </p>
@@ -114,7 +114,7 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="data.frame.html">data.frame</a></code>, <code><a href="colnames.html">rownames</a></code>, <code><a href="names.html">names</a></code>.
+<p><code><a href="../../base/help/data.frame.html">data.frame</a></code>, <code><a href="../../base/help/rownames.html">rownames</a></code>, <code><a href="../../base/help/names.html">names</a></code>.
 </p>
 <p><code>.row_names_info</code> for the internal representations.
 </p>
@@ -126,14 +126,15 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 ## To illustrate the note:
 df &lt;- data.frame(x = c(TRUE, FALSE, NA, NA), y = c(12, 34, 56, 78))
 row.names(df) &lt;- 1 : 4
-attr(df, "row.names")
-deparse(df)
-## (Compact storage, not regarded as automatic.)
+attr(df, "row.names") #&gt; 1:4
+deparse(df) # or dput(df)
+##--&gt; c(NA, 4L) : Compact storage, *not* regarded as automatic.
+
 row.names(df) &lt;- NULL
-attr(df, "row.names")
-deparse(df)
-## (Compact storage, regarded as automatic.)
+attr(df, "row.names") #&gt; 1:4
+deparse(df) # or dput(df) -- shows
+##--&gt; c(NA, -4L) : Compact storage, regarded as automatic.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

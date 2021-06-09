@@ -143,7 +143,7 @@ The default depends on on the number of (bib) entries and
 <tr valign="top"><td><code>sort</code></td>
 <td>
 <p>logical indicating if bibentries should be sorted, using
-<code><a href="../../tools/html/bibstyle.html">bibstyle</a>(.bibstyle)$sortKeys(x)</code>.</p>
+<code><a href="../../tools/help/bibstyle.html">bibstyle</a>(.bibstyle)$sortKeys(x)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>macros</code></td>
 <td>
@@ -184,7 +184,7 @@ of the <code>.bibstyle</code> argument using the <code><a href="../../tools/html
 function.  In addition, one can use the <code>macros</code> argument to
 provide additional (otherwise unknown, presumably LaTeX-style) Rd
 macros, either by giving the path to a file with Rd macros to be
-loaded via <code><a href="../../tools/html/loadRdMacros.html">loadRdMacros</a></code>, or an object with macros
+loaded via <code><a href="../../tools/help/loadRdMacros.html">loadRdMacros</a></code>, or an object with macros
 already loaded.
 </p>
 <p>When printing bibentry objects in citation style, a
@@ -209,7 +209,7 @@ together with bibtex, automatically.
 <p>It is possible to subscript bibentry objects by their keys (which are
 used for character subscripts if the names are <code>NULL</code>).
 </p>
-<p>There is also a <code><a href="toLatex.html">toBibtex</a></code> method for direct conversion to
+<p>There is also a <code><a href="../../utils/help/toBibtex.html">toBibtex</a></code> method for direct conversion to
 BibTeX.
 </p>
 
@@ -270,8 +270,8 @@ BibTeX fields, including
 institution.</p>
 </dd>
 <dt>author:</dt><dd><p>The name(s) of the author(s), either as a
-<code><a href="person.html">person</a></code> object, or as a character string which
-<code><a href="person.html">as.person</a></code> correctly coerces to such.</p>
+<code><a href="../../utils/help/person.html">person</a></code> object, or as a character string which
+<code><a href="../../utils/help/as.person.html">as.person</a></code> correctly coerces to such.</p>
 </dd>
 <dt>booktitle:</dt><dd><p>Title of a book, part of which is being cited.</p>
 </dd>
@@ -317,7 +317,7 @@ field with the unexpanded DOI instead.)</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="person.html">person</a></code>
+<p><code><a href="../../utils/help/person.html">person</a></code>
 </p>
 
 
@@ -393,5 +393,5 @@ writeLines(paste(format(bref, "R"), collapse = "\n\n"))
 writeLines(format(bref, "R", collapse = TRUE))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

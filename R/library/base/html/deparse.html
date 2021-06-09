@@ -45,7 +45,7 @@ enclosed in backticks if they do not follow the standard syntax.</p>
 <tr valign="top"><td><code>control</code></td>
 <td>
 <p>character vector (or <code>NULL</code>) of deparsing options.
-See <code><a href="deparseOpts.html">.deparseOpts</a></code>.</p>
+See <code><a href="../../base/help/.deparseOpts.html">.deparseOpts</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>nlines</code></td>
 <td>
@@ -54,7 +54,7 @@ Negative values indicate no limit.</p>
 </td></tr>
 <tr valign="top"><td><code>collapse</code></td>
 <td>
-<p>a string, passed to <code><a href="paste.html">paste</a>()</code>.</p>
+<p>a string, passed to <code><a href="../../base/help/paste.html">paste</a>()</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -67,9 +67,9 @@ Negative values indicate no limit.</p>
 
 <p>These functions turn unevaluated expressions (where &lsquo;expression&rsquo;
 is taken in a wider sense than the strict concept of a vector of
-<code><a href="mode.html">mode</a></code> and type (<code><a href="typeof.html">typeof</a></code>)
-<code>"expression"</code> used in <code><a href="expression.html">expression</a></code>) into character
-strings (a kind of inverse to <code><a href="parse.html">parse</a></code>).
+<code><a href="../../base/help/mode.html">mode</a></code> and type (<code><a href="../../base/help/typeof.html">typeof</a></code>)
+<code>"expression"</code> used in <code><a href="../../base/help/expression.html">expression</a></code>) into character
+strings (a kind of inverse to <code><a href="../../base/help/parse.html">parse</a></code>).
 </p>
 <p>A typical use of this is to create informative labels for data sets
 and plots.  The example shows a simple use of this facility.  It uses
@@ -91,7 +91,7 @@ asked to do the impossible.
 <p>Unless <code>control</code> contains <code>"digits17"</code> or <code>"hexDigits"</code>,
 (or <code>"all"</code> or <code>"exact"</code> which include one of these), numeric
 and complex vectors are converted using 15 significant digits:
-see <code><a href="character.html">as.character</a></code> for more details.
+see <code><a href="../../base/help/as.character.html">as.character</a></code> for more details.
 </p>
 <p><code>width.cutoff</code> is a lower bound for the line lengths: deparsing a
 line proceeds until at least <code>width.cutoff</code> <em>bytes</em> have
@@ -99,9 +99,9 @@ been output and e.g. <code>arg = value</code> expressions will not be split
 across lines.
 </p>
 <p><code>deparse1()</code> is a simple utility added in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0 to ensure a
-string result (<code><a href="character.html">character</a></code> vector of length one),
+string result (<code><a href="../../base/help/character.html">character</a></code> vector of length one),
 typically used in name construction, as
-<code>deparse1(<a href="substitute.html">substitute</a>(.))</code>.
+<code>deparse1(<a href="../../base/help/substitute.html">substitute</a>(.))</code>.
 </p>
 
 
@@ -128,13 +128,13 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="deparseOpts.html">.deparseOpts</a></code> for available <code>control</code> settings;
-<code><a href="dput.html">dput</a>()</code> and <code><a href="dump.html">dump</a>()</code> for related functions using
+<p><code><a href="../../base/help/.deparseOpts.html">.deparseOpts</a></code> for available <code>control</code> settings;
+<code><a href="../../base/help/dput.html">dput</a>()</code> and <code><a href="../../base/help/dump.html">dump</a>()</code> for related functions using
 identical internal deparsing functionality.
 </p>
-<p><code><a href="substitute.html">substitute</a></code>,
-<code><a href="parse.html">parse</a></code>,
-<code><a href="expression.html">expression</a></code>.
+<p><code><a href="../../base/help/substitute.html">substitute</a></code>,
+<code><a href="../../base/help/parse.html">parse</a></code>,
+<code><a href="../../base/help/expression.html">expression</a></code>.
 </p>
 <p><code>Quotes</code> for quoting conventions, including backticks.
 </p>
@@ -146,7 +146,7 @@ identical internal deparsing functionality.
 require(stats); require(graphics)
 
 deparse(args(lm))
-deparse(args(lm), width = 500)
+deparse(args(lm), width.cutoff = 500)
 
 myplot &lt;- function(x, y) {
     plot(x, y, xlab = deparse1(substitute(x)),
@@ -161,5 +161,5 @@ deparse(e)
 deparse(e, control = "all") # wraps it w/ quote( . )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -9,10 +9,10 @@
 
 <h3>Description</h3>
 
-<p>Scale parameter estimation in <code><a href="gam.html">gam</a></code> depends on the type of <code>family</code>. For 
+<p>Scale parameter estimation in <code><a href="../../mgcv/help/gam.html">gam</a></code> depends on the type of <code>family</code>. For 
 extended families then the RE/ML estimate is used. For conventional exponential families, estimated by the default 
 outer iteration, the scale estimator can be controlled using argument <code>scale.est</code> in 
-<code><a href="gam.control.html">gam.control</a></code>. The options are <code>"fletcher"</code> (default), <code>"pearson"</code> or <code>"deviance"</code>. 
+<code><a href="../../mgcv/help/gam.control.html">gam.control</a></code>. The options are <code>"fletcher"</code> (default), <code>"pearson"</code> or <code>"deviance"</code>. 
 The Pearson estimator is the (weighted) sum of squares of the pearson residuals, divided by the 
 effective residual degrees of freedom. The Fletcher (2012) estimator is an improved version of the Pearson estimator.
 The deviance estimator simply substitutes deviance residuals for Pearson residuals. 
@@ -21,7 +21,7 @@ The deviance estimator simply substitutes deviance residuals for Pearson residua
 </p>
 <p>For performance iteration the Pearson estimator is always used.
 </p>
-<p><code><a href="gamm.html">gamm</a></code> uses the estimate of the scale parameter from the underlying call to <code>lme</code>. <code><a href="bam.html">bam</a></code> uses the REML estimator if the method is <code>"fREML"</code>. Otherwise the estimator is a Pearson estimator.
+<p><code><a href="../../mgcv/help/gamm.html">gamm</a></code> uses the estimate of the scale parameter from the underlying call to <code>lme</code>. <code><a href="../../mgcv/help/bam.html">bam</a></code> uses the REML estimator if the method is <code>"fREML"</code>. Otherwise the estimator is a Pearson estimator.
 </p>
 
 
@@ -38,7 +38,7 @@ The deviance estimator simply substitutes deviance residuals for Pearson residua
 
 <h3>See Also</h3>
 
-  <p><code><a href="gam.control.html">gam.control</a> </code> </p>
+  <p><code><a href="../../mgcv/help/gam.control.html">gam.control</a> </code> </p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

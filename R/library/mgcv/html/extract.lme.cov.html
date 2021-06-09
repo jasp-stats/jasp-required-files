@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p> This is a service routine for <code><a href="gamm.html">gamm</a></code>. Extracts 
+<p> This is a service routine for <code><a href="../../mgcv/help/gamm.html">gamm</a></code>. Extracts 
 the estimated covariance matrix of the data from an <code>lme</code> object, allowing the 
 user control about which levels of random effects to include in this 
 calculation. <code>extract.lme.cov</code> forms the full matrix explicitly:
@@ -30,7 +30,7 @@ extract.lme.cov2(b,data=NULL,start.level=1)
 <table summary="R argblock">
 <tr valign="top"><td><code>b</code></td>
 <td>
-<p> A fitted model object returned by a call to <code><a href="../../nlme/html/lme.html">lme</a></code></p>
+<p> A fitted model object returned by a call to <code><a href="../../nlme/help/lme.html">lme</a></code></p>
 </td></tr></table>
 <p>.
 </p>
@@ -38,7 +38,7 @@ extract.lme.cov2(b,data=NULL,start.level=1)
 <tr valign="top"><td><code>data</code></td>
 <td>
 <p> The data frame/ model frame that was supplied to
-<code><a href="../../nlme/html/lme.html">lme</a></code>, but with any rows removed by the na action dropped. Uses
+<code><a href="../../nlme/help/lme.html">lme</a></code>, but with any rows removed by the na action dropped. Uses
 the data stored in the model object if not supplied.</p>
 </td></tr>
 <tr valign="top"><td><code>start.level</code></td>
@@ -68,7 +68,7 @@ returned along with an index indicating which row of the original data each
 row/column of the block diagonal matrix relates to. The block sizes are defined by
 the coarsest level of grouping in the random effect structure.
 </p>
-<p><code><a href="gamm.html">gamm</a></code> uses <code>extract.lme.cov2</code>.
+<p><code><a href="../../mgcv/help/gamm.html">gamm</a></code> uses <code>extract.lme.cov2</code>.
 </p>
 <p><code>extract.lme.cov</code> does not currently deal with the situation in which the
 grouping factors for a correlation structure are finer than those for the
@@ -115,7 +115,7 @@ and Hall/CRC Press.
 <h3>See Also</h3>
 
   
-<p><code><a href="gamm.html">gamm</a></code>, <code><a href="formXtViX.html">formXtViX</a></code> 
+<p><code><a href="../../mgcv/help/gamm.html">gamm</a></code>, <code><a href="../../mgcv/help/formXtViX.html">formXtViX</a></code> 
 </p>
 
 
@@ -131,5 +131,5 @@ extract.lme.cov(b)
 extract.lme.cov2(b)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

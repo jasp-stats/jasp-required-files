@@ -29,7 +29,7 @@ iconvlist()
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>A character vector, or an object to be converted to a character
-vector by <code><a href="character.html">as.character</a></code>, or a list with <code>NULL</code> and
+vector by <code><a href="../../base/help/as.character.html">as.character</a></code>, or a list with <code>NULL</code> and
 <code>raw</code> elements as returned by <code>iconv(toRaw = TRUE)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>from</code></td>
@@ -84,10 +84,10 @@ encoding) will be returned as <code>NA</code> unless <code>sub</code> is specifi
 <p>Encoding <code>"ASCII"</code> is accepted, and on most systems <code>"C"</code>
 and <code>"POSIX"</code> are synonyms for ASCII.
 </p>
-<p>Any encoding bits (see <code><a href="Encoding.html">Encoding</a></code>) on elements of <code>x</code>
+<p>Any encoding bits (see <code><a href="../../base/help/Encoding.html">Encoding</a></code>) on elements of <code>x</code>
 are ignored: they will always be translated as if from encoding
-<code>from</code> even if declared otherwise.  <code><a href="Encoding.html">enc2native</a></code> and
-<code><a href="Encoding.html">enc2utf8</a></code> provide alternatives which do take declared
+<code>from</code> even if declared otherwise.  <code><a href="../../base/help/enc2native.html">enc2native</a></code> and
+<code><a href="../../base/help/enc2utf8.html">enc2utf8</a></code> provide alternatives which do take declared
 encodings into account.
 </p>
 <p>Note that implementations of <code>iconv</code> typically do not do much
@@ -163,7 +163,7 @@ encodings.  Some systems will write the Unicode character
 <code>U+FEFF</code> at the beginning of a file in these encodings and
 perhaps also in UTF-8.  In that usage the character is known as a BOM,
 and should be handled during input (see the &lsquo;Encodings&rsquo; section
-under <code><a href="connections.html">connection</a></code>: re-encoded connections have some
+under <code><a href="../../base/help/connection.html">connection</a></code>: re-encoded connections have some
 special handling of BOMs).  The rest of this section applies when this
 has not been done so <code>x</code> starts with a BOM.
 </p>
@@ -192,7 +192,7 @@ the official (and most widely supported) name for &lsquo;Mac Roman&rsquo;
 
 <h3>See Also</h3>
 
-<p><code><a href="../../utils/html/localeToCharset.html">localeToCharset</a></code>, <code><a href="connections.html">file</a></code>.
+<p><code><a href="../../utils/html/localeToCharset.html">localeToCharset</a></code>, <code><a href="../../base/help/file.html">file</a></code>.
 </p>
 
 
@@ -234,5 +234,5 @@ str(xx &lt;- iconv(x, "latin1", "UTF-16LE", toRaw = TRUE))
 iconv(xx, "UTF-16LE", "UTF-8")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

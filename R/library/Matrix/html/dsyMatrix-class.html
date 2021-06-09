@@ -42,7 +42,7 @@ values that constitute the matrix, stored in column-major order.</p>
 </dd>
 <dt><code>Dim</code>,<code>Dimnames</code>:</dt><dd><p>The dimension (a length-2
 <code>"integer"</code>) and corresponding names (or <code>NULL</code>), see the
-<code><a href="Matrix-class.html">Matrix</a></code>.</p>
+<code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>.</p>
 </dd>
 <dt><code>factors</code>:</dt><dd><p>Object of class <code>"list"</code>.  A named
 list of factorizations that have been computed for the matrix.</p>
@@ -81,17 +81,17 @@ and class <code>"Matrix"</code> and others, <em>in</em>directly, use
 </dd>
 <dt>norm</dt><dd><p><code>signature(x = "dspMatrix", type = "character")</code>, or
 <code>x = "dsyMatrix"</code> or <code>type = "missing"</code>: Computes the
-matrix norm of the desired type, see, <code><a href="norm.html">norm</a></code>.</p>
+matrix norm of the desired type, see, <code><a href="../../Matrix/help/norm.html">norm</a></code>.</p>
 </dd>
 <dt>rcond</dt><dd><p><code>signature(x = "dspMatrix", type = "character")</code>, or
 <code>x = "dsyMatrix"</code> or <code>type = "missing"</code>: Computes the
-reciprocal condition number, <code><a href="rcond.html">rcond</a>()</code>.</p>
+reciprocal condition number, <code><a href="../../Matrix/help/rcond.html">rcond</a>()</code>.</p>
 </dd>
 <dt>solve</dt><dd><p><code>signature(a = "dspMatrix", b = "....")</code>, and</p>
 </dd>
 <dt>solve</dt><dd><p><code>signature(a = "dsyMatrix", b = "....")</code>: <code>x
 	&lt;- solve(a,b)</code> solves <i>A x = b</i> for <i>x</i>; see
-<code><a href="solve-methods.html">solve-methods</a></code>.</p>
+<code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code>.</p>
 </dd>
 <dt>t</dt><dd><p><code>signature(x = "dsyMatrix")</code>: Transpose; swaps from
 upper triangular to lower triangular storage, i.e., the uplo slot
@@ -105,12 +105,12 @@ symmetric matrices.</p>
 <h3>See Also</h3>
 
 <p>The <em>positive (Semi-)definite</em> dense (packed or non-packed
-numeric matrix classes <code><a href="dpoMatrix-class.html">dpoMatrix</a></code>,
-<code><a href="dpoMatrix-class.html">dppMatrix</a></code> and <code><a href="dpoMatrix-class.html">corMatrix</a></code>,
+numeric matrix classes <code><a href="../../Matrix/help/dpoMatrix-class.html">dpoMatrix</a></code>,
+<code><a href="../../Matrix/help/dppMatrix-class.html">dppMatrix</a></code> and <code><a href="../../Matrix/help/corMatrix-class.html">corMatrix</a></code>,
 </p>
-<p>Classes <code><a href="dgeMatrix-class.html">dgeMatrix</a></code> and <code><a href="Matrix-class.html">Matrix</a></code>;
-<code><a href="../../base/html/solve.html">solve</a></code>, <code><a href="norm.html">norm</a></code>, <code><a href="rcond.html">rcond</a></code>,
-<code><a href="../../base/html/t.html">t</a></code>
+<p>Classes <code><a href="../../Matrix/help/dgeMatrix-class.html">dgeMatrix</a></code> and <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>;
+<code><a href="../../base/help/solve.html">solve</a></code>, <code><a href="../../Matrix/help/norm.html">norm</a></code>, <code><a href="../../Matrix/help/rcond.html">rcond</a></code>,
+<code><a href="../../base/help/t.html">t</a></code>
 </p>
 
 
@@ -130,5 +130,5 @@ try(as(sy3, "dpoMatrix")) # -&gt; error: not positive definite
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

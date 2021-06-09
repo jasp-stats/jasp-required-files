@@ -44,7 +44,7 @@ pairlist of calls.  See the details.</p>
 <td>
 <p>a number, the maximum number of lines to be printed
 <em>per call</em>.  The default is unlimited.  Applies only when <code>x</code>
-is <code>NULL</code>, a <code><a href="list.html">list</a></code> or a <code><a href="list.html">pairlist</a></code> of
+is <code>NULL</code>, a <code><a href="../../base/help/list.html">list</a></code> or a <code><a href="../../base/help/pairlist.html">pairlist</a></code> of
 calls, see the details.</p>
 </td></tr>
 </table>
@@ -53,15 +53,15 @@ calls, see the details.</p>
 <h3>Details</h3>
 
 <p>The default display is of the stack of the last uncaught error as
-stored as a list of <code><a href="call.html">call</a></code>s in <code>.Traceback</code>, which
+stored as a list of <code><a href="../../base/help/call.html">call</a></code>s in <code>.Traceback</code>, which
 <code>traceback</code> prints in a user-friendly format.  The stack of
 calls always contains all function calls and all foreign
-function calls (such as <code><a href="CallExternal.html">.Call</a></code>): if profiling is in
+function calls (such as <code><a href="../../base/help/.Call.html">.Call</a></code>): if profiling is in
 progress it will include calls to some primitive functions.  (Calls
 to builtins are included, but not to specials.)
 </p>
-<p>Errors which are caught <em>via</em> <code><a href="try.html">try</a></code> or
-<code><a href="conditions.html">tryCatch</a></code> do not generate a traceback, so what is printed
+<p>Errors which are caught <em>via</em> <code><a href="../../base/help/try.html">try</a></code> or
+<code><a href="../../base/help/tryCatch.html">tryCatch</a></code> do not generate a traceback, so what is printed
 is the call sequence for the last uncaught error, and not necessarily
 for the last error.
 </p>
@@ -76,7 +76,7 @@ and the error function that called it.
 deparsed calls and will be displayed in the same way.
 </p>
 <p><code>.traceback()</code> and by extension <code>traceback()</code> may trigger
-deparsing of <code><a href="call.html">call</a></code>s.  This is an expensive operation
+deparsing of <code><a href="../../base/help/call.html">call</a></code>s.  This is an expensive operation
 for large calls so it may be advisable to set <code>max.lines</code>
 to a reasonable value when such calls are on the call stack.
 </p>
@@ -99,7 +99,7 @@ produced by <code>.traceback()</code> invisibly.
 
 <p>It is undocumented where <code>.Traceback</code> is stored nor that it is
 visible, and this is subject to change.  As of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0
-<code>.Traceback</code> contains the <code><a href="call.html">call</a></code>s as language
+<code>.Traceback</code> contains the <code><a href="../../base/help/call.html">call</a></code>s as language
 objects, whereas previously these calls were deparsed.
 </p>
 
@@ -130,5 +130,5 @@ bar
 options(error = function() traceback(3))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

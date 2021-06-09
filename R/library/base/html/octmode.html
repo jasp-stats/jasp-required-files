@@ -54,18 +54,18 @@ field width to be used, with padding by leading zeroes.</p>
 <p>Class <code>"octmode"</code> consists of integer vectors with that class
 attribute, used merely to ensure that they are printed in octal
 notation, specifically for Unix-like file permissions such as
-<code>755</code>.  Subsetting (<code><a href="Extract.html">[</a></code>) works too.
+<code>755</code>.  Subsetting (<code><a href="../../base/help/[.html">[</a></code>) works too.
 </p>
 <p>If <code>width = NULL</code> (the default), the output is padded with
 leading zeroes to the smallest width needed for all the non-missing
 elements.
 </p>
-<p><code>as.octmode</code> can convert integers (of <a href="typeof.html">type</a> <code>"integer"</code> or
+<p><code>as.octmode</code> can convert integers (of <a href="../../base/help/type.html">type</a> <code>"integer"</code> or
 <code>"double"</code>) and character vectors whose elements contain only
 digits <code>0-7</code> (or are <code>NA</code>) to class <code>"octmode"</code>.
 </p>
-<p>There is a <code><a href="Logic.html">!</a></code> method and methods for <code><a href="Logic.html">|</a></code> and
-<code><a href="Logic.html">&amp;</a></code>:
+<p>There is a <code><a href="../../base/help/!.html">!</a></code> method and methods for <code><a href="../../base/help/%7C.html">|</a></code> and
+<code><a href="../../base/help/&amp;.html">&amp;</a></code>:
 
 
 these recycle their arguments to the length of the longer and then
@@ -75,10 +75,10 @@ apply the operators bitwise to each element.
 
 <h3>See Also</h3>
 
-<p>These are auxiliary functions for <code><a href="file.info.html">file.info</a></code>.
+<p>These are auxiliary functions for <code><a href="../../base/help/file.info.html">file.info</a></code>.
 </p>
-<p><code><a href="hexmode.html">hexmode</a></code>, <code><a href="sprintf.html">sprintf</a></code> for other options in
-converting integers to octal, <code><a href="strtoi.html">strtoi</a></code> to convert octal
+<p><code><a href="../../base/help/hexmode.html">hexmode</a></code>, <code><a href="../../base/help/sprintf.html">sprintf</a></code> for other options in
+converting integers to octal, <code><a href="../../base/help/strtoi.html">strtoi</a></code> to convert octal
 strings to integers.
 </p>
 
@@ -97,5 +97,5 @@ umask &lt;- Sys.umask(NA) # depends on platform
 c(fmode, "666", "755") &amp; !umask
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

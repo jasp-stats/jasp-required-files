@@ -295,9 +295,9 @@ well in many circumstances.
 
 <h3>See Also</h3>
 
-<p><code><a href="TkWidgets.html">TkWidgets</a></code>,
-<code><a href="TkCommands.html">TkCommands</a></code>,
-<code><a href="TkWidgetcmds.html">TkWidgetcmds</a></code>.
+<p><code><a href="../../tcltk/help/TkWidgets.html">TkWidgets</a></code>,
+<code><a href="../../tcltk/help/TkCommands.html">TkCommands</a></code>,
+<code><a href="../../tcltk/help/TkWidgetcmds.html">TkWidgetcmds</a></code>.
 </p>
 <p><code><a href="../../base/html/capabilities.html">capabilities</a>("tcltk")</code> to see if Tcl/Tk support was
 compiled into this build of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
@@ -309,13 +309,12 @@ compiled into this build of <span style="font-family: Courier New, Courier; colo
 <pre>
 tclVersion()
 
-## Not run: 
-## These cannot be run by example() but should be OK when pasted
-## into an interactive R session with the tcltk package loaded
 .Tcl("format \"%s\n\" \"Hello, World!\"")
-f &lt;- function()cat("HI!\n")
+f &lt;- function() cat("HI!\n")
+## IGNORE_RDIFF_BEGIN
 .Tcl.callback(f)
 .Tcl.args(text = "Push!", command = f) # NB: Different address
+## IGNORE_RDIFF_END
 
 xyzzy &lt;- tclVar(7913)
 tclvalue(xyzzy)
@@ -323,12 +322,18 @@ tclvalue(xyzzy) &lt;- "foo"
 as.character(xyzzy)
 tcl("set", as.character(xyzzy))
 
+## Not run: 
+## These cannot be run by example() but should be OK when pasted
+## into an interactive R session with the tcltk package loaded
 top &lt;- tktoplevel() # a Tk widget, see Tk-widgets
 ls(envir = top$env, all.names = TRUE)
-ls(envir = .TkRoot$env, all.names = TRUE) # .Tcl.args put a callback ref in here
 
 ## End(Not run)
+
+## IGNORE_RDIFF_BEGIN
+ls(envir = .TkRoot$env, all.names = TRUE) # .Tcl.args put a callback ref in here
+## IGNORE_RDIFF_END
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tcltk</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tcltk</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

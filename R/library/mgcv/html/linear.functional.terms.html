@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p><code><a href="gam.html">gam</a></code> allows the response variable to depend on linear 
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> allows the response variable to depend on linear 
 functionals of smooth terms. Specifically dependancies of the form
 </p>
 <p style="text-align: center;"><i>g(mu_i) = ... + sum_j L_ij f(x_ij) +...</i></p>
@@ -22,7 +22,7 @@ differencing or quadrature, respectively). It also allows dependence on predicto
 (sometimes called &lsquo;signal regression&rsquo;).
 </p>
 <p>The mechanism by which this is achieved is to supply matrices of covariate values to the 
-model smooth terms specified by <code><a href="s.html">s</a></code> or <code><a href="te.html">te</a></code> terms in the model formula.
+model smooth terms specified by <code><a href="../../mgcv/help/s.html">s</a></code> or <code><a href="../../mgcv/help/te.html">te</a></code> terms in the model formula.
 Each column of the covariate matrix gives rise to a corresponding column of predictions 
 from the smooth. Let the resulting matrix of evaluated smooth values be F (F will have 
 the same dimension as the covariate matrices). In the absense of a <code>by</code> variable 
@@ -37,7 +37,7 @@ variable then the smooth will automatically be centred in order to ensure identi
 will not be. Note also that for centred smooths it can be worth replacing the constant term in the model with <code>rowSums(L)</code> 
 in order to ensure that predictions are automatically on the right scale.
 </p>
-<p><code><a href="predict.gam.html">predict.gam</a></code> can accept matrix predictors for prediction with such terms, in which case its
+<p><code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code> can accept matrix predictors for prediction with such terms, in which case its
 <code>newdata</code> argument will need to be a list. However when predicting from the model it is not necessary to provide matrix covariate and <code>by</code> variable values. 
 For example to simply examine the underlying smooth function one would use vectors of covariate values and vector 
 <code>by</code> variables, with the <code>by</code> variable and equivalent of <code>L1</code>, above, set to vectors of ones. 
@@ -221,5 +221,5 @@ plot(b,shade=TRUE);lines(x,f,col=2)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

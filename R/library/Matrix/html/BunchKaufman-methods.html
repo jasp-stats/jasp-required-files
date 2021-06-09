@@ -42,7 +42,7 @@ BunchKaufman(x, uplo = NULL, ...)
 <p>optional string, <code>"U"</code> or <code>"L"</code> indicating which
 &ldquo;triangle&rdquo; half of <code>x</code> should determine the result.  The
 default is <code>"U"</code> unless <code>x</code> has a <code>uplo</code> slot which is
-the case for those inheriting from class <code><a href="symmetricMatrix-class.html">symmetricMatrix</a></code>,
+the case for those inheriting from class <code><a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a></code>,
 where <code>x@uplo</code> will be used.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
@@ -60,7 +60,7 @@ where <code>x@uplo</code> will be used.</p>
 
 <h3>Value</h3>
 
-<p>an object of class <code><a href="Cholesky-class.html">BunchKaufman</a></code>, which can also
+<p>an object of class <code><a href="../../Matrix/help/BunchKaufman-class.html">BunchKaufman</a></code>, which can also
 be used as a (triangular) matrix directly.  Somewhat amazingly,
 it inherits its <code>uplo</code> slot from <code>x</code>.
 </p>
@@ -95,10 +95,10 @@ and
 
 <h3>See Also</h3>
 
-<p>The resulting class, <code><a href="Cholesky-class.html">BunchKaufman</a></code>.
-Related decompositions are the LU,  <code><a href="lu.html">lu</a></code>, and the Cholesky,
-<code><a href="chol.html">chol</a></code> (and for <em>sparse</em> matrices,
-<code><a href="Cholesky.html">Cholesky</a></code>).
+<p>The resulting class, <code><a href="../../Matrix/help/BunchKaufman-class.html">BunchKaufman</a></code>.
+Related decompositions are the LU,  <code><a href="../../Matrix/help/lu.html">lu</a></code>, and the Cholesky,
+<code><a href="../../Matrix/help/chol.html">chol</a></code> (and for <em>sparse</em> matrices,
+<code><a href="../../Matrix/help/Cholesky.html">Cholesky</a></code>).
 </p>
 
 
@@ -120,5 +120,5 @@ str(R.CA &lt;- as(bkCA, "sparseMatrix"))
 ## an upper triangular 72x72 matrix with only 144 non-zero entries
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

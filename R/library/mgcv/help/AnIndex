@@ -26,6 +26,7 @@ cubic.regression.spline	smooth.construct.cr.smooth.spec
 cyclic.cubic.spline	smooth.construct.cr.smooth.spec
 cyclic.p.spline	smooth.construct.ps.smooth.spec
 d.mvt	rmvn
+d.spline	smooth.construct.bs.smooth.spec
 dDeta	dDeta
 diagXVXd	XWXd
 Dim.pdIdnot	pdIdnot

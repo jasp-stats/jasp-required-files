@@ -1,6 +1,6 @@
 Package: withr
 Title: Run Code 'With' Temporarily Modified Global State
-Version: 2.4.1
+Version: 2.4.2
 Authors@R: 
     c(person(given = "Jim",
              family = "Hester",
@@ -43,7 +43,6 @@ Suggests: covr, DBI, knitr, lattice, methods, rmarkdown, RSQLite,
         testthat (>= 2.1.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.1.1
 Collate: 'local_.R' 'with_.R' 'collate.R' 'compat-defer.R'
         'connection.R' 'db.R' 'defer.R' 'wrap.R' 'devices.R' 'dir.R'
@@ -52,7 +51,7 @@ Collate: 'local_.R' 'with_.R' 'collate.R' 'compat-defer.R'
         'sink.R' 'tempfile.R' 'timezone.R' 'torture.R' 'utils.R'
         'with.R'
 NeedsCompilation: no
-Packaged: 2021-01-26 14:29:58 UTC; jhester
+Packaged: 2021-04-16 17:12:53 UTC; jhester
 Author: Jim Hester [aut, cre],
   Kirill Müller [aut],
   Kevin Ushey [aut],
@@ -63,5 +62,5 @@ Author: Jim Hester [aut, cre],
   RStudio [cph]
 Maintainer: Jim Hester <jim.hester@rstudio.com>
 Repository: CRAN
-Date/Publication: 2021-01-26 16:20:02 UTC
-Built: R 4.0.4; ; 2021-03-31 21:06:00 UTC; windows
+Date/Publication: 2021-04-18 10:20:02 UTC
+Built: R 4.1.0; ; 2021-06-01 03:09:26 UTC; windows

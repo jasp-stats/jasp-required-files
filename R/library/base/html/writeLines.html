@@ -29,7 +29,7 @@ writeLines(text, con = stdout(), sep = "\n", useBytes = FALSE)
 </td></tr>
 <tr valign="top"><td><code>con</code></td>
 <td>
-<p>A <a href="connections.html">connection</a> object or a character string.</p>
+<p>A <a href="../../base/help/connection.html">connection</a> object or a character string.</p>
 </td></tr>
 <tr valign="top"><td><code>sep</code></td>
 <td>
@@ -46,7 +46,7 @@ after each line of text.</p>
 <h3>Details</h3>
 
 <p>If the <code>con</code> is a character string, the function calls
-<code><a href="connections.html">file</a></code> to obtain a file connection which is opened for
+<code><a href="../../base/help/file.html">file</a></code> to obtain a file connection which is opened for
 the duration of the function call.
 </p>
 <p>If the connection is open it is written from its current position.
@@ -58,7 +58,7 @@ default separator is converted to the normal separator for that
 platform (LF on Unix/Linux, CRLF on Windows).  For more control, open
 a binary connection and specify the precise value you want written to
 the file in <code>sep</code>.  For even more control, use
-<code><a href="readChar.html">writeChar</a></code> on a binary connection.
+<code><a href="../../base/help/writeChar.html">writeChar</a></code> on a binary connection.
 </p>
 <p><code>useBytes</code> is for expert use.  Normally (when false) character
 strings with marked encodings are converted to the current encoding
@@ -66,16 +66,16 @@ before being passed to the connection (which might do further
 re-encoding).  <code>useBytes = TRUE</code> suppresses the re-encoding of
 marked strings so they are passed byte-by-byte to the connection:
 this can be useful when strings have already been re-encoded by
-e.g. <code><a href="iconv.html">iconv</a></code>.  (It is invoked automatically for strings
+e.g. <code><a href="../../base/help/iconv.html">iconv</a></code>.  (It is invoked automatically for strings
 with marked encoding <code>"bytes"</code>.)
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="connections.html">connections</a></code>, <code><a href="readChar.html">writeChar</a></code>, <code><a href="readBin.html">writeBin</a></code>,
-<code><a href="readLines.html">readLines</a></code>, <code><a href="cat.html">cat</a></code>
+<p><code><a href="../../base/help/connections.html">connections</a></code>, <code><a href="../../base/help/writeChar.html">writeChar</a></code>, <code><a href="../../base/help/writeBin.html">writeBin</a></code>,
+<code><a href="../../base/help/readLines.html">readLines</a></code>, <code><a href="../../base/help/cat.html">cat</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

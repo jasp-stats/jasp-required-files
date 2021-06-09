@@ -10,10 +10,10 @@
 <h3>Description</h3>
 
  <p><code>notLog2</code> and <code>notExp2</code> are alternatives to <code>log</code>
-and <code>exp</code> or <code><a href="notExp.html">notLog</a></code> and <code><a href="notExp.html">notExp</a></code> for
+and <code>exp</code> or <code><a href="../../mgcv/help/notLog.html">notLog</a></code> and <code><a href="../../mgcv/help/notExp.html">notExp</a></code> for
 re-parameterization of variance parameters. They are used by the
-<code><a href="pdTens.html">pdTens</a></code> and <code><a href="pdIdnot.html">pdIdnot</a></code> classes which in turn implement
-smooths for <code><a href="gamm.html">gamm</a></code>.
+<code><a href="../../mgcv/help/pdTens.html">pdTens</a></code> and <code><a href="../../mgcv/help/pdIdnot.html">pdIdnot</a></code> classes which in turn implement
+smooths for <code><a href="../../mgcv/help/gamm.html">gamm</a></code>.
 </p>
 <p>The functions are typically used to ensure that smoothing parameters are
 positive, but the <code>notExp2</code> is not monotonic: rather it cycles between
@@ -38,7 +38,7 @@ for a conventional monotonic parameterization.
 </p>
 <p>This reparameterization was made necessary by some modifications to the
 underlying optimization method in  <code>lme</code> introduced in nlme 3.1-62. It is
-possible that future releases will return to the <code><a href="notExp.html">notExp</a></code> parameterization.
+possible that future releases will return to the <code><a href="../../mgcv/help/notExp.html">notExp</a></code> parameterization.
 </p>
 <p>Note that you can reset &lsquo;effective zero&rsquo; and &lsquo;effective infinity&rsquo;: see below.
 </p>
@@ -91,7 +91,7 @@ notLog2(x,d=.Options$mgcv.vc.logrange,b=1/d)
 
 <h3>See Also</h3>
 
- <p><code><a href="pdTens.html">pdTens</a></code>, <code><a href="pdIdnot.html">pdIdnot</a></code>,  <code><a href="gamm.html">gamm</a></code></p>
+ <p><code><a href="../../mgcv/help/pdTens.html">pdTens</a></code>, <code><a href="../../mgcv/help/pdIdnot.html">pdIdnot</a></code>,  <code><a href="../../mgcv/help/gamm.html">gamm</a></code></p>
 
 
 <h3>Examples</h3>
@@ -113,5 +113,5 @@ lines(x,log(exp(x)),col=2) # redundancy intended
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

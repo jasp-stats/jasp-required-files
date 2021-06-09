@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p><code><a href="gam.html">gam</a></code> can use isotropic smooths of any number of variables, specified via terms like
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> can use isotropic smooths of any number of variables, specified via terms like
 <code>s(x,z,bs="tp",m=3)</code> (or just <code>s(x,z)</code> as this is the default basis). These terms are based on thin plate 
 regression splines. <code>m</code> specifies the order of the derivatives in the thin plate spline penalty.
 </p>
@@ -85,14 +85,14 @@ degrees of freedom are controlled primarily by its smoothing parameter).
 </p>
 <p>The default is to set <code>m</code> (the order of derivative in the thin plate spline penalty) to the smallest value satisfying <code>2m &gt; d+1</code> where <code>d</code> if the number of covariates of the term: this yields &lsquo;visually smooth&rsquo; functions. In any case <code>2m&gt;d</code> must be satisfied. 
 </p>
-<p>The constructor is not normally called directly, but is rather used internally by <code><a href="gam.html">gam</a></code>. 
-To use for basis setup it is recommended to use <code><a href="smooth.construct.html">smooth.construct2</a></code>.  
+<p>The constructor is not normally called directly, but is rather used internally by <code><a href="../../mgcv/help/gam.html">gam</a></code>. 
+To use for basis setup it is recommended to use <code><a href="../../mgcv/help/smooth.construct2.html">smooth.construct2</a></code>.  
 </p>
 <p>For these classes the specification <code>object</code> will contain
 information on how to handle large datasets in their <code>xt</code> field. The default is to randomly
 subsample 2000 &lsquo;knots&rsquo; from which to produce a tprs basis, if the number of
 unique predictor variable combinations in excess of 2000. The default can be
-modified via the <code>xt</code> argument to <code><a href="s.html">s</a></code>. This is supplied as a
+modified via the <code>xt</code> argument to <code><a href="../../mgcv/help/s.html">s</a></code>. This is supplied as a
 list with elements <code>max.knots</code> and <code>seed</code> containing a number
 to use in place of 2000, and the random number seed to use (either can be
 missing). 
@@ -119,7 +119,7 @@ the curve to zero at high enough smoothing parameters.
 <h3>Value</h3>
 
 <p> An object of class <code>"tprs.smooth"</code> or <code>"ts.smooth"</code>. In addition to the usual elements of a 
-smooth class documented under <code><a href="smooth.construct.html">smooth.construct</a></code>, this object will contain:
+smooth class documented under <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>, this object will contain:
 </p>
 <table summary="R valueblock">
 <tr valign="top"><td><code>shift</code></td>
@@ -195,5 +195,5 @@ for (i in 2:ncol(X1)) lines(x,X1[,i],col=i)
 ## see ?gam
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

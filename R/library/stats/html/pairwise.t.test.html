@@ -37,7 +37,7 @@ pairwise.t.test(x, g, p.adjust.method = p.adjust.methods,
 </td></tr>
 <tr valign="top"><td><code>p.adjust.method</code></td>
 <td>
-<p> Method for adjusting p values (see <code><a href="p.adjust.html">p.adjust</a></code>). </p>
+<p> Method for adjusting p values (see <code><a href="../../stats/help/p.adjust.html">p.adjust</a></code>). </p>
 </td></tr>
 <tr valign="top"><td><code>pool.sd</code></td>
 <td>
@@ -84,7 +84,7 @@ sensibly.
 
 <h3>See Also</h3>
 
- <p><code><a href="t.test.html">t.test</a></code>, <code><a href="p.adjust.html">p.adjust</a></code></p>
+ <p><code><a href="../../stats/help/t.test.html">t.test</a></code>, <code><a href="../../stats/help/p.adjust.html">p.adjust</a></code></p>
 
 
 <h3>Examples</h3>
@@ -93,10 +93,10 @@ sensibly.
 attach(airquality)
 Month &lt;- factor(Month, labels = month.abb[5:9])
 pairwise.t.test(Ozone, Month)
-pairwise.t.test(Ozone, Month, p.adj = "bonf")
+pairwise.t.test(Ozone, Month, p.adjust.method = "bonf")
 pairwise.t.test(Ozone, Month, pool.sd = FALSE)
 detach()
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

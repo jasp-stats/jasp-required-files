@@ -14,12 +14,12 @@ penalized regression smoothers.
 </p>
 <p>Penalized regression smoothers gain computational efficiency by virtue of
 being defined using a basis of relatively modest size, <code>k</code>. When setting
-up models in the <code>mgcv</code> package, using <code><a href="s.html">s</a></code> or <code><a href="te.html">te</a></code>
+up models in the <code>mgcv</code> package, using <code><a href="../../mgcv/help/s.html">s</a></code> or <code><a href="../../mgcv/help/te.html">te</a></code>
 terms in a model formula, <code>k</code> must be chosen: the defaults are essentially arbitrary. 
 </p>
 <p>In practice <code>k-1</code> (or <code>k</code>) sets the upper limit on the degrees of freedom
-associated with an <code><a href="s.html">s</a></code> smooth (1 degree of freedom is usually lost to the identifiability
-constraint on the smooth). For <code><a href="te.html">te</a></code> smooths the upper limit of the
+associated with an <code><a href="../../mgcv/help/s.html">s</a></code> smooth (1 degree of freedom is usually lost to the identifiability
+constraint on the smooth). For <code><a href="../../mgcv/help/te.html">te</a></code> smooths the upper limit of the
 degrees of freedom is given by the product of the <code>k</code> values provided for
 each marginal smooth less one, for the constraint. However the actual
 effective degrees of freedom are controlled by the degree of penalization
@@ -49,9 +49,9 @@ doing this, then <code>k</code> was large enough. (Change in the smoothness sele
 and/or the effective degrees of freedom, when <code>k</code> is increased, provide the obvious 
 numerical measures for whether the fit has changed substantially.)
 </p>
-<p><code><a href="gam.check.html">gam.check</a></code> runs a simple simulation based check on the basis dimensions, which can 
+<p><code><a href="../../mgcv/help/gam.check.html">gam.check</a></code> runs a simple simulation based check on the basis dimensions, which can 
 help to flag up terms for which <code>k</code> is too low. Grossly too small <code>k</code>
-will also be visible from partial residuals available with <code><a href="plot.gam.html">plot.gam</a></code>.
+will also be visible from partial residuals available with <code><a href="../../mgcv/help/plot.gam.html">plot.gam</a></code>.
 </p>
 <p>One scenario that can cause confusion is this: a model is fitted with
 <code>k=10</code> for a smooth term, and the EDF for the term is estimated as 7.6,
@@ -168,5 +168,5 @@ b
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

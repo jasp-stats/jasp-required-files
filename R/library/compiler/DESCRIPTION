@@ -1,9 +1,10 @@
 Package: compiler
-Version: 4.0.5
+Version: 4.1.0
 Priority: base
 Title: The R Compiler Package
 Author: Luke Tierney <luke-tierney@uiowa.edu>
-Maintainer: R Core Team <R-core@r-project.org>
+Maintainer: R Core Team <do-use-Contact-address@r-project.org>
+Contact: R-help mailing list <r-help@r-project.org>
 Description: Byte code compiler for R.
-License: Part of R 4.0.5
-Built: R 4.0.5; ; 2021-03-31 07:51:16 UTC; windows
+License: Part of R 4.1.0
+Built: R 4.1.0; ; 2021-05-18 08:42:44 UTC; windows

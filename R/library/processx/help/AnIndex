@@ -28,3 +28,4 @@ processx_conn_read_lines	processx_connections
 processx_conn_write	processx_connections
 process_initialize	process_initialize
 run	run
+supervisor_kill	supervisor_kill

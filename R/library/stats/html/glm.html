@@ -38,7 +38,7 @@ weights(object, type = c("prior", "working"), ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>formula</code></td>
 <td>
-<p>an object of class <code>"<a href="formula.html">formula</a>"</code> (or one that
+<p>an object of class <code>"<a href="../../stats/help/formula.html">formula</a>"</code> (or one that
 can be coerced to that class): a symbolic description of the
 model to be fitted.  The details of model specification are given
 under &lsquo;Details&rsquo;.</p>
@@ -49,7 +49,7 @@ under &lsquo;Details&rsquo;.</p>
 function to be used in the model.  For <code>glm</code> this can be a
 character string naming a family function, a family function or the
 result of a call to a family function.  For <code>glm.fit</code> only the
-third option is supported.  (See <code><a href="family.html">family</a></code> for details of
+third option is supported.  (See <code><a href="../../stats/help/family.html">family</a></code> for details of
 family functions.)</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
@@ -75,9 +75,9 @@ to be used in the fitting process.</p>
 <p>a function which indicates what should happen
 when the data contain <code>NA</code>s.  The default is set by
 the <code>na.action</code> setting of <code><a href="../../base/html/options.html">options</a></code>, and is
-<code><a href="na.fail.html">na.fail</a></code> if that is unset.  The &lsquo;factory-fresh&rsquo;
-default is <code><a href="na.fail.html">na.omit</a></code>.  Another possible value is
-<code>NULL</code>, no action.  Value <code><a href="na.fail.html">na.exclude</a></code> can be useful.</p>
+<code><a href="../../stats/help/na.fail.html">na.fail</a></code> if that is unset.  The &lsquo;factory-fresh&rsquo;
+default is <code><a href="../../stats/help/na.omit.html">na.omit</a></code>.  Another possible value is
+<code>NULL</code>, no action.  Value <code><a href="../../stats/help/na.exclude.html">na.exclude</a></code> can be useful.</p>
 </td></tr>
 <tr valign="top"><td><code>start</code></td>
 <td>
@@ -96,15 +96,15 @@ default is <code><a href="na.fail.html">na.omit</a></code>.  Another possible va
 <p>this can be used to specify an <em>a priori</em> known
 component to be included in the linear predictor during fitting.
 This should be <code>NULL</code> or a numeric vector of length equal to
-the number of cases.  One or more <code><a href="offset.html">offset</a></code> terms can be
+the number of cases.  One or more <code><a href="../../stats/help/offset.html">offset</a></code> terms can be
 included in the formula instead or as well, and if more than one is
-specified their sum is used.  See <code><a href="model.extract.html">model.offset</a></code>.</p>
+specified their sum is used.  See <code><a href="../../stats/help/model.offset.html">model.offset</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>control</code></td>
 <td>
 <p>a list of parameters for controlling the fitting
 process.  For <code>glm.fit</code> this is passed to
-<code><a href="glm.control.html">glm.control</a></code>.</p>
+<code><a href="../../stats/help/glm.control.html">glm.control</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>model</code></td>
 <td>
@@ -211,7 +211,7 @@ matrix and family have already been calculated.
 </p>
 <p>If more than one of <code>etastart</code>, <code>start</code> and <code>mustart</code>
 is specified, the first in the list will be used.  It is often
-advisable to supply starting values for a <code><a href="family.html">quasi</a></code> family,
+advisable to supply starting values for a <code><a href="../../stats/help/quasi.html">quasi</a></code> family,
 and also for families with unusual links such as <code>gaussian("log")</code>.
 </p>
 <p>All of <code>weights</code>, <code>subset</code>, <code>offset</code>, <code>etastart</code>
@@ -232,12 +232,12 @@ which inherits from the class <code>"lm"</code>. See later in this section.
 If a non-standard <code>method</code> is used, the object will also inherit
 from the class (if any) returned by that function.
 </p>
-<p>The function <code><a href="../../base/html/summary.html">summary</a></code> (i.e., <code><a href="summary.glm.html">summary.glm</a></code>) can
+<p>The function <code><a href="../../base/html/summary.html">summary</a></code> (i.e., <code><a href="../../stats/help/summary.glm.html">summary.glm</a></code>) can
 be used to obtain or print a summary of the results and the function
-<code><a href="anova.html">anova</a></code> (i.e., <code><a href="anova.glm.html">anova.glm</a></code>)
+<code><a href="../../stats/help/anova.html">anova</a></code> (i.e., <code><a href="../../stats/help/anova.glm.html">anova.glm</a></code>)
 to produce an analysis of variance table.
 </p>
-<p>The generic accessor functions <code><a href="coef.html">coefficients</a></code>,
+<p>The generic accessor functions <code><a href="../../stats/help/coefficients.html">coefficients</a></code>,
 <code>effects</code>, <code>fitted.values</code> and <code>residuals</code> can be used to
 extract various useful features of the value returned by <code>glm</code>.
 </p>
@@ -269,7 +269,7 @@ the linear predictors by the inverse of the link function.</p>
 </td></tr>
 <tr valign="top"><td><code>family</code></td>
 <td>
-<p>the <code><a href="family.html">family</a></code> object used.</p>
+<p>the <code><a href="../../stats/help/family.html">family</a></code> object used.</p>
 </td></tr>
 <tr valign="top"><td><code>linear.predictors</code></td>
 <td>
@@ -358,7 +358,7 @@ attainable values?</p>
 </td></tr>
 <tr valign="top"><td><code>terms</code></td>
 <td>
-<p>the <code><a href="terms.html">terms</a></code> object used.</p>
+<p>the <code><a href="../../stats/help/terms.html">terms</a></code> object used.</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
 <td>
@@ -390,7 +390,7 @@ used in fitting.</p>
 <tr valign="top"><td><code>na.action</code></td>
 <td>
 <p>(where relevant) information returned by
-<code><a href="model.frame.html">model.frame</a></code> on the special handling of <code>NA</code>s.</p>
+<code><a href="../../stats/help/model.frame.html">model.frame</a></code> on the special handling of <code>NA</code>s.</p>
 </td></tr>
 </table>
 <p>In addition, non-empty fits will have components <code>qr</code>, <code>R</code>
@@ -401,10 +401,10 @@ and <code>effects</code> relating to the final weighted linear fit.
 methods for class <code>"lm"</code> will be applied to the weighted linear
 model at the final iteration of IWLS.  However, care is needed, as
 extractor functions for class <code>"glm"</code> such as
-<code><a href="residuals.html">residuals</a></code> and <code>weights</code> do <b>not</b> just pick out
+<code><a href="../../stats/help/residuals.html">residuals</a></code> and <code>weights</code> do <b>not</b> just pick out
 the component of the fit with the same name.
 </p>
-<p>If a <code><a href="family.html">binomial</a></code> <code>glm</code> model was specified by giving a
+<p>If a <code><a href="../../stats/help/binomial.html">binomial</a></code> <code>glm</code> model was specified by giving a
 two-column response, the weights returned by <code>prior.weights</code> are
 the total numbers of cases (factored by the supplied case weights) and
 the component <code>y</code> of the result is the proportion of successes.
@@ -460,16 +460,16 @@ New York: Springer.
 
 <h3>See Also</h3>
 
-<p><code><a href="anova.glm.html">anova.glm</a></code>, <code><a href="summary.glm.html">summary.glm</a></code>, etc. for
+<p><code><a href="../../stats/help/anova.glm.html">anova.glm</a></code>, <code><a href="../../stats/help/summary.glm.html">summary.glm</a></code>, etc. for
 <code>glm</code> methods,
-and the generic functions <code><a href="anova.html">anova</a></code>, <code><a href="../../base/html/summary.html">summary</a></code>,
-<code><a href="effects.html">effects</a></code>, <code><a href="fitted.values.html">fitted.values</a></code>,
-and <code><a href="residuals.html">residuals</a></code>.
+and the generic functions <code><a href="../../stats/help/anova.html">anova</a></code>, <code><a href="../../base/html/summary.html">summary</a></code>,
+<code><a href="../../stats/help/effects.html">effects</a></code>, <code><a href="../../stats/help/fitted.values.html">fitted.values</a></code>,
+and <code><a href="../../stats/help/residuals.html">residuals</a></code>.
 </p>
-<p><code><a href="lm.html">lm</a></code> for non-generalized <em>linear</em> models (which SAS
+<p><code><a href="../../stats/help/lm.html">lm</a></code> for non-generalized <em>linear</em> models (which SAS
 calls GLMs, for &lsquo;general&rsquo; linear models).
 </p>
-<p><code><a href="loglin.html">loglin</a></code> and <code><a href="../../MASS/html/loglm.html">loglm</a></code> (package
+<p><code><a href="../../stats/help/loglin.html">loglin</a></code> and <code><a href="../../MASS/help/loglm.html">loglm</a></code> (package
 <a href="https://CRAN.R-project.org/package=MASS"><span class="pkg">MASS</span></a>) for fitting log-linear models (which binomial and
 Poisson GLMs are) to contingency tables.
 </p>
@@ -477,7 +477,7 @@ Poisson GLMs are) to contingency tables.
 way to fit GLMs to large datasets (especially those with many cases).
 </p>
 <p><code><a href="../../datasets/html/esoph.html">esoph</a></code>, <code><a href="../../datasets/html/infert.html">infert</a></code> and
-<code><a href="predict.glm.html">predict.glm</a></code> have examples of fitting binomial glms.
+<code><a href="../../stats/help/predict.glm.html">predict.glm</a></code> have examples of fitting binomial glms.
 </p>
 
 
@@ -531,5 +531,5 @@ demo(glm.vr)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

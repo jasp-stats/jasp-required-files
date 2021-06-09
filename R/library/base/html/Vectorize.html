@@ -27,7 +27,7 @@ Vectorize(FUN, vectorize.args = arg.names, SIMPLIFY = TRUE,
 <table summary="R argblock">
 <tr valign="top"><td><code>FUN</code></td>
 <td>
-<p>function to apply, found via <code><a href="match.fun.html">match.fun</a></code>.</p>
+<p>function to apply, found via <code><a href="../../base/help/match.fun.html">match.fun</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>vectorize.args</code></td>
 <td>
@@ -38,7 +38,7 @@ vectorized.  Defaults to all arguments of <code>FUN</code>.</p>
 <td>
 <p>logical or character string; attempt to reduce the
 result to a vector, matrix or higher dimensional array; see
-the <code>simplify</code> argument of <code><a href="lapply.html">sapply</a></code>.</p>
+the <code>simplify</code> argument of <code><a href="../../base/help/sapply.html">sapply</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>USE.NAMES</code></td>
 <td>
@@ -53,11 +53,11 @@ the names.</p>
 
 <p>The arguments named in the <code>vectorize.args</code> argument to
 <code>Vectorize</code> are the arguments passed in the <code>...</code>  list to
-<code><a href="mapply.html">mapply</a></code>.  Only those that are actually passed will be
+<code><a href="../../base/help/mapply.html">mapply</a></code>.  Only those that are actually passed will be
 vectorized; default values will not.  See the examples.
 </p>
 <p><code>Vectorize</code> cannot be used with primitive functions as they do
-not have a value for <code><a href="formals.html">formals</a></code>.
+not have a value for <code><a href="../../base/help/formals.html">formals</a></code>.
 </p>
 <p>It also cannot be used with functions that have arguments named
 <code>FUN</code>, <code>vectorize.args</code>, <code>SIMPLIFY</code> or
@@ -69,7 +69,7 @@ arguments.  See the <code>combn</code> example below for a workaround.
 <h3>Value</h3>
 
 <p>A function with the same arguments as <code>FUN</code>, wrapping a call to
-<code><a href="mapply.html">mapply</a></code>.
+<code><a href="../../base/help/mapply.html">mapply</a></code>.
 </p>
 
 
@@ -111,5 +111,5 @@ combnV(4, 1:4)
 combnV(4, 1:4, sum)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

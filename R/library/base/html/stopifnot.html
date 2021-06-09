@@ -10,9 +10,9 @@
 <h3>Description</h3>
 
 <p>If any of the expressions (in <code>...</code> or <code>exprs</code>) are not
-<code><a href="all.html">all</a></code> <code>TRUE</code>, <code><a href="stop.html">stop</a></code> is called, producing
+<code><a href="../../base/help/all.html">all</a></code> <code>TRUE</code>, <code><a href="../../base/help/stop.html">stop</a></code> is called, producing
 an error message indicating the <em>first</em> expression which was not
-(<code><a href="all.html">all</a></code>) true.
+(<code><a href="../../base/help/all.html">all</a></code>) true.
 </p>
 
 
@@ -29,7 +29,7 @@ stopifnot(..., exprs, exprObject, local = TRUE)
 <tr valign="top"><td><code>..., exprs</code></td>
 <td>
 <p>any number of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> expressions, which should each
-evaluate to (a logical vector of all) <code><a href="logical.html">TRUE</a></code>.  Use
+evaluate to (a logical vector of all) <code><a href="../../base/help/TRUE.html">TRUE</a></code>.  Use
 <em>either</em> <code>...</code> <em>or</em>
 <code>exprs</code>, the latter typically an unevaluated expression of the
 form </p>
@@ -50,14 +50,14 @@ the default error message.
 <td>
 <p>alternative to <code>exprs</code> or <code>...</code>:
 an &lsquo;expression-like&rsquo; object, typically an
-<code><a href="expression.html">expression</a></code>, but also a <code><a href="call.html">call</a></code>, a
-<code><a href="name.html">name</a></code>, or atomic constant such as <code>TRUE</code>.
+<code><a href="../../base/help/expression.html">expression</a></code>, but also a <code><a href="../../base/help/call.html">call</a></code>, a
+<code><a href="../../base/help/name.html">name</a></code>, or atomic constant such as <code>TRUE</code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>local</code></td>
 <td>
 <p>(only when <code>exprs</code> is used:) indicates the
-<code><a href="environment.html">environment</a></code> in which the expressions should be
+<code><a href="../../base/help/environment.html">environment</a></code> in which the expressions should be
 evaluated; by default the one from where <code>stopifnot()</code> has been
 called.</p>
 </td></tr>
@@ -74,9 +74,9 @@ checking of functions, in particular to make them easier to read.
 <pre> { if(any(is.na(A)) || !all(A)) stop(...);
    if(any(is.na(B)) || !all(B)) stop(...) }</pre>
 <p>Since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.6.0, <code>stopifnot()</code> no longer handles potential
-errors or warnings (by <code><a href="conditions.html">tryCatch</a>()</code> etc) for each single
+errors or warnings (by <code><a href="../../base/help/tryCatch.html">tryCatch</a>()</code> etc) for each single
 expression
-and may use <code><a href="sys.parent.html">sys.call</a>(&lt;n&gt;)</code> to get a meaningful and short
+and may use <code><a href="../../base/help/sys.call.html">sys.call</a>(&lt;n&gt;)</code> to get a meaningful and short
 error message in case an expression did not evaluate to all TRUE.  This
 provides considerably less overhead.
 </p>
@@ -95,15 +95,15 @@ expressions, as they are more conveniently evaluated interactively
 (&ldquo;no extraneous <code>,</code> &rdquo;).
 </p>
 <p>Since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 3.4.0, when an expression (from <code>...</code>) is not
-true <em>and</em> is a call to <code><a href="all.equal.html">all.equal</a></code>, the error
+true <em>and</em> is a call to <code><a href="../../base/help/all.equal.html">all.equal</a></code>, the error
 message will report the (first part of the) differences reported by
-<code><a href="all.equal.html">all.equal</a>(*)</code>.
+<code><a href="../../base/help/all.equal.html">all.equal</a>(*)</code>.
 </p>
 
 
 <h3>Value</h3>
 
-<p>(<code><a href="NULL.html">NULL</a></code> if all statements in <code>...</code> are <code>TRUE</code>.)
+<p>(<code><a href="../../base/help/NULL.html">NULL</a></code> if all statements in <code>...</code> are <code>TRUE</code>.)
 </p>
 
 
@@ -127,7 +127,7 @@ more commonly known verb as function name.
 
 <h3>See Also</h3>
 
-<p><code><a href="stop.html">stop</a></code>, <code><a href="warning.html">warning</a></code>;
+<p><code><a href="../../base/help/stop.html">stop</a></code>, <code><a href="../../base/help/warning.html">warning</a></code>;
 <code><a href="../../tools/html/assertCondition.html">assertCondition</a></code> in package <span class="pkg">tools</span> complements
 <code>stopifnot()</code> for testing warnings and errors.
 </p>
@@ -173,5 +173,5 @@ stopifnot("m must be symmetric"= m == t(m))
 options(op)  # revert to previous error handler
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

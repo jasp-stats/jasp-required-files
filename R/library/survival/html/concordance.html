@@ -154,10 +154,13 @@ of these values, determined by the <code>timewt</code> option.
 For uncensored data each unique response value is compared to all
 those which are larger.
 </p>
-<p>Using the default value for <code>timewt</code>, this gives the area
+<p>Using the default value for <code>timewt</code> gives the area
 under the receiver operating curve (AUC) for a binary response,
-Harrell's c-statistic when the response is a survival time,
 and (d+1)/2 when y is continuous, where d is Somers' d.
+For a survival time, <code>timewt</code> of n gives Harrell's c-statistic,
+which is closely related to the Gehan-Wilcoxon test,
+S corresponds to the Peto-Wilcoxon, n/G2 is the weighted advocated
+by Umo, and S/G the weighting proposed by Schemper.
 </p>
 <p>When the number of strata is very large, such as in a conditional
 logistic regression for instance (<code>clogit</code> function), a much
@@ -229,7 +232,7 @@ A weighted mean of the ranks equals Somer's d.</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="coxph.html">coxph</a></code></p>
+<p><code><a href="../../survival/help/coxph.html">coxph</a></code></p>
 
 
 <h3>Examples</h3>
@@ -243,5 +246,5 @@ fit2 &lt;- glm(pstat ~ age + sex + mspike, binomial, data= mgus2)
 concordance(fit2)  # equal to the AUC
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-11 <a href="00Index.html">Index</a>]</div>
 </body></html>

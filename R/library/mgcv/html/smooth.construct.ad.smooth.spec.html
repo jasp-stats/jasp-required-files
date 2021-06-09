@@ -9,8 +9,8 @@
 
 <h3>Description</h3>
 
-<p><code><a href="gam.html">gam</a></code> can use adaptive smooths of one or two variables, specified 
-via terms like <code>s(...,bs="ad",...)</code>. (<code><a href="gamm.html">gamm</a></code> can not use such terms &mdash; check out 
+<p><code><a href="../../mgcv/help/gam.html">gam</a></code> can use adaptive smooths of one or two variables, specified 
+via terms like <code>s(...,bs="ad",...)</code>. (<code><a href="../../mgcv/help/gamm.html">gamm</a></code> can not use such terms &mdash; check out 
 package <code>AdaptFit</code> if this is a problem.) The basis for such a term is a (tensor product of) 
 p-spline(s) or cubic regression spline(s). Discrete P-spline type penalties are applied directly to the coefficients 
 of the basis, but the penalties themselves have a basis representation, allowing the strength of the
@@ -72,8 +72,8 @@ Can be <code>NULL</code></p>
 
 <h3>Details</h3>
 
-<p> The constructor is not normally called directly, but is rather used internally by <code><a href="gam.html">gam</a></code>. 
-To use for basis setup it is recommended to use <code><a href="smooth.construct.html">smooth.construct2</a></code>.  
+<p> The constructor is not normally called directly, but is rather used internally by <code><a href="../../mgcv/help/gam.html">gam</a></code>. 
+To use for basis setup it is recommended to use <code><a href="../../mgcv/help/smooth.construct2.html">smooth.construct2</a></code>.  
 </p>
 <p>This class can not be used as a marginal basis in a tensor product smooth, nor by <code>gamm</code>.
 </p>
@@ -156,5 +156,5 @@ cor(fitted(b0),f);cor(fitted(b),f)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

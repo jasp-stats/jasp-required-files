@@ -61,8 +61,8 @@ i.e. have a matrix structure with multiple columns.
 <tr valign="top"><td><code>...</code></td>
 <td>
 
-<p>additional arguments passed to <code><a href="xyplot.html">xyplot</a></code>,
-which may pass them on to <code><a href="panel.xyplot.html">panel.xyplot</a></code>.
+<p>additional arguments passed to <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>,
+which may pass them on to <code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>screens</code></td>
@@ -88,14 +88,14 @@ default values of other arguments.
 <td>
 
 <p>defines a cut-and-stack plot. <code>cut</code> can be a <code>list</code> of
-arguments to the function <code><a href="shingles.html">equal.count</a></code>,
+arguments to the function <code><a href="../../lattice/help/equal.count.html">equal.count</a></code>,
 i.e. <code>number</code> (number of intervals to divide into)
 and <code>overlap</code> (the fraction of overlap between cuts, default
 0.5). If <code>cut</code> is numeric this is passed as the
 <code>number</code> argument.
 </p>
 <p><code>cut = TRUE</code> tries to choose an appropriate number of cuts (up
-to a maximum of 6), using <code><a href="banking.html">banking</a></code>, and assuming a square
+to a maximum of 6), using <code><a href="../../lattice/help/banking.html">banking</a></code>, and assuming a square
 plot region. This should have the effect of minimising wasted space
 when <code>aspect = "xy"</code>.
 </p>
@@ -104,7 +104,7 @@ when <code>aspect = "xy"</code>.
 <td>
 
 <p>graphical arguments, which are processed and eventually passed to
-<code><a href="panel.xyplot.html">panel.xyplot</a></code>.
+<code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code>.
 These arguments can also be vectors or (named) lists, see Details
 for more information.
 </p>
@@ -113,7 +113,7 @@ for more information.
 <td>
 
 <p>a logical, or a list describing how to draw a key. See the
-<code>auto.key</code> entry in <code><a href="xyplot.html">xyplot</a></code>. The default here is
+<code>auto.key</code> entry in <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>. The default here is
 to draw lines, not points, and any specified style arguments should
 show up automatically.
 </p>
@@ -123,15 +123,15 @@ show up automatically.
 
 <p>the panel function. It is recommended to leave this alone, but one
 can pass a <code>panel.groups</code> argument which is handled by
-<code><a href="panel.superpose.html">panel.superpose</a></code> for each series. 
+<code><a href="../../lattice/help/panel.superpose.html">panel.superpose</a></code> for each series. 
 </p>
 </td></tr>
 <tr valign="top"><td><code>par.settings</code></td>
 <td>
 
 <p>style settings beyond the standard <code>col</code>, <code>lty</code>,
-<code>lwd</code>, etc; see <code><a href="trellis.par.get.html">trellis.par.set</a></code> and
-<code><a href="simpleTheme.html">simpleTheme</a></code>.
+<code>lwd</code>, etc; see <code><a href="../../lattice/help/trellis.par.set.html">trellis.par.set</a></code> and
+<code><a href="../../lattice/help/simpleTheme.html">simpleTheme</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>layout</code></td>
@@ -151,7 +151,7 @@ order of columns in <code>x</code>.
 <tr valign="top"><td><code>xlab, ylab</code></td>
 <td>
 
-<p>X axis and Y axis labels; see <code><a href="xyplot.html">xyplot</a></code>. Note in
+<p>X axis and Y axis labels; see <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>. Note in
 particular that <code>ylab</code> may be a character vector, in which case the
 labels are spaced out equally, to correspond to the panels;
 but <em>NOTE</em> in this case the vector should be reversed OR the
@@ -188,9 +188,9 @@ The <code>screens</code> argument can be specified in a similar way.
 <h3>Value</h3>
 
 <p>An object of class <code>"trellis"</code>. The
-<code><a href="update.trellis.html">update</a></code> method can be used to
+<code><a href="../help/update.trellis.html">update</a></code> method can be used to
 update components of the object and the
-<code><a href="print.trellis.html">print</a></code> method (usually called by
+<code><a href="../help/print.trellis.html">print</a></code> method (usually called by
 default) will plot it on an appropriate plotting device.
 </p>
 
@@ -217,11 +217,11 @@ Visualization with R</em>, Springer.
 
 <h3>See Also</h3>
 
-<p><code><a href="xyplot.html">xyplot</a></code>,
-<code><a href="panel.xyplot.html">panel.xyplot</a></code>,
+<p><code><a href="../../lattice/help/xyplot.html">xyplot</a></code>,
+<code><a href="../../lattice/help/panel.xyplot.html">panel.xyplot</a></code>,
 <code><a href="../../stats/html/plot.ts.html">plot.ts</a></code>,
 <code><a href="../../stats/html/ts.html">ts</a></code>,
-<code><a href="../../zoo/html/xyplot.zoo.html">xyplot.zoo</a></code> in the <span class="pkg">zoo</span> package.
+<code><a href="../../zoo/help/xyplot.zoo.html">xyplot.zoo</a></code> in the <span class="pkg">zoo</span> package.
 </p>
 
 
@@ -269,5 +269,5 @@ xyplot(z, screens = list(a = "primary (a)", "other (b &amp; c)"),
   pch = list(a = 2, c = 3), auto.key = list(type = "o"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

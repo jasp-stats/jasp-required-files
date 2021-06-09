@@ -1,5 +1,5 @@
 
-R version 4.0.3 Patched (2021-01-08 r79820) -- "Bunny-Wunnies Freak Out"
+R Under development (unstable) (2021-04-16 r80178) -- "Unsuffered Consequences"
 Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -1442,7 +1442,7 @@ Y    4   10   16   22
 > ## PR#1115 (saving strings with ascii=TRUE)
 > x <- y <- unlist(as.list(
 +     parse(text=paste("\"\\", as.character(as.octmode(1:255)), "\"",sep=""))))
-> save(x, ascii=TRUE, file=(fn <- tempfile()))
+> save(x, ascii=TRUE, file=(fn <- tempfile(tmpdir = getwd())))
 > load(fn)
 > all(x==y)
 [1] TRUE
@@ -1544,8 +1544,8 @@ Eye:Sex   3   11.764 190.64
 > dim(m) <- c(2,2)
 > m
      [,1]      [,2]       
-[1,] Integer,3 3.141593   
-[2,] Integer,3 Character,3
+[1,] integer,3 3.141593   
+[2,] integer,3 character,3
 > m[,2]
 [[1]]
 [1] 3.141593
@@ -1562,8 +1562,8 @@ Eye:Sex   3   11.764 190.64
 > m <- list(a1=1:3, a2=4:6, a3=pi, a4=c("a","b","c"))
 > matrix(m, 2, 2)
      [,1]      [,2]       
-[1,] Integer,3 3.141593   
-[2,] Integer,3 Character,3
+[1,] integer,3 3.141593   
+[2,] integer,3 character,3
 > ## 1.4.1 gave `Unimplemented feature in copyVector'
 > 
 > x <- vector("list",6)
@@ -1571,7 +1571,7 @@ Eye:Sex   3   11.764 190.64
 > x[1,2] <- list(letters[10:11])
 > x
      [,1] [,2]        [,3]
-[1,] NULL Character,2 NULL
+[1,] NULL character,2 NULL
 [2,] NULL NULL        NULL
 > ## 1.4.1 gave `incompatible types in subset assignment'
 > 
@@ -1580,8 +1580,8 @@ Eye:Sex   3   11.764 190.64
 > m <- list(as.integer(1), pi, 3+5i, "testit", TRUE, factor("foo"))
 > dim(m) <- c(1, 6)
 > m
-     [,1] [,2]     [,3] [,4]     [,5] [,6]    
-[1,] 1    3.141593 3+5i "testit" TRUE factor,1
+     [,1] [,2]     [,3] [,4]     [,5] [,6]
+[1,] 1    3.141593 3+5i "testit" TRUE foo 
 > ## prior to 1.5.0 had quotes for 2D case (but not kD, k > 2),
 > ## gave "numeric,1" etc, (even "numeric,1" for integers and factors)
 > 
@@ -3259,7 +3259,7 @@ Error in `[.data.frame`(x, 1, c("a", "c")) : undefined columns selected
 [31] print         prompt        rbind         row.names     row.names<-  
 [36] rowsum        split         split<-       stack         str          
 [41] subset        summary       t             tail          transform    
-[46] type.convert  unique        unstack       within       
+[46] type.convert  unique        unstack       within        xtfrm        
 > meth2gen("dendrogram")
  [1] [[            as.dendrogram as.hclust     cophenetic    cut          
  [6] labels        merge         nobs          plot          print        
@@ -4181,7 +4181,7 @@ Warning message:
 +                 c("2004-01-01", "2004-02-01", "2004-03-01"),
 +                 c("2004-01-01 12:00", "2004-02-01 12:00", "2004-03-01 12:00")),
 +               3, 6)
-> foo <- tempfile()
+> foo <- tempfile(tmpdir = getwd())
 > write.table(Mat, foo, col.names = FALSE, row.names = FALSE)
 > read.table(foo, colClasses = c(NA, NA, "NULL", "character", "Date", "POSIXct"),
 +            stringsAsFactors=TRUE)
@@ -4406,8 +4406,8 @@ Levels: "a" "a \" test" "b" NA
 > dim(x) <- c(2,2)
 > x
      [,1]      [,2]     
-[1,] 1         Integer,2
-[2,] Integer,2 5        
+[1,] 1         integer,2
+[2,] integer,2 5        
 > write.table(x)
 "V1" "V2"
 "1" 1 3:4
@@ -4517,7 +4517,7 @@ Error in stats:::add1.default(fit, ~. + x2) :
 > 
 > 
 > ## (PR#7789) escaped quotes in the first five lines for read.table
-> tf <- tempfile()
+> tf <- tempfile(tmpdir = getwd())
 > x <- c("6 'TV2  Shortland Street'",
 +        "2 'I don\\\'t watch TV at 7'",
 +        "1 'I\\\'m not bothered, whatever that looks good'",
@@ -5726,7 +5726,7 @@ list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_,
 list(a = NA, b = as.integer(NA), c = as.double(NA), d = as.complex(NA), 
     e = 1., f = as.integer(1), g = 1:3, h = as.integer(c(NA, 
     1, 2, 3)), i = as.character(NA), j = c("foo", NA, "bar"))
-> tmp <- tempfile()
+> tmp <- tempfile(tmpdir = getwd())
 > dput(x, tmp, control="all")
 > stopifnot(identical(dget(tmp), x))
 > dput(x, tmp, control=c("all", "S_compatible"))
@@ -6133,7 +6133,7 @@ zero  one
 > x <- as.raw(65:74)
 > readChar(x, nchar=c(3,3,0,3,3,3))
 [1] "ABC" "DEF" ""    "GHI" "J"  
-> f <- tempfile()
+> f <- tempfile(tmpdir = getwd())
 > writeChar("ABCDEFGHIJ", con=f, eos=NULL)
 > readChar(f, nchar=c(3,3,0,3,3,3))
 [1] "ABC" "DEF" ""    "GHI" "J"  
@@ -6363,7 +6363,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x2f23870>
+<bytecode: 0x2177a80>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6374,7 +6374,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x2f23870>
+<bytecode: 0x2177a80>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6386,7 +6386,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x2f23870>
+<bytecode: 0x2177a80>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -7368,10 +7368,20 @@ Warning messages:
 > x <- Sys.time()
 > all.equal(x,x)
 [1] TRUE
-> all.equal(x, as.POSIXlt(x))
+> 
+> # FIXME: check.tzone = FALSE needed because since 79037, all.equal.POSIXt
+> # strictly reports "" and the current time zone (even from TZ environment
+> # variable) as different.  The conversion round-trip from Sys.time()
+> # (POSIXct) via POSIXlt and back to POSIXct creates an object with the
+> # current time zone, yet the original is with "" as time zone (and both
+> # refer to the same time zone).
+> all.equal(x, as.POSIXlt(x), check.tzone = FALSE)
 [1] TRUE
+> 
+> all.equal(x, as.numeric(x))  # errored in R <= 4.0.2
+[1] "'current' is not a POSIXt"
 > all.equal(x, as.POSIXlt(x, tz = "EST5EDT"))
-[1] TRUE
+[1] "'tzone' attributes are inconsistent ('' and 'EST5EDT')"
 > all.equal(x, x+1e-4)
 [1] TRUE
 > isTRUE(all.equal(x, x+0.002)) # message will depend on representation error
@@ -8046,13 +8056,45 @@ mean of x
 > ## now shows the *length* of "someA"
 > 
 > 
-> ## summaryRprof() bug PR#15886 :
-> Rprof(tf <- tempfile("Rprof.out"), memory.profiling=TRUE, line.profiling=FALSE)
-> out <- lapply(1:10000, rnorm, n= 512)
-> Rprof(NULL)
-> if(interactive())
-+     print(length(readLines(tf))) # ca. 10 .. 20 lines
-> op <- options(warn = 2) # no warnings, even !
-> for (cs in 1:21) s <- summaryRprof(tf, memory="tseries", chunksize=cs)
-> options(op) ## "always" triggered an error (or a warning) in R <= 3.6.3
+> ## summaryRprof() bug PR#15886  + "Rprof() not enabled" PR#17836
+> if(capabilities("Rprof")) {
++     Rprof(tf <- tempfile("Rprof.out", tmpdir = getwd()), memory.profiling=TRUE, line.profiling=FALSE)
++     out <- lapply(1:10000, rnorm, n= 512)
++     Rprof(NULL)
++     if(interactive())
++         print(length(readLines(tf))) # ca. 10 .. 20 lines
++     op <- options(warn = 2) # no warnings, even !
++     for (cs in 1:21) s <- summaryRprof(tf, memory="tseries", chunksize=cs)
++     ## "always" triggered an error (or a warning) in R <= 3.6.3
++     options(op)
++     unlink(tf)
++ }
+> 
+> 
+> ## printing *named* complex vectors (*not* arrays), PR#17868 (and PR#18019):
+> a <- 1:12; (z <- a + a*1i); names(z) <- letters[seq_along(z)]; z
+ [1]  1+ 1i  2+ 2i  3+ 3i  4+ 4i  5+ 5i  6+ 6i  7+ 7i  8+ 8i  9+ 9i 10+10i
+[11] 11+11i 12+12i
+     a      b      c      d      e      f      g      h      i      j      k 
+ 1+ 1i  2+ 2i  3+ 3i  4+ 4i  5+ 5i  6+ 6i  7+ 7i  8+ 8i  9+ 9i 10+10i 11+11i
+     l 
+12+12i
+> ## fixed in R-devel in July 2020;  R 4.0.3 patched on Dec 26, 2020
+> 
+> 
+> ## identical(*) on "..." object
+> (ddd <- (function(...) environment())(1)$...) # <...>
+<...>
+>  dd2 <- (function(...) environment())(1)$...
+> stopifnot( identical(ddd, dd2) )
+> ## In R <= 4.0.3,  printed to console (no warning, no message!):
+> ## "Unknown Type: ... (11)"
+> 
+> 
+> ## printCoefmat() should keep NaN values (PR#17336)
+> ##cm <- summary(lm(c(0,0,0) ~ 1))$coefficients
+> cm <- cbind(Estimate = 0, SE = 0, t = NaN, "Pr(>|t|)" = NaN)
+> printCoefmat(cm)  # NaN's were replaced by NA in R < 4.1.0
+     Estimate SE   t Pr(>|t|)
+[1,]        0  0 NaN      NaN
 > 

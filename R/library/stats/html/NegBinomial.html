@@ -87,7 +87,7 @@ The mean is <i>&mu; = n(1-p)/p</i> and variance <i>n(1-p)/p^2</i>.
 </p>
 <p>A negative binomial distribution can also arise as a mixture of
 Poisson distributions with mean distributed as a gamma distribution
-(see <code><a href="GammaDist.html">pgamma</a></code>) with scale parameter <code>(1 - prob)/prob</code>
+(see <code><a href="../../stats/help/pgamma.html">pgamma</a></code>) with scale parameter <code>(1 - prob)/prob</code>
 and shape parameter <code>size</code>.  (This definition allows non-integer
 values of <code>size</code>.)
 </p>
@@ -137,9 +137,9 @@ values are returned since R version 4.0.0.
 <h3>Source</h3>
 
 <p><code>dnbinom</code> computes via binomial probabilities, using code
-contributed by Catherine Loader (see <code><a href="Binomial.html">dbinom</a></code>).
+contributed by Catherine Loader (see <code><a href="../../stats/help/dbinom.html">dbinom</a></code>).
 </p>
-<p><code>pnbinom</code> uses <code><a href="Beta.html">pbeta</a></code>.
+<p><code>pnbinom</code> uses <code><a href="../../stats/help/pbeta.html">pbeta</a></code>.
 </p>
 <p><code>qnbinom</code> uses the Cornish&ndash;Fisher Expansion to include a skewness
 correction to a normal approximation, followed by a search.
@@ -153,9 +153,9 @@ Springer-Verlag, New York. Page 480.
 
 <h3>See Also</h3>
 
-<p><a href="Distributions.html">Distributions</a> for standard distributions, including
-<code><a href="Binomial.html">dbinom</a></code> for the binomial, <code><a href="Poisson.html">dpois</a></code> for the
-Poisson and <code><a href="Geometric.html">dgeom</a></code> for the geometric distribution, which
+<p><a href="../../stats/help/Distributions.html">Distributions</a> for standard distributions, including
+<code><a href="../../stats/help/dbinom.html">dbinom</a></code> for the binomial, <code><a href="../../stats/help/dpois.html">dpois</a></code> for the
+Poisson and <code><a href="../../stats/help/dgeom.html">dgeom</a></code> for the geometric distribution, which
 is a special case of the negative binomial.
 </p>
 
@@ -193,5 +193,5 @@ barplot(rbind(h1$counts, h2$counts, h3$counts),
         names.arg = round(h1$breaks[-length(h1$breaks)]))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

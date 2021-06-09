@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Tweedie family in which the mean, power and scale parameters can all depend on smooth linear predictors. Restricted to estimation via the extended Fellner Schall method of Wood and Fasiolo (2017). Only usable with <code><a href="gam.html">gam</a></code>. Tweedie distributions are exponential family with variance given by <i>s*m^p</i> where <i>s</i> is a scale parameter, <i>p</i> a parameter (here between 1 and 2) and <i>m</i> is the mean. 
+<p>Tweedie family in which the mean, power and scale parameters can all depend on smooth linear predictors. Restricted to estimation via the extended Fellner Schall method of Wood and Fasiolo (2017). Only usable with <code><a href="../../mgcv/help/gam.html">gam</a></code>. Tweedie distributions are exponential family with variance given by <i>s*m^p</i> where <i>s</i> is a scale parameter, <i>p</i> a parameter (here between 1 and 2) and <i>m</i> is the mean. 
 </p>
 
 
@@ -45,7 +45,7 @@ where <code>N</code> has a Poisson distribution. The p=1 case is a generalizatio
 distribution supported on integer multiples of the scale parameter. For 1&lt;p&lt;2 the distribution is supported on the 
 positive reals with a point mass at zero. p=2 is a gamma distribution. As p gets very close to 1 the continuous 
 distribution begins to converge on the discretely supported limit at p=1, and is therefore highly multimodal. 
-See <code><a href="ldTweedie.html">ldTweedie</a></code> for more on this behaviour.
+See <code><a href="../../mgcv/help/ldTweedie.html">ldTweedie</a></code> for more on this behaviour.
 </p>
 <p>The Tweedie density involves a normalizing constant with no closed form, so this is evaluated using the series 
 evaluation method of Dunn and Smyth (2005), with extensions to also compute the derivatives w.r.t. <code>p</code> and the scale parameter. 
@@ -91,7 +91,7 @@ doi: <a href="https://doi.org/10.1080/01621459.2016.1180986">10.1080/01621459.20
 
 <h3>See Also</h3>
 
-<p><code><a href="Tweedie.html">Tweedie</a></code>, <code><a href="ldTweedie.html">ldTweedie</a></code>, <code><a href="rTweedie.html">rTweedie</a></code></p>
+<p><code><a href="../../mgcv/help/Tweedie.html">Tweedie</a></code>, <code><a href="../../mgcv/help/ldTweedie.html">ldTweedie</a></code>, <code><a href="../../mgcv/help/rTweedie.html">rTweedie</a></code></p>
 
 
 <h3>Examples</h3>
@@ -113,5 +113,5 @@ print(b)
 rm(dat)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

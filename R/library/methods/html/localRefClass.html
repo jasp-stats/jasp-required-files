@@ -9,14 +9,14 @@
 
 <h3>Description</h3>
 
-<p>Local reference classes are modified <a href="refClass.html">ReferenceClasses</a> that
+<p>Local reference classes are modified <a href="../../methods/help/ReferenceClasses.html">ReferenceClasses</a> that
 isolate the objects to the local frame.  Therefore, they do <em>not</em>
 propagate changes back to the calling environment.   At the same time,
 they use the reference field semantics locally, avoiding the automatic
 duplication applied to standard <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects.
 </p>
 <p>The current implementation has no special construction.  To create a
-local reference class, call <code><a href="refClass.html">setRefClass</a>()</code> with a
+local reference class, call <code><a href="../../methods/help/setRefClass.html">setRefClass</a>()</code> with a
 <code>contains=</code> argument that includes <code>"localRefClass"</code>.  See
 the example below.
 </p>
@@ -90,7 +90,7 @@ x1 &lt;- myIter(BigData = rnorm(1000), twiddle = tw) # OK, not REALLY big
 
 twiddler &lt;- function(x, n) {
   x$ensureLocal() # see the Details.  Not really needed in this example
-  for(i in seq(length = n)) {
+  for(i in seq_len(n)) {
       x$twiddle &lt;- x$twiddle + rnorm(length(x$twiddle))
       ## then do something ....
       ## Snooping in gdb, etc will show that x$BigData is not copied
@@ -104,5 +104,5 @@ stopifnot(identical(x1$twiddle, tw), !identical(x1$twiddle, x2$twiddle))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

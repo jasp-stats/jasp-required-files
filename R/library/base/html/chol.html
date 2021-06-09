@@ -42,8 +42,7 @@ applies to numeric (or logical) symmetric, positive-definite matrices.</p>
 </td></tr>
 <tr valign="top"><td><code>LINPACK</code></td>
 <td>
-<p>logical.  Should LINPACK be used (defunct, ignored with
-a warning)?</p>
+<p>logical.  Should LINPACK be used (now an error)?</p>
 </td></tr>
 <tr valign="top"><td><code>tol</code></td>
 <td>
@@ -131,11 +130,11 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="chol2inv.html">chol2inv</a></code> for its <em>inverse</em> (without pivoting),
-<code><a href="backsolve.html">backsolve</a></code> for solving linear systems with upper
+<p><code><a href="../../base/help/chol2inv.html">chol2inv</a></code> for its <em>inverse</em> (without pivoting),
+<code><a href="../../base/help/backsolve.html">backsolve</a></code> for solving linear systems with upper
 triangular left sides.
 </p>
-<p><code><a href="qr.html">qr</a></code>, <code><a href="svd.html">svd</a></code> for related matrix factorizations.
+<p><code><a href="../../base/help/qr.html">qr</a></code>, <code><a href="../../base/help/svd.html">svd</a></code> for related matrix factorizations.
 </p>
 
 
@@ -170,5 +169,5 @@ try(chol(m))  # fails
 crossprod(Q)  # not equal to m
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

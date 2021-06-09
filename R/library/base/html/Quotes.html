@@ -108,15 +108,18 @@ strings, and double quotes in double-quoted strings.
 
 <p>Alternative forms for the last two are <span class="samp">\u{nnnn}</span> and
 <span class="samp">\U{nnnnnnnn}</span>.  All except the Unicode escape sequences are
-also supported when reading character strings by <code><a href="scan.html">scan</a></code>
+also supported when reading character strings by <code><a href="../../base/help/scan.html">scan</a></code>
 and <code><a href="../../utils/html/read.table.html">read.table</a></code> if <code>allowEscapes = TRUE</code>.  Unicode
 escapes can be used to enter Unicode characters not in the current
 locale's charset (when the string will be stored internally in UTF-8).
 </p>
+<p>As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.1.0 the largest allowed <span class="samp">\U</span> value is
+<span class="samp">\U10FFFF</span>, the maximum Unicode point.
+</p>
 <p>The parser does not allow the use of both octal/hex and Unicode
 escapes in a single string.
 </p>
-<p>These forms will also be used by <code><a href="print.default.html">print.default</a></code>
+<p>These forms will also be used by <code><a href="../../base/help/print.default.html">print.default</a></code>
 when outputting non-printable characters (including backslash).
 </p>
 <p>Embedded nuls are not allowed in character strings, so using escapes
@@ -139,7 +142,7 @@ between the closing delimiter and the closing quote.
 
 <p>Identifiers consist of a sequence of letters, digits, the period
 (<code>.</code>) and the underscore.  They must not start with a digit nor
-underscore, nor with a period followed by a digit.  <a href="Reserved.html">Reserved</a>
+underscore, nor with a period followed by a digit.  <a href="../../base/help/Reserved.html">Reserved</a>
 words are not valid identifiers.
 </p>
 <p>The definition of a <em>letter</em> depends on the current locale, but
@@ -148,7 +151,7 @@ only ASCII digits are considered to be digits.
 <p>Such identifiers are also known as <em>syntactic names</em> and may be used
 directly in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> code.  Almost always, other names can be used
 provided they are quoted.  The preferred quote is the backtick
-(<span class="samp">`</span>), and <code><a href="deparse.html">deparse</a></code> will normally use it, but under
+(<span class="samp">`</span>), and <code><a href="../../base/help/deparse.html">deparse</a></code> will normally use it, but under
 many circumstances single or double quotes can be used (as a character
 constant will often be converted to a name).  One place where
 backticks may be essential is to delimit variable names in formulae:
@@ -158,22 +161,22 @@ see <code><a href="../../stats/html/formula.html">formula</a></code>.
 
 <h3>Note</h3>
 
-<p>Handling of UTF-16 surrogate pairs in <span class="samp">\unnnn\uoooo</span> form is
-platform-dependent: these are better specified by <span class="samp">\U</span>, for
-example <span class="samp">\U1D11E</span> rather than <span class="samp">\uD834\uDD1E</span>.  The
-handling of unpaired values in the surrogate range such as in the
-string <code>"abc\uD834de"</code> is even more platform-dependent and may
-become an error.
+<p>UTF-16 surrogate pairs in <span class="samp">\unnnn\uoooo</span> form will be converted
+to a single Unicode point, so for example <span class="samp">\uD834\uDD1E</span> gives
+the single character <span class="samp">\U1D11E</span>.  However, unpaired values in
+the surrogate range such as in the string <code>"abc\uD834de"</code> will be
+converted to a non-standard-conformant UTF-8 string (as is done by most
+other software): this may change in future.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="Syntax.html">Syntax</a></code> for other aspects of the syntax.
+<p><code><a href="../../base/help/Syntax.html">Syntax</a></code> for other aspects of the syntax.
 </p>
-<p><code><a href="sQuote.html">sQuote</a></code> for quoting English text.
+<p><code><a href="../../base/help/sQuote.html">sQuote</a></code> for quoting English text.
 </p>
-<p><code><a href="shQuote.html">shQuote</a></code> for quoting OS commands.
+<p><code><a href="../../base/help/shQuote.html">shQuote</a></code> for quoting OS commands.
 </p>
 <p>The  &lsquo;R Language Definition&rsquo; manual.
 </p>
@@ -251,7 +254,7 @@ stopifnot(identical(nn, n2))
 ## and bug 16098 https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=16098
 ## This character may or not be printable (the platform decides)
 ## and if it is, may not have a glyph in the font used.
-"\U1d4d7" # On Windows this gives the incorrect value of "\Ud4d7"
+"\U1d4d7" # On Windows this used to give the incorrect value of "\Ud4d7"
 
 ## nul characters (for terminating strings in C) are not allowed (parse errors)
 ## Not run: 
@@ -269,5 +272,5 @@ r"(use both "double" and 'single' quotes)"
 r"---(\1--)-)---"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

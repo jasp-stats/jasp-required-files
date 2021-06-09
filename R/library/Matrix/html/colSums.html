@@ -10,10 +10,10 @@
 <h3>Description</h3>
 
 <p>Form row and column sums and means for
-objects, for <code><a href="sparseMatrix-class.html">sparseMatrix</a></code> the result may
-optionally be sparse (<code><a href="sparseVector-class.html">sparseVector</a></code>), too.
+objects, for <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code> the result may
+optionally be sparse (<code><a href="../../Matrix/help/sparseVector-class.html">sparseVector</a></code>), too.
 Row or column names are kept respectively as for <span class="pkg">base</span> matrices
-and <code><a href="colSums.html">colSums</a></code> methods, when the result is
+and <code><a href="../../Matrix/help/colSums.html">colSums</a></code> methods, when the result is
 <code><a href="../../base/html/numeric.html">numeric</a></code> vector.
 </p>
 
@@ -46,7 +46,7 @@ rowMeans(x, na.rm = FALSE,
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>a Matrix, i.e., inheriting from  <code><a href="Matrix-class.html">Matrix</a></code>.</p>
+<p>a Matrix, i.e., inheriting from  <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>na.rm</code></td>
 <td>
@@ -65,9 +65,9 @@ generic compatibility.</p>
 <tr valign="top"><td><code>sparseResult</code></td>
 <td>
 <p>logical indicating if the result should be sparse,
-i.e., inheriting from class <code><a href="sparseVector-class.html">sparseVector</a></code>.  Only
+i.e., inheriting from class <code><a href="../../Matrix/help/sparseVector-class.html">sparseVector</a></code>.  Only
 applicable when <code>x</code> is inheriting from a
-<code><a href="sparseMatrix-class.html">sparseMatrix</a></code> class.</p>
+<code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code> class.</p>
 </td></tr>
 </table>
 
@@ -75,18 +75,18 @@ applicable when <code>x</code> is inheriting from a
 <h3>Value</h3>
 
 <p>returns a numeric vector if <code>sparseResult</code> is <code>FALSE</code> as per
-default.  Otherwise, returns a <code><a href="sparseVector-class.html">sparseVector</a></code>.
+default.  Otherwise, returns a <code><a href="../../Matrix/help/sparseVector-class.html">sparseVector</a></code>.
 </p>
 <p><code><a href="../../base/html/dimnames.html">dimnames</a>(x)</code> are only kept (as <code><a href="../../base/html/names.html">names</a>(v)</code>)
 when the resulting <code>v</code> is <code><a href="../../base/html/numeric.html">numeric</a></code>, since
-<code><a href="sparseVector.html">sparseVector</a></code>s do not have names.
+<code><a href="../../Matrix/help/sparseVector.html">sparseVector</a></code>s do not have names.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="../../base/html/colSums.html">colSums</a></code> and the
-<code><a href="sparseVector-class.html">sparseVector</a></code> classes.
+<p><code><a href="../../base/help/colSums.html">colSums</a></code> and the
+<code><a href="../../Matrix/help/sparseVector-class.html">sparseVector</a></code> classes.
 </p>
 
 
@@ -125,5 +125,5 @@ stopifnot(all.equal(colSums(M),
 					   .Names = paste0("r", 1:7))))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

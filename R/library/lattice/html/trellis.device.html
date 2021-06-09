@@ -50,7 +50,7 @@ will be available.
 black and white.  Defaults to <code>FALSE</code> for postscript devices,
 <code>TRUE</code> otherwise.  Note that this only applies to the initial
 choice of colors, which can be overridden using <code>theme</code> or
-subsequent calls to <code><a href="trellis.par.get.html">trellis.par.set</a></code> (and by arguments
+subsequent calls to <code><a href="../../lattice/help/trellis.par.set.html">trellis.par.set</a></code> (and by arguments
 supplied directly in high level calls for some settings).
 </p>
 </td></tr>
@@ -112,7 +112,7 @@ individual devices for admissible arguments.
 graphical parameters (colors, line types, fonts, etc.) from a
 customizable &ldquo;settings&rdquo; list.  This functionality is analogous
 to <code><a href="../../graphics/html/par.html">par</a></code> for standard <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> graphics and, together with
-<code><a href="lattice.options.html">lattice.options</a></code>, mostly supplants it (<code><a href="../../graphics/html/par.html">par</a></code>
+<code><a href="../../lattice/help/lattice.options.html">lattice.options</a></code>, mostly supplants it (<code><a href="../../graphics/html/par.html">par</a></code>
 settings are mostly ignored by Lattice).  Unlike <code><a href="../../graphics/html/par.html">par</a></code>,
 Trellis settings can be controlled separately for each different
 device type (but not concurrently for different instances of the same
@@ -152,7 +152,7 @@ argument to <code>trellis.par.set</code>, or even as <code>theme</code> in
 </p>
 <p><code>col.whitebg</code> returns a similar (but smaller) list that is
 suitable as the <code>theme</code> argument to <code>trellis.device</code> and
-<code><a href="trellis.par.get.html">trellis.par.set</a></code>.  It contains settings values which
+<code><a href="../../lattice/help/trellis.par.set.html">trellis.par.set</a></code>.  It contains settings values which
 provide colors suitable for plotting on a white background.  Note that
 the name <code>col.whitebg</code> is somewhat of a misnomer, since it
 actually sets the background to transparent rather than white.
@@ -186,17 +186,17 @@ Visualization with R</em>, Springer.
 
 <h3>See Also</h3>
 
-<p><code><a href="Lattice.html">Lattice</a></code> for an overview of the <code>lattice</code> package.
+<p><code><a href="../../lattice/help/Lattice.html">Lattice</a></code> for an overview of the <code>lattice</code> package.
 </p>
 <p><code><a href="../../grDevices/html/Devices.html">Devices</a></code> for valid choices of <code>device</code> on your
 platform.
 </p>
-<p><code><a href="trellis.par.get.html">trellis.par.get</a></code> and <code><a href="trellis.par.get.html">trellis.par.set</a></code> can be
+<p><code><a href="../../lattice/help/trellis.par.get.html">trellis.par.get</a></code> and <code><a href="../../lattice/help/trellis.par.set.html">trellis.par.set</a></code> can be
 used to query and modify the settings <em>after</em> a device has been
 initialized.  The <code>par.settings</code> argument to high level
-functions, described in <code><a href="xyplot.html">xyplot</a></code>, can be used to attach
+functions, described in <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>, can be used to attach
 transient settings to a <code>"trellis"</code> object.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

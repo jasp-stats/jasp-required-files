@@ -19,9 +19,11 @@ Type 'q()' to quit R.
 > options(digits = 6)
 > data(votes.repub)
 > 
+> ## IGNORE_RDIFF_BEGIN
 > source(system.file("test-tools.R", package = "cluster"), keep.source = FALSE)
 Loading required package: tools
 doExtras <- cluster:::doExtras() :  TRUE
+> ## IGNORE_RDIFF_END
 > ## -> showProc.time() ...  & doExtras
 > 
 > agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)

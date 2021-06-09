@@ -10,7 +10,7 @@
 <h3>Description</h3>
 
 <p>A generic function coercing an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object to an
-<code><a href="environment.html">environment</a></code>.  A number or a character string is
+<code><a href="../../base/help/environment.html">environment</a></code>.  A number or a character string is
 converted to the corresponding environment on the search path.
 </p>
 
@@ -34,10 +34,10 @@ is <code>-1</code>, the environment it is called from.  If
 it is a character string, match the string to the names on the
 search list.
 </p>
-<p>If it is a list, the equivalent of <code><a href="list2env.html">list2env</a>(x,
+<p>If it is a list, the equivalent of <code><a href="../../base/help/list2env.html">list2env</a>(x,
       parent = emptyenv())</code> is returned.
 </p>
-<p>If <code><a href="is.object.html">is.object</a>(x)</code> is true and it has a <code><a href="class.html">class</a></code>
+<p>If <code><a href="../../base/help/is.object.html">is.object</a>(x)</code> is true and it has a <code><a href="../../base/help/class.html">class</a></code>
 for which an <code>as.environment</code> method is found, that is used.
 </p>
 </td></tr>
@@ -46,8 +46,8 @@ for which an <code>as.environment</code> method is found, that is used.
 
 <h3>Details</h3>
 
-<p>This is a <a href="Primitive.html">primitive</a> generic function: you can write methods to
-handle specific classes of objects, see <a href="InternalMethods.html">InternalMethods</a>.
+<p>This is a <a href="../../base/help/primitive.html">primitive</a> generic function: you can write methods to
+handle specific classes of objects, see <a href="../../base/help/InternalMethods.html">InternalMethods</a>.
 </p>
 
 
@@ -64,9 +64,9 @@ handle specific classes of objects, see <a href="InternalMethods.html">InternalM
 
 <h3>See Also</h3>
 
-<p><code><a href="environment.html">environment</a></code> for creation and manipulation,
-<code><a href="search.html">search</a></code>;
-<code><a href="list2env.html">list2env</a></code>.
+<p><code><a href="../../base/help/environment.html">environment</a></code> for creation and manipulation,
+<code><a href="../../base/help/search.html">search</a></code>;
+<code><a href="../../base/help/list2env.html">list2env</a></code>.
 </p>
 
 
@@ -82,5 +82,5 @@ ls(ee) # names of objects in ee
 utils::ls.str(ee)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

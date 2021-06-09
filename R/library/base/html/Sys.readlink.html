@@ -32,7 +32,7 @@ Sys.readlink(paths)
 <tr valign="top"><td><code>paths</code></td>
 <td>
 <p>character vector of file paths.  Tilde expansion is done:
-see <code><a href="path.expand.html">path.expand</a></code>.</p>
+see <code><a href="../../base/help/path.expand.html">path.expand</a></code>.</p>
 </td></tr>
 </table>
 
@@ -51,8 +51,8 @@ path does not exist or cannot be converted to the native encoding).
 
 <h3>See Also</h3>
 
-<p><code><a href="files.html">file.symlink</a></code> for the creation of symbolic links (and
-their Windows analogues), <code><a href="file.info.html">file.info</a></code>
+<p><code><a href="../../base/help/file.symlink.html">file.symlink</a></code> for the creation of symbolic links (and
+their Windows analogues), <code><a href="../../base/help/file.info.html">file.info</a></code>
 </p>
 
 
@@ -65,5 +65,5 @@ is.symlink &lt;- function(paths) isTRUE(nzchar(Sys.readlink(paths), keepNA=TRUE)
 is.symlink("/foo/bar")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

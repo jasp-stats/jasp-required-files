@@ -35,7 +35,7 @@ selectSuperClasses(Class, dropVirtual = FALSE, namesOnly = TRUE,
 <tr valign="top"><td><code>Class</code></td>
 <td>
 <p>name of the class or (more efficiently) the class
-definition object (see <code><a href="getClass.html">getClass</a></code>).</p>
+definition object (see <code><a href="../../methods/help/getClass.html">getClass</a></code>).</p>
 </td></tr>
 <tr valign="top"><td><code>dropVirtual</code></td>
 <td>
@@ -65,7 +65,7 @@ environment where the class definition of <code>Class</code> is found.</p>
 <tr valign="top"><td><code>ext</code></td>
 <td>
 <p>for <code>.selectSuperClasses()</code> only, a <code><a href="../../base/html/list.html">list</a></code>
-of class extensions, typically <code><a href="getClass.html">getClassDef</a>(..)@contains</code>.</p>
+of class extensions, typically <code><a href="../../methods/help/getClassDef.html">getClassDef</a>(..)@contains</code>.</p>
 </td></tr>
 </table>
 
@@ -74,7 +74,7 @@ of class extensions, typically <code><a href="getClass.html">getClassDef</a>(..)
 
 <p>a <code><a href="../../base/html/character.html">character</a></code> vector (if <code>namesOnly</code> is true, as per
 default) or a list of class extensions (as the <code>contains</code> slot in
-the result of <code><a href="getClass.html">getClass</a></code>).
+the result of <code><a href="../../methods/help/getClass.html">getClass</a></code>).
 </p>
 
 
@@ -88,8 +88,8 @@ be used for efficiency reasons by experienced useRs.
 
 <h3>See Also</h3>
 
-<p><code><a href="is.html">is</a></code>, <code><a href="getClass.html">getClass</a></code>; further, the more technical
-class <code><a href="classRepresentation-class.html">classRepresentation</a></code> documentation.
+<p><code><a href="../../methods/help/is.html">is</a></code>, <code><a href="../../methods/help/getClass.html">getClass</a></code>; further, the more technical
+class <code><a href="../../methods/help/classRepresentation-class.html">classRepresentation</a></code> documentation.
 </p>
 
 
@@ -104,9 +104,9 @@ setClass("C", contains = c("A", "B"))
 
 extends("C")   #--&gt;  "C"  "A" "B"  "Base" "Root"
 selectSuperClasses("C") # "A" "B"
-selectSuperClasses("C", direct=FALSE) # "A" "B"  "Base"  "Root"
-selectSuperClasses("C", dropVirt = TRUE, direct=FALSE)# ditto w/o "Root"
+selectSuperClasses("C", directOnly=FALSE) # "A" "B"  "Base"  "Root"
+selectSuperClasses("C", dropVirtual=TRUE, directOnly=FALSE)# ditto w/o "Root"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

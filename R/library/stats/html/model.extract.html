@@ -11,7 +11,7 @@
 
 <p>Returns the response, offset, subset, weights or other
 special components of a model frame passed as optional arguments to
-<code><a href="model.frame.html">model.frame</a></code>.
+<code><a href="../../stats/help/model.frame.html">model.frame</a></code>.
 </p>
 
 
@@ -51,12 +51,12 @@ Using either of latter two coerces the result to have storage mode
 <p><code>model.extract</code> is provided for compatibility with S, which does
 not have the more specific functions.  It is also useful to extract
 e.g. the <code>etastart</code> and <code>mustart</code> components of a
-<code><a href="glm.html">glm</a></code> fit.
+<code><a href="../../stats/help/glm.html">glm</a></code> fit.
 </p>
 <p><code>model.offset</code> and <code>model.response</code> are equivalent to
 <code>model.extract(, "offset")</code> and <code>model.extract(, "response")</code>
 respectively.  <code>model.offset</code> sums any terms specified by
-<code><a href="offset.html">offset</a></code> terms in the formula or by <code>offset</code> arguments
+<code><a href="../../stats/help/offset.html">offset</a></code> terms in the formula or by <code>offset</code> arguments
 in the call producing the model frame: it does check that the offset
 is numeric.
 </p>
@@ -72,7 +72,7 @@ is numeric.
 
 <h3>See Also</h3>
 
-<p><code><a href="model.frame.html">model.frame</a></code>, <code><a href="offset.html">offset</a></code></p>
+<p><code><a href="../../stats/help/model.frame.html">model.frame</a></code>, <code><a href="../../stats/help/offset.html">offset</a></code></p>
 
 
 <h3>Examples</h3>
@@ -93,5 +93,5 @@ names(a)
 stopifnot(model.extract(a, "something") == esoph$tobgp)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

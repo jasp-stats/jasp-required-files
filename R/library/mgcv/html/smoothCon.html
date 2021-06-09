@@ -56,7 +56,7 @@ constraints absorbed into the basis.</p>
 <td>
 <p>should the penalty coefficient matrix be scaled to have
 approximately the same &lsquo;size&rsquo; as the inner product of the terms model matrix
-with itself? This can improve the performance of <code><a href="gamm.html">gamm</a></code> fitting.</p>
+with itself? This can improve the performance of <code><a href="../../mgcv/help/gamm.html">gamm</a></code> fitting.</p>
 </td></tr>
 <tr valign="top"><td><code>n</code></td>
 <td>
@@ -83,7 +83,7 @@ variable is present. Useful for <code>bam</code> discrete method setup.</p>
 <tr valign="top"><td><code>sparse.cons</code></td>
 <td>
 <p>If <code>0</code> then default sum to zero constraints are used. If <code>-1</code> then sweep and 
-drop sum to zero constraints are used (default with <code><a href="bam.html">bam</a></code>). If <code>1</code> then one
+drop sum to zero constraints are used (default with <code><a href="../../mgcv/help/bam.html">bam</a></code>). If <code>1</code> then one
 coefficient is set to zero as constraint for sparse smooths. If <code>2</code> then sparse coefficient sum to zero 
 constraints are used for sparse smooths. None of these options has an effect if the smooth supplies its own 
 constraint.</p>
@@ -103,7 +103,7 @@ with the final diagonal elements zeroed (corresponding to the penalty nullspace)
 <h3>Details</h3>
 
 <p> These wrapper functions exist to allow smooths specified using
-<code><a href="smooth.construct.html">smooth.construct</a></code> and <code><a href="Predict.matrix.html">Predict.matrix</a></code> method
+<code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code> and <code><a href="../../mgcv/help/Predict.matrix.html">Predict.matrix</a></code> method
 functions to be re-parameterized so that identifiability constraints are no
 longer required in fitting. This is done in a user transparent
 manner, but is typically of no importance in use of GAMs. The routine's 
@@ -126,15 +126,15 @@ of a smooth, each multiplied by the dummy variable associated with one factor le
 the smooth object labels in the presence of <code>by</code> variables, to ensure that they are unique, it also stores 
 the level of a by variable factor associated with a smooth, for later use by <code>PredictMat</code>.
 </p>
-<p>The parameterization used by <code><a href="gam.html">gam</a></code> can be controlled via
-<code><a href="gam.control.html">gam.control</a></code>.
+<p>The parameterization used by <code><a href="../../mgcv/help/gam.html">gam</a></code> can be controlled via
+<code><a href="../../mgcv/help/gam.control.html">gam.control</a></code>.
 </p>
 
 
 <h3>Value</h3>
 
 <p> From <code>smoothCon</code> a list of <code>smooth</code> objects returned by the
-appropriate <code><a href="smooth.construct.html">smooth.construct</a></code> method function. If constraints are
+appropriate <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code> method function. If constraints are
 to be absorbed then the objects will have  attributes <code>"qrc"</code> and
 <code>"nCons"</code>. <code>"nCons"</code> is the number of constraints. <code>"qrc"</code> is
 usually the qr decomposition of the constraint matrix (returned by
@@ -162,8 +162,8 @@ values given in <code>object</code>.
 
 <h3>See Also</h3>
 
- <p><code><a href="gam.control.html">gam.control</a></code>,
-<code><a href="smooth.construct.html">smooth.construct</a></code>, <code><a href="Predict.matrix.html">Predict.matrix</a></code> </p>
+ <p><code><a href="../../mgcv/help/gam.control.html">gam.control</a></code>,
+<code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>, <code><a href="../../mgcv/help/Predict.matrix.html">Predict.matrix</a></code> </p>
 
 
 <h3>Examples</h3>
@@ -194,5 +194,5 @@ with(mcycle,plot(times,accel)) ## plot data
 lines(times,Xp%*%beta) ## overlay smooth
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

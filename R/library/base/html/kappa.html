@@ -47,7 +47,7 @@ rcond(x, norm = c("O","I","1"), triangular = FALSE, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>z, x</code></td>
 <td>
-<p>A matrix or a the result of <code><a href="qr.html">qr</a></code> or a fit from
+<p>A matrix or a the result of <code><a href="../../base/help/qr.html">qr</a></code> or a fit from
 a class inheriting from <code>"lm"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>exact</code></td>
@@ -58,7 +58,7 @@ a class inheriting from <code>"lm"</code>.</p>
 <td>
 <p>character string, specifying the matrix norm with respect
 to which the condition number is to be computed, see also
-<code><a href="norm.html">norm</a></code>.  For <code>rcond</code>, the default is <code>"O"</code>,
+<code><a href="../../base/help/norm.html">norm</a></code>.  For <code>rcond</code>, the default is <code>"O"</code>,
 meaning the <b>O</b>ne- or 1-norm.  The (currently only) other
 possible value is <code>"I"</code> for the infinity norm.</p>
 </td></tr>
@@ -91,7 +91,7 @@ for <code>kappa.*()</code>, notably <code>LINPACK</code> when <code>norm</code> 
 
 <p>For <code>kappa()</code>, if <code>exact = FALSE</code> (the default) the 2-norm
 condition number is estimated by a cheap approximation.  However, the
-exact calculation (via <code><a href="svd.html">svd</a></code>) is also likely to be quick
+exact calculation (via <code><a href="../../base/help/svd.html">svd</a></code>) is also likely to be quick
 enough.
 </p>
 <p>Note that the 1- and Inf-norm condition numbers are much faster to
@@ -155,9 +155,9 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="norm.html">norm</a></code>;
-<code><a href="svd.html">svd</a></code> for the singular value decomposition and
-<code><a href="qr.html">qr</a></code> for the <i>QR</i> one.
+<p><code><a href="../../base/help/norm.html">norm</a></code>;
+<code><a href="../../base/help/svd.html">svd</a></code> for the singular value decomposition and
+<code><a href="../../base/help/qr.html">qr</a></code> for the <i>QR</i> one.
 </p>
 
 
@@ -175,5 +175,5 @@ kappa(h9, exact = TRUE) == max(sv9) / min(sv9)
 kappa(h9, exact = TRUE) / kappa(h9)  # 0.677 (i.e., rel.error = 32%)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -61,11 +61,11 @@ specified instead of <code>dist</code>, which can be more efficient.</p>
 <tr valign="top"><td><code>full</code></td>
 <td>
 <p>logical or number in <i>[0,1]</i> specifying if a <em>full</em>
-silhouette should be computed for <code><a href="clara.html">clara</a></code> object.  When a
+silhouette should be computed for <code><a href="../../cluster/help/clara.html">clara</a></code> object.  When a
 number, say <i>f</i>, for a random <code><a href="../../base/html/sample.html">sample.int</a>(n, size = f*n)</code>
 of the data the silhouette values are computed.
 This requires <i>O((f*n)^2)</i> memory, since the full dissimilarity of
-the (sub)sample (see <code><a href="daisy.html">daisy</a></code>) is needed internally.</p>
+the (sub)sample (see <code><a href="../../cluster/help/daisy.html">daisy</a></code>) is needed internally.</p>
 </td></tr>
 <tr valign="top"><td><code>subset</code></td>
 <td>
@@ -203,12 +203,12 @@ ordered as by <code>sortSilhouette()</code>.  In that case,
 <h3>Note</h3>
 
 <p>While <code>silhouette()</code> is <em>intrinsic</em> to the
-<code><a href="partition.object.html">partition</a></code> clusterings, and hence has a (trivial) method
+<code><a href="../../cluster/help/partition.html">partition</a></code> clusterings, and hence has a (trivial) method
 for these, it is straightforward to get silhouettes from hierarchical
 clusterings from <code>silhouette.default()</code> with
 <code><a href="../../stats/html/cutree.html">cutree</a>()</code> and distance as input.
 </p>
-<p>By default, for <code><a href="clara.html">clara</a>()</code> partitions, the silhouette is
+<p>By default, for <code><a href="../../cluster/help/clara.html">clara</a>()</code> partitions, the silhouette is
 just for the best random <em>subset</em> used.  Use <code>full = TRUE</code>
 to compute (and later possibly plot) the full silhouette.
 </p>
@@ -221,13 +221,13 @@ Silhouettes: A graphical aid to the interpretation and validation of
 cluster analysis. <em>J. Comput. Appl. Math.</em>, <b>20</b>, 53&ndash;65.
 </p>
 <p>chapter 2 of Kaufman and Rousseeuw (1990), see
-the references in <code><a href="plot.agnes.html">plot.agnes</a></code>.
+the references in <code><a href="../../cluster/help/plot.agnes.html">plot.agnes</a></code>.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="partition.object.html">partition.object</a></code>, <code><a href="plot.partition.html">plot.partition</a></code>.
+<p><code><a href="../../cluster/help/partition.object.html">partition.object</a></code>, <code><a href="../../cluster/help/plot.partition.html">plot.partition</a></code>.
 </p>
 
 
@@ -283,5 +283,5 @@ si4 &lt;- silhouette(cutree(ar, k = 2), daisy(ruspini))
 plot(si4, nmax = 80, cex.names = 0.5)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

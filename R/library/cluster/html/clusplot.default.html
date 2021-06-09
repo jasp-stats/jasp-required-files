@@ -54,7 +54,7 @@ variables or some observations contain only missing values, the
 function stops with a warning message.
 </p>
 <p>In case of a dissimilarity matrix, <code>x</code> is the output of
-<code><a href="daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code> or a symmetric matrix.  Also,
+<code><a href="../../cluster/help/daisy.html">daisy</a></code> or <code><a href="../../stats/html/dist.html">dist</a></code> or a symmetric matrix.  Also,
 a vector of length <i>n*(n-1)/2</i> is allowed (where <i>n</i> is the
 number of observations), and will be interpreted in the same way as
 the output of the above-mentioned functions.  Missing values (NAs)
@@ -67,8 +67,8 @@ are not allowed.
 <p>a vector of length n representing a clustering of <code>x</code>.  For
 each observation the vector lists the number or name of the cluster
 to which it has been assigned. <code>clus</code> is often the clustering
-component of the output of <code><a href="pam.html">pam</a></code>, <code><a href="fanny.html">fanny</a></code> or
-<code><a href="clara.html">clara</a></code>.</p>
+component of the output of <code><a href="../../cluster/help/pam.html">pam</a></code>, <code><a href="../../cluster/help/fanny.html">fanny</a></code> or
+<code><a href="../../cluster/help/clara.html">clara</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>diss</code></td>
 <td>
@@ -161,7 +161,7 @@ of the points are the rownames of <code>x</code> if <code>x</code> is matrix lik
 Otherwise (<code>diss = TRUE</code>), <code>x</code> is a vector, point labels
 can be attached to <code>x</code> as a &quot;Labels&quot; attribute
 (<code>attr(x,"Labels")</code>), as is done for the output of
-<code><a href="daisy.html">daisy</a></code>.
+<code><a href="../../cluster/help/daisy.html">daisy</a></code>.
 </p>
 <p>A possible <code><a href="../../base/html/names.html">names</a></code> attribute of <code>clus</code> will not
 be taken into account.
@@ -296,7 +296,7 @@ Then we put shading = y/z *37 + 3 .
 
 <p>When we have 4 or fewer clusters, then the <code>color=TRUE</code> gives
 every cluster a different color.  When there are more than 4 clusters,
-clusplot uses the function <code><a href="pam.html">pam</a></code> to cluster the
+clusplot uses the function <code><a href="../../cluster/help/pam.html">pam</a></code> to cluster the
 densities into 4 groups such that ellipses with nearly the same
 density get the same color.  <code>col.clus</code> specifies the colors used.
 </p>
@@ -328,10 +328,10 @@ Integrating Robust Clustering Techniques in S-PLUS,
 
 <h3>See Also</h3>
 
-<p><code><a href="../../stats/html/princomp.html">princomp</a></code>, <code><a href="../../stats/html/cmdscale.html">cmdscale</a></code>, <code><a href="pam.html">pam</a></code>,
-<code><a href="clara.html">clara</a></code>, <code><a href="daisy.html">daisy</a></code>, <code><a href="../../graphics/html/par.html">par</a></code>,
-<code><a href="../../graphics/html/identify.html">identify</a></code>, <code><a href="../../MASS/html/cov.mve.html">cov.mve</a></code>,
-<code><a href="clusplot.partition.html">clusplot.partition</a></code>.
+<p><code><a href="../../stats/html/princomp.html">princomp</a></code>, <code><a href="../../stats/html/cmdscale.html">cmdscale</a></code>, <code><a href="../../cluster/help/pam.html">pam</a></code>,
+<code><a href="../../cluster/help/clara.html">clara</a></code>, <code><a href="../../cluster/help/daisy.html">daisy</a></code>, <code><a href="../../graphics/html/par.html">par</a></code>,
+<code><a href="../../graphics/html/identify.html">identify</a></code>, <code><a href="../../MASS/help/cov.mve.html">cov.mve</a></code>,
+<code><a href="../../cluster/help/clusplot.partition.html">clusplot.partition</a></code>.
 </p>
 
 
@@ -388,5 +388,5 @@ rect(U[1],U[3], U[2],U[4], lwd=2, lty = 3)
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.1 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>cluster</em> version 2.1.2 <a href="00Index.html">Index</a>]</div>
 </body></html>

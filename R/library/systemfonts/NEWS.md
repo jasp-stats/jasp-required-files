@@ -1,3 +1,8 @@
+# systemfonts 1.0.2
+
+* Ensure compitability with freetype <= 2.4.11 (#70, @jan-glx)
+* Prepare for UCRT compilation
+
 # systemfonts 1.0.1
 
 * Fix a bug in font matching on Windows when matching monospace fonts

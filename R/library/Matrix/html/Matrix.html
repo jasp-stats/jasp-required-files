@@ -55,10 +55,10 @@ of the entries are 0.</p>
 </td></tr>
 <tr valign="top"><td><code>doDiag</code></td>
 <td>
-<p>logical indicating if a <code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code>
+<p>logical indicating if a <code><a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a></code>
 object should be returned when the resulting matrix is diagonal
-(<em>mathematically</em>).  As class <code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code>
-<code><a href="../../methods/html/is.html">extends</a></code> <code><a href="sparseMatrix-class.html">sparseMatrix</a></code>, this is a
+(<em>mathematically</em>).  As class <code><a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a></code>
+<code><a href="../../methods/html/is.html">extends</a></code> <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>, this is a
 natural default for all values of <code>sparse</code>.
 </p>
 <p>Otherwise, if <code>doDiag</code> is false, a dense or sparse (depending on
@@ -79,7 +79,7 @@ object.</p>
 made to infer it from the length of <code>data</code> and the other
 parameter.
 Further, <code>Matrix()</code> makes efforts to keep <code><a href="../../base/html/logical.html">logical</a></code>
-matrices logical, i.e., inheriting from class <code><a href="dMatrix-class.html">lMatrix</a></code>,
+matrices logical, i.e., inheriting from class <code><a href="../../Matrix/help/lMatrix-class.html">lMatrix</a></code>,
 and to determine specially structured matrices such as symmetric,
 triangular or diagonal ones.  Note that a <em>symmetric</em> matrix also
 needs symmetric <code><a href="../../base/html/dimnames.html">dimnames</a></code>, e.g., by specifying
@@ -87,7 +87,7 @@ needs symmetric <code><a href="../../base/html/dimnames.html">dimnames</a></code
 </p>
 <p>Most of the time, the function works via a traditional (<em>full</em>)
 <code><a href="../../base/html/matrix.html">matrix</a></code>.  However, <code>Matrix(0, nrow,ncol)</code> directly
-constructs an &ldquo;empty&rdquo; <a href="sparseMatrix-class.html">sparseMatrix</a>, as does
+constructs an &ldquo;empty&rdquo; <a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a>, as does
 <code>Matrix(FALSE, *)</code>.
 </p>
 <p>Although it is sometime possible to mix unclassed matrices (created
@@ -101,23 +101,23 @@ safer to always use carefully constructed ones of class
 
 <p>Returns matrix of a class that inherits from <code>"Matrix"</code>.
 Only if <code>data</code> is not a <code><a href="../../base/html/matrix.html">matrix</a></code> and does not already inherit
-from class <code><a href="Matrix-class.html">Matrix</a></code> are the arguments
+from class <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code> are the arguments
 <code>nrow</code>, <code>ncol</code> and <code>byrow</code> made use of.
 </p>
 
 
 <h3>See Also</h3>
 
-<p>The classes <code><a href="Matrix-class.html">Matrix</a></code>,
-<code><a href="symmetricMatrix-class.html">symmetricMatrix</a></code>,
-<code><a href="triangularMatrix-class.html">triangularMatrix</a></code>, and
-<code><a href="diagonalMatrix-class.html">diagonalMatrix</a></code>; further,
+<p>The classes <code><a href="../../Matrix/help/Matrix-class.html">Matrix</a></code>,
+<code><a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a></code>,
+<code><a href="../../Matrix/help/triangularMatrix-class.html">triangularMatrix</a></code>, and
+<code><a href="../../Matrix/help/diagonalMatrix-class.html">diagonalMatrix</a></code>; further,
 <code><a href="../../base/html/matrix.html">matrix</a></code>.
 </p>
 <p>Special matrices can be constructed, e.g., via
-<code><a href="sparseMatrix.html">sparseMatrix</a></code> (sparse), <code><a href="bdiag.html">bdiag</a></code>
-(block-diagonal), <code><a href="bandSparse.html">bandSparse</a></code> (banded sparse), or
-<code><a href="Diagonal.html">Diagonal</a></code>.
+<code><a href="../../Matrix/help/sparseMatrix.html">sparseMatrix</a></code> (sparse), <code><a href="../../Matrix/help/bdiag.html">bdiag</a></code>
+(block-diagonal), <code><a href="../../Matrix/help/bandSparse.html">bandSparse</a></code> (banded sparse), or
+<code><a href="../../Matrix/help/Diagonal.html">Diagonal</a></code>.
 </p>
 
 
@@ -160,5 +160,5 @@ stopifnot(is(As, "symmetricMatrix"),
           is(Matrix(FALSE, 1,1), "sparseMatrix"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -37,9 +37,8 @@ path.expand(path)
 <dl>
 <dt>On Unix - alikes:</dt><dd>
 <p>On most builds of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> a leading <code>~user</code> will expand to the home
-directory of <code>user</code>, but not on builds without <code>readline</code>
-installed.  (In an interactive session <code>capabilities("cledit")</code>
-will report if <code>readline</code> is available.)
+directory of <code>user</code> (since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.1.0 also without <code>readline</code>
+in use).
 </p>
 <p>There are possibly different concepts of &lsquo;home directory&rsquo;: that
 usually used is the setting of the environment variable <span class="env">HOME</span>.
@@ -69,7 +68,7 @@ directory is unknown or none is specified the path is returned unchanged.
 
 <h3>See Also</h3>
 
-<p><code><a href="basename.html">basename</a></code>, <code><a href="normalizePath.html">normalizePath</a></code>, <code><a href="file.path.html">file.path</a></code>.
+<p><code><a href="../../base/help/basename.html">basename</a></code>, <code><a href="../../base/help/normalizePath.html">normalizePath</a></code>, <code><a href="../../base/help/file.path.html">file.path</a></code>.
 </p>
 
 
@@ -79,5 +78,5 @@ directory is unknown or none is specified the path is returned unchanged.
 path.expand("~/foo")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

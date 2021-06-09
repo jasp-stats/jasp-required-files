@@ -42,14 +42,14 @@ stable, so ties are preserved, and if the data are already
 grouped/sorted, the grouping is unchanged.  This is useful for
 aggregation and is particularly fast for character vectors.
 </p>
-<p>Under the covers, the <code>"radix"</code> method of <code><a href="order.html">order</a></code> is
+<p>Under the covers, the <code>"radix"</code> method of <code><a href="../../base/help/order.html">order</a></code> is
 used, and the same caveats apply, including restrictions on character
-encodings and lack of support for <a href="LongVectors.html">long vectors</a> (those with
+encodings and lack of support for <a href="../../base/help/long vectors.html">long vectors</a> (those with
 <i>2^31</i> or more elements). Real-valued numbers are slightly
 rounded to account for numerical imprecision.
 </p>
 <p>Like <code>order</code>, for a classed <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object the grouping is based on
-the result of <code><a href="xtfrm.html">xtfrm</a></code>.
+the result of <code><a href="../../base/help/xtfrm.html">xtfrm</a></code>.
 </p>
 
 
@@ -74,7 +74,7 @@ member of each group</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="order.html">order</a></code>, <code><a href="xtfrm.html">xtfrm</a></code>.
+<p><code><a href="../../base/help/order.html">order</a></code>, <code><a href="../../base/help/xtfrm.html">xtfrm</a></code>.
 </p>
 
 
@@ -86,5 +86,5 @@ member of each group</p>
 rbind(x, y, z)[, ii]
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

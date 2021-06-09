@@ -31,7 +31,7 @@ loess(formula, data, weights, subset, na.action, model = FALSE,
 <table summary="R argblock">
 <tr valign="top"><td><code>formula</code></td>
 <td>
-<p>a <a href="formula.html">formula</a> specifying the numeric response and
+<p>a <a href="../../stats/help/formula.html">formula</a> specifying the numeric response and
 one to four numeric predictors (best specified via an interaction,
 but can also be specified additively).  Will be coerced to a formula
 if necessary.</p>
@@ -110,7 +110,7 @@ biweight function.  Can be abbreviated.</p>
 </td></tr>
 <tr valign="top"><td><code>control</code></td>
 <td>
-<p>control parameters: see <code><a href="loess.control.html">loess.control</a></code>.</p>
+<p>control parameters: see <code><a href="../../stats/help/loess.control.html">loess.control</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -140,7 +140,7 @@ procedure with Tukey's biweight are used.  Be aware that as the initial
 value is the least-squares fit, this need not be a very resistant fit.
 </p>
 <p>It can be important to tune the control list to achieve acceptable
-speed.  See <code><a href="loess.control.html">loess.control</a></code> for details.
+speed.  See <code><a href="../../stats/help/loess.control.html">loess.control</a></code> for details.
 </p>
 
 
@@ -190,10 +190,10 @@ and T.J. Hastie, Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="loess.control.html">loess.control</a></code>,
-<code><a href="predict.loess.html">predict.loess</a></code>.
+<p><code><a href="../../stats/help/loess.control.html">loess.control</a></code>,
+<code><a href="../../stats/help/predict.loess.html">predict.loess</a></code>.
 </p>
-<p><code><a href="lowess.html">lowess</a></code>, the ancestor of <code>loess</code> (with
+<p><code><a href="../../stats/help/lowess.html">lowess</a></code>, the ancestor of <code>loess</code> (with
 different defaults!).
 </p>
 
@@ -209,5 +209,5 @@ cars.lo2 &lt;- loess(dist ~ speed, cars,
 predict(cars.lo2, data.frame(speed = seq(5, 30, 1)), se = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

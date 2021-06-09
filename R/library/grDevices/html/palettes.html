@@ -46,7 +46,7 @@ upper vs. lower case, spaces, dashes, etc. in the matching.</p>
 <td>
 <p>an alpha-transparency level in the range [0,1]
 (0 means transparent and 1 means opaque), see argument
-<code>alpha</code> in <code><a href="hsv.html">hsv</a></code> and <code><a href="hcl.html">hcl</a></code>, respectively.<br />
+<code>alpha</code> in <code><a href="../../grDevices/help/hsv.html">hsv</a></code> and <code><a href="../../grDevices/help/hcl.html">hcl</a></code>, respectively.<br />
 Since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0, a <code><a href="../../base/html/missing.html">missing</a></code>, i.e., not explicitly specified
 <code>alpha</code> is equivalent to <code>alpha = NULL</code>, which does <em>not</em>
 add opacity codes (<code>"FF"</code>) to the individual color hex codes.</p>
@@ -59,7 +59,7 @@ be reversed.</p>
 <tr valign="top"><td><code>fixup</code></td>
 <td>
 <p>logical indicating whether the resulting color should be
-corrected to RGB coordinates in [0,1], see <code><a href="hcl.html">hcl</a></code>.</p>
+corrected to RGB coordinates in [0,1], see <code><a href="../../grDevices/help/hcl.html">hcl</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>type</code></td>
 <td>
@@ -93,14 +93,14 @@ perceptually-based HCL color space.
 </p>
 <p>HSV (hue-saturation-value) is a simple transformation of the RGB
 (red-green-blue) space which was therefore a convenient choice for color
-palettes in many software systems (see also <code><a href="hsv.html">hsv</a></code>). However, HSV
+palettes in many software systems (see also <code><a href="../../grDevices/help/hsv.html">hsv</a></code>). However, HSV
 colors capture the perceptual properties hue, colorfulness/saturation/chroma,
 and lightness/brightness/luminance/value only poorly and consequently
 the corresponding palettes are typically not a good choice for statistical
 graphics and data visualization.
 </p>
 <p>In contrast, HCL (hue-chroma-luminance) colors are much more suitable for
-capturing human color perception (see also <code><a href="hcl.html">hcl</a></code>) and better color
+capturing human color perception (see also <code><a href="../../grDevices/help/hcl.html">hcl</a></code>) and better color
 palettes can be derived based on HCL coordinates.
 Conceptually, three types of palettes are often distinguished:
 </p>
@@ -147,7 +147,7 @@ up to five groups, <code>"YlGnBu"</code> is a sequential palette similar to
 diverging palettes.
 </p>
 <p>Further qualitative palettes are provided in the 
-<code><a href="palette.html">palette.colors</a></code> function. While the qualitative palettes in 
+<code><a href="../../grDevices/help/palette.colors.html">palette.colors</a></code> function. While the qualitative palettes in 
 <code>hcl.colors</code> are always based on the same combination of chroma and 
 luminance, the <code>palette.colors</code> vary in chroma and luminance up to 
 a certain degree. The advantage of fixing chroma/luminance is that the 
@@ -175,7 +175,7 @@ suitable palette from <code>hcl.colors</code> instead of
 <p>A character vector <code>cv</code> containing either palette names (for
 <code>hcl.pals</code>) or <code>n</code> hex color codes (for all other functions).
 The latter can be used either to create a user-defined color palette for
-subsequent graphics by <code><a href="palette.html">palette</a>(cv)</code>, a <code>col =</code> specification
+subsequent graphics by <code><a href="../../grDevices/help/palette.html">palette</a>(cv)</code>, a <code>col =</code> specification
 in graphics functions or in <code>par</code>.
 </p>
 
@@ -207,11 +207,11 @@ doi: <a href="https://doi.org/10.1016/j.csda.2008.11.033">10.1016/j.csda.2008.11
 
 <h3>See Also</h3>
 
-<p><code><a href="colors.html">colors</a></code>, <code><a href="palette.html">palette</a></code>,
-<code><a href="gray.colors.html">gray.colors</a></code>,
-<code><a href="hsv.html">hsv</a></code>,
-<code><a href="hcl.html">hcl</a></code>, <code><a href="rgb.html">rgb</a></code>, <code><a href="gray.html">gray</a></code> and
-<code><a href="col2rgb.html">col2rgb</a></code> for translating to RGB numbers.
+<p><code><a href="../../grDevices/help/colors.html">colors</a></code>, <code><a href="../../grDevices/help/palette.html">palette</a></code>,
+<code><a href="../../grDevices/help/gray.colors.html">gray.colors</a></code>,
+<code><a href="../../grDevices/help/hsv.html">hsv</a></code>,
+<code><a href="../../grDevices/help/hcl.html">hcl</a></code>, <code><a href="../../grDevices/help/rgb.html">rgb</a></code>, <code><a href="../../grDevices/help/gray.html">gray</a></code> and
+<code><a href="../../grDevices/help/col2rgb.html">col2rgb</a></code> for translating to RGB numbers.
 </p>
 
 
@@ -291,5 +291,5 @@ hcl.pals("diverging")
 hcl.pals("divergingx")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

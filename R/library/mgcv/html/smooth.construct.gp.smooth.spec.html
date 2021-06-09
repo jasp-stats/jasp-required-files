@@ -77,14 +77,14 @@ This is essentially arbitrary, and should be checked, but as with all penalized 
 insensitive to the exact choise, provided it is not so small that it forces oversmoothing (the smoother's 
 degrees of freedom are controlled primarily by its smoothing parameter).
 </p>
-<p>The constructor is not normally called directly, but is rather used internally by <code><a href="gam.html">gam</a></code>. 
-To use for basis setup it is recommended to use <code><a href="smooth.construct.html">smooth.construct2</a></code>.  
+<p>The constructor is not normally called directly, but is rather used internally by <code><a href="../../mgcv/help/gam.html">gam</a></code>. 
+To use for basis setup it is recommended to use <code><a href="../../mgcv/help/smooth.construct2.html">smooth.construct2</a></code>.  
 </p>
 <p>For these classes the specification <code>object</code> will contain
 information on how to handle large datasets in their <code>xt</code> field. The default is to randomly
 subsample 2000 &lsquo;knots&rsquo; from which to produce a reduced rank eigen approximation to the full basis, 
 if the number of unique predictor variable combinations in excess of 2000. The default can be
-modified via the <code>xt</code> argument to <code><a href="s.html">s</a></code>. This is supplied as a
+modified via the <code>xt</code> argument to <code><a href="../../mgcv/help/s.html">s</a></code>. This is supplied as a
 list with elements <code>max.knots</code> and <code>seed</code> containing a number
 to use in place of 2000, and the random number seed to use (either can be
 missing). Note that the random sampling will not effect the state of R's RNG. 
@@ -105,7 +105,7 @@ faster, but gives poorer results (and the user must be quite careful in choosing
 <h3>Value</h3>
 
 <p> An object of class <code>"gp.smooth"</code>. In addition to the usual elements of a 
-smooth class documented under <code><a href="smooth.construct.html">smooth.construct</a></code>, this object will contain:
+smooth class documented under <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code>, this object will contain:
 </p>
 <table summary="R valueblock">
 <tr valign="top"><td><code>shift</code></td>
@@ -154,7 +154,7 @@ out duplicate locations).</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="smooth.construct.tp.smooth.spec.html">tprs</a></code></p>
+<p><code><a href="../../mgcv/help/tprs.html">tprs</a></code></p>
 
 
 <h3>Examples</h3>
@@ -186,5 +186,5 @@ detach(eg)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

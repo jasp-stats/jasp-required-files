@@ -52,10 +52,10 @@ a permutation matrix <i>P</i> (where we assume matching dimensions):
 
 <p>where <code>p</code> is the &ldquo;permutation vector&rdquo; corresponding to the
 permutation matrix <code>P</code> (see first note), and <code>i(p)</code> is short
-for <code><a href="invPerm.html">invPerm</a>(p)</code>.
+for <code><a href="../../Matrix/help/invPerm.html">invPerm</a>(p)</code>.
 </p>
 <p>Also one could argue that these are really only two cases if you take
-into account that inversion (<code><a href="solve-methods.html">solve</a></code>) and transposition
+into account that inversion (<code><a href="../../Matrix/help/solve.html">solve</a></code>) and transposition
 (<code><a href="../../base/html/t.html">t</a></code>) are the same for permutation matrices <i>P</i>.
 </p>
 
@@ -89,7 +89,7 @@ equal the corresponding <code>Dim</code> element.</p>
 
 <h3>Extends</h3>
 
-<p>Class <code>"<a href="indMatrix-class.html">indMatrix</a>"</code>, directly.
+<p>Class <code>"<a href="../../Matrix/help/indMatrix-class.html">indMatrix</a>"</code>, directly.
 </p>
 
 
@@ -117,7 +117,7 @@ better to the &ldquo;natural&rdquo; sparseMatrix counterpart,
 <code>"ngTMatrix"</code>.)</p>
 </dd>
 <dt>coerce</dt><dd><p><code>signature(from = "pMatrix", to = "ngTMatrix")</code>:
-coercion to sparse logical matrix of class <code><a href="nsparseMatrix-classes.html">ngTMatrix</a></code>.</p>
+coercion to sparse logical matrix of class <code><a href="../../Matrix/help/ngTMatrix-class.html">ngTMatrix</a></code>.</p>
 </dd>
 <dt>determinant</dt><dd><p><code>signature(x = "pMatrix", logarithm="logical")</code>:
 Since permutation matrices are orthogonal, the determinant must be
@@ -127,7 +127,7 @@ permutation</em>.</p>
 <dt>solve</dt><dd><p><code>signature(a = "pMatrix", b = "missing")</code>: return
 the inverse permutation matrix; note that <code>solve(P)</code> is
 identical to <code>t(P)</code> for permutation matrices.  See
-<code><a href="solve-methods.html">solve-methods</a></code> for other methods.</p>
+<code><a href="../../Matrix/help/solve-methods.html">solve-methods</a></code> for other methods.</p>
 </dd>
 <dt>t</dt><dd><p><code>signature(x = "pMatrix")</code>: return the transpose of
 the permutation matrix (which is also the inverse of the
@@ -148,14 +148,14 @@ permutation vector <code>p</code> (of indices, 1:n), and these are related by
 <p>see also the &lsquo;Examples&rsquo;.
 </p>
 <p>&ldquo;Row-indexing&rdquo; a permutation matrix typically returns
-an <code>"indMatrix"</code>.  See <code>"<a href="indMatrix-class.html">indMatrix</a>"</code> for all other
+an <code>"indMatrix"</code>.  See <code>"<a href="../../Matrix/help/indMatrix-class.html">indMatrix</a>"</code> for all other
 subsetting/indexing and subassignment (<code>A[..] &lt;- v</code>) operations.
 </p>
 
 
 <h3>See Also</h3>
 
-<p><code><a href="invPerm.html">invPerm</a>(p)</code> computes the inverse permutation of an
+<p><code><a href="../../Matrix/help/invPerm.html">invPerm</a>(p)</code> computes the inverse permutation of an
 integer (index) vector <code>p</code>.
 </p>
 
@@ -187,5 +187,5 @@ p10[1:7, 1:4] # gives an "ngTMatrix" (most economic!)
 p10[1:3, ]
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

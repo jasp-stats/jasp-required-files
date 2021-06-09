@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Family for use with <code><a href="gam.html">gam</a></code> or <code><a href="bam.html">bam</a></code>, implementing regression for zero inflated Poisson data
+<p>Family for use with <code><a href="../../mgcv/help/gam.html">gam</a></code> or <code><a href="../../mgcv/help/bam.html">bam</a></code>, implementing regression for zero inflated Poisson data
 when the complimentary log log of the zero probability is linearly dependent on the log of the Poisson parameter. Use with great care, noting that simply having many zero response observations is not an indication of zero inflation: the question is whether you have too many zeroes given the specified model.
 </p>
 <p>This sort of model is really only appropriate when none of your covariates help to explain the zeroes in your data. If your covariates predict which observations are likely to have zero mean then adding a zero inflated model on top of this is likely to lead to identifiability problems. Identifiability problems may lead to fit failures, or absurd values for the linear predictor or predicted values. 
@@ -84,7 +84,7 @@ doi: <a href="https://doi.org/10.1080/01621459.2016.1180986">10.1080/01621459.20
 
 <h3>See Also</h3>
 
-<p><code><a href="ziplss.html">ziplss</a></code></p>
+<p><code><a href="../../mgcv/help/ziplss.html">ziplss</a></code></p>
 
 
 <h3>Examples</h3>
@@ -146,5 +146,5 @@ b2 &lt;- gam(y~s(x0)+s(x1)+s(x2)+s(x3),family=ziP(b=.3),data=dat)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

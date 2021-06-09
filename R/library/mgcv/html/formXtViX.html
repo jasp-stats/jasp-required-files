@@ -9,8 +9,8 @@
 
 <h3>Description</h3>
 
-<p> This is a service routine for <code><a href="gamm.html">gamm</a></code>. Given,
-<i>V</i>, an estimated covariance matrix obtained using <code><a href="extract.lme.cov.html">extract.lme.cov2</a></code> this
+<p> This is a service routine for <code><a href="../../mgcv/help/gamm.html">gamm</a></code>. Given,
+<i>V</i>, an estimated covariance matrix obtained using <code><a href="../../mgcv/help/extract.lme.cov2.html">extract.lme.cov2</a></code> this
 routine forms a matrix square root of <i>X'inv(V)X</i> as efficiently as possible, given
 the structure of <i>V</i> (usually sparse).
 </p>
@@ -28,7 +28,7 @@ formXtViX(V,X)
 <table summary="R argblock">
 <tr valign="top"><td><code>V</code></td>
 <td>
-<p> A data covariance matrix list returned from <code><a href="extract.lme.cov.html">extract.lme.cov2</a></code></p>
+<p> A data covariance matrix list returned from <code><a href="../../mgcv/help/extract.lme.cov2.html">extract.lme.cov2</a></code></p>
 </td></tr>
 <tr valign="top"><td><code>X</code></td>
 <td>
@@ -39,7 +39,7 @@ formXtViX(V,X)
 
 <h3>Details</h3>
 
-<p> The covariance matrix returned by <code><a href="extract.lme.cov.html">extract.lme.cov2</a></code> may
+<p> The covariance matrix returned by <code><a href="../../mgcv/help/extract.lme.cov2.html">extract.lme.cov2</a></code> may
 be in a packed and re-ordered format, since it is usually sparse. Hence a
 special service routine is required to form the required products involving
 this matrix. 
@@ -75,7 +75,7 @@ Generalized Additive Mixed Models. Biometrics 62(4):1025-1036
 <h3>See Also</h3>
 
   
-<p><code><a href="gamm.html">gamm</a></code>, <code><a href="extract.lme.cov.html">extract.lme.cov2</a></code> 
+<p><code><a href="../../mgcv/help/gamm.html">gamm</a></code>, <code><a href="../../mgcv/help/extract.lme.cov2.html">extract.lme.cov2</a></code> 
 </p>
 
 
@@ -93,5 +93,5 @@ crossprod(formXtViX(V2, X))
 t(X)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -11,7 +11,7 @@
 
 <p>Generate a random sparse matrix efficiently.  The default has rounded
 gaussian non-zero entries, and <code>rand.x = NULL</code> generates random
-patter<b>n</b> matrices, i.e. inheriting from <code><a href="nsparseMatrix-classes.html">nsparseMatrix</a></code>.
+patter<b>n</b> matrices, i.e. inheriting from <code><a href="../../Matrix/help/nsparseMatrix-class.html">nsparseMatrix</a></code>.
 </p>
 
 
@@ -48,7 +48,7 @@ considerably smaller than <code>nrow*ncol</code>.  Must be specified if
 <tr valign="top"><td><code>symmetric</code></td>
 <td>
 <p>logical indicating if result should be a matrix of
-class <code><a href="symmetricMatrix-class.html">symmetricMatrix</a></code>.  Note that in the symmetric
+class <code><a href="../../Matrix/help/symmetricMatrix-class.html">symmetricMatrix</a></code>.  Note that in the symmetric
 case, <code>nnz</code> denotes the number of non zero entries of the upper
 (or lower) part of the matrix, including the diagonal.</p>
 </td></tr>
@@ -63,7 +63,7 @@ for didactical purposes.</p>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>optionally further arguments passed to
-<code><a href="sparseMatrix.html">sparseMatrix</a>()</code>, notably <code>repr</code>.</p>
+<code><a href="../../Matrix/help/sparseMatrix.html">sparseMatrix</a>()</code>, notably <code>repr</code>.</p>
 </td></tr>
 </table>
 
@@ -74,18 +74,18 @@ for didactical purposes.</p>
 replacement, via one dimensional indices, if not <code>symmetric</code>
 <code><a href="../../base/html/sample.html">sample.int</a>(nrow*ncol, nnz)</code>, then&mdash;if <code>rand.x</code> is
 not <code>NULL</code>&mdash;gets <code>x &lt;- rand.x(nnz)</code> and calls
-<code><a href="sparseMatrix.html">sparseMatrix</a>(i=i, j=j, x=x, ..)</code>.  When
-<code>rand.x=NULL</code>, <code><a href="sparseMatrix.html">sparseMatrix</a>(i=i, j=j, ..)</code> will
+<code><a href="../../Matrix/help/sparseMatrix.html">sparseMatrix</a>(i=i, j=j, x=x, ..)</code>.  When
+<code>rand.x=NULL</code>, <code><a href="../../Matrix/help/sparseMatrix.html">sparseMatrix</a>(i=i, j=j, ..)</code> will
 return a patter<b>n</b> matrix (i.e., inheriting from
-<code><a href="nsparseMatrix-classes.html">nsparseMatrix</a></code>).
+<code><a href="../../Matrix/help/nsparseMatrix-class.html">nsparseMatrix</a></code>).
 </p>
 
 
 <h3>Value</h3>
 
-<p>a <code><a href="sparseMatrix-class.html">sparseMatrix</a></code>, say <code>M</code> of dimension (nrow,
+<p>a <code><a href="../../Matrix/help/sparseMatrix-class.html">sparseMatrix</a></code>, say <code>M</code> of dimension (nrow,
 ncol), i.e., with <code>dim(M) == c(nrow, ncol)</code>, if <code>symmetric</code>
-is not true, with <code>nzM &lt;- <a href="nnzero.html">nnzero</a>(M)</code> fulfilling
+is not true, with <code>nzM &lt;- <a href="../../Matrix/help/nnzero.html">nnzero</a>(M)</code> fulfilling
 <code>nzM &lt;= nnz</code> and typically, <code>nzM == nnz</code>.
 </p>
 
@@ -116,5 +116,5 @@ T2 &lt;- rsparsematrix(40, 12, nnz = 99, repr = "T")
 head(T2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

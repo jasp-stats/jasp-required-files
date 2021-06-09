@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>The <code>gumbls</code> family implements Gumbel location scale additive models in which the location and scale parameters (see details) can depend on additive smooth predictors. Useable only with <code><a href="gam.html">gam</a></code>, the linear predictors are specified via a list of formulae.
+<p>The <code>gumbls</code> family implements Gumbel location scale additive models in which the location and scale parameters (see details) can depend on additive smooth predictors. Useable only with <code><a href="../../mgcv/help/gam.html">gam</a></code>, the linear predictors are specified via a list of formulae.
 </p>
 
 
@@ -38,12 +38,12 @@ gumbls(link=list("identity","log"),b=-7)
 
 <p>Let <i>z = (y - m)exp(-B)</i>, then the log Gumbel density is <i>l = -B - z - exp(-z)</i>. The expected value of a Gumbel r.v. is <i>m + g exp(B)</i> where <i>g</i> is Eulers constant (about 0.57721566). The corresponding variance is <i>pi^2 exp(2B)/6</i>.
 </p>
-<p><code>gumbls</code> is used with <code><a href="gam.html">gam</a></code> to fit Gumbel location - scale models parameterized in terms of scale parameter <i>m</i> and the log scale parameter <i>B</i>. Note that <code>identity</code> link for the scale parameter means that the corresponding linear predictor gives <i>B</i> directly. By default the <code>log</code> link for the scale parameter simply forces the log scale parameter to have a lower limit given by argument <code>b</code>: if <i>l</i> is the linear predictor for the log scale parameter, <i>B</i>, then <i>B = b + log(1+e^l)</i>.
+<p><code>gumbls</code> is used with <code><a href="../../mgcv/help/gam.html">gam</a></code> to fit Gumbel location - scale models parameterized in terms of location parameter <i>m</i> and the log scale parameter <i>B</i>. Note that <code>identity</code> link for the scale parameter means that the corresponding linear predictor gives <i>B</i> directly. By default the <code>log</code> link for the scale parameter simply forces the log scale parameter to have a lower limit given by argument <code>b</code>: if <i>l</i> is the linear predictor for the log scale parameter, <i>B</i>, then <i>B = b + log(1+e^l)</i>.
 </p>
 <p><code>gam</code> is called with 
 a list containing 2 formulae, the first specifies the response on the left hand side and the structure of the linear predictor for location parameter, <i>m</i>, on the right hand side. The second is one sided, specifying the linear predictor for the lg scale, <i>B</i>, on the right hand side. 
 </p>
-<p>The fitted values for this family will be a two column matrix. The first column is the mean, and the second column is the log scale parameter, <i>B</i>. Predictions using <code><a href="predict.gam.html">predict.gam</a></code> will also produce 2 column matrices for <code>type</code> <code>"link"</code> and <code>"response"</code>. The first column is on the original data scale when <code>type="response"</code> and on the log mean scale of the linear predictor when <code>type="link"</code>. The second column when <code>type="response"</code> is again the log scale parameter, but is on the linear predictor when <code>type="link"</code>.
+<p>The fitted values for this family will be a two column matrix. The first column is the mean, and the second column is the log scale parameter, <i>B</i>. Predictions using <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code> will also produce 2 column matrices for <code>type</code> <code>"link"</code> and <code>"response"</code>. The first column is on the original data scale when <code>type="response"</code> and on the log mean scale of the linear predictor when <code>type="link"</code>. The second column when <code>type="response"</code> is again the log scale parameter, but is on the linear predictor when <code>type="link"</code>.
 </p>
 
 
@@ -85,5 +85,5 @@ gam.check(b)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

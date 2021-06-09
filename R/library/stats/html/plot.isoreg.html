@@ -10,7 +10,7 @@
 <h3>Description</h3>
 
 <p>The <code><a href="../../graphics/html/plot.default.html">plot</a></code> and <code><a href="../../graphics/html/lines.html">lines</a></code> method for
-<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects of class <code><a href="isoreg.html">isoreg</a></code>.
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects of class <code><a href="../../stats/help/isoreg.html">isoreg</a></code>.
 </p>
 
 
@@ -38,7 +38,7 @@ lines(x, col = "red", lwd = 1.5,
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>an <code><a href="isoreg.html">isoreg</a></code> object.</p>
+<p>an <code><a href="../../stats/help/isoreg.html">isoreg</a></code> object.</p>
 </td></tr>
 <tr valign="top"><td><code>plot.type</code></td>
 <td>
@@ -96,7 +96,7 @@ is <code>TRUE</code>.</p>
 
 <h3>See Also</h3>
 
-<p><code><a href="isoreg.html">isoreg</a></code> for computation of <code>isoreg</code> objects.</p>
+<p><code><a href="../../stats/help/isoreg.html">isoreg</a></code> for computation of <code>isoreg</code> objects.</p>
 
 
 <h3>Examples</h3>
@@ -113,7 +113,7 @@ lines(ir3)
 plot(isoreg(2^(1:9), c(1,0,4,3,3,5,4,2,0)), plot.type = "row", log = "x")
 
 plot(ir3, plot.type = "row", ylab = "y3")
-plot(isoreg(y3 - 4), plot.t="r", ylab = "y3 - 4")
+plot(isoreg(y3 - 4), plot.type = "r", ylab = "y3 - 4")
 plot(ir4, plot.type = "ro",  ylab = "y4", xlab = "x = 1:n")
 
 ## experiment a bit with these (C-c C-j):
@@ -124,5 +124,5 @@ plot(ir &lt;- isoreg(sample(10), sample(10, replace = TRUE)),
                   plot.type = "r")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

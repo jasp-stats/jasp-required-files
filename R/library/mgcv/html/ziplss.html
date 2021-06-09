@@ -11,7 +11,7 @@
 
 <p>The <code>ziplss</code> family implements a zero inflated (hurdle) Poisson model in which one linear predictor 
 controls the probability of presence  and the other controls the mean given presence.
-Useable only with <code><a href="gam.html">gam</a></code>, the linear predictors are specified via a list of formulae. 
+Useable only with <code><a href="../../mgcv/help/gam.html">gam</a></code>, the linear predictors are specified via a list of formulae. 
 Should be used with care: simply having a large number of zeroes is not an indication of zero inflation. 
 </p>
 <p>Requires integer count data.
@@ -38,19 +38,19 @@ parameterization is directly in terms of log of Poisson response and logit of pr
 
 <h3>Details</h3>
 
-<p>Used with <code><a href="gam.html">gam</a></code> to fit 2 stage zero inflated Poisson models. <code>gam</code> is called with 
+<p>Used with <code><a href="../../mgcv/help/gam.html">gam</a></code> to fit 2 stage zero inflated Poisson models. <code>gam</code> is called with 
 a list containing 2 formulae, the first specifies the response on the left hand side and the structure of the linear predictor for the Poisson parameter on the right hand side. The second is one sided, specifying the linear predictor for the probability of presence on the right hand side. 
 </p>
 <p>The fitted values for this family will be a two column matrix. The first column is the log of the Poisson parameter, 
 and the second column is the complimentary log log of probability of presence.. 
-Predictions using <code><a href="predict.gam.html">predict.gam</a></code> will also produce 2 column matrices for <code>type</code> 
+Predictions using <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code> will also produce 2 column matrices for <code>type</code> 
 <code>"link"</code> and <code>"response"</code>.
 </p>
 <p>The null deviance computed for this model assumes that a single probability of presence and a single Poisson parameter 
 are estimated. 
 </p>
 <p>For data with large areas of covariate space over which the response is zero it may be advisable to use low order penalties to 
-avoid problems. For 1D smooths uses e.g. <code>s(x,m=1)</code> and for isotropic smooths use <code><a href="smooth.construct.ds.smooth.spec.html">Duchon.spline</a></code>s in place of thin plaste terms with order 1 penalties, e.g <code>s(x,z,m=c(1,.5))</code> &mdash; such smooths penalize towards constants, thereby avoiding extreme estimates when the data are uninformative.
+avoid problems. For 1D smooths uses e.g. <code>s(x,m=1)</code> and for isotropic smooths use <code><a href="../../mgcv/help/Duchon.spline.html">Duchon.spline</a></code>s in place of thin plaste terms with order 1 penalties, e.g <code>s(x,z,m=c(1,.5))</code> &mdash; such smooths penalize towards constants, thereby avoiding extreme estimates when the data are uninformative.
 </p>
 
 
@@ -111,5 +111,5 @@ summary(b)
 plot(b,pages=1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

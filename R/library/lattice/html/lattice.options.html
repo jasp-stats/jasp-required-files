@@ -58,7 +58,7 @@ end-user.
 <p>A function, or <code>NULL</code>.  If the former, every call to the
 panel function will be wrapped inside <code><a href="../../base/html/conditions.html">tryCatch</a></code> with
 the specified function as an error handler.  The default is to use
-the <code><a href="print.trellis.html">panel.error</a></code> function.  This prevents the plot
+the <code><a href="../../lattice/help/panel.error.html">panel.error</a></code> function.  This prevents the plot
 from failing due to errors in a single panel, and leaving the grid
 operations in an unmanageable state.  If set to <code>NULL</code>,
 errors in panel functions will not be caught using
@@ -80,7 +80,7 @@ component is a list of arguments to the <span class="pkg">grid</span> function
 </p>
 <p>Usually not of interest to the end-user, who should instead use
 the similiarly named component in the graphical settings,
-modifiable using <code><a href="trellis.par.get.html">trellis.par.set</a></code>.
+modifiable using <code><a href="../../lattice/help/trellis.par.set.html">trellis.par.set</a></code>.
 </p>
 </dd>
 <dt><code>drop.unused.levels</code></dt><dd><p> A list of two components named
@@ -88,7 +88,7 @@ modifiable using <code><a href="trellis.par.get.html">trellis.par.set</a></code>
 indicate whether the unused levels of factors (conditioning
 variables and primary variables respectively) will be dropped,
 which is usually relevant when a subsetting operation is performed
-or an 'interaction' is created.  See <code><a href="xyplot.html">xyplot</a></code> for more
+or an 'interaction' is created.  See <code><a href="../../lattice/help/xyplot.html">xyplot</a></code> for more
 details.  Note that this does not control dropping of levels of
 the 'groups' argument.
 </p>
@@ -97,7 +97,7 @@ the 'groups' argument.
 <p>A character string, either <code>"full"</code> or <code>"panel"</code>.  This
 determines the interpretation of <code>x</code> and <code>y</code> when
 <code>space="inside"</code> in <code>key</code> (determining the legend; see
-<code><a href="xyplot.html">xyplot</a></code>): either the full figure region ('&quot;full&quot;'),
+<code><a href="../../lattice/help/xyplot.html">xyplot</a></code>): either the full figure region ('&quot;full&quot;'),
 or just the region that bounds the panels and strips ('&quot;panel&quot;').
 </p>
 </dd>
@@ -110,11 +110,11 @@ standard arguments: <code>as.table</code>, <code>aspect</code>,
 </dd>
 <dt><code>highlight.gpar</code></dt><dd><p> A list giving arguments to
 <code><a href="../../grid/html/gpar.html">gpar</a></code> used to highlight a viewport chosen using
-<code><a href="interaction.html">trellis.focus</a></code>.
+<code><a href="../../lattice/help/trellis.focus.html">trellis.focus</a></code>.
 </p>
 </dd>
 <dt><code>banking</code></dt><dd><p> The banking function. See
-<code><a href="banking.html">banking</a></code>. </p>
+<code><a href="../../lattice/help/banking.html">banking</a></code>. </p>
 </dd>
 <dt><code>axis.padding</code></dt><dd><p> List with components named
 <code>"numeric"</code> and <code>"factor"</code>, both scalar numbers.
@@ -129,7 +129,7 @@ proportion, and anything outside is skipped. </p>
 </dd>
 <dt><code>interaction.sep</code></dt><dd><p> The separator for creating
 interactions with the extended formula interface (see
-<code><a href="xyplot.html">xyplot</a></code>).
+<code><a href="../../lattice/help/xyplot.html">xyplot</a></code>).
 </p>
 </dd>
 <dt><code>axis.units</code></dt><dd><p> List determining default units for axis
@@ -140,7 +140,7 @@ components.  Should not be of interest to the end-user.
 
 <p>In addition, there is an option for the default prepanel and panel
 function for each high-level function; e.g., <code>panel.xyplot</code> and
-<code>prepanel.default.xyplot</code> for <code><a href="xyplot.html">xyplot</a></code>.  The options
+<code>prepanel.default.xyplot</code> for <code><a href="../../lattice/help/xyplot.html">xyplot</a></code>.  The options
 for the others have similarly patterned names.
 </p>
 
@@ -163,8 +163,8 @@ list is returned.
 
 <h3>See Also</h3>
 
-<p><code><a href="../../base/html/options.html">options</a></code>, <code><a href="trellis.device.html">trellis.device</a></code>,
-<code><a href="trellis.par.get.html">trellis.par.get</a></code>, <code><a href="Lattice.html">Lattice</a></code>
+<p><code><a href="../../base/html/options.html">options</a></code>, <code><a href="../../lattice/help/trellis.device.html">trellis.device</a></code>,
+<code><a href="../../lattice/help/trellis.par.get.html">trellis.par.get</a></code>, <code><a href="../../lattice/help/Lattice.html">Lattice</a></code>
 </p>
 
 
@@ -175,5 +175,5 @@ names(lattice.options())
 str(lattice.getOption("layout.widths"), max.level = 2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-41 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>lattice</em> version 0.20-44 <a href="00Index.html">Index</a>]</div>
 </body></html>

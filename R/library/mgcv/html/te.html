@@ -39,7 +39,7 @@ ti(..., k=NA,bs="cr",m=NA,d=NA,by=NA,fx=FALSE,
 <p> a list of variables that are the covariates that this
 smooth is a function of. Transformations whose form depends on
 the values of the data are best avoided here: e.g. <code>te(log(x),z)</code>
-is fine, but <code>te(I(x/sd(x)),z)</code> is not (see <code><a href="predict.gam.html">predict.gam</a></code>). </p>
+is fine, but <code>te(I(x/sd(x)),z)</code> is not (see <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>). </p>
 </td></tr>
 <tr valign="top"><td><code>k</code></td>
 <td>
@@ -47,7 +47,7 @@ is fine, but <code>te(I(x/sd(x)),z)</code> is not (see <code><a href="predict.ga
 If not supplied then set to <code>5^d</code>. If supplied as a single number then this 
 basis dimension is used for each basis. If supplied as an array then the elements are
 the dimensions of the component (marginal) bases of the tensor
-product. See <code><a href="choose.k.html">choose.k</a></code> for further information.</p>
+product. See <code><a href="../../mgcv/help/choose.k.html">choose.k</a></code> for further information.</p>
 </td></tr>
 <tr valign="top"><td><code>bs</code></td>
 <td>
@@ -55,9 +55,9 @@ product. See <code><a href="choose.k.html">choose.k</a></code> for further infor
 marginal basis. <code>"cr"</code> for cubic regression spline; <code>"cs"</code> for cubic
 regression spline with shrinkage; <code>"cc"</code> for periodic/cyclic 
 cubic regression spline; <code>"tp"</code> for thin plate regression spline;
-<code>"ts"</code> for t.p.r.s. with extra shrinkage. See <code><a href="smooth.terms.html">smooth.terms</a></code> for details 
+<code>"ts"</code> for t.p.r.s. with extra shrinkage. See <code><a href="../../mgcv/help/smooth.terms.html">smooth.terms</a></code> for details 
 and full list. User defined bases can 
-also be used here (see <code><a href="smooth.construct.html">smooth.construct</a></code> for an example). If only one 
+also be used here (see <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code> for an example). If only one 
 basis code is given then this is used for all bases.</p>
 </td></tr>
 <tr valign="top"><td><code>m</code></td>
@@ -65,7 +65,7 @@ basis code is given then this is used for all bases.</p>
 <p>The order of the spline and its penalty (for smooth classes that use this) for each term. 
 If a single number is given  then it is used for all terms. A vector can be used to 
 supply a different <code>m</code> for each margin. For marginals that take vector <code>m</code> 
-(e.g. <code><a href="smooth.construct.ps.smooth.spec.html">p.spline</a></code> and <code><a href="smooth.construct.ds.smooth.spec.html">Duchon.spline</a></code>), then
+(e.g. <code><a href="../../mgcv/help/p.spline.html">p.spline</a></code> and <code><a href="../../mgcv/help/Duchon.spline.html">Duchon.spline</a></code>), then
 a list can be supplied, with a vector element for each margin. <code>NA</code> autoinitializes. 
 <code>m</code> is ignored by some bases (e.g. <code>"cr"</code>).</p>
 </td></tr>
@@ -82,9 +82,9 @@ resolved by resetting the basis type.</p>
 In the numeric vector case the elements multiply the smooth evaluated at the corresponding 
 covariate values (a &lsquo;varying coefficient model&rsquo; results). 
 In the factor case causes a replicate of the smooth to be produced for
-each factor level. See <code><a href="gam.models.html">gam.models</a></code> for further details. May also be a matrix 
+each factor level. See <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> for further details. May also be a matrix 
 if covariates are matrices: in this case implements linear functional of a smooth 
-(see <code><a href="gam.models.html">gam.models</a></code> and <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> for details).</p>
+(see <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> and <code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code> for details).</p>
 </td></tr>
 <tr valign="top"><td><code>fx</code></td>
 <td>
@@ -118,7 +118,7 @@ used in basis construction).</p>
 <p>any supplied smoothing parameters for this term. Must be an array of the same
 length as the number of penalties for this smooth. Positive or zero elements are taken as fixed 
 smoothing parameters. Negative elements signal auto-initialization. Over-rides values supplied in 
-<code>sp</code> argument to <code><a href="gam.html">gam</a></code>. Ignored by <code>gamm</code>.</p>
+<code>sp</code> argument to <code><a href="../../mgcv/help/gam.html">gam</a></code>. Ignored by <code>gamm</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>mc</code></td>
 <td>
@@ -133,7 +133,7 @@ will have no identifiability constraints. Only use this if you really understand
 <td>
 <p>If not <code>NULL</code>, signals a point constraint: the smooth should pass through zero at the
 point given here (as a vector or list with names corresponding to the smooth names). Never ignored
-if supplied. See <code><a href="identifiability.html">identifiability</a></code>. </p>
+if supplied. See <code><a href="../../mgcv/help/identifiability.html">identifiability</a></code>. </p>
 </td></tr>
 </table>
 
@@ -143,7 +143,7 @@ if supplied. See <code><a href="identifiability.html">identifiability</a></code>
 <p> Smooths of several covariates can be constructed from tensor products of the bases
 used to represent smooths of one (or sometimes more) of the covariates. To do this &lsquo;marginal&rsquo; bases
 are produced with associated model matrices and penalty matrices, and these are then combined in the
-manner described in <code><a href="tensor.prod.model.matrix.html">tensor.prod.model.matrix</a></code> and <code><a href="tensor.prod.model.matrix.html">tensor.prod.penalties</a></code>, to produce 
+manner described in <code><a href="../../mgcv/help/tensor.prod.model.matrix.html">tensor.prod.model.matrix</a></code> and <code><a href="../../mgcv/help/tensor.prod.penalties.html">tensor.prod.penalties</a></code>, to produce 
 a single model matrix for the smooth, but multiple penalties (one for each marginal basis). The basis dimension 
 of the whole smooth is the product of the basis dimensions of the marginal smooths.
 </p>
@@ -189,7 +189,7 @@ to be turned into a basis and penalties by the <code>smooth.construct.tensor.smo
 <table summary="R valueblock">
 <tr valign="top"><td><code>margin</code></td>
 <td>
-<p>A list of <code>smooth.spec</code> objects of the type returned by <code><a href="s.html">s</a></code>, 
+<p>A list of <code>smooth.spec</code> objects of the type returned by <code><a href="../../mgcv/help/s.html">s</a></code>, 
 defining the basis from which the tensor product smooth is constructed.</p>
 </td></tr>
 <tr valign="top"><td><code>term</code></td>
@@ -263,8 +263,8 @@ and Hall/CRC Press.
 
 <h3>See Also</h3>
 
- <p><code><a href="s.html">s</a></code>,<code><a href="gam.html">gam</a></code>,<code><a href="gamm.html">gamm</a></code>, 
-<code><a href="smooth.construct.tensor.smooth.spec.html">smooth.construct.tensor.smooth.spec</a></code></p>
+ <p><code><a href="../../mgcv/help/s.html">s</a></code>,<code><a href="../../mgcv/help/gam.html">gam</a></code>,<code><a href="../../mgcv/help/gamm.html">gamm</a></code>, 
+<code><a href="../../mgcv/help/smooth.construct.tensor.smooth.spec.html">smooth.construct.tensor.smooth.spec</a></code></p>
 
 
 <h3>Examples</h3>
@@ -325,5 +325,5 @@ par(op)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

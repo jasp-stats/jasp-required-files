@@ -78,7 +78,7 @@ require(graphics)
 
 n2mfrow(8) # 3 x 3
 
-n &lt;- 5 ; x &lt;- seq(-2, 2, len = 51)
+n &lt;- 5 ; x &lt;- seq(-2, 2, length.out = 51)
 ## suppose now that 'n' is not known {inside function}
 op &lt;- par(mfrow = n2mfrow(n))
 for (j in 1:n)
@@ -89,5 +89,5 @@ sapply(1:14, n2mfrow)
 sapply(1:14, n2mfrow, asp=16/9)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -54,5 +54,5 @@ Author: R Core Team [aut, cph, cre],
 Maintainer: R Core Team <R-core@R-project.org>
 Repository: CRAN
 Date/Publication: 2020-12-22 14:59:20 UTC
-Built: R 4.0.5; x86_64-w64-mingw32; 2021-03-31 07:59:26 UTC; windows
+Built: R 4.1.0; x86_64-w64-mingw32; 2021-05-18 08:50:53 UTC; windows
 Archs: i386, x64

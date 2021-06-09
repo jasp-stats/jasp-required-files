@@ -10,16 +10,16 @@
 <h3>Description</h3>
 
 <p>The <code>gam</code> modelling function is designed to be able to use 
-the <code><a href="negbin.html">negbin</a></code> family (a modification of MASS library <code>negative.binomial</code> family 
-by Venables and Ripley), or the <code><a href="negbin.html">nb</a></code> function designed for integrated estimation of 
+the <code><a href="../../mgcv/help/negbin.html">negbin</a></code> family (a modification of MASS library <code>negative.binomial</code> family 
+by Venables and Ripley), or the <code><a href="../../mgcv/help/nb.html">nb</a></code> function designed for integrated estimation of 
 parameter <code>theta</code>. <i>&theta;</i> is the parameter such that <i>var(y) = &mu; + &mu;^2/&theta;</i>, where <i>&mu; = E(y)</i>.
 </p>
-<p>Two approaches to estimating <code>theta</code> are available (with <code><a href="gam.html">gam</a></code> only):
+<p>Two approaches to estimating <code>theta</code> are available (with <code><a href="../../mgcv/help/gam.html">gam</a></code> only):
 </p>
 
 <ul>
 <li><p> With <code>negbin</code> then if &lsquo;performance iteration&rsquo; is used for smoothing parameter estimation 
-(see <code><a href="gam.html">gam</a></code>), then smoothing parameters are chosen by GCV and 
+(see <code><a href="../../mgcv/help/gam.html">gam</a></code>), then smoothing parameters are chosen by GCV and 
 <code>theta</code> is chosen in order to ensure that the Pearson estimate of the scale 
 parameter is as close as possible to 1, the value that the scale parameter should have.
 </p>
@@ -29,7 +29,7 @@ parameter is as close as possible to 1, the value that the scale parameter shoul
 </p>
 </li></ul>
 
-<p>To use the first option, set the <code>optimizer</code> argument of <code><a href="gam.html">gam</a></code> to <code>"perf"</code> (it can sometimes fail to converge).
+<p>To use the first option, set the <code>optimizer</code> argument of <code><a href="../../mgcv/help/gam.html">gam</a></code> to <code>"perf"</code> (it can sometimes fail to converge).
 </p>
 
 
@@ -60,11 +60,11 @@ it is estimated (the absolute value of a negative <code>theta</code> is taken as
 
 <h3>Details</h3>
 
-<p><code>nb</code> allows estimation of the <code>theta</code> parameter alongside the model smoothing parameters, but is only usable with <code><a href="gam.html">gam</a></code> or <code><a href="bam.html">bam</a></code> (not <code>gamm</code>).
+<p><code>nb</code> allows estimation of the <code>theta</code> parameter alongside the model smoothing parameters, but is only usable with <code><a href="../../mgcv/help/gam.html">gam</a></code> or <code><a href="../../mgcv/help/bam.html">bam</a></code> (not <code>gamm</code>).
 </p>
-<p>For <code>negbin</code>, if a single value of <code>theta</code> is supplied then it is always taken as the known fixed value and this is useable with <code><a href="bam.html">bam</a></code> and <code><a href="gamm.html">gamm</a></code>. If <code>theta</code> is two 
+<p>For <code>negbin</code>, if a single value of <code>theta</code> is supplied then it is always taken as the known fixed value and this is useable with <code><a href="../../mgcv/help/bam.html">bam</a></code> and <code><a href="../../mgcv/help/gamm.html">gamm</a></code>. If <code>theta</code> is two 
 numbers (<code>theta[2]&gt;theta[1]</code>) then they are taken as specifying the range of values over which to search for 
-the optimal theta. This option is deprecated and should only be used with performance iteration estimation (see <code><a href="gam.html">gam</a></code> argument <code>optimizer</code>), in which case  the method 
+the optimal theta. This option is deprecated and should only be used with performance iteration estimation (see <code><a href="../../mgcv/help/gam.html">gam</a></code> argument <code>optimizer</code>), in which case  the method 
 of estimation is to choose <i>theta</i>  so that the GCV (Pearson) estimate 
 of the scale parameter is one (since the scale parameter 
 is one for the negative binomial). In this case <i>theta</i> estimation is nested within the IRLS loop 
@@ -103,7 +103,7 @@ estimate of <code>theta</code> after fitting (see example).</p>
 
 <h3>WARNINGS</h3>
 
-<p><code><a href="gamm.html">gamm</a></code> does not support <code>theta</code> estimation
+<p><code><a href="../../mgcv/help/gamm.html">gamm</a></code> does not support <code>theta</code> estimation
 </p>
 <p>The negative binomial functions from the MASS library are no longer supported.
 </p>
@@ -162,5 +162,5 @@ print(b2)
 rm(dat)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

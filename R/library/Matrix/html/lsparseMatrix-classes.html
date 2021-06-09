@@ -14,12 +14,12 @@ matrices with <code>TRUE</code>/<code>FALSE</code> or <code>NA</code> entries.  
 positions of the elements that are <code>TRUE</code> are stored.
 </p>
 <p>These can be stored in the &ldquo;triplet&rdquo; form (class
-<code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>, subclasses <code>lgTMatrix</code>,
+<code><a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a></code>, subclasses <code>lgTMatrix</code>,
 <code>lsTMatrix</code>, and <code>ltTMatrix</code>) or in compressed
-column-oriented form (class <code><a href="CsparseMatrix-class.html">CsparseMatrix</a></code>,
+column-oriented form (class <code><a href="../../Matrix/help/CsparseMatrix-class.html">CsparseMatrix</a></code>,
 subclasses <code>lgCMatrix</code>, <code>lsCMatrix</code>, and <code>ltCMatrix</code>)
 or&ndash;<em>rarely</em>&ndash;in compressed row-oriented form (class
-<code><a href="RsparseMatrix-class.html">RsparseMatrix</a></code>, subclasses <code>lgRMatrix</code>,
+<code><a href="../../Matrix/help/RsparseMatrix-class.html">RsparseMatrix</a></code>, subclasses <code>lgRMatrix</code>,
 <code>lsRMatrix</code>, and <code>ltRMatrix</code>).  The second letter in the
 name of these non-virtual classes indicates <code>g</code>eneral,
 <code>s</code>ymmetric, or <code>t</code>riangular.
@@ -28,16 +28,16 @@ name of these non-virtual classes indicates <code>g</code>eneral,
 
 <h3>Details</h3>
 
-<p>Note that triplet stored (<code><a href="TsparseMatrix-class.html">TsparseMatrix</a></code>) matrices
+<p>Note that triplet stored (<code><a href="../../Matrix/help/TsparseMatrix-class.html">TsparseMatrix</a></code>) matrices
 such as <code>lgTMatrix</code> may contain duplicated pairs of indices
 <i>(i,j)</i> as for the corresponding numeric class
-<code><a href="dgTMatrix-class.html">dgTMatrix</a></code> where for such pairs, the corresponding
+<code><a href="../../Matrix/help/dgTMatrix-class.html">dgTMatrix</a></code> where for such pairs, the corresponding
 <code>x</code> slot entries are added.  For logical matrices, the <code>x</code>
 entries corresponding to duplicated index pairs <i>(i,j)</i> are
 &ldquo;added&rdquo; as well if the addition is defined as logical <i>or</i>,
 i.e., &ldquo;<code>TRUE + TRUE  |-&gt;  TRUE</code>&rdquo; and
 &ldquo;<code>TRUE + FALSE  |-&gt;  TRUE</code>&rdquo;.
-Note the use of <code><a href="uniqTsparse.html">uniqTsparse</a>()</code> for getting an internally
+Note the use of <code><a href="../../Matrix/help/uniqTsparse.html">uniqTsparse</a>()</code> for getting an internally
 unique representation without duplicated <i>(i,j)</i> entries.
 </p>
 
@@ -111,7 +111,7 @@ of <code>x</code></p>
 </dd>
 <dt>which</dt><dd><p><code>signature(x = "lsparseMatrix")</code>, semantically
 equivalent to <span class="pkg">base</span> function <code><a href="../../base/html/which.html">which</a>(x, arr.ind)</code>;
-for details, see the <code><a href="dMatrix-class.html">lMatrix</a></code> class documentation.</p>
+for details, see the <code><a href="../../Matrix/help/lMatrix-class.html">lMatrix</a></code> class documentation.</p>
 </dd>
 </dl>
 
@@ -119,7 +119,7 @@ for details, see the <code><a href="dMatrix-class.html">lMatrix</a></code> class
 
 <h3>See Also</h3>
 
-<p>the class <code><a href="dgCMatrix-class.html">dgCMatrix</a></code> and <code><a href="dgTMatrix-class.html">dgTMatrix</a></code>
+<p>the class <code><a href="../../Matrix/help/dgCMatrix-class.html">dgCMatrix</a></code> and <code><a href="../../Matrix/help/dgTMatrix-class.html">dgTMatrix</a></code>
 </p>
 
 
@@ -156,5 +156,5 @@ stopifnot(isSymmetric(xlx), isSymmetric(xnx),
                  function(n) identical(slot(xnx, n), slot(xlx, n))))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

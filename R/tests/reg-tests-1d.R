@@ -3,8 +3,14 @@
 pdf("reg-tests-1d.pdf", encoding = "ISOLatin1.enc")
 .pt <- proc.time()
 tryCid <- function(expr) tryCatch(expr, error = identity)
+tryCmsg<- function(expr) tryCatch(expr, error = conditionMessage) # typically == *$message
 identCO <- function(x,y, ...) identical(capture.output(x), capture.output(y), ...)
+assertErrV <- function(...) tools::assertError(..., verbose=TRUE)
 onWindows <- .Platform$OS.type == "windows"
+.M <- .Machine
+str(.M[grep("^sizeof", names(.M))]) ## also differentiate long-double..
+b64 <- .M$sizeof.pointer == 8
+
 
 ## body() / formals() notably the replacement versions
 x <- NULL; tools::assertWarning(   body(x) <-    body(mean))	# to be error
@@ -19,7 +25,7 @@ englishMsgs <- {
     ## 1. LANGUAGE takes precedence over locale settings:
     if(nzchar(lang <- Sys.getenv("LANGUAGE")))
         lang == "en"
-    else { ## query the  locale
+    else { ## 2. Query the  locale
         if(!onWindows) {
             ## sub() :
             lc.msgs <- sub("\\..*", "", print(Sys.getlocale("LC_MESSAGES")))
@@ -301,8 +307,7 @@ options(op) # (revert to default)
 
 
 ## contour() did not check args sufficiently
-tryCatch(contour(matrix(rnorm(100), 10, 10), levels = 0, labels = numeric()),
-         error = function(e) e$message)
+tryCmsg(contour(matrix(rnorm(100), 10, 10), levels = 0, labels = numeric()))
 ## caused segfault in R 3.3.1 and earlier
 
 
@@ -498,8 +503,9 @@ stopifnot(
 
 ## format()ing invalid hand-constructed  POSIXlt  objects
 if(hasTZ <- nzchar(.TZ <- Sys.getenv("TZ"))) cat(sprintf("env.var. TZ='%s'\n",.TZ))
-d <- as.POSIXlt("2016-12-06")
+d <- as.POSIXlt("2016-12-06", tz = "Europe/Vienna")
 op <- options(warn = 1)# ==> assert*() will match behavior
+if(is.null(d$zone)) cat("Skipping timezone-dependent POSIXlt formatting\n") else
 for(EX in expression({}, Sys.setenv(TZ = "UTC"), Sys.unsetenv("TZ"))) {
     cat(format(EX),":\n---------\n")
     eval(EX)
@@ -538,17 +544,18 @@ stopifnot(is.null(attributes(body(g)[[3L]][[4L]])))
 
 ## pmin/pmax of ordered factors -- broken in R 3.3.2  [PR #17195]
 of <- ordered(c(1,5,6))
+asI <- as.integer # < shorter code
 set.seed(6); rof <- sample(of, 12, replace=TRUE)
 stopifnot(exprs = {
-    identical(pmax(rof, of), ordered(pmax(c(rof), c(of)), labels=levels(rof)) -> pmar)
+    identical(pmax(rof, of), ordered(pmax(asI(rof), asI(of)), labels=levels(rof)) -> pmar)
     identical(pmax(of, rof), pmar)
-    identical(pmin(rof, of), ordered(pmin(c(rof), c(of)), labels=levels(rof)) -> pmir)
+    identical(pmin(rof, of), ordered(pmin(asI(rof), asI(of)), labels=levels(rof)) -> pmir)
     identical(pmin(of, rof), pmir)
-    identical(pmin(rof, 5), ordered(pmin(c(rof), 2), levels=1:3, labels=levels(rof)))
-    identical(pmax(rof, 6), ordered(pmax(c(rof), 3), levels=1:3, labels=levels(rof)))
+    identical(pmin(rof, 5), ordered(pmin(asI(rof), 2), levels=1:3, labels=levels(rof)))
+    identical(pmax(rof, 6), ordered(pmax(asI(rof), 3), levels=1:3, labels=levels(rof)))
     identical(pmax(rof, 1), rof)
     identical(pmin(rof, 6), rof)
-    identical(pmax(of, 5, rof), ordered(pmax(c(of),2L,c(rof)), levels=1:3,
+    identical(pmax(of, 5, rof), ordered(pmax(asI(of),2L,asI(rof)), levels=1:3,
                                         labels=levels(of)))
 })
 ## these were "always" true .. but may change (FIXME ?)
@@ -610,7 +617,7 @@ stopifnot(exprs = {
     identical(c(1L, 3L), seq.int(1L, 3L, length.out=2))
 })
 ## the first was missing(.), the others "double" in R < 3.4.0
-tools::assertError(seq(1,7, by = 1:2))# gave warnings in R < 3.4.0
+assertErrV(seq(1,7, by = 1:2))# gave warnings in R < 3.4.0
 ## seq() for <complex> / <integer>
 stopifnot(exprs = {
     all.equal(seq(1+1i, 9+2i, length.out = 9) -> sCplx,
@@ -676,9 +683,9 @@ stopifnot(identical(dim(xt), c(6L, 3L, 2L)), # of the 6 x 3 x 2 = 36 entries,
 xtC <- xtabs(ncontrols ~ agegp + alcgp + tobgp, data = esoph2)
 stopifnot(# no NA's in data, hence result should have none, just 0's:
     identical(asArr(unname(xtC)),
-	      array(c(4, 14, 15, 17, 9, 3,   0, 2, 5, 6, 3, 0,	 1, 4, 3, 3, 1, 0,
-		      7,  8,  7,  6, 0, 1,   2, 1, 4, 4, 1, 0,	 2, 0, 4, 6, 1, 0),
-		    dim = dim(xt))))
+ 	      array(c(4, 13, 10, 13, 4, 3,   0, 2, 4, 3, 1, 0,	 1, 2, 1, 1, 0, 0,
+ 		      7,  8,  2,  3, 0, 0,   2, 1, 2, 0, 0, 0,	 2, 0, 0, 1, 0, 0),
+ 		    dim = dim(xt))))
 
 DF <- as.data.frame(UCBAdmissions)
 xt <- xtabs(Freq ~ Gender + Admit, DF)
@@ -749,8 +756,7 @@ stopifnot(exprs = {
 
 
 ## stopifnot(all.equal(.)) message abbreviation
-msg <- tryCatch(stopifnot(all.equal(rep(list(pi),4), list(3.1, 3.14, 3.141, 3.1415))),
-		error = conditionMessage)
+msg <- tryCmsg(stopifnot(all.equal(rep(list(pi),4), list(3.1, 3.14, 3.141, 3.1415))))
 writeLines(msg)
 stopifnot(length(strsplit(msg,"\n")[[1]]) == 1+3+1)
 ## was wrong for months in R-devel only
@@ -775,7 +781,7 @@ stopifnot(exprs = {
 
 ## quantile(ordered(.)) - error message more directly useful
 OL <- ordered(sample(LETTERS, 20, replace=TRUE))
-(e <- tryCatch(quantile(OL), error = conditionMessage))
+(e <- tryCmsg(quantile(OL)))
 stopifnot(exprs = {
     grepl("type.*1.*3", e) # typically works in several locales
     is.ordered(quantile(OL, type = 1))
@@ -836,8 +842,8 @@ if(englishMsgs)
     stopifnot(grepl("indexing '...' with .* index 0", mt0),
 	      identical("the ... list contains fewer than 2 elements", mt2.0),
 	      identical(mt2.0, mt2.1))
-tools::assertError(t0(1))
-tools::assertError(t0(1, 2))
+assertErrV(t0(1))
+assertErrV(t0(1, 2))
 ## the first gave a different error msg, the next gave no error in R < 3.5.0
 
 
@@ -1077,9 +1083,9 @@ stopifnot(exprs = {
 ## invalid user device function  options(device = *) -- PR#15883
 graphics.off() # just in case
 op <- options(device=function(...){}) # non-sense device
-tools::assertError(plot.new(), verbose = TRUE)
+assertErrV(plot.new())
 if(no.grid <- !("grid" %in% loadedNamespaces())) requireNamespace("grid")
-tools::assertError(grid::grid.newpage(), verbose = TRUE)
+assertErrV(grid::grid.newpage())
 if(no.grid) unloadNamespace("grid") ; options(op)
 ## both errors gave segfaults in R <= 3.4.1
 
@@ -1279,7 +1285,7 @@ stopifnot(exprs = {
 if(no.splines <- !("splines" %in% loadedNamespaces())) requireNamespace("splines")
 x <- (0:8)/8
 aKnots <- c(rep(0, 4), c(0.3, 0.5, 0.6), rep(1, 4))
-tools::assertError(splines::splineDesign(aKnots, x, derivs = 4), verbose = TRUE)
+assertErrV(splines::splineDesign(aKnots, x, derivs = 4))
 ## gave seg.fault in R <= 3.4.1
 
 
@@ -1503,8 +1509,8 @@ options(warn = 2)# no warnings allowed
 
 ## PR#17372: sum(<ints whose sum overflows>, <higher type>)
 iL <- rep(1073741824L, 2) # 2^30 + 2^30 = 2^31 integer overflows to NA
-r1 <- tryCatch(sum("foo", iL), error=function(e) conditionMessage(e))
-r2 <- tryCatch(sum(iL, "foo"), error=function(e) conditionMessage(e))
+r1 <- tryCmsg(sum("foo", iL))
+r2 <- tryCmsg(sum(iL, "foo"))
 stopifnot(exprs = {
     identical(r1, r2)
     grepl("invalid 'type' (character) ", r1, fixed=TRUE)
@@ -2667,7 +2673,7 @@ stopifnot(exprs = {
 
 
 ## Failed to work after r76382--8:
-tools::assertError(formula("3"), verbose=TRUE)
+assertErrV(formula("3"))
 stopifnot(exprs = {
     ## New formula(<character>) specs:
     ## These give deprecation warnings:
@@ -2719,7 +2725,7 @@ stopifnot(exprs = {
     identNoE(quasi(var = mu),        quasi(variance = "mu"))
     identNoE(quasi(var = mu(1-mu)),  quasi(variance = "mu(1- mu)"))# both failed in R <= 3.6.0
     identNoE(quasi(var = mu^3),      quasi(variance = "mu ^ 3"))   #  2nd failed in R <= 3.6.0
-    is.character(msg <- tryCatch(quasi(variance = "log(mu)"), error=conditionMessage)) &&
+    is.character(msg <- tryCmsg(quasi(variance = "log(mu)"))) &&
         grepl("variance.*log\\(mu\\).* invalid", msg) ## R <= 3.6.0: 'variance' "NA" is invalid
 })
 
@@ -2820,6 +2826,7 @@ stopifnot(exprs = { ## Same variances and same as V
               sqrt(sqpois$dispersion) * SE1)
 })
 ## vcov(. , dispersion=*) was wrong on R versions 3.5.0 -- 3.6.0
+proc.time() - .pt; .pt <- proc.time()
 
 
 ## runmed(<x_with_NA>, "Turlach") still seg.faults in 3.6.0 {reported by Hilmar Berger}
@@ -3001,23 +3008,6 @@ stopifnot(exprs = { length(prE) >= 3
 })
 
 
-.M <- .Machine
-str(.M[grep("^sizeof", names(.M))]) ## also differentiate long-double..
-b64 <- .M$sizeof.pointer == 8
-arch <- Sys.info()[["machine"]]
-if(!(onWindows && arch == "x86")) {
-## PR#17577 - dgamma(x, shape)  for shape < 1 (=> +Inf at x=0) and very small x
-stopifnot(exprs = {
-    all.equal(dgamma(2^-1027, shape = .99 , log=TRUE), 7.1127667376, tol=1e-10)
-    all.equal(dgamma(2^-1031, shape = 1e-2, log=TRUE), 702.8889158,  tol=1e-10)
-    all.equal(dgamma(2^-1048, shape = 1e-7, log=TRUE), 710.30007699, tol=1e-10)
-    all.equal(dgamma(2^-1048, shape = 1e-7, scale = 1e-315, log=TRUE),
-              709.96858768, tol=1e-10)
-})
-## all gave Inf in R <= 3.6.1
-} else cat("PR#17577 bug fix not checked, as it may not work on this platform\n")
-
-
 ## format(x, scientific = FALSE)  for large x
 xMAX <- .Machine$double.xmax
 ch <- format(xMAX, scientific = 400) # << scientific as 'scipen'
@@ -3035,14 +3025,6 @@ stopifnot(exprs = {
 for(ch in c("foo", "bar", "1", "a:b", "B space A", "`ABC", "'CBA"))
     stopifnot(identical(ch, format(as.symbol(ch))))
 ## gave  'Found no format() method for class "name"' in R <= 3.6.x
-
-
-if(!(onWindows && arch == "x86")) {
- ## This gave a practically infinite loop (on 64-bit Lnx, Windows; not in 32-bit)
-    tools::assertWarning(p <- pchisq(1.00000012e200, df=1e200, ncp=100),
-                         "simpleWarning", verbose=TRUE)
-    stopifnot(p == 1)
-}
 
 
 ## x %% +- Inf -- PR#17611  //  also  %/%  for "large" args
@@ -3124,7 +3106,7 @@ w <- function(class) {
 catch <- function(expr) tryCatch({ expr; FALSE }, warning = function(...) TRUE)
 stopifnot(! catch(suppressWarnings(w("foo"))))
 stopifnot(! catch(suppressWarnings(w("foo"), classes = c("bar", "foo"))))
-stopifnot(catch(suppressWarnings(w("foo"), classes = c("bar", "baz"))))
+stopifnot(  catch(suppressWarnings(w("foo"), classes = c("bar", "baz"))))
 rm(w, catch)
 
 
@@ -3137,7 +3119,7 @@ m <- function(class) {
 catch <- function(expr) tryCatch({ expr; FALSE }, message = function(...) TRUE)
 stopifnot(! catch(suppressMessages(m("foo"))))
 stopifnot(! catch(suppressMessages(m("foo"), classes = c("bar", "foo"))))
-stopifnot(catch(suppressMessages(m("foo"), classes = c("bar", "baz"))))
+stopifnot(  catch(suppressMessages(m("foo"), classes = c("bar", "baz"))))
 rm(m, catch)
 
 
@@ -3271,7 +3253,7 @@ stopifnot(exprs = {
 
 
 ## improved error message from contour():
-tt <- tryCatch(contour(volcano, levels = c(20*c(4:6, -Inf, 8:10))), error=identity)
+tt <- tryCid(contour(volcano, levels = c(20*c(4:6, -Inf, 8:10))))
 print(tt)
 ## The rest of this message is OS-dependent: gcc 5.x on Solaris has '= -Inf'
 ## others have " = -inf"
@@ -3374,7 +3356,7 @@ stopifnot(exprs = {
     NextMethod("[")
 }
 noC <- structure(datasets::trees, class = c("noCol", "data.frame"))
-tools::assertError( noC[1,2], verbose=TRUE) # fails indeed
+assertErrV( noC[1,2]) # fails indeed
 stopifnot(exprs = {
     identical(head(noC), noC[1:6,])
     identical(head(noC, 1), noC[1, ])
@@ -3386,8 +3368,8 @@ stopifnot(exprs = {
 str(Alis <- lapply(1:4, function(n) {d <- 1+(1:n); array(seq_len(prod(d)), d) }))
 h2 <- lapply(Alis, head, 2)
 t2 <- lapply(Alis, head, 2)
-tools::assertError( head(Alis[[1]], c(1, NA)), verbose=TRUE)
-tools::assertError( tail(1:5, c(1, NA)), verbose=TRUE)
+assertErrV( head(Alis[[1]], c(1, NA)))
+assertErrV( tail(1:5, c(1, NA)))
 h1 <- lapply(Alis, head, 1)
 t1 <- lapply(Alis, tail, 1)
 dh1 <- lapply(h1, dim)
@@ -3396,7 +3378,7 @@ Alis2p <- Alis[-1]
 h1N <- lapply(Alis2p, head, c(1, NA))
 t1N <- lapply(Alis2p, tail, c(1, NA))
 Foolis <- lapply(Alis, `class<-`, "foo")
-tools::assertError( head(Foolis[[1]], c(1, NA)), verbose=TRUE)
+assertErrV( head(Foolis[[1]], c(1, NA)))
 h1F  <- lapply(Foolis, head, 1)
 h2F  <- lapply(Foolis, head, 2)
 t1F  <- lapply(Foolis, tail, 1)
@@ -3537,8 +3519,8 @@ stopifnot(exprs = {
     all.equal(attributes(x),         list(tsp = c(2.5, 107.5, 0.2), class = "ts"))
     all.equal(wx, structure(c(0.5, 0.6), .Tsp = c(22.5, 27.5, 0.2), class = "ts"))
 })
-tools::assertError(cbind(ts(1:2, start = 0.5, end = 1.5),
-			 ts(1:2, start = 0  , end = 1)), verbose=TRUE)
+assertErrV(cbind(ts(1:2, start = 0.5, end = 1.5),
+                 ts(1:2, start = 0  , end = 1)))
 ## Wrong results in R < 4.0.0
 ## New checks needed tweaks :
 ## -- 1 --
@@ -3718,7 +3700,7 @@ stopifnot(choose(4 + 1e-7, 4) == 1)
 
 
 ## correct error message:
-tt <- tryCatch(strptime(100, pi), error=identity)
+tt <- tryCid(strptime(100, pi))
 stopifnot(inherits(tt, "error"), grepl("'format'", tt$message))
 ## had 'x' instead of 'format'
 
@@ -3750,7 +3732,7 @@ stopifnot(#identical(N, 999994112L), # (wrong) implementation detail
 
 ## assertCondition(*, "error") etc triggered errors *twice* (accidentally)
 stopifnot(identical(tools::assertError(sqrt("a")),
-                    list(     tryCatch(sqrt("a"), error=identity))))
+                    list(     tryCid(sqrt("a")))))
 ## The former contained the error object twice in R <= 3.6.2
 
 
@@ -3815,10 +3797,9 @@ stopifnot(is.integer(y1), is.integer(y2), y1[-3] == y2[-3],
 
 
 ## stopifnot() custom message now via <named> args:
-e <- tools::assertError(stopifnot("ehmm, you must be kidding!" = 1 == 0), verbose=TRUE)
+e <- assertErrV(stopifnot("ehmm, you must be kidding!" = 1 == 0))
 stopifnot(grepl("must be kidding!", e[[1]]$message))
-e2 <- tools::assertError(
- stopifnot("2 is not approximately 2.1" = all.equal(2, 2.1)), verbose=TRUE)
+e2 <- assertErrV(stopifnot("2 is not approximately 2.1" = all.equal(2, 2.1)))
 stopifnot(grepl("not approximately", e2[[1]]$message))
 ## did not work in original stopifnot(<named>) patch
 CHK <- function(...) stopifnot(...)
@@ -3837,7 +3818,8 @@ stopifnot(is.na( norm(diag(c(1, NA)), "2") ))
 ## norm(<matrix-w-NA>, "F")
 (m <- cbind(0, c(NA, 0), 0:-1))
 nTypes <- eval(formals(base::norm)$type) # "O" "I" "F" "M" "2"
-stopifnot(is.na( print(vapply(nTypes, norm, 0., x = m)) )) # print(): show NA *or* NaN
+print( # stopifnot( -- for now, as Lapack is still broken in some OpenBLAS -- FIXME
+    is.na( print(vapply(nTypes, norm, 0., x = m)) )) # print(): show NA *or* NaN
 ## "F" gave non-NA with LAPACK 3.9.0, before our patch in R-devel and R-patched
 
 
@@ -3924,11 +3906,109 @@ if(englishMsgs) { cat("checking (default = ) English error messages\n")
 ##
 
 
+## paste(...,  recycle0=TRUE)  uses the "normal" 0-length recycling rule:
+##                                "if one argument has length zero, the result has too."
+ch0 <- character(0)
+stopifnot(exprs = {
+    ## a) when paste() has 0 '...' arguments :
+    identical(paste (), ch0)               ## collapse = NULL -----------
+    identical(paste0(), ch0)
+    identical(paste (collapse= "A"  ), "")
+    identical(paste0(collapse="foof"), "")
+    identical(paste (collapse= "A"  , recycle0 = TRUE), "") # new!
+    identical(paste0(collapse="foof", recycle0 = TRUE), "") # new!
+    ##
+    ## b) when all '...'  arguments have length 0 :
+    ## ---- collapse = NULL -------------
+    identical(paste({}),                  ch0)
+    identical(paste({}, recycle0 = TRUE), ch0)
+    identical(paste({}, NULL, ch0),                  ch0)
+    identical(paste({}, NULL, ch0, recycle0 = TRUE), ch0)
+    ## ---- collapse not NULL ---------
+    identical(paste({}, collapse=""),                              "")
+    identical(paste({}, collapse="", recycle0 = TRUE),             "") # new!
+    identical(paste({}, NULL, ch0, collapse=""),                   "")
+    identical(paste({}, NULL, ch0, collapse="", recycle0 = TRUE),  "") # new!
+    ##
+    ## c) when *one* of the ...-args has length 0 :
+    identical(paste ("foo", character(0), "bar", recycle0 = FALSE), "foo  bar")
+    identical(paste0("foo", character(0), "bar", recycle0 = FALSE), "foobar")
+    identical(paste ("foo", character(0), "bar", recycle0 = TRUE), ch0)
+    identical(paste0("foo", character(0), "bar", recycle0 = TRUE), ch0)
+    identical(paste ("foo", character(0), "bar", recycle0 = TRUE, collapse="A"), "")
+    identical(paste0("foo", character(0), "bar", recycle0 = TRUE, collapse="A"), "")
+})
+## 0-length recycling with default recycle0 = FALSE has always been "unusual"
+## -----------------  with     recycle0 = TRUE      returns 0-length i.e. character(0)
+
+
+## aov() formula deparsing  {Jan Hauffa, Apr 11, 2020, on R-devel}
+mkAov <- function(nms, n = 50) {
+    dflong <- as.data.frame(matrix(pi, n, length(nms),
+                                   dimnames = list(NULL, nms)))
+    forml <- as.formula(paste0("cbind(", paste(nms, collapse = ","), ") ~ 1 + Error(1)"))
+    aov(forml, data=dflong)
+}
+nLng <- paste0("someReallyLongVariableName", 1:20)
+cf1 <- coef(fm1 <- mkAov(vnms <- paste0("v", 1:20)))
+cfL <- coef(fmL <- mkAov(nLng)); colnames(cfL[[1]]) <- vnms
+stopifnot(all.equal(cf1, cfL))
+## mkAov(nLng)  failed in R <= 4.0.0
+
+
+## UTF8 validity checking internal in R (from PCRE, PR#17755)
+## This is the byte representation of U+D800 (a part of a surrogate
+## pair) in UTF-8, but do not rely on parser (which on some platforms
+## has mis-parsed that)
+stopifnot(identical(validUTF8("\xed\xa0\x80"), FALSE))
+
+## summary.warnings()  -- reported by Allison Meisner, jhmi.edu
+testf <- function(x) {
+    if(x > 30)
+        warning("A big problem (should be 20 of these)")
+    else
+        warning("Bigger problem (should be 30 of these)")
+}
+op <- options(warn=0)
+for(i in 1:50) testf(i) # -> 50 warnings ..
+options(op)# reset
+(sw <- summary(warnings()))
+stopifnot(identical(unlist(lapply(names(sw), substr, 1, 6)), c("Bigger", "A big ")),
+          identical(attr(sw, "counts"), c(30L, 20L)))
+## was wrong (mis-sorted counts) in R <= 4.0.0
+
+
+## plot.formula(..,  ylab = <call>)
+dd <- list(x = -4:4, w = 1/(1+(-4:4)^2))
+plot(w ~ x, data=dd, type = "h", xlab = quote(x[j]))                    # worked before
+plot(w ~ x, data=dd, type = "h", xlab = quote(x[j]), ylab = quote(y[j]))# *now* works
+## main, sub, xlab worked (PR#10525)  but ylab did not in R <= 4.0.0
+
+
+## ...names()
+F <- function(x, ...) ...names()
+F(a, b="bla"/0, c=c, D=d, ..) # << does *not* evaluate arguments
+# |->  c("b", "c", "D", NA)
+stopifnot(exprs = {
+    identical(F(pi), character(0))
+    F(foo = "bar") == "foo"
+    identical(F(., .., .not.ok. = "a"-b, 2, 3, last = LAST),
+              c(  NA, ".not.ok.",      NA, NA,"last"))
+})
+# .. was wrong for a few days
+
+
 ## check raw string parse data
 p <- parse(text = 'r"-(hello)-"', keep.source = TRUE)
 stopifnot(identical(getParseData(p)$text, c("r\"-(hello)-\"", "")))
 rm(p)
-# (wrong in R 4.0.0; reorted by Gabor Csardi)
+# (wrong in R 4.0.0; reported by Gabor Csardi)
+
+## check 0x...L parse data
+p <- parse(text = '0x2L', keep.source = TRUE)
+stopifnot(identical(getParseData(p)$text, c("0x2L", "")))
+rm(p)
+# (wrong in R 4.0.0; reported by Gabor Csardi)
 
 
 ## make sure there is n aliasing in assignments with partial matching
@@ -3939,12 +4019,1044 @@ rm(v)
 # defensive reference counts needed; missing in R 4.0.0
 
 
+## round() & signif() with one / wrong (named) argument(s):
+cat("Case 1 : round(1.12345):            ", round(  1.12345),"\n")
+cat("Case 2 : round(x=1.12345,2):        ", round(x=1.12345, 2),"\n")
+cat("Case 3 : round(x=1.12345,digits=2): ", round(x=1.12345, digits=2),"\n")
+cat("Case 4 : round(digits=2,x=1.12345): ", round(digits=2, x=1.12345),"\n")
+cat("Case 4b: round(digits=2,1.12345):   ", round(digits=2,1.12345),"\n")
+## R <= 4.0.0 does not produce error in cases 5,6 but should :
+cat("Case 5:    round(digits=x): \n")
+assertErrV(cat("round(digits=99.23456): ", round(digits=99.23456)))
+cat("Case 6:    round(banana=x): \n")
+assertErrV(cat("round(banana=99.23456): ", round(banana=99.23456)))
+## Cases 7,8 have been given an error already:
+cat("Case 7: round(x=1.12345, digits=2, banana=3):\n")
+assertErrV(  round(x=1.12345, digits=2, banana=3))
+cat("Case 8 : round(x=1.12345, banana=3):\n")
+assertErrV(  round(x=1.12345, banana=3))
+## (by Shane Mueller, to the R-devel m.list)
+
+
+## source(*, echo=TRUE) with srcref's and empty lines; PR#
+exP <- parse(text=c("1;2+", "", "3"), keep.source=TRUE)
+r <- source(exprs=exP, echo=TRUE)
+stopifnot(identical(r, list(value = 5, visible = TRUE)))
+## failed in R <= 4.0.1
+
+
+## boxplot() with call (instead of expression) in labels; Marius Hofert on R-devel
+rm(x,y,X,f)
+boxplot(cbind(x = 1:10, y = c(16,9:1)), xlab = quote(x^{y[2]}), ylab = quote(X[t]),
+        sub = quote(f^2 == f %*% f), main = quote(e^{-x^2/2}))
+## failed in R <= 4.0.1
+
+
+## on.exit() argument matching -- PR#17815
+f <- function() { on.exit(add=FALSE, expr=cat('bar\n')) ; 'foo' }
+stopifnot(identical(f(), 'foo')) # and write 'bar' line
+g <- function() { on.exit(add=stop('boom'), expr={cat('bar\n'); FALSE}) ; "foo" }
+assertErrV(g())
+## f() :> "Error in on.exit(....): invalid 'add' argument"  and no error for g() in R <= 4.0.1
+
+
 ## multi-encodings in vector-case for duplicated/match -- PR#17809
 c_latin1 <- "\xe4"
 Encoding(c_latin1) <- "latin1"
 c_utf8 <- enc2utf8(c_latin1)
 x <- list(c_latin1, c_utf8, letters)
 stopifnot(identical(duplicated(x)[2], TRUE))
+## failed in R <= 4.0.1
+
+
+## str(<S4 w/ extra attributes>)
+mixW <- setClass("mixW", contains = "numeric")
+Summ <- setClass("Summ", representation(call = "language", wts = "mixW"))
+S <- Summ(call = quote(foo(x)), wts = structure(mixW(pi), CA="sunny"))
+stopifnot(length(c.str <- capture.output(str(S))) >= 5,
+          grepl(r"(\$ CA: chr "sunny")", c.str[5]))
+deparse(S)# FIXME: is still wrong (no trace of "CA")
+## "CA" was not shown in R <= 4.0.2
+
+
+## sort(), order(), rank() for "raw - object":
+int8 <- function(x) structure(x, class = c("int8", oldClass(x)))
+`[.int8` <- function(x, ...) structure(NextMethod("["), class=class(x))
+set.seed(2); si <- sample.int(37)
+rI <- int8(as.raw(si))
+stopifnot(exprs = {
+    identical(rank (rI), rank (si))
+    identical(order(rI), order(si))
+    identical(sort (rI), int8(as.raw(1:37)))
+})
+## failed in  R <= 4.0.2
+
+
+## PR#16814: r2dtable() and chisq.test(*, simulate.p.value=TRUE) for large numbers
+rc <- c(63194L, 4787074L)
+cc <- c(34677L, 4815591L)
+set.seed(28); system.time(R2 <- simplify2array(r2dtable(1000, rc, cc)))
+(c.t <- chisq.test(R2[,,1], simulate.p.value = TRUE))
+set.seed(2*3); R2x3 <- r2dtable(5000, c(3,13), c(4,4,8))
+stopifnot(exprs = {
+    sum(!(dupR2 <- duplicated.array(R2, MARGIN=3))) == 109
+    all.equal(c.t$p.value, 1929/2001)
+    ## From here, true also in previous R versions:
+    is.matrix(cR2 <- colSums(R2))
+    cR2[1,] == cc[1]
+    cR2[2,] == cc[2]
+    identical(c(table(vapply(R2x3, function(m) 10*m[2,1]+m[2,3], 1))),
+              c(`18` = 42L, `27` = 405L, `28` = 217L, `36` = 1021L, `37` = 1159L,
+                `38` = 192L, `45` = 491L, `46` = 967L, `47` = 464L, `48` = 42L))
+})
+## The large tables and p-values were completely wrong in R <= 4.0.2
+
+
+## PR#16877: glm()-internal refitting for the null deviance
+y <- c(1, 1, 0, 0)
+x <- c(5, 3, 2, 4)
+fit <- glm(y ~ 1 + x + offset(log(x)), family = gaussian("log"), start = c(0,0))
+## failed in R < 4.1.0 due to missing starting values for glm-internal 'fit2'
+fit0 <- glm.fit(x = rep(1, length(y)), y = y, offset = log(x),
+                family = gaussian("log"), start = 0)
+stopifnot(all.equal(fit$null.deviance, fit0$deviance))
+proc.time() - .pt; .pt <- proc.time()
+
+
+## UTF-8 truncation tests
+if (l10n_info()$"UTF-8") {
+    ## These tests fail on R < 4.0
+
+    ## Use .Internal(seterrmessage(old.err)) to trigger truncation via
+    ## Rsnprintf (mbcsTruncateToValid).
+    trunc_string <- function(x) {
+        old.err <- geterrmessage()
+        on.exit(.Internal(seterrmessage(old.err)))
+        unname(
+            vapply(
+                x,
+                function(y) {
+                    .Internal(seterrmessage(y))
+                    geterrmessage()
+                },
+                ""
+            )
+        )
+    }
+    ## limits to detect the internal buffer size for truncation (now 8192)
+    buff.min <- 8
+    buff.max <- 7e4  # > buff.min
+    buff.size <- nchar(
+        trunc_string(paste0(rep(0:9, length.out = buff.max), collapse="")),
+        type='bytes'
+    )
+    stopifnot(buff.size >= buff.min + 1)
+    if(buff.size == buff.max)
+        ## possibly, the buffer is no longer fixed size?
+        warning('BUFSIZE too large for UTF-8 truncation test?')
+    else {
+        string.base <- paste0(
+            rep(0:9, length.out = buff.size),
+            collapse=""
+        )
+        ## Append UTF-8 sequences at the end of strings that are just
+        ## a bit shorter than the buffer, each one byte longer than the
+        ## previous.
+        string.starts <- substr(
+            rep(string.base, 6), 1,
+            nchar(string.base) - seq(buff.min, 3, -1)
+        )
+        ## For each of the increasing length string, append 2, 3, and 4 byte
+        ## (valid) UTF-8 characters.
+        string.ends <- rep(
+            c(
+                '\u00A2',            # <C2><A2>           (cent symbol)
+                '\u20AC',            # <E2><82><AC>       (euro symbol)
+                '\U00010348',        # <F0><90><8D><88>   (circle with dot)
+                NULL
+            ),
+            each=length(string.starts)
+        )
+        strings <- paste0(
+            string.starts,
+            '\U0001F600',  # 4 byte grinning face, extra padding char
+            string.ends
+        )
+        output <- trunc_string(strings)
+        stopifnot(validUTF8(strings)) # sanity check
+        stopifnot(validUTF8(output))
+    }
+    ## These tests fail on R < 4.1
+    ##
+    ## Checking that truncation and `...` concatenation are working
+    ## correctly in verrorcall_dflt.  Prior to 4.1 truncation detection did
+    ## not work with call set, and multibyte characters could be mangled by
+    ## the `...`.
+    ##
+    ## We assume getttext strings are not translated (or are translated
+    ## to the same byte-length as the ones in source).
+
+    ## We cannot use `tryCatch` as we're testing the C-level error construction
+    ## and that is not invoked when signalled errors are caught, hence:
+    capt_err_msg <- function(expr) {
+        tmp <- tempfile()
+        on.exit(unlink(tmp))
+        err.con <- getConnection(sink.number(type='message'))
+        sink(file(tmp, 'w'), type='message')
+        withRestarts(expr, abort=function() sink(err.con, type='message'))
+        ## add back newlines consumed by readlines; we assume a trailing one
+        ## exists, if it doesn't readLines will issue a warning
+        paste0(c(readLines(tmp), ""), collapse="\n")
+    }
+    ## Generate errors with long messages (length buff.size + overflow), ending
+    ## in `x`, to test truncation.  Will need to be updated if buff.size is
+    ## increased.  Function names / etc. are all carefully counted.
+    long_error <- function(x, overflow=0, buff.size=8192) {
+        overflow <- as.integer(overflow)
+        x <- paste0(as.character(x), collapse="")
+
+        ## Compute how many chars needed to fill buffer
+        call.len <- 51   # nchar of a_really...(stop(x)) - see below
+        extra.len <- 12  # "Error in  : "
+        extra.ws <- 3    # +2 spaces +1 \n from `tail`
+        chars.left <- buff.size - call.len - extra.len - extra.ws
+        chars <- nchar(x, type = 'bytes')
+        pad.chars <- chars.left - chars + as.integer(overflow)
+        stopifnot(pad.chars >= 0)
+        err.msg <- paste0(paste0(rev(rep_len(rev(LETTERS), pad.chars)),
+                                 collapse = ""), x)
+        ## force truncation despite 8170 warn length limit
+        old.opt <- options(warning.length = 8170, warn=2)
+        on.exit(options(old.opt))
+        a_really_long_function_to_cause_truncation <- function(x) x
+        f <- function(x)
+            a_really_long_function_to_cause_truncation(stop(x))
+        ## trigger error and capture std.err
+        capt_err_msg(f(err.msg))
+    }
+    buff.size.2 <- buff.size + 1     # .Internal(seterrmessage) drops 1 byte
+
+    ## 2 byte and 4 byte utf-8 encoded chars, avoid code points between \u00a0
+    ## and \u0100 as some iconv implementations will translate them into char
+    ## values in those ranges instead of into "<U+...>" in C locales.
+    utf8.test <- '\u0238\U00010348'
+
+    if(buff.size.2 != 8192) {
+        warning('These tests assume BUFSIZE = 8192')
+    } else {
+        ## Mangled multibyte in R < 4.1
+        stopifnot(validUTF8(long_error(utf8.test, overflow=-1)))
+
+        ## Truncation detection fails in R < 4.1, so newline isn't appended, so
+        ## we get a "incomplete final line" warning (converted to error)
+        long_error(utf8.test, overflow=0)
+
+        overflow <- c(
+             -6,   # Buffer unambiguosly unfilled for MB_CUR_MAX=6
+             -5,   # Buffer maybe filled for MB_CUR_MAX=6
+             -4,   # Buffer full with '...\n\0'
+             -3,   # Lose 4 byte UTF-8 char
+             -2,
+             -1,
+              0,   # 4 byte UTF-8 char exactly replaced by '...\n', buffer full
+              1,   # Lose 2 byte UTF-8 char
+              2,
+              3,   # Lose first non UTF-8
+            # These will need to change if R_ConciseTraceback changes
+            -87,   # Room for traceback; options(showErrorCalls=TRUE)
+            -86    # No room for traceback.
+        )
+        le.res <- vapply(overflow, long_error, character(1),
+                         buff.size = buff.size.2, x = utf8.test)
+        stopifnot(validUTF8(utf8.test))  # sanity check
+        stopifnot(validUTF8(le.res))
+
+        ## # For first one, before truncation test, we've used 8186 bytes, so we
+        ## # know there was no truncation.  Code adds a trailing newline, which
+        ## # is why we get 8187.  For the second, we add one byte to the
+        ## # message, which puts us in maybe-truncated state, which adds 3 more
+        ## # bytes via with "...", so total of 8187 + 1 + 3 == 8191.
+        ## le.res.nc <- nchar(le.res)
+        ## data.frame(overflow,
+        ##            bytes=nchar(le.res, type='bytes'),
+        ##            snippet=substr(le.res, le.res.nc - 5, le.res.nc))
+        ##
+        ##    overflow bytes snippet
+        ## 1        -6  8187 XYZȸ𐍈\n
+        ## 2        -5  8191 ȸ𐍈...\n
+        ## 3        -4  8192 ȸ𐍈...\n
+        ## 4        -3  8189 Zȸ...\n
+        ## 5        -2  8190 Zȸ...\n
+        ## 6        -1  8191 Zȸ...\n
+        ## 7         0  8192 Zȸ...\n
+        ## 8         1  8191 YZ...\n
+        ## 9         2  8192 YZ...\n
+        ## 10        3  8192 XY...\n
+        ## 11      -87  8192 ation\n
+        ## 12      -86  8107 XYZȸ𐍈\n
+        ## test recursive errors in handler, Fails R < 4.0
+
+        handler_error <- function(x, overflow=0, buff.size=8192) {
+            overflow <- as.integer(overflow)
+            x <- paste0(as.character(x), collapse="")
+            pad.chars <- buff.size - nchar(x, type='bytes') + overflow
+            err.msg <- paste0(
+                paste0(rev(rep_len(rev(LETTERS), pad.chars)), collapse=""), x
+            )
+            old.opt <- options(
+                error=function(...) {
+                    options(error=old.opt[['error']])
+                    stop(err.msg)
+                }
+            )
+            capt_err_msg(stop('initial error'))
+        }
+        handler.error.trunc <- vapply(
+            c(0, 1, 5), handler_error, x=utf8.test, "", buff.size=buff.size.2
+        )
+        stopifnot(validUTF8(handler.error.trunc))
+
+        ## Test when warning.length is limiting
+
+        short_error <- function(call.=TRUE) {
+            old.opt <- options(warning.length=100)
+            on.exit(old.opt)
+            f <- function()
+                stop(paste0(rep_len(0:9, 110), collapse=""), call.=call.)
+            capt_err_msg(f())
+        }
+        ## trailing newline adds 1
+        stopifnot(nchar(short_error(call.=FALSE)) == 101L)
+    }
+    ## PrintGenericVector truncations
+    ##
+    ## New printing in r78508 needs to account for UTF-8 truncation
+    grin <- "\U0001F600"
+    lc1 <- paste0(c(rep(LETTERS, length.out=110), grin), collapse="")
+    lc2 <- paste0(c(rep(LETTERS, length.out=111), grin), collapse="")
+    list.mats <- list(matrix(list(structure(1:2, class=lc1))),
+                      matrix(list(structure(1:2, class=lc2))))
+
+    ## Allowed UTF-8 truncation in R < 4.1
+    ls1 <- paste0(c(rep(0:9, length.out=95), "\U0001F600"), collapse="")
+    ls2 <- paste0(c(rep(0:9, length.out=96), "\U0001F600"), collapse="")
+    long.strings <- list(matrix(list(ls1)), matrix(list(ls2)))
+
+    ## Invalid UTF-8 output as "\xf0\x9f..." so needs to be parsed to un-escape
+    capt_parse <- function(x) {
+        out <- capture.output(print(x))
+        eval(parse(text=paste0(c('c(', sprintf("'%s',", out), 'NULL)'),
+                               collapse=""))[[1]])
+    }
+    capt.parsed <- unlist(lapply(c(list.mats, long.strings), capt_parse))
+    stopifnot(validUTF8(capt.parsed))
+
+    ## Allowed MBCS truncation in R < 4.1
+    fmt <- paste0(c(rep_len("a", 253), "\U0001f600"), collapse="")
+    stopifnot(validUTF8(format(as.POSIXlt('2020-01-01'), fmt)))
+
+    f <- file(paste0(c(rep_len("a", 992), "\U0001F600"), collapse=""))
+    suppressWarnings(g <- gzcon(f))
+    stopifnot(!grepl("xf0", capture.output(g)[2]))
+}
+
+## c() generic removes all NULL elements --- *but* the first --- before dispatch
+c.foobar <- function(...) list("ok", ...)
+foobar <- structure(list(), class = "foobar")
+stopifnot(exprs = {
+    identical(c(foobar, NULL, one=1,NULL), list("ok", foobar, one=1))
+    identical(c(a = foobar, pi, NULL, b="B",NULL), list("ok", a = foobar, pi, b="B"))
+    identical(c(a = foobar, b = NULL),     list("ok", a = foobar))
+    identical(c(foobar, b = foobar),       list("ok", foobar, b=foobar))
+    ## Back compatibly, w/ initial NULL, using c()'s default method:
+    ##  ==> result has list() for foobar
+    identical(c(NULL,     foobar, NULL, NULL, 1), c(  list(), 1))
+    identical(c(NULL, b = foobar, NULL, NULL, 1), c(b=list(), 1))
+    identical(c(a = NULL, b = foobar),                 list())
+    identical(c(a = NULL, b = foobar, c = NULL),       list())
+    identical(c(NULL, a = NULL, b = foobar, c = NULL), list())
+})
+## the first three cases failed in R <= 4.0.x
+
+
+## quantile(*, pr)  allows pr values very slightly outside [0,1] -- PR#17891
+stopifnot( identical(quantile(0:1, 1+1e-14), c("100%" = 1)) )
+## failed  in R <= 4.0.2
+
+
+## quantile(*, pr, names=FALSE)  with NA's in 'pr' -- PR#17892
+x <- (0:99)/64
+prN <- c(0.1, 0.5, 1, 2, 5, 10, 50, NA)/100
+qxN  <- quantile(x, probs = prN)
+qxNN <- quantile(x, probs = prN, names = FALSE)
+stopifnot(exprs = {
+    is.null(names(qxNN))
+    identical(qxNN, unname(qxN))
+    identical(NA_real_, quantile(x, probs = NA, names = FALSE))
+})
+## qxNN gave "Error in names(o.pr)[p.ok] <- names(qs) : ..."  in R <= 4.0.2
+
+
+## Vectorize() no longer keeps "garbage":
+vrep <- Vectorize(rep.int, "times")
+stopifnot(identical(sort(names(environment(vrep))),
+                    c("FUN", "SIMPLIFY", "USE.NAMES", "vectorize.args")))
+## names(..) was of length 7 in R <= 4.0.2
+
+
+## as.Date( "" ) -- PR#17909
+dd <- c("", "2001-09-11")
+(D1 <- as.Date(    dd)) # failed in R <= 4.0.2
+(D2 <- as.Date(rev(dd)))
+stopifnot(is.na(D1[1]), identical(D1, rev(D2)))
+## "" was not treated correctly when at [1] in R <= 4.0.2
+
+
+## ..elt() propagates visibility consistently with ..n and other args, PR#17905
+local({
+    fn <- function(...) list(withVisible(...elt(1)), withVisible(..2))
+    stopifnot(identical(
+	fn(invisible(NULL), invisible(NULL)),
+	rep(list(withVisible(invisible(NULL))), 2)
+    ))
+})
+
+
+## PR#17913 -- numToBits() accidentally was destructive
+n0 <- c(-7.7, 2.34e55)
+b0 <- numToBits(n0)
+stopifnot(sum(l0 <- as.logical(b0)) == 62L,
+          identical(which(head(l0, 10)), c(1L, 3:4, 7:8)),
+          identical(n0, c(-7.7, 2.34e55)))
+## was '0 0' for almost a month in R-devel
+
+
+## No longer assuming integer length()
+if(.Machine$sizeof.pointer >= 8) {
+  .Internal(inspect(-199900000:2e9))
+}
+## gave an error in R <= 4.0.2
+
+
+## PR#17907 -- capture.output() now using standard evaluation (SE) :
+## parent.frame() returns the correct environment in capture.output()
+local({
+    fn <- function(env = parent.frame()) {
+	capture.output(env)
+	list(
+	    env,
+	    parent.frame()
+	)
+    }
+    env <- environment()
+    out <- fn()
+    stopifnot(
+	identical(out[[1]], out[[2]]),
+	identical(out[[1]], env)
+    )
+})
+## capture.output() works with forwarded dots
+local({
+    wrapper <- function(...) {
+	capture.output(..., type = "output")
+    }
+    out <- local({
+	foo <- 1
+	wrapper(foo)
+    })
+    stopifnot(identical(out, capture.output(1)))
+})
+## Failed when capture.output() was using NSE
+
+
+## Inverse of numToBits() via
+stopifnot(identical(packBits(b0, "double"), n0))
+r <- c(pi, 1+ (0:8)/4); head(b <- numToBits(r), 25)
+stopifnot(identical(packBits(b, "double"), r))
+## thanks to PR#17914 by Bill Dunlap
+
+
+## quantile(x, probs) when probs has NA's, PR#17899
+stopifnot(identical(quantile(NULL), quantile(numeric())), # back-compatibility
+	  identical(quantile(structure(numeric(), names = character()), names = FALSE),
+		    rep(NA_real_, 5)))
+L <- list(ordered(letters[1:11]), # class "ordered" "factor"
+          seq(as.Date("2000-01-07"), as.Date("1997-12-17"), by="-1 month"))
+ct <- seq(as.POSIXct("2020-01-01 12:13:14", tz="UTC"), by="1 hour", length.out = 47)
+LL <- c(L, list(o0 = L[[1]][FALSE], D0 = L[[2]][FALSE],
+                ct = ct, lt = as.POSIXlt(ct), num= as.numeric(ct)))
+prb <- seq(0, 1, by=2^-8) # includes 0.25, 0.5, etc
+for(x in LL) {
+    cat("x : "); str(x, vec.len=3)
+    clx <- class(if(inherits(x, "POSIXlt")) as.POSIXct(x) else x)
+    ## for "ordered" *and* "Date", type must be 1 or 3
+    for(typ in if(any(clx %in% c("ordered", "Date"))) c(1,3) else 1:7) {
+        cat(typ, ": ")
+        stopifnot(exprs = {
+            identical(clx, class(q1 <- quantile(x, probs=  prb,     type=typ)))
+            identical(clx, class(qN <- quantile(x, probs=c(prb,NA), type=typ))) # failed
+            ## for "POSIXct", here q1 is integer, qN "double":
+            { if(inherits(q1, "POSIXct")) storage.mode(qN) <- storage.mode(q1); TRUE }
+            identical(qN[seq_along(q1)], q1)
+            is.na(    qN[length(qN)])
+        })
+    }; cat("\n")
+}
+## qN often lost class() e.g. for "ordered" and "Date" in  R <= 4.0.2
+
+
+## isS3stdGeneric() traced function:
+trace(print)
+stopifnot( isS3stdGeneric(print) )
+untrace(print)
+## was FALSE in R <= 4.0.2
+
+
+## PR#17897: all.equal.factor() did not distinguish the two different NA in factors
+labs <- c("a", "b", NA)
+x <- factor(      3:1,                labels = labs)
+y <- factor(c(NA, 2:1), levels = 1:3, labels = labs)
+x
+dput(x) ; dput(y) ## --> they are clearly different, but print the same:
+stopifnot(exprs = {
+    identCO(x,y)
+    is.character(print(ae <- all.equal(x,y)))
+    !englishMsgs || grepl("NA mismatch", ae, fixed=TRUE)
+})
+## all.equal() gave TRUE wrongly, from 2012 till R <= 4.0.2
+
+
+## PR#17935:  `[.formula` for formulas with NULL:
+forms <- list(f0 = (~ NULL)
+            , f1 = (z ~ NULL)
+            , f2 = (NULL ~ x)
+            , f3 = (NULL ~ NULL)
+              )
+rr <- lapply(forms, function(f)
+        lapply(seq_along(f), function(ii) f[ii]))
+cN <- quote(NULL())
+stopifnot(exprs = {
+    identical( unique(lapply(rr , `[[`, 1)), list(`~`()))
+    identical( lapply(unname(rr), `[[`, 2),  list(cN, quote(z()), cN,cN) )
+})
+## subsetting failed for all 4 formulas in R <= 4.0.3
+(tm1 <- (~ "~")[-1])
+(tq1 <- (~ `~`)[-1])
+stopifnot(exprs = {
+    identical((~ NA)[-1], quote(NA())) ## subsetting (~ NA) failed in R <= 4.0.3
+    identical(tm1,        `[[<-`(call("T"), 1L, "~")) ;  is.call(tm1)
+    identical(tq1,        structure(call("~"), class="formula", ".Environment" = globalenv()))
+})
+## zero-length formulas from subsetting are now equal to formula(NULL)
+exps <- expression(
+           (~ x)[FALSE]
+         , (~ x)[rep(FALSE, 2)]
+         , (y ~ x)[FALSE])
+formL <- lapply(exps, eval)
+stopifnot( length(unique(formL)) == 1,
+          all.equal(formL[[1]], formula(NULL)) )
+## Gave error  "attempt to set an attribute on NULL" in R <= 4,0.3
+
+
+## Regression in .traceback()  PR#17930
+op <- options(keep.source=TRUE)
+f <- function() .traceback(1)
+g <- function() f()
+x <- g()
+stopifnot(inherits(attr(x[[1]], 'srcref'), "srcref"))
+options(op)
+## had worked up to R 3.6.3, but not from 4.0.0 to 4.0.3
+
+
+## Summary() and Math() data.frame methods with *logical* columns
+a <- na.omit(airquality)
+aF <- a[FALSE,] # 0-row version of it
+dL0 <- data.frame(x=numeric(), L=logical()) # logical column
+stopifnot(exprs = {
+    ## "Summary" :
+    sum(aF) == 0 # gave Error  "only defined on a data frame with all numeric variables"
+    sum(subset(a, Ozone > 200)) == 0 # (ditto)
+    suppressWarnings(range(dL0) == c(Inf, -Inf)) # (2 warnings)
+    ## "Math" , gave Error..: non-numeric variable(s) in data frame :
+    identical(exp(data.frame(L=TRUE)), data.frame(L=exp(TRUE)))
+    identical(sinL0 <- sin(dL0), data.frame(x=numeric(), L=numeric()))
+    identical(sinL0, log1p(dL0))
+    identical(cumsum(dL0),       data.frame(x=numeric(), L=integer()))
+})
+## probably never worked in any R <= 4.0.3
+
+
+## unlist(<pairlist w/ list>, recursive=FALSE), PR#17950
+l.ex <- list(a = list(1:5, LETTERS[1:5]), b = "Z", c = NA)
+stopifnot(identical(
+    unlist(as.pairlist(l.ex), recursive = FALSE),
+    unlist(            l.ex , recursive = FALSE)))
+##
+l2 <- list(a = "a", b = quote(b), c = pi+2i)# no list-entries
+stopifnot(
+    identical(
+        unlist(as.pairlist(l2), recursive = FALSE) -> ul2,
+        unlist(as.pairlist(l2))),
+    identical(ul2, unlist(l2, recursive = FALSE)))
+## lost content in R <= 4.0.3  ('FIXME' in source went lost in 2006)
+
+
+## `class<-` was mutating outside of an assignment context
+x <- c(1)
+xx <- `class<-`(x, "foo")
+stopifnot(identical(class(x), "numeric"))
+
+
+## Can splice expression vectors with attributes -- PR#17869
+local({
+    exprs <- structure(expression(1, 2, 3), attr = TRUE)
+    exprsSrcrefs <- parse(text = "1;2;3", keep.source = TRUE)
+    stopifnot(
+	identical(
+	    bquote({ ..(exprs) }, splice = TRUE),
+	    call("{", 1, 2, 3)
+	),
+	identical(
+	    bquote({ ..(exprsSrcrefs) }, splice = TRUE),
+	    call("{", 1, 2, 3)
+	)
+    )
+})
+
+
+## some issues with task callbacks:
+## avoid adding a reference to the value:
+x <- c(1)
+old_xr <- .Internal(refcnt(x))
+TCB <- addTaskCallback(function(...) TRUE)
+x
+stopifnot(.Internal(refcnt(x)) == old_xr)
+removeTaskCallback(TCB)
+
+## these used to fail with "object 'foo' not found":
+TCB <- addTaskCallback(function(e, v, ...) { v; TRUE})
+quote(foo)
+removeTaskCallback(TCB)
+TCB <- addTaskCallback(function(...) { length(list(...)); TRUE},
+                       data = quote(foo))
+removeTaskCallback(TCB)
+
+
+## all.equal(<functions>) should check.environment (Kevin Van Horn, R-devel)
+f <- function(x) function(y) x+y
+dif <- all.equal(f(5), f(0))
+stopifnot(is.function(f(5)),
+          is.character(dif), grepl("difference", dif))
+## all.equal() gave TRUE in  R <= 4.0.x
+
+
+## p.adjust(<empty>, n=0) - PR#18002
+## (1st fix-proposal computed wrongly w/ NAs:
+pp <- 2^-(40:1); pp[17:19] <- NA
+ppa <- p.adjust(pp, "holm") # worked always but was not strictly tested
+stopifnot(all.equal(c(3.365e-11, 6.548e-11, 1.273e-10, 2.474e-10, 4.802e-10,
+                      9.313e-10, 1.804e-09), ppa[1:7]))
+n0 <- numeric()
+stopifnot(identical(n0, p.adjust(n0, n = length(n0))))
+## errored in R <= 4.0.3
+
+
+## show(<standardGeneric>) where it has package ".GlobalEnv"
+f <- function(x) x
+setGeneric("f")
+f # failed for a while (in R-devel only)
+
+
+## all.equal.function() in case the env contains '...' -- PR#18010
+a <- (function(...) function() NULL)(1)
+b <- (function(...) function() NULL)(1) # want "a .eq. b"
+D <- (function(...) function() NULL)(1:2 < 3) # want "D .NE. b"
+e.. <- (function(...) environment())(1)
+##' General creator of "..."  (DOTSXP) objects (short form by Suharto Anggono):
+...maker <- function(...) get("...") ## fails if called without argument
+...maker <- function(...) (function(...) environment())(...)[["..."]]
+str( ddd <- ...maker(1) )
+str( Ddd <- environment(D)[["..."]] ) # length 1, mode "...":
+str( D2  <- ...maker(TRUE,TRUE))      # length 2, mode "...":
+str( D3n <- ...maker(ch = {cat("HOO!\n"); "arg1"}, 2, three=1+2) )
+## These all worked "accidentally" in R <= 4.0.x
+assertErrV(lD2 <- D2[]) #  type '...' is not subsettable
+assertErrV(D3n[]) #   (ditto)
+assertErrV(D3n[][["three"]]) #  (ditto)
+assertErrV(D3n $ ch) #  (ditto)
+str( D3n <- ...maker(ch = {cat("HOO!\n"); "arg1"}, 2, three=1+2) )
+stopifnot(exprs = {
+    identical(alist(a=)$a, ...maker())# "*the* missing", the empty symbol
+    identical(ddd, ...maker(1))
+    identical(Ddd, ...maker(1:2 < 3))
+    is.character(aeLD <- all.equal(quote(x+1), ddd))
+    grepl("Mode",    aeLD[1])
+    grepl("deparse", aeLD[2])
+    all.equal(a, b) # failed with "Component “...”: target is not list-like" since r79585 (2020-12-07)
+    all.equal(e.., environment(a))
+    ## all.equal() dispatch for "..." objects ('ddd') directly:
+    typeof(ddd) == "..."
+    typeof(D2) == "..."
+    length(D2) == 2
+    is.character(aeD <- all.equal(a, D) )
+    grepl("same length", aeD)
+    grepl("...", aeD, fixed=TRUE)
+    grepl("not identical", aeD)
+    ##
+    ## names(<DOTSXP>):
+    is.null(names(ddd))
+    identical(c("ch", "", "three"), names(D3n))
+})
+##  for identical() ==> ./reg-tests-2.R  -- as it's about "output"
+op <- options(keep.source = FALSE) # don't keep "srcref" etc
+##
+Qlis <- list(NULL
+## Next 4 now must work as identical(X,X) is true:
+, ddd = ddd
+, Ddd = Ddd
+, D2  = D2
+, D3n = D3n
+, Qass   = quote(x <- 1)
+, Qbrc   = quote({1})
+, Qparen = quote((1))
+, Qif    = quote(if(1)2)
+, Qif2   = quote(if(1)2 else 3)
+, Qwhile = quote(while(1) 2)
+)
+##
+sapply(Qlis, class)
+stopifnot( sapply(Qlis, function(obj) all.equal(obj, obj)) )
+## only the first failed in R <= 4.0.3
+
+
+## See PR#18012 -- may well change
+aS <- (function(x) function() NULL)(stop('hello'))
+bS <- (function(x) function() NULL)(stop('hello'))
+try( all.equal(aS, bS) ) ## now (check.environment=TRUE) triggers the promise ..
+## Now have a way *not* to evaluate aka force the promise:
+(aeS <- all.equal(aS, bS, evaluate=FALSE)) # no promises forced
+stopifnot(grepl("same names.* not identical", aeS))
+
+
+## PR#18032: identical(<DOTSXP>,*)
+ddd <- ...maker(47)
+DDD <- ...maker(ch = {cat("Hu hu!\n"); "arg1"}, two = 1+1, pi, ABC="A")
+stopifnot(exprs = {
+    identical(ddd,ddd)
+    identical(DDD,DDD)
+    identical  (ddd, ...maker(47))
+    ! identical(ddd, ...maker(7 )) # these *are* different
+    ! identical(ddd, DDD)
+})
+options(op)
+
+
+## PR#18034 : explicit and implicit row.names=NULL for as.data.frame.list()
+data(mtcars, package="datasets")
+lmtcars <- as.list(mtcars)
+names(lmtcars[[3]]) <- RN <- c(letters[1:26], LETTERS[1:6])
+dfcars1 <- as.data.frame.list(lmtcars)# default: missing(row.names); uses RN
+dfcarsN <- as.data.frame.list(lmtcars, row.names = NULL)# does *not* use  RN
+stopifnot(identical(RN,    rownames      (dfcars1)) ,
+          identical(-32L, .row_names_info(dfcarsN))) # now has "automatic" (integer) row names
+## dfcarsN == dfcars1  in  R <= 4.0.3
+
+
+## str(x) when x has "unusal" length() semantics such that lapply() / vapply() fails:
+length.Strange4 <- function(x) 4
+`[[.Strange4` <- function(x, i) {
+    stopifnot(length(i) == 1)
+    if(i %in% 1:4) paste(sprintf("content of  x[[%d]]", i))
+    else stop("invalid [[-index, partly out of 1..4")
+}
+`[.Strange4` <- function(x, i) {
+    isM <- length(i) > 1
+    if(all(i %in% 1:4)) paste(sprintf("content of  x[%s]",
+                                      if(isM) paste0("c(", i, collapse=", ", ")")
+                                      else paste0(i, collapse=", ")))
+    else stop("invalid indices, partly out of 1..4")
+}
+L <- structure(as.list(1:6), class="Strange4")
+stopifnot(is.list(L), length(L) == 4, length(unclass(L)) == 6)
+assertErrV(lapply(L, length))
+assertErrV(vapply(L, typeof, ""))
+lns <- capture.output(str(L)) # no longer fails
+stopifnot(length(lns) == 1+6,  grepl("hidden list", lns[1]))
+## str() failed for these and similar in R <= 4.0.x
+
+
+## PR#18041:  checkRdaFiles(<more-than-1>) $ version
+save(pi, file = rda2 <- tempfile(fileext = ".rda"), version = 2)
+save(pi, file = rda3 <- tempfile(fileext = ".rda"), version = 3)
+stopifnot(identical(2:3, tools::checkRdaFiles(c(rda2, rda3))$version))
+## gave '3 3' in R <= 4.0.3
+
+
+if (l10n_info()$"UTF-8") {
+  x <- "d\xc3\xa9faut" # "défaut" flagged as native
+  stopifnot(grepl("d.faut", x)) # incorrectly FALSE in in R < 4.1
+}
+
+
+## constructing the names() of quantile():
+str(L <- lapply(c(2,3,5,7), function(dig) { options(digits = dig)
+    names(quantile(lynx, probs = 1 - 10^(-1:-5))) }))
+stopifnot(length(unique(L)) == 1)
+## in R <= 4.0.x,  L contained 3 different results
+
+
+## PR#18079:  sub() & gsub(patt, repl, x) -- when patt is NA
+(x <- c(a="abc", b="bd", d=NA, foo="babar"))
+stopifnot(exprs = {
+    identical(names(x1  <-  sub("a", "_", x)), names(x)) ; x1[["foo"]] == "b_bar"
+    identical(names(x2  <- gsub("a", "_", x)), names(x)) ; x2[["foo"]] == "b_b_r"
+    identical(names(xN2 <- gsub(NA , "_", x)), names(x)) ; is.na(xN2)
+    identical(names(xN1 <-  sub(NA , "_", x)), names(x)) ; is.na(xN1)
+})
+## NA-pattern did not keep any attributes in R <= 4.0
+
+
+## svn c80082/80141's change to grep.R broke several of these -- the PR#18063 saga
+check_regexetc <- function(txt, fx.ptn, s.ptn, gr.ptn, msg = stop) {
+    stopifnot(is.character(txt))
+    chkString <- function(ch) {
+        if(!is.character(ch)) { str(ch); stop("is not a character") }
+        if(length(ch) != 1)   { str(ch); stop("is not of length 1") }
+    }
+    chkString(fx.ptn)
+    chkString( s.ptn)
+    chkString(gr.ptn)
+    ## ref: result using "character";
+    ## x  : from as.character(.) w/ "lost" attributes
+    identC <- function(x, ref) {
+        attributes(ref) <- attributes(ref)[names(attributes(x))]
+        identical(x, ref)
+    }
+
+    a2_fns <- expression(grepl,  regexpr, gregexpr,  regexec) # plus possibly:
+    if(getRversion() >= "4.1") a2_fns <- c(a2_fns, expression(gregexec))
+
+    exclude <- NA # (the default, used in  factor(.., exclude=*)
+    ##
+    for (txt_i in 1:3) {
+        if (txt_i == 2) { # txt_i  \in {2, 3}  will have  NA in 'txt'
+            txt <- c(NA_character_, txt, NA_character_)
+        } else if (txt_i == 3) {
+            exclude <- NULL
+        }
+        txt_fkt <- factor(txt, exclude = exclude)
+        cat("txt_i = ", txt_i,"; str(<factor>):\n", sep="") ; str(txt_fkt)
+        if(chkpre <- !is.null(names(txt_fkt)) && length(levels(txt_fkt)) < length(txt_fkt)) {
+            txt_fkt_pre <- txt_fkt[seq(levels(txt_fkt))]
+            cat("str(txt_fkt_pre):\n") ; str(txt_fkt_pre)
+        }
+
+        for (ptn in c(fx.ptn, s.ptn, gr.ptn, NA_character_)) {
+            fixed <- (!is.na(ptn) && ptn == fx.ptn)
+            perl  <- (!is.na(ptn) && ptn == gr.ptn)
+            ptn_ch <- if(is.na(ptn)) ptn else dQuote(ptn, q=NULL)
+            cat(sprintf(" pattern=%16s, fixed=%s, perl=%s:  ", ptn_ch, fixed, perl))
+            for (e_2 in a2_fns) {
+                f_2 <- eval(e_2)
+                f_2s <- as.character(e_2)
+                ## when ptn ==  NA_character_  only test grep() & grepl() :
+                if(is.na(ptn) && !(f_2s %in% c("grep", "grepl"))) next
+                cat(f_2s,"")
+                if(!identical(
+                    f_2(ptn, txt_fkt, fixed = fixed, perl = perl),
+                    f_2(ptn, txt,     fixed = fixed, perl = perl)
+                    )) msg(sprintf(
+                           "not identical: %s(%s, txt*, fixed=%s, perl=%s)",
+                           f_2s, ptn_ch, fixed, perl))
+            }
+
+            cat("\n\t grep(*, invert=F/T, value = F/T): ")
+            for(iv in list(c(FALSE,FALSE), c(TRUE,FALSE), c(FALSE,TRUE), c(TRUE,TRUE)))
+              if(!identical(
+                grep(ptn, txt_fkt, fixed = fixed, perl = perl, invert=iv[1], value = iv[2]),
+                grep(ptn, txt,     fixed = fixed, perl = perl, invert=iv[1], value = iv[2])
+              )) msg(sprintf(
+                    "not identical: grep(%s, txt*, fixed=%s, perl=%s, invert=%s, value=%s)",
+                    ptn_ch, fixed, perl, iv[1], iv[2]))
+            cat("f_3, i.e. *sub() :")
+            for (e_3 in expression(sub, gsub)) {
+                ##                 ---  -----
+                f_3 <- eval(e_3)
+                f_3s <- as.character(e_3)
+                cat(f_3s,"")
+                if(!identC(##identical(
+                    res <-
+                    f_3(ptn, "@@", txt_fkt, fixed = fixed, perl = perl),
+                    f_3(ptn, "@@", txt,     fixed = fixed, perl = perl)
+                )) msg(sprintf(
+                    "not identical: %s(%s, \"@@\", txt*, fixed=%s, perl=%s)",
+                    f_3s, ptn_ch, fixed, perl))
+                if(chkpre &&
+                   is.null(names(f_3(ptn, "@@", txt_fkt_pre, fixed = fixed, perl = perl))) !=
+                   is.null(names(res))
+                ) msg(sprintf(
+                    "not identical pre: names(%s(%s, \"@@\", txt_fkt*, fixed=%s, perl=%s))",
+                    f_3s, ptn_ch, fixed, perl))
+            }
+            cat("\n")
+        }
+        cat("--------- finished  txt_i = ", txt_i,"\n")
+    }
+} ## end{ check_regexetc }
+
+codetools::findGlobals(check_regexetc,merge=FALSE)
+## "default check"
+txt <- c(
+    "The", "licenses", "for", "most", "software", "are",  "designed", "to",
+    "take", "away", "your", "freedom",  "to", "share", "and", "change", "it.",
+    "", "By", "contrast,", "the", "GNU", "General", "Public", "License",
+    "is", "intended", "to", "guarantee", "your", "freedom", "to", "share",
+    "and", "change", "free", "software", "--", "to", "make", "sure", "the",
+    "software", "is", "free", "for", "all", "its", "users")
+names(txt) <- paste0("c", seq_along(txt))
+if(FALSE)
+ system.time(check_regexetc(txt, fx.ptn = "e", s.ptn = "e.", gr.ptn = "(?<a>e)(?<b>.)", msg=warning))
+check_regexetc(txt, fx.ptn = "e", s.ptn = "e.", gr.ptn = "(?<a>e)(?<b>.)")
+##============
+
+
+x <- c("e", "\xe7")
+Encoding(x) <- "UTF-8"
+x <- factor(c(1, 1, 2), c(1, 2), x)
+tools::assertWarning(grep("e", x, fixed = TRUE))
+## broken by svn c80136
+
+
+## "difftime" objects pmin() .. & modifications when "units" differ -- PR#18066
+x_hr <- as.difftime(1:10, units = "hours")
+y_hr <- as.difftime( 5,   units = "hours")
+y_mi <- `units<-`(y_hr, "mins")
+x_na <- `[<-`(x_hr, 2L, NA_real_)
+stopifnot(exprs = { ## these all are FALSE in R <= 4.0.*
+    inherits(rep(y_hr, 5L), "difftime")
+    identical(`[<-`(x_hr, 1L, y_hr), `[<-`(x_hr, 1L, y_mi))
+    identical(pmin(x_hr, y_hr), pmin(x_hr, y_mi))
+    identical(pmin(x_na, y_hr, na.rm = TRUE),
+              pmin(x_na, y_mi, na.rm = TRUE))
+})
+## objects became wrong without warning in R <= 4.0.x
+
+## Bytes Enc may be unset directly to unknown (impossible R <= 4.0.x)
+x <- "fa\xE7ile"
+Encoding(x) <- "bytes"
+xu <- x
+Encoding(xu) <- "unknown"
+stopifnot(identical(Encoding(c(x, xu)), c("bytes", "unknown")))
+
+
+## Correctness tests for sorted ALTREP handling of unique/duplicated (PR#17993)
+
+
+altrep_dup_test <- function(vec, nalast, fromlast, s3class) {
+    svec_ar <- sort(vec, na.last = nalast)
+    svec_std <- svec_ar
+    svec_std[1] <- svec_std[1] ## this clobbers ALTREP-ness
+    if(!is.null(s3class)) {
+        class(svec_ar) <- s3class
+        class(svec_std) <- s3class
+    }
+    stopifnot(identical(duplicated(svec_ar, fromLast = fromlast),
+                        duplicated(svec_std, fromLast = fromlast)),
+              identical(unique(svec_ar, fromLast = fromlast),
+                        unique(svec_std, fromLast = fromlast)),
+              identical(anyDuplicated(svec_ar, fromLast = fromlast),
+                        anyDuplicated(svec_std, fromLast = fromlast))
+              )
+}
+
+altint_dup_check <- function(vec, numna, nalast, fromlast, s3class = NULL) {
+     if(length(vec) > 0 && numna > 0) {
+         vec[1:numna] = NA_integer_
+     }
+     altrep_dup_test(vec, nalast = nalast, fromlast = fromlast, s3class = s3class)
+}
+
+altint_dup_multicheck <- function(vec, numna, s3class = NULL) {
+    altint_dup_check(ivec, numna, FALSE, FALSE, s3class = s3class)
+    altint_dup_check(ivec, numna, FALSE, TRUE, s3class = s3class)
+    altint_dup_check(ivec, numna, TRUE, FALSE, s3class = s3class)
+    altint_dup_check(ivec, numna, TRUE, TRUE, s3class = s3class)
+}
+
+altreal_dup_check <- function(vec, numna, numnan, numinf, nalast, fromlast, s3class = NULL) {
+    if(length(vec) > 0) {
+        if(numna > 0) {
+            vec[1:numna] <- NA_real_
+        }
+        if(numnan > 0) {
+            vec[seq(1+numna, 1+numnan)] <- NaN
+        }
+        if(numinf > 0) {
+            infstrt <- 1 + numna + numnan
+            vec[seq(infstrt, infstrt + numinf - 1)] <- rep(c(Inf, -Inf), length.out = numinf)
+        }
+    } ## end length(vec) > 0
+    altrep_dup_test(vec, nalast = nalast, fromlast = fromlast, s3class = s3class)
+}
+
+altreal_dup_multicheck <- function(vec, numna, numnan, numinf, s3class = NULL) {
+    altreal_dup_check(ivec, numna, numnan, numinf, FALSE, FALSE, s3class = s3class)
+    altreal_dup_check(ivec, numna, numnan, numinf, FALSE, TRUE, s3class = s3class)
+    altreal_dup_check(ivec, numna, numnan, numinf, TRUE, FALSE, s3class = s3class)
+    altreal_dup_check(ivec, numna, numnan, numinf, TRUE, TRUE, s3class = s3class)
+}
+
+## NB buffer size used by ITERATE_BY_REGION macros is 512, so we need to test
+## handling of NAs, NaNs, and Infs around/past that barrier.
+
+set.seed(83); dvec <- round(runif(2000, 1, 20), 1)
+ivec <- ceiling(dvec)
+
+altint_dup_multicheck(ivec, 0)
+## just before buffer break
+altint_dup_multicheck(ivec, 512)
+## just after buffer break
+altint_dup_multicheck(ivec, 513)
+## all nas
+altint_dup_multicheck(ivec, 2000)
+
+altreal_dup_multicheck(dvec, 0, 0, 0)
+## NA/NaN up to edge of 1 buffer
+altreal_dup_multicheck(dvec, 256, 256, 0)
+## NA/NaN  crossing buffer barrier
+altreal_dup_multicheck(dvec, 256, 257, 0)
+## all NA/NaN
+altreal_dup_multicheck(dvec, 1000, 1000, 0)
+## non-finite filling exactly one buffer on each side
+altreal_dup_multicheck(dvec, 0, 0, 1024)
+## non-finite  across more than one buffer on both sides
+altreal_dup_multicheck(dvec, 0, 0, 1026)
+## all non-finite
+altreal_dup_multicheck(dvec, 0, 0, 2000)
+
+## sanity checks
+## no breakage on length 0 vectors
+altint_dup_multicheck(integer(0), 0)
+altreal_dup_multicheck(numeric(0), 0, 0, 0)
+## works on on length 1 vectors
+altint_dup_multicheck(1L, 0)
+altreal_dup_multicheck(1.0, 0, 0, 0)
+
+
+## s3 methods take precedence over altrep methods
+## these methods are (very) wrong on purpose so there can be
+## no doubt they are hit rather than the altrep code even in the sorted case
+duplicated.fake_class <-  function(x, incomparables = FALSE, ...) {
+    rep(c(TRUE, FALSE), length.out = length(x))
+}
+
+unique.fake_class <- function(x, incomparables = FALSE, ...) {
+    x[c(1, 5, length(x))]
+}
+
+altint_dup_multicheck(ivec, 0, s3class = "fake_class")
+altreal_dup_multicheck(dvec, 0, 0, 0, s3class = "fake_class")
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

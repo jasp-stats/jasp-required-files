@@ -12,7 +12,7 @@
 
 <dl>
 <dt>on Windows,</dt><dd><p>the <code>X11()</code> and <code>x11()</code> functions are
-simple wrappers to <code><a href="windows.html">windows</a>()</code> for historical
+simple wrappers to <code><a href="../../grDevices/help/windows.html">windows</a>()</code> for historical
 compatibility convenience: Calling <code>x11()</code> or <code>X11()</code>
 would work in most cases to open an interactive graphics device.
 </p>
@@ -97,7 +97,7 @@ and the second for font 5, the symbol font.  See section &lsquo;Fonts&rsquo;.</p
 <td>
 <p>The default family: a length-one character string.  This
 is primarily intended for cairo-based devices, but for <code>type =
-    "Xlib"</code>, the <code><a href="x11Fonts.html">X11Fonts</a>()</code> database is used to map family
+    "Xlib"</code>, the <code><a href="../../grDevices/help/X11Fonts.html">X11Fonts</a>()</code> database is used to map family
 names to <code>fonts</code> (and this argument takes precedence over that
 one).</p>
 </td></tr>
@@ -115,7 +115,7 @@ See also &lsquo;Resources&rsquo;.</p>
 <p>character string, up to 100 bytes.  With the default,
 <code>""</code>, a suitable title is created internally.  A C-style format
 for an integer will be substituted by the device number (see the
-<code>file</code> argument to <code><a href="postscript.html">postscript</a></code> for further
+<code>file</code> argument to <code><a href="../../grDevices/help/postscript.html">postscript</a></code> for further
 details).  How non-ASCII titles are handled is
 implementation-dependent.</p>
 </td></tr>
@@ -124,8 +124,9 @@ implementation-dependent.</p>
 <p>character string, one of <code>"Xlib"</code>, <code>"cairo"</code>,
 <code>"nbcairo"</code> or <code>"dbcairo"</code>.  Only the first will be
 available if the system was compiled without support for
-cairographics.  The default is <code>"cairo"</code> where available except
-on macOS, otherwise <code>"Xlib"</code>.</p>
+cairographics.  The default is <code>"cairo"</code> where <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> was built
+using <code>pangocairo</code> (so not usually on macOS), otherwise
+<code>"Xlib"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>antialias</code></td>
 <td>
@@ -136,7 +137,7 @@ to be used.  One of <code>c("default", "none", "gray", "subpixel")</code>.</p>
 <td>
 <p>for cairo-based devices only:
 a length-one character string that specifies the font family to
-be used as the &quot;symbol&quot; font (e.g., for <a href="plotmath.html">plotmath</a> output).
+be used as the &quot;symbol&quot; font (e.g., for <a href="../../grDevices/help/plotmath.html">plotmath</a> output).
 The default value is &quot;default&quot;, which means that R will choose
 a default &quot;symbol&quot; font based on the graphics device capabilities.</p>
 </td></tr>
@@ -191,7 +192,7 @@ in non-UTF-8 locales).  The output should be locale-independent.
 
 <p>There are three variants of the cairo-based device.  <code>type =
   "nbcairo"</code> has no buffering.  <code>type = "cairo"</code> has some
-buffering, and supports <code><a href="dev.flush.html">dev.hold</a></code> and <code>dev.flush</code>.
+buffering, and supports <code><a href="../../grDevices/help/dev.hold.html">dev.hold</a></code> and <code>dev.flush</code>.
 <code>type = "dbcairo"</code> buffers output and updates the screen about
 every 100ms (by default).  The refresh interval can be set (in units
 of seconds) by e.g. <code><a href="../../base/html/options.html">options</a>(X11updates = 0.25)</code>: the
@@ -214,7 +215,7 @@ and italic (since worked around), selecting incorrect glyphs and ugly
 or missing symbol glyphs.
 </p>
 <p>All devices which use an X11 server (including the <code>type =
-    "Xlib"</code> versions of bitmap devices such as <code><a href="png.html">png</a></code>) share
+    "Xlib"</code> versions of bitmap devices such as <code><a href="../../grDevices/help/png.html">png</a></code>) share
 internal structures, which means that they must use the same
 <code>display</code> and visual.  If you want to change display, first close
 all such devices.
@@ -292,7 +293,7 @@ should if you have them installed are <code>"Arial"</code>,
   Serif"</code>.  To match LaTeX text, use something like <code>"CM Roman"</code>.
 </p>
 <p>Fedora systems from version 31 on do not like the default <code>"symbol"</code>
-font family for rendering symbols (e.g., <a href="plotmath.html">plotmath</a>).  For those
+font family for rendering symbols (e.g., <a href="../../grDevices/help/plotmath.html">plotmath</a>).  For those
 systems, users should specify a different font via
 <code>symbolfamily</code>.  The default can also be changed via
 <code>X11.options</code>. 
@@ -353,7 +354,7 @@ be necessary to limit the number of colours used by <span style="font-family: Co
 model for the visual of the X11 server: these days this will almost
 always be &lsquo;truecolor&rsquo;.  This can be overridden by the
 <code>colortype</code> argument of <code>X11.options</code>.  <b>Note:</b> All
-<code>X11</code> and <code>type = "Xlib"</code> <code><a href="png.html">bmp</a></code>, <code>jpeg</code>,
+<code>X11</code> and <code>type = "Xlib"</code> <code><a href="../../grDevices/help/bmp.html">bmp</a></code>, <code>jpeg</code>,
 <code>png</code> and <code>tiff</code> devices share a <code>colortype</code> which is
 set when the first device to be opened.  To change the
 <code>colortype</code> you need to close <em>all</em> open such devices, and
@@ -446,7 +447,7 @@ minimum one.
 
 <h3>See Also</h3>
 
-<p><code><a href="Devices.html">Devices</a></code>, <code><a href="x11Fonts.html">X11Fonts</a></code>, <code><a href="savePlot.html">savePlot</a></code>.
+<p><code><a href="../../grDevices/help/Devices.html">Devices</a></code>, <code><a href="../../grDevices/help/X11Fonts.html">X11Fonts</a></code>, <code><a href="../../grDevices/help/savePlot.html">savePlot</a></code>.
 </p>
 
 
@@ -461,5 +462,5 @@ setHook(packageEvent("grDevices", "onLoad"),
 }
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

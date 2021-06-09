@@ -105,7 +105,7 @@ data frame.</p>
 <p>a character vector describing the location of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
 library trees to search through, or <code>NULL</code>.  The default value
 of <code>NULL</code> corresponds to all libraries currently known to
-<code><a href="libPaths.html">.libPaths</a>()</code>.</p>
+<code><a href="../../base/help/.libPaths.html">.libPaths</a>()</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>quiet</code></td>
 <td>
@@ -158,7 +158,7 @@ latter with a negative sign for &lsquo;automatic&rsquo; row names.</p>
 </td></tr>
 <tr valign="top"><td><code>refhook</code></td>
 <td>
-<p>a load hook: see <code><a href="serialize.html">unserialize</a></code>.</p>
+<p>a load hook: see <code><a href="../../base/help/unserialize.html">unserialize</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>seed</code></td>
 <td>
@@ -191,7 +191,7 @@ the default classes.</p>
 </td></tr>
 <tr valign="top"><td><code>units</code></td>
 <td>
-<p>see <code><a href="difftime.html">difftime</a></code>.</p>
+<p>see <code><a href="../../base/help/difftime.html">difftime</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -199,7 +199,7 @@ the default classes.</p>
 </td></tr>
 <tr valign="top"><td><code>FUN</code></td>
 <td>
-<p>function to apply, found via <code><a href="match.fun.html">match.fun</a></code>.</p>
+<p>function to apply, found via <code><a href="../../base/help/match.fun.html">match.fun</a></code>.</p>
 </td></tr>
 <tr valign="top"><td><code>dots</code></td>
 <td>
@@ -233,7 +233,7 @@ strictly positive length, or all of zero length).</p>
 <h3>Details</h3>
 
 <p>The functions <code>.subset</code> and <code>.subset2</code> are essentially
-equivalent to the <code><a href="Extract.html">[</a></code> and <code><a href="Extract.html">[[</a></code> operators,
+equivalent to the <code><a href="../../base/help/[.html">[</a></code> and <code><a href="../../base/help/[[.html">[[</a></code> operators,
 except that methods dispatch does not take place.  This is to avoid
 expensive unclassing when applying the default method to an object.  They
 should not normally be invoked by end users.  Note that unlike the
@@ -265,7 +265,7 @@ is able to open a connection to save the image.  This is appropriate
 when called from <code>q()</code> and allies, but reinforces the warning
 that it should not be called directly.
 </p>
-<p><code><a href="row.names.html">row.names</a></code> can be stored internally in compact form.
+<p><code><a href="../../base/help/row.names.html">row.names</a></code> can be stored internally in compact form.
 <code>.set_row_names(n)</code> generates that form for automatic row names
 of length <code>n</code>, to be assigned to
 <code>attr(&lt;a data frame&gt;, "row.names")</code>.  <code>.row_names_info</code>
@@ -278,21 +278,21 @@ have had had they been closures.  All the primitives that are internal
 S3 generics have corresponding members of <code>.GenericArgsEnv</code> and
 the remaining non-language-element primitives correspond to
 <code>.ArgsEnv</code>.  See the &lsquo;R Internals&rsquo; manual for further
-details.  They are used by <code><a href="args.html">args</a></code> and
-<code><a href="print.default.html">print.default</a></code> and the QC functions <code><a href="../../tools/html/codoc.html">codoc</a></code>
+details.  They are used by <code><a href="../../base/help/args.html">args</a></code> and
+<code><a href="../../base/help/print.default.html">print.default</a></code> and the QC functions <code><a href="../../tools/html/codoc.html">codoc</a></code>
 and <code><a href="../../tools/html/QC.html">checkS3methods</a></code>.
 </p>
 <p><code>findPackageEnv</code> is invoked by the unserialize code to set a
 saved environment if possible.
 </p>
 <p><code>.TAOCP1997init</code> is the initialization code for the
-<code>"Knuth-TAOCP"</code> <a href="Random.html">RNG</a>.
+<code>"Knuth-TAOCP"</code> <a href="../../base/help/RNG.html">RNG</a>.
 </p>
-<p><code>.gt</code> and <code>.gtn</code> are callbacks from <code><a href="rank.html">rank</a></code> and
-<code><a href="is.unsorted.html">is.unsorted</a></code> used for (S3 or S4) classed objects.
+<p><code>.gt</code> and <code>.gtn</code> are callbacks from <code><a href="../../base/help/rank.html">rank</a></code> and
+<code><a href="../../base/help/is.unsorted.html">is.unsorted</a></code> used for (S3 or S4) classed objects.
 </p>
-<p><code>.primTrace</code> and <code>.primUntrace</code> are the <a href="Primitive.html">primitive</a>
-functions underlying <code><a href="trace.html">trace</a></code> and <code><a href="trace.html">untrace</a></code>
+<p><code>.primTrace</code> and <code>.primUntrace</code> are the <a href="../../base/help/primitive.html">primitive</a>
+functions underlying <code><a href="../../base/help/trace.html">trace</a></code> and <code><a href="../../base/help/untrace.html">untrace</a></code>
 respectively.
 </p>
 <p><code>.Date</code>, <code>.POSIXct</code>, <code>.POSIXlt</code> and <code>.difftime</code>
@@ -308,8 +308,8 @@ the <span class="pkg">translations</span> package in use is.
 <p><code>.mapply</code> and <code>.detach</code> are &lsquo;bare-bones&rsquo; versions for
 use in other <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> packages.
 </p>
-<p><code>.maskedMsg</code> is a utility called both from <code><a href="attach.html">attach</a>()</code>
-and <code><a href="library.html">library</a>()</code> for consistency to produce the warning message.
+<p><code>.maskedMsg</code> is a utility called both from <code><a href="../../base/help/attach.html">attach</a>()</code>
+and <code><a href="../../base/help/library.html">library</a>()</code> for consistency to produce the warning message.
 </p>
 <p>Objects starting <code>.C_</code> and <code>.F_</code> are references to
 registered C and Fortran entry points.
@@ -330,5 +330,5 @@ return <code>invisible()</code>.
 <p><code>testPlatformEquivalence</code> returns <code>TRUE</code> or <code>FALSE</code>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

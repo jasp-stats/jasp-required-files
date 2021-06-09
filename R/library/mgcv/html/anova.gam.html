@@ -53,7 +53,7 @@ print(x, digits = max(3, getOption("digits") - 3),...)
 <tr valign="top"><td><code>freq</code></td>
 <td>
 <p>whether to use frequentist or Bayesian approximations for parametric term 
-p-values. See <code><a href="summary.gam.html">summary.gam</a></code> for details.</p>
+p-values. See <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code> for details.</p>
 </td></tr>
 <tr valign="top"><td><code>digits</code></td>
 <td>
@@ -79,7 +79,7 @@ can be greatly overstated: i.e. p-values are often substantially too low. This c
 <p>Note also that in the multi-model call to <code>anova.gam</code>, it is quite possible for a model with more terms to end up with lower effective degrees of freedom, but better fit, than the notionally null model with fewer terms. In such cases it is very rare that it makes sense to perform any sort of test, since there is then no basis on which to accept the notional null model. 
 </p>
 <p>If only one model is provided then the significance of each model term
-is assessed using Wald like tests, conditional on the smoothing parameter estimates: see <code><a href="summary.gam.html">summary.gam</a></code> 
+is assessed using Wald like tests, conditional on the smoothing parameter estimates: see <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code> 
 and Wood (2013a,b) for details. The p-values  provided here are better justified than in the multi model case, and have close to the 
 correct distribution under the null, unless smoothing parameters are poorly identified. ML or REML smoothing parameter selection leads to 
 the best results in simulations as they tend to avoid occasional severe undersmoothing. In replication of the full simulation study of Scheipl et al. (2008) the tests give almost indistinguishable power to the method recommended there, but slightly too low p-values under the null in their section 3.1.8 test for a smooth interaction (the Scheipl et al. recommendation is not used directly, because it only applies in the Gaussian case, and requires model refits, but it is available in package <code>RLRsim</code>). 
@@ -100,7 +100,7 @@ penalized using the <code>paraPen</code> argument will not be good.
 <code><a href="../../stats/html/anova.glm.html">anova.glm</a></code>, which it in fact uses.
 </p>
 <p>In the single model case an object of class <code>anova.gam</code> is produced,
-which is in fact an object returned from <code><a href="summary.gam.html">summary.gam</a></code>.
+which is in fact an object returned from <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code>.
 </p>
 <p><code>print.anova.gam</code> simply produces tabulated output.
 </p>
@@ -137,8 +137,8 @@ regression in additive and linear mixed models. Comp. Statist. Data Anal. 52, 32
 
 <h3>See Also</h3>
 
-  <p><code><a href="gam.html">gam</a></code>, <code><a href="predict.gam.html">predict.gam</a></code>,
-<code><a href="gam.check.html">gam.check</a></code>, <code><a href="summary.gam.html">summary.gam</a></code> </p>
+  <p><code><a href="../../mgcv/help/gam.html">gam</a></code>, <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>,
+<code><a href="../../mgcv/help/gam.check.html">gam.check</a></code>, <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code> </p>
 
 
 <h3>Examples</h3>
@@ -154,5 +154,5 @@ b1&lt;-gam(y ~ x0 + s(x1) + s(x2),data=dat)
 anova(b,b1,test="F")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

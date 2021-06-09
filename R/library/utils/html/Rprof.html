@@ -75,7 +75,7 @@ of the call tree. See the filtering out call frames section.</p>
 another or the same file.
 </p>
 <p>Profiling works by writing out the call stack every <code>interval</code>
-seconds, to the file specified.  Either the <code><a href="summaryRprof.html">summaryRprof</a></code>
+seconds, to the file specified.  Either the <code><a href="../../utils/help/summaryRprof.html">summaryRprof</a></code>
 function or the wrapper script <code>R CMD Rprof</code> can be used to
 process the output file to produce a summary of the usage; use
 <code>R CMD Rprof --help</code> for usage information.
@@ -116,7 +116,7 @@ for more details).
 <code>line.profiling</code> is <code>TRUE</code>, and if the code being executed
 was parsed with source references.  See <code><a href="../../base/html/parse.html">parse</a></code> for a
 discussion of source references.  By default the statement locations
-are not shown in <code><a href="summaryRprof.html">summaryRprof</a></code>, but see that help page
+are not shown in <code><a href="../../utils/help/summaryRprof.html">summaryRprof</a></code>, but see that help page
 for options to enable the display.
 </p>
 
@@ -227,12 +227,12 @@ line information for new files, and issue a warning when
 <h3>See Also</h3>
 
 <p>The chapter on &ldquo;Tidying and profiling R code&rdquo; in
-&ldquo;Writing <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> Extensions&rdquo; (see the &lsquo;<span class="file">doc/manual</span>&rsquo; subdirectory
+&lsquo;Writing R Extensions&rsquo; (see the &lsquo;<span class="file">doc/manual</span>&rsquo; subdirectory
 of the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> source tree).
 </p>
-<p><code><a href="summaryRprof.html">summaryRprof</a></code> to analyse the output file.
+<p><code><a href="../../utils/help/summaryRprof.html">summaryRprof</a></code> to analyse the output file.
 </p>
-<p><code><a href="../../base/html/tracemem.html">tracemem</a></code>, <code><a href="Rprofmem.html">Rprofmem</a></code> for other ways to track
+<p><code><a href="../../base/html/tracemem.html">tracemem</a></code>, <code><a href="../../utils/help/Rprofmem.html">Rprofmem</a></code> for other ways to track
 memory use.
 </p>
 
@@ -247,10 +247,10 @@ Rprof(NULL)
 Rprof(append = TRUE)
 ## some code to be profiled
 Rprof(NULL)
-\dots
+## ...
 ## Now post-process the output as described in Details
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

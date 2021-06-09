@@ -24,18 +24,18 @@ transformed to a symmetric matrix (see Ord (1975), p. 125).
 <h3>Format</h3>
 
 <p>A <i>3111 ^2</i> symmetric sparse matrix of class
-<code><a href="dsCMatrix-class.html">dsCMatrix</a></code> with 9101 non-zero entries.
+<code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code> with 9101 non-zero entries.
 </p>
 
 
 <h3>Details</h3>
 
-<p>The data were read into <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> using <code><a href="../../spdep/html/read.gal.html">read.gal</a></code>, and
+<p>The data were read into <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> using <code><a href="../../spdep/help/read.gal.html">read.gal</a></code>, and
 row-standardised and transformed to symmetry using
-<code><a href="../../spdep/html/nb2listw.html">nb2listw</a></code> and <code><a href="../../spdep/html/similar.listw.html">similar.listw</a></code>.
+<code><a href="../../spdep/help/nb2listw.html">nb2listw</a></code> and <code><a href="../../spdep/help/similar.listw.html">similar.listw</a></code>.
 This spatial weights object was converted to class
-<code><a href="dsCMatrix-class.html">dsCMatrix</a></code> using
-<code><a href="../../spdep/html/as_dsTMatrix_listw.html">as_dsTMatrix_listw</a></code> and coercion.
+<code><a href="../../Matrix/help/dsCMatrix-class.html">dsCMatrix</a></code> using
+<code><a href="../../spdep/help/as_dsTMatrix_listw.html">as_dsTMatrix_listw</a></code> and coercion.
 </p>
 
 
@@ -88,5 +88,5 @@ system.time(MJ4 &lt;- n * log(rho) + Matrix:::ldetL2up(C2, nWC, 1/rho))
 stopifnot(all.equal(MJ, MJ4))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-2 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>Matrix</em> version 1.3-3 <a href="00Index.html">Index</a>]</div>
 </body></html>

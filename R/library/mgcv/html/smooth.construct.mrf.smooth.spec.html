@@ -70,7 +70,7 @@ the levels of the argument of the smooth, in any order (i.e. it gives the area l
 defining the boundary of the ith area. A boundary may be made up of several closed loops: these must
 be separated by <code>NA</code> rows. A polygon within another is treated as a hole. The first polygon in 
 any <code>polys[[i]]</code>  should not be a hole.  An example 
-of the structure is provided by <code><a href="columb.html">columb.polys</a></code> (which contains an artificial hole
+of the structure is provided by <code><a href="../../mgcv/help/columb.polys.html">columb.polys</a></code> (which contains an artificial hole
 in its second element, for illustration). Any list elements with duplicate names are combined into a 
 single NA separated matrix.
 </p>
@@ -103,12 +103,12 @@ Its row and column names should correspond to the levels of the covariate.</p>
 geographic area. Otherwise a low rank approximation is obtained based on truncation of the parameterization given in
 Wood (2017) Section 5.4.2. See Wood (2017, section 5.8.1). 
 </p>
-<p>Note that smooths of this class have a built in plot method, and that the utility function <code><a href="in.out.html">in.out</a></code> 
+<p>Note that smooths of this class have a built in plot method, and that the utility function <code><a href="../../mgcv/help/in.out.html">in.out</a></code> 
 can be useful for working with discrete area data. The plot method has two schemes, <code>scheme==0</code> is colour, 
 <code>scheme==1</code> is grey scale.
 </p>
 <p>The situation in which there are areas with no data requires special handling. You should set <code>drop.unused.levels=FALSE</code> in 
-the model fitting function, <code><a href="gam.html">gam</a></code>, <code><a href="bam.html">bam</a></code> or <code><a href="gamm.html">gamm</a></code>, having first ensured that any fixed effect 
+the model fitting function, <code><a href="../../mgcv/help/gam.html">gam</a></code>, <code><a href="../../mgcv/help/bam.html">bam</a></code> or <code><a href="../../mgcv/help/gamm.html">gamm</a></code>, having first ensured that any fixed effect 
 factors do not contain unobserved levels. Also make sure that the basis dimension is set to ensure that the total number of 
 coefficients is less than the number of observations. 
 </p>
@@ -135,7 +135,7 @@ to the predictions for the areas listed in <code>data</code>.
 
 <h3>See Also</h3>
 
-<p><code><a href="in.out.html">in.out</a></code>, <code><a href="polys.plot.html">polys.plot</a></code></p>
+<p><code><a href="../../mgcv/help/in.out.html">in.out</a></code>, <code><a href="../../mgcv/help/polys.plot.html">polys.plot</a></code></p>
 
 
 <h3>Examples</h3>
@@ -182,5 +182,5 @@ b1 ## fit unchanged
 plot(b1) ## but now there is no information with which to plot the mrf
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

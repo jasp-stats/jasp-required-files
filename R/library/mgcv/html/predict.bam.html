@@ -9,10 +9,10 @@
 
 <h3>Description</h3>
 
-<p> Essentially a wrapper for <code><a href="predict.gam.html">predict.gam</a></code> for prediction from a 
-model fitted by <code><a href="bam.html">bam</a></code>. Can compute on a parallel cluster. 
+<p> Essentially a wrapper for <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code> for prediction from a 
+model fitted by <code><a href="../../mgcv/help/bam.html">bam</a></code>. Can compute on a parallel cluster. 
 </p>
-<p>Takes a fitted <code>bam</code> object produced by <code><a href="bam.html">bam</a></code> 
+<p>Takes a fitted <code>bam</code> object produced by <code><a href="../../mgcv/help/bam.html">bam</a></code> 
 and produces predictions given a new set of values for the model covariates 
 or the original values used for the model fit. Predictions can be accompanied
 by standard errors, based on the posterior distribution of the model
@@ -39,7 +39,7 @@ predict(object,newdata,type="link",se.fit=FALSE,terms=NULL,
 <table summary="R argblock">
 <tr valign="top"><td><code>object</code></td>
 <td>
-<p> a fitted <code>bam</code> object as produced by <code><a href="bam.html">bam</a></code>.
+<p> a fitted <code>bam</code> object as produced by <code><a href="../../mgcv/help/bam.html">bam</a></code>.
 </p>
 </td></tr>
 <tr valign="top"><td><code>newdata</code></td>
@@ -108,9 +108,9 @@ determined from <code>object$na.action</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>cluster</code></td>
 <td>
-<p><code>predict.bam</code> can compute in parallel using <a href="../../parallel/html/clusterApply.html">parLapply</a>
+<p><code>predict.bam</code> can compute in parallel using <a href="../../parallel/help/clusterApply.html">parLapply</a>
 from the <code>parallel</code> package, if it is supplied with a cluster on which to do this (a cluster here can be some cores of a 
-single machine). See details and example code for <code><a href="bam.html">bam</a></code>. 
+single machine). See details and example code for <code><a href="../../mgcv/help/bam.html">bam</a></code>. 
 </p>
 </td></tr>
 <tr valign="top"><td><code>discrete</code></td>
@@ -139,10 +139,10 @@ an attribute <code>"para.only"</code> and <code>type=="terms"</code> then only p
 terms of order 1 are returned (i.e. those that <code>termplot</code> can handle).
 </p>
 <p>Note that, in common with other prediction functions, any offset supplied to
-<code><a href="bam.html">bam</a></code> as an argument is always ignored when predicting, unlike
+<code><a href="../../mgcv/help/bam.html">bam</a></code> as an argument is always ignored when predicting, unlike
 offsets specified in the bam model formula.
 </p>
-<p>See the examples in <code><a href="predict.gam.html">predict.gam</a></code> for how to use the <code>lpmatrix</code> for obtaining credible
+<p>See the examples in <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code> for how to use the <code>lpmatrix</code> for obtaining credible
 regions for quantities derived from the model.
 </p>
 <p>When <code>discrete=TRUE</code> the prediction data in <code>newdata</code> is discretized in the same way as is done when using discrete fitting methods with <code>bam</code>. However the discretization grids are not currently identical to those used during fitting. Instead, discretization is done afresh for the prediction data. This means that if you are predicting for a relatively small set of prediction data, or on a regular grid, then the results may in fact be identical to those obtained without discretization. The disadvantage to this approach is that if you make predictions with a large data frame, and then split it into smaller data frames to make the predictions again, the results may differ slightly, because of slightly different discretization errors.    
@@ -170,7 +170,7 @@ then all variables must be supplied.
 <h3>WARNING </h3>
 
 <p>Predictions are likely to be incorrect if data dependent transformations of the covariates
-are used within calls to smooths. See examples in <code><a href="predict.gam.html">predict.gam</a></code>.
+are used within calls to smooths. See examples in <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>.
 </p>
 
 
@@ -197,7 +197,7 @@ and Hall/CRC Press.
 
 <h3>See Also</h3>
 
-  <p><code><a href="bam.html">bam</a></code>, <code><a href="predict.gam.html">predict.gam</a></code></p>
+  <p><code><a href="../../mgcv/help/bam.html">bam</a></code>, <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code></p>
 
 
 <h3>Examples</h3>
@@ -209,5 +209,5 @@ and Hall/CRC Press.
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>

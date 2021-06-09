@@ -82,7 +82,7 @@ value is zero for all variables.
 <tr valign="top"><td><code>control</code></td>
 <td>
 
-<p>Object of class <code><a href="coxph.control.html">coxph.control</a></code> specifying iteration limit
+<p>Object of class <code><a href="../../survival/help/coxph.control.html">coxph.control</a></code> specifying iteration limit
 and other control options. Default is <code>coxph.control(...)</code>.
 </p>
 </td></tr>
@@ -180,7 +180,7 @@ within this set are not recentered</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>Other arguments will be passed to <code><a href="coxph.control.html">coxph.control</a></code>
+<p>Other arguments will be passed to <code><a href="../../survival/help/coxph.control.html">coxph.control</a></code>
 </p>
 </td></tr>
 </table>
@@ -351,8 +351,8 @@ Users may need to add <code>timefix=FALSE</code> for simulated data sets.
 
 <p><code>coxph</code> can maximise a penalised partial likelihood with
 arbitrary user-defined penalty.  Supplied penalty functions include
-ridge regression (<a href="ridge.html">ridge</a>), smoothing splines
-(<a href="pspline.html">pspline</a>), and frailty models (<a href="frailty.html">frailty</a>).
+ridge regression (<a href="../../survival/help/ridge.html">ridge</a>), smoothing splines
+(<a href="../../survival/help/pspline.html">pspline</a>), and frailty models (<a href="../../survival/help/frailty.html">frailty</a>).
 </p>
 
 
@@ -370,10 +370,10 @@ Springer-Verlag, 2000.
 
 <h3>See Also</h3>
 
-<p><code><a href="coxph.object.html">coxph.object</a></code>, <code><a href="coxph.control.html">coxph.control</a></code>,
-<code><a href="cluster.html">cluster</a></code>,  <code><a href="strata.html">strata</a></code>,  <code><a href="Surv.html">Surv</a></code>,
-<code><a href="survfit.html">survfit</a></code>, <code><a href="pspline.html">pspline</a></code>, 
-<code><a href="ridge.html">ridge</a></code>.   
+<p><code><a href="../../survival/help/coxph.object.html">coxph.object</a></code>, <code><a href="../../survival/help/coxph.control.html">coxph.control</a></code>,
+<code><a href="../../survival/help/cluster.html">cluster</a></code>,  <code><a href="../../survival/help/strata.html">strata</a></code>,  <code><a href="../../survival/help/Surv.html">Surv</a></code>,
+<code><a href="../../survival/help/survfit.html">survfit</a></code>, <code><a href="../../survival/help/pspline.html">pspline</a></code>, 
+<code><a href="../../survival/help/ridge.html">ridge</a></code>.   
 </p>
 
 
@@ -416,5 +416,5 @@ coxph(Surv(time, status) ~ ph.ecog + tt(age), data=lung,
      tt=function(x,t,...) pspline(x + t/365.25))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-10 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-11 <a href="00Index.html">Index</a>]</div>
 </body></html>

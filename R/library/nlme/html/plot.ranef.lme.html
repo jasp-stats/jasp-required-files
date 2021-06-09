@@ -11,7 +11,7 @@
 
 <p>Plots (class <code>"Trellis"</code> from package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>) of the
 random effects from linear mixed effects model, i.e., the result of
-<code><a href="random.effects.html">ranef</a>(<a href="lme.html">lme</a>(*))</code> (of class <code>"<a href="ranef.lme.html">ranef.lme</a>"</code>).
+<code><a href="../../nlme/help/ranef.html">ranef</a>(<a href="../../nlme/help/lme.html">lme</a>(*))</code> (of class <code>"<a href="../../nlme/help/ranef.lme.html">ranef.lme</a>"</code>).
 </p>
 
 
@@ -31,7 +31,7 @@ plot(x, form = NULL, omitFixed = TRUE, level = Q,
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>an object inheriting from class
-<code>"<a href="ranef.lme.html">ranef.lme</a>"</code>, representing the estimated coefficients or
+<code>"<a href="../../nlme/help/ranef.lme.html">ranef.lme</a>"</code>, representing the estimated coefficients or
 estimated random effects for the <code>lme</code> object from which it was
 produced.</p>
 </td></tr>
@@ -41,14 +41,14 @@ produced.</p>
 </p>
 
 <ul>
-<li><p> If given as a one-sided formula, a <code><a href="../../lattice/html/xyplot.html">dotplot</a>()</code>
+<li><p> If given as a one-sided formula, a <code><a href="../../lattice/help/xyplot.html">dotplot</a>()</code>
 of the estimated random effects (coefficients) grouped according to
 all combinations of the levels of the factors named in <code>form</code>
 is returned.
 </p>
 </li>
 <li><p> If given as a two-sided formula (or by default, <code>NULL</code>),
-an <code><a href="../../lattice/html/xyplot.html">xyplot</a>()</code> Trellis display of the random
+an <code><a href="../../lattice/help/xyplot.html">xyplot</a>()</code> Trellis display of the random
 effect (coefficient) versus the named covariates is returned.  In
 <code>NULL</code> case the row names of the random effects (coefficients)
 are used (as covariates).
@@ -102,7 +102,7 @@ margin parameters for the x-axis (default is <code>c(2, 0.5, 0)</code>).</p>
 <tr valign="top"><td><code>strip</code></td>
 <td>
 <p>a <code><a href="../../base/html/function.html">function</a></code> or <code>FALSE</code>, see
-<code><a href="../../lattice/html/xyplot.html">dotplot</a>()</code> from package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>.</p>
+<code><a href="../../lattice/help/xyplot.html">dotplot</a>()</code> from package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -115,7 +115,7 @@ function.</p>
 <h3>Details</h3>
 
 <p>If <code>form</code> is missing, or is given as a one-sided formula, a
-Trellis dot-plot (via <code><a href="../../lattice/html/xyplot.html">dotplot</a>()</code> from pkg
+Trellis dot-plot (via <code><a href="../../lattice/help/xyplot.html">dotplot</a>()</code> from pkg
 <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>) of the random effects is generated, with a different
 panel for each random effect (coefficient).  Rows in the dot-plot are
 determined by the <code>form</code> argument (if not missing) or by the row
@@ -130,7 +130,7 @@ formula.
 <p>If <code>form</code> is a two-sided formula, the left hand side must
 be a single random effect (coefficient) and the right hand side is
 formed by covariates in <code>x</code> separated by <code>+</code>.
-An <code><a href="../../lattice/html/xyplot.html">xyplot</a>()</code> Trellis display is generated,
+An <code><a href="../../lattice/help/xyplot.html">xyplot</a>()</code> Trellis display is generated,
 with a different panel for each variable listed in the right hand side
 of <code>form</code>.  Scatter plots are generated for numeric variables and
 boxplots are generated for categorical (<code>factor</code> or
@@ -152,7 +152,7 @@ covariates, or groups.
 
 <h3>See Also</h3>
 
-<p><code><a href="ranef.lme.html">ranef.lme</a></code>, <code><a href="lme.html">lme</a></code>,
+<p><code><a href="../../nlme/help/ranef.lme.html">ranef.lme</a></code>, <code><a href="../../nlme/help/lme.html">lme</a></code>,
 <code><a href="../../lattice/html/xyplot.html">dotplot</a></code>.
 </p>
 

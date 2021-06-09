@@ -485,7 +485,7 @@ rowsum(matrix(1:12, 3,4), c("Y","X","Y"))
 ## PR#1115 (saving strings with ascii=TRUE)
 x <- y <- unlist(as.list(
     parse(text=paste("\"\\", as.character(as.octmode(1:255)), "\"",sep=""))))
-save(x, ascii=TRUE, file=(fn <- tempfile()))
+save(x, ascii=TRUE, file=(fn <- tempfile(tmpdir = getwd())))
 load(fn)
 all(x==y)
 unlink(fn)
@@ -1322,7 +1322,7 @@ Mat <- matrix(c(1:3, letters[1:3], 1:3, LETTERS[1:3],
                 c("2004-01-01", "2004-02-01", "2004-03-01"),
                 c("2004-01-01 12:00", "2004-02-01 12:00", "2004-03-01 12:00")),
               3, 6)
-foo <- tempfile()
+foo <- tempfile(tmpdir = getwd())
 write.table(Mat, foo, col.names = FALSE, row.names = FALSE)
 read.table(foo, colClasses = c(NA, NA, "NULL", "character", "Date", "POSIXct"),
            stringsAsFactors=TRUE)
@@ -1466,7 +1466,7 @@ stopifnot(inherits(res, "try-error"))
 
 
 ## (PR#7789) escaped quotes in the first five lines for read.table
-tf <- tempfile()
+tf <- tempfile(tmpdir = getwd())
 x <- c("6 'TV2  Shortland Street'",
        "2 'I don\\\'t watch TV at 7'",
        "1 'I\\\'m not bothered, whatever that looks good'",
@@ -2016,7 +2016,7 @@ dput(x, control="keepNA")
 dput(x)
 dput(x, control="all")
 dput(x, control=c("all", "S_compatible"))
-tmp <- tempfile()
+tmp <- tempfile(tmpdir = getwd())
 dput(x, tmp, control="all")
 stopifnot(identical(dget(tmp), x))
 dput(x, tmp, control=c("all", "S_compatible"))
@@ -2230,7 +2230,7 @@ qr.coef(qr(matrix(0:1, 1, dimnames=list(NULL, c("zero","one")))), 5)
 ## readChar read extra items, terminated on zeros
 x <- as.raw(65:74)
 readChar(x, nchar=c(3,3,0,3,3,3))
-f <- tempfile()
+f <- tempfile(tmpdir = getwd())
 writeChar("ABCDEFGHIJ", con=f, eos=NULL)
 readChar(f, nchar=c(3,3,0,3,3,3))
 unlink(f)
@@ -2838,7 +2838,16 @@ read.csv(f, skipNul = TRUE, fileEncoding = "UTF-8-BOM")
 ## all.equal datetime method
 x <- Sys.time()
 all.equal(x,x)
-all.equal(x, as.POSIXlt(x))
+
+# FIXME: check.tzone = FALSE needed because since 79037, all.equal.POSIXt
+# strictly reports "" and the current time zone (even from TZ environment
+# variable) as different.  The conversion round-trip from Sys.time()
+# (POSIXct) via POSIXlt and back to POSIXct creates an object with the
+# current time zone, yet the original is with "" as time zone (and both
+# refer to the same time zone).
+all.equal(x, as.POSIXlt(x), check.tzone = FALSE)
+
+all.equal(x, as.numeric(x))  # errored in R <= 4.0.2
 all.equal(x, as.POSIXlt(x, tz = "EST5EDT"))
 all.equal(x, x+1e-4)
 isTRUE(all.equal(x, x+0.002)) # message will depend on representation error
@@ -3147,12 +3156,35 @@ str(treeA)
 ## now shows the *length* of "someA"
 
 
-## summaryRprof() bug PR#15886 :
-Rprof(tf <- tempfile("Rprof.out"), memory.profiling=TRUE, line.profiling=FALSE)
-out <- lapply(1:10000, rnorm, n= 512)
-Rprof(NULL)
-if(interactive())
-    print(length(readLines(tf))) # ca. 10 .. 20 lines
-op <- options(warn = 2) # no warnings, even !
-for (cs in 1:21) s <- summaryRprof(tf, memory="tseries", chunksize=cs)
-options(op) ## "always" triggered an error (or a warning) in R <= 3.6.3
+## summaryRprof() bug PR#15886  + "Rprof() not enabled" PR#17836
+if(capabilities("Rprof")) {
+    Rprof(tf <- tempfile("Rprof.out", tmpdir = getwd()), memory.profiling=TRUE, line.profiling=FALSE)
+    out <- lapply(1:10000, rnorm, n= 512)
+    Rprof(NULL)
+    if(interactive())
+        print(length(readLines(tf))) # ca. 10 .. 20 lines
+    op <- options(warn = 2) # no warnings, even !
+    for (cs in 1:21) s <- summaryRprof(tf, memory="tseries", chunksize=cs)
+    ## "always" triggered an error (or a warning) in R <= 3.6.3
+    options(op)
+    unlink(tf)
+}
+
+
+## printing *named* complex vectors (*not* arrays), PR#17868 (and PR#18019):
+a <- 1:12; (z <- a + a*1i); names(z) <- letters[seq_along(z)]; z
+## fixed in R-devel in July 2020;  R 4.0.3 patched on Dec 26, 2020
+
+
+## identical(*) on "..." object
+(ddd <- (function(...) environment())(1)$...) # <...>
+ dd2 <- (function(...) environment())(1)$...
+stopifnot( identical(ddd, dd2) )
+## In R <= 4.0.3,  printed to console (no warning, no message!):
+## "Unknown Type: ... (11)"
+
+
+## printCoefmat() should keep NaN values (PR#17336)
+##cm <- summary(lm(c(0,0,0) ~ 1))$coefficients
+cm <- cbind(Estimate = 0, SE = 0, t = NaN, "Pr(>|t|)" = NaN)
+printCoefmat(cm)  # NaN's were replaced by NA in R < 4.1.0

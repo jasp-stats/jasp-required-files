@@ -27,15 +27,15 @@ grepRaw(pattern, x, offset = 1L, ignore.case = FALSE,
 <table summary="R argblock">
 <tr valign="top"><td><code>pattern</code></td>
 <td>
-<p>raw vector containing a <a href="regex.html">regular expression</a>
+<p>raw vector containing a <a href="../../base/help/regular expression.html">regular expression</a>
 (or fixed pattern for <code>fixed = TRUE</code>) to be matched in the
-given raw vector.  Coerced by <code><a href="rawConversion.html">charToRaw</a></code> to a character
+given raw vector.  Coerced by <code><a href="../../base/help/charToRaw.html">charToRaw</a></code> to a character
 string if possible.</p>
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
 <p>a raw vector where matches are sought, or an object which can
-be coerced by <code>charToRaw</code> to a raw vector.  <a href="LongVectors.html">Long vectors</a>
+be coerced by <code>charToRaw</code> to a raw vector.  <a href="../../base/help/Long vectors.html">Long vectors</a>
 are not supported.</p>
 </td></tr>
 <tr valign="top"><td><code>ignore.case</code></td>
@@ -74,7 +74,7 @@ elements that do <em>not</em> match.  Ignored (with a warning) unless
 
 <h3>Details</h3>
 
-<p>Unlike <code><a href="grep.html">grep</a></code>, seeks matching patterns within the raw
+<p>Unlike <code><a href="../../base/help/grep.html">grep</a></code>, seeks matching patterns within the raw
 vector <code>x</code> . This has implications especially in the <code>all =
   TRUE</code> case, e.g., patterns matching empty strings are inherently
 infinite and thus may lead to unexpected results.
@@ -117,10 +117,10 @@ is used except for <code>fixed = TRUE</code>.
 
 <h3>See Also</h3>
 
-<p><a href="regex.html">regular expression</a> (aka <code><a href="regex.html">regexp</a></code>) for the details
+<p><a href="../../base/help/regular expression.html">regular expression</a> (aka <code><a href="../../base/help/regexp.html">regexp</a></code>) for the details
 of the pattern specification.
 </p>
-<p><code><a href="grep.html">grep</a></code> for matching character vectors.
+<p><code><a href="../../base/help/grep.html">grep</a></code> for matching character vectors.
 </p>
 
 
@@ -133,5 +133,5 @@ grepRaw("adf", "adadfadfdfadadf", all=TRUE, fixed=TRUE)
 ## [1]  3  6 13 -- three matches
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

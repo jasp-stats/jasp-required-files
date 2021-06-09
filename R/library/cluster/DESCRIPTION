@@ -1,6 +1,6 @@
 Package: cluster
-Version: 2.1.1
-Date: 2021-02-11
+Version: 2.1.2
+Date: 2021-04-16
 Priority: recommended
 Title: "Finding Groups in Data": Cluster Analysis Extended Rousseeuw et
         al.
@@ -38,7 +38,7 @@ BuildResaveData: no
 License: GPL (>= 2)
 URL: https://svn.r-project.org/R-packages/trunk/cluster/
 NeedsCompilation: yes
-Packaged: 2021-02-11 11:08:52 UTC; maechler
+Packaged: 2021-04-16 13:59:34 UTC; maechler
 Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
   Peter Rousseeuw [aut] (Fortran original,
     <https://orcid.org/0000-0002-3807-5353>),
@@ -54,6 +54,6 @@ Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
     <https://orcid.org/0000-0001-9143-4880>),
   Keefe Murphy [ctb] (volume.ellipsoid({d >= 3}))
 Repository: CRAN
-Date/Publication: 2021-02-14 23:50:05 UTC
-Built: R 4.0.5; x86_64-w64-mingw32; 2021-03-31 07:59:15 UTC; windows
+Date/Publication: 2021-04-17 08:50:02 UTC
+Built: R 4.1.0; x86_64-w64-mingw32; 2021-05-18 08:50:42 UTC; windows
 Archs: i386, x64

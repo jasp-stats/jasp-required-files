@@ -18,7 +18,7 @@ Japanese characters (Hiragana, Katakana, and Kanji).
 
 <p>Without keyboard support for typing Japanese characters, the only way
 to produce these characters is to use special escape sequences: see
-<code><a href="Hershey.html">Hershey</a></code>.
+<code><a href="../../grDevices/help/Hershey.html">Hershey</a></code>.
 </p>
 <p>For example, the Hiragana character for the sound &quot;ka&quot; is produced
 by <span class="samp">\\#J242b</span> and the Katakana character for this sound is
@@ -38,7 +38,7 @@ sequences for the available Japanese characters.
 
 <h3>See Also</h3>
 
-<p><code><a href="../../utils/html/demo.html">demo</a>(Japanese)</code>, <code><a href="Hershey.html">Hershey</a></code>, <code><a href="../../graphics/html/text.html">text</a></code>
+<p><code><a href="../../utils/html/demo.html">demo</a>(Japanese)</code>, <code><a href="../../grDevices/help/Hershey.html">Hershey</a></code>, <code><a href="../../graphics/html/text.html">text</a></code>
 </p>
 
 
@@ -47,7 +47,7 @@ sequences for the available Japanese characters.
 <pre>
 require(graphics)
 
-plot(1:9, type = "n", axes = FALSE, frame = TRUE, ylab = "",
+plot(1:9, type = "n", axes = FALSE, frame.plot = TRUE, ylab = "",
      main = "example(Japanese)", xlab = "using Hershey fonts")
 par(cex = 3)
 Vf &lt;- c("serif", "plain")
@@ -63,5 +63,5 @@ text(8, 6, "Kanji")
 text(8, 8, "English")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.1.0 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -11,7 +11,7 @@
 
 <p> Fits a generalized additive model (GAM) to
 data, the term &lsquo;GAM&rsquo; being taken to include any quadratically penalized GLM and a variety of 
-other models estimated by a quadratically penalised likelihood type approach (see <code><a href="family.mgcv.html">family.mgcv</a></code>).  
+other models estimated by a quadratically penalised likelihood type approach (see <code><a href="../../mgcv/help/family.mgcv.html">family.mgcv</a></code>).  
 The degree of smoothness of model terms is estimated as part of
 fitting. <code>gam</code> can also fit any GLM subject to multiple quadratic penalties (including 
 estimation of degree of penalization). Confidence/credible intervals are readily
@@ -23,12 +23,12 @@ fixed degrees of freedom (mixtures of the two are permitted). Multi-dimensional 
 available using penalized thin plate regression splines (isotropic) or tensor product splines 
 (when an isotropic smooth is inappropriate), and users can add smooths. 
 Linear functionals of smooths can also be included in models.
-For an overview of the smooths available see <code><a href="smooth.terms.html">smooth.terms</a></code>. 
-For more on specifying models see <code><a href="gam.models.html">gam.models</a></code>, <code><a href="random.effects.html">random.effects</a></code> and <code><a href="linear.functional.terms.html">linear.functional.terms</a></code>. For more on model selection see <code><a href="gam.selection.html">gam.selection</a></code>. Do read <code><a href="gam.check.html">gam.check</a></code> and <code><a href="choose.k.html">choose.k</a></code>.
+For an overview of the smooths available see <code><a href="../../mgcv/help/smooth.terms.html">smooth.terms</a></code>. 
+For more on specifying models see <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code>, <code><a href="../../mgcv/help/random.effects.html">random.effects</a></code> and <code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code>. For more on model selection see <code><a href="../../mgcv/help/gam.selection.html">gam.selection</a></code>. Do read <code><a href="../../mgcv/help/gam.check.html">gam.check</a></code> and <code><a href="../../mgcv/help/choose.k.html">choose.k</a></code>.
 </p>
 <p>See package <code>gam</code>, for GAMs via the original Hastie and Tibshirani approach (see details for differences to this implementation).
 </p>
-<p>For very large datasets see <code><a href="bam.html">bam</a></code>, for mixed GAM see <code><a href="gamm.html">gamm</a></code> and <code><a href="random.effects.html">random.effects</a></code>.
+<p>For very large datasets see <code><a href="../../mgcv/help/bam.html">bam</a></code>, for mixed GAM see <code><a href="../../mgcv/help/gamm.html">gamm</a></code> and <code><a href="../../mgcv/help/random.effects.html">random.effects</a></code>.
 </p>
 
 
@@ -51,9 +51,9 @@ gam(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,
 <table summary="R argblock">
 <tr valign="top"><td><code>formula</code></td>
 <td>
-<p> A GAM formula, or a list of formulae (see <code><a href="formula.gam.html">formula.gam</a></code> and also <code><a href="gam.models.html">gam.models</a></code>). 
-These are exactly like the formula for a GLM except that smooth terms, <code><a href="s.html">s</a></code>, <code><a href="te.html">te</a></code>, <code><a href="te.html">ti</a></code> 
-and <code><a href="t2.html">t2</a></code>, can be added to the right hand side to specify that the linear predictor depends on smooth functions of predictors (or linear functionals of these).
+<p> A GAM formula, or a list of formulae (see <code><a href="../../mgcv/help/formula.gam.html">formula.gam</a></code> and also <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code>). 
+These are exactly like the formula for a GLM except that smooth terms, <code><a href="../../mgcv/help/s.html">s</a></code>, <code><a href="../../mgcv/help/te.html">te</a></code>, <code><a href="../../mgcv/help/ti.html">ti</a></code> 
+and <code><a href="../../mgcv/help/t2.html">t2</a></code>, can be added to the right hand side to specify that the linear predictor depends on smooth functions of predictors (or linear functionals of these).
 </p>
 </td></tr> 
 <tr valign="top"><td><code>family</code></td>
@@ -61,7 +61,7 @@ and <code><a href="t2.html">t2</a></code>, can be added to the right hand side t
 
 <p>This is a family object specifying the distribution and link to use in
 fitting etc (see <code><a href="../../stats/html/glm.html">glm</a></code> and <code><a href="../../stats/html/family.html">family</a></code>). See 
-<code><a href="family.mgcv.html">family.mgcv</a></code> for a full list of what is available, which goes well beyond exponential family.
+<code><a href="../../mgcv/help/family.mgcv.html">family.mgcv</a></code> for a full list of what is available, which goes well beyond exponential family.
 Note that <code>quasi</code> families actually result in the use of extended quasi-likelihood 
 if <code>method</code> is set to a RE/ML method (McCullagh and Nelder, 1989, 9.6).
 </p>
@@ -102,7 +102,7 @@ included in <code>formula</code> (this used to conform to the behaviour of
 <tr valign="top"><td><code>control</code></td>
 <td>
 <p>A list of fit control parameters to replace defaults returned by 
-<code><a href="gam.control.html">gam.control</a></code>. Values not set assume default values. </p>
+<code><a href="../../mgcv/help/gam.control.html">gam.control</a></code>. Values not set assume default values. </p>
 </td></tr>
 <tr valign="top"><td><code>method</code></td>
 <td>
@@ -141,7 +141,7 @@ smoothing parameter is estimated as zero then the extra penalty has no effect. U
 <p>this is an optional list containing user specified knot values to be used for basis construction. 
 For most bases the user simply supplies the knots to be used, which must match up with the <code>k</code> value
 supplied (note that the number of knots is not always just <code>k</code>). 
-See <code><a href="smooth.construct.tp.smooth.spec.html">tprs</a></code> for what happens in the <code>"tp"/"ts"</code> case. 
+See <code><a href="../../mgcv/help/tprs.html">tprs</a></code> for what happens in the <code>"tp"/"ts"</code> case. 
 Different terms can use different numbers of knots, unless they share a covariate.
 </p>
 </td></tr>
@@ -183,7 +183,7 @@ would be required to fit is returned is returned. See argument <code>G</code>.</
 <tr valign="top"><td><code>paraPen</code></td>
 <td>
 <p>optional list specifying any penalties to be applied to parametric model terms. 
-<code><a href="gam.models.html">gam.models</a></code> explains more.</p>
+<code><a href="../../mgcv/help/gam.models.html">gam.models</a></code> explains more.</p>
 </td></tr>
 <tr valign="top"><td><code>G</code></td>
 <td>
@@ -213,7 +213,7 @@ even with factor variables present. Can be vector when <code>formula</code> is a
 </td></tr>
 <tr valign="top"><td><code>discrete</code></td>
 <td>
-<p>experimental option for setting up models for use with discrete methods employed in <code><a href="bam.html">bam</a></code>. Do not modify.</p>
+<p>experimental option for setting up models for use with discrete methods employed in <code><a href="../../mgcv/help/bam.html">bam</a></code>. Do not modify.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -278,7 +278,7 @@ coefficient matrices for each smooth term in the model formula, obtaining a mode
 the strictly parametric part of the model formula, and combining these to obtain a 
 complete model matrix (/design matrix) and a set of penalty matrices for the smooth terms. 
 The linear identifiability constraints are also obtained at this point. The model is 
-fit using <code><a href="gam.fit.html">gam.fit</a></code>, <code><a href="gam.fit3.html">gam.fit3</a></code> or variants, which are modifications 
+fit using <code><a href="../../mgcv/help/gam.fit.html">gam.fit</a></code>, <code><a href="../../mgcv/help/gam.fit3.html">gam.fit3</a></code> or variants, which are modifications 
 of <code><a href="../../stats/html/glm.html">glm.fit</a></code>. The GAM 
 penalized likelihood maximization problem is solved by Penalized Iteratively 
 Re-weighted  Least Squares (P-IRLS) (see e.g. Wood 2000). 
@@ -286,17 +286,17 @@ Smoothing parameter selection is possible in one of two ways. (i)
 &lsquo;Performance iteration&rsquo; uses the fact that at each P-IRLS step a working penalized linear model
 is estimated, and the smoothing parameter estimation can be performed for each such working model.
 Eventually, in most cases, both model parameter estimates and smoothing 
-parameter estimates converge. This option is available in <code><a href="bam.html">bam</a></code> and <code><a href="gamm.html">gamm</a></code> but
+parameter estimates converge. This option is available in <code><a href="../../mgcv/help/bam.html">bam</a></code> and <code><a href="../../mgcv/help/gamm.html">gamm</a></code> but
 is deprecated for <code>gam</code> (ii) Alternatively the P-IRLS scheme is iterated to
 convergence for each trial set of smoothing parameters, and GCV, UBRE or REML scores
 are only evaluated on convergence - optimization is then &lsquo;outer&rsquo; to the P-IRLS
 loop: in this case the P-IRLS iteration has to be differentiated, to
-facilitate optimization, and <code><a href="gam.fit3.html">gam.fit3</a></code> or one of its variants is used in place of
+facilitate optimization, and <code><a href="../../mgcv/help/gam.fit3.html">gam.fit3</a></code> or one of its variants is used in place of
 <code>gam.fit</code>. <code>gam</code> uses the second method, outer iteration.
 </p>
 <p>Several alternative basis-penalty types  are built in for representing model
-smooths, but alternatives can easily be added (see <code><a href="smooth.terms.html">smooth.terms</a></code> 
-for an overview and <code><a href="smooth.construct.html">smooth.construct</a></code> for how to add smooth classes). The choice of the basis dimension 
+smooths, but alternatives can easily be added (see <code><a href="../../mgcv/help/smooth.terms.html">smooth.terms</a></code> 
+for an overview and <code><a href="../../mgcv/help/smooth.construct.html">smooth.construct</a></code> for how to add smooth classes). The choice of the basis dimension 
 (<code>k</code> in the <code>s</code>, <code>te</code>, <code>ti</code> and <code>t2</code> terms) is something that should be considered carefully 
 (the exact value is not critical, but it is important not to make it restrictively small, nor very large and 
 computationally costly). The basis should 
@@ -312,7 +312,7 @@ coefficients to estimate than there are data).
 basically any penalized GLM can be used: to this end <code>gam</code> allows the non smooth model 
 components to be penalized via argument <code>paraPen</code> and allows the linear predictor to depend on 
 general linear functionals of smooths, via the summation convention mechanism described in 
-<code><a href="linear.functional.terms.html">linear.functional.terms</a></code>. <code>link{family.mgcv}</code> details what is available beyond GLMs 
+<code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code>. <code>link{family.mgcv}</code> details what is available beyond GLMs 
 and the exponential family.
 </p>
 <p>Details of the default underlying fitting methods are given in Wood (2011
@@ -326,9 +326,9 @@ confidence interval calculation (with good coverage probabilities), (iii) that t
 can depend on any (bounded) linear functional of smooth terms, (iv) the parametric part of the model can be penalized, 
 (v) simple random effects can be incorporated, and 
 (vi) the facilities for incorporating smooths of more than one variable are
-different: specifically there are no <code>lo</code> smooths, but instead (a) <code><a href="s.html">s</a></code>
-terms can have more than one argument, implying an isotropic smooth and (b) <code><a href="te.html">te</a></code>, 
-<code><a href="te.html">ti</a></code> or <code><a href="t2.html">t2</a></code> smooths are
+different: specifically there are no <code>lo</code> smooths, but instead (a) <code><a href="../../mgcv/help/s.html">s</a></code>
+terms can have more than one argument, implying an isotropic smooth and (b) <code><a href="../../mgcv/help/te.html">te</a></code>, 
+<code><a href="../../mgcv/help/ti.html">ti</a></code> or <code><a href="../../mgcv/help/t2.html">t2</a></code> smooths are
 provided as an effective means for modelling smooth interactions of any
 number of variables via scale invariant tensor product smooths. Splines on the sphere, Duchon splines 
 and Gaussian Markov Random Fields are also available. (vii) Models beyond the exponential family are available. 
@@ -342,15 +342,15 @@ See package <code>gam</code>, for GAMs via the original Hastie and Tibshirani ap
 <p>If <code>fit=FALSE</code> the function returns a list <code>G</code> of items needed to
 fit a GAM, but doesn't actually fit it. 
 </p>
-<p>Otherwise the function returns an object of class <code>"gam"</code> as described in <code><a href="gamObject.html">gamObject</a></code>.
+<p>Otherwise the function returns an object of class <code>"gam"</code> as described in <code><a href="../../mgcv/help/gamObject.html">gamObject</a></code>.
 </p>
 
 
 <h3>WARNINGS </h3>
 
 <p>The default basis dimensions used for smooth terms are essentially arbitrary, and 
-it should be checked that they are not too small. See <code><a href="choose.k.html">choose.k</a></code> and
-<code><a href="gam.check.html">gam.check</a></code>. 
+it should be checked that they are not too small. See <code><a href="../../mgcv/help/choose.k.html">choose.k</a></code> and
+<code><a href="../../mgcv/help/gam.check.html">gam.check</a></code>. 
 </p>
 <p>You must have more unique combinations of covariates than the model has total
 parameters. (Total parameters is sum of basis dimensions plus sum of non-spline 
@@ -450,12 +450,12 @@ to environmental modelling. Ecological Modelling 157:157-177
 
 <h3>See Also</h3>
 
-<p><code><a href="mgcv-package.html">mgcv-package</a></code>, <code><a href="gamObject.html">gamObject</a></code>, <code><a href="gam.models.html">gam.models</a></code>, <code><a href="smooth.terms.html">smooth.terms</a></code>,
-<code><a href="linear.functional.terms.html">linear.functional.terms</a></code>, <code><a href="s.html">s</a></code>,
-<code><a href="te.html">te</a></code> <code><a href="predict.gam.html">predict.gam</a></code>,
-<code><a href="plot.gam.html">plot.gam</a></code>, <code><a href="summary.gam.html">summary.gam</a></code>, <code><a href="gam.side.html">gam.side</a></code>,
-<code><a href="gam.selection.html">gam.selection</a></code>, <code><a href="gam.control.html">gam.control</a></code>
-<code><a href="gam.check.html">gam.check</a></code>, <code><a href="linear.functional.terms.html">linear.functional.terms</a></code> <code><a href="negbin.html">negbin</a></code>, <code><a href="magic.html">magic</a></code>,<code><a href="vis.gam.html">vis.gam</a></code>
+<p><code><a href="../../mgcv/help/mgcv-package.html">mgcv-package</a></code>, <code><a href="../../mgcv/help/gamObject.html">gamObject</a></code>, <code><a href="../../mgcv/help/gam.models.html">gam.models</a></code>, <code><a href="../../mgcv/help/smooth.terms.html">smooth.terms</a></code>,
+<code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code>, <code><a href="../../mgcv/help/s.html">s</a></code>,
+<code><a href="../../mgcv/help/te.html">te</a></code> <code><a href="../../mgcv/help/predict.gam.html">predict.gam</a></code>,
+<code><a href="../../mgcv/help/plot.gam.html">plot.gam</a></code>, <code><a href="../../mgcv/help/summary.gam.html">summary.gam</a></code>, <code><a href="../../mgcv/help/gam.side.html">gam.side</a></code>,
+<code><a href="../../mgcv/help/gam.selection.html">gam.selection</a></code>, <code><a href="../../mgcv/help/gam.control.html">gam.control</a></code>
+<code><a href="../../mgcv/help/gam.check.html">gam.check</a></code>, <code><a href="../../mgcv/help/linear.functional.terms.html">linear.functional.terms</a></code> <code><a href="../../mgcv/help/negbin.html">negbin</a></code>, <code><a href="../../mgcv/help/magic.html">magic</a></code>,<code><a href="../../mgcv/help/vis.gam.html">vis.gam</a></code>
 </p>
 
 
@@ -654,5 +654,5 @@ detach(eg)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-34 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-35 <a href="00Index.html">Index</a>]</div>
 </body></html>
