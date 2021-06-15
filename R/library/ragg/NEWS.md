@@ -1,3 +1,10 @@
+# ragg 1.1.3
+
+* Use int32_t instead of int32 in old code
+* Prepare for UCRT
+* Better error message when failing to allocate memory for the buffer (#82)
+* Increase storage size limits for paths (#80)
+
 # ragg 1.1.2
 
 * Fix bug in `agg_capture()` that resulted in premultiplied colour values being
