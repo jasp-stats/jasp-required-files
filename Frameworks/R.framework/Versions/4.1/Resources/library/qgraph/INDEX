@@ -1,0 +1,42 @@
+EBICglasso              Compute Gaussian graphical model using
+                        graphical lasso based on extended BIC
+                        criterium.
+FDRnetwork              Model selection using local False Discovery
+                        Rate
+VARglm                  Computes a vector autoregressive lag-1 model
+                        using GLM
+as.igraph.qgraph        Converts qgraph object to igraph object.
+averageLayout           Computes an average layout over several graphs
+big5                    Big 5 dataset
+big5groups              Big 5 groups list
+centrality              Centrality statistics of graphs
+centralityPlot          Centrality and Clustering plots and tables
+centrality_auto         Automatic centrality statistics of graphs
+clustcoef_auto          Local clustering coefficients.
+cor_auto                Automatically compute an apppropriate
+                        correlation matrix
+flow                    Draws network as a flow diagram showing how one
+                        node is connected to all other nodes
+getWmat                 Obtain a weights matrix
+ggmFit                  Obtain fit measures of a Gaussian graphical
+                        model
+ggmModSelect            Unregularized GGM model search
+makeBW                  A qgraph plot can be understood in black and
+                        white
+mat2vec                 Weights matrix to vector
+mutualInformation       Computes the mutual information between nodes
+pathways                Highlight shortest pathways in a network
+plot.qgraph             Plot method for "qgraph"
+print.qgraph            Print edgelist
+qgraph                  qgraph
+qgraph.animate          Animate a growing network
+qgraph.layout.fruchtermanreingold
+                        qgraph.layout.fruchtermanreingold
+qgraph.loadings         qgraph.loadings
+qgraphMixed             Plots a mixed graph with both directed and
+                        undirected edges.
+smallworldIndex         Small-world index of unweighted graph
+smallworldness          Compute the small-worldness index.
+summary.qgraph          Summary method for "qgraph"
+wi2net                  Converts precision matrix to partial
+                        correlation matrix
