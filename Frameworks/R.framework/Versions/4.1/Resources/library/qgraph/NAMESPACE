@@ -1,0 +1,146 @@
+# C++ stuff:
+useDynLib(qgraph, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+
+# Rest:
+export(mutualInformation) 
+# export(vein)
+export(flow)
+importFrom("utils", "capture.output")
+importFrom("grDevices", "hcl")
+S3method(print, ggmFit)
+S3method(plot, ggmFit)
+export(ggmFit)
+export(pathways)
+export(smallworldIndex)
+export(clusteringTable)
+export(clusteringPlot)
+export(centralityTable)
+export(centralityPlot)
+export(qgraph)
+export(qgraph.layout.fruchtermanreingold)
+export(qgraph.loadings)
+#export(qgraph.efa)
+#export(qgraph.svg)
+#export(qgraph.pca)
+#export(qgraph.sem)
+#export(qgraph.panel)
+#export(qgraph.semModel)
+#export(qgraph.cfa)
+#export(qgraph.lavaan)
+#export(qgraph.gui)
+export(centrality)
+S3method(print, qgraph)
+export(qgraph.animate)
+S3method(plot, qgraph)
+S3method(summary, qgraph)
+#importFrom(sem,"sem","standardizedCoefficients")
+#importFrom(psych,"principal")
+#importFrom(lavaan,"lavaan","cfa","standardizedSolution", "standardizedsolution", "parameterEstimates", "parameterestimates","inspect")
+importClassesFrom(lavaan,"lavaan")
+importFrom(stats,"factanal")
+# importFrom(ellipse,"ellipse")
+importFrom(corpcor,"cor2pcor")
+importFrom(graphics,"plot","points","lines","polygon")
+importFrom(png,"readPNG")
+importFrom(jpeg,"readJPEG")
+import(plyr)
+importFrom(Hmisc,"subplot")
+import(igraph)
+S3method(as.igraph, qgraph)
+importFrom(colorspace,rainbow_hcl)
+importFrom(Matrix,sparseMatrix)
+export(averageLayout)
+
+export(getWmat)
+S3method(getWmat, matrix)
+S3method(getWmat, data.frame)
+S3method(getWmat, igraph)
+S3method(getWmat, qgraph)
+S3method(getWmat, list)
+S3method(getWmat, bootnetResult)
+
+
+importFrom(reshape2, "melt")
+import(ggplot2)
+# importFrom(glasso, glasso)
+# importFrom(sna, component.largest)
+
+import(fdrtool)
+
+importFrom(psych,corr.p)
+
+# export(smoothAnimationList)
+# export(mixGraphs)
+
+# Functions Giulio:
+export(smallworldness)
+export(clustOnnela)
+export(clustZhang)
+export(clustWS)
+export(clustcoef_auto)
+export(centrality_auto)
+export(mat2vec)
+
+# LASSO STUFF:
+export(wi2net)
+export(EBICglasso)
+export(ggmModSelect)
+#export(EBICglasso2)
+#export(EBICglassoCluster)
+importFrom(Matrix, forceSymmetric)
+import(glasso)
+
+## corauto stuff:
+#importFrom(huge, huge.npn)
+#importFrom(psych, tetrachoric)
+#importFrom(psych, polychoric)
+export(cor_auto)
+importFrom(lavaan, lavCor)
+
+export(VARglm)
+
+export(FDRnetwork)
+
+
+
+# importFrom(sendplot, "xy.send")
+# export(qgraphAnnotate)
+
+#importFrom(d3Network, "d3ForceNetwork")
+
+importFrom(gtools, mixedorder)
+importFrom(gtools, mixedsort)
+
+export(qgraphMixed)
+
+
+# exports for the BW function
+export(makeBW)
+
+# Extra:
+
+# Extra:
+importFrom("grDevices", "col2rgb", "dev.cur", "dev.list", "dev.new",
+             "dev.off", "dev.size", "jpeg", "pdf", "png", "postscript",
+             "rainbow", "rgb", "tiff")
+importFrom("graphics", "par", "rect", "strheight", "strwidth", "text",
+             "title", "xspline")
+importFrom("methods", "is")
+importFrom("stats", "BIC", "ave", "coef", "cor", "cov", "cov2cor",
+             "glm", "loess", "pchisq", "predict", "qt", "quantile",
+             "rnorm", "sd", "weighted.mean")
+importFrom("utils", "browseURL", "combn", "menu", "setTxtProgressBar",
+             "txtProgressBar")
+importFrom("graphics", "plot.new", "plot.window")
+importFrom("stats", "uniroot")
+
+
+# Parallel:
+import(parallel)
+importFrom("pbapply","pblapply")
+importFrom("abind","abind")
+
+
+#export(as.ggraph)
+
