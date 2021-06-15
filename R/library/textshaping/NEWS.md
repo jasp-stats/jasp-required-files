@@ -1,3 +1,8 @@
+# textshaping 0.3.5
+
+* Address an UBCSAN issue in packages linking to textshaping
+* Remove a few compiler warnings
+
 # textshaping 0.3.4
 
 * Prepare textshaping for UCRT support
