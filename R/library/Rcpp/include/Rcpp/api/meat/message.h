@@ -1,7 +1,7 @@
 
-// config.h: Rcpp R/C++ interface class library -- Rcpp configuration
+// message.h: Rcpp R/C++ interface class library -- Wrapper for base::message
 //
-// Copyright (C) 2010 - 2021  Dirk Eddelbuettel and Romain Francois
+// Copyright (C) 2021  Dirk Eddelbuettel
 //
 // This file is part of Rcpp.
 //
@@ -18,19 +18,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Rcpp.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef RCPP__CONFIG_H
-#define RCPP__CONFIG_H
+#ifndef Rcpp_api_meat_message_h
+#define Rcpp_api_meat_message_h
 
-#define Rcpp_Version(v,p,s) (((v) * 65536) + ((p) * 256) + (s))
+namespace Rcpp {
 
-#define RcppDevVersion(maj, min, rev, dev)  (((maj)*1000000) + ((min)*10000) + ((rev)*100) + (dev))
+    inline void message(SEXP s) {
+        Rcpp::Function msg = Rcpp::Environment::base_env()["message"];
+        msg(s);
+    }
 
-// the currently released version
-#define RCPP_VERSION            Rcpp_Version(1,0,7)
-#define RCPP_VERSION_STRING     "1.0.7"
-
-// the current source snapshot (using four components, if a fifth is used in DESCRIPTION we ignore it)
-#define RCPP_DEV_VERSION        RcppDevVersion(1,0,7,0)
-#define RCPP_DEV_VERSION_STRING "1.0.7"
+}
 
 #endif
