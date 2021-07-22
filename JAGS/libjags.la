@@ -14,7 +14,7 @@ library_names='libjags.4.dylib libjags.dylib'
 old_library=''
 
 # Linker flags that cannot go in dependency_libs.
-inherited_linker_flags='  -framework Accelerate'
+inherited_linker_flags=' '
 
 # Libraries that this one depends upon.
 dependency_libs=''

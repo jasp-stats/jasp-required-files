@@ -14,10 +14,10 @@ library_names='msm.so msm.so'
 old_library=''
 
 # Linker flags that cannot go in dependency_libs.
-inherited_linker_flags='  -framework Accelerate'
+inherited_linker_flags=' '
 
 # Libraries that this one depends upon.
-dependency_libs=' /usr/local/lib/libjrmath.la -lm /usr/local/lib/libjags.la'
+dependency_libs=' /usr/local/lib/libjrmath.la -lm /usr/local/lib/libjags.la -llapack -lblas'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

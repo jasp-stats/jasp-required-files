@@ -14,10 +14,10 @@ library_names='glm.so glm.so'
 old_library=''
 
 # Linker flags that cannot go in dependency_libs.
-inherited_linker_flags='  -framework Accelerate'
+inherited_linker_flags=' '
 
 # Libraries that this one depends upon.
-dependency_libs=' /usr/local/lib/libjags.la /usr/local/lib/libjrmath.la -lm'
+dependency_libs=' /usr/local/lib/libjags.la /usr/local/lib/libjrmath.la -lm -llapack -lblas'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
