@@ -1,3 +1,15 @@
+# systemfonts 1.0.4
+
+* Provide a fallback solution to the setup of the CRAN windows builder so that
+  fonts can be discovered (#87)
+
+# systemfonts 1.0.3
+
+* Avoid warning when including the systemfonts header (#77)
+* Fix size selection of non-scalable fonts when the requested size is bigger 
+  than the available
+* Fix compilation bug when systemfont is used in C packages (#76)
+
 # systemfonts 1.0.2
 
 * Ensure compitability with freetype <= 2.4.11 (#70, @jan-glx)

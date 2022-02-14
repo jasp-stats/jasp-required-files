@@ -1,7 +1,7 @@
 Package: systemfonts
 Type: Package
 Title: System Native Font Finding
-Version: 1.0.2
+Version: 1.0.4
 Authors@R: 
     c(person(given = "Thomas Lin",
              family = "Pedersen",
@@ -29,22 +29,22 @@ Description: Provides system native access to the font catalogue. As font
     also provides access from R.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: R (>= 3.2.0)
-SystemRequirements: c("C++11", "\n fontconfig", "\n freetype2"), C++11
+SystemRequirements: C++11, fontconfig, freetype2
 Suggests: testthat (>= 2.1.0), covr, knitr, rmarkdown, tools
 VignetteBuilder: knitr
 URL: https://github.com/r-lib/systemfonts
 BugReports: https://github.com/r-lib/systemfonts/issues
 LinkingTo: cpp11 (>= 0.2.1)
 NeedsCompilation: yes
-Packaged: 2021-05-11 11:50:45 UTC; thomas
+Packaged: 2022-02-11 12:33:22 UTC; thomas
 Author: Thomas Lin Pedersen [aut, cre]
     (<https://orcid.org/0000-0002-5147-4711>),
   Jeroen Ooms [aut] (<https://orcid.org/0000-0002-4035-0289>),
   Devon Govett [aut] (Author of font-manager),
   RStudio [cph]
 Repository: CRAN
-Date/Publication: 2021-05-11 12:10:05 UTC
-Built: R 4.1.0; x86_64-apple-darwin17.0; 2021-05-25 21:19:38 UTC; unix
+Date/Publication: 2022-02-11 12:50:02 UTC
+Built: R 4.1.2; x86_64-apple-darwin17.0; 2022-02-12 12:13:51 UTC; unix
 Archs: systemfonts.so.dSYM

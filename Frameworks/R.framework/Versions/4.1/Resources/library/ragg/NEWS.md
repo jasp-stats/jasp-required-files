@@ -1,3 +1,23 @@
+# ragg 1.2.1
+
+* Fix bug that caused R to crash when writing tiff files with transparent 
+  background (#97)
+
+# ragg 1.2.0
+
+* Add support for new graphic engine features:
+  - Arbitrary clipping paths
+  - Alpha masks
+  - Linear and radial gradients
+  - Tiling patterns
+* Use white as background when passing in a fully transparent background colour
+  to devices that doesn't support alpha (notably jpeg) (#91)
+* ragg now defers symbol font resolving to systemfonts which makes it possible 
+  to register alternative symbol fonts using `register_font()` (#90)
+* Filenames in UTF-8 are now treated correctly on Windows (#87)
+* Fix size selection of non-scalable fonts when the requested size is bigger 
+  than the available
+
 # ragg 1.1.3
 
 * Use int32_t instead of int32 in old code

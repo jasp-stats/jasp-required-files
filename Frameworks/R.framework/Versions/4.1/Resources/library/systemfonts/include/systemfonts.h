@@ -13,6 +13,7 @@ struct FontFeature {
   char feature[4];
   int setting;
 };
+typedef struct FontFeature FontFeature;
 // A structure to pass around a single font with features (used by the C interface)
 struct FontSettings {
   char file[PATH_MAX + 1];
@@ -20,6 +21,7 @@ struct FontSettings {
   const FontFeature* features;
   int n_features;
 };
+typedef struct FontSettings FontSettings;
 
 // Get the file and index of a font given by its name, along with italic and
 // bold status. Writes filepath to `path` and returns the index
@@ -106,5 +108,5 @@ static inline void detect_emoji_embedding(const uint32_t* string, int n, int* em
   if (p_detect_emoji_embedding == NULL) {
     p_detect_emoji_embedding = (void (*)(const uint32_t*, int, int*, const char*, int)) R_GetCCallable("systemfonts", "detect_emoji_embedding");
   }
-  return p_detect_emoji_embedding(string, n, embedding, path, index);
+  p_detect_emoji_embedding(string, n, embedding, path, index);
 }
